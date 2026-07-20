@@ -1,0 +1,49 @@
+generated: '2026-07-17'
+method: searched
+source: openapi/amcs-group-pay-openapi-original.json
+docs: https://github.com/amcsplatform/amcsrestapi/tree/master/quickstart
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+  - cookie
+  model: >-
+    The AMCS Platform REST API uses a two-step Personal Access Token (PAT) plus
+    session-cookie model. A client first POSTs its PAT (PrivateKey) to the
+    authTokens endpoint; on success the response returns authResult "ok" and a
+    session token in a Set-Cookie header. That session cookie is then sent on
+    every subsequent data request. AMCS Pay uses the same shape with a
+    Platform.PAY.SessionToken cookie.
+schemes:
+- name: privateKey
+  type: apiKey
+  in: query
+  parameter: PrivateKey
+  description: >-
+    Personal Access Token (PAT) presented as the PrivateKey query parameter to
+    POST /erp/api/authTokens to start a session. Sandbox PATs are issued via the
+    developer stack forum.
+  sources:
+  - quickstart/READ ME.md (amcsplatform/amcsrestapi)
+- name: sessionCookie
+  type: apiKey
+  in: cookie
+  parameter: session
+  description: >-
+    Session token returned by the authTokens endpoint in Set-Cookie, replayed as
+    a Cookie header on every data request.
+  sources:
+  - quickstart/READ ME.md (amcsplatform/amcsrestapi)
+- name: cookieAuth
+  type: apiKey
+  in: cookie
+  parameter: Platform.PAY.SessionToken
+  description: AMCS Pay external API session cookie.
+  sources:
+  - openapi/amcs-group-pay-openapi-original.json
+endpoints:
+  auth_token: POST /erp/api/authTokens?PrivateKey={PAT}
+  auth_result_field: authResult
+notes:
+- No OAuth2 / OpenID Connect surface is declared in any published spec; scopes/ is not applicable.
