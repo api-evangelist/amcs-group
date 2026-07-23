@@ -1,0 +1,44 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/amcs-group-erp-openapi-original.json
+summary: >-
+  No official hosted/remote AMCS MCP server was found (not in the AMCS docs,
+  npm @modelcontextprotocol, or public MCP registries). This is a candidate tool
+  surface derived from real ERP Platform operationIds so an agent integration can
+  be scaffolded. Every source_operation below exists verbatim in the referenced
+  spec.
+server:
+  name: amcs-platform
+  transport: http
+tools:
+- name: get_customer
+  description: Find a customer by GUID.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Customer_Get
+- name: list_customers
+  description: Find customers with filters (paged).
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Customer_GetCollection
+- name: upsert_customer
+  description: Create or update a customer.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Customer_Create
+- name: get_customer_changes
+  description: Retrieve incremental customer changes for delta sync.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Customer_GetChanges
+- name: list_account_customers
+  description: Find accounting account-customers with filters.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#AccountCustomer_GetCollection
+- name: get_invoice_changes
+  description: Retrieve incremental invoice changes.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Invoice_GetChanges
+- name: get_order_changes
+  description: Retrieve incremental transport order changes.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Order_GetChanges
+- name: get_service
+  description: Find a service list item by GUID.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Service_Get
+- name: get_contract
+  description: Find a contract by GUID.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Contract_Get
+- name: get_payment_changes
+  description: Retrieve incremental payment changes.
+  source_operation: openapi/amcs-group-erp-openapi-original.json#Payment_GetChanges

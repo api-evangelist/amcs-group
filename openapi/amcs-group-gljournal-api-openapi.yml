@@ -1,0 +1,504 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup GLJournal API
+  version: core
+tags:
+- name: GLJournal
+paths:
+  /accounting/glJournals/changes:
+    get:
+      tags:
+      - GLJournal
+      summary: Retrieve changes
+      description: "| Property                                    | Description                                                           |\r\n| ------------------------------------------- | --------------------------------------------------------------------- |\r\n| GUID                                        | The GUID associated to the GLJournalBatch.                          |\r\n| BatchType                                   | The type of this GLJournalBatch. |\r\n| BatchName                                   | The name of this GLJournalBatch. |\r\n| BatchStatus                                 | The status of this GLJournalBatch. |\r\n| BatchApprovalStatus                         | The approval status of this GLJournalBatch. |\r\n| PostingDate                                 | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| PostedDate                                  | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| AccountingPeriodCode  | The accounting period code of this GLJournalBatch. Filterable |\r\n| AccountingPeriodGuid  | The accounting period guid of this GLJournalBatch. Filterable |\r\n| AccountingPeriodListItem  | The GUID and description of the accounting period. |\r\n| RelatedGLExportGuid  | The GUID of GLExport associated to the GLJournalBatch. Filterable. |\r\n| RelatedGeneralLedgerExportGuid  | The GUID of General Ledger Export associated to the GLJournalBatch |\r\n| RelatedUserCreatedByGuid  | The GUID of the user who created the GLJournalBatch. Filterable |\r\n| RelatedUserUpdatedByGuid  | The GUID of the user who updated the GLJournalBatch. Filterable |\r\n| CreationDateTime      | The date of the GLJournalBatch creation. |\r\n| UpdatedDateTime      | The date of the GLJournalBatch last update. |\r\n| RelatedTransactionGuidFilter  | Used to filter the related transaction guid associated to the GLJournalHeader. |\r\n| JournalHeaders.JournalHeaderGuid            | The GUID associated to the GLJournalHeaders. |\r\n| JournalHeaders.HeaderName                   | The GLJournalHeaders headername.  |\r\n| JournalHeaders.CompanyListItem              | The GUID and name of the company this GLJournalHeaders is associated to. |\r\n| JournalHeaders.Source                       | The source of this GLJournalHeaders.  |\r\n| JournalHeaders.BaseCurrencyIntegrationCode  | The integration code of the base currency of this GLJournalHeaders. |\r\n| JournalHeaders.CurrencyIntegrationCode      | The integration code of the currency of this GLJournalHeaders. |\r\n| JournalHeaders.TransactionDate              | The transaction date in ISO format of this GLJournalHeaders. |\r\n| JournalHeaders.GLDate                       | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |\r\n| JournalHeaders.JournalType                  | The type of this GLJournalHeaders. |\r\n| JournalHeaders.JournalStatus                | The status of this GLJournalHeaders. |\r\n| JournalHeaders.TotalDr                      | The total debit amount of this GLJournalHeaders. |\r\n| JournalHeaders.TotalCr                      | The total credit amount of this GLJournalHeaders. |\r\n| JournalHeaders.RelatedTransactionGuid  | The Source GUID associated to the transaction of the GLJournalHeader. |\r\n| JournalHeaders.CreationDateTime  | The date of the GLJournalHeaders creation. |\r\n| JournalHeaders.UpdatedDateTime  | The date of the GLJournalHeaders last update. |\r\n| JournalHeaders.AccountGuid  | The GUID associated to the account. |\r\n| JournalHeaders.AccountTypeListItem  | The GUID and the description of the account type. |\r\n| JournalLines.RelatedJournalHeaderGuid       | The GUID of the journal header related to this GLJournalLines. |\r\n| JournalLines.JournalLineNo                  | The journal line number of this GLJournalLines. |\r\n| JournalLines.TransactionFromDate            | The transaction from date in ISO format of this GLJournalLines. |\r\n| JournalLines.TransactionToDate              | The transaction to date in ISO format of this GLJournalLines. |\r\n| JournalLines.LineType                       | The type of this GLJournalLines. |\r\n| JournalLines.LineDescription                | The description of this GLJournalLines. |\r\n| JournalLines.JnlDr                          | The debit amount of this GLJournalLines. |\r\n| JournalLines.JnlCr                          | The credit amount of this GLJournalLines. |\r\n| JournalLines.BaseDr                         | The base debit amount of this GLJournalLines. |\r\n| JournalLines.BaseCr                         | The base credit amount of this GLJournalLines. |\r\n| JournalLines.Category  | The category of this GLJournalLines. |\r\n| JournalLines.CreationDateTime      | The date of the GLJournalLines creation. |\r\n| JournalLines.UpdatedDateTime      | The date of the GLJournalLines last update. |\r\n| JournalLines.ExchangeRate.RelatedExchangeRateGuid    | The Related Exchange Rate Guid of this GLJournalLines.                                    |\r\n| JournalLines.ExchangeRate.Rate              | The exchange rate of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.ExchangeDate      | The exchange rate date in ISO format of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.BaseCurrencyListItem | The base exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.ExchangeRate.CurrencyListItem  | The exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.Tax.Code                       | The tax code of this GLJournalLines. |\r\n| JournalLines.Tax.Rate                       | The tax rate of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element1 | The 1 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element2 | The 2 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element3 | The 3 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element4 | The 4 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element5 | The 5 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element6 | The 6 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element7 | The 7 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element8 | The 8 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element9 | The 9 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element10 | The 10 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Site  | The analysis code of customersite of this GLJournalLines. |\r\n| JournalLines.Reference.Reference1   | The 1 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference2   | The 2 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference3   | The 3 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference4   | The 4 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference5   | The 5 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference6   | The 6 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference7   | The 7 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference8   | The 8 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference9   | The 9 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference10  | The 10 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference11  | The 11 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference12  | The 12 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference13  | The 13 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference14  | The 14 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference15  | The 15 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference16  | The 16 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference17  | The 17 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference18  | The 18 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference19  | The 19 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference20  | The 20 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference21  | The 21 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference22  | The 22 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference23  | The 23 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.OrderNo  | The reference order number of this GLJournalLines. |\r\n| JournalLines.SummaryAccountCode  | The summary account code of this GLJournalLines. |"
+      operationId: GLJournal_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorGLJournalResource]'
+  /accounting/glJournals/{guid}:
+    get:
+      tags:
+      - GLJournal
+      summary: Find with GUID
+      description: "| Property                                    | Description                                                           |\r\n| ------------------------------------------- | --------------------------------------------------------------------- |\r\n| GUID                                        | The GUID associated to the GLJournalBatch.                          |\r\n| BatchType                                   | The type of this GLJournalBatch. |\r\n| BatchName                                   | The name of this GLJournalBatch. |\r\n| BatchStatus                                 | The status of this GLJournalBatch. |\r\n| BatchApprovalStatus                         | The approval status of this GLJournalBatch. |\r\n| PostingDate                                 | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| PostedDate                                  | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| AccountingPeriodCode  | The accounting period code of this GLJournalBatch. Filterable |\r\n| AccountingPeriodGuid  | The accounting period guid of this GLJournalBatch. Filterable |\r\n| AccountingPeriodListItem  | The GUID and description of the accounting period. |\r\n| RelatedGLExportGuid  | The GUID of GLExport associated to the GLJournalBatch. Filterable. |\r\n| RelatedGeneralLedgerExportGuid  | The GUID of General Ledger Export associated to the GLJournalBatch |\r\n| RelatedUserCreatedByGuid  | The GUID of the user who created the GLJournalBatch. Filterable |\r\n| RelatedUserUpdatedByGuid  | The GUID of the user who updated the GLJournalBatch. Filterable |\r\n| CreationDateTime      | The date of the GLJournalBatch creation. |\r\n| UpdatedDateTime      | The date of the GLJournalBatch last update. |\r\n| RelatedTransactionGuidFilter  | Used to filter the related transaction guid associated to the GLJournalHeader. |\r\n| JournalHeaders.JournalHeaderGuid            | The GUID associated to the GLJournalHeaders. |\r\n| JournalHeaders.HeaderName                   | The GLJournalHeaders headername.  |\r\n| JournalHeaders.CompanyListItem              | The GUID and name of the company this GLJournalHeaders is associated to. |\r\n| JournalHeaders.Source                       | The source of this GLJournalHeaders.  |\r\n| JournalHeaders.BaseCurrencyIntegrationCode  | The integration code of the base currency of this GLJournalHeaders. |\r\n| JournalHeaders.CurrencyIntegrationCode      | The integration code of the currency of this GLJournalHeaders. |\r\n| JournalHeaders.TransactionDate              | The transaction date in ISO format of this GLJournalHeaders. |\r\n| JournalHeaders.GLDate                       | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |\r\n| JournalHeaders.JournalType                  | The type of this GLJournalHeaders. |\r\n| JournalHeaders.JournalStatus                | The status of this GLJournalHeaders. |\r\n| JournalHeaders.TotalDr                      | The total debit amount of this GLJournalHeaders. |\r\n| JournalHeaders.TotalCr                      | The total credit amount of this GLJournalHeaders. |\r\n| JournalHeaders.RelatedTransactionGuid  | The Source GUID associated to the transaction of the GLJournalHeader. |\r\n| JournalHeaders.CreationDateTime  | The date of the GLJournalHeaders creation. |\r\n| JournalHeaders.UpdatedDateTime  | The date of the GLJournalHeaders last update.  |\r\n| JournalHeaders.AccountGuid  | The GUID associated to the account. |\r\n| JournalHeaders.AccountTypeListItem  | The GUID and the description of the account type. |\r\n| JournalLines.RelatedJournalHeaderGuid       | The GUID of the journal header related to this GLJournalLines. |\r\n| JournalLines.JournalLineNo                  | The journal line number of this GLJournalLines. |\r\n| JournalLines.TransactionFromDate            | The transaction from date in ISO format of this GLJournalLines. |\r\n| JournalLines.TransactionToDate              | The transaction to date in ISO format of this GLJournalLines. |\r\n| JournalLines.LineType                       | The type of this GLJournalLines. |\r\n| JournalLines.LineDescription                | The description of this GLJournalLines. |\r\n| JournalLines.JnlDr                          | The debit amount of this GLJournalLines. |\r\n| JournalLines.JnlCr                          | The credit amount of this GLJournalLines. |\r\n| JournalLines.BaseDr                         | The base debit amount of this GLJournalLines. |\r\n| JournalLines.BaseCr                         | The base credit amount of this GLJournalLines. |\r\n| JournalLines.Category  | The category of this GLJournalLines. |\r\n| JournalLines.CreationDateTime      | The date of the GLJournalLines creation. |\r\n| JournalLines.UpdatedDateTime      | The date of the GLJournalLines last update. |\r\n| JournalLines.ExchangeRate.RelatedExchangeRateGuid    | The Related Exchange Rate Guid of this GLJournalLines.                                    |\r\n| JournalLines.ExchangeRate.Rate              | The exchange rate of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.ExchangeDate      | The exchange rate date in ISO format of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.BaseCurrencyListItem | The base exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.ExchangeRate.CurrencyListItem  | The exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.Tax.Code                       | The tax code of this GLJournalLines. |\r\n| JournalLines.Tax.Rate                       | The tax rate of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element1 | The 1 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element2 | The 2 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element3 | The 3 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element4 | The 4 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element5 | The 5 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element6 | The 6 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element7 | The 7 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element8 | The 8 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element9 | The 9 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element10 | The 10 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Site  | The analysis code of customersite of this GLJournalLines. |\r\n| JournalLines.Reference.Reference1   | The 1 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference2   | The 2 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference3   | The 3 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference4   | The 4 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference5   | The 5 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference6   | The 6 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference7   | The 7 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference8   | The 8 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference9   | The 9 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference10  | The 10 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference11  | The 11 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference12  | The 12 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference13  | The 13 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference14  | The 14 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference15  | The 15 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference16  | The 16 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference17  | The 17 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference18  | The 18 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference19  | The 19 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference20  | The 20 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference21  | The 21 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference22  | The 22 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference23  | The 23 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.OrderNo  | The reference order number of this GLJournalLines. |\r\n| JournalLines.SummaryAccountCode  | The summary account code of this GLJournalLines. |"
+      operationId: GLJournal_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorGLJournalResource]'
+  /accounting/glJournals:
+    get:
+      tags:
+      - GLJournal
+      summary: Find with Filters
+      description: "| Property                                    | Description                                                           |\r\n| ------------------------------------------- | --------------------------------------------------------------------- |\r\n| GUID                                        | The GUID associated to the GLJournalBatch.                          |\r\n| BatchType                                   | The type of this GLJournalBatch. |\r\n| BatchName                                   | The name of this GLJournalBatch. |\r\n| BatchStatus                                 | The status of this GLJournalBatch. |\r\n| BatchApprovalStatus                         | The approval status of this GLJournalBatch. |\r\n| PostingDate                                 | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| PostedDate                                  | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |\r\n| AccountingPeriodCode  | The accounting period code of this GLJournalBatch. Filterable |\r\n| AccountingPeriodGuid  | The accounting period guid of this GLJournalBatch. Filterable |\r\n| AccountingPeriodListItem  | The GUID and description of the accounting period. |\r\n| RelatedGLExportGuid  | The GUID of GLExport associated to the GLJournalBatch. Filterable. |\r\n| RelatedGeneralLedgerExportGuid  | The GUID of General Ledger Export associated to the GLJournalBatch |\r\n| RelatedUserCreatedByGuid  | The GUID of the user who created the GLJournalBatch. Filterable |\r\n| RelatedUserUpdatedByGuid  | The GUID of the user who updated the GLJournalBatch. Filterable |\r\n| CreationDateTime      | The date of the GLJournalBatch creation. |\r\n| UpdatedDateTime      | The date of the GLJournalBatch last update. |\r\n| RelatedTransactionGuidFilter  | Used to filter the related transaction guid associated to the GLJournalHeader. |\r\n| JournalHeaders.JournalHeaderGuid            | The GUID associated to the GLJournalHeaders. |\r\n| JournalHeaders.HeaderName                   | The GLJournalHeaders headername.  |\r\n| JournalHeaders.CompanyListItem              | The GUID and name of the company this GLJournalHeaders is associated to. |\r\n| JournalHeaders.Source                       | The source of this GLJournalHeaders.  |\r\n| JournalHeaders.BaseCurrencyIntegrationCode  | The integration code of the base currency of this GLJournalHeaders. |\r\n| JournalHeaders.CurrencyIntegrationCode      | The integration code of the currency of this GLJournalHeaders. |\r\n| JournalHeaders.TransactionDate              | The transaction date in ISO format of this GLJournalHeaders. |\r\n| JournalHeaders.GLDate                       | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |\r\n| JournalHeaders.JournalType                  | The type of this GLJournalHeaders. |\r\n| JournalHeaders.JournalStatus                | The status of this GLJournalHeaders. |\r\n| JournalHeaders.TotalDr                      | The total debit amount of this GLJournalHeaders. |\r\n| JournalHeaders.TotalCr                      | The total credit amount of this GLJournalHeaders. |\r\n| JournalHeaders.RelatedTransactionGuid  | The Source GUID associated to the transaction of the GLJournalHeader. |\r\n| JournalHeaders.CreationDateTime  | The date of the GLJournalHeaders creation. |\r\n| JournalHeaders.UpdatedDateTime  | The date of the GLJournalHeaders last update.  |\r\n| JournalHeaders.AccountGuid  | The GUID associated to the account. |\r\n| JournalHeaders.AccountTypeListItem  | The GUID and the description of the account type. |\r\n| JournalLines.RelatedJournalHeaderGuid       | The GUID of the journal header related to this GLJournalLines. |\r\n| JournalLines.JournalLineNo                  | The journal line number of this GLJournalLines. |\r\n| JournalLines.TransactionFromDate            | The transaction from date in ISO format of this GLJournalLines. |\r\n| JournalLines.TransactionToDate              | The transaction to date in ISO format of this GLJournalLines. |\r\n| JournalLines.LineType                       | The type of this GLJournalLines. |\r\n| JournalLines.LineDescription                | The description of this GLJournalLines. |\r\n| JournalLines.JnlDr                          | The debit amount of this GLJournalLines. |\r\n| JournalLines.JnlCr                          | The credit amount of this GLJournalLines. |\r\n| JournalLines.BaseDr                         | The base debit amount of this GLJournalLines. |\r\n| JournalLines.BaseCr                         | The base credit amount of this GLJournalLines. |\r\n| JournalLines.Category  | The category of this GLJournalLines. |\r\n| JournalLines.CreationDateTime      | The date of the GLJournalLines creation. |\r\n| JournalLines.UpdatedDateTime      | The date of the GLJournalLines last update. |\r\n| JournalLines.ExchangeRate.RelatedExchangeRateGuid    | The Related Exchange Rate Guid of this GLJournalLines.                                    |\r\n| JournalLines.ExchangeRate.Rate              | The exchange rate of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.ExchangeDate      | The exchange rate date in ISO format of this GLJournalLines. |\r\n| JournalLines.ExchangeRate.BaseCurrencyListItem | The base exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.ExchangeRate.CurrencyListItem  | The exchange rate currency id and description assouciated this GLJournalLines. |\r\n| JournalLines.Tax.Code                       | The tax code of this GLJournalLines. |\r\n| JournalLines.Tax.Rate                       | The tax rate of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element1 | The 1 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element2 | The 2 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element3 | The 3 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element4 | The 4 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element5 | The 5 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element6 | The 6 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element7 | The 7 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element8 | The 8 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element9 | The 9 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Element10 | The 10 element lines of this GLJournalLines. |\r\n| JournalLines.AnalysisCodes.Site  | The analysis code of customersite of this GLJournalLines. |\r\n| JournalLines.Reference.Reference1   | The 1 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference2   | The 2 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference3   | The 3 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference4   | The 4 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference5   | The 5 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference6   | The 6 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference7   | The 7 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference8   | The 8 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference9   | The 9 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference10  | The 10 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference11  | The 11 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference12  | The 12 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference13  | The 13 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference14  | The 14 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference15  | The 15 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference16  | The 16 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference17  | The 17 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference18  | The 18 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference19  | The 19 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference20  | The 20 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference21  | The 21 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference22  | The 22 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.Reference23  | The 23 reference lines of this GLJournalLines. |\r\n| JournalLines.Reference.OrderNo  | The reference order number of this GLJournalLines. |\r\n| JournalLines.SummaryAccountCode  | The summary account code of this GLJournalLines. |"
+      operationId: GLJournal_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorGLJournalResource]'
+    post:
+      tags:
+      - GLJournal
+      summary: Create or update
+      description: "| Property                                                  | Description                                                            | Required|\r\n| --------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------- |\r\n| GUID                                                      | The GUID associated to the GLJournalBatch.                                                |        No         |\r\n| BatchType                                                 | The type of this GLJournalBatch.                                                          |        No         |\r\n| BatchName                                                 | The name of this GLJournalBatch.                                                          |        Yes        |\r\n| BatchStatus                                               | The status of this GLJournalBatch.                                                        |        Yes        |\r\n| BatchApprovalStatus                                       | The approval status of this GLJournalBatch.                                               |        Yes        |\r\n| PostingDate                                               | The posting date of this GLJournalBatch.                        |        No         |\r\n| PostedDate                                                | The posted date of this GLJournalBatch.    |        No         |\r\n| AccountingPeriodCode                | The accounting period code of this GLJournalBatch.                                        |        No         |\r\n| AccountingPeriodListItem.Guid                | The GUID of the accounting period of this GLJournalBatch.                                 |        Yes        |\r\n| RelatedGLExportGuid                | The GUID of GLExport associated to the GLJournalBacth. Filterable.                        |        No         |\r\n| RelatedUserCreatedByGuid                | The GUID of the user who created the GLJournalBatch. Filterable                           |        No         |\r\n| RelatedUserUpdatedByGuid                | The GUID of the user who updated the GLJournalBatch. Filterable                           |        No         |\r\n| CreationDateTime                    | The date of the GLJournalBatch creation.                                                  |        No         |\r\n| UpdatedDateTime                    | The date of the GLJournalBatch last update.                                               |        No         |\r\n| RelatedTransactionGuidFilter                | Used to filter the related transaction guid associated to the GLJournalHeader.            |        No         |\r\n| JournalHeaders.JournalHeaderGuid                          | The GUID associated to the GLJournalHeaders.                                              |        Yes        |\r\n| JournalHeaders.HeaderName                                 | The GLJournalHeaders headername.                                                          |        Yes        |\r\n| JournalHeaders.CompanyListItem.Guid                       | The GUID of the company this GLJournalHeaders is associated to.                |        Yes        |\r\n| JournalHeaders.Source                                     | The source of this GLJournalHeaders.                                                      |        No         |\r\n| JournalHeaders.BaseCurrencyIntegrationCode                | The integration code of the base currency of this GLJournalHeaders.                       |        No         |\r\n| JournalHeaders.CurrencyIntegrationCode                    | The integration code of the currency of this GLJournalHeaders.                            |        Yes        |\r\n| JournalHeaders.TransactionDate                            | The transaction date of this GLJournalHeaders.                                            |        No         |\r\n| JournalHeaders.GLDate                                     | The Gl date of this GLJournalHeaders.            |        No         |\r\n| JournalHeaders.JournalType                                | The type of this GLJournalHeaders.                                                        |        No         |\r\n| JournalHeaders.JournalStatus                              | The status of this GLJournalHeaders.                                                      |        Yes        |\r\n| JournalHeaders.TotalDr                                    | The total debit amount of this GLJournalHeaders.                                          |        Yes        |\r\n| JournalHeaders.TotalCr                                    | The total credit amount of this GLJournalHeaders.                                         |        Yes        |\r\n| JournalHeaders.RelatedTransactionGuid                | The Source GUID associated to the transaction of the GLJournalHeader.                     |        No         |\r\n| JournalHeaders.CreationDateTime                | The date of the GLJournalHeaders creation.                                                |        No         |\r\n| JournalHeaders.UpdatedDateTime                | The date of the GLJournalHeaders last update.                                             |        No         |\r\n| JournalLines.RelatedJournalHeaderGuid                     | The GUID of the journal header related to this GLJournalLines.                            |        Yes        |\r\n| JournalLines.JournalLineNo                                | The journal line number of this GLJournalLines.                                           |        No         |\r\n| JournalLines.TransactionFromDate                          | The transaction from date of this GLJournalLines.                                         |        No         |\r\n| JournalLines.TransactionToDate                            | The transaction to date of this GLJournalLines.                                           |        No         |\r\n| JournalLines.LineType                                     | The type of this GLJournalLines.                                                          |        No         |\r\n| JournalLines.LineDescription                              | The description of this GLJournalLines.                                                   |        Yes        |\r\n| JournalLines.JnlDr                                        | The debit amount of this GLJournalLines.                                                  |        Yes        |\r\n| JournalLines.JnlCr                                        | The credit amount of this GLJournalLines.                                                 |        Yes        |\r\n| JournalLines.BaseDr                                       | The base debit amount of this GLJournalLines.                                             |        Yes        |\r\n| JournalLines.BaseCr                                       | The base credit amount of this GLJournalLines.                                            |        Yes        |\r\n| JournalLines.Category                | The category of this GLJournalLines.                                                      |        No         |\r\n| JournalLines.CreationDateTime                    | The date of the GLJournalLines creation.                                                  |        No         |\r\n| JournalLines.UpdatedDateTime                    | The date of the GLJournalLines last update.                                               |        No         |\r\n| JournalLines.ExchangeRate.RelatedExchangeRateGuid         | The Related Exchange Rate Guid of this GLJournalLines.                                    |        No         |\r\n| JournalLines.ExchangeRate.ExchangeDate                    | The exchange rate date of this GLJournalLines.                                            |        No         |\r\n| JournalLines.ExchangeRate.Rate| The exchange rate of this GLJournalLines.                                                 |        No         |\r\n| JournalLines.ExchangeRate.BaseCurrencyListItem   | The base exchange rate currency id and description assouciated this GLJournalLines.       |        No         |\r\n| JournalLines.ExchangeRate.CurrencyListItem                | The exchange rate currency id and description assouciated this GLJournalLines.            |        No         |\r\n| JournalLines.Tax.Code                                     | The tax code of this GLJournalLines.                                                      |        No         |\r\n| JournalLines.Tax.Rate                                     | The tax rate of this GLJournalLines.                                                      |        No         |\r\n| JournalLines.AnalysisCodes.Element1   | The 1 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element2   | The 2 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element3   | The 3 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element4   | The 4 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element5   | The 5 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element6   | The 6 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element7   | The 7 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element8   | The 8 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element9   | The 9 element lines of this GLJournalLines.                                               |        No         |\r\n| JournalLines.AnalysisCodes.Element10   | The 10 element lines of this GLJournalLines.                                              |        No         |\r\n| JournalLines.AnalysisCodes.Site    | The analysis code of customersite of this GLJournalLines.                                 |        No         |\r\n| JournalLines.Reference.Reference1     | The 1 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference2     | The 2 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference3     | The 3 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference4     | The 4 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference5     | The 5 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference6     | The 6 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference7     | The 7 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference8     | The 8 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference9     | The 9 reference lines of this GLJournalLines.                                             |        No         |\r\n| JournalLines.Reference.Reference10    | The 10 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference11    | The 11 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference12    | The 12 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference13    | The 13 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference14    | The 14 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference15    | The 15 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference16    | The 16 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference17    | The 17 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference18    | The 18 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference19    | The 19 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference20    | The 20 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference21    | The 21 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference22    | The 22 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.Reference23    | The 23 reference lines of this GLJournalLines.                                            |        No         |\r\n| JournalLines.Reference.OrderNo    | The reference order number of this GLJournalLines.                                        |        No         |\r\n| JournalLines.SummaryAccountCode    | The summary account code of this GLJournalLines.                                          |        No         |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Guid must be null | The method or operation is not implemented. |\r\n| PostedDate must be null | PostedDate: is not supported |\r\n| PostingDate must be null | PostingDate: is not supported |\r\n| CreationDateTime must be null | CreationDateTime: is not supported |\r\n| UpdateDateTime must be null | UpdateDateTime: is not supported |\r\n| When RelatedGLexportguid is not null | The method or operation is not implemented. |\r\n| BatchStatus and BatchApprovalStatus must be 'NEW' | The status of the batch is not NEW. Could not create the batch. Set the BatchState and BatchApprovalState as 'NEW' |\r\n| JournalHeaders and JournalLines must have values | Only batches with headers and lines can be created. |\r\n| JournalHeader without JournalLine | JournalHeader with JournalHeaderGuid of <Guid> without a JournalLine is not allowed. |\r\n| JournalLine without JournalHeader | JournalLine with RelatedJournalHeaderGuid of <Guid> without a JournalHeader is not allowed. |\r\n"
+      operationId: GLJournal_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorGLJournalLineExchangeRateResource:
+      type: object
+      properties:
+        RelatedExchangeRateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorGLJournalResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorGLJournalLineAnalysisCodesResource:
+      type: object
+      properties:
+        Element1:
+          type: string
+        Element2:
+          type: string
+        Element3:
+          type: string
+        Element4:
+          type: string
+        Element5:
+          type: string
+        Element6:
+          type: string
+        Element7:
+          type: string
+        Element8:
+          type: string
+        Element9:
+          type: string
+        Element10:
+          type: string
+        Site:
+          type: string
+    ApiIntegratorGLJournalHeaderResource:
+      type: object
+      properties:
+        JournalHeaderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        HeaderName:
+          type: string
+        CompanyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Source:
+          type: string
+        BaseCurrencyIntegrationCode:
+          type: string
+        CurrencyIntegrationCode:
+          type: string
+        TransactionDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        GLDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        JournalType:
+          type: string
+        JournalStatus:
+          type: string
+        TotalDr:
+          type: number
+          format: double
+        TotalCr:
+          type: number
+          format: double
+        RelatedTransactionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CreationDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        UpdatedDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorGLJournalResource:
+      type: object
+      properties:
+        BatchType:
+          type: string
+        BatchName:
+          type: string
+        BatchStatus:
+          type: string
+        BatchApprovalStatus:
+          type: string
+        PostingDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        PostedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        AccountingPeriodCode:
+          type: string
+        AccountingPeriodGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedGLExportGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedGeneralLedgerExportGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserCreatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserUpdatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CreationDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        UpdatedDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        JournalHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalHeaderResource'
+        JournalLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalLineResource'
+        RelatedTransactionGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorGLJournalLineTaxResource:
+      type: object
+      properties:
+        Code:
+          type: string
+        Rate:
+          type: number
+          format: double
+    ApiIntegratorGLJournalLineResource:
+      type: object
+      properties:
+        RelatedJournalHeaderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        JournalLineNo:
+          type: integer
+          format: int32
+        TransactionFromDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        TransactionToDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        LineType:
+          type: string
+        LineDescription:
+          type: string
+        JnlDr:
+          type: number
+          format: double
+        JnlCr:
+          type: number
+          format: double
+        BaseDr:
+          type: number
+          format: double
+        BaseCr:
+          type: number
+          format: double
+        Category:
+          type: string
+        CreationDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        UpdatedDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        ExchangeRate:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalLineExchangeRateResource'
+        Tax:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalLineTaxResource'
+        AnalysisCodes:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalLineAnalysisCodesResource'
+        Reference:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalLineReferenceResource'
+        SummaryAccountCode:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection[ApiIntegratorGLJournalResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceChanges[ApiIntegratorGLJournalResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorGLJournalLineReferenceResource:
+      type: object
+      properties:
+        Context:
+          type: string
+        Reference1:
+          type: string
+        Reference2:
+          type: string
+        Reference3:
+          type: string
+        Reference4:
+          type: string
+        Reference5:
+          type: string
+        Reference6:
+          type: string
+        Reference7:
+          type: string
+        Reference8:
+          type: string
+        Reference9:
+          type: string
+        Reference10:
+          type: string
+        Reference11:
+          type: string
+        Reference12:
+          type: string
+        Reference13:
+          type: string
+        Reference14:
+          type: string
+        Reference15:
+          type: string
+        Reference16:
+          type: string
+        Reference17:
+          type: string
+        Reference18:
+          type: string
+        Reference19:
+          type: string
+        Reference20:
+          type: string
+        Reference21:
+          type: string
+        Reference22:
+          type: string
+        Reference23:
+          type: string
+        OrderNo:
+          type: string

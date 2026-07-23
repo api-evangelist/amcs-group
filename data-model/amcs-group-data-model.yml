@@ -1,0 +1,79 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/amcs-group-erp-openapi-original.json
+summary: >-
+  Entity/domain map derived from the ERP Platform REST API path structure (381
+  paths, 699 component schemas). Resources are grouped by domain; relationships
+  below are the load-bearing links implied by the accounting/directory/transport
+  domains. Resources are addressed by GUID and wrapped in ApiResourceResultEntity
+  / ApiResourceResultCollection envelopes with HATEOAS links.
+identifiers:
+  primary_key: guid
+  reference_style: GUID references between resources; envelopes expose links.associations.
+domains:
+  directory: [customers, sites, supplierSites, suppliers, contacts, containers, drivers, locations, users]
+  accounting: [accountCustomers, contracts, invoices, creditNotes, charges, payments, lodgements, accountBalances, glJournals, glBatches]
+  transport: [orders, jobs, routes, routeTemplates, routeVisits, liftEvents]
+  fleet: [vehicles, trailers, externalVehicles, vehicleEvents, vehicleTrails]
+  productCatalogue: [serviceAgreements, costAgreements]
+  purchasing: [supplierBills, appliedCosts]
+  municipal: [municipalAccountServicePackages, bulkyWasteJobs, municipalAccountCalendarEvents]
+  scale: [weighings]
+  stosag: [sharedContainers, sharedContainerHistories, accessPassHistories]
+entities:
+- name: customer
+  domain: directory
+  operations: [Customer_Get, Customer_GetCollection, Customer_Create, Customer_GetChanges]
+- name: site
+  domain: directory
+- name: accountCustomer
+  domain: accounting
+- name: contract
+  domain: accounting
+- name: invoice
+  domain: accounting
+- name: payment
+  domain: accounting
+- name: order
+  domain: transport
+- name: job
+  domain: transport
+- name: vehicle
+  domain: fleet
+- name: weighing
+  domain: scale
+relationships:
+- from: site
+  to: customer
+  type: belongs_to
+  via: customer (GUID)
+- from: accountCustomer
+  to: customer
+  type: belongs_to
+  via: customer (GUID)
+- from: contract
+  to: accountCustomer
+  type: belongs_to
+  via: accountCustomer (GUID)
+- from: invoice
+  to: accountCustomer
+  type: belongs_to
+  via: accountCustomer (GUID)
+- from: payment
+  to: invoice
+  type: belongs_to
+  via: invoice (GUID)
+- from: order
+  to: customer
+  type: belongs_to
+  via: customer (GUID)
+- from: job
+  to: order
+  type: belongs_to
+  via: order (GUID)
+- from: weighing
+  to: job
+  type: belongs_to
+  via: job (GUID)
+notes:
+- Relationship directions are derived from domain structure and standard AMCS ERP semantics; the specs address every resource by GUID and advertise related resources via envelope links.associations.

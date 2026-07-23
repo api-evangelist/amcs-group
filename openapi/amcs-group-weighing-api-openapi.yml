@@ -1,0 +1,601 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Weighing API
+  version: core
+tags:
+- name: Weighing
+paths:
+  /scale/weighings/changes:
+    get:
+      tags:
+      - Weighing
+      summary: Retrieve changes
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| RelatedRouteGuid                      | The GUID associated to the route of the weighing.                             |\r\n| RelatedJobGuid                        | The GUID associated to the job of the weighing.                               |\r\n| RelatedVehicleGuid                    | The GUID associated to the vehicle of the weighing.                           |\r\n| RelatedExternalVehicleGuid            | The GUID associated to the external vehicle of the weighing.                  |\r\n| RelatedMaterialGuid                   | The GUID associated to the material of the weighing.                          |\r\n| RelatedLocationGuid                   | Used to filter the related location guid associated to the location of the weighing.                          |\r\n| RelatedLocationDestinationGuid        | Used to filter the related destination location guid associated to the destination location of the weighing.              |\r\n| RelatedAreaOfOriginGuid               | The GUID associated to the area of origin of the weighing.                    |\r\n| RelatedSupplierThirdPartyCarrierGuid  | The GUID associated to the third party carrier supplier site of the weighing. |\r\n| RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing.    |\r\n| TicketNo                              | The ticket number associated to the weighing.                                 |\r\n| ExternalTicketNo                      | The external ticket number associated to the weighing.                        |\r\n| DestinationTicketNo                   | The destination ticket number associated to the weighing.                     |\r\n| CustomerLoadReference                 | The customer load reference associated to the weighing.                       |\r\n| CustomerInvoiceReference              | The customer invoice reference associated to the weighing.                    |\r\n| Notes                                 | The notes associated to the weighing.                                         |\r\n| WeighingTypeListItem                  | The GUID and description of the weighing type associated to the weighing.     |\r\n| HaulierName                           | The haulier name associated to the weighing.                                  |\r\n| Driver                                | The driver data associated to the weighing.                                   |\r\n| Driver.Name                           | The name associated to the driver.                                            |\r\n| Driver.LicenceNumber                  | The licence number associated to the driver.                                  |\r\n| IsComplete                            | Is this weighing complete?                                                    |\r\n| IsDestinationConfirmed                | Is this weighing confirmed on destination?                                    |\r\n| IsExternalVehicle                     | Is this weighing done with an external vehicle?                               |\r\n| IsEstimatedWeight                     | Is the weight of this weighing estimated?                                     |\r\n| IsGradingConfirmed                    | Is the grading of this weighing confirmed?                                    |\r\n| IsIncContainer                        | Is this weighing including a container?                                       |\r\n| IsInspectionConfirmed                 | Is the inspection of this weighing confirmed?                                 |\r\n| IsOutboundWeighingComplete            | Is the outbound weighing complete?                                            |\r\n| IsPassThrough                         | Is this a pass through weighing?                                              |\r\n| IsPrinted                             | Is this weighing printed?                                                     |\r\n| StartedFromANPR                       | Is this weighing started by an Automatic Number Plate Recognition device?     |\r\n| CashCollected                         | Amount of cash collected for this weighing.                                   |\r\n| WeighingDate                          | The weighing date of this weighing. Filterable                                |\r\n| Weights                               | The weight data assosicated to the weighing.                                  |\r\n| Weights.GrossWeight                   | The gross weight data associated to the weighing.                             |\r\n| Weights.GrossWeight.Guid              | The GUID associated to the gross weight of the weighing.                      |\r\n| Weights.GrossWeight.Weight            | The weight associated to the gross weight of the weighing.                    |\r\n| Weights.GrossWeight.Timestamp         | The timestamp associated to the gross weight of the weighing.                 |\r\n| Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the gross weight.                 |\r\n| Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|\r\n| Weights.TareWeight                    | The tare weight data associated to the weighing.                              |\r\n| Weights.TareWeight.Guid               | The GUID associated to the tare weight of the weighing.                       |\r\n| Weights.TareWeight.Weight             | The weight associated to the tare weight of the weighing.                     |\r\n| Weights.TareWeight.Timestamp          | The timestamp associated to the tare weight of the weighing.                  |\r\n| Weights.TareWeight.WeightTypeListItem          | The GUID and description of the weight type associated to the tare weight.                  |\r\n| Weights.TareWeight.TallyNo| The tally number associated to the tare weight.|\r\n| Weights.Quantity                      | The quantity associated to the weighing.                                      |\r\n| Weights.Volume                        | The volume associated to the weighing.                                        |\r\n| Weights.BridgeName                    | The bridge name associated to the weighing.                                   |\r\n| DestinationWeight                     | Weights done at destination associated to the weighing.                       |\r\n| DestinationWeight.GrossWeight         | The gross weight at destination associated to the weighing.                   |\r\n| DestinationWeight.TareWeight          | The tare weight at destination associated to the weighing.                    |\r\n| DestinationWeight.Quantity            | The quantity at destination associated to the weighing.                       |\r\n| DestinationWeight.Volume              | The volume at destination associated to the weighing.                         |\r\n| WeighingIns[0]                        | The list of weighing ins associated to the weighing.                          |\r\n| WeighingIns[0].Guid                   | The GUID associated to the weighing in.                                       |\r\n| WeighingIns[0].TicketNo               | The ticket number associated to the weighing in.                              |\r\n| WeighingIns[0].IsAutomatic            | Is this weighing done automatic?                                              |\r\n| WeighingIns[0].TareTallyNo            | The tare tally number of weighing in.|\r\n| WeighingIns[0].MaterialListItem       | The GUID and description of the material list associated to the weighing in.  |\r\n| WeighingIns[0].ContainerTypeListItem  | The GUID and description of the container type associated to the weighing in. |\r\n| WeighingIns[0].RelatedTreatmentGuid| The GUID of the treatment code associated to the weighing in.|\r\n| WeighingIns[0].Weights                       | The weight data assosicated to the weighing in.                        |\r\n| WeighingIns[0].Weights.GrossWeight           | The gross weight data associated to the weighing in.                   |\r\n| WeighingIns[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing in.            |\r\n| WeighingIns[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing in.          |\r\n| WeighingIns[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing in.       |\r\n| WeighingIns[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing in gross weight.       |\r\n| WeighingIns[0].Weights.TareWeight            | The tare weight data associated to the weighing in.                    |\r\n| WeighingIns[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing in.             |\r\n| WeighingIns[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing in.           |\r\n| WeighingIns[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing in.        |\r\n| WeighingIns[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing in tare weight.        |\r\n| WeighingIns[0].Weights.Quantity              | The quantity associated to the weighing in.                            |\r\n| WeighingIns[0].Weights.Volume                | The volume associated to the weighing in.                              |\r\n| WeighingIns[0].Details| The weighingin detail assosicated to the weighing in                          |\r\n| WeighingIns[0].Details[0].Guid                | The guid assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Barcode             | The barcode assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Weight              | The weight assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].RelatedJobOverrideBreakdownGuid | The job override breakdown assosicated to the weighingin detail   |\r\n| WeighingIns[0].Details[0].ReasonListItem      | The reason assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].IsDeleted           | Is the weighingin detail is deleted?                                  |\r\n| WeighingOuts[0]                       | The list of weighing outs associated to the weighing.                         |\r\n| WeighingOuts[0].Guid                  | The GUID associated to the weighing out.                                      |\r\n| WeighingOuts[0].TicketNo              | The ticket number associated to the weighing out.                             |\r\n| WeighingOuts[0].IsAutomatic           | Is this weighing done automatic?                                              |\r\n| WeighingOuts[0].GrossTallyNo          | The gross tally number of weighing out.                                       |\r\n| WeighingOuts[0].MaterialListItem      | The GUID and description of the material list associated to the weighing out. |\r\n| WeighingOuts[0].ContainerTypeListItem | The GUID and description of the container type associated to the weighing out.|\r\n| WeighingOuts[0].RelatedTreatmentGuid  | The GUID of the treatment code associated to the weighing out.|\r\n| WeighingOuts[0].RelatedWeighingInGuid| The GUID associated to the weighing in of the weighing out.           |\r\n| WeighingOuts[0].Weights                       | The weight data assosicated to the weighing out.                      |\r\n| WeighingOuts[0].Weights.GrossWeight           | The gross weight data associated to the weighing out.                 |\r\n| WeighingOuts[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing out.          |\r\n| WeighingOuts[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing out.        |\r\n| WeighingOuts[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing out.     |\r\n| WeighingOuts[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing out gross weight.     |\r\n| WeighingOuts[0].Weights.TareWeight            | The tare weight data associated to the weighing out.                  |\r\n| WeighingOuts[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing out.           |\r\n| WeighingOuts[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing out.         |\r\n| WeighingOuts[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing out.      |\r\n| WeighingOuts[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing out tare weight.      |\r\n| WeighingOuts[0].Weights.Quantity              | The quantity associated to the weighing out.                          |\r\n| WeighingOuts[0].Weights.Volume                | The volume associated to the weighing out.                            |\r\n| ContainerIdentifier| The container identifier of the weighing.|\r\n| SealIdentifier| The seal identifier of the weighing.|\r\n| ContainerTare | The container tare weight of the weighing.|\r\n| VerifiedGrossMaximum | The verified gross maximum weight of the weighing.|\r\n| ContainerNotes| The container notes of the weighing.|\r\n| TimeInWeighing| The time in associated to the weighing. Filterable|\r\n| TimeOutWeighing| The time out associated to the weighing. Filterable|\r\n| CustomerRound| The customer site round number associated to the weighing.|\r\n| GrossManualWeightReasonListItem| The GUID and description of the reason associated to the gross manual weight.|\r\n| TareManualWeightReasonListItem| The GUID and description of the reason associated to the tare manual weight.|\r\n| RelatedWeighingInGuid                 | Used to filter on weighing with weighing in of provided GUID.                 |\r\n| RelatedWeighingOutGuid                | Used to filter on weighing with weighing out of provided GUID.                |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the weighing. |\r\n| RelatedBlobHashes[0].Description| The description of the blob.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedBlobWeighingDocketPdfHashes | The array of related weighing docket blob hashes. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash | The hash of the weighing docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedWeighingInDetailGuid                | Used to filter on weighing with weighing in detail of provided GUID. Filterable   |\r\n| RelatedJobOverrideBreakdownGuid            | Used to filter on weighing with weighing in detail job override breakdown of provided GUID. Filterable              |\r\n| WeighingOutsRelatedWeighingInGuidFilter    | Used to filter the related weighing in guid associated to the weighing out.   |"
+      operationId: Weighing_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorWeighingResource]'
+  /scale/weighings/{guid}:
+    get:
+      tags:
+      - Weighing
+      summary: Find with GUID
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| RelatedRouteGuid                      | The GUID associated to the route of the weighing.                             |\r\n| RelatedJobGuid                        | The GUID associated to the job of the weighing.                               |\r\n| RelatedVehicleGuid                    | The GUID associated to the vehicle of the weighing.                           |\r\n| RelatedExternalVehicleGuid            | The GUID associated to the external vehicle of the weighing.                  |\r\n| RelatedMaterialGuid                   | The GUID associated to the material of the weighing.                          |\r\n| RelatedLocationGuid                   | Used to filter the related location guid associated to the location of the weighing.                          |\r\n| RelatedLocationDestinationGuid        | Used to filter the related destination location guid associated to the destination location of the weighing.              |\r\n| RelatedAreaOfOriginGuid               | The GUID associated to the area of origin of the weighing.                    |\r\n| RelatedSupplierThirdPartyCarrierGuid  | The GUID associated to the third party carrier supplier site of the weighing. |\r\n| RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing.    |\r\n| TicketNo                              | The ticket number associated to the weighing.                                 |\r\n| ExternalTicketNo                      | The external ticket number associated to the weighing.                        |\r\n| DestinationTicketNo                   | The destination ticket number associated to the weighing.                     |\r\n| CustomerLoadReference                 | The customer load reference associated to the weighing.                       |\r\n| CustomerInvoiceReference              | The customer invoice reference associated to the weighing.                    |\r\n| Notes                                 | The notes associated to the weighing.                                         |\r\n| WeighingTypeListItem                  | The GUID and description of the weighing type associated to the weighing.     |\r\n| HaulierName                           | The haulier name associated to the weighing.                                  |\r\n| Driver                                | The driver data associated to the weighing.                                   |\r\n| Driver.Name                           | The name associated to the driver.                                            |\r\n| Driver.LicenceNumber                  | The licence number associated to the driver.                                  |\r\n| IsComplete                            | Is this weighing complete?                                                    |\r\n| IsDestinationConfirmed                | Is this weighing confirmed on destination?                                    |\r\n| IsExternalVehicle                     | Is this weighing done with an external vehicle?                               |\r\n| IsEstimatedWeight                     | Is the weight of this weighing estimated?                                     |\r\n| IsGradingConfirmed                    | Is the grading of this weighing confirmed?                                    |\r\n| IsIncContainer                        | Is this weighing including a container?                                       |\r\n| IsInspectionConfirmed                 | Is the inspection of this weighing confirmed?                                 |\r\n| IsOutboundWeighingComplete            | Is the outbound weighing complete?                                            |\r\n| IsPassThrough                         | Is this a pass through weighing?                                              |\r\n| IsPrinted                             | Is this weighing printed?                                                     |\r\n| StartedFromANPR                       | Is this weighing started by an Automatic Number Plate Recognition device?     |\r\n| CashCollected                         | Amount of cash collected for this weighing.                                   |\r\n| WeighingDate                          | The weighing date of this weighing. Filterable                                |\r\n| Weights                               | The weight data assosicated to the weighing.                                  |\r\n| Weights.GrossWeight                   | The gross weight data associated to the weighing.                             |\r\n| Weights.GrossWeight.Guid              | The GUID associated to the gross weight of the weighing.                      |\r\n| Weights.GrossWeight.Weight            | The weight associated to the gross weight of the weighing.                    |\r\n| Weights.GrossWeight.Timestamp         | The timestamp associated to the gross weight of the weighing.                 |\r\n| Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the gross weight.                 |\r\n| Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|\r\n| Weights.TareWeight                    | The tare weight data associated to the weighing.                              |\r\n| Weights.TareWeight.Guid               | The GUID associated to the tare weight of the weighing.                       |\r\n| Weights.TareWeight.Weight             | The weight associated to the tare weight of the weighing.                     |\r\n| Weights.TareWeight.Timestamp          | The timestamp associated to the tare weight of the weighing.                  |\r\n| Weights.TareWeight.WeightTypeListItem          | The GUID and description of the weight type associated to the tare weight.                  |\r\n| Weights.TareWeight.TallyNo| The tally number associated to the tare weight.|\r\n| Weights.Quantity                      | The quantity associated to the weighing.                                      |\r\n| Weights.Volume                        | The volume associated to the weighing.                                        |\r\n| Weights.BridgeName                    | The bridge name associated to the weighing.                                   |\r\n| DestinationWeight                     | Weights done at destination associated to the weighing.                       |\r\n| DestinationWeight.GrossWeight         | The gross weight at destination associated to the weighing.                   |\r\n| DestinationWeight.TareWeight          | The tare weight at destination associated to the weighing.                    |\r\n| DestinationWeight.Quantity            | The quantity at destination associated to the weighing.                       |\r\n| DestinationWeight.Volume              | The volume at destination associated to the weighing.                         |\r\n| WeighingIns[0]                        | The list of weighing ins associated to the weighing.                          |\r\n| WeighingIns[0].Guid                   | The GUID associated to the weighing in.                                       |\r\n| WeighingIns[0].TicketNo               | The ticket number associated to the weighing in.                              |\r\n| WeighingIns[0].IsAutomatic            | Is this weighing done automatic?                                              |\r\n| WeighingIns[0].TareTallyNo            | The tare tally number of weighing in.|\r\n| WeighingIns[0].MaterialListItem       | The GUID and description of the material list associated to the weighing in.  |\r\n| WeighingIns[0].ContainerTypeListItem  | The GUID and description of the container type associated to the weighing in. |\r\n| WeighingIns[0].RelatedTreatmentGuid| The GUID of the treatment code associated to the weighing in.|\r\n| WeighingIns[0].Weights                       | The weight data assosicated to the weighing in.                        |\r\n| WeighingIns[0].Weights.GrossWeight           | The gross weight data associated to the weighing in.                   |\r\n| WeighingIns[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing in.            |\r\n| WeighingIns[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing in.          |\r\n| WeighingIns[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing in.       |\r\n| WeighingIns[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing in gross weight.       |\r\n| WeighingIns[0].Weights.TareWeight            | The tare weight data associated to the weighing in.                    |\r\n| WeighingIns[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing in.             |\r\n| WeighingIns[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing in.           |\r\n| WeighingIns[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing in.        |\r\n| WeighingIns[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing in tare weight.        |\r\n| WeighingIns[0].Weights.Quantity              | The quantity associated to the weighing in.                            |\r\n| WeighingIns[0].Weights.Volume                | The volume associated to the weighing in.                              |\r\n| WeighingIns[0].Details| The weighingin detail assosicated to the weighing in                          |\r\n| WeighingIns[0].Details[0].Guid                | The guid assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Barcode             | The barcode assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Weight              | The weight assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].RelatedJobOverrideBreakdownGuid | The job override breakdown assosicated to the weighingin detail   |\r\n| WeighingIns[0].Details[0].ReasonListItem      | The reason assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].IsDeleted           | Is the weighingin detail is deleted?                                  |\r\n| WeighingOuts[0]                       | The list of weighing outs associated to the weighing.                         |\r\n| WeighingOuts[0].Guid                  | The GUID associated to the weighing out.                                      |\r\n| WeighingOuts[0].TicketNo              | The ticket number associated to the weighing out.                             |\r\n| WeighingOuts[0].IsAutomatic           | Is this weighing done automatic?                                              |\r\n| WeighingOuts[0].GrossTallyNo          | The gross tally number of weighing out.                                       |\r\n| WeighingOuts[0].MaterialListItem      | The GUID and description of the material list associated to the weighing out. |\r\n| WeighingOuts[0].ContainerTypeListItem | The GUID and description of the container type associated to the weighing out.|\r\n| WeighingOuts[0].RelatedTreatmentGuid  | The GUID of the treatment code associated to the weighing out.|\r\n| WeighingOuts[0].RelatedWeighingInGuid| The GUID associated to the weighing in of the weighing out.           |\r\n| WeighingOuts[0].Weights                       | The weight data assosicated to the weighing out.                      |\r\n| WeighingOuts[0].Weights.GrossWeight           | The gross weight data associated to the weighing out.                 |\r\n| WeighingOuts[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing out.          |\r\n| WeighingOuts[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing out.        |\r\n| WeighingOuts[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing out.     |\r\n| WeighingOuts[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing out gross weight.     |\r\n| WeighingOuts[0].Weights.TareWeight            | The tare weight data associated to the weighing out.                  |\r\n| WeighingOuts[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing out.           |\r\n| WeighingOuts[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing out.         |\r\n| WeighingOuts[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing out.      |\r\n| WeighingOuts[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing out tare weight.      |\r\n| WeighingOuts[0].Weights.Quantity              | The quantity associated to the weighing out.                          |\r\n| WeighingOuts[0].Weights.Volume                | The volume associated to the weighing out.                            |\r\n| ContainerIdentifier| The container identifier of the weighing.|\r\n| SealIdentifier| The seal identifier of the weighing.|\r\n| ContainerTare | The container tare weight of the weighing.|\r\n| VerifiedGrossMaximum | The verified gross maximum weight of the weighing.|\r\n| ContainerNotes| The container notes of the weighing.|\r\n| TimeInWeighing| The time in associated to the weighing. Filterable|\r\n| TimeOutWeighing| The time out associated to the weighing. Filterable|\r\n| CustomerRound| The customer site round number associated to the weighing.|\r\n| GrossManualWeightReasonListItem| The GUID and description of the reason associated to the gross manual weight.|\r\n| TareManualWeightReasonListItem| The GUID and description of the reason associated to the tare manual weight.|\r\n| RelatedWeighingInGuid                 | Used to filter on weighing with weighing in of provided GUID.                 |\r\n| RelatedWeighingOutGuid                | Used to filter on weighing with weighing out of provided GUID.                |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the weighing. |\r\n| RelatedBlobHashes[0].Description| The description of the blob.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedBlobWeighingDocketPdfHashes | The array of related weighing docket blob hashes. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash | The hash of the weighing docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedWeighingInDetailGuid                | Used to filter on weighing with weighing in detail of provided GUID. Filterable   |\r\n| RelatedJobOverrideBreakdownGuid            | Used to filter on weighing with weighing in detail job override breakdown of provided GUID. Filterable              |\r\n| WeighingOutsRelatedWeighingInGuidFilter    | Used to filter the related weighing in guid associated to the weighing out.   |"
+      operationId: Weighing_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorWeighingResource]'
+    put:
+      tags:
+      - Weighing
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          | No |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          | No |\r\n| RelatedRouteGuid                      | The GUID associated to the route of the weighing.                             | Route |\r\n| RelatedJobGuid                        | The GUID associated to the job of the weighing.                               | Gate, ScheduledJob, MaterialSale, TransferOut |\r\n| RelatedVehicleGuid                    | The GUID associated to the vehicle of the weighing.                           | No |\r\n| RelatedExternalVehicleGuid            | The GUID associated to the external vehicle of the weighing.                  | Yes |\r\n| RelatedMaterialGuid                   | The GUID associated to the material of the weighing.                          | Yes |\r\n| RelatedLocationGuid                   | The GUID associated to the location of the weighing.                          | No |\r\n| RelatedLocationDestinationGuid        | The GUID associated to the destination location of the weighing.              | TransferOut |\r\n| RelatedAreaOfOriginGuid               | The GUID associated to the area of origin of the weighing.                    | Route |\r\n| RelatedSupplierThirdPartyCarrierGuid  | The GUID associated to the third party carrier supplier site of the weighing. | No |\r\n| RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing.    | No |\r\n| TicketNo                              | The ticket number associated to the weighing.                                 | No |\r\n| ExternalTicketNo                      | The external ticket number associated to the weighing.                        | No |\r\n| DestinationTicketNo                   | The destination ticket number associated to the weighing.                     | No |\r\n| CustomerLoadReference                 | The customer load reference associated to the weighing.                       | No |\r\n| CustomerInvoiceReference              | The customer invoice reference associated to the weighing.                    | No |\r\n| Notes                                 | The notes associated to the weighing.                                         | No |\r\n| WeighingTypeListItem                  | The GUID and description of the weighing type associated to the weighing.     | Yes |\r\n| HaulierName                           | The haulier name associated to the weighing.                                  | No |\r\n| Driver                                | The driver data associated to the weighing.                                   | No |\r\n| Driver.Name                           | The name associated to the driver.                                            | No |\r\n| Driver.LicenceNumber                  | The licence number associated to the driver.                                  | No |\r\n| IsComplete                            | Is this weighing complete?                                                    | No |\r\n| IsDestinationConfirmed                | Is this weighing confirmed on destination?                                    | No |\r\n| IsExternalVehicle                     | Is this weighing done with an external vehicle?                               | No |\r\n| IsEstimatedWeight                     | Is the weight of this weighing estimated?                                     | No |\r\n| IsGradingConfirmed                    | Is the grading of this weighing confirmed?                                    | No |\r\n| IsIncContainer                        | Is this weighing including a container?                                       | No |\r\n| IsInspectionConfirmed                 | Is the inspection of this weighing confirmed?                                 | No |\r\n| IsOutboundWeighingComplete            | Is the outbound weighing complete?                                            | No |\r\n| IsPassThrough                         | Is this a pass through weighing?                                              | No |\r\n| IsPrinted                             | Is this weighing printed?                                                     | No |\r\n| StartedFromANPR                       | Is this weighing started by an Automatic Number Plate Recognition device?     | No |\r\n| CashCollected                         | Amount of cash collected for this weighing.                                   | No |\r\n| WeighingDate                          | The weighing date of this weighing.                                           | No |\r\n| Weights                               | The weight data assosicated to the weighing.                                  | No |\r\n| Weights.GrossWeight                   | The gross weight data associated to the weighing.                             | No |\r\n| Weights.GrossWeight.Guid              | The GUID associated to the gross weight of the weighing.                      | No |\r\n| Weights.GrossWeight.Weight            | The weight associated to the gross weight of the weighing.                    | No |\r\n| Weights.GrossWeight.Timestamp         | The timestamp associated to the gross weight of the weighing.                 | Yes if Weight not null |\r\n| Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the gross weight.                 | Yes if Weights.GrossWeight not null |\r\n| Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.| No |\r\n| Weights.TareWeight                    | The tare weight data associated to the weighing.                              | No |\r\n| Weights.TareWeight.Guid               | The GUID associated to the tare weight of the weighing.                       | No |\r\n| Weights.TareWeight.Weight             | The weight associated to the tare weight of the weighing.                     | No |\r\n| Weights.TareWeight.Timestamp          | The timestamp associated to the tare weight of the weighing.                  | No |\r\n| Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the tare weight.                 | Yes if Weights.TareWeight not null |\r\n| Weights.TareWeight.TallyNo| The tally number associated to the tare weight.| No |\r\n| Weights.Quantity                      | The quantity associated to the weighing.                                      | No |\r\n| Weights.Volume                        | The volume associated to the weighing.                                        | No |\r\n| Weights.BridgeName                    | The bridge name associated to the weighing.                                   | No |\r\n| DestinationWeight                     | Weights done at destination associated to the weighing.                       | No |\r\n| DestinationWeight.GrossWeight         | The gross weight at destination associated to the weighing.                   | No |\r\n| DestinationWeight.TareWeight          | The tare weight at destination associated to the weighing.                    | No |\r\n| DestinationWeight.Quantity            | The quantity at destination associated to the weighing.                       | No |\r\n| DestinationWeight.Volume              | The volume at destination associated to the weighing.                         | No |\r\n| WeighingIns[0]                        | The list of weighing ins associated to the weighing.                          | No |\r\n| WeighingIns[0].Guid                   | The GUID associated to the weighing in.                                       | No |\r\n| WeighingIns[0].TicketNo               | The ticket number associated to the weighing in.                              | No |\r\n| WeighingIns[0].IsAutomatic            | Is this weighing done automatic?                                              | No |\r\n| WeighingIns[0].TareTallyNo            | The tare tally number of weighing in.| No |\r\n| WeighingIns[0].MaterialListItem       | The GUID and description of the material list associated to the weighing in.  | Yes |\r\n| WeighingIns[0].ContainerTypeListItem  | The GUID and description of the container type associated to the weighing in. | No |\r\n| WeighingIns[0].RelatedTreatmentGuid| The GUID of the treatment code associated to the weighing in.| No |\r\n| WeighingIns[0].Weights                       | The weight data assosicated to the weighing in.                        | No |\r\n| WeighingIns[0].Weights.GrossWeight           | The gross weight data associated to the weighing in.                   | No |\r\n| WeighingIns[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing in.            | No |\r\n| WeighingIns[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing in.          | No |\r\n| WeighingIns[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing in.       | No |\r\n| WeighingIns[0].Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingIns.Weights gross weight.                 | Yes if WeighingIns.Weights.GrossWeight not null |\r\n| WeighingIns[0].Weights.TareWeight            | The tare weight data associated to the weighing in.                    | No |\r\n| WeighingIns[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing in.             | No |\r\n| WeighingIns[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing in.           | No |\r\n| WeighingIns[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing in.        | No |\r\n| WeighingIns[0].Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingIns.Weights tare weight.                 | Yes if WeighingIns.Weights.GrossWeight not null |\r\n| WeighingIns[0].Weights.Quantity              | The quantity associated to the weighing in.                            | No |\r\n| WeighingIns[0].Weights.Volume                | The volume associated to the weighing in.                              | No |\r\n| WeighingIns[0].Details| The weighingin detail assosicated to the weighing in                          | No |\r\n| WeighingIns[0].Details[0].Guid| The guid assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].Barcode| The barcode assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].Weight| The weight assosicated to the weighingin detail| Yes |\r\n| WeighingIns[0].Details[0].RelatedJobOverrideBreakdownGuid| The job override breakdown assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].ReasonListItem| The reason assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].IsDeleted| Is the weighingin detail is deleted?                        | No |\r\n| WeighingOuts[0]                       | The list of weighing outs associated to the weighing.                         | No |\r\n| WeighingOuts[0].Guid                  | The GUID associated to the weighing out.                                      | No |\r\n| WeighingOuts[0].TicketNo              | The ticket number associated to the weighing out.                             | No |\r\n| WeighingOuts[0].IsAutomatic           | Is this weighing done automatic?                                              | No |\r\n| WeighingOuts[0].GrossTallyNo          | The gross tally number of weighing out.                                       | No |\r\n| WeighingOuts[0].MaterialListItem      | The GUID and description of the material list associated to the weighing out. | Yes |\r\n| WeighingOuts[0].ContainerTypeListItem | The GUID and description of the container type associated to the weighing out.| No |\r\n| WeighingOuts[0].RelatedTreatmentGuid  | The GUID of the treatment code associated to the weighing out.| No |\r\n| WeighingOuts[0].RelatedWeighingInGuid| The GUID associated to the weighing in of the weighing out.           | No |\r\n| WeighingOuts[0].Weights                       | The weight data assosicated to the weighing out.                      | No |\r\n| WeighingOuts[0].Weights.GrossWeight           | The gross weight data associated to the weighing out.                 | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing out.          | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing out.        | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing out.     | No |\r\n| WeighingOuts[0].Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingOuts.Weights gross weight.                 | Yes if WeighingOuts.Weights.GrossWeight not null |\r\n| WeighingOuts[0].Weights.TareWeight            | The tare weight data associated to the weighing out.                  | No |\r\n| WeighingOuts[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing out.           | No |\r\n| WeighingOuts[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing out.         | No |\r\n| WeighingOuts[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing out.      | No |\r\n| WeighingOuts[0].Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingOuts.Weights tare weight.                 | Yes if WeighingOuts.Weights.GrossWeight not null |\r\n| WeighingOuts[0].Weights.Quantity              | The quantity associated to the weighing out.                          | No |\r\n| WeighingOuts[0].Weights.Volume                | The volume associated to the weighing out.                            | No |\r\n| ContainerIdentifier| The container identifier of the weighing.| No |\r\n| SealIdentifier| The seal identifier of the weighing.| No |\r\n| ContainerTare | The container tare weight of the weighing.| No |\r\n| VerifiedGrossMaximum | The verified gross maximum weight of the weighing.| No |\r\n| ContainerNotes| The container notes of the weighing.| No |\r\n| TimeInWeighing| The time in associated to the weighing.| No |\r\n| TimeOutWeighing| The time out associated to the weighing.| No |\r\n| CustomerRound| The customer site round number associated to the weighing.| No |\r\n| GrossManualWeightReasonListItem| The GUID and description of the reason associated to the gross manual weight.| Yes if \"ManualWeighingReasonRequired\" is enabled |\r\n| TareManualWeightReasonListItem| The GUID and description of the reason associated to the tare manual weight.| Yes if \"ManualWeighingReasonRequired\" is enabled |\r\n| RelatedWeighingInGuid                 | Used to filter on weighing with weighing in of provided GUID.                 | - |\r\n| RelatedWeighingOutGuid                | Used to filter on weighing with weighing out of provided GUID.                | - |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the weighing.| No |\r\n| RelatedBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedBlobWeighingDocketPdfHashes | The array of related weighing docket blob hashes. | No |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash | The hash of the weighing docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedWeighingInDetailGuid| Used to filter on weighing with weighing in detail of provided GUID.| No |\r\n| RelatedJobOverrideBreakdownGuid| Used to filter on weighing with weighing in detail job override breakdown of provided GUID.           | No |\r\n| WeighingOutsRelatedWeighingInGuidFilter                   | Used to filter the related weighing in guid associated to the weighing out.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| For Gate, ScheduledJob and MaterialSale if provided Job does not have a SiteOrder. | RelatedJobGuid must be a job with a site order. |\r\n| For Gate, ScheduledJob, Route and MaterialSale if provided Job is linked to another Weighing. | The weighing must be unique per job. |\r\n| If TicketNo is changed. | ticketNo is a read-only property. | \r\n| If weighing is inbound or Route and WeighingOut provided. (1) | WeighingOut: is not supported. |\r\n| If weighing is outbound or Route and WeighingIn provided. (2) | WeighingIn: is not supported. |\r\n| If Weights.TareWeight.Weight is bigger then Weights.GrossWeight.Weight. | Weights.GrossWeight.Weight: Must be greater than the then Weights.TareWeight.Weight |\r\n| If WeighingIns[0].Weights.TareWeight.Weight is bigger then WeighingIns[0].Weights.GrossWeight.Weight. | WeighingIns[0].Weights.GrossWeight.Weight: Must be greater than the then WeighingIns[0].Weights.TareWeight.Weight |\r\n| If WeighingIns[0].TareTallyNo is not null on create or value changed on update. | WeighingIns[0].TareTallyNo is a read-only property |\r\n| If WeighingOuts[0].Weights.TareWeight.Weight is bigger then WeighingOuts[0].Weights.GrossWeight.Weight. | WeighingOuts[0].Weights.GrossWeight.Weight: Must be greater than the then WeighingOuts[0].Weights.TareWeight.Weight |\r\n| If WeighingOuts[0].GrossTallyNo is not null on create or value changed on update. | WeighingOuts[0].GrossTallyNo is a read-only property |\r\n| For Gate if RelatedVehicleGuid is provided. | RelatedVehicleGuid: is not supported. |\r\n| For weighing, if IsExternalVehicle set to true and RelatedExternalVehicleGuid is not provided | For Weighing, IsExternalVehicle property has been set as true, therefore RelatedExternalVehicleGuid property must also be set. |\r\n| For weighing, if RelatedExternalVehicleGuid have value and IsExternalVehicle set to false | For Weighing, RelatedExternalVehicleGuid property have seen set, therefore IsExternalVehicle property must be set as true. |\r\n| For weighing, if RelatedVehicleGuid and RelatedExternalVehicleGuid was provided  | Either RelatedExternalVehicleGuid or RelatedVehicleGuid properties must be set. |\r\n| For transferout weighing type, if we try to set IsComplete as true | Weighing has the property IsComplete with value of true that is not supported. WeighingType TransferOut does not support CompleteWeighing |\r\n| For transferout weighing type if the weighing was already Completed and if we try to set IsComplete as false | Weighing has the property IsComplete with value of false that is not supported. WeighingType TransferOut does not support UnCompleteWeighing |\r\n| For transferout weighing type, if RelatedJobGuid is changed. | RelatedJobGuid is a read-only property. | \r\n| If Weights.BridgeName is more than 100 characters long | BridgeName must be no more than 100 characters long. |\r\n| If ContainerIdentifier is more than 50 characters long | ContainerIdentifier must be no more than 50 characters long. |\r\n| If SealIdentifier is more than 50 characters long | SealIdentifier must be no more than 50 characters long. |\r\n| If CustomerRound is provided and the weighing type is other than Gate or ScheduledJob | Failed to save/update Weighing because CustomerRound can be set only for Gate and ScheduledJob weighings. |\r\n| If the Guid of the GrossManualWeightReasonListItem, TareManualWeightReasonListItem is deleted | The provided GrossManualWeightReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If the Guid of the GrossManualWeightReasonListItem, TareManualWeightReasonListItem is not listed in the ReasonCategory under Manual weighing | Invalid GrossManualWeightReasonListItem.Guid. Reason must be from 'ManualWeighing' reason category. |\r\n\r\n1) Inbound are weighings of type Gate, ScheduledJob and TransferOut (if the weighing is not linked to another weighing via TransferDestinationWeighingId)\r\n2) Outbound are weighings of type MaterialSale and TransferOut (if the weighing is linked to another weighing via TransferDestinationWeighingId)\r\n\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash is not null for Update and the Weighing did not have RelatedBlobWeighingDocketPdfHashes initially | Failed to save/update Weighing because RelatedBlobWeighingDocketPdfHashes do not exist for the Weighing. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash is not null for Update and Invalid Hash | Could not find WeighingDocketOutput matching template. |\r\n| WeighingIns[0].Details[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. WeighingIns[0].Details[0] can not be deleted via the REST API. |\r\n| If the GUID passed to WeighingIns[0].Details[0].ReasonListItem has a value that is deleted | The provided WeighingIns[0].Details[0].ReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If Weights.GrossWeight.TallyNo is more than 20 characters long | TallyNo must be no more than 20 characters long. |\r\n| If Weights.TareWeight.TallyNo is more than 20 characters long | TallyNo must be no more than 20 characters long. |"
+      operationId: Weighing_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /scale/weighings:
+    get:
+      tags:
+      - Weighing
+      summary: Find with Filters
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| RelatedRouteGuid                      | The GUID associated to the route of the weighing.                             |\r\n| RelatedJobGuid                        | The GUID associated to the job of the weighing.                               |\r\n| RelatedVehicleGuid                    | The GUID associated to the vehicle of the weighing.                           |\r\n| RelatedExternalVehicleGuid            | The GUID associated to the external vehicle of the weighing.                  |\r\n| RelatedMaterialGuid                   | The GUID associated to the material of the weighing.                          |\r\n| RelatedLocationGuid                   | Used to filter the related location guid associated to the location of the weighing.                          |\r\n| RelatedLocationDestinationGuid        | Used to filter the related destination location guid associated to the destination location of the weighing.              |\r\n| RelatedAreaOfOriginGuid               | The GUID associated to the area of origin of the weighing.                    |\r\n| RelatedSupplierThirdPartyCarrierGuid  | The GUID associated to the third party carrier supplier site of the weighing. |\r\n| RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing.    |\r\n| TicketNo                              | The ticket number associated to the weighing.                                 |\r\n| ExternalTicketNo                      | The external ticket number associated to the weighing.                        |\r\n| DestinationTicketNo                   | The destination ticket number associated to the weighing.                     |\r\n| CustomerLoadReference                 | The customer load reference associated to the weighing.                       |\r\n| CustomerInvoiceReference              | The customer invoice reference associated to the weighing.                    |\r\n| Notes                                 | The notes associated to the weighing.                                         |\r\n| WeighingTypeListItem                  | The GUID and description of the weighing type associated to the weighing.     |\r\n| HaulierName                           | The haulier name associated to the weighing.                                  |\r\n| Driver                                | The driver data associated to the weighing.                                   |\r\n| Driver.Name                           | The name associated to the driver.                                            |\r\n| Driver.LicenceNumber                  | The licence number associated to the driver.                                  |\r\n| IsComplete                            | Is this weighing complete?                                                    |\r\n| IsDestinationConfirmed                | Is this weighing confirmed on destination?                                    |\r\n| IsExternalVehicle                     | Is this weighing done with an external vehicle?                               |\r\n| IsEstimatedWeight                     | Is the weight of this weighing estimated?                                     |\r\n| IsGradingConfirmed                    | Is the grading of this weighing confirmed?                                    |\r\n| IsIncContainer                        | Is this weighing including a container?                                       |\r\n| IsInspectionConfirmed                 | Is the inspection of this weighing confirmed?                                 |\r\n| IsOutboundWeighingComplete            | Is the outbound weighing complete?                                            |\r\n| IsPassThrough                         | Is this a pass through weighing?                                              |\r\n| IsPrinted                             | Is this weighing printed?                                                     |\r\n| StartedFromANPR                       | Is this weighing started by an Automatic Number Plate Recognition device?     |\r\n| CashCollected                         | Amount of cash collected for this weighing.                                   |\r\n| WeighingDate                          | The weighing date of this weighing. Filterable                                |\r\n| Weights                               | The weight data assosicated to the weighing.                                  |\r\n| Weights.GrossWeight                   | The gross weight data associated to the weighing.                             |\r\n| Weights.GrossWeight.Guid              | The GUID associated to the gross weight of the weighing.                      |\r\n| Weights.GrossWeight.Weight            | The weight associated to the gross weight of the weighing.                    |\r\n| Weights.GrossWeight.Timestamp         | The timestamp associated to the gross weight of the weighing.                 |\r\n| Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the gross weight.                 |\r\n| Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|\r\n| Weights.TareWeight                    | The tare weight data associated to the weighing.                              |\r\n| Weights.TareWeight.Guid               | The GUID associated to the tare weight of the weighing.                       |\r\n| Weights.TareWeight.Weight             | The weight associated to the tare weight of the weighing.                     |\r\n| Weights.TareWeight.Timestamp          | The timestamp associated to the tare weight of the weighing.                  |\r\n| Weights.TareWeight.WeightTypeListItem          | The GUID and description of the weight type associated to the tare weight.                  |\r\n| Weights.TareWeight.TallyNo| The tally number associated to the tare weight.|\r\n| Weights.Quantity                      | The quantity associated to the weighing.                                      |\r\n| Weights.Volume                        | The volume associated to the weighing.                                        |\r\n| Weights.BridgeName                    | The bridge name associated to the weighing.                                   |\r\n| DestinationWeight                     | Weights done at destination associated to the weighing.                       |\r\n| DestinationWeight.GrossWeight         | The gross weight at destination associated to the weighing.                   |\r\n| DestinationWeight.TareWeight          | The tare weight at destination associated to the weighing.                    |\r\n| DestinationWeight.Quantity            | The quantity at destination associated to the weighing.                       |\r\n| DestinationWeight.Volume              | The volume at destination associated to the weighing.                         |\r\n| WeighingIns[0]                        | The list of weighing ins associated to the weighing.                          |\r\n| WeighingIns[0].Guid                   | The GUID associated to the weighing in.                                       |\r\n| WeighingIns[0].TicketNo               | The ticket number associated to the weighing in.                              |\r\n| WeighingIns[0].IsAutomatic            | Is this weighing done automatic?                                              |\r\n| WeighingIns[0].TareTallyNo            | The tare tally number of weighing in.|\r\n| WeighingIns[0].MaterialListItem       | The GUID and description of the material list associated to the weighing in.  |\r\n| WeighingIns[0].ContainerTypeListItem  | The GUID and description of the container type associated to the weighing in. |\r\n| WeighingIns[0].RelatedTreatmentGuid| The GUID of the treatment code associated to the weighing in.|\r\n| WeighingIns[0].Weights                       | The weight data assosicated to the weighing in.                        |\r\n| WeighingIns[0].Weights.GrossWeight           | The gross weight data associated to the weighing in.                   |\r\n| WeighingIns[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing in.            |\r\n| WeighingIns[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing in.          |\r\n| WeighingIns[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing in.       |\r\n| WeighingIns[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing in gross weight.       |\r\n| WeighingIns[0].Weights.TareWeight            | The tare weight data associated to the weighing in.                    |\r\n| WeighingIns[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing in.             |\r\n| WeighingIns[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing in.           |\r\n| WeighingIns[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing in.        |\r\n| WeighingIns[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing in tare weight.        |\r\n| WeighingIns[0].Weights.Quantity              | The quantity associated to the weighing in.                            |\r\n| WeighingIns[0].Weights.Volume                | The volume associated to the weighing in.                              |\r\n| WeighingIns[0].Details| The weighingin detail assosicated to the weighing in                          |\r\n| WeighingIns[0].Details[0].Guid                | The guid assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Barcode             | The barcode assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].Weight              | The weight assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].RelatedJobOverrideBreakdownGuid | The job override breakdown assosicated to the weighingin detail   |\r\n| WeighingIns[0].Details[0].ReasonListItem      | The reason assosicated to the weighingin detail|\r\n| WeighingIns[0].Details[0].IsDeleted           | Is the weighingin detail is deleted?                                  |\r\n| WeighingOuts[0]                       | The list of weighing outs associated to the weighing.                         |\r\n| WeighingOuts[0].Guid                  | The GUID associated to the weighing out.                                      |\r\n| WeighingOuts[0].TicketNo              | The ticket number associated to the weighing out.                             |\r\n| WeighingOuts[0].IsAutomatic           | Is this weighing done automatic?                                              |\r\n| WeighingOuts[0].GrossTallyNo          | The gross tally number of weighing out.                                       |\r\n| WeighingOuts[0].MaterialListItem      | The GUID and description of the material list associated to the weighing out. |\r\n| WeighingOuts[0].ContainerTypeListItem | The GUID and description of the container type associated to the weighing out.|\r\n| WeighingOuts[0].RelatedTreatmentGuid  | The GUID of the treatment code associated to the weighing out.|\r\n| WeighingOuts[0].RelatedWeighingInGuid| The GUID associated to the weighing in of the weighing out.           |\r\n| WeighingOuts[0].Weights                       | The weight data assosicated to the weighing out.                      |\r\n| WeighingOuts[0].Weights.GrossWeight           | The gross weight data associated to the weighing out.                 |\r\n| WeighingOuts[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing out.          |\r\n| WeighingOuts[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing out.        |\r\n| WeighingOuts[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing out.     |\r\n| WeighingOuts[0].Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the weighing out gross weight.     |\r\n| WeighingOuts[0].Weights.TareWeight            | The tare weight data associated to the weighing out.                  |\r\n| WeighingOuts[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing out.           |\r\n| WeighingOuts[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing out.         |\r\n| WeighingOuts[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing out.      |\r\n| WeighingOuts[0].Weights.TareWeight.WeightTypeListItem  | The GUID and description of the weight type associated to the weighing out tare weight.      |\r\n| WeighingOuts[0].Weights.Quantity              | The quantity associated to the weighing out.                          |\r\n| WeighingOuts[0].Weights.Volume                | The volume associated to the weighing out.                            |\r\n| ContainerIdentifier| The container identifier of the weighing.|\r\n| SealIdentifier| The seal identifier of the weighing.|\r\n| ContainerTare | The container tare weight of the weighing.|\r\n| VerifiedGrossMaximum | The verified gross maximum weight of the weighing.|\r\n| ContainerNotes| The container notes of the weighing.|\r\n| TimeInWeighing| The time in associated to the weighing. Filterable|\r\n| TimeOutWeighing| The time out associated to the weighing. Filterable|\r\n| CustomerRound| The customer site round number associated to the weighing.|\r\n| GrossManualWeightReasonListItem| The GUID and description of the reason associated to the gross manual weight.|\r\n| TareManualWeightReasonListItem| The GUID and description of the reason associated to the tare manual weight.|\r\n| RelatedWeighingInGuid                 | Used to filter on weighing with weighing in of provided GUID.                 |\r\n| RelatedWeighingOutGuid                | Used to filter on weighing with weighing out of provided GUID.                |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the weighing. |\r\n| RelatedBlobHashes[0].Description| The description of the blob.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedBlobWeighingDocketPdfHashes | The array of related weighing docket blob hashes. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash | The hash of the weighing docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedWeighingInDetailGuid                | Used to filter on weighing with weighing in detail of provided GUID. Filterable   |\r\n| RelatedJobOverrideBreakdownGuid            | Used to filter on weighing with weighing in detail job override breakdown of provided GUID. Filterable              |\r\n| WeighingOutsRelatedWeighingInGuidFilter    | Used to filter the related weighing in guid associated to the weighing out.   |"
+      operationId: Weighing_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorWeighingResource]'
+    post:
+      tags:
+      - Weighing
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          | No |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          | No |\r\n| RelatedRouteGuid                      | The GUID associated to the route of the weighing.                             | Route |\r\n| RelatedJobGuid                        | The GUID associated to the job of the weighing.                               | Gate, ScheduledJob, MaterialSale, TransferOut |\r\n| RelatedVehicleGuid                    | The GUID associated to the vehicle of the weighing.                           | No |\r\n| RelatedExternalVehicleGuid            | The GUID associated to the external vehicle of the weighing.                  | Yes |\r\n| RelatedMaterialGuid                   | The GUID associated to the material of the weighing.                          | Yes |\r\n| RelatedLocationGuid                   | The GUID associated to the location of the weighing.                          | No |\r\n| RelatedLocationDestinationGuid        | The GUID associated to the destination location of the weighing.              | TransferOut |\r\n| RelatedAreaOfOriginGuid               | The GUID associated to the area of origin of the weighing.                    | Route |\r\n| RelatedSupplierThirdPartyCarrierGuid  | The GUID associated to the third party carrier supplier site of the weighing. | No |\r\n| RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing.    | No |\r\n| TicketNo                              | The ticket number associated to the weighing.                                 | No |\r\n| ExternalTicketNo                      | The external ticket number associated to the weighing.                        | No |\r\n| DestinationTicketNo                   | The destination ticket number associated to the weighing.                     | No |\r\n| CustomerLoadReference                 | The customer load reference associated to the weighing.                       | No |\r\n| CustomerInvoiceReference              | The customer invoice reference associated to the weighing.                    | No |\r\n| Notes                                 | The notes associated to the weighing.                                         | No |\r\n| WeighingTypeListItem                  | The GUID and description of the weighing type associated to the weighing.     | Yes |\r\n| HaulierName                           | The haulier name associated to the weighing.                                  | No |\r\n| Driver                                | The driver data associated to the weighing.                                   | No |\r\n| Driver.Name                           | The name associated to the driver.                                            | No |\r\n| Driver.LicenceNumber                  | The licence number associated to the driver.                                  | No |\r\n| IsComplete                            | Is this weighing complete?                                                    | No |\r\n| IsDestinationConfirmed                | Is this weighing confirmed on destination?                                    | No |\r\n| IsExternalVehicle                     | Is this weighing done with an external vehicle?                               | No |\r\n| IsEstimatedWeight                     | Is the weight of this weighing estimated?                                     | No |\r\n| IsGradingConfirmed                    | Is the grading of this weighing confirmed?                                    | No |\r\n| IsIncContainer                        | Is this weighing including a container?                                       | No |\r\n| IsInspectionConfirmed                 | Is the inspection of this weighing confirmed?                                 | No |\r\n| IsOutboundWeighingComplete            | Is the outbound weighing complete?                                            | No |\r\n| IsPassThrough                         | Is this a pass through weighing?                                              | No |\r\n| IsPrinted                             | Is this weighing printed?                                                     | No |\r\n| StartedFromANPR                       | Is this weighing started by an Automatic Number Plate Recognition device?     | No |\r\n| CashCollected                         | Amount of cash collected for this weighing.                                   | No |\r\n| WeighingDate                          | The weighing date of this weighing.                                           | No |\r\n| Weights                               | The weight data assosicated to the weighing.                                  | No |\r\n| Weights.GrossWeight                   | The gross weight data associated to the weighing.                             | No |\r\n| Weights.GrossWeight.Guid              | The GUID associated to the gross weight of the weighing.                      | No |\r\n| Weights.GrossWeight.Weight            | The weight associated to the gross weight of the weighing.                    | No |\r\n| Weights.GrossWeight.Timestamp         | The timestamp associated to the gross weight of the weighing.                 | Yes if Weight not null |\r\n| Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the gross weight.                 | Yes if Weights.GrossWeight not null |\r\n| Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.| No |\r\n| Weights.TareWeight                    | The tare weight data associated to the weighing.                              | No |\r\n| Weights.TareWeight.Guid               | The GUID associated to the tare weight of the weighing.                       | No |\r\n| Weights.TareWeight.Weight             | The weight associated to the tare weight of the weighing.                     | No |\r\n| Weights.TareWeight.Timestamp          | The timestamp associated to the tare weight of the weighing.                  | No |\r\n| Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the tare weight.                 | Yes if Weights.TareWeight not null |\r\n| Weights.TareWeight.TallyNo| The tally number associated to the tare weight.| No |\r\n| Weights.Quantity                      | The quantity associated to the weighing.                                      | No |\r\n| Weights.Volume                        | The volume associated to the weighing.                                        | No |\r\n| Weights.BridgeName                    | The bridge name associated to the weighing.                                   | No |\r\n| DestinationWeight                     | Weights done at destination associated to the weighing.                       | No |\r\n| DestinationWeight.GrossWeight         | The gross weight at destination associated to the weighing.                   | No |\r\n| DestinationWeight.TareWeight          | The tare weight at destination associated to the weighing.                    | No |\r\n| DestinationWeight.Quantity            | The quantity at destination associated to the weighing.                       | No |\r\n| DestinationWeight.Volume              | The volume at destination associated to the weighing.                         | No |\r\n| WeighingIns[0]                        | The list of weighing ins associated to the weighing.                          | No |\r\n| WeighingIns[0].Guid                   | The GUID associated to the weighing in.                                       | No |\r\n| WeighingIns[0].TicketNo               | The ticket number associated to the weighing in.                              | No |\r\n| WeighingIns[0].IsAutomatic            | Is this weighing done automatic?                                              | No |\r\n| WeighingIns[0].TareTallyNo            | The tare tally number of weighing in.| No |\r\n| WeighingIns[0].MaterialListItem       | The GUID and description of the material list associated to the weighing in.  | Yes |\r\n| WeighingIns[0].ContainerTypeListItem  | The GUID and description of the container type associated to the weighing in. | No |\r\n| WeighingIns[0].RelatedTreatmentGuid| The GUID of the treatment code associated to the weighing in.| No |\r\n| WeighingIns[0].Weights                       | The weight data assosicated to the weighing in.                        | No |\r\n| WeighingIns[0].Weights.GrossWeight           | The gross weight data associated to the weighing in.                   | No |\r\n| WeighingIns[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing in.            | No |\r\n| WeighingIns[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing in.          | No |\r\n| WeighingIns[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing in.       | No |\r\n| WeighingIns[0].Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingIns.Weights gross weight.                 | Yes if WeighingIns.Weights.GrossWeight not null |\r\n| WeighingIns[0].Weights.TareWeight            | The tare weight data associated to the weighing in.                    | No |\r\n| WeighingIns[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing in.             | No |\r\n| WeighingIns[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing in.           | No |\r\n| WeighingIns[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing in.        | No |\r\n| WeighingIns[0].Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingIns.Weights tare weight.                 | Yes if WeighingIns.Weights.GrossWeight not null |\r\n| WeighingIns[0].Weights.Quantity              | The quantity associated to the weighing in.                            | No |\r\n| WeighingIns[0].Weights.Volume                | The volume associated to the weighing in.                              | No |\r\n| WeighingIns[0].Details| The weighingin detail assosicated to the weighing in                          | No |\r\n| WeighingIns[0].Details[0].Guid| The guid assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].Barcode| The barcode assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].Weight| The weight assosicated to the weighingin detail| Yes |\r\n| WeighingIns[0].Details[0].RelatedJobOverrideBreakdownGuid| The job override breakdown assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].ReasonListItem| The reason assosicated to the weighingin detail| No |\r\n| WeighingIns[0].Details[0].IsDeleted| Is the weighingin detail is deleted?                        | No |\r\n| WeighingOuts[0]                       | The list of weighing outs associated to the weighing.                         | No |\r\n| WeighingOuts[0].Guid                  | The GUID associated to the weighing out.                                      | No |\r\n| WeighingOuts[0].TicketNo              | The ticket number associated to the weighing out.                             | No |\r\n| WeighingOuts[0].IsAutomatic           | Is this weighing done automatic?                                              | No |\r\n| WeighingOuts[0].GrossTallyNo          | The gross tally number of weighing out.                                       | No |\r\n| WeighingOuts[0].MaterialListItem      | The GUID and description of the material list associated to the weighing out. | Yes |\r\n| WeighingOuts[0].ContainerTypeListItem | The GUID and description of the container type associated to the weighing out.| No |\r\n| WeighingOuts[0].RelatedTreatmentGuid  | The GUID of the treatment code associated to the weighing out.| No |\r\n| WeighingOuts[0].RelatedWeighingInGuid| The GUID associated to the weighing in of the weighing out.           | No |\r\n| WeighingOuts[0].Weights                       | The weight data assosicated to the weighing out.                      | No |\r\n| WeighingOuts[0].Weights.GrossWeight           | The gross weight data associated to the weighing out.                 | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Guid      | The GUID associated to the gross weight of the weighing out.          | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Weight    | The weight associated to the gross weight of the weighing out.        | No |\r\n| WeighingOuts[0].Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing out.     | No |\r\n| WeighingOuts[0].Weights.GrossWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingOuts.Weights gross weight.                 | Yes if WeighingOuts.Weights.GrossWeight not null |\r\n| WeighingOuts[0].Weights.TareWeight            | The tare weight data associated to the weighing out.                  | No |\r\n| WeighingOuts[0].Weights.TareWeight.Guid       | The GUID associated to the tare weight of the weighing out.           | No |\r\n| WeighingOuts[0].Weights.TareWeight.Weight     | The weight associated to the tare weight of the weighing out.         | No |\r\n| WeighingOuts[0].Weights.TareWeight.Timestamp  | The timestamp associated to the tare weight of the weighing out.      | No |\r\n| WeighingOuts[0].Weights.TareWeight.WeightTypeListItem         | The GUID and description of the weight type associated to the WeighingOuts.Weights tare weight.                 | Yes if WeighingOuts.Weights.GrossWeight not null |\r\n| WeighingOuts[0].Weights.Quantity              | The quantity associated to the weighing out.                          | No |\r\n| WeighingOuts[0].Weights.Volume                | The volume associated to the weighing out.                            | No |\r\n| ContainerIdentifier| The container identifier of the weighing.| No |\r\n| SealIdentifier| The seal identifier of the weighing.| No |\r\n| ContainerTare | The container tare weight of the weighing.| No |\r\n| VerifiedGrossMaximum | The verified gross maximum weight of the weighing.| No |\r\n| ContainerNotes| The container notes of the weighing.| No |\r\n| TimeInWeighing| The time in associated to the weighing.| No |\r\n| TimeOutWeighing| The time out associated to the weighing.| No |\r\n| CustomerRound| The customer site round number associated to the weighing.| No |\r\n| GrossManualWeightReasonListItem| The GUID and description of the reason associated to the gross manual weight.| Yes if \"ManualWeighingReasonRequired\" is enabled |\r\n| TareManualWeightReasonListItem| The GUID and description of the reason associated to the tare manual weight.| Yes if \"ManualWeighingReasonRequired\" is enabled |\r\n| RelatedWeighingInGuid                 | Used to filter on weighing with weighing in of provided GUID.                 | - |\r\n| RelatedWeighingOutGuid                | Used to filter on weighing with weighing out of provided GUID.                | - |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the weighing.| No |\r\n| RelatedBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedBlobWeighingDocketPdfHashes | The array of related weighing docket blob hashes. | No |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash | The hash of the weighing docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedWeighingInDetailGuid| Used to filter on weighing with weighing in detail of provided GUID.| No |\r\n| RelatedJobOverrideBreakdownGuid| Used to filter on weighing with weighing in detail job override breakdown of provided GUID.           | No |\r\n| WeighingOutsRelatedWeighingInGuidFilter                   | Used to filter the related weighing in guid associated to the weighing out.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| For Gate, ScheduledJob and MaterialSale if provided Job does not have a SiteOrder. | RelatedJobGuid must be a job with a site order. |\r\n| For Gate, ScheduledJob, Route and MaterialSale if provided Job is linked to another Weighing. | The weighing must be unique per job. |\r\n| If weighing is inbound or Route and WeighingOut provided. (1) | WeighingOut: is not supported. |\r\n| If weighing is outbound or Route and WeighingIn provided. (2) | WeighingIn: is not supported. |\r\n| If Weights.TareWeight.Weight is bigger then Weights.GrossWeight.Weight. | Weights.GrossWeight.Weight: Must be greater than the then Weights.TareWeight.Weight |\r\n| If WeighingIns[0].Weights.TareWeight.Weight is bigger then WeighingIns[0].Weights.GrossWeight.Weight. | WeighingIns[0].Weights.GrossWeight.Weight: Must be greater than the then WeighingIns[0].Weights.TareWeight.Weight |\r\n| If WeighingIns[0].TareTallyNo is not null on create or value changed on update. | WeighingIns[0].TareTallyNo is a read-only property |\r\n| If WeighingOuts[0].Weights.TareWeight.Weight is bigger then WeighingOuts[0].Weights.GrossWeight.Weight. | WeighingOuts[0].Weights.GrossWeight.Weight: Must be greater than the then WeighingOuts[0].Weights.TareWeight.Weight |\r\n| If WeighingOuts[0].GrossTallyNo is not null on create or value changed on update. | WeighingOuts[0].GrossTallyNo is a read-only property |\r\n| For Gate if RelatedVehicleGuid is provided. | RelatedVehicleGuid: is not supported. |\r\n| For weighing, if IsExternalVehicle set to true and RelatedExternalVehicleGuid is not provided | For Weighing, IsExternalVehicle property has been set as true, therefore RelatedExternalVehicleGuid property must also be set. |\r\n| For weighing, if RelatedExternalVehicleGuid have value and IsExternalVehicle set to false | For Weighing, RelatedExternalVehicleGuid property have seen set, therefore IsExternalVehicle property must be set as true. |\r\n| For weighing, if RelatedVehicleGuid and RelatedExternalVehicleGuid was provided  | Either RelatedExternalVehicleGuid or RelatedVehicleGuid properties must be set. |\r\n| For weighing, if IsComplete set to true | Attempted to create a completed weighing. Weighing could not be created. Create the weighing and then set the IsComplete flag via an update. |\r\n| If Weights.BridgeName is more than 100 characters long | BridgeName must be no more than 100 characters long. |\r\n| If ContainerIdentifier is more than 50 characters long | ContainerIdentifier must be no more than 50 characters long. |\r\n| If SealIdentifier is more than 50 characters long | SealIdentifier must be no more than 50 characters long. |\r\n| If CustomerRound is provided and the weighing type is other than Gate or ScheduledJob | Failed to save/update Weighing because CustomerRound can be set only for Gate and ScheduledJob weighings. |\r\n| If the Guid of the GrossManualWeightReasonListItem, TareManualWeightReasonListItem is deleted | The provided GrossManualWeightReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If the Guid of the GrossManualWeightReasonListItem, TareManualWeightReasonListItem is not listed in the ReasonCategory under Manual weighing | Invalid GrossManualWeightReasonListItem.Guid. Reason must be from 'ManualWeighing' reason category. |\r\n\r\n1) Inbound are weighings of type Gate, ScheduledJob and TransferOut (if the weighing is not linked to another weighing via TransferDestinationWeighingId)\r\n2) Outbound are weighings of type MaterialSale and TransferOut (if the weighing is linked to another weighing via TransferDestinationWeighingId)\r\n\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash is not null for Insert | Failed to save Weighing because RelatedBlobWeighingDocketPdfHashes creation is not permitted. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash is not null for Update and the Weighing did not have RelatedBlobWeighingDocketPdfHashes initially | Failed to save/update Weighing because RelatedBlobWeighingDocketPdfHashes do not exist for the Weighing. |\r\n| RelatedBlobWeighingDocketPdfHashes[0].Hash is not null for Update and Invalid Hash | Could not find WeighingDocketOutput matching template. |\r\n| WeighingIns[0].Details[0].Guid is not null on insert | Attempting to update WeighingIns[0].Details[0] when creating the weighing. Could not process the request. Provide WeighingIns[0].Details[0] without a Guid property to create new WeighingIns[0].Details[0] rather than attempting an update. |\r\n| WeighingIns[0].Details[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. WeighingIns[0].Details[0] can not be deleted via the REST API. |\r\n| If the GUID passed to WeighingIns[0].Details[0].ReasonListItem has a value that is deleted | The provided WeighingIns[0].Details[0].ReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If Weights.GrossWeight.TallyNo is more than 20 characters long | TallyNo must be no more than 20 characters long. |\r\n| If Weights.TareWeight.TallyNo is more than 20 characters long | TallyNo must be no more than 20 characters long. |"
+      operationId: Weighing_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorWeighingDestinationWeightResource:
+      type: object
+      properties:
+        GrossWeight:
+          type: number
+          format: double
+        TareWeight:
+          type: number
+          format: double
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+    ApiIntegratorWeighingWeightsResource:
+      type: object
+      properties:
+        GrossWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
+        TareWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorWeighingDriverResource:
+      type: object
+      properties:
+        LicenceNumber:
+          type: string
+        Name:
+          type: string
+    ApiIntegratorWeighingInDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Barcode:
+          type: string
+        Weight:
+          type: number
+          format: double
+        RelatedJobOverrideBreakdownGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorWeighingWeightsWeightResource:
+      type: object
+      properties:
+        BridgeName:
+          type: string
+        GrossWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
+        TareWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+    ApiResourceChanges[ApiIntegratorWeighingResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingOutResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        IsAutomatic:
+          type: boolean
+        GrossTallyNo:
+          type: string
+        RelatedTreatmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorWeighingResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingWeightResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weight:
+          type: number
+          format: double
+        Timestamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        WeightTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingWeightDetailResource:
+      type: object
+      properties:
+        TallyNo:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weight:
+          type: number
+          format: double
+        Timestamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        WeightTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorWeighingInResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        IsAutomatic:
+          type: boolean
+        TareTallyNo:
+          type: string
+        RelatedTreatmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingInDetailResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorWeighingResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorWeighingDocketPdfResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiIntegratorWeighingPictureResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Hash:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorWeighingResource:
+      type: object
+      properties:
+        RelatedScheduleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedExternalVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedMaterialGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedAreaOfOriginGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierThirdPartyCarrierGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedTransferDestinationWeighingGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        ExternalTicketNo:
+          type: string
+        DestinationTicketNo:
+          type: string
+        CustomerLoadReference:
+          type: string
+        CustomerInvoiceReference:
+          type: string
+        Notes:
+          type: string
+        WeighingTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        HaulierName:
+          type: string
+        Driver:
+          $ref: '#/components/schemas/ApiIntegratorWeighingDriverResource'
+        IsComplete:
+          type: boolean
+        IsDestinationConfirmed:
+          type: boolean
+        IsExternalVehicle:
+          type: boolean
+        IsEstimatedWeight:
+          type: boolean
+        IsGradingConfirmed:
+          type: boolean
+        IsIncContainer:
+          type: boolean
+        IsInspectionConfirmed:
+          type: boolean
+        IsOutboundWeighingComplete:
+          type: boolean
+        IsPassThrough:
+          type: boolean
+        IsPrinted:
+          type: boolean
+        StartedFromANPR:
+          type: boolean
+        CashCollected:
+          type: number
+          format: double
+        WeighingDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsWeightResource'
+        DestinationWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingDestinationWeightResource'
+        WeighingIns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingInResource'
+        WeighingOuts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingOutResource'
+        ContainerIdentifier:
+          type: string
+        SealIdentifier:
+          type: string
+        ContainerTare:
+          type: number
+          format: double
+        VerifiedGrossMaximum:
+          type: number
+          format: double
+        ContainerNotes:
+          type: string
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationDestinationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingPictureResource'
+        RelatedTrailerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedBlobWeighingDocketPdfHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingDocketPdfResource'
+        RelatedWeighingInDetailGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobOverrideBreakdownGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TimeInWeighing:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TimeOutWeighing:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        CustomerRound:
+          type: string
+        GrossManualWeightReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TareManualWeightReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        WeighingOutsRelatedWeighingInGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

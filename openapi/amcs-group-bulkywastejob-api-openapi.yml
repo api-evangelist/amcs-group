@@ -1,0 +1,139 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup BulkyWasteJob API
+  version: core
+tags:
+- name: BulkyWasteJob
+paths:
+  /municipal/bulkyWasteJobs:
+    post:
+      tags:
+      - BulkyWasteJob
+      summary: Create or update
+      operationId: BulkyWasteJob_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorBulkyWasteJobResource:
+      type: object
+      properties:
+        OrderNumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialProfileGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Date:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        ProcessingPrices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorBulkyWasteProcessingPriceResource'
+        ChargeAndCostList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobChargeAndCostResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorBulkyWasteJobChargeAndCostResource:
+      type: object
+      properties:
+        PriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsSelected:
+          type: boolean
+        Type:
+          type: string
+        Service:
+          type: string
+        ContainerType:
+          type: string
+        Action:
+          type: string
+        Material:
+          type: string
+        PricingBasis:
+          type: string
+        Rate:
+          type: number
+          format: double
+    ApiIntegratorBulkyWasteProcessingPriceResource:
+      type: object
+      properties:
+        PriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerType:
+          type: string
+        MaterialClass:
+          type: string
+        MaterialProfile:
+          type: string
+        PricingBasis:
+          type: string
+        NetPrice:
+          type: number
+          format: double
+        GrossPrice:
+          type: number
+          format: double
+        BreakdownQuantity:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

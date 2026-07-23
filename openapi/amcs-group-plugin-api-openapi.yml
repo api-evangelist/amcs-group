@@ -1,0 +1,109 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Plugin API
+  version: core
+tags:
+- name: Plugin
+paths:
+  /services/api/plugins/update:
+    put:
+      tags:
+      - Plugin
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+      responses:
+        '200':
+          description: Success
+  /plugins/update:
+    put:
+      tags:
+      - Plugin
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+      responses:
+        '200':
+          description: Success
+  /services/api/plugins/run-ui-component:
+    post:
+      tags:
+      - Plugin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+      responses:
+        '200':
+          description: Success
+  /plugins/run-ui-component:
+    post:
+      tags:
+      - Plugin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ShowScreenActivityRequest'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.PluginData.Data.IPluginAction:
+      type: object
+      additionalProperties: false
+    AMCS.Data.Entity.Workflow.ShowScreenActivityRequest:
+      type: object
+      properties:
+        callbackUrl:
+          type: string
+          nullable: true
+        parameters: {}
+        name:
+          type: string
+          nullable: true
+        userContext:
+          type: string
+          nullable: true
+        allowedActions:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false

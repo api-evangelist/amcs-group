@@ -1,0 +1,193 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup DefaultAction API
+  version: core
+tags:
+- name: DefaultAction
+paths:
+  /lists/defaultActions/{guid}:
+    get:
+      tags:
+      - DefaultAction
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated with the default action.|\r\n| ActionListItem| The GUID and description of the action associated with the default action.|\r\n| ServiceListItem| The GUID and description of the service associated with the default action.|\r\n| PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|\r\n| VATListItem| The GUID and description of the VAT associated with the default action.|\r\n| MaterialClassListItem| The GUID and description of the material class associated with the default action.|\r\n| TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|\r\n| UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|\r\n| AnalysisCode| The analysis code associated with the default action associated with the default action.|\r\n| SalesCode| The sales code associated with the default action.|\r\n| CostCode| The cost code associated with the default action.|\r\n| PurchaseCode| The purchase code associated with the default action.|\r\n| HandlingTime| The handling time (in seconds) associated with the default action.|\r\n| IsDeleted                 | Whether the default action is deleted                        |\r\n"
+      operationId: DefaultAction_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDefaultActionResource]'
+  /lists/defaultActions:
+    get:
+      tags:
+      - DefaultAction
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated with the default action.|\r\n| ActionListItem| The GUID and description of the action associated with the default action.|\r\n| ServiceListItem| The GUID and description of the service associated with the default action.|\r\n| PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|\r\n| VATListItem| The GUID and description of the VAT associated with the default action.|\r\n| MaterialClassListItem| The GUID and description of the material class associated with the default action.|\r\n| TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|\r\n| UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|\r\n| AnalysisCode| The analysis code associated with the default action associated with the default action.|\r\n| SalesCode| The sales code associated with the default action.|\r\n| CostCode| The cost code associated with the default action.|\r\n| PurchaseCode| The purchase code associated with the default action.|\r\n| HandlingTime| The handling time (in seconds) associated with the default action.|\r\n| IsDeleted                 | Whether the default action is deleted                        |\r\n"
+      operationId: DefaultAction_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDefaultActionResource]'
+components:
+  schemas:
+    ApiResourceResultEntity[ApiIntegratorDefaultActionResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorDefaultActionResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorDefaultActionResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDefaultActionResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorDefaultActionResource:
+      type: object
+      properties:
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PricingBasisListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialClassListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TaxTemplateCollectionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        UnitOfMeasureListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AnalysisCode:
+          type: string
+        SaleCode:
+          type: string
+        CostCode:
+          type: string
+        PurchaseCode:
+          type: string
+        IsDeleted:
+          type: boolean
+        HandlingTime:
+          type: integer
+          format: int32
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

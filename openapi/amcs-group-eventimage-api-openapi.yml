@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup EventImage API
+  version: core
+tags:
+- name: EventImage
+paths:
+  /visionai/api/integrator/image/{eventGuid}:
+    get:
+      tags:
+      - EventImage
+      summary: Download Event Image
+      description: "# Download Event Image\r\n\r\nDownload the inferenced jpeg image associated with an Event.\r\n\r\n| Property                | Description                                            |\r\n| ----------------------- | ------------------------------------------------------ |\r\n| GUID                    | GUID associated to the Event.                          |"
+      parameters:
+      - name: eventGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request - Invalid Guid Please check your Guid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid Guid Please check your Guid.
+                additionalProperties: false
+        '401':
+          description: ''
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+components:
+  responses:
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false

@@ -1,0 +1,748 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Outlet API
+  version: core
+tags:
+- name: Outlet
+paths:
+  /lists/outlets/{guid}:
+    get:
+      tags:
+      - Outlet
+      summary: Find with GUID
+      description: "| Property                  | Description|\r\n| ------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the outlet|\r\n| Description               | The description of the outlet|\r\n| IsDeleted                 | Whether the outlet is deleted  |\r\n| AbbreviatedDescription    | The abbreviated description of the outlet|\r\n| AnalysisCode              | The analysis code of the outlet|\r\n| CompanyListItem           | The GUID and description of the company|\r\n| OutletTypeListItem        | The GUID and description of the outlet type (various values)|\r\n| Address                   | The address object of the outlet|\r\n| Address.HouseNumber       | The house number of the address object of the outlet|\r\n| Address.Address1          | The Address1 of the address object of the outlet|\r\n| Address.Address2          | The Address2 of the address object of the outlet|\r\n| Address.Address3          | The Address3 of the address object of the outlet|\r\n| Address.Address4          | The Address4 of the address object of the outlet|\r\n| Address.Address5          | The Address5 of the address object of the outlet|\r\n| Address.Postcode          | The Postcode of the address object of the outlet| \r\n| DepartmentListItems| The GUID and description of departments associated to the outlet|\r\n| VATRegistrationNumber     | The VAT Registration Number of the outlet|\r\n| RelatedLocationGuid       | The RelatedLocationGuid of the outlet. Filterable|\r\n| AcceptedMaterials[]| The materials accepted of the outlet|\r\n| AcceptedMaterials[].MaterialListItem| The materialListItem of the materials accepted for the outlet|\r\n| AcceptedMaterials[].WarnOnMinimumLoad| The WarnOnMinimumLoad of the materials accepted for the outlet|\r\n| AcceptedMaterials[].MinimumLoadWeight| The MinimumLoadWeight of the materials accepted for the outlet|\r\n| AcceptedMaterials[].IsDeleted     | Whether the materials accepted for the outlet is deleted|\r\n| AcceptedMaterials[].GUID     | The GUID of the materials accepted for the outlet|\r\n| AnalysisCodes| The list of company outlet analysis codes associated to the outlet.|\r\n| AnalysisCodes[0].Guid| The guid associated to the company outlet analysis code.|\r\n| AnalysisCodes[0].Description| The Description of the company outlet analysis code.|\r\n| AnalysisCodes[0].IsDeleted| Whether the company outlet analysis code is deleted.|"
+      operationId: Outlet_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCompanyOutletResource]'
+  /lists/outlets:
+    get:
+      tags:
+      - Outlet
+      summary: Find with Filters
+      description: "| Property                  | Description|\r\n| ------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the outlet|\r\n| Description               | The description of the outlet|\r\n| IsDeleted                 | Whether the outlet is deleted  |\r\n| AbbreviatedDescription    | The abbreviated description of the outlet|\r\n| AnalysisCode              | The analysis code of the outlet|\r\n| CompanyListItem           | The GUID and description of the company|\r\n| OutletTypeListItem        | The GUID and description of the outlet type (various values)|\r\n| Address                   | The address object of the outlet|\r\n| Address.HouseNumber       | The house number of the address object of the outlet|\r\n| Address.Address1          | The Address1 of the address object of the outlet|\r\n| Address.Address2          | The Address2 of the address object of the outlet|\r\n| Address.Address3          | The Address3 of the address object of the outlet|\r\n| Address.Address4          | The Address4 of the address object of the outlet|\r\n| Address.Address5          | The Address5 of the address object of the outlet|\r\n| Address.Postcode          | The Postcode of the address object of the outlet| \r\n| DepartmentListItems| The GUID and description of departments associated to the outlet|\r\n| VATRegistrationNumber     | The VAT Registration Number of the outlet|\r\n| RelatedLocationGuid       | The RelatedLocationGuid of the outlet. Filterable|\r\n| AcceptedMaterials[]| The materials accepted of the outlet|\r\n| AcceptedMaterials[].MaterialListItem| The materialListItem of the materials accepted for the outlet|\r\n| AcceptedMaterials[].WarnOnMinimumLoad| The WarnOnMinimumLoad of the materials accepted for the outlet|\r\n| AcceptedMaterials[].MinimumLoadWeight| The MinimumLoadWeight of the materials accepted for the outlet|\r\n| AcceptedMaterials[].IsDeleted     | Whether the materials accepted for the outlet is deleted|\r\n| AcceptedMaterials[].GUID     | The GUID of the materials accepted for the outlet|\r\n| AnalysisCodes| The list of company outlet analysis codes associated to the outlet.|\r\n| AnalysisCodes[0].Guid| The guid associated to the company outlet analysis code.|\r\n| AnalysisCodes[0].Description| The Description of the company outlet analysis code.|\r\n| AnalysisCodes[0].IsDeleted| Whether the company outlet analysis code is deleted.|"
+      operationId: Outlet_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCompanyOutletResource]'
+  /integrator/lists/outlets/{id}:
+    get:
+      tags:
+      - Outlet
+      summary: Find with GUID
+      description: "| Property                                             | Description                                                                        |\r\n| ---------------------------------------------------- | ---------------------------------------------------------------------------------- |\r\n| GUID                                                 | The GUID associated to the outlet                                                  |\r\n| Description                                          | The description of the outlet                                                      |\r\n| IsDeleted                                            | Whether the outlet is deleted                                                      |\r\n| AbbreviatedDescription                               | The abbreviated description of the outlet                                          |\r\n| AnalysisCode                                         | The analysis code of the outlet                                                    |\r\n| Location                                             | The description of the weighing type                                               |\r\n| Address                                              | The address object of the outlet                                                   |\r\n| Address.HouseNumber                                  | The house number of the address object of the outlet                               |\r\n| Address.Address1                                     | The Address1 of the address object of the outlet                                   |\r\n| Address.Address2                                     | The Address2 of the address object of the outlet                                   |\r\n| Address.Address3                                     | The Address3 of the address object of the outlet                                   |\r\n| Address.Address4                                     | The Address4 of the address object of the outlet                                   |\r\n| Address.Address5                                     | The Address5 of the address object of the outlet                                   |\r\n| Address.Postcode                                     | The Postcode of the address object of the outlet                                   |\r\n| CompanyOutletMaterial[]                              | The materials accepted of the outlet                                               |\r\n| CompanyOutletMaterial[].MaterialListItem             | The materialListItem of the materials accepted for the outlet                      |\r\n| CompanyOutletMaterial[].MaterialListItem.Description | The materialListItem material description of the materials accepted for the outlet |\r\n| CompanyOutletMaterial[].MaterialListItem.GUID        | The materialListItem material GUID of the materials accepted for the outlet        |\r\n| CompanyOutletMaterial[].Guid                         | The company outlet accepted material GUID                                          |\r\n| OutletSupplierSite[]                                 | The outlet Supplier Site Object                                                    |\r\n| OutletSupplierSite[].Address                         | The outlet Supplier Site Address Object                                            |\r\n| OutletSupplierSite[].Address.Location                | The Location of the outlet Supplier Site address                                   |\r\n| OutletSupplierSite[].Address.HouseNumber             | The House Number of the outlet Supplier Site address                               |\r\n| OutletSupplierSite[].Address.Address1                | Address1 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address2                | Address2 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address3                | Address3 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address4                | Address4 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address5                | Address5 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Postcode                | The outlet Supplier Site Postcode                                                  |\r\n| OutletSupplierSite[].SupplierName                    | The outlet Supplier Name                                                           |\r\n| OutletSupplierSite[].RelatedSupplierSiteGUID         | The Related Supplier Site GUID of the outlet                                       |\r\n| OutletSupplierSite[].GUID                            | The GUID of the Company Outlet Supplier Site                                       |\r\n| VATRegistrationNumber                                | The VAT Registration Number of the outlet                                          |\r\n| Company                                              | The Company that the outlet is associated with                                     |\r\n| NominalPrefix                                        | The Nominal Prefix of the outlet                                                   |\r\n| TelNo                                                | The Telephone number of the outlet                                                 |\r\n| ContactEmail                                         | The Contact Email of the outlet                                                    |\r\n| PremisesRegNo                                        | The Premises Registration Number of the outlet                                     |\r\n| WasteCarrierLicenceNumber                            | The Waste Carrier Licence Number of the outlet                                     |\r\n| WasteCarrierLicenceIssuedBy                          | Who the Waste Carrier Licence was issued by to the outlet                          |\r\n| IsDriversLicenceRequired                             | Whether Drivers Licence is required                                                |\r\n| IsCashDepositRequired                                | Whether Cash Deposit is required                                                   |\r\n| IsValidWasteCarrierLicenceRequired                   | Whether a Valid Waste Carrier Licence is required                                  |\r\n| DepositValueRequired                                 | Whether a Deposit Value is Required                                                |\r\n| WasteManagementLicenceNumber                         | The Waste Management Licence Number                                                |\r\n| WasteManagementIssuedBy                              | Who the Waste Management is issued by                                              |\r\n| IsAutoLoadVehicleStoredTares                         | Whether Auto Load Vehicle Stored Tares                                             |\r\n| ShowANPRReads                                        | Whether to Show ANPR Reads                                                         |\r\n| EPAId                                                | The EPAId of the outlet                                                            |\r\n| AmiceNumber                                          | The Amice Number of the outlet                                                     |\r\n| ReportToExternalAuthorities                          | Whether to Report to External Authorities                                          |\r\n| LegislationType                                      | The Legislation Type of the outlet                                                 |\r\n| WeightUnitOfMeasurement                              | The Weight Unit of Measurement of the outlet                                       |\r\n| ReportingUnitOfMeasurement                           | The Reporting Unit of Measurement of the outlet                                    |\r\n| VolumeUnitOfMeasurement                              | The Volume Unit of Measurement of the outlet                                       |\r\n| GateWeighbridgeDocket                                | The outlet Gete Weighbridge Docket report path                                     |\r\n| MaterialSaleWeighbridgeDocket                        | The outlet Material Sale Weighbridge Docket report path                            |\r\n| RouteWeighbridgeDocket                               | The outlet Route Weighbridge Docket report path                                    |\r\n| TransferOutWeighbridgeDocket                         | The outlet Transfer Out Weighbridge Docket report path                             |\r\n| TransferInWeighbridgeDocket                          | The outlet Transfer In Weighbridge Docket report path                              |\r\n| ScaleReceiptWeighbridgeDocket                        | The outlet Scale Reciept Weighbridge Docket report path                            |\r\n| BillOfLadingWeighbridgeDocket                        | The outlet Bill of Lading Weighbridge Docket report path                           |\r\n| VZCReport                                            | The outlet VZC report path                                                         |\r\n| CMRReport                                            | The outlet CMR report path                                                         |\r\n| CurrencyCode                                         | The Currency Code of the outlet                                                    |\r\n\t\t\t\t   "
+      operationId: Outlet_Get
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: uuid
+      - name: links
+        in: query
+        required: false
+        type: string
+      - name: include
+        in: query
+        required: false
+        type: string
+      - name: expand
+        in: query
+        required: false
+        type: string
+      - name: udf
+        in: query
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApiResourceResultEntity[ApiCompanyOutletResource]'
+  /integrator/lists/outlets:
+    get:
+      tags:
+      - Outlet
+      summary: Find with Filters
+      description: "| Property                                             | Description                                                                        |\r\n| ---------------------------------------------------- | ---------------------------------------------------------------------------------- |\r\n| GUID                                                 | The GUID associated to the outlet                                                  |\r\n| Description                                          | The description of the outlet                                                      |\r\n| IsDeleted                                            | Whether the outlet is deleted                                                      |\r\n| AbbreviatedDescription                               | The abbreviated description of the outlet                                          |\r\n| AnalysisCode                                         | The analysis code of the outlet                                                    |\r\n| Location                                             | The description of the weighing type                                               |\r\n| Address                                              | The address object of the outlet                                                   |\r\n| Address.HouseNumber                                  | The house number of the address object of the outlet                               |\r\n| Address.Address1                                     | The Address1 of the address object of the outlet                                   |\r\n| Address.Address2                                     | The Address2 of the address object of the outlet                                   |\r\n| Address.Address3                                     | The Address3 of the address object of the outlet                                   |\r\n| Address.Address4                                     | The Address4 of the address object of the outlet                                   |\r\n| Address.Address5                                     | The Address5 of the address object of the outlet                                   |\r\n| Address.Postcode                                     | The Postcode of the address object of the outlet                                   |\r\n| CompanyOutletMaterial[]                              | The materials accepted of the outlet                                               |\r\n| CompanyOutletMaterial[].MaterialListItem             | The materialListItem of the materials accepted for the outlet                      |\r\n| CompanyOutletMaterial[].MaterialListItem.Description | The materialListItem material description of the materials accepted for the outlet |\r\n| CompanyOutletMaterial[].MaterialListItem.GUID        | The materialListItem material GUID of the materials accepted for the outlet        |\r\n| CompanyOutletMaterial[].Guid                         | The company outlet accepted material GUID                                          |\r\n| OutletSupplierSite[]                                 | The outlet Supplier Site Object                                                    |\r\n| OutletSupplierSite[].Address                         | The outlet Supplier Site Address Object                                            |\r\n| OutletSupplierSite[].Address.Location                | The Location of the outlet Supplier Site address                                   |\r\n| OutletSupplierSite[].Address.HouseNumber             | The House Number of the outlet Supplier Site address                               |\r\n| OutletSupplierSite[].Address.Address1                | Address1 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address2                | Address2 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address3                | Address3 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address4                | Address4 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Address5                | Address5 of the outlet Supplier Site address                                       |\r\n| OutletSupplierSite[].Address.Postcode                | The outlet Supplier Site Postcode                                                  |\r\n| OutletSupplierSite[].SupplierName                    | The outlet Supplier Name                                                           |\r\n| OutletSupplierSite[].RelatedSupplierSiteGUID         | The Related Supplier Site GUID of the outlet                                       |\r\n| OutletSupplierSite[].GUID                            | The GUID of the Company Outlet Supplier Site                                       |\r\n| VATRegistrationNumber                                | The VAT Registration Number of the outlet                                          |\r\n| Company                                              | The Company that the outlet is associated with                                     |\r\n| NominalPrefix                                        | The Nominal Prefix of the outlet                                                   |\r\n| TelNo                                                | The Telephone number of the outlet                                                 |\r\n| ContactEmail                                         | The Contact Email of the outlet                                                    |\r\n| PremisesRegNo                                        | The Premises Registration Number of the outlet                                     |\r\n| WasteCarrierLicenceNumber                            | The Waste Carrier Licence Number of the outlet                                     |\r\n| WasteCarrierLicenceIssuedBy                          | Who the Waste Carrier Licence was issued by to the outlet                          |\r\n| IsDriversLicenceRequired                             | Whether Drivers Licence is required                                                |\r\n| IsCashDepositRequired                                | Whether Cash Deposit is required                                                   |\r\n| IsValidWasteCarrierLicenceRequired                   | Whether a Valid Waste Carrier Licence is required                                  |\r\n| DepositValueRequired                                 | Whether a Deposit Value is Required                                                |\r\n| WasteManagementLicenceNumber                         | The Waste Management Licence Number                                                |\r\n| WasteManagementIssuedBy                              | Who the Waste Management is issued by                                              |\r\n| IsAutoLoadVehicleStoredTares                         | Whether Auto Load Vehicle Stored Tares                                             |\r\n| ShowANPRReads                                        | Whether to Show ANPR Reads                                                         |\r\n| EPAId                                                | The EPAId of the outlet                                                            |\r\n| AmiceNumber                                          | The Amice Number of the outlet                                                     |\r\n| ReportToExternalAuthorities                          | Whether to Report to External Authorities                                          |\r\n| LegislationType                                      | The Legislation Type of the outlet                                                 |\r\n| WeightUnitOfMeasurement                              | The Weight Unit of Measurement of the outlet                                       |\r\n| ReportingUnitOfMeasurement                           | The Reporting Unit of Measurement of the outlet                                    |\r\n| VolumeUnitOfMeasurement                              | The Volume Unit of Measurement of the outlet                                       |\r\n| GateWeighbridgeDocket                                | The outlet Gete Weighbridge Docket report path                                     |\r\n| MaterialSaleWeighbridgeDocket                        | The outlet Material Sale Weighbridge Docket report path                            |\r\n| RouteWeighbridgeDocket                               | The outlet Route Weighbridge Docket report path                                    |\r\n| TransferOutWeighbridgeDocket                         | The outlet Transfer Out Weighbridge Docket report path                             |\r\n| TransferInWeighbridgeDocket                          | The outlet Transfer In Weighbridge Docket report path                              |\r\n| ScaleReceiptWeighbridgeDocket                        | The outlet Scale Reciept Weighbridge Docket report path                            |\r\n| BillOfLadingWeighbridgeDocket                        | The outlet Bill of Lading Weighbridge Docket report path                           |\r\n| VZCReport                                            | The outlet VZC report path                                                         |\r\n| CMRReport                                            | The outlet CMR report path                                                         |\r\n| CurrencyCode                                         | The Currency Code of the outlet                                                    |\r\n\t\t\t\t   "
+      operationId: Outlet_GetCollection
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        type: string
+      - name: search
+        in: query
+        required: false
+        type: string
+      - name: order
+        in: query
+        required: false
+        type: string
+      - name: max
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: includeCount
+        in: query
+        required: false
+        type: boolean
+      - name: includeDeleted
+        in: query
+        required: false
+        type: boolean
+      - name: links
+        in: query
+        required: false
+        type: string
+      - name: udf
+        in: query
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApiResourceResultCollection[ApiCompanyOutletResource]'
+  /visionai/api/integrator/outlets:
+    post:
+      tags:
+      - Outlet
+      summary: Create or Update an Outlet
+      description: "# Create or Update an Outlet\r\n\r\n| Parameter   | Type   | Description                      |\r\n|-------------|--------|----------------------------------|\r\n| OutletId    | GUID   | ID of the Outlet                 |\r\n| OutletName  | string | Display name                     |\r\n| IsDeleted   | bool   | Outlet is no longer in use       |\r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"OutletId\": \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\",\r\n  \"OutletName\": \"Primary Company Outlet\",\r\n  \"IsDeleted\": false\r\n}\r\n```"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Outlet.ApiOutlet'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Unauthorized
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+components:
+  schemas:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection[ApiIntegratorCompanyOutletResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCompanyOutletResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorCompanyOutletResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCompanyOutletResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCompanyOutletResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        AbbreviatedDescription:
+          type: string
+        AnalysisCode:
+          type: string
+        CompanyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorCompanyOutletAddressResource'
+        DepartmentListItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AcceptedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCompanyOutletAcceptedMaterialResource'
+        AnalysisCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCompanyOutletAnalysisCodesResource'
+        VATRegistrationNumber:
+          type: string
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCompanyOutletAcceptedMaterialResource:
+      type: object
+      properties:
+        WarnOnMinimumLoad:
+          type: boolean
+        MinimumLoadWeight:
+          type: number
+          format: double
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCompanyOutletAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCompanyOutletAnalysisCodesResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    AMCS.IoT.Contamination.Api.Integrator.Outlet.ApiOutlet:
+      type: object
+      properties:
+        outletId:
+          type: string
+          format: uuid
+          nullable: true
+        outletName:
+          type: string
+          nullable: true
+        isDeleted:
+          type: boolean
+        tenantId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type: guid
+      additionalProperties: false
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+  responses:
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+definitions:
+  ApiResourceErrors:
+    type: object
+    properties:
+      errors:
+        type: string
+  ApiOutletSupplierSiteResource:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/ApiOutletSupplierSiteAddressResource'
+      SupplierName:
+        type: string
+      RelatedSupplierSiteGuid:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      GUID:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+  ApiCompanyOutletAcceptedMaterialResource:
+    type: object
+    properties:
+      MaterialListItem:
+        $ref: '#/definitions/ApiIntegratorListItemResource'
+      Guid:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+  ApiResourceResultEntity[ApiCompanyOutletResource]:
+    type: object
+    properties:
+      resource:
+        $ref: '#/definitions/ApiCompanyOutletResource'
+      links:
+        $ref: '#/definitions/ApiResourceResultEntityLinks'
+      extra:
+        $ref: '#/definitions/ApiResourceResultEntityExtra'
+      errors:
+        $ref: '#/definitions/ApiResourceErrors'
+      status:
+        $ref: '#/definitions/ApiResourceStatus'
+  ApiIntegratorListItemResource:
+    type: object
+    properties:
+      Description:
+        type: string
+      AbbreviatedDescription:
+        type: string
+      Guid:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+  ApiCompanyOutletAddressResource:
+    type: object
+    properties:
+      HouseNumber:
+        type: string
+      Address1:
+        type: string
+      Address2:
+        type: string
+      Address3:
+        type: string
+      Address4:
+        type: string
+      Address5:
+        type: string
+      Postcode:
+        type: string
+  ApiOutletSupplierSiteAddressResource:
+    type: object
+    properties:
+      Location:
+        type: string
+      HouseNumber:
+        type: string
+      Address1:
+        type: string
+      Address2:
+        type: string
+      Address3:
+        type: string
+      Address4:
+        type: string
+      Address5:
+        type: string
+      Postcode:
+        type: string
+  ApiResourceStatus:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      isSuccess:
+        type: boolean
+  ApiResourceResultCollection[ApiCompanyOutletResource]:
+    type: object
+    properties:
+      resource:
+        type: array
+        items:
+          $ref: '#/definitions/ApiCompanyOutletResource'
+      extra:
+        $ref: '#/definitions/ApiResourceResultCollectionExtra'
+      errors:
+        $ref: '#/definitions/ApiResourceErrors'
+      status:
+        $ref: '#/definitions/ApiResourceStatus'
+  ApiResourceResultCollectionExtra:
+    type: object
+    properties:
+      count:
+        format: int32
+        type: integer
+  ApiResourceResultEntityExtra:
+    type: object
+    properties:
+      expand:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+      include:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+  ApiCompanyOutletResource:
+    type: object
+    properties:
+      Description:
+        type: string
+      IsDeleted:
+        type: boolean
+      AbbreviatedDescription:
+        type: string
+      AnalysisCode:
+        type: string
+      Location:
+        type: string
+      Address:
+        $ref: '#/definitions/ApiCompanyOutletAddressResource'
+      CompanyOutletMaterial:
+        type: array
+        items:
+          $ref: '#/definitions/ApiCompanyOutletAcceptedMaterialResource'
+      OutletSupplierSite:
+        type: array
+        items:
+          $ref: '#/definitions/ApiOutletSupplierSiteResource'
+      VATRegistrationNumber:
+        type: string
+      Company:
+        type: string
+      NominalPrefix:
+        type: string
+      TelNo:
+        type: string
+      ContactEmail:
+        type: string
+      PremisesRegNo:
+        type: string
+      WasteCarrierLicenceNumber:
+        type: string
+      WasteCarrierLicenceIssuedBy:
+        type: string
+      IsDriversLicenceRequired:
+        type: boolean
+      IsCashDepositRequired:
+        type: boolean
+      IsValidWasteCarrierLicenceRequired:
+        type: boolean
+      DepositValueRequired:
+        format: int32
+        type: integer
+      WasteManagementLicenceNumber:
+        type: string
+      WasteManagementIssuedBy:
+        type: string
+      IsAutoLoadVehicleStoredTares:
+        type: boolean
+      ShowANPRReads:
+        type: boolean
+      EPAId:
+        type: string
+      AmiceNumber:
+        type: string
+      ReportToExternalAuthorities:
+        type: boolean
+      LegislationType:
+        type: string
+      WeightUnitOfMeasurement:
+        type: string
+      ReportingUnitOfMeasurement:
+        type: string
+      VolumeUnitOfMeasurement:
+        type: string
+      GateWeighbridgeDocket:
+        type: string
+      MaterialSaleWeighbridgeDocket:
+        type: string
+      RouteWeighbridgeDocket:
+        type: string
+      TransferOutWeighbridgeDocket:
+        type: string
+      TransferInWeighbridgeDocket:
+        type: string
+      ScaleReceiptWeighbridgeDocket:
+        type: string
+      BillOfLadingWeighbridgeDocket:
+        type: string
+      VZCReport:
+        type: string
+      CMRReport:
+        type: string
+      CurrencyCode:
+        type: string
+      GUID:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+  ApiResourceResultEntityLinks:
+    type: object
+    properties:
+      self:
+        type: string
+      associations:
+        type: array
+        items:
+          type: string
+      expand:
+        type: array
+        items:
+          type: string
+      operations:
+        type: array
+        items:
+          type: string

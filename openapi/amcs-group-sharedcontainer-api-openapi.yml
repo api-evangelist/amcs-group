@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup SharedContainer API
+  version: core
+tags:
+- name: SharedContainer
+paths:
+  /stosag/sharedContainers:
+    get:
+      tags:
+      - SharedContainer
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|\r\n| MunicipalityGuids| The GUID associated to the local authority. Filterable|\r\n| SharedContainerGuid| The GUID associated to the shared container.| \r\n| ClusterAccountId| The id associated to the shared container.|\r\n| SharedContainer| The NAME associated to the shared container.| \r\n| Containers[0].ContainerGuid| The GUID of the container associated to the shared container.|\r\n| Container[0].Tag| The Tag of the container associated to the shared container.| \r\n| Container[0].SerialNo| The SerialNo of the container associated to the shared container.| \r\n| Container[0].AccessPassRequired| The AccessPassRequired of the container associated to the shared container.| \r\n| MasterAccessPasses[0].AccessPassTagId| The AccessPassTagId of the local authority associated to the shared container.| \r\n| MasterAccessPasses[0].MasterAccessPassGuid| The GUID of the access pass associated to the shared container.| \r\n| Accounts[0].ClusterAccountId| The id associated to the shared container.| \r\n| Accounts[0].CustomerId| The id of the customer associated to the shared container.|\r\n| Accounts[0].CustomerGuid| The GUID of municipal account associated to the shared container.| \r\n| Accounts[0].MunicipalAccountAccessPasses[0].MunicipalAccessPassGuid| The GUID of the access pass of municipal account associated to the shared container.|\r\n| Accounts[0].MunicipalAccountAccessPasses[0].AccessPassTagId| The AccessPassTagId of the access pass of municipal account associated to the shared container.|"
+      operationId: SharedContainer_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSharedContainerResource]'
+components:
+  schemas:
+    ApiIntegratorAccessClusterMunicipalAccessPassResource:
+      type: object
+      properties:
+        MunicipalAccessPassGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessPassTagId:
+          type: string
+    ApiIntegratorAccessClusterMasterAccessPassResource:
+      type: object
+      properties:
+        MasterAccessPassGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessPassTagId:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorSharedContainerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSharedContainerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSharedContainerResource:
+      type: object
+      properties:
+        MunicipalityGuids:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        SharedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ClusterAccountId:
+          type: integer
+          format: int32
+        SharedContainer:
+          type: string
+        Containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessClusterContainerResource'
+        MasterAccessPasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessClusterMasterAccessPassResource'
+        Accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessClusterMunicipalAccountResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorAccessClusterMunicipalAccountResource:
+      type: object
+      properties:
+        ClusterAccountId:
+          type: integer
+          format: int32
+        CustomerId:
+          type: integer
+          format: int32
+        CustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MunicipalAccountAccessPasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessClusterMunicipalAccessPassResource'
+    ApiIntegratorAccessClusterContainerResource:
+      type: object
+      properties:
+        ContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Tag:
+          type: string
+        SerialNo:
+          type: string
+        AccessPassRequired:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

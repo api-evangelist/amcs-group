@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup MunicipalAccountCalendarEvent API
+  version: core
+tags:
+- name: MunicipalAccountCalendarEvent
+paths:
+  /municipal/municipalAccountCalendarEvents:
+    get:
+      tags:
+      - MunicipalAccountCalendarEvent
+      summary: Find with Filters
+      operationId: MunicipalAccountCalendarEvent_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMunicipalCalendarEventResource]'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorMunicipalCalendarEventResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorMunicipalCalendarEventDetailResource:
+      type: object
+      properties:
+        EventType:
+          type: string
+        EventDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorMunicipalCalendarEventResource:
+      type: object
+      properties:
+        AccountGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        FunctionalIdFilter:
+          type: string
+        EventDateFromFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        EventDateToFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventDetailResource'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

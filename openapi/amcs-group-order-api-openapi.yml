@@ -1,0 +1,696 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Order API
+  version: core
+tags:
+- name: Order
+paths:
+  /transport/orders/changes:
+    get:
+      tags:
+      - Order
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site order.|\r\n| RelatedSiteGuid| The GUID associated to the customer site of the site order.|\r\n| RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order.|\r\n| RelatedSupplierSiteForServiceGuid| The GUID associated to the supplier site for service of the site order.|\r\n| RelatedSupplierSiteForTransportGuid| The GUID associated to the supplier site for transport of the site order.|\r\n| RelatedUserSalesRepGuid| The GUID associated to the sales rep of the site order.|     \r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the site order.|\r\n| RelatedPONumberChainGuid| The GUID associated to the purchase order number chain of the site order.|\r\n| OrderNumber| Used to filter the order number associated to the site order.|\r\n| CustomerOrderNumber| The customer order number associated to the site order.|\r\n| OrderedBy| The ordered by associated to the site order.|\r\n| ProcessFrom| The process from date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| ValidUntil| The valid until date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| Notes| The notes associated to the site order.|\r\n| DriverNotes| The driver notes associated to the site order.|\r\n| IsCustomerOwnedEquipment| Is the equipment used in the site order customer owned?|\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the site order.|\r\n| ServiceListItem| The GUID and description of the service associated to the site order.|\r\n| MaterialListItem| The GUID and description of the material associated to the site order.|\r\n| DefaultContainerTypeListItem| The GUID and description of the container type associated to the site order.|\r\n| PriorityListItem| The GUID and description of the priority associated to the site order.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the site order.|\r\n| Containers[0]| The list of site order items associated to the site order.|\r\n| Containers[0].Guid| The GUID associated to the site order item.|\r\n| Containers[0].IsDeleted| Whether the site order item is deleted.|\r\n| Containers[0].Notes| The Notes associated to the site order item.|\r\n| Containers[0].IsContainerAssignedWithoutJob | Whether the container is assigned without job.|\r\n| Containers[0].IsFromIncreasedOrder | Whether the container is from increased order.|\r\n| Containers[0].IsContainerRemovedWithoutJob | Whether the container is removed without job.|\r\n| Containers[0].IsFixLocation | Whether the container has a fixed location.|\r\n| Containers[0].Geo | The Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Lat| The latitude of Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Long| The longitude of Geo Location associated to the site order item.|\r\n| Containers[0].StartDate | The StartDate associated to the site order item.|\r\n| Containers[0].EndDate| The EndDate associated to the site order item.|\r\n| Containers[0].DateLinked    | The DateLinked associated to the site order item.|\r\n| Containers[0].RelatedContainerGuid| The GUID associated to the container of the site order item.|\r\n| Containers[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item.|\r\n| Containers[0].ContainerStateListItem| The GUID and description of the site order item state associated to site order item.|\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the site order. |\r\n| IsDeleted| Whether the site order is deleted.|\r\n| ItemRentals| The list of site order item rentals associated to the site order.|\r\n| ItemRentals[0].RelatedPriceGuid| The GUID associated to the price of the site order item rental.|\r\n| ItemRentals[0].RelatedPriceModifierGuid| The GUID associated to the price modifier of the site order item rental.|\r\n| ItemRentals[0].RelatedCostGuid| The GUID associated to the cost of the site order item rental.|\r\n| ItemRentals[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item rental.|\r\n| ItemRentals[0].ActionListItem| The GUID and description of the action associated to site order item rental.|\r\n| ItemRentals[0].StartDate| The start date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].EndDate| The end date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].IsStartOnStartOfCycle| Start on start of cycle when site order item rental.|\r\n| ItemRentals[0].IsEndOnEndOfCycle| End on start of cycle when site order item rental.|\r\n| ItemRentals[0].Quantity| The quantity associated to the site order item rental.|\r\n| ItemRentals[0].Notes| The notes associated to the site order item rental.|\r\n| ItemRentals[0].IsArrears| Is the site order item rental in arrears?|\r\n| ItemRentals[0].RentalQuantityAttributeListItem| The GUID and description of the rental quantity attribute associated to site order item rental.|\r\n| ItemRentals[0].IsBinOnSiteBasedOnQuantityNow| Is the bin on site are based on quantity for site order item rental?|\r\n| ItemRentals[0].IsDiscount| Is the site order item rental discounted?|\r\n| ItemRentals[0].DiscountOverridePrice| The discount override price associated to the site order item rental.|\r\n| ItemRentals[0].DiscountReasonListItem| The GUID and description of the discount reason associated to site order item rental.|\r\n| ItemRentals[0].Guid| The GUID associated to the site order item rental.|\r\n| ItemRentals[0].IsDeleted| Whether the site order item rental is deleted.|\r\n| PermitRequired| Whether the site order has required permit.|\r\n| RelatedPriceGuidFilter| Used to filter by the related price GUID.|\r\n| RelatedPriceModifierGuidFilter| Used to filter by the related price modifier GUID.|\r\n| RelatedCostGuidFilter| Used to filter by the related cost GUID.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the site order.|\r\n| StandingJobs| The list of standing job template associated to the site order.|\r\n| StandingJobs[0].Guid| The GUID associated to the standing job template of site order.|\r\n| StandingJobs[0].ActionListItem| The GUID and description of the action associated to site order standing job|\r\n| StandingJobs[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order standing job|\r\n| StandingJobs[0].EndOnJobCompletion| Is job completion on end for standing job|\r\n| StandingJobs[0].ExcludeNoBinOnSite| Exclude no bin on site for standing job|\r\n| StandingJobs[0].IsNoPlannedDay| Is on no planned day for standing job|\r\n| StandingJobs[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order standing job|\r\n| StandingJobs[0].StartDate| The start date associated to the standing job.|\r\n| StandingJobs[0].EndDate| The end date associated to the standing job.|\r\n| StandingJobs[0].CompanyOutletListItem| The GUID and description of the companyoutlet associated to site order standing job|\r\n| StandingJobs[0].RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order standing job.|\r\n| StandingJobs[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order standing job|\r\n| StandingJobs[0].RelatedSysUserDriverGuid| The GUID associated to the sriver sysuser of the site order standing job.|\r\n| StandingJobs[0].RelatedVehicleGuid| The GUID associated to the vehcile of the site order standing job.|\r\n| StandingJobs[0].RequestedBy| Requested by details of standing job.|\r\n| StandingJobs[0].IsDeleted| Whether the standing job related to the siteorderis deleted.|\r\n| StandingJobsSiteAreaGuidFilter| Used to filter by the standing job site area guid.|\r\n| StandingJobsSysUserDriverGuidFilter| Used to filter by the standing job sysuser driver guid.|\r\n| StandingJobsVehicleGuidFilter| Used to filter by the standing job vehicle guid.|\r\n| StandingJobsStartDateFilter| Used to filter by the standing job start date.|\r\n| StandingJobsEndDateFilter| Used to filter by the standing job end date.|\r\n| InspectionTypeListItem| The GUID and description of the inspection type associated to the site order.|\r\n| ItemTimeStamp| The item timestamp of the site order.|\r\n| RouteAssignments| The list of route assignments associated to the site order.|\r\n| RouteAssignments[0].Guid| The guid associated to the route assignment.|\r\n| RouteAssignments[0].ActionListItem| The GUID and description of the action associated to site order route assignment|\r\n| RouteAssignments[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route assignment|\r\n| RouteAssignments[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order route assignment|\r\n| RouteAssignments[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order route assignment|\r\n| RouteAssignments[0].DayOfOccurrenceInMonthListItem| The GUID and description of the day of occurrence in month associated to site order route assignment|\r\n| RouteAssignments[0].Position| The position associated to the routeAssignment.|\r\n| RouteAssignments[0].StartDate| The start date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].EndDate| The end date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].RequestedBy| Who is the routeAssignment requested by?|\r\n| RouteAssignments[0].Notes| The notes associated to the routeAssignment.|\r\n| RouteAssignments[0].MaxLiftQuantity| The max lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].MinLiftQuantity| The min lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].RequiresQuantity| Does the routeAssignment require quantity?|\r\n| RouteAssignments[0].IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?|\r\n| RouteAssignments[0].IsNoPlannedDate| Is there no planned date for the routeAssignment?|\r\n| RouteAssignments[0].IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? |\r\n| RouteAssignments[0].RelatedRouteTemplateGuid| The guid associated to the route template  to the routeAssignment.|\r\n| RouteAssignments[0].RelatedSiteAreaGuid| The guid associated to the site area of the route assignment.|\r\n| RouteAssignments[0].IsDeleted| Whether the site order route assignment is deleted.|\r\n| RouteAssignments[0].Exclusions| The list of exclusions associated to the route assignment.|\r\n| RouteAssignments[0].Exclusions[0].Guid| The guid associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeFrom| The exclude from date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeTo| The exclude to date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExclusionTypeListItem| The guid and description of the exclusion type associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ReasonListItem| The guid and description of the reason associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].Notes| The notes associated to the exclusion.|\r\n| RouteCalloutRequests| The list of route callout requests associated to the site order.|\r\n| RouteCalloutRequests[0].Guid| The guid associated to the route callout request.|\r\n| RouteCalloutRequests[0].ActionListItem| The GUID and description of the action associated to site order route callout request|\r\n| RouteCalloutRequests[0].OutletListItem | The GUID and description of the company outlet associated to site order route callout request|\r\n| RouteCalloutRequests[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route callout request|\r\n| RouteCalloutRequests[0].DateRequired| The date required of the route callout request|\r\n| RouteCalloutRequests[0].Notes| The notes of the route callout request|\r\n| RouteCalloutRequests[0].RelatedRouteVisitGuid| The guid associated to the routevisit of the route callout request.|\r\n| RouteCalloutRequests[0].RequestedBy| Who requested the route callout request.|\r\n| RouteCalloutRequests[0].MaxLiftQuantity| The max lift quantity of the route callout request.|\r\n| RouteCalloutRequests[0].IsDeleted| Whether the route callout request is deleted.|\r\n| RouteAssignmentSiteAreaGuidFilter| Used to filter by the related route assignment site area GUID. |\r\n| RouteAssignmentStartDateFilter | Used to filter by the related route assignment start date|\r\n| RouteAssignmentEndDateFilter | Used to filter by the related route assignment end date|\r\n| RelatedContainerGuidFilter| Used to filter by the related container GUID.|\r\n| RelatedOrderCombinationGroupingGuid| The GUID associated to the order combination grouping. Filterable|\r\n| ContainersGeoLocationLatFilter| Used to filter by the location latitude of the site order item|\r\n| ContainersGeoLocationLongFilter| Used to filter by the location longitude of the site order item|\r\n| RelatedRouteVisitGuidFilter| Used to filter by the related routevisit GUID.|\r\n| RouteCalloutRequestGuidFilter| Used to filter by the route callout request GUID|"
+      operationId: Order_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorOrderResource]'
+  /transport/orders/{guid}:
+    get:
+      tags:
+      - Order
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site order.|\r\n| RelatedSiteGuid| The GUID associated to the customer site of the site order.|\r\n| RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order.|\r\n| RelatedSupplierSiteForServiceGuid| The GUID associated to the supplier site for service of the site order.|\r\n| RelatedSupplierSiteForTransportGuid| The GUID associated to the supplier site for transport of the site order.|\r\n| RelatedUserSalesRepGuid| The GUID associated to the sales rep of the site order.|     \r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the site order.|\r\n| RelatedPONumberChainGuid| The GUID associated to the purchase order number chain of the site order.|\r\n| OrderNumber| Used to filter the order number associated to the site order.|\r\n| CustomerOrderNumber| The customer order number associated to the site order.|\r\n| OrderedBy| The ordered by associated to the site order.|\r\n| ProcessFrom| The process from date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| ValidUntil| The valid until date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| Notes| The notes associated to the site order.|\r\n| DriverNotes| The driver notes associated to the site order.|\r\n| IsCustomerOwnedEquipment| Is the equipment used in the site order customer owned?|\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the site order.|\r\n| ServiceListItem| The GUID and description of the service associated to the site order.|\r\n| MaterialListItem| The GUID and description of the material associated to the site order.|\r\n| DefaultContainerTypeListItem| The GUID and description of the container type associated to the site order.|\r\n| PriorityListItem| The GUID and description of the priority associated to the site order.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the site order.|\r\n| Containers[0]| The list of site order items associated to the site order.|\r\n| Containers[0].Guid| The GUID associated to the site order item.|\r\n| Containers[0].IsDeleted| Whether the site order item is deleted.|\r\n| Containers[0].Notes| The Notes associated to the site order item.|\r\n| Containers[0].IsContainerAssignedWithoutJob | Whether the container is assigned without job.|\r\n| Containers[0].IsFromIncreasedOrder | Whether the container is from increased order.|\r\n| Containers[0].IsContainerRemovedWithoutJob | Whether the container is removed without job.|\r\n| Containers[0].IsFixLocation | Whether the container has a fixed location.|\r\n| Containers[0].Geo | The Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Lat| The latitude of Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Long| The longitude of Geo Location associated to the site order item.|\r\n| Containers[0].StartDate | The StartDate associated to the site order item.|\r\n| Containers[0].EndDate| The EndDate associated to the site order item.|\r\n| Containers[0].DateLinked    | The DateLinked associated to the site order item.|\r\n| Containers[0].RelatedContainerGuid| The GUID associated to the container of the site order item.|\r\n| Containers[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item.|\r\n| Containers[0].ContainerStateListItem| The GUID and description of the site order item state associated to site order item.|\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the site order. |\r\n| IsDeleted| Whether the site order is deleted.|\r\n| ItemRentals| The list of site order item rentals associated to the site order.|\r\n| ItemRentals[0].RelatedPriceGuid| The GUID associated to the price of the site order item rental.|\r\n| ItemRentals[0].RelatedPriceModifierGuid| The GUID associated to the price modifier of the site order item rental.|\r\n| ItemRentals[0].RelatedCostGuid| The GUID associated to the cost of the site order item rental.|\r\n| ItemRentals[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item rental.|\r\n| ItemRentals[0].ActionListItem| The GUID and description of the action associated to site order item rental.|\r\n| ItemRentals[0].StartDate| The start date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].EndDate| The end date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].IsStartOnStartOfCycle| Start on start of cycle when site order item rental.|\r\n| ItemRentals[0].IsEndOnEndOfCycle| End on start of cycle when site order item rental.|\r\n| ItemRentals[0].Quantity| The quantity associated to the site order item rental.|\r\n| ItemRentals[0].Notes| The notes associated to the site order item rental.|\r\n| ItemRentals[0].IsArrears| Is the site order item rental in arrears?|\r\n| ItemRentals[0].RentalQuantityAttributeListItem| The GUID and description of the rental quantity attribute associated to site order item rental.|\r\n| ItemRentals[0].IsBinOnSiteBasedOnQuantityNow| Is the bin on site are based on quantity for site order item rental?|\r\n| ItemRentals[0].IsDiscount| Is the site order item rental discounted?|\r\n| ItemRentals[0].DiscountOverridePrice| The discount override price associated to the site order item rental.|\r\n| ItemRentals[0].DiscountReasonListItem| The GUID and description of the discount reason associated to site order item rental.|\r\n| ItemRentals[0].Guid| The GUID associated to the site order item rental.|\r\n| ItemRentals[0].IsDeleted| Whether the site order item rental is deleted.|\r\n| PermitRequired| Whether the site order has required permit.|\r\n| RelatedPriceGuidFilter| Used to filter by the related price GUID.|\r\n| RelatedPriceModifierGuidFilter| Used to filter by the related price modifier GUID.|\r\n| RelatedCostGuidFilter| Used to filter by the related cost GUID.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the site order.|\r\n| StandingJobs| The list of standing job template associated to the site order.|\r\n| StandingJobs[0].Guid| The GUID associated to the standing job template of site order.|\r\n| StandingJobs[0].ActionListItem| The GUID and description of the action associated to site order standing job|\r\n| StandingJobs[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order standing job|\r\n| StandingJobs[0].EndOnJobCompletion| Is job completion on end for standing job|\r\n| StandingJobs[0].ExcludeNoBinOnSite| Exclude no bin on site for standing job|\r\n| StandingJobs[0].IsNoPlannedDay| Is on no planned day for standing job|\r\n| StandingJobs[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order standing job|\r\n| StandingJobs[0].StartDate| The start date associated to the standing job.|\r\n| StandingJobs[0].EndDate| The end date associated to the standing job.|\r\n| StandingJobs[0].CompanyOutletListItem| The GUID and description of the companyoutlet associated to site order standing job|\r\n| StandingJobs[0].RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order standing job.|\r\n| StandingJobs[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order standing job|\r\n| StandingJobs[0].RelatedSysUserDriverGuid| The GUID associated to the sriver sysuser of the site order standing job.|\r\n| StandingJobs[0].RelatedVehicleGuid| The GUID associated to the vehcile of the site order standing job.|\r\n| StandingJobs[0].RequestedBy| Requested by details of standing job.|\r\n| StandingJobs[0].IsDeleted| Whether the standing job related to the siteorderis deleted.|\r\n| StandingJobsSiteAreaGuidFilter| Used to filter by the standing job site area guid.|\r\n| StandingJobsSysUserDriverGuidFilter| Used to filter by the standing job sysuser driver guid.|\r\n| StandingJobsVehicleGuidFilter| Used to filter by the standing job vehicle guid.|\r\n| StandingJobsStartDateFilter| Used to filter by the standing job start date.|\r\n| StandingJobsEndDateFilter| Used to filter by the standing job end date.|\r\n| InspectionTypeListItem| The GUID and description of the inspection type associated to the site order.|\r\n| ItemTimeStamp| The item timestamp of the site order.|\r\n| RouteAssignments| The list of route assignments associated to the site order.|\r\n| RouteAssignments[0].Guid| The guid associated to the route assignment.|\r\n| RouteAssignments[0].ActionListItem| The GUID and description of the action associated to site order route assignment|\r\n| RouteAssignments[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route assignment|\r\n| RouteAssignments[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order route assignment|\r\n| RouteAssignments[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order route assignment|\r\n| RouteAssignments[0].DayOfOccurrenceInMonthListItem| The GUID and description of the day of occurrence in month associated to site order route assignment|\r\n| RouteAssignments[0].Position| The position associated to the routeAssignment.|\r\n| RouteAssignments[0].StartDate| The start date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].EndDate| The end date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].RequestedBy| Who is the routeAssignment requested by?|\r\n| RouteAssignments[0].Notes| The notes associated to the routeAssignment.|\r\n| RouteAssignments[0].MaxLiftQuantity| The max lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].MinLiftQuantity| The min lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].RequiresQuantity| Does the routeAssignment require quantity?|\r\n| RouteAssignments[0].IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?|\r\n| RouteAssignments[0].IsNoPlannedDate| Is there no planned date for the routeAssignment?|\r\n| RouteAssignments[0].IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? |\r\n| RouteAssignments[0].RelatedRouteTemplateGuid| The guid associated to the route template  to the routeAssignment.|\r\n| RouteAssignments[0].RelatedSiteAreaGuid| The guid associated to the site area of the route assignment.|\r\n| RouteAssignments[0].IsDeleted| Whether the site order route assignment is deleted.|\r\n| RouteAssignments[0].Exclusions| The list of exclusions associated to the route assignment.|\r\n| RouteAssignments[0].Exclusions[0].Guid| The guid associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeFrom| The exclude from date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeTo| The exclude to date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExclusionTypeListItem| The guid and description of the exclusion type associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ReasonListItem| The guid and description of the reason associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].Notes| The notes associated to the exclusion.|\r\n| RouteCalloutRequests| The list of route callout requests associated to the site order.|\r\n| RouteCalloutRequests[0].Guid| The guid associated to the route callout request.|\r\n| RouteCalloutRequests[0].ActionListItem| The GUID and description of the action associated to site order route callout request|\r\n| RouteCalloutRequests[0].OutletListItem | The GUID and description of the company outlet associated to site order route callout request|\r\n| RouteCalloutRequests[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route callout request|\r\n| RouteCalloutRequests[0].DateRequired| The date required of the route callout request|\r\n| RouteCalloutRequests[0].Notes| The notes of the route callout request|\r\n| RouteCalloutRequests[0].RelatedRouteVisitGuid| The guid associated to the routevisit of the route callout request.|\r\n| RouteCalloutRequests[0].RequestedBy| Who requested the route callout request.|\r\n| RouteCalloutRequests[0].MaxLiftQuantity| The max lift quantity of the route callout request.|\r\n| RouteCalloutRequests[0].IsDeleted| Whether the route callout request is deleted.|\r\n| RouteAssignmentSiteAreaGuidFilter| Used to filter by the related route assignment site area GUID. |\r\n| RouteAssignmentStartDateFilter | Used to filter by the related route assignment start date|\r\n| RouteAssignmentEndDateFilter | Used to filter by the related route assignment end date|\r\n| RelatedContainerGuidFilter| Used to filter by the related container GUID.|\r\n| RelatedOrderCombinationGroupingGuid| The GUID associated to the order combination grouping. Filterable|\r\n| ContainersGeoLocationLatFilter| Used to filter by the location latitude of the site order item|\r\n| ContainersGeoLocationLongFilter| Used to filter by the location longitude of the site order item|\r\n| RelatedRouteVisitGuidFilter| Used to filter by the related routevisit GUID.|\r\n| RouteCalloutRequestGuidFilter| Used to filter by the route callout request GUID|"
+      operationId: Order_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorOrderResource]'
+    put:
+      tags:
+      - Order
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the site order.| No  |\r\n| RelatedSiteGuid| The GUID associated to the customer site of the site order.| Yes |\r\n| RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order.| No  |\r\n| RelatedSupplierSiteForServiceGuid| The GUID associated to the supplier site for service of the site order.| No |\r\n| RelatedSupplierSiteForTransportGuid| The GUID associated to the supplier site for transport of the site order.| No  |\r\n| RelatedUserSalesRepGuid| The GUID associated to the sales rep of the site order.| No  |  \r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the site order.| Yes |\r\n| RelatedPONumberChainGuid| The GUID associated to the purchase order number chain of the site order.| No  |\r\n| OrderNumber| Used to filter the order number associated to the site order.| No  |\r\n| CustomerOrderNumber| The customer order number associated to the site order.| No  |\r\n| OrderedBy| The ordered by associated to the site order.| No  |\r\n| ProcessFrom| The process from date associated to the site order in ISO format (YYYY-MM-DD).| Yes |\r\n| ValidUntil| The valid until date associated to the site order in ISO format (YYYY-MM-DD).| No  |\r\n| Notes| The notes associated to the site order.| No  |\r\n| DriverNotes| The driver notes associated to the site order.| No  |\r\n| IsCustomerOwnedEquipment| Is the equipment used in the site order customer owned?| Yes |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the site order.| Yes |\r\n| ServiceListItem| The GUID and description of the service associated to the site order.| Yes |\r\n| MaterialListItem| The GUID and description of the material associated to the site order.| Yes |\r\n| DefaultContainerTypeListItem| The GUID and description of the container type associated to the site order.| No |\r\n| PriorityListItem| The GUID and description of the priority associated to the site order.| Yes |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the site order.| No  |\r\n| Containers[0]| The list of site order items associated to the site order.| No  |\r\n| Containers[0].Guid| The GUID associated to the site order item.| Yes |\r\n| Containers[0].IsDeleted| Whether the site order item is deleted.| No  |\r\n| Containers[0].Notes| The Notes associated to the site order item.| No  |\r\n| Containers[0].IsContainerAssignedWithoutJob | Whether the container is assigned without job.| Yes |\r\n| Containers[0].IsFromIncreasedOrder | Whether the container is from increased order.| Yes |\r\n| Containers[0].IsContainerRemovedWithoutJob | Whether the container is removed without job.| Yes |\r\n| Containers[0].IsFixLocation | Whether the container has a fixed location.| No  |\r\n| Containers[0].Geo | The Geo Location associated to the site order item.| No  |\r\n| Containers[0].Geo.Location.Lat| The latitude of Geo Location associated to the site order item.| No  |\r\n| Containers[0].Geo.Location.Long| The longitude of Geo Location associated to the site order item.| No  |\r\n| Containers[0].StartDate | The StartDate associated to the site order item.| No  |\r\n| Containers[0].EndDate| The EndDate associated to the site order item.| No  |\r\n| Containers[0].DateLinked    | The DateLinked associated to the site order item.| No  |\r\n| Containers[0].RelatedContainerGuid| The GUID associated to the container of the site order item.| No  |\r\n| Containers[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item.| Yes |\r\n| Containers[0].ContainerStateListItem| The GUID and description of the site order item state associated to site order item.| Yes |\r\n| RelatedLocationDestinationGuid| The destination location associated to the site order. | Yes |\r\n| IsDeleted| Whether the site order is deleted.| No  |\r\n| ItemRentals| The list of site order item rentals associated to the site order.| No  |\r\n| ItemRentals[0].RelatedPriceGuid| The GUID associated to the price of the site order item rental.| Yes |\r\n| ItemRentals[0].RelatedPriceModifierGuid| The GUID associated to the price modifier of the site order item rental.| No  |\r\n| ItemRentals[0].RelatedCostGuid| The GUID associated to the cost of the site order item rental.| No  |\r\n| ItemRentals[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item rental.| Yes |\r\n| ItemRentals[0].ActionListItem| The GUID and description of the action associated to site order item rental.| Yes |\r\n| ItemRentals[0].StartDate| The start date associated to the site order item rental in ISO format (YYYY-MM-DD).| Yes |\r\n| ItemRentals[0].EndDate| The end date associated to the site order item rental in ISO format (YYYY-MM-DD).| No  |\r\n| ItemRentals[0].IsStartOnStartOfCycle| Start on start of cycle when site order item rental.| No  |\r\n| ItemRentals[0].IsEndOnEndOfCycle| End on start of cycle when site order item rental.| No  |\r\n| ItemRentals[0].Quantity| The quantity associated to the site order item rental.| No  |\r\n| ItemRentals[0].Notes| The notes associated to the site order item rental.| No  |\r\n| ItemRentals[0].IsArrears| Is the site order item rental in arrears?| No  |\r\n| ItemRentals[0].RentalQuantityAttributeListItem| The GUID and description of the rental quantity attribute associated to site order item rental.| No  |\r\n| ItemRentals[0].IsBinOnSiteBasedOnQuantityNow| Is the bin on site are based on quantity for site order item rental?| No  |\r\n| ItemRentals[0].IsDiscount| Is the site order item rental discounted?| No  |\r\n| ItemRentals[0].DiscountOverridePrice| The discount override price associated to the site order item rental.| No  |\r\n| ItemRentals[0].DiscountReasonListItem| The GUID and description of the discount reason associated to site order item rental.| No  |\r\n| ItemRentals[0].Guid| The GUID associated to the site order item rental.| No  |\r\n| ItemRentals[0].IsDeleted| Whether the site order item rental is deleted.| No  |\r\n| PermitRequired| Whether the site order has required permit.| No  |\r\n| RelatedPriceGuidFilter| Used to filter by the related price GUID.| No  |\r\n| RelatedPriceModifierGuidFilter| Used to filter by the related price modifier GUID.| No  |\r\n| RelatedCostGuidFilter| Used to filter by the related cost GUID.| No  |\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the site order.| No  |\r\n| StandingJobs| The list of standing job template associated to the site order.| No  |\r\n| StandingJobs[0].Guid| The GUID associated to the standing job template of site order.| No  |\r\n| StandingJobs[0].ActionListItem| The GUID and description of the action associated to site order standing job| Yes |\r\n| StandingJobs[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order standing job| Yes |\r\n| StandingJobs[0].EndOnJobCompletion| Is job completion on end for standing job| Yes |\r\n| StandingJobs[0].ExcludeNoBinOnSite| Exclude no bin on site for standing job| Yes |\r\n| StandingJobs[0].IsNoPlannedDay| Is on no planned day for standing job| Yes |\r\n| StandingJobs[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order standing job| Yes |\r\n| StandingJobs[0].StartDate| The start date associated to the standing job.| Yes |\r\n| StandingJobs[0].EndDate| The end date associated to the standing job.| No  |\r\n| StandingJobs[0].CompanyOutletListItem| The GUID and description of the companyoutlet associated to site order standing job| No  |\r\n| StandingJobs[0].RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order standing job.| No  |\r\n| StandingJobs[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order standing job| No  |\r\n| StandingJobs[0].RelatedSysUserDriverGuid| The GUID associated to the sriver sysuser of the site order standing job.| No  |\r\n| StandingJobs[0].RelatedVehicleGuid| The GUID associated to the vehcile of the site order standing job.| No  |\r\n| StandingJobs[0].RequestedBy| Requested by details of standing job| No  |\r\n| StandingJobs[0].IsDeleted| Whether the standing job related to the siteorderis deleted.| No  |\r\n| StandingJobsSiteAreaGuidFilter| Used to filter by the standing job site area guid.| No  |\r\n| StandingJobsSysUserDriverGuidFilter| Used to filter by the standing job sysuser driver guid.| No  |\r\n| StandingJobsVehicleGuidFilter| Used to filter by the standing job vehicle guid.| No  |\r\n| StandingJobsStartDateFilter| Used to filter by the standing job start date.| No  |\r\n| StandingJobsEndDateFilter| Used to filter by the standing job end date.| No  |\r\n| InspectionTypeListItem| The GUID and description of the inspection type associated to the site order.| No  |\r\n| ItemTimeStamp| The item timestamp of the site order.| Yes |\r\n| RouteAssignments| The list of route assignments associated to the site order.| No  |\r\n| RouteAssignments[0].Guid| The guid associated to the route assignment.| No  |\r\n| RouteAssignments[0].ActionListItem| The GUID and description of the action associated to site order route assignment| Yes |\r\n| RouteAssignments[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route assignment| Yes |\r\n| RouteAssignments[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order route assignment| Yes |\r\n| RouteAssignments[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order route assignment| No  |\r\n| RouteAssignments[0].DayOfOccurrenceInMonthListItem| The GUID and description of the day of occurrence in month associated to site order route assignment| No  |\r\n| RouteAssignments[0].Position| The position associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].StartDate| The start date associated to the route assignment in ISO format (YYYY-MM-DD).| No  |\r\n| RouteAssignments[0].EndDate| The end date associated to the route assignment in ISO format (YYYY-MM-DD).| No  |\r\n| RouteAssignments[0].RequestedBy| Who is the routeAssignment requested by?| No  |\r\n| RouteAssignments[0].Notes| The notes associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].MaxLiftQuantity| The max lift quantity associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].MinLiftQuantity| The min lift quantity associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].RequiresQuantity| Does the routeAssignment require quantity?| Yes |\r\n| RouteAssignments[0].IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?| Yes |\r\n| RouteAssignments[0].IsNoPlannedDate| Is there no planned date for the routeAssignment?| Yes |\r\n| RouteAssignments[0].IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? | Yes |\r\n| RouteAssignments[0].RelatedRouteTemplateGuid| The guid associated to the route template  to the routeAssignment.| No  |\r\n| RouteAssignments[0].RelatedSiteAreaGuid| The guid associated to the site area of the route assignment.| No  |\r\n| RouteAssignments[0].IsDeleted| Whether the site order route assignment is deleted.| No  |\r\n| RouteAssignments[0].Exclusions| The list of exclusions associated to the route assignment.| No  |\r\n| RouteAssignments[0].Exclusions[0].Guid| The guid associated to the exclusion.| No  |\r\n| RouteAssignments[0].Exclusions[0].ExcludeFrom| The exclude from date associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ExcludeTo| The exclude to date associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ExclusionTypeListItem| The guid and description of the exclusion type associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ReasonListItem| The guid and description of the reason associated to the exclusion.| No  |\r\n| RouteAssignments[0].Exclusions[0].Notes| The notes associated to the exclusion.| No  |\r\n| RouteCalloutRequests| The list of route callout requests associated to the site order.| No  |\r\n| RouteCalloutRequests[0].Guid| The guid associated to the route callout request.| No  |\r\n| RouteCalloutRequests[0].ActionListItem| The GUID and description of the action associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].OutletListItem | The GUID and description of the company outlet associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].DateRequired| The date required of the route callout request| Yes |\r\n| RouteCalloutRequests[0].Notes| The notes of the route callout request| No  |\r\n| RouteCalloutRequests[0].RelatedRouteVisitGuid| The guid associated to the routevisit of the route callout request.| No  |\r\n| RouteCalloutRequests[0].RequestedBy| Who requested the route callout request.| Yes |\r\n| RouteCalloutRequests[0].MaxLiftQuantity| The max lift quantity of the route callout request.| Yes |\r\n| RouteCalloutRequests[0].IsDeleted| Whether the route callout request is deleted.| No  |\r\n| RouteAssignmentSiteAreaGuidFilter| Used to filter by the related route assignment site area GUID. | No  |\r\n| RouteAssignmentStartDateFilter | Used to filter by the related route assignment start date| No  |\r\n| RouteAssignmentEndDateFilter | Used to filter by the related route assignment end date| No  |\r\n| RelatedContainerGuidFilter| Used to filter by the related container GUID.| No  |\r\n| RelatedOrderCombinationGroupingGuid| The GUID associated to the order combination grouping. | No  |\r\n| ContainersGeoLocationLatFilter| Used to filter by the location latitude of the site order item| No  |\r\n| ContainersGeoLocationLongFilter| Used to filter by the location longitude of the site order item| No  |\r\n| RelatedRouteVisitGuidFilter| Used to filter by the related routevisit GUID.| No  |\r\n| RouteCalloutRequestGuidFilter| Used to filter by the route callout request GUID| No  |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Quantity or RentalQuantityAttributeListItem are expected | Either Quantity or RentalQuantityAttributeListItem.Guid properties must be set. SiteOrderItemRental with Quantity cannot be set if RentalQuantityAttributeListItem.Guid has a value. |\r\n| If OrderNumber is changed. | OrderNumber is a read-only property. | \r\n| If the given price is not in the service agreement and the actiontypes is not in rental or advance service  | Failed to save. SiteOrderItemRental with RelatedPriceGuid is not supported for SiteOrder |\r\n| If the GUID passed to AreaOfOriginListItem has a value that is not in the AreaOfOrigin table OR is deleted | Failed to save/update Order because The supplied AreaOfOrigin is not valid. The update has been rejected. Change the AreaOfOriginListItem to the Guid of a valid and undeleted AreaOfOrigin. |\r\n| If the given DefaultContainerTypeListItem is not in service | Failed to save. SiteOrder with DefaultContainerTypeListItem.GUID cannot be set if DefaultContainerType are not linked to Service. |\r\n| If related site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If RelatedSiteAreaGuid is not relevant | The site area and site do not match. The resource could not be created/updated. Ensure that RelatedSiteAreaGuid references an site area of RelatedSiteGuid |\r\n| If siteorder service is not IsScheduled and service is not IsCollection with IsStandingOrder. | StandingJobs is not supported. Primary service in ServiceAgreement should have IsScheduled or IsCollection set to true. If the service IsCollection set to true then IsStandingOrder also need to be set true. |\r\n| If site area is not linked with customer site | Failed to save. StandingJobs with RelatedSiteAreaGuid of guid is not supported for SiteOrder StandingJobs. The given customer site area is not linked to the customer site of site order. |\r\n| If site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the StandingJobs.RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If Action List is not provided in the service agreement price, the action type not of CreateJobFrom, the action type not of CreateJobFrom,CreateContainerJobFrom when service IsCollection and action type in StartOfCycle,EndOfCycle| Failed to save. StandingJobs with ActionListItem.Guid of guid is not supported for SiteOrder StandingJobs. The given action is not linked to the service agreement price or the action does not belongs to action type of CreateJobFrom and CreateContainerJobFrom(when the service have IsCollection is enabled) or the actions action type should have enabled or disabled both StartOfCycle,EndOfCycle |\r\n| If ContainerType List is not provided in the service agreement price action| Failed to save. StandingJobs with ContainerTypeListItem.Guid of guid is not supported for SiteOrder StandingJobs. The given container type is not linked to the service agreement price |\r\n| If sysuser is not belong to order companyoutlet or standingjob companyoutlet and staff type is not driver | Failed to save. StandingJobs with RelatedSysUserDriverGuid of guid is not supported for SiteOrder StandingJobs. The given Sysuser must have staff type as Driver and  Sysuser must belongs to order companyoutlet or standingjob companyoutlet |\r\n| If vehicle is not belong to order companyoutlet or standingjob companyoutlet and vehicle containertype is not supported | Failed to save. StandingJobs with RelatedVehicleGuid of guid is not supported for SiteOrder StandingJobs. The vehicle must be linked with container type and vehicle must belongs to order companyoutlet or standingjob companyoutlet |\r\n| If DayOfWeekListItem is provided when IsNoPlannedDay set to true | Failed to save. StandingJobs with DayOfWeekListItem cannot be set if IsNoPlannedDay is set to true. |\r\n| If siteorder service is not IsCollection | RouteAssignments is not supported. Primary service in ServiceAgreement should have iscollection set to true. |\r\n| If site area is not linked with customer site | Failed to save. RouteAssignments with RelatedSiteAreaGuid of guid is not supported for SiteOrder Route Assignment. The given customer site area is not linked to the customer site of site order. |\r\n| If site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the RouteAssignments.RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If the given action does not have action type of Assign To Round | Failed to save. ActionListItem.Guid is not supported for Route Assignment.The given actions should be linked with action type AssignToRound. |\r\n| If the given container type is not priced in the service agreement | Failed to save. ContainerTypeListItem.Guid is not supported for Route Assignment.The given container type should be in service agreement price. |\r\n| If DayOfWeekListItem is set when IsNoPlannedDate is true | Failed to save. DayOfWeekListItem cannot be set when IsNoPlannedDate is set to true |\r\n| If startDate is set when IsNoPlannedDate is true | Failed to save. StartDate cannot be set when IsNoPlannedDate is set to true |\r\n| If DayOfWeekListItem is null or empty when IsNoPlannedDate is false | Failed to save. DayOfWeekListItem cannot be null when IsNoPlannedDate is set to false |\r\n| If startDate is null or empty when IsNoPlannedDate is false | Failed to save. StartDate cannot be null when IsNoPlannedDate is set to false |\r\n| If position is set to 0 and relatedRouteTemplateGuid has a value | Failed to save. Position cannot be set to zero when relatedRouteTemplateGuid has a value |\r\n| If position has a value and relatedRouteTemplateGuid is null | Failed to save. Position cannot have a value if relatedRouteTemplateGuid is set to null |\r\n| If the company outlet passed is not related to the customer site | The Company Outlet and Customer Site do not match. The resource could not be created/updated. Ensure that CompanyOutletListItem.Guid references a Company Outlet of RelatedSiteGuid |\r\n| If the RouteAssignment is deleted in an order | Failed to save/update SiteOrder because the supplied RouteAssignment is not valid. The update has been rejected. Change the RouteAssignments to the Guid of a valid undeleted RouteAssignment |\r\n| If Containers[0].RelatedContainerGuid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied RelatedContainerGuid is not valid. The update has been rejected. Change the Containers[0].RelatedContainerGuid to the Guid of a valid and undeleted RelatedContainerGuid |\r\n| If Containers[0].ContainerTypeListItem.Guid is null | The mandatory property Containers[0].ContainerTypeListItem.Guid has a null value. The request could not be processed. Supply a value for the Containers[0].ContainerTypeListItem.Guid property of the submitted resource. |\r\n| If Containers[0].ContainerStateListItem.Guid provided is null | The mandatory property Containers[0].ContainerStateListItem.Guid has a null value. The request could not be processed. Supply a value for the Containers[0].ContainerStateListItem.Guid property of the submitted resource. |\r\n| If Containers[0].ContainerTypeListItem.Guid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied Containers[0].ContainerTypeListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerTypeListItem.Guid to the Guid of a valid and undeleted Containers[0].ContainerTypeListItem.Guid |\r\n| If Containers[0].ContainerStateListItem.Guid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied  Containers[0].ContainerStateListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerStateListItem.Guid to the Guid of a valid and undeleted Containers[0].ContainerStateListItem.Guid |\r\n| If Containers[0].ContainerStateListItem.Guid provided has an inactive value | Failed to save/update SiteOrder because the supplied  Containers[0].ContainerStateListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerStateListItem.Guid to the Guid of an active Containers[0].ContainerStateListItem.Guid |\r\n| If RouteAssignments[0].Exclusions[0].ExclusionTypeListItem.Guid provided with a mark as Deleted Exclusion Type | The provided  RouteAssignments[0].Exclusions[0].ExclusionTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteAssignments[0].Exclusions[0].ReasonListItem.Guid provided with a mark as Deleted Reason | The provided  RouteAssignments[0].Exclusions[0].ReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteAssignments[0].Exclusions[0].ReasonListItem is not in one of the following reason categories: Exclusions |  RouteAssignments[0].Exclusions[0].ReasonListItem must be in one of the following reason categories: Exclusions. |\r\n| If Valid Until date is provided on update and rentals/invoice is not created | Issue closing the order. Could not update the order and close it - {message} |\r\n| If the value for IsDeleted is changed on update | IsDeleted is a read-only property |\r\n| If the value for Containers.IsDeleted is changed on update | Containers.IsDeleted is a read-only property |\r\n| If the value for ItemRentals.IsDeleted is changed on update | ItemRentals.IsDeleted is a read-only property |\r\n| If the GUID passed to InspectionTypeListItem has a value that is deleted | The provided InspectionTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteCalloutRequests[0].MaxLiftQuantity is a negative number |  Failed to save/update MaxLiftQuantity because value must be non negative. |\r\n| If po number chain is not belong to customer | Failed to save. PONumberChain with RelatedPONumberChainGuid of guid is not supported for customer. The given PONumberChain must belongs to customer |\r\n"
+      operationId: Order_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/orders:
+    get:
+      tags:
+      - Order
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site order.|\r\n| RelatedSiteGuid| The GUID associated to the customer site of the site order.|\r\n| RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order.|\r\n| RelatedSupplierSiteForServiceGuid| The GUID associated to the supplier site for service of the site order.|\r\n| RelatedSupplierSiteForTransportGuid| The GUID associated to the supplier site for transport of the site order.|\r\n| RelatedUserSalesRepGuid| The GUID associated to the sales rep of the site order.|     \r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the site order.|\r\n| RelatedPONumberChainGuid| The GUID associated to the purchase order number chain of the site order.|\r\n| OrderNumber| Used to filter the order number associated to the site order.|\r\n| CustomerOrderNumber| The customer order number associated to the site order.|\r\n| OrderedBy| The ordered by associated to the site order.|\r\n| ProcessFrom| The process from date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| ValidUntil| The valid until date associated to the site order in ISO format (YYYY-MM-DD).|\r\n| Notes| The notes associated to the site order.|\r\n| DriverNotes| The driver notes associated to the site order.|\r\n| IsCustomerOwnedEquipment| Is the equipment used in the site order customer owned?|\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the site order.|\r\n| ServiceListItem| The GUID and description of the service associated to the site order.|\r\n| MaterialListItem| The GUID and description of the material associated to the site order.|\r\n| DefaultContainerTypeListItem| The GUID and description of the container type associated to the site order.|\r\n| PriorityListItem| The GUID and description of the priority associated to the site order.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the site order.|\r\n| Containers[0]| The list of site order items associated to the site order.|\r\n| Containers[0].Guid| The GUID associated to the site order item.|\r\n| Containers[0].IsDeleted| Whether the site order item is deleted.|\r\n| Containers[0].Notes| The Notes associated to the site order item.|\r\n| Containers[0].IsContainerAssignedWithoutJob | Whether the container is assigned without job.|\r\n| Containers[0].IsFromIncreasedOrder | Whether the container is from increased order.|\r\n| Containers[0].IsContainerRemovedWithoutJob | Whether the container is removed without job.|\r\n| Containers[0].IsFixLocation | Whether the container has a fixed location.|\r\n| Containers[0].Geo | The Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Lat| The latitude of Geo Location associated to the site order item.|\r\n| Containers[0].Geo.Location.Long| The longitude of Geo Location associated to the site order item.|\r\n| Containers[0].StartDate | The StartDate associated to the site order item.|\r\n| Containers[0].EndDate| The EndDate associated to the site order item.|\r\n| Containers[0].DateLinked    | The DateLinked associated to the site order item.|\r\n| Containers[0].RelatedContainerGuid| The GUID associated to the container of the site order item.|\r\n| Containers[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item.|\r\n| Containers[0].ContainerStateListItem| The GUID and description of the site order item state associated to site order item.|\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the site order. |\r\n| IsDeleted| Whether the site order is deleted.|\r\n| ItemRentals| The list of site order item rentals associated to the site order.|\r\n| ItemRentals[0].RelatedPriceGuid| The GUID associated to the price of the site order item rental.|\r\n| ItemRentals[0].RelatedPriceModifierGuid| The GUID associated to the price modifier of the site order item rental.|\r\n| ItemRentals[0].RelatedCostGuid| The GUID associated to the cost of the site order item rental.|\r\n| ItemRentals[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item rental.|\r\n| ItemRentals[0].ActionListItem| The GUID and description of the action associated to site order item rental.|\r\n| ItemRentals[0].StartDate| The start date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].EndDate| The end date associated to the site order item rental in ISO format (YYYY-MM-DD).|\r\n| ItemRentals[0].IsStartOnStartOfCycle| Start on start of cycle when site order item rental.|\r\n| ItemRentals[0].IsEndOnEndOfCycle| End on start of cycle when site order item rental.|\r\n| ItemRentals[0].Quantity| The quantity associated to the site order item rental.|\r\n| ItemRentals[0].Notes| The notes associated to the site order item rental.|\r\n| ItemRentals[0].IsArrears| Is the site order item rental in arrears?|\r\n| ItemRentals[0].RentalQuantityAttributeListItem| The GUID and description of the rental quantity attribute associated to site order item rental.|\r\n| ItemRentals[0].IsBinOnSiteBasedOnQuantityNow| Is the bin on site are based on quantity for site order item rental?|\r\n| ItemRentals[0].IsDiscount| Is the site order item rental discounted?|\r\n| ItemRentals[0].DiscountOverridePrice| The discount override price associated to the site order item rental.|\r\n| ItemRentals[0].DiscountReasonListItem| The GUID and description of the discount reason associated to site order item rental.|\r\n| ItemRentals[0].Guid| The GUID associated to the site order item rental.|\r\n| ItemRentals[0].IsDeleted| Whether the site order item rental is deleted.|\r\n| PermitRequired| Whether the site order has required permit.|\r\n| RelatedPriceGuidFilter| Used to filter by the related price GUID.|\r\n| RelatedPriceModifierGuidFilter| Used to filter by the related price modifier GUID.|\r\n| RelatedCostGuidFilter| Used to filter by the related cost GUID.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the site order.|\r\n| StandingJobs| The list of standing job template associated to the site order.|\r\n| StandingJobs[0].Guid| The GUID associated to the standing job template of site order.|\r\n| StandingJobs[0].ActionListItem| The GUID and description of the action associated to site order standing job|\r\n| StandingJobs[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order standing job|\r\n| StandingJobs[0].EndOnJobCompletion| Is job completion on end for standing job|\r\n| StandingJobs[0].ExcludeNoBinOnSite| Exclude no bin on site for standing job|\r\n| StandingJobs[0].IsNoPlannedDay| Is on no planned day for standing job|\r\n| StandingJobs[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order standing job|\r\n| StandingJobs[0].StartDate| The start date associated to the standing job.|\r\n| StandingJobs[0].EndDate| The end date associated to the standing job.|\r\n| StandingJobs[0].CompanyOutletListItem| The GUID and description of the companyoutlet associated to site order standing job|\r\n| StandingJobs[0].RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order standing job.|\r\n| StandingJobs[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order standing job|\r\n| StandingJobs[0].RelatedSysUserDriverGuid| The GUID associated to the sriver sysuser of the site order standing job.|\r\n| StandingJobs[0].RelatedVehicleGuid| The GUID associated to the vehcile of the site order standing job.|\r\n| StandingJobs[0].RequestedBy| Requested by details of standing job.|\r\n| StandingJobs[0].IsDeleted| Whether the standing job related to the siteorderis deleted.|\r\n| StandingJobsSiteAreaGuidFilter| Used to filter by the standing job site area guid.|\r\n| StandingJobsSysUserDriverGuidFilter| Used to filter by the standing job sysuser driver guid.|\r\n| StandingJobsVehicleGuidFilter| Used to filter by the standing job vehicle guid.|\r\n| StandingJobsStartDateFilter| Used to filter by the standing job start date.|\r\n| StandingJobsEndDateFilter| Used to filter by the standing job end date.|\r\n| InspectionTypeListItem| The GUID and description of the inspection type associated to the site order.|\r\n| ItemTimeStamp| The item timestamp of the site order.|\r\n| RouteAssignments| The list of route assignments associated to the site order.|\r\n| RouteAssignments[0].Guid| The guid associated to the route assignment.|\r\n| RouteAssignments[0].ActionListItem| The GUID and description of the action associated to site order route assignment|\r\n| RouteAssignments[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route assignment|\r\n| RouteAssignments[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order route assignment|\r\n| RouteAssignments[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order route assignment|\r\n| RouteAssignments[0].DayOfOccurrenceInMonthListItem| The GUID and description of the day of occurrence in month associated to site order route assignment|\r\n| RouteAssignments[0].Position| The position associated to the routeAssignment.|\r\n| RouteAssignments[0].StartDate| The start date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].EndDate| The end date associated to the route assignment in ISO format (YYYY-MM-DD).|\r\n| RouteAssignments[0].RequestedBy| Who is the routeAssignment requested by?|\r\n| RouteAssignments[0].Notes| The notes associated to the routeAssignment.|\r\n| RouteAssignments[0].MaxLiftQuantity| The max lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].MinLiftQuantity| The min lift quantity associated to the routeAssignment.|\r\n| RouteAssignments[0].RequiresQuantity| Does the routeAssignment require quantity?|\r\n| RouteAssignments[0].IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?|\r\n| RouteAssignments[0].IsNoPlannedDate| Is there no planned date for the routeAssignment?|\r\n| RouteAssignments[0].IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? |\r\n| RouteAssignments[0].RelatedRouteTemplateGuid| The guid associated to the route template  to the routeAssignment.|\r\n| RouteAssignments[0].RelatedSiteAreaGuid| The guid associated to the site area of the route assignment.|\r\n| RouteAssignments[0].IsDeleted| Whether the site order route assignment is deleted.|\r\n| RouteAssignments[0].Exclusions| The list of exclusions associated to the route assignment.|\r\n| RouteAssignments[0].Exclusions[0].Guid| The guid associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeFrom| The exclude from date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExcludeTo| The exclude to date associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ExclusionTypeListItem| The guid and description of the exclusion type associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].ReasonListItem| The guid and description of the reason associated to the exclusion.|\r\n| RouteAssignments[0].Exclusions[0].Notes| The notes associated to the exclusion.|\r\n| RouteCalloutRequests| The list of route callout requests associated to the site order.|\r\n| RouteCalloutRequests[0].Guid| The guid associated to the route callout request.|\r\n| RouteCalloutRequests[0].ActionListItem| The GUID and description of the action associated to site order route callout request|\r\n| RouteCalloutRequests[0].OutletListItem | The GUID and description of the company outlet associated to site order route callout request|\r\n| RouteCalloutRequests[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route callout request|\r\n| RouteCalloutRequests[0].DateRequired| The date required of the route callout request|\r\n| RouteCalloutRequests[0].Notes| The notes of the route callout request|\r\n| RouteCalloutRequests[0].RelatedRouteVisitGuid| The guid associated to the routevisit of the route callout request.|\r\n| RouteCalloutRequests[0].RequestedBy| Who requested the route callout request.|\r\n| RouteCalloutRequests[0].MaxLiftQuantity| The max lift quantity of the route callout request.|\r\n| RouteCalloutRequests[0].IsDeleted| Whether the route callout request is deleted.|\r\n| RouteAssignmentSiteAreaGuidFilter| Used to filter by the related route assignment site area GUID. |\r\n| RouteAssignmentStartDateFilter | Used to filter by the related route assignment start date|\r\n| RouteAssignmentEndDateFilter | Used to filter by the related route assignment end date|\r\n| RelatedContainerGuidFilter| Used to filter by the related container GUID.|\r\n| RelatedOrderCombinationGroupingGuid| The GUID associated to the order combination grouping. Filterable|\r\n| ContainersGeoLocationLatFilter| Used to filter by the location latitude of the site order item|\r\n| ContainersGeoLocationLongFilter| Used to filter by the location longitude of the site order item|\r\n| RelatedRouteVisitGuidFilter| Used to filter by the related routevisit GUID.|\r\n| RouteCalloutRequestGuidFilter| Used to filter by the route callout request GUID|"
+      operationId: Order_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorOrderResource]'
+    post:
+      tags:
+      - Order
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | --------------------------------------------------------------------------------------------------| -------- |\r\n| GUID| The GUID associated to the site order.| No  |\r\n| RelatedSiteGuid| The GUID associated to the customer site of the site order.| Yes |\r\n| RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order.| No  |\r\n| RelatedSupplierSiteForServiceGuid| The GUID associated to the supplier site for service of the site order.| No  |\r\n| RelatedSupplierSiteForTransportGuid| The GUID associated to the supplier site for transport of the site order.| No  |\r\n| RelatedUserSalesRepGuid| The GUID associated to the sales rep of the site order.| No  |  \r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the site order.| Yes |\r\n| RelatedPONumberChainGuid| The GUID associated to the purchase order number chain of the site order.| No  |\r\n| OrderNumber| Used to filter the order number associated to the site order.| No  |\r\n| CustomerOrderNumber| The customer order number associated to the site order.| No  |\r\n| OrderedBy| The ordered by associated to the site order.| No  |\r\n| ProcessFrom| The process from date associated to the site order in ISO format (YYYY-MM-DD).| Yes |\r\n| ValidUntil| The valid until date associated to the site order in ISO format (YYYY-MM-DD).| No  |\r\n| Notes| The notes associated to the site order.| No  |\r\n| DriverNotes| The driver notes associated to the site order.| No  |\r\n| IsCustomerOwnedEquipment| Is the equipment used in the site order customer owned?| Yes |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the site order.| Yes |\r\n| ServiceListItem| The GUID and description of the service associated to the site order.| Yes |\r\n| MaterialListItem| The GUID and description of the material associated to the site order.| Yes |\r\n| DefaultContainerTypeListItem| The GUID and description of the container type associated to the site order.| No |\r\n| PriorityListItem| The GUID and description of the priority associated to the site order.| Yes |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the site order.| No  |\r\n| Containers[0]| The list of site order items associated to the site order.| No  |\r\n| Containers[0].Guid| The GUID associated to the site order item.| No  |\r\n| Containers[0].IsDeleted| Whether the site order item is deleted.| No  |\r\n| Containers[0].Notes| The Notes associated to the site order item.| No  |\r\n| Containers[0].IsContainerAssignedWithoutJob | Whether the container is assigned without job.| Yes |\r\n| Containers[0].IsFromIncreasedOrder | Whether the container is from increased order.| Yes |\r\n| Containers[0].IsContainerRemovedWithoutJob | Whether the container is removed without job.| Yes |\r\n| Containers[0].IsFixLocation | Whether the container has a fixed location.| No  |\r\n| Containers[0].Geo | The Geo Location associated to the site order item.| No  |\r\n| Containers[0].Geo.Location.Lat| The latitude of Geo Location associated to the site order item.| No  |\r\n| Containers[0].Geo.Location.Long| The longitude of Geo Location associated to the site order item.| No  |\r\n| Containers[0].StartDate | The StartDate associated to the site order item.| No  |\r\n| Containers[0].EndDate| The EndDate associated to the site order item.| No  |\r\n| Containers[0].DateLinked    | The DateLinked associated to the site order item.| No  |\r\n| Containers[0].RelatedContainerGuid| The GUID associated to the container of the site order item.| No  |\r\n| Containers[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item.| Yes |\r\n| Containers[0].ContainerStateListItem| The GUID and description of the site order item state associated to site order item.| Yes |\r\n| RelatedLocationDestinationGuid| The destination location associated to the site order. | Yes |\r\n| IsDeleted| Whether the site order is deleted.| No  |\r\n| ItemRentals| The list of site order item rentals associated to the site order.| No  |\r\n| ItemRentals[0].RelatedPriceGuid| The GUID associated to the price of the site order item rental.| Yes |\r\n| ItemRentals[0].RelatedPriceModifierGuid| The GUID associated to the price modifier of the site order item rental.| No  |\r\n| ItemRentals[0].RelatedCostGuid| The GUID associated to the cost of the site order item rental.| No  |\r\n| ItemRentals[0].ContainerTypeListItem| The GUID and description of the container type associated to site order item rental.| Yes |\r\n| ItemRentals[0].ActionListItem| The GUID and description of the action associated to site order item rental.| Yes |\r\n| ItemRentals[0].StartDate| The start date associated to the site order item rental in ISO format (YYYY-MM-DD).| Yes |\r\n| ItemRentals[0].EndDate| The end date associated to the site order item rental in ISO format (YYYY-MM-DD).| No  |\r\n| ItemRentals[0].IsStartOnStartOfCycle| Start on start of cycle when site order item rental.| No  |\r\n| ItemRentals[0].IsEndOnEndOfCycle| End on start of cycle when site order item rental.| No  |\r\n| ItemRentals[0].Quantity| The quantity associated to the site order item rental.| No  |\r\n| ItemRentals[0].Notes| The notes associated to the site order item rental.| No  |\r\n| ItemRentals[0].IsArrears| Is the site order item rental in arrears?| No  |\r\n| ItemRentals[0].RentalQuantityAttributeListItem| The GUID and description of the rental quantity attribute associated to site order item rental.| No  |\r\n| ItemRentals[0].IsBinOnSiteBasedOnQuantityNow| Is the bin on site are based on quantity for site order item rental?| No  |\r\n| ItemRentals[0].IsDiscount| Is the site order item rental discounted?| No  |\r\n| ItemRentals[0].DiscountOverridePrice| The discount override price associated to the site order item rental.| No  |\r\n| ItemRentals[0].DiscountReasonListItem| The GUID and description of the discount reason associated to site order item rental.| No  |\r\n| ItemRentals[0].Guid| The GUID associated to the site order item rental.| No  |\r\n| ItemRentals[0].IsDeleted| Whether the site order item rental is deleted.| No  |\r\n| PermitRequired| Whether the site order has required permit.| No  |\r\n| RelatedPriceGuidFilter| Used to filter by the related price GUID.| No  |\r\n| RelatedPriceModifierGuidFilter| Used to filter by the related price modifier GUID.| No  |\r\n| RelatedCostGuidFilter| Used to filter by the related cost GUID.| No  |\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the site order.| No  |\r\n| StandingJobs| The list of standing job template associated to the site order.| No  |\r\n| StandingJobs[0].Guid| The GUID associated to the standing job template of site order.| No  |\r\n| StandingJobs[0].ActionListItem| The GUID and description of the action associated to site order standing job| Yes |\r\n| StandingJobs[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order standing job| Yes |\r\n| StandingJobs[0].EndOnJobCompletion| Is job completion on end for standing job| Yes |\r\n| StandingJobs[0].ExcludeNoBinOnSite| Exclude no bin on site for standing job| Yes |\r\n| StandingJobs[0].IsNoPlannedDay| Is on no planned day for standing job| Yes |\r\n| StandingJobs[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order standing job| Yes |\r\n| StandingJobs[0].StartDate| The start date associated to the standing job.| Yes |\r\n| StandingJobs[0].EndDate| The end date associated to the standing job.| No  |\r\n| StandingJobs[0].CompanyOutletListItem| The GUID and description of the companyoutlet associated to site order standing job| No  |\r\n| StandingJobs[0].RelatedSiteAreaGuid| The GUID associated to the customer site area of the site order standing job.| No  |\r\n| StandingJobs[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order standing job| No  |\r\n| StandingJobs[0].RelatedSysUserDriverGuid| The GUID associated to the sriver sysuser of the site order standing job.| No  |\r\n| StandingJobs[0].RelatedVehicleGuid| The GUID associated to the vehcile of the site order standing job.| No  |\r\n| StandingJobs[0].RequestedBy| Requested by details of standing job| No  |\r\n| StandingJobs[0].IsDeleted| Whether the standing job related to the siteorderis deleted.| No  |\r\n| StandingJobsSiteAreaGuidFilter| Used to filter by the standing job site area guid.| No  |\r\n| StandingJobsSysUserDriverGuidFilter| Used to filter by the standing job sysuser driver guid.| No  |\r\n| StandingJobsVehicleGuidFilter| Used to filter by the standing job vehicle guid.| No  |\r\n| StandingJobsStartDateFilter| Used to filter by the standing job start date.| No  |\r\n| StandingJobsEndDateFilter| Used to filter by the standing job end date.| No  |\r\n| InspectionTypeListItem| The GUID and description of the inspection type associated to the site order.| No  |\r\n| ItemTimeStamp| The item timestamp of the site order.| Yes |\r\n| RouteAssignments| The list of route assignments associated to the site order.| No  |\r\n| RouteAssignments[0].Guid| The guid associated to the route assignment.| No  |\r\n| RouteAssignments[0].ActionListItem| The GUID and description of the action associated to site order route assignment| Yes |\r\n| RouteAssignments[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route assignment| Yes |\r\n| RouteAssignments[0].PickupIntervalListItem| The GUID and description of the pickup interval associated to site order route assignment| Yes |\r\n| RouteAssignments[0].DayOfWeekListItem| The GUID and description of the day of week associated to site order route assignment| No  |\r\n| RouteAssignments[0].DayOfOccurrenceInMonthListItem| The GUID and description of the day of occurrence in month associated to site order route assignment| No  |\r\n| RouteAssignments[0].Position| The position associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].StartDate| The start date associated to the route assignment in ISO format (YYYY-MM-DD).| No  |\r\n| RouteAssignments[0].EndDate| The end date associated to the route assignment in ISO format (YYYY-MM-DD).| No  |\r\n| RouteAssignments[0].RequestedBy| Who is the routeAssignment requested by?| No  |\r\n| RouteAssignments[0].Notes| The notes associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].MaxLiftQuantity| The max lift quantity associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].MinLiftQuantity| The min lift quantity associated to the routeAssignment.| No  |\r\n| RouteAssignments[0].RequiresQuantity| Does the routeAssignment require quantity?| Yes |\r\n| RouteAssignments[0].IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?| Yes |\r\n| RouteAssignments[0].IsNoPlannedDate| Is there no planned date for the routeAssignment?| Yes |\r\n| RouteAssignments[0].IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? | Yes |\r\n| RouteAssignments[0].RelatedRouteTemplateGuid| The guid associated to the route template  to the routeAssignment.| No  |\r\n| RouteAssignments[0].RelatedSiteAreaGuid| The guid associated to the site area of the route assignment.| No  |\r\n| RouteAssignments[0].IsDeleted| Whether the site order route assignment is deleted.| No  |\r\n| RouteAssignments[0].Exclusions| The list of exclusions associated to the route assignment.| No  |\r\n| RouteAssignments[0].Exclusions[0].Guid| The guid associated to the exclusion.| No  |\r\n| RouteAssignments[0].Exclusions[0].ExcludeFrom| The exclude from date associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ExcludeTo| The exclude to date associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ExclusionTypeListItem| The guid and description of the exclusion type associated to the exclusion.| Yes |\r\n| RouteAssignments[0].Exclusions[0].ReasonListItem| The guid and description of the reason associated to the exclusion.| No  |\r\n| RouteAssignments[0].Exclusions[0].Notes| The notes associated to the exclusion.| No  |\r\n| RouteCalloutRequests| The list of route callout requests associated to the site order.| No  |\r\n| RouteCalloutRequests[0].Guid| The guid associated to the route callout request.| No  |\r\n| RouteCalloutRequests[0].ActionListItem| The GUID and description of the action associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].OutletListItem | The GUID and description of the company outlet associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].ContainerTypeListItem| The GUID and description of the containertype associated to site order route callout request| Yes |\r\n| RouteCalloutRequests[0].DateRequired| The date required of the route callout request| Yes |\r\n| RouteCalloutRequests[0].Notes| The notes of the route callout request| No  |\r\n| RouteCalloutRequests[0].RelatedRouteVisitGuid| The guid associated to the routevisit of the route callout request.| No  |\r\n| RouteCalloutRequests[0].RequestedBy| Who requested the route callout request.| Yes |\r\n| RouteCalloutRequests[0].MaxLiftQuantity| The max lift quantity of the route callout request.| Yes |\r\n| RouteCalloutRequests[0].IsDeleted| Whether the route callout request is deleted.| No  |\r\n| RouteAssignmentSiteAreaGuidFilter| Used to filter by the related route assignment site area GUID. | No  |\r\n| RouteAssignmentStartDateFilter | Used to filter by the related route assignment start date| No  |\r\n| RouteAssignmentEndDateFilter | Used to filter by the related route assignment end date| No  |\r\n| RelatedContainerGuidFilter| Used to filter by the related container GUID.| No  |\r\n| RelatedOrderCombinationGroupingGuid| The GUID associated to the order combination grouping. | No  |\r\n| ContainersGeoLocationLatFilter| Used to filter by the location latitude of the site order item| No  |\r\n| ContainersGeoLocationLongFilter| Used to filter by the location longitude of the site order item| No  |\r\n| RelatedRouteVisitGuidFilter| Used to filter by the related routevisit GUID.| No  |\r\n| RouteCalloutRequestGuidFilter| Used to filter by the route callout request GUID| No  |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Quantity or RentalQuantityAttributeListItem are expected | Either Quantity or RentalQuantityAttributeListItem.Guid properties must be set. SiteOrderItemRental with Quantity cannot be set if RentalQuantityAttributeListItem.Guid has a value. |\r\n| Order number already exists | Failed to save/update Order because the site order that you are trying to save conflicts with an existing item. Each site order must be unique in terms of OrderNumber. |\r\n| If the given price is not in the service agreement and the actiontypes is not in rental or advance service  | Failed to save. SiteOrderItemRental with RelatedPriceGuid is not supported for SiteOrder |\r\n| If the GUID passed to AreaOfOriginListItem has a value that is not in the AreaOfOrigin table OR is deleted | Failed to save/update Order because The supplied AreaOfOrigin is not valid. The update has been rejected. Change the AreaOfOriginListItem to the Guid of a valid and undeleted AreaOfOrigin. |\r\n| If the given DefaultContainerTypeListItem is not in service | Failed to save. SiteOrder with DefaultContainerTypeListItem.GUID cannot be set if DefaultContainerType are not linked to Service. |\r\n| If related site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If RelatedSiteAreaGuid is not relevant | The site area and site do not match. The resource could not be created/updated. Ensure that RelatedSiteAreaGuid references an site area of RelatedSiteGuid |\r\n| If siteorder service is not IsScheduled and service is not IsCollection with IsStandingOrder. | StandingJobs is not supported. Primary service in ServiceAgreement should have IsScheduled or IsCollection set to true. If the service IsCollection set to true then IsStandingOrder also need to be set true. |\r\n| If Standing job Guid is set on order creation | StandingJobs has the property Guid with value of is not supported. The given StandingJobs.Guid is linked to another siteorder |\r\n| If site area is not linked with customer site | Failed to save. StandingJobs with RelatedSiteAreaGuid of guid is not supported for SiteOrder StandingJobs. The given customer site area is not linked to the customer site of site order. |\r\n| If site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the StandingJobs.RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If Action List is not provided in the service agreement price, the action type not of CreateJobFrom, the action type not of CreateJobFrom,CreateContainerJobFrom when service IsCollection and action type in StartOfCycle,EndOfCycle| Failed to save. StandingJobs with ActionListItem.Guid of guid is not supported for SiteOrder StandingJobs. The given action is not linked to the service agreement price or the action does not belongs to action type of CreateJobFrom and CreateContainerJobFrom(when the service have IsCollection is enabled) or the actions action type should have enabled or disabled both StartOfCycle,EndOfCycle |\r\n| If ContainerType List is not provided in the service agreement price action| Failed to save. StandingJobs with ContainerTypeListItem.Guid of guid is not supported for SiteOrder StandingJobs. The given container type is not linked to the service agreement price |\r\n| If sysuser is not belong to order companyoutlet or standingjob companyoutlet and staff type is not driver | Failed to save. StandingJobs with RelatedSysUserDriverGuid of guid is not supported for SiteOrder StandingJobs. The given Sysuser must have staff type as Driver and  Sysuser must belongs to order companyoutlet or standingjob companyoutlet |\r\n| If vehicle is not belong to order companyoutlet or standingjob companyoutlet and vehicle containertype is not supported | Failed to save. StandingJobs with RelatedVehicleGuid of guid is not supported for SiteOrder StandingJobs. The vehicle must be linked with container type and vehicle must belongs to order companyoutlet or standingjob companyoutlet |\r\n| If DayOfWeekListItem is provided when IsNoPlannedDay set to true | Failed to save. StandingJobs with DayOfWeekListItem cannot be set if IsNoPlannedDay is set to true. |\r\n| If siteorder service is not IsCollection | RouteAssignments is not supported. Primary service in ServiceAgreement should have iscollection set to true. |\r\n| If RouteAssignment Guid is set on order creation | RouteAssignments has the property Guid with value of is not supported. The given RouteAssignments.Guid is linked to another siteorder |\r\n| If site area is not linked with customer site | Failed to save. RouteAssignments with RelatedSiteAreaGuid of guid is not supported for SiteOrder Route Assignment. The given customer site area is not linked to the customer site of site order. |\r\n| If site area is deleted | Failed to save/update SiteOrder because the supplied CustomerSiteArea is not valid. The update has been rejected. Change the RouteAssignments.RelatedSiteAreaGuid to the Guid of a valid and undeleted CustomerSiteArea |\r\n| If the given action does not have action type of Assign To Round | Failed to save. ActionListItem.Guid is not supported for Route Assignment.The given actions should be linked with action type AssignToRound. |\r\n| If the given container type is not priced in the service agreement | Failed to save. ContainerTypeListItem.Guid is not supported for Route Assignment.The given container type should be in service agreement price. |\r\n| If DayOfWeekListItem is set when IsNoPlannedDate is true | Failed to save. DayOfWeekListItem cannot be set when IsNoPlannedDate is set to true |\r\n| If startDate is set when IsNoPlannedDate is true | Failed to save. StartDate cannot be set when IsNoPlannedDate is set to true |\r\n| If DayOfWeekListItem is null or empty when IsNoPlannedDate is false | Failed to save. DayOfWeekListItem cannot be null when IsNoPlannedDate is set to false |\r\n| If startDate is null or empty when IsNoPlannedDate is false | Failed to save. StartDate cannot be null when IsNoPlannedDate is set to false |\r\n| If position is set to 0 and relatedRouteTemplateGuid has a value | Failed to save. Position cannot be set to zero when relatedRouteTemplateGuid has a value |\r\n| If position has a value and relatedRouteTemplateGuid is null | Failed to save. Position cannot have a value if relatedRouteTemplateGuid is set to null |\r\n| If the company outlet passed is not related to the customer site | The Company Outlet and Customer Site do not match. The resource could not be created/updated. Ensure that CompanyOutletListItem.Guid references a Company Outlet of RelatedSiteGuid |\r\n| If the RouteAssignment is deleted in an order | Failed to save/update SiteOrder because the supplied RouteAssignment is not valid. The update has been rejected. Change the RouteAssignments to the Guid of a valid undeleted RouteAssignment |\r\n| If Containers[0].Guid is not null on insert | Containers.Guid is a read-only property on insert |\r\n| If Containers[0].RelatedContainerGuid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied RelatedContainerGuid is not valid. The update has been rejected. Change the Containers[0].RelatedContainerGuid to the Guid of a valid and undeleted RelatedContainerGuid |\r\n| If Containers[0].ContainerTypeListItem.Guid is null | The mandatory property Containers[0].ContainerTypeListItem.Guid has a null value. The request could not be processed. Supply a value for the Containers[0].ContainerTypeListItem.Guid property of the submitted resource. |\r\n| If Containers[0].ContainerStateListItem.Guid provided is null | The mandatory property Containers[0].ContainerStateListItem.Guid has a null value. The request could not be processed. Supply a value for the Containers[0].ContainerStateListItem.Guid property of the submitted resource. |\r\n| If Containers[0].ContainerTypeListItem.Guid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied Containers[0].ContainerTypeListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerTypeListItem.Guid to the Guid of a valid and undeleted Containers[0].ContainerTypeListItem.Guid |\r\n| If Containers[0].ContainerStateListItem.Guid provided has a non-existent or deleted value | Failed to save/update SiteOrder because the supplied  Containers[0].ContainerStateListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerStateListItem.Guid to the Guid of a valid and undeleted Containers[0].ContainerStateListItem.Guid |\r\n| If Containers[0].ContainerStateListItem.Guid provided has an inactive value | Failed to save/update SiteOrder because the supplied  Containers[0].ContainerStateListItem.Guid is not valid. The update has been rejected. Change the Containers[0].ContainerStateListItem.Guid to the Guid of an active Containers[0].ContainerStateListItem.Guid |\r\n| If RouteAssignments[0].Exclusions[0].ExclusionTypeListItem.Guid provided with a mark as Deleted Exclusion Type | The provided  RouteAssignments[0].Exclusions[0].ExclusionTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteAssignments[0].Exclusions[0].ReasonListItem.Guid provided with a mark as Deleted Reason | The provided  RouteAssignments[0].Exclusions[0].ReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteAssignments[0].Exclusions[0].ReasonListItem is not in one of the following reason categories: Exclusions |  RouteAssignments[0].Exclusions[0].ReasonListItem must be in one of the following reason categories: Exclusions. |\r\n| If ValidUntil is not null while creating rental orders | Attempt to create Order in a closed state. Could not create the Order. Set the ValidUntil date to null when creating an order then make a separate call to close the Order by setting the ValidUntil date |\r\n| If Valid Until date is provided on update and rentals/invoice is not created | Issue closing the order. Could not update the order and close it - {message} |\r\n| If IsDeleted is true on insert | An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value |\r\n| If the value for IsDeleted is changed on update | IsDeleted is a read-only property |\r\n| If Containers.IsDeleted is true on insert | An attempt has been made to set Containers.IsDeleted. The request could not be processed. Ensure that Containers.IsDeleted has default value |\r\n| If the value for Containers.IsDeleted is changed on update | Containers.IsDeleted is a read-only property |\r\n| If ItemRentals.IsDeleted is true on insert | An attempt has been made to set ItemRentals.IsDeleted. The request could not be processed. Ensure that ItemRentals.IsDeleted has default value |\r\n| If the value for ItemRentals.IsDeleted is changed on update | ItemRentals.IsDeleted is a read-only property |\r\n| If the GUID passed to InspectionTypeListItem has a value that is deleted | The provided InspectionTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RouteCalloutRequests[0].MaxLiftQuantity is a negative number |  Failed to save/update MaxLiftQuantity because value must be non negative. |\r\n| If po number chain is not belong to customer | Failed to save. PONumberChain with RelatedPONumberChainGuid of guid is not supported for customer. The given PONumberChain must belongs to customer |\r\n"
+      operationId: Order_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultEntity[ApiIntegratorOrderResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorLocationGeoLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiIntegratorSiteOrderItemLocationGeoResource:
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorOrderRouteAssignmentExclusionResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ExcludeFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExcludeTo:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExclusionTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+    ApiResourceChanges[ApiIntegratorOrderResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorOrderRouteCalloutRequestResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateRequired:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Notes:
+          type: string
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RequestedBy:
+          type: string
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorOrderResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorOrderRouteAssignmentResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PickupIntervalListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfOccurrenceInMonthListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Position:
+          type: integer
+          format: int32
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RequestedBy:
+          type: string
+        Notes:
+          type: string
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        MinLiftQuantity:
+          type: integer
+          format: int32
+        RequiresQuantity:
+          type: boolean
+        IsGpsAutoMatchingDisabled:
+          type: boolean
+        IsNoPlannedDate:
+          type: boolean
+        IsNoBinOnSiteExcluded:
+          type: boolean
+        RelatedRouteTemplateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteAreaGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Exclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderRouteAssignmentExclusionResource'
+    ApiIntegratorOrderResource:
+      type: object
+      properties:
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteAreaGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteForServiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteForTransportGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserSalesRepGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedServiceAgreementGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        OrderNumber:
+          type: string
+        RelatedPONumberChainGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CustomerOrderNumber:
+          type: string
+        OrderedBy:
+          type: string
+        ProcessFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ValidUntil:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Notes:
+          type: string
+        DriverNotes:
+          type: string
+        IsCustomerOwnedEquipment:
+          type: boolean
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DefaultContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PriorityListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedLocationDestinationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderContainerResource'
+        AreaOfOriginListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ItemRentals:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderItemRentalResource'
+        InspectionTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ItemTimeStamp:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        PermitRequired:
+          type: boolean
+        StandingJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderStandingJobResource'
+        RouteAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderRouteAssignmentResource'
+        RouteCalloutRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderRouteCalloutRequestResource'
+        IsDeleted:
+          type: boolean
+        RelatedOrderCombinationGroupingGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceModifierGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCostGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StandingJobsSiteAreaGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StandingJobsSysUserDriverGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StandingJobsVehicleGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StandingJobsStartDateFilter:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        StandingJobsEndDateFilter:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RouteAssignmentSiteAreaGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RouteAssignmentStartDateFilter:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RouteAssignmentEndDateFilter:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedContainerGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainersGeoLocationLatFilter:
+          type: number
+          format: double
+        ContainersGeoLocationLongFilter:
+          type: number
+          format: double
+        RelatedRouteVisitGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RouteCalloutRequestGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorOrderStandingJobResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        EndOnJobCompletion:
+          type: boolean
+        ExcludeNoBinOnSite:
+          type: boolean
+        IsNoPlannedDay:
+          type: boolean
+        PickupIntervalListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedSiteAreaGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedSysUserDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RequestedBy:
+          type: string
+        IsDeleted:
+          type: boolean
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorOrderItemRentalResource:
+      type: object
+      properties:
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceModifierGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCostGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsStartOnStartOfCycle:
+          type: boolean
+        IsEndOnEndOfCycle:
+          type: boolean
+        Quantity:
+          type: integer
+          format: int32
+        Notes:
+          type: string
+        IsArrears:
+          type: boolean
+        RentalQuantityAttributeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsBinOnSiteBasedOnQuantityNow:
+          type: boolean
+        IsDiscount:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        DiscountOverridePrice:
+          type: number
+          format: double
+        DiscountReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorOrderContainerResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        IsDeleted:
+          type: boolean
+        IsContainerAssignedWithoutJob:
+          type: boolean
+        IsFromIncreasedOrder:
+          type: boolean
+        IsContainerRemovedWithoutJob:
+          type: boolean
+        IsFixLocation:
+          type: boolean
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorSiteOrderItemLocationGeoResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        DateLinked:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string

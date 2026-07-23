@@ -1,0 +1,408 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup DefinitionSchedule API
+  version: core
+tags:
+- name: DefinitionSchedule
+paths:
+  /services/api/workflow/definitionSchedules/changes:
+    get:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiWorkflowDefinitionScheduleResource]'
+  /services/api/workflow/definitionSchedules/template:
+    get:
+      tags:
+      - DefinitionSchedule
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResult[ApiWorkflowDefinitionScheduleResource]'
+  /services/api/workflow/definitionSchedules/{id}:
+    get:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: include
+        in: query
+        schema:
+          type: string
+      - name: expand
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiWorkflowDefinitionScheduleResource]'
+    put:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+    delete:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResource'
+  /services/api/workflow/definitionSchedules/{id}/blob/{blobMemberName}:
+    get:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: blobMemberName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        schema:
+          type: string
+      - name: contentType
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /services/api/workflow/definitionSchedules:
+    get:
+      tags:
+      - DefinitionSchedule
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: includeCount
+        in: query
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowDefinitionScheduleResource]'
+    post:
+      tags:
+      - DefinitionSchedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+          nullable: true
+        cursor:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionSchedule:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        scheduledJobId:
+          type: integer
+          format: int32
+          nullable: true
+        scheduleWorkflowDefinitionId:
+          type: integer
+          format: int32
+          nullable: true
+        workflowDefinitionId:
+          type: string
+          format: uuid
+        workflowProvider:
+          type: string
+          nullable: true
+        friendlyName:
+          type: string
+          nullable: true
+        workflowStartParameters:
+          type: string
+          nullable: true
+        trigger:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResult[ApiWorkflowDefinitionScheduleResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionSchedule'
+      additionalProperties: false
+    ApiResourceResultCollection[ApiWorkflowDefinitionScheduleResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionSchedule'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntity[ApiWorkflowDefinitionScheduleResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionSchedule'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ApiResourceChanges[ApiWorkflowDefinitionScheduleResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionSchedule'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+            nullable: true
+          nullable: true
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties: {}
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          nullable: true
+        associations:
+          type: array
+          items:
+            type: string
+          nullable: true
+        expand:
+          type: array
+          items:
+            type: string
+          nullable: true
+        operations:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

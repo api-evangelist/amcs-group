@@ -1,0 +1,324 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Container API
+  version: core
+tags:
+- name: Container
+paths:
+  /directory/containers/changes:
+    get:
+      tags:
+      - Container
+      summary: Retrieve changes
+      description: "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commercial use?                            |\r\n| IsStoplisted                        | Is this container stop listed?                                   |\r\n| TipLocationListItem                 | The GUID and description of the tip location this container is associated to.     |\r\n| ContainerStatusListItem             | The GUID and description of the container status this container is associated to. |\r\n| ContainerTypeListItem               | The GUID and description of the container type this container is associated to. |\r\n| LastChangeReasonListItem            | The GUID and description of the reason this container was last changed.  |\r\n| CompanyOutletListItem               | The GUID and name of the company outlet this container is associated to. |\r\n| Manufacture                         | The container's manufacture information.                           |\r\n| Manufacture.DateOfDelivery          | The container's date of delivery in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.DateOfManufacture       | The container's manufacture date in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.WarrantyEndDate         | The container's warranty end date in ISO format (YYYY-MM-DD).      |\r\n| Manufacture.RelatedSupplierSiteGuid | The GUID of the supplier site related to the manufacturer of the container.|\r\n| Manufacture.RelatedAppliedCostGuid  | The GUID of the applied cost related to the purchase of the container.|\r\n| Geo                                 | The geographical associated to the container.                      |\r\n| Geo.Latitude                        | The geographical latitude associated to the container.             |\r\n| Geo.Longitude                       | The geographical longitude associated to the container.            |\r\n| Note                                | The container's note.                                              |\r\n| SerialNo                            | The container's serial number.                                     |\r\n| Tag                                 | The container's tag.                                               |"
+      operationId: Container_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorContainerResource]'
+  /directory/containers/{guid}:
+    get:
+      tags:
+      - Container
+      summary: Find with GUID
+      description: "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commercial use?                            |\r\n| IsStoplisted                        | Is this container stop listed?                                   |\r\n| TipLocationListItem                 | The GUID and description of the tip location this container is associated to.     |\r\n| ContainerStatusListItem             | The GUID and description of the container status this container is associated to. |\r\n| ContainerTypeListItem               | The GUID and description of the container type this container is associated to. |\r\n| LastChangeReasonListItem            | The GUID and description of the reason this container was last changed.  |\r\n| CompanyOutletListItem               | The GUID and name of the company outlet this container is associated to. |\r\n| Manufacture                         | The container's manufacture information.                           |\r\n| Manufacture.DateOfDelivery          | The container's date of delivery in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.DateOfManufacture       | The container's manufacture date in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.WarrantyEndDate         | The container's warranty end date in ISO format (YYYY-MM-DD).      |\r\n| Manufacture.RelatedSupplierSiteGuid | The GUID of the supplier site related to the manufacturer of the container.|\r\n| Manufacture.RelatedAppliedCostGuid  | The GUID of the applied cost related to the purchase of the container.|\r\n| Geo                                 | The geographical associated to the container.                      |\r\n| Geo.Latitude                        | The geographical latitude associated to the container.             |\r\n| Geo.Longitude                       | The geographical longitude associated to the container.            |\r\n| Note                                | The container's note.                                              |\r\n| SerialNo                            | The container's serial number.                                     |\r\n| Tag                                 | The container's tag.                                               |"
+      operationId: Container_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContainerResource]'
+    put:
+      tags:
+      - Container
+      summary: Partial update
+      description: "| Property                            | Description                                                      | Required |\r\n| ----------------------------------- | ---------------------------------------------------------------- | -------- |\r\n| GUID                                | The GUID associated to the container.                            | No |\r\n| IsDeleted                           | Whether the container is deleted                                 | Yes |\r\n| IsCommercial                        | Is this container for commercial use?                            | Yes |\r\n| IsStoplisted                        | Is this container stop listed?                                   | Yes |\r\n| TipLocationListItem                 | The GUID and description of the tip location this container is associated to.     | No |\r\n| ContainerStatusListItem             | The GUID and description of the container status this container is associated to. | No |\r\n| ContainerTypeListItem               | The GUID and description of the container type this container is associated to. | Yes |\r\n| LastChangeReasonListItem            | The GUID and description of the reason this container was last changed.  | No |\r\n| CompanyOutletListItem               | The GUID and name of the company outlet this container is associated to. | No |\r\n| Manufacture                         | The container's manufacture information.                           | No |\r\n| Manufacture.DateOfDelivery          | The container's date of delivery in ISO format (YYYY-MM-DD).       | No |\r\n| Manufacture.DateOfManufacture       | The container's manufacture date in ISO format (YYYY-MM-DD).       | No |\r\n| Manufacture.WarrantyEndDate         | The container's warranty end date in ISO format (YYYY-MM-DD).      | No |\r\n| Manufacture.RelatedSupplierSiteGuid | The GUID of the supplier site related to the manufacturer of the container.| No |\r\n| Manufacture.RelatedAppliedCostGuid  | The GUID of the applied cost related to the purchase of the container.| No |\r\n| Geo                                 | The geographical associated to the container.                      | No |\r\n| Geo.Latitude                        | The geographical latitude associated to the container.             | No |\r\n| Geo.Longitude                       | The geographical longitude associated to the container.            | No |\r\n| Note                                | The container's note.                                              | No |\r\n| SerialNo                            | The container's serial number.                                     | No |\r\n| Tag                                 | The container's tag.                                               | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Tag is not unique | The container must be unique per tag. |\r\n| If IsDeleted is true |IsDeleted is TRUE. Could not process the request. Containers can not be deleted via the REST API. |\r\n| If IsDeleted is null or not provided |The mandatory property IsDeleted has a null value. The request could not be processed. Supply a value for the IsDeleted property of the submitted resource. |\r\n| If the TipLocationListItem.Guid belongs to a deleted TipLocation | The provided TipLocationListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |"
+      operationId: Container_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/containers:
+    get:
+      tags:
+      - Container
+      summary: Find with Filters
+      description: "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commercial use?                            |\r\n| IsStoplisted                        | Is this container stop listed?                                   |\r\n| TipLocationListItem                 | The GUID and description of the tip location this container is associated to.     |\r\n| ContainerStatusListItem             | The GUID and description of the container status this container is associated to. |\r\n| ContainerTypeListItem               | The GUID and description of the container type this container is associated to. |\r\n| LastChangeReasonListItem            | The GUID and description of the reason this container was last changed.  |\r\n| CompanyOutletListItem               | The GUID and name of the company outlet this container is associated to. |\r\n| Manufacture                         | The container's manufacture information.                           |\r\n| Manufacture.DateOfDelivery          | The container's date of delivery in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.DateOfManufacture       | The container's manufacture date in ISO format (YYYY-MM-DD).       |\r\n| Manufacture.WarrantyEndDate         | The container's warranty end date in ISO format (YYYY-MM-DD).      |\r\n| Manufacture.RelatedSupplierSiteGuid | The GUID of the supplier site related to the manufacturer of the container.|\r\n| Manufacture.RelatedAppliedCostGuid  | The GUID of the applied cost related to the purchase of the container.|\r\n| Geo                                 | The geographical associated to the container.                      |\r\n| Geo.Latitude                        | The geographical latitude associated to the container.             |\r\n| Geo.Longitude                       | The geographical longitude associated to the container.            |\r\n| Note                                | The container's note.                                              |\r\n| SerialNo                            | The container's serial number.                                     |\r\n| Tag                                 | The container's tag.                                               |"
+      operationId: Container_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContainerResource]'
+    post:
+      tags:
+      - Container
+      summary: Create or update
+      description: "| Property                            | Description                                                      | Required |\r\n| ----------------------------------- | ---------------------------------------------------------------- | -------- |\r\n| GUID                                | The GUID associated to the container.                            | No |\r\n| IsDeleted                           | Whether the container is deleted                                 | Yes |\r\n| IsCommercial                        | Is this container for commercial use?                            | Yes |\r\n| IsStoplisted                        | Is this container stop listed?                                   | Yes |\r\n| TipLocationListItem                 | The GUID and description of the tip location this container is associated to.     | No |\r\n| ContainerStatusListItem             | The GUID and description of the container status this container is associated to. | No |\r\n| ContainerTypeListItem               | The GUID and description of the container type this container is associated to. | Yes |\r\n| LastChangeReasonListItem            | The GUID and description of the reason this container was last changed.  | No |\r\n| CompanyOutletListItem               | The GUID and name of the company outlet this container is associated to. | No |\r\n| Manufacture                         | The container's manufacture information.                           | No |\r\n| Manufacture.DateOfDelivery          | The container's date of delivery in ISO format (YYYY-MM-DD).       | No |\r\n| Manufacture.DateOfManufacture       | The container's manufacture date in ISO format (YYYY-MM-DD).       | No |\r\n| Manufacture.WarrantyEndDate         | The container's warranty end date in ISO format (YYYY-MM-DD).      | No |\r\n| Manufacture.RelatedSupplierSiteGuid | The GUID of the supplier site related to the manufacturer of the container.| No |\r\n| Manufacture.RelatedAppliedCostGuid  | The GUID of the applied cost related to the purchase of the container.| No |\r\n| Geo                                 | The geographical associated to the container.                      | No |\r\n| Geo.Latitude                        | The geographical latitude associated to the container.             | No |\r\n| Geo.Longitude                       | The geographical longitude associated to the container.            | No |\r\n| Note                                | The container's note.                                              | No |\r\n| SerialNo                            | The container's serial number.                                     | No |\r\n| Tag                                 | The container's tag.                                               | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Tag is not unique | The container must be unique per tag. |\r\n| If IsDeleted is true |IsDeleted is TRUE. Could not process the request. Containers can not be deleted via the REST API. |\r\n| If IsDeleted is null or not provided |The mandatory property IsDeleted has a null value. The request could not be processed. Supply a value for the IsDeleted property of the submitted resource. |\r\n| If the TipLocationListItem.Guid belongs to a deleted TipLocation | The provided TipLocationListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |"
+      operationId: Container_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorContainerResource:
+      type: object
+      properties:
+        IsDeleted:
+          type: boolean
+        IsCommercial:
+          type: boolean
+        IsStoplisted:
+          type: boolean
+        TipLocationListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LastChangeReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Manufacture:
+          $ref: '#/components/schemas/ApiIntegratorContainerManufactureResource'
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorContainerGeoResource'
+        Note:
+          type: string
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges[ApiIntegratorContainerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorContainerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorContainerGeoResource:
+      type: object
+      properties:
+        Latitude:
+          type: number
+          format: double
+        Longitude:
+          type: number
+          format: double
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorContainerResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorContainerManufactureResource:
+      type: object
+      properties:
+        DateOfDelivery:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        DateOfManufacture:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        WarrantyEndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedSupplierSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedAppliedCostGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

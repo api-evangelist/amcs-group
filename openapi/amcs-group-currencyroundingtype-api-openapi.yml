@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup CurrencyRoundingType API
+  version: core
+tags:
+- name: CurrencyRoundingType
+paths:
+  /lists/currencyRoundingTypes/{guid}:
+    get:
+      tags:
+      - CurrencyRoundingType
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rounding type   |\r\n| Description               | The description of the currency rounding type   |\r\n| IsDeleted                 | Whether the currency rounding type is deleted           |\r\n"
+      operationId: CurrencyRoundingType_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCurrencyRoundingTypeResource]'
+  /lists/currencyRoundingTypes:
+    get:
+      tags:
+      - CurrencyRoundingType
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rounding type   |\r\n| Description               | The description of the currency rounding type   |\r\n| IsDeleted                 | Whether the currency rounding type is deleted           |\r\n"
+      operationId: CurrencyRoundingType_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCurrencyRoundingTypeResource]'
+components:
+  schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection[ApiIntegratorCurrencyRoundingTypeResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCurrencyRoundingTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorCurrencyRoundingTypeResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCurrencyRoundingTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCurrencyRoundingTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

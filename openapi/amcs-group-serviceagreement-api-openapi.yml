@@ -1,0 +1,658 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ServiceAgreement API
+  version: core
+tags:
+- name: ServiceAgreement
+paths:
+  /productCatalogue/serviceAgreements/changes:
+    get:
+      tags:
+      - ServiceAgreement
+      summary: Retrieve changes
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID| The GUID associated to the service agreement. |\r\n| Description| The description associated to the service agreement. |        \r\n| StartDate| The start date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| EndDate| The end date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| ReviewDate| The review date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| RelatedCustomerGuid| The GUID of the customer associated to the service agreement. Filterable. | \r\n| EndReasonListItem| The GUID and name of the end reason associated to the service agreement. |    \r\n| InvoiceFrequencyListItem| The GUID and name of the invoice frequency associated to the service agreement. |    \r\n| InvoiceCycleListItem| The GUID and name of the Invoice cycle associated to the service agreement. |    \r\n| OutletListItem| The GUID and name of the outlet associated to the service agreement. |    \r\n| PaymentTypeListItem| The GUID and name of the payment type associated to the service agreement. |    \r\n| PaymentTermListItem| The GUID and name of the payment term associated to the service agreement. |\r\n| DepartmentListItem| The GUID and name of the department associated to the service agreement. |\r\n| PrimaryServiceListItem| The GUID and name of the primary service  associated to the service agreement. |\r\n| IsDeleted| Whether the service agreement is deleted. |\r\n| Prices| The list of prices associated to the service agreement. |\r\n| Prices[0].PriceGuid| The GUID associated to the price related to the service agreement. |\r\n| Prices[0].ActionListItem| The GUID and name of the action associated to the price. |\r\n| Prices[0].ServiceListItem| The GUID and name of the service associated to the price. |\r\n| Prices[0].UnitOfMeasureListItem| The GUID and name of the unit of measurement associated to the price. |\r\n| Prices[0].DefaultActionExternalDescription | The default action external description of the price. |\r\n| Prices[0].SalesCode| The sales code of the price. |\r\n| Prices[0].CostCode| The cost code of the price. OBSOLETE |\r\n| Prices[0].PurchaseCode| The purchase code of the price. OBSOLETE |\r\n| Prices[0].ContainerTypeListItem| The GUID and name of the container type associated to the price. |\r\n| Prices[0].MaterialListItem| The GUID and name of the material associated to the price. |\r\n| Prices[0].MaterialClassListItem| The GUID and name of the material class associated to the price. |\r\n| Prices[0].PricingBasisListItem| The GUID and name of the pricing basis associated to the price. |\r\n| Prices[0].DateDeleted| The date deleted of the price. |\r\n| Prices[0].IsDeleted| Whether the price is deleted. |\r\n| Prices[0].Amount| The amount object associated to the price. |\r\n| Prices[0].Amount.Price| The price associated to the amount. |\r\n| Prices[0].Amount.Offset| The offset associated to the amount. |\r\n| Prices[0].Amount.Percentage| The percentage associated to the amount. |\r\n| Prices[0].Amount.FloorPrice| The floor price associated to the amount. |\r\n| Prices[0].Amount.CeilingPrice| The ceiling price associated to the amount. |\r\n| Prices[0].Amount.MinimumCharge| The minimum charge associated to the amount. |\r\n| Prices[0].Amount.Allowance| The allowance associated to the amount. |\r\n| Prices[0].Amount.VATListItem| The GUID and name of the VAT associated to the amount. |\r\n| Prices[0].Amount.IsRebate| Whether the price is rebate. |\r\n| Prices[0].LatePaymentFeeDefinition    | The late payment fee definition associated to the price. |\r\n| Prices[0].LatePaymentFeeDefinition.Description | The description associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.CustomerCategoryListItem | The GUID and description of the customer category associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.LatePaymentFeeTypeListItem | The GUID and description of the late payment fee type associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.ActionListItem | The GUID and description of the action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.DefaultActionListItem | The GUID and description of the default action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.RelatedPriceGuid | The GUID of the price associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.GraceDays | The GraceDays associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.FlatFeeAmount | The FlatFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeDecimalAmount | The PercentageFeeDecimalAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeAmount | The PercentageFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MinimumCharge | The MinimumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MaximumCharge | The MaximumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.IsDeleted |  Whether the late payment fee definition is deleted. |\r\n| Prices[0].LatePaymentFeeDefinition.Guid | The Guid associated to the late payment fee definition. |\r\n| OrderCombinationGroups | The list of order combination groups associated to the service agreement. |\r\n| OrderCombinationGroups[0].Guid | The GUID associated to the order combination group. |\r\n| OrderCombinationGroups[0].InvoiceCycleListItem | The GUID and description of the invoice cycle associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsConcessionary | Whether the order combination group is concessionary. |\r\n| OrderCombinationGroups[0].IsRequiresPrePay | Whether the order combination group requires prepay. |\r\n| OrderCombinationGroups[0].Name | The name of the order combination group. |\r\n| OrderCombinationGroups[0].IsOutletLevelPricingUsed | Is outlet level pricing used. |\r\n| OrderCombinationGroups[0].AnnualContractCost | The cost of the annual contract. |\r\n| OrderCombinationGroups[0].AnnualContractValue | The value of the annual contract. |\r\n| OrderCombinationGroups[0].BillingUsagePolicyGuid | The GUID of the billing usage policy associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsUseReducedRateForAdditionalBin | Is reduced rate used for additional bin. |\r\n| OrderCombinationGroups[0].RefundableAdvanceDeposit | The refundable advance deposit. |\r\n| OrderCombinationGroups[0].StartDateDeferredDays | The start date deferred days. |\r\n| OrderCombinationGroups[0].ForceFullPayment| Whether the order combination group forces full payment. |\r\n| OrderCombinationGroups[0].UseOutletLevelPricing| Whether the order combination group uses outlet level pricing. |\r\n| OrderCombinationGroups[0].RelatedContractTermLengthGuid | The GUID of the contract term length associated to the order combination group. |\r\n| OrderCombinationGroups[0].SubscriptionTypeListItem | The GUID and description of the subscription type associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsDeleted | Whether the order combination group is deleted. |\r\n| RelatedOutlets | The list of related outlets associated to the service agreement. |\r\n| RelatedOutlets[0].Guid | The Guid associated to the related outlets. |\r\n| RelatedOutlets[0].CompanyOutletListItem | The Guid and description of the CompanyOutlet associated to the service agreement. |\r\n| RelatedOutlets[0].IsRelatedOutletDeleted | Is the service agreement deleted. |\r\n| RelatedCustomers     | The list of related customers associated to the service agreement. |\r\n| RelatedCustomers[0].Guid | The Guid associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedCustomerGuid | The related customer guid CompanyOutlet associated to the service agreement. |\r\n| RelatedCustomers[0].IsRelatedCustomerDeleted | Is the related customer deleted. |\r\n| RelatedCustomers[0].IsForAllSites | Is the related customer for all sites. |\r\n| RelatedCustomers[0].RelatedSites[] | The list of related sites associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedSites[0].CustomerSiteGuid  | The guid associated to the Customer site. |\r\n| RelatedCustomers[0].RelatedSites[0].RelatedSiteGuid  | The RelatedSiteGuid associated to the site. |\r\n| RelatedCustomers[0].RelatedSites[0].IsRelatedSiteDeleted  | Is the RelatedSite deleted. |\r\n| BillingUsagePolicies | The list of billing usage policies associated to the service agreement. |\r\n| BillingUsagePolicies[0].Guid | The GUID associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Description | The description of the billing usage policy. |\r\n| BillingUsagePolicies[0].AltWeightSourceForOutsideThreshold | Alternative weight source for outside threshold. |\r\n| BillingUsagePolicies[0].AltWeightSourceForZeroWeight | Alternative weight source for zero weight. |\r\n| BillingUsagePolicies[0].ApplyToWeightsOutsideThresholds | Whether to apply to weights outside thresholds. |\r\n| BillingUsagePolicies[0].ApplyToZeroWeights | Whether to apply to zero weights. |\r\n| BillingUsagePolicies[0].IsUseAccumulatedWeight | Whether to use accumulated weight. |\r\n| BillingUsagePolicies[0].IsUseActualLifts | Whether to use actual lifts. |\r\n| BillingUsagePolicies[0].IsUseExpectedLifts | Whether to use expected lifts. |\r\n| BillingUsagePolicies[0].FairUsageMonths | Number of fair usage months. |\r\n| BillingUsagePolicies[0].LiftsForAverage | Number of lifts to get average weight. |\r\n| BillingUsagePolicies[0].MonthlyLag | Number of monthly lag. |\r\n| BillingUsagePolicies[0].IsDeleted | Whether the billing usage policy is deleted. |\r\n| BillingUsagePolicies[0].Thresholds | The weight threshold associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Thresholds[0].Guid | The GUID associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].IsDeleted | Whether the billing usage policy weight threshold is deleted. |\r\n| BillingUsagePolicies[0].Thresholds[0].MinWeight | The minimum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaxWeight | The maximum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].ContainerTypeListItem | The GUID and description of the container type associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaterialListItem | The GUID and description of the material associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].UnitOfMeasurementListItem | The GUID and description of the unit of measurement associated to the billing usage policy weight threshold. |\r\n| PriceGuidFilter | Used to filter on the Guid in the Prices array. |\r\n| CompanyOutletListItemGuidFilter | Used to filter on the CompanyOutletListItem Guid in the RelatedOutlets array. |\r\n| RelatedCustomerGuidFilter | Used to filter on the GUID in the RelatedCustomers array. |\r\n| RelatedCustomersGuidFilter | Used to filter on the RelatedCustomerGuid in the RelatedCustomers array. |\r\n| RelatedSiteGuidFilter | Used to filter on the GUID in the RelatedSites array. |\r\n"
+      operationId: ServiceAgreement_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorServiceAgreementResource]'
+  /productCatalogue/serviceAgreements/{guid}:
+    get:
+      tags:
+      - ServiceAgreement
+      summary: Find with GUID
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID| The GUID associated to the service agreement. |\r\n| Description| The description associated to the service agreement. |        \r\n| StartDate| The start date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| EndDate| The end date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| ReviewDate| The review date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| RelatedCustomerGuid| The GUID of the customer associated to the service agreement. Filterable. | \r\n| EndReasonListItem| The GUID and name of the end reason associated to the service agreement. |    \r\n| InvoiceFrequencyListItem| The GUID and name of the invoice frequency associated to the service agreement. |    \r\n| InvoiceCycleListItem| The GUID and name of the Invoice cycle associated to the service agreement. |    \r\n| OutletListItem| The GUID and name of the outlet associated to the service agreement. |    \r\n| PaymentTypeListItem| The GUID and name of the payment type associated to the service agreement. |    \r\n| PaymentTermListItem| The GUID and name of the payment term associated to the service agreement. |\r\n| DepartmentListItem| The GUID and name of the department associated to the service agreement. |\r\n| PrimaryServiceListItem| The GUID and name of the primary service  associated to the service agreement. |\r\n| IsDeleted| Whether the service agreement is deleted. |\r\n| Prices| The list of prices associated to the service agreement. |\r\n| Prices[0].PriceGuid| The GUID associated to the price related to the service agreement. |\r\n| Prices[0].ActionListItem| The GUID and name of the action associated to the price. |\r\n| Prices[0].ServiceListItem| The GUID and name of the service associated to the price. |\r\n| Prices[0].UnitOfMeasureListItem| The GUID and name of the unit of measurement associated to the price. |\r\n| Prices[0].DefaultActionExternalDescription | The default action external description of the price. |\r\n| Prices[0].SalesCode| The sales code of the price. |\r\n| Prices[0].CostCode| The cost code of the price. OBSOLETE |\r\n| Prices[0].PurchaseCode| The purchase code of the price. OBSOLETE |\r\n| Prices[0].ContainerTypeListItem| The GUID and name of the container type associated to the price. |\r\n| Prices[0].MaterialListItem| The GUID and name of the material associated to the price. |\r\n| Prices[0].MaterialClassListItem| The GUID and name of the material class associated to the price. |\r\n| Prices[0].PricingBasisListItem| The GUID and name of the pricing basis associated to the price. |\r\n| Prices[0].DateDeleted| The date deleted of the price. |\r\n| Prices[0].IsDeleted| Whether the price is deleted. |\r\n| Prices[0].Amount| The amount object associated to the price. |\r\n| Prices[0].Amount.Price| The price associated to the amount. |\r\n| Prices[0].Amount.Offset| The offset associated to the amount. |\r\n| Prices[0].Amount.Percentage| The percentage associated to the amount. |\r\n| Prices[0].Amount.FloorPrice| The floor price associated to the amount. |\r\n| Prices[0].Amount.CeilingPrice| The ceiling price associated to the amount. |\r\n| Prices[0].Amount.MinimumCharge| The minimum charge associated to the amount. |\r\n| Prices[0].Amount.Allowance| The allowance associated to the amount. |\r\n| Prices[0].Amount.VATListItem| The GUID and name of the VAT associated to the amount. |\r\n| Prices[0].Amount.IsRebate| Whether the price is rebate. |\r\n| Prices[0].LatePaymentFeeDefinition    | The late payment fee definition associated to the price. |\r\n| Prices[0].LatePaymentFeeDefinition.Description | The description associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.CustomerCategoryListItem | The GUID and description of the customer category associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.LatePaymentFeeTypeListItem | The GUID and description of the late payment fee type associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.ActionListItem | The GUID and description of the action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.DefaultActionListItem | The GUID and description of the default action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.RelatedPriceGuid | The GUID of the price associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.GraceDays | The GraceDays associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.FlatFeeAmount | The FlatFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeDecimalAmount | The PercentageFeeDecimalAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeAmount | The PercentageFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MinimumCharge | The MinimumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MaximumCharge | The MaximumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.IsDeleted |  Whether the late payment fee definition is deleted. |\r\n| Prices[0].LatePaymentFeeDefinition.Guid | The Guid associated to the late payment fee definition. |\r\n| OrderCombinationGroups | The list of order combination groups associated to the service agreement. |\r\n| OrderCombinationGroups[0].Guid | The GUID associated to the order combination group. |\r\n| OrderCombinationGroups[0].InvoiceCycleListItem | The GUID and description of the invoice cycle associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsConcessionary | Whether the order combination group is concessionary. |\r\n| OrderCombinationGroups[0].IsRequiresPrePay | Whether the order combination group requires prepay. |\r\n| OrderCombinationGroups[0].Name | The name of the order combination group. |\r\n| OrderCombinationGroups[0].IsOutletLevelPricingUsed | Is outlet level pricing used. |\r\n| OrderCombinationGroups[0].AnnualContractCost | The cost of the annual contract. |\r\n| OrderCombinationGroups[0].AnnualContractValue | The value of the annual contract. |\r\n| OrderCombinationGroups[0].BillingUsagePolicyGuid | The GUID of the billing usage policy associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsUseReducedRateForAdditionalBin | Is reduced rate used for additional bin. |\r\n| OrderCombinationGroups[0].RefundableAdvanceDeposit | The refundable advance deposit. |\r\n| OrderCombinationGroups[0].StartDateDeferredDays | The start date deferred days. |\r\n| OrderCombinationGroups[0].ForceFullPayment| Whether the order combination group forces full payment. |\r\n| OrderCombinationGroups[0].UseOutletLevelPricing| Whether the order combination group uses outlet level pricing. |\r\n| OrderCombinationGroups[0].RelatedContractTermLengthGuid | The GUID of the contract term length associated to the order combination group. |\r\n| OrderCombinationGroups[0].SubscriptionTypeListItem | The GUID and description of the subscription type associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsDeleted | Whether the order combination group is deleted. |\r\n| RelatedOutlets | The list of related outlets associated to the service agreement. |\r\n| RelatedOutlets[0].Guid | The Guid associated to the related outlets. |\r\n| RelatedOutlets[0].CompanyOutletListItem | The Guid and description of the CompanyOutlet associated to the service agreement. |\r\n| RelatedOutlets[0].IsRelatedOutletDeleted | Is the service agreement deleted. |\r\n| RelatedCustomers     | The list of related customers associated to the service agreement. |\r\n| RelatedCustomers[0].Guid | The Guid associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedCustomerGuid | The related customer guid CompanyOutlet associated to the service agreement. |\r\n| RelatedCustomers[0].IsRelatedCustomerDeleted | Is the related customer deleted. |\r\n| RelatedCustomers[0].IsForAllSites | Is the related customer for all sites. |\r\n| RelatedCustomers[0].RelatedSites[] | The list of related sites associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedSites[0].CustomerSiteGuid  | The guid associated to the Customer site. |\r\n| RelatedCustomers[0].RelatedSites[0].RelatedSiteGuid  | The RelatedSiteGuid associated to the site. |\r\n| RelatedCustomers[0].RelatedSites[0].IsRelatedSiteDeleted  | Is the RelatedSite deleted. |\r\n| BillingUsagePolicies | The list of billing usage policies associated to the service agreement. |\r\n| BillingUsagePolicies[0].Guid | The GUID associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Description | The description of the billing usage policy. |\r\n| BillingUsagePolicies[0].AltWeightSourceForOutsideThreshold | Alternative weight source for outside threshold. |\r\n| BillingUsagePolicies[0].AltWeightSourceForZeroWeight | Alternative weight source for zero weight. |\r\n| BillingUsagePolicies[0].ApplyToWeightsOutsideThresholds | Whether to apply to weights outside thresholds. |\r\n| BillingUsagePolicies[0].ApplyToZeroWeights | Whether to apply to zero weights. |\r\n| BillingUsagePolicies[0].IsUseAccumulatedWeight | Whether to use accumulated weight. |\r\n| BillingUsagePolicies[0].IsUseActualLifts | Whether to use actual lifts. |\r\n| BillingUsagePolicies[0].IsUseExpectedLifts | Whether to use expected lifts. |\r\n| BillingUsagePolicies[0].FairUsageMonths | Number of fair usage months. |\r\n| BillingUsagePolicies[0].LiftsForAverage | Number of lifts to get average weight. |\r\n| BillingUsagePolicies[0].MonthlyLag | Number of monthly lag. |\r\n| BillingUsagePolicies[0].IsDeleted | Whether the billing usage policy is deleted. |\r\n| BillingUsagePolicies[0].Thresholds | The weight threshold associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Thresholds[0].Guid | The GUID associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].IsDeleted | Whether the billing usage policy weight threshold is deleted. |\r\n| BillingUsagePolicies[0].Thresholds[0].MinWeight | The minimum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaxWeight | The maximum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].ContainerTypeListItem | The GUID and description of the container type associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaterialListItem | The GUID and description of the material associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].UnitOfMeasurementListItem | The GUID and description of the unit of measurement associated to the billing usage policy weight threshold. |\r\n| PriceGuidFilter | Used to filter on the Guid in the Prices array. |\r\n| CompanyOutletListItemGuidFilter | Used to filter on the CompanyOutletListItem Guid in the RelatedOutlets array. |\r\n| RelatedCustomerGuidFilter | Used to filter on the GUID in the RelatedCustomers array. |\r\n| RelatedCustomersGuidFilter | Used to filter on the RelatedCustomerGuid in the RelatedCustomers array. |\r\n| RelatedSiteGuidFilter | Used to filter on the GUID in the RelatedSites array. |\r\n"
+      operationId: ServiceAgreement_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorServiceAgreementResource]'
+  /productCatalogue/serviceAgreements:
+    get:
+      tags:
+      - ServiceAgreement
+      summary: Find with Filters
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID| The GUID associated to the service agreement. |\r\n| Description| The description associated to the service agreement. |        \r\n| StartDate| The start date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| EndDate| The end date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| ReviewDate| The review date associated to the service agreement in ISO format (YYYY-MM-DD). |    \r\n| RelatedCustomerGuid| The GUID of the customer associated to the service agreement. Filterable. | \r\n| EndReasonListItem| The GUID and name of the end reason associated to the service agreement. |    \r\n| InvoiceFrequencyListItem| The GUID and name of the invoice frequency associated to the service agreement. |    \r\n| InvoiceCycleListItem| The GUID and name of the Invoice cycle associated to the service agreement. |    \r\n| OutletListItem| The GUID and name of the outlet associated to the service agreement. |    \r\n| PaymentTypeListItem| The GUID and name of the payment type associated to the service agreement. |    \r\n| PaymentTermListItem| The GUID and name of the payment term associated to the service agreement. |\r\n| DepartmentListItem| The GUID and name of the department associated to the service agreement. |\r\n| PrimaryServiceListItem| The GUID and name of the primary service  associated to the service agreement. |\r\n| IsDeleted| Whether the service agreement is deleted. |\r\n| Prices| The list of prices associated to the service agreement. |\r\n| Prices[0].PriceGuid| The GUID associated to the price related to the service agreement. |\r\n| Prices[0].ActionListItem| The GUID and name of the action associated to the price. |\r\n| Prices[0].ServiceListItem| The GUID and name of the service associated to the price. |\r\n| Prices[0].UnitOfMeasureListItem| The GUID and name of the unit of measurement associated to the price. |\r\n| Prices[0].DefaultActionExternalDescription | The default action external description of the price. |\r\n| Prices[0].SalesCode| The sales code of the price. |\r\n| Prices[0].CostCode| The cost code of the price. OBSOLETE |\r\n| Prices[0].PurchaseCode| The purchase code of the price. OBSOLETE |\r\n| Prices[0].ContainerTypeListItem| The GUID and name of the container type associated to the price. |\r\n| Prices[0].MaterialListItem| The GUID and name of the material associated to the price. |\r\n| Prices[0].MaterialClassListItem| The GUID and name of the material class associated to the price. |\r\n| Prices[0].PricingBasisListItem| The GUID and name of the pricing basis associated to the price. |\r\n| Prices[0].DateDeleted| The date deleted of the price. |\r\n| Prices[0].IsDeleted| Whether the price is deleted. |\r\n| Prices[0].Amount| The amount object associated to the price. |\r\n| Prices[0].Amount.Price| The price associated to the amount. |\r\n| Prices[0].Amount.Offset| The offset associated to the amount. |\r\n| Prices[0].Amount.Percentage| The percentage associated to the amount. |\r\n| Prices[0].Amount.FloorPrice| The floor price associated to the amount. |\r\n| Prices[0].Amount.CeilingPrice| The ceiling price associated to the amount. |\r\n| Prices[0].Amount.MinimumCharge| The minimum charge associated to the amount. |\r\n| Prices[0].Amount.Allowance| The allowance associated to the amount. |\r\n| Prices[0].Amount.VATListItem| The GUID and name of the VAT associated to the amount. |\r\n| Prices[0].Amount.IsRebate| Whether the price is rebate. |\r\n| Prices[0].LatePaymentFeeDefinition    | The late payment fee definition associated to the price. |\r\n| Prices[0].LatePaymentFeeDefinition.Description | The description associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.CustomerCategoryListItem | The GUID and description of the customer category associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.LatePaymentFeeTypeListItem | The GUID and description of the late payment fee type associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.ActionListItem | The GUID and description of the action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.DefaultActionListItem | The GUID and description of the default action associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.RelatedPriceGuid | The GUID of the price associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.GraceDays | The GraceDays associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.FlatFeeAmount | The FlatFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeDecimalAmount | The PercentageFeeDecimalAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.PercentageFeeAmount | The PercentageFeeAmount associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MinimumCharge | The MinimumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.MaximumCharge | The MaximumCharge associated to the late payment fee definition. |\r\n| Prices[0].LatePaymentFeeDefinition.IsDeleted |  Whether the late payment fee definition is deleted. |\r\n| Prices[0].LatePaymentFeeDefinition.Guid | The Guid associated to the late payment fee definition. |\r\n| OrderCombinationGroups | The list of order combination groups associated to the service agreement. |\r\n| OrderCombinationGroups[0].Guid | The GUID associated to the order combination group. |\r\n| OrderCombinationGroups[0].InvoiceCycleListItem | The GUID and description of the invoice cycle associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsConcessionary | Whether the order combination group is concessionary. |\r\n| OrderCombinationGroups[0].IsRequiresPrePay | Whether the order combination group requires prepay. |\r\n| OrderCombinationGroups[0].Name | The name of the order combination group. |\r\n| OrderCombinationGroups[0].IsOutletLevelPricingUsed | Is outlet level pricing used. |\r\n| OrderCombinationGroups[0].AnnualContractCost | The cost of the annual contract. |\r\n| OrderCombinationGroups[0].AnnualContractValue | The value of the annual contract. |\r\n| OrderCombinationGroups[0].BillingUsagePolicyGuid | The GUID of the billing usage policy associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsUseReducedRateForAdditionalBin | Is reduced rate used for additional bin. |\r\n| OrderCombinationGroups[0].RefundableAdvanceDeposit | The refundable advance deposit. |\r\n| OrderCombinationGroups[0].StartDateDeferredDays | The start date deferred days. |\r\n| OrderCombinationGroups[0].ForceFullPayment| Whether the order combination group forces full payment. |\r\n| OrderCombinationGroups[0].UseOutletLevelPricing| Whether the order combination group uses outlet level pricing. |\r\n| OrderCombinationGroups[0].RelatedContractTermLengthGuid | The GUID of the contract term length associated to the order combination group. |\r\n| OrderCombinationGroups[0].SubscriptionTypeListItem | The GUID and description of the subscription type associated to the order combination group. |\r\n| OrderCombinationGroups[0].IsDeleted | Whether the order combination group is deleted. |\r\n| RelatedOutlets | The list of related outlets associated to the service agreement. |\r\n| RelatedOutlets[0].Guid | The Guid associated to the related outlets. |\r\n| RelatedOutlets[0].CompanyOutletListItem | The Guid and description of the CompanyOutlet associated to the service agreement. |\r\n| RelatedOutlets[0].IsRelatedOutletDeleted | Is the service agreement deleted. |\r\n| RelatedCustomers     | The list of related customers associated to the service agreement. |\r\n| RelatedCustomers[0].Guid | The Guid associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedCustomerGuid | The related customer guid CompanyOutlet associated to the service agreement. |\r\n| RelatedCustomers[0].IsRelatedCustomerDeleted | Is the related customer deleted. |\r\n| RelatedCustomers[0].IsForAllSites | Is the related customer for all sites. |\r\n| RelatedCustomers[0].RelatedSites[] | The list of related sites associated to the service agreement. |\r\n| RelatedCustomers[0].RelatedSites[0].CustomerSiteGuid  | The guid associated to the Customer site. |\r\n| RelatedCustomers[0].RelatedSites[0].RelatedSiteGuid  | The RelatedSiteGuid associated to the site. |\r\n| RelatedCustomers[0].RelatedSites[0].IsRelatedSiteDeleted  | Is the RelatedSite deleted. |\r\n| BillingUsagePolicies | The list of billing usage policies associated to the service agreement. |\r\n| BillingUsagePolicies[0].Guid | The GUID associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Description | The description of the billing usage policy. |\r\n| BillingUsagePolicies[0].AltWeightSourceForOutsideThreshold | Alternative weight source for outside threshold. |\r\n| BillingUsagePolicies[0].AltWeightSourceForZeroWeight | Alternative weight source for zero weight. |\r\n| BillingUsagePolicies[0].ApplyToWeightsOutsideThresholds | Whether to apply to weights outside thresholds. |\r\n| BillingUsagePolicies[0].ApplyToZeroWeights | Whether to apply to zero weights. |\r\n| BillingUsagePolicies[0].IsUseAccumulatedWeight | Whether to use accumulated weight. |\r\n| BillingUsagePolicies[0].IsUseActualLifts | Whether to use actual lifts. |\r\n| BillingUsagePolicies[0].IsUseExpectedLifts | Whether to use expected lifts. |\r\n| BillingUsagePolicies[0].FairUsageMonths | Number of fair usage months. |\r\n| BillingUsagePolicies[0].LiftsForAverage | Number of lifts to get average weight. |\r\n| BillingUsagePolicies[0].MonthlyLag | Number of monthly lag. |\r\n| BillingUsagePolicies[0].IsDeleted | Whether the billing usage policy is deleted. |\r\n| BillingUsagePolicies[0].Thresholds | The weight threshold associated to the billing usage policy. |\r\n| BillingUsagePolicies[0].Thresholds[0].Guid | The GUID associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].IsDeleted | Whether the billing usage policy weight threshold is deleted. |\r\n| BillingUsagePolicies[0].Thresholds[0].MinWeight | The minimum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaxWeight | The maximum weight associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].ContainerTypeListItem | The GUID and description of the container type associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].MaterialListItem | The GUID and description of the material associated to the billing usage policy weight threshold. |\r\n| BillingUsagePolicies[0].Thresholds[0].UnitOfMeasurementListItem | The GUID and description of the unit of measurement associated to the billing usage policy weight threshold. |\r\n| PriceGuidFilter | Used to filter on the Guid in the Prices array. |\r\n| CompanyOutletListItemGuidFilter | Used to filter on the CompanyOutletListItem Guid in the RelatedOutlets array. |\r\n| RelatedCustomerGuidFilter | Used to filter on the GUID in the RelatedCustomers array. |\r\n| RelatedCustomersGuidFilter | Used to filter on the RelatedCustomerGuid in the RelatedCustomers array. |\r\n| RelatedSiteGuidFilter | Used to filter on the GUID in the RelatedSites array. |\r\n"
+      operationId: ServiceAgreement_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorServiceAgreementResource]'
+  /integrator/vip/serviceAgreements:
+    post:
+      tags:
+      - ServiceAgreement
+      summary: Create or update
+      operationId: ServiceAgreement_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorServiceAgreementSaveResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorServiceAgreementResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MinWeight:
+          type: number
+          format: double
+        MaxWeight:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorServiceAgreementRelatedSitesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsRelatedSiteDeleted:
+          type: boolean
+    ApiIntegratorServiceAgreementBillingUsagePolicyResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Thresholds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource'
+        IsDeleted:
+          type: boolean
+        AltWeightSourceForOutsideThreshold:
+          type: integer
+          format: int32
+        AltWeightSourceForZeroWeight:
+          type: integer
+          format: int32
+        ApplyToWeightsOutsideThresholds:
+          type: boolean
+        ApplyToZeroWeights:
+          type: boolean
+        Description:
+          type: string
+        IsUseAccumulatedWeight:
+          type: boolean
+        IsUseActualLifts:
+          type: boolean
+        IsUseExpectedLifts:
+          type: boolean
+        FairUsageMonths:
+          type: integer
+          format: int32
+        LiftsForAverage:
+          type: integer
+          format: int32
+        MonthlyLag:
+          type: integer
+          format: int32
+    ApiResourceResultEntity[ApiIntegratorServiceAgreementResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorServiceAgreementPriceResource:
+      type: object
+      properties:
+        PriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CostCode:
+          type: string
+        PurchaseCode:
+          type: string
+        DateDeleted:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceAmountResource'
+        LatePaymentFeeDefinition:
+          $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceLatePaymentFeeDefinitionResource'
+    ApiIntegratorServiceAgreementResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ReviewDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        EndReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceFrequencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PrimaryServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceResource'
+        OrderCombinationGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementOrderCombinationGroupsResource'
+        RelatedOutlets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedOutletsResource'
+        RelatedCustomers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedCustomersResource'
+        BillingUsagePolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementBillingUsagePolicyResource'
+        IsDeleted:
+          type: boolean
+        PriceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CompanyOutletListItemGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomersGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorServiceAgreementSaveResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ReviewDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        EndReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceFrequencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PrimaryServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceResource'
+        OrderCombinationGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementOrderCombinationGroupsResource'
+        RelatedOutlets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedOutletsResource'
+        RelatedCustomers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedCustomersResource'
+        BillingUsagePolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementBillingUsagePolicyResource'
+        IsDeleted:
+          type: boolean
+        PriceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CompanyOutletListItemGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomersGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorServiceAgreementPriceAmountResource:
+      type: object
+      properties:
+        Price:
+          type: number
+          format: double
+        Offset:
+          type: number
+          format: double
+        Percentage:
+          type: number
+          format: double
+        FloorPrice:
+          type: number
+          format: double
+        CeilingPrice:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        Allowance:
+          type: number
+          format: float
+        VatListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        EffectiveFrom:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        EffectiveTo:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TaxTemplateCollectionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsRebate:
+          type: boolean
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorServiceAgreementRelatedOutletsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsRelatedOutletDeleted:
+          type: boolean
+    ApiIntegratorServiceAgreementPriceLatePaymentFeeDefinitionResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        CustomerCategoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LatePaymentFeeTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GraceDays:
+          type: integer
+          format: int32
+        FlatFeeAmount:
+          type: number
+          format: double
+        PercentageFeeDecimalAmount:
+          type: number
+          format: double
+        PercentageFeeAmount:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorServiceAgreementOrderCombinationGroupsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsConcessionary:
+          type: boolean
+        IsRequiresPrePay:
+          type: boolean
+        ForceFullPayment:
+          type: boolean
+        RelatedContractTermLengthGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        UseOutletLevelPricing:
+          type: boolean
+        Name:
+          type: string
+        IsOutletLevelPricingUsed:
+          type: boolean
+        AnnualContractCost:
+          type: number
+          format: double
+        AnnualContractValue:
+          type: number
+          format: double
+        BillingUsagePolicyGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsUseReducedRateForAdditionalBin:
+          type: boolean
+        RefundableAdvanceDeposit:
+          type: number
+          format: double
+        StartDateDeferredDays:
+          type: integer
+          format: int32
+        SubscriptionTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorServiceAgreementRelatedCustomersResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsForAllSites:
+          type: boolean
+        IsRelatedCustomerDeleted:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedSitesResource'
+    ApiResourceChanges[ApiIntegratorServiceAgreementResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

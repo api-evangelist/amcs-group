@@ -1,0 +1,213 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiTripExternal API
+  version: core
+tags:
+- name: ApiTripExternal
+paths:
+  /integrator/trips/changes:
+    get:
+      tags:
+      - ApiTripExternal
+      summary: Get List of Completed Trip Changes
+      description: '# Get List of Completed Trip Changes
+
+
+        Retrieves completed trips with their associated vehicle information and trip summaries. This endpoint supports incremental data extraction by tracking changes using SQL Server''s row version mechanism.
+
+
+        ---
+
+
+        ## Query Parameters
+
+        | Parameter | Type   | Required | Description                                                                 |
+
+        |-----------|--------|----------|-----------------------------------------------------------------------------|
+
+        | since     | string | No       | Base64-encoded row version (from `@@DBTS`). Only returns trips changed after this version. **Must be URL-encoded.** |
+
+        | cursor    | string | No       | Pagination cursor for retrieving next page of results (not used with row version tracking). |
+
+
+        ---
+
+
+        ## Authentication
+
+        Requires authentication via the standard authentication mechanism. The tenant context is automatically determined from the authenticated user.
+
+
+        ---
+
+
+        ## Output Structure
+
+
+        ### Main Response Object
+
+        | Property | Type                          | Description                                    |
+
+        |----------|-------------------------------|------------------------------------------------|
+
+        | Resource | List\<ApiTripExternalDto\>    | List of completed trips with summaries.        |
+
+        | Extra    | object                        | Additional pagination information (if needed). |
+
+
+        ---
+
+
+        ### ApiTripExternalDto Object
+
+        | Property     | Type              | Description                                           |
+
+        |--------------|-------------------|-------------------------------------------------------|
+
+        | VehicleId    | Guid?             | Unique identifier for the vehicle (Asset GUID).      |
+
+        | VehicleName  | string            | Name of the vehicle.                                 |
+
+        | TripId       | int               | Unique identifier for the trip.                      |
+
+        | StartTime    | DateTimeOffset    | Trip start timestamp.                                |
+
+        | EndTime      | DateTimeOffset?   | Trip end timestamp.                                  |
+
+        | Status       | int               | Trip status (0=Started, 1=Completed, 2=Invalid).     |
+
+        | TripSummary  | ApiTripSummary    | Calculated trip summary with metrics.                |
+
+
+        ---
+
+
+        ### ApiTripSummary Object
+
+        | Property                         | Type    | Description                                                  |
+
+        |----------------------------------|---------|--------------------------------------------------------------|
+
+        | TripId                           | int     | Trip identifier.                                            |
+
+        | TotalTripMileage                 | double | Total mileage covered during the trip. Unit of Measure - KM                 |
+
+        | TotalPloughEnabledMileage        | double | Mileage covered while plough was enabled. Unit of Measure - KM                |
+
+        | TotalSpreaderEnabledMileage      | double | Mileage covered while spreader was enabled. Unit of Measure - KM               |
+
+        | SpreaderWidth                    | double | Spreader width setting. Unit of Measure - Meters                   |
+
+        | TotalSolidMaterialDelivered      | double | Total solid material delivered during the trip. Unit of Measure - KG     |
+
+        | TotalPrewetMaterialDelivered    | double | Total prewet material delivered during the trip. Unit of Measure - Liters    |
+
+        | TotalTripDuration                | double | Total trip duration in minutes. Unit of Measure - Minutes      |
+
+
+        ---'
+      parameters:
+      - name: since
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Must be URL-encoded.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Pagination cursor for retrieving next page of results.
+      responses:
+        '200':
+          description: Successful response with completed trip changes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripChangesResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Unauthorized - authentication required.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    ApiTripExternalDto:
+      type: object
+      properties:
+        VehicleId:
+          type: string
+          format: uuid
+          nullable: true
+          description: Unique identifier for the vehicle (Asset GUID).
+        VehicleName:
+          type: string
+          nullable: true
+          description: Name of the vehicle.
+        TripId:
+          type: integer
+          format: int32
+          description: Unique identifier for the trip.
+        StartTime:
+          type: string
+          format: date-time
+          description: Trip start timestamp.
+        EndTime:
+          type: string
+          format: date-time
+          nullable: true
+          description: Trip end timestamp.
+        Status:
+          type: integer
+          format: int32
+          description: Trip status (0=Started, 1=Completed, 2=Invalid).
+        TripSummary:
+          $ref: '#/components/schemas/ApiTripSummary'
+          description: Calculated trip summary with metrics.
+    ApiTripSummary:
+      type: object
+      properties:
+        TripId:
+          type: integer
+          format: int32
+          description: Trip identifier.
+        TotalTripMileage:
+          type: number
+          format: double
+          description: Total mileage covered during the trip. Unit of Measure - Liters
+        TotalPloughEnabledMileage:
+          type: number
+          format: double
+          description: Mileage covered while plough was enabled. Unit of Measure - Meters
+        TotalSpreaderEnabledMileage:
+          type: number
+          format: double
+          description: Mileage covered while spreader was enabled. Unit of Measure - Meters
+        SpreaderWidth:
+          type: number
+          format: double
+          description: Spreader width setting. Unit of Measure - Meters
+        TotalSolidMaterialDelivered:
+          type: number
+          format: double
+          description: Total solid material delivered during the trip. Unit of Measure - KG
+        TotalPrewetMaterialDelivered:
+          type: number
+          format: double
+          description: Total prewet material delivered during the trip. Unit of Measure - Liters
+        TotalTripDuration:
+          type: number
+          format: double
+          description: Total trip duration in minutes. Unit of Measure - Minutes
+    TripChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiTripExternalDto'
+        Extra:
+          type: object
+          nullable: true

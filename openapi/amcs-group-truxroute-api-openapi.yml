@@ -1,0 +1,244 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup TruxRoute API
+  version: core
+tags:
+- name: TruxRoute
+paths:
+  /visionai/api/integrator/truxRoutes:
+    post:
+      tags:
+      - TruxRoute
+      summary: Create or Update Trux Route Information
+      description: "# Create or Update Trux Route Information\r\n\r\nThis endpoint allows external systems to submit route information from Trux, which updates associated assets (vehicles) and creates or updates customer address records.\r\n\r\n| Parameter       | Type     | Description                                                         |\r\n|-----------------|----------|---------------------------------------------------------------------|\r\n| RouteNumber     | long     | Route identification number                                         |\r\n| RouteDate       | DateTime | Date and time of the route                                          |\r\n| VehicleId       | GUID     | ID of the vehicle (Asset) performing the route                      |\r\n| CompanyCode     | string   | Company code associated with the route                              |\r\n| CustomerNumber  | string   | Customer identification number                                      |\r\n| SiteNumber      | string   | Site identification number                                          |\r\n| ServiceNumber   | string   | Service type identification number                                  |\r\n| Country         | string   | Country of the customer address                                     |\r\n| City            | string   | City of the customer address                                        |\r\n| District        | string   | District of the customer address                                    |\r\n| Street          | string   | Street address of the customer                                      |\r\n| PostalCode      | string   | Postal/ZIP code of the customer address                             |\r\n| Latitude        | double   | Latitude coordinate of the customer address                         |\r\n| Longitude       | double   | Longitude coordinate of the customer address                        |\r\n| JobId           | string   | Job identification for the route                                    |\r\n\r\n## Sample API Request\r\n\r\n```json\r\n{\r\n  \"RouteNumber\": 12345678901,\r\n  \"RouteDate\": \"2026-01-26T08:30:00\",\r\n  \"VehicleId\": \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\",\r\n  \"CompanyCode\": \"COMP123\",\r\n  \"CustomerNumber\": \"CUST-456789\",\r\n  \"SiteNumber\": \"SITE-001\",\r\n  \"ServiceNumber\": \"SVC-789\",\r\n  \"Country\": \"USA\",\r\n  \"City\": \"Los Angeles\",\r\n  \"District\": \"Downtown\",\r\n  \"Street\": \"123 Main Street\",\r\n  \"PostalCode\": \"90001\",\r\n  \"Latitude\": 34.0522,\r\n  \"Longitude\": -118.2437,\r\n  \"JobId\": \"JOB-2026-001\"\r\n}\r\n```\r\n\r\n## Sample API Response\r\n```json\r\n{\r\n  \"resource\": 1\r\n}\r\n```\r\n\r\n## Behavior\r\n\r\n- The system finds the asset by `VehicleId` and updates it with `RouteNumber`, `RouteDate`, and `JobId`\r\n- The system finds or creates a customer address record using `CustomerNumber` as the foreign ID\r\n- All address information (location, coordinates, site details) is saved to the customer address record\r\n- The tenant must be configured with Trux sync type for this endpoint to process data\r\n- If the vehicle is not found, a warning is logged but the customer address is still created/updated\r\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxRoute'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Unauthorized
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiauthTokens500Error'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+components:
+  responses:
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+  schemas:
+    AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxRoute:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        routeNumber:
+          type: integer
+          format: int64
+          nullable: true
+        routeDate:
+          type: string
+          format: dateTime
+          nullable: true
+          example: '2000-01-01 00:00:00.000'
+        vehicleId:
+          type: string
+          format: uuid
+        companyCode:
+          type: string
+          nullable: true
+        customerNumber:
+          type: string
+          nullable: true
+        siteNumber:
+          type: string
+          nullable: true
+        serviceNumber:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        district:
+          type: string
+          nullable: true
+        street:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        jobId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: guid
+      additionalProperties: false
+    ApiauthTokens500Error:
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        stackTrace:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

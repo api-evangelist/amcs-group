@@ -1,0 +1,321 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup RouteAssignment API
+  version: core
+tags:
+- name: RouteAssignment
+paths:
+  /transport/routeAssignments/{guid}:
+    get:
+      tags:
+      - RouteAssignment
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the routeAssignment.|\r\n| RelatedOrderGuid| The GUID of the RelatedOrder associated to the routeAssignment.|\r\n| ActionListItem| The GUID and description of the Action associated to the routeAssignment.|\r\n| ContainerTypeListItem| The GUID and description of the ContainerType associated to the routeAssignment.|\r\n| PickupIntervalListItem| The GUID and description of the PickupInterval associated to the routeAssignment.|\r\n| DayOfWeekListItem| The GUID and description of the DayOfWeek associated to the routeAssignment.|\r\n| DayOfOccurrenceInMonthListItem| The GUID and description of the Day of Occurrence in month associated to the routeAssignment.|\r\n| RelatedRouteTemplateGuid| The GUID of the RelatedRouteTemplate associated to the routeAssignment.|\r\n| Position| The position associated to the routeAssignment.|\r\n| StartDate| The start date associated to the routeAssignment. |\r\n| EndDate| The end date associated to the routeAssignment.|\r\n| RequestedBy| Who is the routeAssignment requested by?|\r\n| Notes| The notes associated to the routeAssignment.|\r\n| MaxLiftQuantity| The max lift quantity associated to the routeAssignment.|\r\n| MinLiftQuantity| The min lift quantity associated to the routeAssignment.|\r\n| RequiresQuantity| Does the routeAssignment require quantity?|\r\n| IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?|\r\n| IsNoPlannedDate| Is there no planned date for the routeAssignment?|\r\n| IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? |\r\n| RelatedContainerGuid| The RelatedContainerGuid associated to the routeAssignment.|\r\n| AccessTimes[0]| A list of objects containing route assignment access time.|\r\n| AccessTimes[0].Guid  | The GUID associated to the route assignment access time.|\r\n| AccessTimes[0].AccessContact        | The access contact name to associated route assignment.|\r\n| AccessTimes[0].AccessNotes          | The access notes to associated route assignment.|\r\n| AccessTimes[0].FromExclusion        | The exclusion of access to associated route assignment.|\r\n| AccessTimes[0].AccessStartTime      | The access start time to associated route assignment.|\r\n| AccessTimes[0].AccessEndTime  | The access end time to associated route assignment.|\r\n| AccessTimes[0].DayOfWeekListItem    | The GUID and description of the day of week to access.|\r\n| Details[0]  | A list of objects containing route assignment details.|\r\n| Details[0].Guid  | The GUID associated to the route assignment details.|\r\n| Details[0].PlannedQuantity  | The planned quantity associated to the routeAssignment.|\r\n| Details[0].ContainerTypeListItem  | The GUID and description of the ContainerType associated to the routeAssignment detail.|\r\n"
+      operationId: RouteAssignment_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRouteAssignmentResource]'
+    put:
+      tags:
+      - RouteAssignment
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the routeAssignment.| No   |\r\n| RelatedOrderGuid| The GUID of the RelatedOrder associated to the routeAssignment.| Yes   |\r\n| ActionListItem| The GUID and description of the Action associated to the routeAssignment.| Yes   |\r\n| ContainerTypeListItem| The GUID and description of the ContainerType associated to the routeAssignment.| Yes   |\r\n| PickupIntervalListItem| The GUID and description of the PickupInterval associated to the routeAssignment.| Yes   |\r\n| DayOfWeekListItem| The GUID and description of the DayOfWeek associated to the routeAssignment.| No   |\r\n| DayOfOccurrenceInMonthListItem| The GUID and description of the Day of Occurrence in month associated to the routeAssignment.| No   |\r\n| RelatedRouteTemplateGuid| The GUID of the RelatedRouteTemplate associated to the routeAssignment.| No   |\r\n| Position| The position associated to the routeAssignment.| No   |\r\n| StartDate| The start date associated to the routeAssignment. | No   |\r\n| EndDate| The end date associated to the routeAssignment.| No   |\r\n| RequestedBy| Who is the routeAssignment requested by?| No   |\r\n| Notes| The notes associated to the routeAssignment.| No   |\r\n| MaxLiftQuantity| The max lift quantity associated to the routeAssignment.| No   |\r\n| MinLiftQuantity| The min lift quantity associated to the routeAssignment.| No   |\r\n| RequiresQuantity| Does the routeAssignment require quantity?| No   |\r\n| IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?| No   |\r\n| IsNoPlannedDate| Is there no planned date for the routeAssignment?| No   |\r\n| IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? | No   |\r\n| RelatedContainerGuid| The RelatedContainerGuid associated to the routeAssignment.| No   |\r\n| AccessTimes[0]| A list of objects containing route assignment access time.| No   |\r\n| AccessTimes[0].Guid  | The GUID associated to the route assignment access time.| No   |\r\n| AccessTimes[0].AccessContact        | The access contact name to associated route assignment.| No   |\r\n| AccessTimes[0].AccessNotes          | The access notes to associated route assignment.| No   |\r\n| AccessTimes[0].FromExclusion        | The exclusion fo access to associated route assignment.| Yes   |\r\n| AccessTimes[0].AccessStartTime      | The access start time to associated route assignment.| Yes   |\r\n| AccessTimes[0].AccessEndTime  | The access end time to associated route assignment.| Yes   |\r\n| AccessTimes[0].DayOfWeekListItem    | The GUID and description of the day of week to access.| Yes   |\r\n| Details[0]  | A list of objects containing route assignment details.| No   |\r\n| Details[0].Guid  | The GUID associated to the route assignment details.| No   |\r\n| Details[0].PlannedQuantity  | The planned quantity associated to the routeAssignment.| Yes   |\r\n| Details[0].ContainerTypeListItem  | The GUID and description of the ContainerType associated to the routeAssignment detail.| Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If the DayOfOccurrenceInMonthListItem is not equal to the week of month of the StartDate | Failed to save Route Assignment. Start date must be associated to the correct DayOfOccurenceInMonthId |\r\n| If startDate and DayOfWeekListItem  are set when IsNoPlannedDate is true | Failed to save Route Assignment. Start date and DayOfWeekListItem cannot be set when IsNoPlannedDate is true |\r\n| If the DayOfOccurrenceInMonthListItem has a value and PickUpInterval is Weekly/ Fortnightly/ Every Three Weeks or Every Four Weeks. | Failed to save Route Assignment. DayOfOccurrenceInMonthListItem cannot be set when PickupIntervalId is Weekly/ Fortnightly/ Every Three Weeks or Every Four Weeks | \r\n| If position is set to 0 and relatedRouteTemplateGuid has a value | Failed to save Route Assignment. Position cannot be set to zero when relatedRouteTemplateGuid has a value |\r\n| If position has a value and relatedRouteTemplateGuid is null | Failed to save Route Assignment. Position cannot have a value if relatedRouteTemplateGuid is set to null |\r\n| If the given action does not have primary action type of Assign To Round | Failed to save Route Assignment. ActionListItem.Guid is not supported for Route Assignment |\r\n| If the given container type is not priced in the service agreement | Failed to save Route Assignment. ContainerTypeListItem.Guid is not supported for Route Assignment |\r\n| If the given container type is not associated with Route Assignment container type | Failed to save Route Assignment. Details.ContainerTypeListItem.Guid is not supported for Route Assignment Detail |"
+      operationId: RouteAssignment_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/routeAssignments:
+    get:
+      tags:
+      - RouteAssignment
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the routeAssignment.|\r\n| RelatedOrderGuid| The GUID of the RelatedOrder associated to the routeAssignment.|\r\n| ActionListItem| The GUID and description of the Action associated to the routeAssignment.|\r\n| ContainerTypeListItem| The GUID and description of the ContainerType associated to the routeAssignment.|\r\n| PickupIntervalListItem| The GUID and description of the PickupInterval associated to the routeAssignment.|\r\n| DayOfWeekListItem| The GUID and description of the DayOfWeek associated to the routeAssignment.|\r\n| DayOfOccurrenceInMonthListItem| The GUID and description of the Day of Occurrence in month associated to the routeAssignment.|\r\n| RelatedRouteTemplateGuid| The GUID of the RelatedRouteTemplate associated to the routeAssignment.|\r\n| Position| The position associated to the routeAssignment.|\r\n| StartDate| The start date associated to the routeAssignment. |\r\n| EndDate| The end date associated to the routeAssignment.|\r\n| RequestedBy| Who is the routeAssignment requested by?|\r\n| Notes| The notes associated to the routeAssignment.|\r\n| MaxLiftQuantity| The max lift quantity associated to the routeAssignment.|\r\n| MinLiftQuantity| The min lift quantity associated to the routeAssignment.|\r\n| RequiresQuantity| Does the routeAssignment require quantity?|\r\n| IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?|\r\n| IsNoPlannedDate| Is there no planned date for the routeAssignment?|\r\n| IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? |\r\n| RelatedContainerGuid| The RelatedContainerGuid associated to the routeAssignment.|\r\n| AccessTimes[0]| A list of objects containing route assignment access time.|\r\n| AccessTimes[0].Guid  | The GUID associated to the route assignment access time.|\r\n| AccessTimes[0].AccessContact        | The access contact name to associated route assignment.|\r\n| AccessTimes[0].AccessNotes          | The access notes to associated route assignment.|\r\n| AccessTimes[0].FromExclusion        | The exclusion of access to associated route assignment.|\r\n| AccessTimes[0].AccessStartTime      | The access start time to associated route assignment.|\r\n| AccessTimes[0].AccessEndTime  | The access end time to associated route assignment.|\r\n| AccessTimes[0].DayOfWeekListItem    | The GUID and description of the day of week to access.|\r\n| Details[0]  | A list of objects containing route assignment details.|\r\n| Details[0].Guid  | The GUID associated to the route assignment details.|\r\n| Details[0].PlannedQuantity  | The planned quantity associated to the routeAssignment.|\r\n| Details[0].ContainerTypeListItem  | The GUID and description of the ContainerType associated to the routeAssignment detail.|\r\n"
+      operationId: RouteAssignment_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRouteAssignmentResource]'
+    post:
+      tags:
+      - RouteAssignment
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the routeAssignment.| No   |\r\n| RelatedOrderGuid| The GUID of the RelatedOrder associated to the routeAssignment.| Yes   |\r\n| ActionListItem| The GUID and description of the Action associated to the routeAssignment.| Yes   |\r\n| ContainerTypeListItem| The GUID and description of the ContainerType associated to the routeAssignment.| Yes   |\r\n| PickupIntervalListItem| The GUID and description of the PickupInterval associated to the routeAssignment.| Yes   |\r\n| DayOfWeekListItem| The GUID and description of the DayOfWeek associated to the routeAssignment.| No   |\r\n| DayOfOccurrenceInMonthListItem| The GUID and description of the Day of Occurrence in month associated to the routeAssignment.| No   |\r\n| RelatedRouteTemplateGuid| The GUID of the RelatedRouteTemplate associated to the routeAssignment.| No   |\r\n| Position| The position associated to the routeAssignment.| No   |\r\n| StartDate| The start date associated to the routeAssignment. | No   |\r\n| EndDate| The end date associated to the routeAssignment.| No   |\r\n| RequestedBy| Who is the routeAssignment requested by?| No   |\r\n| Notes| The notes associated to the routeAssignment.| No   |\r\n| MaxLiftQuantity| The max lift quantity associated to the routeAssignment.| No   |\r\n| MinLiftQuantity| The min lift quantity associated to the routeAssignment.| No   |\r\n| RequiresQuantity| Does the routeAssignment require quantity?| No   |\r\n| IsGpsAutoMatchingDisabled| Is the GPS auto matching disabled for the routeAssignment?| No   |\r\n| IsNoPlannedDate| Is there no planned date for the routeAssignment?| No   |\r\n| IsNoBinOnSiteExcluded| Is the bin on site excluded for the routeAssignment? | No   |\r\n| RelatedContainerGuid| The RelatedContainerGuid associated to the routeAssignment.| No   |\r\n| AccessTimes[0]| A list of objects containing route assignment access time.| No   |\r\n| AccessTimes[0].Guid  | The GUID associated to the route assignment access time.| No   |\r\n| AccessTimes[0].AccessContact        | The access contact name to associated route assignment.| No   |\r\n| AccessTimes[0].AccessNotes          | The access notes to associated route assignment.| No   |\r\n| AccessTimes[0].FromExclusion        | The exclusion of access to associated route assignment.| Yes   |\r\n| AccessTimes[0].AccessStartTime      | The access start time to associated route assignment.| Yes   |\r\n| AccessTimes[0].AccessEndTime  | The access end time to associated route assignment.| Yes   |\r\n| AccessTimes[0].DayOfWeekListItem    | The GUID and description of the day of week to access.| Yes   |\r\n| Details[0]  | A list of objects containing route assignment details.| No   |\r\n| Details[0].Guid  | The GUID associated to the route assignment details.| No   |\r\n| Details[0].PlannedQuantity  | The planned quantity associated to the routeAssignment.| Yes   |\r\n| Details[0].ContainerTypeListItem  | The GUID and description of the ContainerType associated to the routeAssignment detail.| Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If the DayOfOccurrenceInMonthListItem is not equal to the week of month of the StartDate | Failed to save Route Assignment. Start date must be associated to the correct DayOfOccurenceInMonthId |\r\n| If startDate and DayOfWeekListItem  are set when IsNoPlannedDate is true | Failed to save Route Assignment. Start date and DayOfWeekListItem cannot be set when IsNoPlannedDate is true |\r\n| If the DayOfOccurrenceInMonthListItem has a value and PickUpInterval is Weekly/ Fortnightly/ Every Three Weeks or Every Four Weeks. | Failed to save Route Assignment. DayOfOccurrenceInMonthListItem cannot be set when PickupIntervalId is Weekly/ Fortnightly/ Every Three Weeks or Every Four Weeks | \r\n| If position is set to 0 and relatedRouteTemplateGuid has a value | Failed to save Route Assignment. Position cannot be set to zero when relatedRouteTemplateGuid has a value |\r\n| If position has a value and relatedRouteTemplateGuid is null | Failed to save Route Assignment. Position cannot have a value if relatedRouteTemplateGuid is set to null |\r\n| If the given action does not have primary action type of Assign To Round | Failed to save Route Assignment. ActionListItem.Guid is not supported for Route Assignment |\r\n| If the given container type is not priced in the service agreement | Failed to save Route Assignment. ContainerTypeListItem.Guid is not supported for Route Assignment |\r\n| If the given container type is not associated with Route Assignment container type | Failed to save Route Assignment. Details.ContainerTypeListItem.Guid is not supported for Route Assignment Detail |\r\n"
+      operationId: RouteAssignment_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorRouteAssignmentResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRouteAssignmentDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PlannedQuantity:
+          type: number
+          format: double
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRouteAssignmentAccessTimeResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessContact:
+          type: string
+        AccessNotes:
+          type: string
+        FromExclusion:
+          type: boolean
+        AccessStartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccessEndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorRouteAssignmentResource:
+      type: object
+      properties:
+        RelatedOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PickupIntervalListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfOccurrenceInMonthListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedRouteTemplateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Position:
+          type: integer
+          format: int32
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RequestedBy:
+          type: string
+        Notes:
+          type: string
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        MinLiftQuantity:
+          type: integer
+          format: int32
+        RequiresQuantity:
+          type: boolean
+        IsGpsAutoMatchingDisabled:
+          type: boolean
+        IsNoPlannedDate:
+          type: boolean
+        IsNoBinOnSiteExcluded:
+          type: boolean
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteAssignmentAccessTimeResource'
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteAssignmentDetailResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorRouteAssignmentResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup GLExport API
+  version: core
+tags:
+- name: GLExport
+paths:
+  /accounting/glExports:
+    post:
+      tags:
+      - GLExport
+      summary: Create or update
+      description: "| Property                        | Description                                                  | Required |\r\n| ------------------------------  | ------------------------------------------------------------ | -------- |\r\n| IsDeleted              | Is the GLExport Deleted. | Yes      |\r\n| GeneralLedgerExportTypeBitmask  | The GeneralLedgerExportTypeBitmask of the GLExport.          | Yes      |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| GeneralLedgerExportTypeBitmask was set null | The mandatory property GeneralLedgerExportTypeBitmask has a null value. The request could not be processed. Supply a value for the GeneralLedgerExportTypeBitmask property of the submitted resource. |\r\n| IsDeleted was set null | The mandatory property IsDeleted has a null value. The request could not be processed. Supply a value for the IsDeleted property of the submitted resource. |\r\n| GLExport with Guid | GLExport has the property Guid with value of {0} that is not supported. The GLExport cannot be created with Guid. |\r\n| GLExport with IsDeleted true | IsDeleted is TRUE. Could not process the request. GLExports can not be deleted via the REST API. |\r\n| GeneralLedgerExportTypeBitmask with invalid bit mask | GLExport with GeneralLedgerExportTypeBitmask of {0} is not a valid general ledger export type bit mask. More than one transaction type is not allowed. |"
+      operationId: GLExport_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorGLExportResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorGLExportResource:
+      type: object
+      properties:
+        IsDeleted:
+          type: boolean
+        GeneralLedgerExportTypeBitmask:
+          type: integer
+          format: int32
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

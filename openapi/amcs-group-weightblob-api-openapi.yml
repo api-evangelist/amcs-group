@@ -1,0 +1,52 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup WeightBlob API
+  version: core
+tags:
+- name: WeightBlob
+paths:
+  /integrator/weightBlobs:
+    post:
+      consumes:
+      - application/json
+      description: "| Property\t\t\t\t\t\t| Description                               | Required\t|\r\n|-------------------------------|-------------------------------------------|-----------|\r\n| WeightId\t\t\t\t\t\t| The weight Id (Guid).\t\t\t\t\t\t|   Yes\t\t|\r\n| BlobURL\t\t\t\t\t\t| The blob url of the picture.\t\t\t\t|   Yes\t\t|\r\n\r\n\r\n## Extra validations\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Both WeightId and BlobURL property must have a value. |"
+      operationId: WeightBlob_Create
+      parameters:
+      - in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ApiResourceId'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApiResourceId'
+      summary: Create or update
+      tags:
+      - WeightBlob
+definitions:
+  ApiResourceId:
+    type: object
+    properties:
+      resource:
+        format: int32
+        type: integer
+      errors:
+        $ref: '#/definitions/ApiResourceErrors'
+      status:
+        $ref: '#/definitions/ApiResourceStatus'
+  ApiResourceStatus:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      isSuccess:
+        type: boolean
+  ApiResourceErrors:
+    type: object
+    properties:
+      errors:
+        type: string

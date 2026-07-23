@@ -1,0 +1,27 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PluginMetadata API
+  version: core
+tags:
+- name: PluginMetadata
+paths:
+  /plugins/metadata/{type}.xml:
+    get:
+      tags:
+      - PluginMetadata
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /plugins/metadata/plugins.json:
+    get:
+      tags:
+      - PluginMetadata
+      responses:
+        '200':
+          description: Success

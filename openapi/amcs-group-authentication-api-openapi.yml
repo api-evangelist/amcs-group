@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Authentication API
+  version: core
+tags:
+- name: Authentication
+paths:
+  /services/api/login:
+    post:
+      tags:
+      - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
+      responses:
+        '200':
+          description: Success
+  /services/api/loginPageConfiguration:
+    get:
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Success
+  /services/api/verifyToken:
+    get:
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.Core.Entity.Api.Login.LoginDetails:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        stayLoggedIn:
+          type: boolean
+      additionalProperties: false

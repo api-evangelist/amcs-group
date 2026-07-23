@@ -1,0 +1,187 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup SystemConfiguration API
+  version: core
+tags:
+- name: SystemConfiguration
+paths:
+  /systemConfiguration:
+    get:
+      tags:
+      - SystemConfiguration
+      responses:
+        '200':
+          description: Success
+    post:
+      tags:
+      - SystemConfiguration
+      responses:
+        '200':
+          description: Success
+  /systemConfiguration/schema:
+    get:
+      tags:
+      - SystemConfiguration
+      responses:
+        '200':
+          description: Success
+  /lists/systemConfigurations/{guid}:
+    get:
+      tags:
+      - SystemConfiguration
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the system configuration.                         |\r\n| Name| The Name of the system configuration.   |\r\n| HelpDescription           | The Description of the system configuration.   |\r\n| IsInternal                | Whether the system configuration is Internal.   |  \r\n| Value| The Value of the system configuration.   |\r\n| IsDeleted    | Is the system configuration deleted.   |\r\n\r\n\r\n"
+      operationId: SystemConfiguration_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSystemConfigurationResource]'
+  /lists/systemConfigurations:
+    get:
+      tags:
+      - SystemConfiguration
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the system configuration.                         |\r\n| Name| The Name of the system configuration.   |\r\n| HelpDescription           | The Description of the system configuration.   |\r\n| IsInternal                | Whether the system configuration is Internal.   |  \r\n| Value| The Value of the system configuration.   |\r\n| IsDeleted    | Is the system configuration deleted.   |\r\n\r\n\r\n"
+      operationId: SystemConfiguration_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSystemConfigurationResource]'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorSystemConfigurationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSystemConfigurationResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+        HelpDescription:
+          type: string
+        IsInternal:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntity[ApiIntegratorSystemConfigurationResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

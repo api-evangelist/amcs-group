@@ -1,0 +1,100 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup RouteTemplateAssignment API
+  version: core
+tags:
+- name: RouteTemplateAssignment
+paths:
+  /transport/routeTemplateAssignments/{guid}:
+    put:
+      tags:
+      - RouteTemplateAssignment
+      summary: Partial update
+      operationId: RouteTemplateAssignment_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentsResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRouteTemplateAssignmentGroupResource:
+      type: object
+      properties:
+        RouteAssignmentGroupGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Description:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorRouteTemplateAssignmentItemResource:
+      type: object
+      properties:
+        RouteAssignmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RouteAssignmentGroupGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsLastDayOccurenceInMonth:
+          type: boolean
+    ApiIntegratorRouteTemplateAssignmentsResource:
+      type: object
+      properties:
+        RouteAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentItemResource'
+        RouteAssignmentGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentGroupResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

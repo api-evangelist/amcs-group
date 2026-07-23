@@ -1,0 +1,142 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup MunicipalAccountChangeBatch API
+  version: core
+tags:
+- name: MunicipalAccountChangeBatch
+paths:
+  /municipal/municipalAccountChangeBatches:
+    post:
+      tags:
+      - MunicipalAccountChangeBatch
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| MunicipalAccountChanges[0]| List of Municipal Account Changes.   | Yes      |\r\n| MunicipalAccountChanges[0].MunicipalityListItem| The GUID of the Municipality.   | Yes      |\r\n| MunicipalAccountChanges[0].HouseNumber| House Number of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address1| Address line 1 of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address2| Address line 2 of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address3| Address line 3 of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address4| Address line 4 of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address5| Address line 5 of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Address6| Address line 6 of Municipal Account.   | No  |\r\n| MunicipalAccountChanges[0].Address7| Address line 7 of Municipal Account.   | No       |\r\n| MunicipalAccountChanges[0].Address8| Address line 8 of Municipal Account.   | No       |\r\n| MunicipalAccountChanges[0].Address9| Address line 9 of Municipal Account.   | No       |\r\n| MunicipalAccountChanges[0].Postcode| Post code of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Latitude| Latitude of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Longitude| Longitude of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].AddedBy| Who making the change.       | Yes      |\r\n| MunicipalAccountChanges[0].MunicipalAccountStateListItem          | Current state of Municipal Accout. Required for New account. | Yes      |\r\n| MunicipalAccountChanges[0].MunicipalAccountStatusDate| Account state effective from. Required if state is provided. | Yes      |\r\n| MunicipalAccountChanges[0].MunicipalAccountBuildingTypeListItem| Building type of municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].Purpose| Purpose of change.       | No       |\r\n| MunicipalAccountChanges[0].ExternalReferenceTypeListItem          | External refernce type of Municipal Account.   | Yes      |\r\n| MunicipalAccountChanges[0].ExternalReference| External refernce of Municipal Account.       | Yes      |\r\n| MunicipalAccountChanges[0].OtherInformation| Non-sale end cost for this accounting period inventory.      | No       |\r\n| MunicipalAccountChanges[0].FunctionalID| FunctionalID of municipal account to identify create/update. | Yes      |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message   |\r\n| -----------------------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |\r\n| If MunicipalityListItem.Guid provided is Deleted.| The provided MunicipalityListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options.   |\r\n| If MunicipalAccountStateListItem.Guid provided is Deleted.| The provided MunicipalAccountStateListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options.   |\r\n| If MunicipalAccountBuildingTypeListItem.Guid provided is Deleted. | The provided MunicipalAccountBuildingTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ExternalReferenceTypeListItem.Guid provided is Deleted.| The provided ExternalReferenceTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options.   |"
+      operationId: MunicipalAccountChangeBatch_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorMunicipalAccountChangeBatchResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorMunicipalAccountChangeBatchResource:
+      type: object
+      properties:
+        MunicipalAccountChanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountChangeResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorMunicipalAccountChangeResource:
+      type: object
+      properties:
+        MunicipalityListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Address6:
+          type: string
+        Address7:
+          type: string
+        Address8:
+          type: string
+        Address9:
+          type: string
+        Postcode:
+          type: string
+        Latitude:
+          type: number
+          format: double
+        Longitude:
+          type: number
+          format: double
+        AddedBy:
+          type: string
+        MunicipalAccountStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MunicipalAccountStatusDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        MunicipalAccountBuildingTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Purpose:
+          type: string
+        ExternalReferenceTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExternalReference:
+          type: string
+        OtherInformation:
+          type: string
+        FunctionalID:
+          type: string
+        CustomerTemplateId:
+          type: integer
+          format: int32
+        OperationalAreaId:
+          type: integer
+          format: int32
+        CompanyOutletId:
+          type: integer
+          format: int32
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

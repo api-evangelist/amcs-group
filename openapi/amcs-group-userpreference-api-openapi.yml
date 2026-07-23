@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup UserPreference API
+  version: core
+tags:
+- name: UserPreference
+paths:
+  /services/api/userPreference:
+    get:
+      tags:
+      - UserPreference
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+    post:
+      tags:
+      - UserPreference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.User.UserPreference'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.User.UserPreference'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.User.UserPreference'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.Core.Entity.Api.User.UserPreference:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        userPreferenceId:
+          type: integer
+          format: int32
+          nullable: true
+        userIdentity:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          format: uuid
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false

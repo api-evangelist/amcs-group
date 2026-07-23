@@ -1,0 +1,209 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup DirectDebitRunConfiguration API
+  version: core
+tags:
+- name: DirectDebitRunConfiguration
+paths:
+  /lists/directDebitRunConfigurations/{guid}:
+    get:
+      tags:
+      - DirectDebitRunConfiguration
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the direct debit run configuration   |\r\n| ApplyFailedFee        | The Apply Failed Fee of the direct debit account type   |\r\n| Description            | The Description of the direct debit account type   |\r\n| FileNo| The FileNo of the direct debit account type   |\r\n| IsCollectionDatesRequired| Is Collection Dates Required for the direct debit account type   |\r\n| SerialNo| The SerialNo of the direct debit account type       |\r\n| AccountName            | The AccountName of the direct debit account type   |\r\n| AccountNo| The AccountNo of the direct debit account type   |\r\n| BankReference            | The BankReference of the direct debit account type   |\r\n| BankUsername            | The BankUsername of the direct debit account type   |\r\n| BIC| The BIC of the direct debit account type   |\r\n| ChequeReport            | The ChequeReport of the direct debit account type   |\r\n| DefaultActionListItem    | The DefaultActionListItem of the direct debit account type   |\r\n| FeeAmount| The FeeAmount of the direct debit account type   |\r\n| FileDescription        | The FileDescription of the direct debit account type   |\r\n| IBAN| The IBAN of the direct debit account type   |\r\n| RelatedPriceGuid| The RelatedPriceGuid of the direct debit account type   |\r\n| SortCode| The SortCode of the direct debit account type       |\r\n| IsDeleted| The IsDeleted of the direct debit account type   |\r\n| CreditorIdentifier| The Id of the creditor associated to the direct debit account type   |"
+      operationId: DirectDebitRunConfiguration_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDirectDebitRunConfigurationResource]'
+  /lists/directDebitRunConfigurations:
+    get:
+      tags:
+      - DirectDebitRunConfiguration
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the direct debit run configuration   |\r\n| ApplyFailedFee        | The Apply Failed Fee of the direct debit account type   |\r\n| Description            | The Description of the direct debit account type   |\r\n| FileNo| The FileNo of the direct debit account type   |\r\n| IsCollectionDatesRequired| Is Collection Dates Required for the direct debit account type   |\r\n| SerialNo| The SerialNo of the direct debit account type       |\r\n| AccountName            | The AccountName of the direct debit account type   |\r\n| AccountNo| The AccountNo of the direct debit account type   |\r\n| BankReference            | The BankReference of the direct debit account type   |\r\n| BankUsername            | The BankUsername of the direct debit account type   |\r\n| BIC| The BIC of the direct debit account type   |\r\n| ChequeReport            | The ChequeReport of the direct debit account type   |\r\n| DefaultActionListItem    | The DefaultActionListItem of the direct debit account type   |\r\n| FeeAmount| The FeeAmount of the direct debit account type   |\r\n| FileDescription        | The FileDescription of the direct debit account type   |\r\n| IBAN| The IBAN of the direct debit account type   |\r\n| RelatedPriceGuid| The RelatedPriceGuid of the direct debit account type   |\r\n| SortCode| The SortCode of the direct debit account type       |\r\n| IsDeleted| The IsDeleted of the direct debit account type   |\r\n| CreditorIdentifier| The Id of the creditor associated to the direct debit account type   |"
+      operationId: DirectDebitRunConfiguration_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDirectDebitRunConfigurationResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorDirectDebitRunConfigurationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDirectDebitRunConfigurationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorDirectDebitRunConfigurationResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorDirectDebitRunConfigurationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorDirectDebitRunConfigurationResource:
+      type: object
+      properties:
+        ApplyFailedFee:
+          type: boolean
+        Description:
+          type: string
+        FileNo:
+          type: integer
+          format: int32
+        IsCollectionDatesRequired:
+          type: boolean
+        SerialNo:
+          type: integer
+          format: int32
+        AccountName:
+          type: string
+        AccountNo:
+          type: string
+        BankReference:
+          type: string
+        BankUsername:
+          type: string
+        BIC:
+          type: string
+        ChequeReport:
+          type: string
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        FeeAmount:
+          type: number
+          format: double
+        FileDescription:
+          type: string
+        IBAN:
+          type: string
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        SortCode:
+          type: string
+        IsDeleted:
+          type: boolean
+        CreditorIdentifier:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

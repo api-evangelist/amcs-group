@@ -1,0 +1,405 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AssignedUdfs API
+  version: core
+tags:
+- name: AssignedUdfs
+paths:
+  /udf/assignedUdfs/changes:
+    get:
+      tags:
+      - AssignedUdfs
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiAssignedUdfsResource]'
+  /udf/assignedUdfs/template:
+    get:
+      tags:
+      - AssignedUdfs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResult[ApiAssignedUdfsResource]'
+  /udf/assignedUdfs/{id}:
+    get:
+      tags:
+      - AssignedUdfs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: include
+        in: query
+        schema:
+          type: string
+      - name: expand
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiAssignedUdfsResource]'
+  /udf/assignedUdfs/{id}/blob/{blobMemberName}:
+    get:
+      tags:
+      - AssignedUdfs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: blobMemberName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        schema:
+          type: string
+      - name: contentType
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /udf/assignedUdfs:
+    get:
+      tags:
+      - AssignedUdfs
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: includeCount
+        in: query
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiAssignedUdfsResource]'
+components:
+  schemas:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+          nullable: true
+        cursor:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceChanges[ApiAssignedUdfsResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntity[ApiAssignedUdfsResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceResultCollection[ApiAssignedUdfsResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    AMCS.Data.Entity.Api.Udf.ApiAssignedUdf:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        fieldName:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        dataType:
+          type: string
+          nullable: true
+        required:
+          type: boolean
+        minimumLengthRestriction:
+          type: integer
+          format: int32
+          nullable: true
+        maximumLengthRestriction:
+          type: integer
+          format: int32
+          nullable: true
+        minimumValueRestriction:
+          type: number
+          format: double
+          nullable: true
+        maximumValueRestriction:
+          type: number
+          format: double
+          nullable: true
+        numericPrecisionRestriction:
+          type: integer
+          format: int32
+          nullable: true
+        mustBeFutureRestriction:
+          type: boolean
+        mustBePastRestriction:
+          type: boolean
+        mustBePositiveRestriction:
+          type: boolean
+        mustBeNegativeRestriction:
+          type: boolean
+        row:
+          type: integer
+          format: int32
+        column:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+            nullable: true
+          nullable: true
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties: {}
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        componentGuid:
+          type: string
+          format: uuid
+        businessObjectName:
+          type: string
+          nullable: true
+        plugins:
+          type: array
+          items:
+            type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        udFs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdf'
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          nullable: true
+        associations:
+          type: array
+          items:
+            type: string
+          nullable: true
+        expand:
+          type: array
+          items:
+            type: string
+          nullable: true
+        operations:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResult[ApiAssignedUdfsResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

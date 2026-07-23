@@ -1,0 +1,234 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup CurrencyRate API
+  version: core
+tags:
+- name: CurrencyRate
+paths:
+  /lists/currencyRates/changes:
+    get:
+      tags:
+      - CurrencyRate
+      summary: Retrieve changes
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rate|\r\n| FromCurrencyListItem      | The GUID and description of the FromCurrency associated to the currency rate|\r\n| ToCurrencylistitem| The GUID and description of the ToCurrency associated to the currency rate|\r\n| EffectiveFrom             | The effective from date of currency rate |\r\n| ExchangeRateDivider       | The exchange rate divider of currency rate |\r\n| ExchangeRateMultiplier    | The exchange rate multiplier of currency rate |\r\n| ExchangeRate              | The exchange rate of currency rate |\r\n| ExchangeRateInverse       | The exchange rate inverse of currency rate |\r\n| ExchangeRateDisplay       | The exchange rate display of currency rate |\r\n| IsDeleted                 | Whether the currency rateis deleted |"
+      operationId: CurrencyRate_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCurrencyRateResource]'
+  /lists/currencyRates/{guid}:
+    get:
+      tags:
+      - CurrencyRate
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rate|\r\n| FromCurrencyListItem      | The GUID and description of the FromCurrency associated to the currency rate|\r\n| ToCurrencylistitem| The GUID and description of the ToCurrency associated to the currency rate|\r\n| EffectiveFrom             | The effective from date of currency rate |\r\n| ExchangeRateDivider       | The exchange rate divider of currency rate |\r\n| ExchangeRateMultiplier    | The exchange rate multiplier of currency rate |\r\n| ExchangeRate              | The exchange rate of currency rate |\r\n| ExchangeRateInverse       | The exchange rate inverse of currency rate |\r\n| ExchangeRateDisplay       | The exchange rate display of currency rate |\r\n| IsDeleted                 | Whether the currency rateis deleted |"
+      operationId: CurrencyRate_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCurrencyRateResource]'
+  /lists/currencyRates:
+    get:
+      tags:
+      - CurrencyRate
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rate|\r\n| FromCurrencyListItem      | The GUID and description of the FromCurrency associated to the currency rate|\r\n| ToCurrencylistitem| The GUID and description of the ToCurrency associated to the currency rate|\r\n| EffectiveFrom             | The effective from date of currency rate |\r\n| ExchangeRateDivider       | The exchange rate divider of currency rate |\r\n| ExchangeRateMultiplier    | The exchange rate multiplier of currency rate |\r\n| ExchangeRate              | The exchange rate of currency rate |\r\n| ExchangeRateInverse       | The exchange rate inverse of currency rate |\r\n| ExchangeRateDisplay       | The exchange rate display of currency rate |\r\n| IsDeleted                 | Whether the currency rateis deleted |"
+      operationId: CurrencyRate_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCurrencyRateResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorCurrencyRateResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCurrencyRateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorCurrencyRateResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCurrencyRateResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorCurrencyRateResource:
+      type: object
+      properties:
+        FromCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ToCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        EffectiveFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExchangeRateDivider:
+          type: number
+          format: double
+        ExchangeRateMultiplier:
+          type: number
+          format: double
+        ExchangeRate:
+          type: number
+          format: double
+        ExchangeRateInverse:
+          type: number
+          format: double
+        ExchangeRateDisplay:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceChanges[ApiIntegratorCurrencyRateResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCurrencyRateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

@@ -1,0 +1,381 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Schedule API
+  version: core
+tags:
+- name: Schedule
+paths:
+  /transport/schedules/changes:
+    get:
+      tags:
+      - Schedule
+      summary: Retrieve changes
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a container.|\r\n| Notes| The notes associated to the schedule.Filterable.|\r\n| LeaveYardTime| The leave yard time associated to the schedule.|\r\n| ReturnYardTime| The return yard time associated to the schedule.|\r\n| Driver.RelatedUserDriverGuid| The GUID associated to the related user driver.|\r\n| Driver.ClockOffDateTime| The clock off time associated to the driver.|\r\n| Driver.ClockOnDateTime| The clock on time associated to the driver.|\r\n| VehicleChecks.StartMileage| The start mileage associated to the vehicle.|\r\n| VehicleChecks.EndMileage| The end mileage associated to the vehicle.|\r\n| VehicleChecks.IsStartSafetyChecked| Is the start safety checked associated to the vehicle.|\r\n| VehicleChecks.StartNotes| The start notes associated to the vehicle.|\r\n| VehicleChecks.IsEndSafetyChecked| Is the end safety checked associated to the vehicle.|\r\n| VehicleChecks.EndNotes| The end notes associated to the vehicle.|\r\n| VehicleChecks.StartDefectTicketNo| The start defect ticket number associated to the vehicle.|\r\n| VehicleChecks.EndDefectTicketNo| The end defect ticket number for the vehicle.|\r\n| VehicleChecks.StartDefectCheckBySysUserId| The start defect check of the vehicle by user id.|\r\n| VehicleChecks.EndDefectCheckBySysUserId| The end defect check associated to the vehicle by user id.|\r\n| CompanyOutletListItem| The GUID and the description associated to the company outlet.|\r\n| IsCompleted| Is the schedule completed.|\r\n| IsForVehicle| Is the schedule for the vehicle.|\r\n| IsManifestCompleted| Is the manifest associated to the schedule completed.|\r\n| IsManifestExported| Is the manifest associated to the schedule exported.|\r\n| IsManifestExportedFailed| Is the manifest export associated to the schedule failed.|\r\n| IsManifestRequired| Is the manifest associated to the schedule required.|\r\n| IsThirdPartySchedule| Is the schedule a third party.|\r\n| FuelUsed| The fuel used associated to the schedule.|\r\n| FuelCost| The fuel cost associated to the schedule.|\r\n| Position| The position associated to the schedule.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle. Filterable.|\r\n| RelatedUserDriverGuid| The GUID associated to the related user driver. Filterable.|\r\n| RelatedUserStartCheckByGuid| The GUID associated to the related user for start check. Filterable.|\r\n| RelatedUserEndCheckByGuid| The GUID associated to the related user for end check. Filterable.|"
+      operationId: Schedule_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorScheduleResource]'
+  /transport/schedules/{guid}:
+    get:
+      tags:
+      - Schedule
+      summary: Find with GUID
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a container.|\r\n| Notes| The notes associated to the schedule.Filterable.|\r\n| LeaveYardTime| The leave yard time associated to the schedule.|\r\n| ReturnYardTime| The return yard time associated to the schedule.|\r\n| Driver.RelatedUserDriverGuid| The GUID associated to the related user driver.|\r\n| Driver.ClockOffDateTime| The clock off time associated to the driver.|\r\n| Driver.ClockOnDateTime| The clock on time associated to the driver.|\r\n| VehicleChecks.StartMileage| The start mileage associated to the vehicle.|\r\n| VehicleChecks.EndMileage| The end mileage associated to the vehicle.|\r\n| VehicleChecks.IsStartSafetyChecked| Is the start safety checked associated to the vehicle.|\r\n| VehicleChecks.StartNotes| The start notes associated to the vehicle.|\r\n| VehicleChecks.IsEndSafetyChecked| Is the end safety checked associated to the vehicle.|\r\n| VehicleChecks.EndNotes| The end notes associated to the vehicle.|\r\n| VehicleChecks.StartDefectTicketNo| The start defect ticket number associated to the vehicle.|\r\n| VehicleChecks.EndDefectTicketNo| The end defect ticket number for the vehicle.|\r\n| VehicleChecks.StartDefectCheckBySysUserId| The start defect check of the vehicle by user id.|\r\n| VehicleChecks.EndDefectCheckBySysUserId| The end defect check associated to the vehicle by user id.|\r\n| CompanyOutletListItem| The GUID and the description associated to the company outlet.|\r\n| IsCompleted| Is the schedule completed.|\r\n| IsForVehicle| Is the schedule for the vehicle.|\r\n| IsManifestCompleted| Is the manifest associated to the schedule completed.|\r\n| IsManifestExported| Is the manifest associated to the schedule exported.|\r\n| IsManifestExportedFailed| Is the manifest export associated to the schedule failed.|\r\n| IsManifestRequired| Is the manifest associated to the schedule required.|\r\n| IsThirdPartySchedule| Is the schedule a third party.|\r\n| FuelUsed| The fuel used associated to the schedule.|\r\n| FuelCost| The fuel cost associated to the schedule.|\r\n| Position| The position associated to the schedule.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle. Filterable.|\r\n| RelatedUserDriverGuid| The GUID associated to the related user driver. Filterable.|\r\n| RelatedUserStartCheckByGuid| The GUID associated to the related user for start check. Filterable.|\r\n| RelatedUserEndCheckByGuid| The GUID associated to the related user for end check. Filterable.|"
+      operationId: Schedule_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorScheduleResource]'
+    put:
+      tags:
+      - Schedule
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the schedule.                                          | No |\r\n| ScheduledDate| The date associated to the schedule.| Yes |\r\n| Description| The description associated to the schedule.| Yes |\r\n| IsContainerSchedule| Is the schedule a container.| No |\r\n| Notes| The notes associated to the schedule. Editable.| No |\r\n| LeaveYardTime| The leave yard time associated to the schedule.| No |\r\n| ReturnYardTime| The return yard time associated to the schedule.| No |\r\n| Driver.RelatedUserDriverGuid| The GUID associated to the related user driver.| No |\r\n| Driver.ClockOffDateTime| The clock off time associated to the driver.| No |\r\n| Driver.ClockOnDateTime| The clock on time associated to the driver.| No |\r\n| VehicleChecks.StartMileage| The start mileage associated to the vehicle.| No |\r\n| VehicleChecks.EndMileage| The end mileage associated to the vehicle.| No |\r\n| VehicleChecks.IsStartSafetyChecked| Is the start safety checked associated to the vehicle.| No |\r\n| VehicleChecks.StartNotes| The start notes associated to the vehicle.| No |\r\n| VehicleChecks.IsEndSafetyChecked| Is the end safety checked associated to the vehicle.| No |\r\n| VehicleChecks.EndNotes| The end notes associated to the vehicle.| No |\r\n| VehicleChecks.StartDefectTicketNo| The start defect ticket number associated to the vehicle.| No |\r\n| VehicleChecks.EndDefectTicketNo| The end defect ticket number for the vehicle.| No |\r\n| VehicleChecks.StartDefectCheckBySysUserId| The start defect check of the vehicle by user id.| No |\r\n| VehicleChecks.EndDefectCheckBySysUserId| The end defect check associated to the vehicle by user id.| No |\r\n| CompanyOutletListItem| The GUID and the description associated to the company outlet.| Yes |\r\n| IsCompleted| Is the schedule completed.| Yes |\r\n| IsForVehicle| Is the schedule for the vehicle.| Yes |\r\n| IsManifestCompleted| Is the manifest associated to the schedule completed.| Yes |\r\n| IsManifestExported| Is the manifest associated to the schedule exported.| Yes |\r\n| IsManifestExportedFailed| Is the manifest export associated to the schedule failed.| Yes |\r\n| IsManifestRequired| Is the manifest associated to the schedule required.| Yes |\r\n| IsThirdPartySchedule| Is the schedule a third party.| Yes |\r\n| FuelUsed| The fuel used associated to the schedule.| No |\r\n| FuelCost| The fuel cost associated to the schedule.| No |\r\n| Position| The position associated to the schedule.| No |\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle.| Yes |\r\n| RelatedUserDriverGuid| The GUID associated to the related user driver.| Yes |\r\n| RelatedUserStartCheckByGuid| The GUID associated to the related user for start check.| No |\r\n| RelatedUserEndCheckByGuid| The GUID associated to the related user for end check.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If Description is more than 60 characters long | Description must be no more than 60 characters long. |\r\n| If Notes is more than 4096 characters long | Notes must be no more than 4096 characters long. |\r\n| If DefectTicketNo is more than 20 characters long | Defect Ticket No must be no more than 20 characters long. |\r\n| RelatedVehicleGuid is being edited | RelatedVehicleGuid is a read-only property. |\r\n| CompanyOutletListItem is being edited | CompanyOutletListItem.Guid is a read-only property. |\r\n| ScheduledDate is being edited | ScheduledDate is a read-only property. |\r\n| Description is being edited | Description is a read-only property. |\r\n| Position is being edited | Position is a read-only property. |\r\n| IsContainerSchedule is being edited | IsContainerSchedule is a read-only property. |\r\n| IsManifestRequired is being edited | IsManifestRequired is a read-only property. |\r\n| IsManifestCompleted is being edited | IsManifestCompleted is a read-only property. |\r\n| IsManifestExported is being edited | IsManifestExported is a read-only property. |\r\n| IsManifestExportedFailed is being edited | IsManifestExportedFailed is a read-only property. |\r\n| IsForVehicle is being edited | IsForVehicle is a read-only property. |\r\n| RelatedUserDriverGuid is being edited when the schedule is completed | RelatedUserDriverGuid is a read-only property. |\r\n| Driver.ClockOnDateTime is being edited when the schedule is completed | ClockOnTime is a read-only property. |\r\n| Driver.ClockOffDateTime is being edited when the schedule is completed | ClockOffTime is a read-only property. |\r\n| VehicleChecks.IsStartSafetyChecked is being edited when the schedule is completed | StartSafetyCheck is a read-only property. |\r\n| VehicleChecks.StartNotes is being edited when the schedule is completed | StartNotes is a read-only property. |\r\n| VehicleChecks.StartDefectTicketNo is being edited when the schedule is completed | StartDefectTicketNo is a read-only property. |\r\n| VehicleChecks.RelatedUserStartCheckByGuid is being edited when the schedule is completed | StartDefectCheckBySysUserId is a read-only property. |\r\n| VehicleChecks.IsEndSafetyChecked is being edited when the schedule is completed | EndSafetyCheck is a read-only property. |\r\n| VehicleChecks.EndNotes is being edited when the schedule is completed | EndNotes is a read-only property. |\r\n| VehicleChecks.EndDefectTicketNo is being edited when the schedule is completed | EndDefectTicketNo is a read-only property. |\r\n| VehicleChecks.RelatedUserEndCheckByGuid is being edited when the schedule is completed | EndDefectCheckBySysUserId is a read-only property. |\r\n| LeaveYardTime is being edited when the schedule is completed | LeaveYardTime is a read-only property. |\r\n| ReturnYardTime is being edited when the schedule is completed | ReturnYardTime is a read-only property. |\r\n| FuelUsed is being edited when the schedule is completed | FuelUsed is a read-only property. |\r\n| FuelCost is being edited when the schedule is completed | FuelCost is a read-only property. |\r\n| Notes is being edited when the schedule is completed | Notes is a read-only property. |\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+      operationId: Schedule_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/schedules:
+    get:
+      tags:
+      - Schedule
+      summary: Find with Filters
+      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a container.|\r\n| Notes| The notes associated to the schedule.Filterable.|\r\n| LeaveYardTime| The leave yard time associated to the schedule.|\r\n| ReturnYardTime| The return yard time associated to the schedule.|\r\n| Driver.RelatedUserDriverGuid| The GUID associated to the related user driver.|\r\n| Driver.ClockOffDateTime| The clock off time associated to the driver.|\r\n| Driver.ClockOnDateTime| The clock on time associated to the driver.|\r\n| VehicleChecks.StartMileage| The start mileage associated to the vehicle.|\r\n| VehicleChecks.EndMileage| The end mileage associated to the vehicle.|\r\n| VehicleChecks.IsStartSafetyChecked| Is the start safety checked associated to the vehicle.|\r\n| VehicleChecks.StartNotes| The start notes associated to the vehicle.|\r\n| VehicleChecks.IsEndSafetyChecked| Is the end safety checked associated to the vehicle.|\r\n| VehicleChecks.EndNotes| The end notes associated to the vehicle.|\r\n| VehicleChecks.StartDefectTicketNo| The start defect ticket number associated to the vehicle.|\r\n| VehicleChecks.EndDefectTicketNo| The end defect ticket number for the vehicle.|\r\n| VehicleChecks.StartDefectCheckBySysUserId| The start defect check of the vehicle by user id.|\r\n| VehicleChecks.EndDefectCheckBySysUserId| The end defect check associated to the vehicle by user id.|\r\n| CompanyOutletListItem| The GUID and the description associated to the company outlet.|\r\n| IsCompleted| Is the schedule completed.|\r\n| IsForVehicle| Is the schedule for the vehicle.|\r\n| IsManifestCompleted| Is the manifest associated to the schedule completed.|\r\n| IsManifestExported| Is the manifest associated to the schedule exported.|\r\n| IsManifestExportedFailed| Is the manifest export associated to the schedule failed.|\r\n| IsManifestRequired| Is the manifest associated to the schedule required.|\r\n| IsThirdPartySchedule| Is the schedule a third party.|\r\n| FuelUsed| The fuel used associated to the schedule.|\r\n| FuelCost| The fuel cost associated to the schedule.|\r\n| Position| The position associated to the schedule.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle. Filterable.|\r\n| RelatedUserDriverGuid| The GUID associated to the related user driver. Filterable.|\r\n| RelatedUserStartCheckByGuid| The GUID associated to the related user for start check. Filterable.|\r\n| RelatedUserEndCheckByGuid| The GUID associated to the related user for end check. Filterable.|"
+      operationId: Schedule_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorScheduleResource]'
+    post:
+      tags:
+      - Schedule
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the schedule.                                          | No |\r\n| ScheduledDate| The date associated to the schedule.| Yes |\r\n| Description| The description associated to the schedule.| Yes |\r\n| IsContainerSchedule| Is the schedule a container.| No |\r\n| Notes| The notes associated to the schedule.Editable.| No |\r\n| LeaveYardTime| The leave yard time associated to the schedule.| No |\r\n| ReturnYardTime| The return yard time associated to the schedule.| No |\r\n| Driver.RelatedUserDriverGuid| The GUID associated to the related user driver.| No |\r\n| Driver.ClockOffDateTime| The clock off time associated to the driver.| No |\r\n| Driver.ClockOnDateTime| The clock on time associated to the driver.| No |\r\n| VehicleChecks.StartMileage| The start mileage associated to the vehicle.| No |\r\n| VehicleChecks.EndMileage| The end mileage associated to the vehicle.| No |\r\n| VehicleChecks.IsStartSafetyChecked| Is the start safety checked associated to the vehicle.| No |\r\n| VehicleChecks.StartNotes| The start notes associated to the vehicle.| No |\r\n| VehicleChecks.IsEndSafetyChecked| Is the end safety checked associated to the vehicle.| No |\r\n| VehicleChecks.EndNotes| The end notes associated to the vehicle.| No |\r\n| VehicleChecks.StartDefectTicketNo| The start defect ticket number associated to the vehicle.| No |\r\n| VehicleChecks.EndDefectTicketNo| The end defect ticket number for the vehicle.| No |\r\n| VehicleChecks.StartDefectCheckBySysUserId| The start defect check of the vehicle by user id.| No |\r\n| VehicleChecks.EndDefectCheckBySysUserId| The end defect check associated to the vehicle by user id.| No |\r\n| CompanyOutletListItem| The GUID and the description associated to the company outlet.| Yes |\r\n| IsCompleted| Is the schedule completed.| Yes |\r\n| IsForVehicle| Is the schedule for the vehicle.| Yes |\r\n| IsManifestCompleted| Is the manifest associated to the schedule completed.| Yes |\r\n| IsManifestExported| Is the manifest associated to the schedule exported.| Yes |\r\n| IsManifestExportedFailed| Is the manifest export associated to the schedule failed.| Yes |\r\n| IsManifestRequired| Is the manifest associated to the schedule required.| Yes |\r\n| IsThirdPartySchedule| Is the schedule a third party.| Yes |\r\n| FuelUsed| The fuel used associated to the schedule.| No |\r\n| FuelCost| The fuel cost associated to the schedule.| No |\r\n| Position| The position associated to the schedule.| No |\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle.| Yes |\r\n| RelatedUserDriverGuid| The GUID associated to the related user driver.| Yes |\r\n| RelatedUserStartCheckByGuid| The GUID associated to the related user for start check.| No |\r\n| RelatedUserEndCheckByGuid| The GUID associated to the related user for end check.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If Description is more than 60 characters long | Description must be no more than 60 characters long. |\r\n| If Notes is more than 4096 characters long | Notes must be no more than 4096 characters long. |\r\n| If DefectTicketNo is more than 20 characters long | Defect Ticket No must be no more than 20 characters long. |\r\n| RelatedVehicleGuid is being edited | RelatedVehicleGuid is a read-only property. |\r\n| CompanyOutletListItem is being edited | CompanyOutletListItem.Guid is a read-only property. |\r\n| ScheduledDate is being edited | ScheduledDate is a read-only property. |\r\n| Description is being edited | Description is a read-only property. |\r\n| Position is being edited | Position is a read-only property. |\r\n| IsContainerSchedule is being edited | IsContainerSchedule is a read-only property. |\r\n| IsManifestRequired is being edited | IsManifestRequired is a read-only property. |\r\n| IsManifestCompleted is being edited | IsManifestCompleted is a read-only property. |\r\n| IsManifestExported is being edited | IsManifestExported is a read-only property. |\r\n| IsManifestExportedFailed is being edited | IsManifestExportedFailed is a read-only property. |\r\n| IsForVehicle is being edited | IsForVehicle is a read-only property. |\r\n| RelatedUserDriverGuid is being edited when the schedule is completed | RelatedUserDriverGuid is a read-only property. |\r\n| Driver.ClockOnDateTime is being edited when the schedule is completed | ClockOnTime is a read-only property. |\r\n| Driver.ClockOffDateTime is being edited when the schedule is completed | ClockOffTime is a read-only property. |\r\n| VehicleChecks.IsStartSafetyChecked is being edited when the schedule is completed | StartSafetyCheck is a read-only property. |\r\n| VehicleChecks.StartNotes is being edited when the schedule is completed | StartNotes is a read-only property. |\r\n| VehicleChecks.StartDefectTicketNo is being edited when the schedule is completed | StartDefectTicketNo is a read-only property. |\r\n| VehicleChecks.RelatedUserStartCheckByGuid is being edited when the schedule is completed | StartDefectCheckBySysUserId is a read-only property. |\r\n| VehicleChecks.IsEndSafetyChecked is being edited when the schedule is completed | EndSafetyCheck is a read-only property. |\r\n| VehicleChecks.EndNotes is being edited when the schedule is completed | EndNotes is a read-only property. |\r\n| VehicleChecks.EndDefectTicketNo is being edited when the schedule is completed | EndDefectTicketNo is a read-only property. |\r\n| VehicleChecks.RelatedUserEndCheckByGuid is being edited when the schedule is completed | EndDefectCheckBySysUserId is a read-only property. |\r\n| LeaveYardTime is being edited when the schedule is completed | LeaveYardTime is a read-only property. |\r\n| ReturnYardTime is being edited when the schedule is completed | ReturnYardTime is a read-only property. |\r\n| FuelUsed is being edited when the schedule is completed | FuelUsed is a read-only property. |\r\n| FuelCost is being edited when the schedule is completed | FuelCost is a read-only property. |\r\n| Notes is being edited when the schedule is completed | Notes is a read-only property. |\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+      operationId: Schedule_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorScheduleVehicleCheckResource:
+      type: object
+      properties:
+        StartMileage:
+          type: number
+          format: double
+        EndMileage:
+          type: number
+          format: double
+        IsStartSafetyChecked:
+          type: boolean
+        StartNotes:
+          type: string
+        IsEndSafetyChecked:
+          type: boolean
+        EndNotes:
+          type: string
+        StartDefectTicketNo:
+          type: string
+        EndDefectTicketNo:
+          type: string
+        RelatedUserStartCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserEndCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorScheduleResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorScheduleResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorScheduleDriverResource:
+      type: object
+      properties:
+        RelatedUserDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ClockOffDateTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        ClockOnDateTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+    ApiResourceResultEntity[ApiIntegratorScheduleResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorScheduleResource:
+      type: object
+      properties:
+        ScheduledDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Description:
+          type: string
+        IsContainerSchedule:
+          type: boolean
+        Notes:
+          type: string
+        LeaveYardTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        ReturnYardTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        Driver:
+          $ref: '#/components/schemas/ApiIntegratorScheduleDriverResource'
+        VehicleChecks:
+          $ref: '#/components/schemas/ApiIntegratorScheduleVehicleCheckResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsCompleted:
+          type: boolean
+        IsForVehicle:
+          type: boolean
+        IsManifestCompleted:
+          type: boolean
+        IsManifestExported:
+          type: boolean
+        IsManifestExportedFailed:
+          type: boolean
+        IsManifestRequired:
+          type: boolean
+        IsThirdPartySchedule:
+          type: boolean
+        FuelUsed:
+          type: number
+          format: double
+        FuelCost:
+          type: number
+          format: double
+        Position:
+          type: integer
+          format: int32
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserStartCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserEndCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,385 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Customer API
+  version: core
+tags:
+- name: Customer
+paths:
+  /directory/customers/changes:
+    get:
+      tags:
+      - Customer
+      summary: Retrieve changes
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n"
+      operationId: Customer_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCustomerResource]'
+  /directory/customers/{guid}:
+    get:
+      tags:
+      - Customer
+      summary: Find with GUID
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n"
+      operationId: Customer_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCustomerResource]'
+    put:
+      tags:
+      - Customer
+      summary: Partial update
+      description: "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Name                 | The customer's name.                                                  | Yes |\r\n| Reference            | An alternative name used for the customer.                            | No |\r\n| ARAccountCode        | The account code used for Accounts Receivable. This field must be null. Error \"ARAccountCode should be null\" is returned when not null. | No |\r\n| FederalId            | The customer's local authority / government /tax reference.           | No |\r\n| IsInternal           | Whether the customer is an internal customer.                         | Yes |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.                 | Yes |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.                  | Yes |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.               | Yes |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.                | Yes |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        | Yes |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       | Yes |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                | No |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). | No |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 | No |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    | No |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 | Yes |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the customer.| No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not null | ARAccountCode should be null |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update Customer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update Customer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. Customer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to Customer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n"
+      operationId: Customer_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/customers:
+    get:
+      tags:
+      - Customer
+      summary: Find with Filters
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n"
+      operationId: Customer_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCustomerResource]'
+    post:
+      tags:
+      - Customer
+      summary: Create or update
+      description: "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Name                 | The customer's name.                                                  | Yes |\r\n| Reference            | An alternative name used for the customer.                            | No |\r\n| ARAccountCode        | The account code used for Accounts Receivable. This field must be null. Error \"ARAccountCode should be null\" is returned when not null. | No |\r\n| FederalId            | The customer's local authority / government /tax reference.           | No |\r\n| IsInternal           | Whether the customer is an internal customer.                         | Yes |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.                 | Yes |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.                  | Yes |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.               | Yes |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.                | Yes |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        | Yes |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       | Yes |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                | No |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). | No |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 | No |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    | No |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 | Yes |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the customer.| No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not null | ARAccountCode should be null |\r\n| RelatedBlobHashes[0].Hash is not null for Insert | Failed to save/update Customer because RelatedBlobHashes creation is not permitted |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update Customer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs[0].Hash is not null for Insert | Failed to save/update Customer because RelatedReportBlobs creation is not permitted |\r\n| RelatedReportBlobs is not empty for Insert | Failed to save/update Customer because RelatedReportBlobs creation is not permitted |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update Customer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. Customer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to Customer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n| A CustomerStateChangeReason is supplied on a insert | CustomerStateChangeReasonListItem is not supported for create |"
+      operationId: Customer_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCustomerBlobHashesResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorCustomerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCustomerResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        Reference:
+          type: string
+        ARAccountCode:
+          type: string
+        FederalId:
+          type: string
+        IsInternal:
+          type: boolean
+        ReceiveServiceUpdatesByEmail:
+          type: boolean
+        ReceiveServiceUpdatesByText:
+          type: boolean
+        ReceiveMarketingUpdatesByEmail:
+          type: boolean
+        ReceiveMarketingUpdatesByText:
+          type: boolean
+        CompanyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerStateChangeReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerCategoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerGroupListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerBlobHashesResource'
+        RelatedReportBlobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportBlobHashesResource'
+        RelatedCustomerStateChangeRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerStateChangeRequestResource'
+        RelatedCustomerStateChangeRequest:
+          $ref: '#/components/schemas/ApiIntegratorCustomerStateChangeRequestResource'
+        IsResidential:
+          type: boolean
+        AutoArAccountCode:
+          $ref: '#/components/schemas/ApiIntegratorAutoArAccountCodeResource'
+        HQLocation:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerReportRelatedSiteResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerStateChangeRequestResource:
+      type: object
+      properties:
+        EffectiveDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerStateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedChangeReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAutoArAccountCodeResource:
+      type: object
+      properties:
+        CompanyOutletGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceChanges[ApiIntegratorCustomerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorCustomerResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCustomerReportBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DocumentDescription:
+          type: string
+        DocumentName:
+          type: string
+        Hash:
+          type: string
+        IsForAllSites:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+        RelatedExcludedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

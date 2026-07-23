@@ -1,0 +1,470 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup RouteTemplate API
+  version: core
+tags:
+- name: RouteTemplate
+paths:
+  /transport/routeTemplates/changes:
+    get:
+      tags:
+      - RouteTemplate
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route.|\r\n| AcceptedMaterials| An array of accepted materials.|\r\n| AcceptedMaterials[0].Guid| The GUID of accepted material.|\r\n| AcceptedMaterials[0].IsDeleted| Whether accepted material is deleted.|\r\n| AcceptedMaterials[0].MaterialClassListItem| The GUID and Description of material class|\r\n| ArchiveMissedRouteVisitReasonListItem| The GUID and description of the archive missed route visit reason associated to the route template. |\r\n| ArchiveRouteVisitDays| The archive route visit days associated to the route template.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the route template. |\r\n| AuditDays| The audit days associated to the route template.|\r\n| AuditStartDate| The audit start date associated to the route template.|\r\n| AutoCompleteVisits| Whether auto complete visits associated to the route template.| \r\n| AutoSend| Whether auto send associated to the route template.| \r\n| BuildDaysBeforeNextPlannedDate| The build days before next planned date associated to the route template.| \r\n| BuildSimpleRouteInstance| Whether build simple route instance associated to the route template.| \r\n| CanRunOnSchedule| Whether can run on schedule associated to the route template.| \r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the route template. |\r\n| DayOccurrenceInMonthListItem| The GUID and description of the day occurrence in month associated to the route template. |\r\n| DayOfWeekListItem| The GUID and description of the day of week associated to the route template. |\r\n| DaysBeforeExpiry| The days before expiry associated to the route template.| \r\n| DefaultTipMaterialListItem| The GUID and description of the material associated to the route template. |\r\n| Description| The description associated to the route.|\r\n| DiffReasonRequired| Whether different reason required associated to the route template.|\r\n| DoubleDumpTimeInSeconds| The double dump time in seconds associated to the route template.|\r\n| ExcludeMunicipalCustomerFromHandheld| Whether exclude municipal customer from handheld associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteConfirmation| Whether exclude municipal customer from route confirmation associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteWorksheet| Whether exclude municipal customer from route worksheet associated to the route template.|\r\n| ForceWeightsOnRouteCompletion| Whether force weights on route completion associated to the route template.|\r\n| GPSMatchingEnabled| Whether GPS matching enabled associated to the route template.|\r\n| GpsMatchingMaxRange| The Gps matching max range associated to the route.|\r\n| GpsmatchingMinProximity| The Gps matching min proximity associated to the route.|\r\n| GuidedNavigationPassword| The guided navigation password associated to the route.|\r\n| GuidedNavigationUsername| The guided navigation username associated to the route.|\r\n| GuideVersion| The guide version associated to the route.|\r\n| HideTipLocationMapMarkers| Whether hide tip location map markers associated to the route template.|\r\n| IsAutoCompleteOnBuild| Whether the route template is auto complete on build.|\r\n| IsDeleted| Whether the route template is deleted.|\r\n| IsNightRoute| Whether the route template is for night route.|\r\n| IsProximityOrderedVisits| Whether the route template is proximity ordered visits.|\r\n| IsRouteNavigationEnabled| Whether the route template has route navigation enabled.|\r\n| IsRouteStatisticGenerationOn| Whether the route template is route statistic generation is On.|\r\n| IsSubContracted| Whether the route template is sub contracted.|\r\n| MarketListItem| The GUID and description of the market associated to the route template. |\r\n| MissedReasonRequired| Whether the missed reason is required for route template.|\r\n| MobileForceManualLiftMatching| Whether the mobile force manual lift matching for route template.|\r\n| MobileSettingsProfileListItem| The GUID and description of the mobile settings profile associated to the route template.|\r\n| NextPlannedDate| The next planned date associated to the route template.|\r\n| NoMatchAlertThreshold| The No match alert threshold to the route template.|\r\n| NoTagStopEnabled| Whether the route template has no tag stop enabled.|\r\n| Notes| The notes associated to the route template.|\r\n| PickupIntervalListItem| The GUID and description of the pick up interval associated to the route template.|\r\n| PlannedEndTime| The planned end time associated to the route template.|\r\n| PlannedStartTime| The planned start time associated to the route template.|\r\n| PrintExceptionsOnly| Whether the route template should print exceptions only.|\r\n| PromptForLiftsOnVisitCompletion| Whether the route template should prompt for lifts on visit completion.|\r\n| RelatedCompanyOutletGuidFilter| Used to filter by the related company outlet GUID.|\r\n| RelatedLocationDestinationGuid| The GUID of location destination associated to the route template. Filterable.|\r\n| RelatedMasterRouteGuid| The GUID of master route associated to the route template. Filterable.|\r\n| RelatedRouteGroupGuid| The GUID of route group associated to the route template.|\r\n| RelatedSupplierSiteGuid| The GUID of supplier site associated to the route template. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of supplier site transport associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultExternalGuid| The GUID of external vehicle associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultGuid| The GUID of vehicle associated to the route template. Filterable.|\r\n| RelatedUserDefaultDriverGuid| The GUID of driver user associated to the route template. Filterable.|\r\n| RFIDAlertThreshold| The RFID alert threshold associated to the route template.|\r\n| RouteManagementTypeListItem| The GUID and description of the route management type associated to the route template.|\r\n| RouteNo| The route number associated to the route template.|\r\n| RouteVisitProximityRadius| The route visit proximity radius associated to the route template.|\r\n| StoplistPollingRate| The stoplist polling rate associated to the route template.|\r\n| SupplierEmailAddress| The supplier email address associated to the route template.|\r\n| UseOrderSupplierForCostGeneration| Whether the route template can use order supplier for cost generation.|\r\n| UseSystemGPSMatchingSettings| Whether the route template can use system GPS matching settings.|\r\n| VehicleTypeListItem| The GUID and description of the vehicle type associated to the route template.|\r\n| ZeroWeightAlertThreshold| The zero weight alert threshold associated to the route template.|\r\n| TeamBoardListItem| The GUID and description of the TeamBoard associated to the route template.|\r\n| IsManagedExternally| Whether the route template is created by Master Route Module Team.|"
+      operationId: RouteTemplate_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorRouteTemplateResource]'
+  /transport/routeTemplates/{guid}:
+    get:
+      tags:
+      - RouteTemplate
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route.|\r\n| AcceptedMaterials| An array of accepted materials.|\r\n| AcceptedMaterials[0].Guid| The GUID of accepted material.|\r\n| AcceptedMaterials[0].IsDeleted| Whether accepted material is deleted.|\r\n| AcceptedMaterials[0].MaterialClassListItem| The GUID and Description of material class|\r\n| ArchiveMissedRouteVisitReasonListItem| The GUID and description of the archive missed route visit reason associated to the route template. |\r\n| ArchiveRouteVisitDays| The archive route visit days associated to the route template.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the route template. |\r\n| AuditDays| The audit days associated to the route template.|\r\n| AuditStartDate| The audit start date associated to the route template.|\r\n| AutoCompleteVisits| Whether auto complete visits associated to the route template.| \r\n| AutoSend| Whether auto send associated to the route template.| \r\n| BuildDaysBeforeNextPlannedDate| The build days before next planned date associated to the route template.| \r\n| BuildSimpleRouteInstance| Whether build simple route instance associated to the route template.| \r\n| CanRunOnSchedule| Whether can run on schedule associated to the route template.| \r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the route template. |\r\n| DayOccurrenceInMonthListItem| The GUID and description of the day occurrence in month associated to the route template. |\r\n| DayOfWeekListItem| The GUID and description of the day of week associated to the route template. |\r\n| DaysBeforeExpiry| The days before expiry associated to the route template.| \r\n| DefaultTipMaterialListItem| The GUID and description of the material associated to the route template. |\r\n| Description| The description associated to the route.|\r\n| DiffReasonRequired| Whether different reason required associated to the route template.|\r\n| DoubleDumpTimeInSeconds| The double dump time in seconds associated to the route template.|\r\n| ExcludeMunicipalCustomerFromHandheld| Whether exclude municipal customer from handheld associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteConfirmation| Whether exclude municipal customer from route confirmation associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteWorksheet| Whether exclude municipal customer from route worksheet associated to the route template.|\r\n| ForceWeightsOnRouteCompletion| Whether force weights on route completion associated to the route template.|\r\n| GPSMatchingEnabled| Whether GPS matching enabled associated to the route template.|\r\n| GpsMatchingMaxRange| The Gps matching max range associated to the route.|\r\n| GpsmatchingMinProximity| The Gps matching min proximity associated to the route.|\r\n| GuidedNavigationPassword| The guided navigation password associated to the route.|\r\n| GuidedNavigationUsername| The guided navigation username associated to the route.|\r\n| GuideVersion| The guide version associated to the route.|\r\n| HideTipLocationMapMarkers| Whether hide tip location map markers associated to the route template.|\r\n| IsAutoCompleteOnBuild| Whether the route template is auto complete on build.|\r\n| IsDeleted| Whether the route template is deleted.|\r\n| IsNightRoute| Whether the route template is for night route.|\r\n| IsProximityOrderedVisits| Whether the route template is proximity ordered visits.|\r\n| IsRouteNavigationEnabled| Whether the route template has route navigation enabled.|\r\n| IsRouteStatisticGenerationOn| Whether the route template is route statistic generation is On.|\r\n| IsSubContracted| Whether the route template is sub contracted.|\r\n| MarketListItem| The GUID and description of the market associated to the route template. |\r\n| MissedReasonRequired| Whether the missed reason is required for route template.|\r\n| MobileForceManualLiftMatching| Whether the mobile force manual lift matching for route template.|\r\n| MobileSettingsProfileListItem| The GUID and description of the mobile settings profile associated to the route template.|\r\n| NextPlannedDate| The next planned date associated to the route template.|\r\n| NoMatchAlertThreshold| The No match alert threshold to the route template.|\r\n| NoTagStopEnabled| Whether the route template has no tag stop enabled.|\r\n| Notes| The notes associated to the route template.|\r\n| PickupIntervalListItem| The GUID and description of the pick up interval associated to the route template.|\r\n| PlannedEndTime| The planned end time associated to the route template.|\r\n| PlannedStartTime| The planned start time associated to the route template.|\r\n| PrintExceptionsOnly| Whether the route template should print exceptions only.|\r\n| PromptForLiftsOnVisitCompletion| Whether the route template should prompt for lifts on visit completion.|\r\n| RelatedCompanyOutletGuidFilter| Used to filter by the related company outlet GUID.|\r\n| RelatedLocationDestinationGuid| The GUID of location destination associated to the route template. Filterable.|\r\n| RelatedMasterRouteGuid| The GUID of master route associated to the route template. Filterable.|\r\n| RelatedRouteGroupGuid| The GUID of route group associated to the route template.|\r\n| RelatedSupplierSiteGuid| The GUID of supplier site associated to the route template. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of supplier site transport associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultExternalGuid| The GUID of external vehicle associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultGuid| The GUID of vehicle associated to the route template. Filterable.|\r\n| RelatedUserDefaultDriverGuid| The GUID of driver user associated to the route template. Filterable.|\r\n| RFIDAlertThreshold| The RFID alert threshold associated to the route template.|\r\n| RouteManagementTypeListItem| The GUID and description of the route management type associated to the route template.|\r\n| RouteNo| The route number associated to the route template.|\r\n| RouteVisitProximityRadius| The route visit proximity radius associated to the route template.|\r\n| StoplistPollingRate| The stoplist polling rate associated to the route template.|\r\n| SupplierEmailAddress| The supplier email address associated to the route template.|\r\n| UseOrderSupplierForCostGeneration| Whether the route template can use order supplier for cost generation.|\r\n| UseSystemGPSMatchingSettings| Whether the route template can use system GPS matching settings.|\r\n| VehicleTypeListItem| The GUID and description of the vehicle type associated to the route template.|\r\n| ZeroWeightAlertThreshold| The zero weight alert threshold associated to the route template.|\r\n| TeamBoardListItem| The GUID and description of the TeamBoard associated to the route template.|\r\n| IsManagedExternally| Whether the route template is created by Master Route Module Team.|"
+      operationId: RouteTemplate_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRouteTemplateResource]'
+    put:
+      tags:
+      - RouteTemplate
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route.| No |\r\n| AcceptedMaterials| An array of accepted materials.| No |\r\n| AcceptedMaterials.Guid| Guid of accepted material.| No |\r\n| AcceptedMaterials.IsDeleted| Whether the accepted material is deleted.| Yes |\r\n| AcceptedMaterials.MaterialClassItem| Guid and description of material class.| Yes |\r\n| ArchiveMissedRouteVisitReasonListItem| The GUID and description of the archive missed route visit reason associated to the route template. | No |\r\n| ArchiveRouteVisitDays| The archive route visit days associated to the route template.| No |\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the route template. | Yes |\r\n| AuditDays| The audit days associated to the route template.| No |\r\n| AuditStartDate| The audit start date associated to the route template.| No |\r\n| AutoSend| Whether auto send associated to the route template.| No |\r\n| BuildDaysBeforeNextPlannedDate| The build days before next planned date associated to the route template.| No |\r\n| BuildSimpleRouteInstance| Whether build simple route instance associated to the route template.| No | \r\n| CanRunOnSchedule| Whether can run on schedule associated to the route template.| Yes |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the route template. | Yes |\r\n| DayOccurrenceInMonthListItem| The GUID and description of the day occurrence in month associated to the route template. | No |\r\n| DayOfWeekListItem| The GUID and description of the day of week associated to the route template. | Yes |\r\n| DaysBeforeExpiry| The days before expiry associated to the route template.| No | \r\n| DefaultTipMaterialListItem| The GUID and description of the material associated to the route template. | No |\r\n| Description| The description associated to the route.| Yes |\r\n| DiffReasonRequired| Whether different reason required associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromHandheld| Whether exclude municipal customer from handheld associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromRouteConfirmation| Whether exclude municipal customer from route confirmation associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromRouteWorksheet| Whether exclude municipal customer from route worksheet associated to the route template.| No |\r\n| ForceWeightsOnRouteCompletion| Whether force weights on route completion associated to the route template.| No |\r\n| GuidedNavigationPassword| The guided navigation password associated to the route.| No |\r\n| GuidedNavigationUsername| The guided navigation username associated to the route.| No |\r\n| GuideVersion| The guide version associated to the route.| No |\r\n| IsAutoCompleteOnBuild| Whether the route template is auto complete on build.| No |\r\n| IsDeleted| Whether the route template is deleted.| No |\r\n| IsNightRoute| Whether the route template is for night route.| No |\r\n| IsRouteNavigationEnabled| Whether the route template has route navigation enabled.| No |\r\n| IsRouteStatisticGenerationOn| Whether the route template is route statistic generation is On.| No |\r\n| MarketListItem| The GUID and description of the market associated to the route template. | No |\r\n| MissedReasonRequired| Whether the missed reason is required for route template.| No |\r\n| MobileSettingsProfileListItem| The GUID and description of the mobile settings profile associated to the route template.| Yes |\r\n| NextPlannedDate| The next planned date associated to the route template.| Yes |\r\n| Notes| The notes associated to the route template.| No |\r\n| PickupIntervalListItem| The GUID and description of the pick up interval associated to the route template.| Yes |\r\n| PlannedEndTime| The planned end time associated to the route template.| No |\r\n| PlannedStartTime| The planned start time associated to the route template.| No |\r\n| PrintExceptionsOnly| Whether the route template should print exceptions only.| No |\r\n| RelatedCompanyOutletGuidFilter| Used to filter by the related company outlet GUID.| No |\r\n| RelatedLocationDestinationGuid| The GUID of location destination associated to the route template. Filterable.| No |\r\n| RelatedMasterRouteGuid| The GUID of master route associated to the route template. Filterable.| No |\r\n| RelatedSupplierSiteGuid| The GUID of supplier site associated to the route template. Filterable.| No |\r\n| RelatedSupplierSiteTransportGuid| The GUID of supplier site transport associated to the route template. Filterable.| No |\r\n| RelatedVehicleDefaultExternalGuid| The GUID of external vehicle associated to the route template. Filterable.| No |\r\n| RelatedVehicleDefaultGuid| The GUID of vehicle associated to the route template. Filterable.| No |\r\n| RelatedUserDefaultDriverGuid| The GUID of driver user associated to the route template. Filterable.| No |\r\n| RouteManagementTypeListItem| The GUID and description of the route management type associated to the route template.| Yes |\r\n| RouteNo| The route number associated to the route template.| Yes |\r\n| SupplierEmailAddress| The supplier email address associated to the route template.| Yes |\r\n| UseOrderSupplierForCostGeneration| Whether the route template can use order supplier for cost generation.| No |\r\n| VehicleTypeListItem| The GUID and description of the vehicle type associated to the route template.| Yes |\r\n| IsManagedExternally| Whether the route template is created by Master Route Module Team.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| Updating a deleted RouteTemplate | Failed to save/update RouteTemplate because attempt to update a deleted RouteTemplate is not allowed. Could not process the request. |\r\n| AcceptedMaterials.MaterialClassListItem is being edited | AcceptedMaterials.MaterialClassListItem is a read-only property. |\r\n| AcceptedMaterials.MaterialClassListItem.Guid is duplicate | The MaterialClassListItem must be unique per AcceptedMaterials |"
+      operationId: RouteTemplate_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteTemplateResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/routeTemplates:
+    get:
+      tags:
+      - RouteTemplate
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route.|\r\n| AcceptedMaterials| An array of accepted materials.|\r\n| AcceptedMaterials[0].Guid| The GUID of accepted material.|\r\n| AcceptedMaterials[0].IsDeleted| Whether accepted material is deleted.|\r\n| AcceptedMaterials[0].MaterialClassListItem| The GUID and Description of material class|\r\n| ArchiveMissedRouteVisitReasonListItem| The GUID and description of the archive missed route visit reason associated to the route template. |\r\n| ArchiveRouteVisitDays| The archive route visit days associated to the route template.|\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the route template. |\r\n| AuditDays| The audit days associated to the route template.|\r\n| AuditStartDate| The audit start date associated to the route template.|\r\n| AutoCompleteVisits| Whether auto complete visits associated to the route template.| \r\n| AutoSend| Whether auto send associated to the route template.| \r\n| BuildDaysBeforeNextPlannedDate| The build days before next planned date associated to the route template.| \r\n| BuildSimpleRouteInstance| Whether build simple route instance associated to the route template.| \r\n| CanRunOnSchedule| Whether can run on schedule associated to the route template.| \r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the route template. |\r\n| DayOccurrenceInMonthListItem| The GUID and description of the day occurrence in month associated to the route template. |\r\n| DayOfWeekListItem| The GUID and description of the day of week associated to the route template. |\r\n| DaysBeforeExpiry| The days before expiry associated to the route template.| \r\n| DefaultTipMaterialListItem| The GUID and description of the material associated to the route template. |\r\n| Description| The description associated to the route.|\r\n| DiffReasonRequired| Whether different reason required associated to the route template.|\r\n| DoubleDumpTimeInSeconds| The double dump time in seconds associated to the route template.|\r\n| ExcludeMunicipalCustomerFromHandheld| Whether exclude municipal customer from handheld associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteConfirmation| Whether exclude municipal customer from route confirmation associated to the route template.|\r\n| ExcludeMunicipalCustomerFromRouteWorksheet| Whether exclude municipal customer from route worksheet associated to the route template.|\r\n| ForceWeightsOnRouteCompletion| Whether force weights on route completion associated to the route template.|\r\n| GPSMatchingEnabled| Whether GPS matching enabled associated to the route template.|\r\n| GpsMatchingMaxRange| The Gps matching max range associated to the route.|\r\n| GpsmatchingMinProximity| The Gps matching min proximity associated to the route.|\r\n| GuidedNavigationPassword| The guided navigation password associated to the route.|\r\n| GuidedNavigationUsername| The guided navigation username associated to the route.|\r\n| GuideVersion| The guide version associated to the route.|\r\n| HideTipLocationMapMarkers| Whether hide tip location map markers associated to the route template.|\r\n| IsAutoCompleteOnBuild| Whether the route template is auto complete on build.|\r\n| IsDeleted| Whether the route template is deleted.|\r\n| IsNightRoute| Whether the route template is for night route.|\r\n| IsProximityOrderedVisits| Whether the route template is proximity ordered visits.|\r\n| IsRouteNavigationEnabled| Whether the route template has route navigation enabled.|\r\n| IsRouteStatisticGenerationOn| Whether the route template is route statistic generation is On.|\r\n| IsSubContracted| Whether the route template is sub contracted.|\r\n| MarketListItem| The GUID and description of the market associated to the route template. |\r\n| MissedReasonRequired| Whether the missed reason is required for route template.|\r\n| MobileForceManualLiftMatching| Whether the mobile force manual lift matching for route template.|\r\n| MobileSettingsProfileListItem| The GUID and description of the mobile settings profile associated to the route template.|\r\n| NextPlannedDate| The next planned date associated to the route template.|\r\n| NoMatchAlertThreshold| The No match alert threshold to the route template.|\r\n| NoTagStopEnabled| Whether the route template has no tag stop enabled.|\r\n| Notes| The notes associated to the route template.|\r\n| PickupIntervalListItem| The GUID and description of the pick up interval associated to the route template.|\r\n| PlannedEndTime| The planned end time associated to the route template.|\r\n| PlannedStartTime| The planned start time associated to the route template.|\r\n| PrintExceptionsOnly| Whether the route template should print exceptions only.|\r\n| PromptForLiftsOnVisitCompletion| Whether the route template should prompt for lifts on visit completion.|\r\n| RelatedCompanyOutletGuidFilter| Used to filter by the related company outlet GUID.|\r\n| RelatedLocationDestinationGuid| The GUID of location destination associated to the route template. Filterable.|\r\n| RelatedMasterRouteGuid| The GUID of master route associated to the route template. Filterable.|\r\n| RelatedRouteGroupGuid| The GUID of route group associated to the route template.|\r\n| RelatedSupplierSiteGuid| The GUID of supplier site associated to the route template. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of supplier site transport associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultExternalGuid| The GUID of external vehicle associated to the route template. Filterable.|\r\n| RelatedVehicleDefaultGuid| The GUID of vehicle associated to the route template. Filterable.|\r\n| RelatedUserDefaultDriverGuid| The GUID of driver user associated to the route template. Filterable.|\r\n| RFIDAlertThreshold| The RFID alert threshold associated to the route template.|\r\n| RouteManagementTypeListItem| The GUID and description of the route management type associated to the route template.|\r\n| RouteNo| The route number associated to the route template.|\r\n| RouteVisitProximityRadius| The route visit proximity radius associated to the route template.|\r\n| StoplistPollingRate| The stoplist polling rate associated to the route template.|\r\n| SupplierEmailAddress| The supplier email address associated to the route template.|\r\n| UseOrderSupplierForCostGeneration| Whether the route template can use order supplier for cost generation.|\r\n| UseSystemGPSMatchingSettings| Whether the route template can use system GPS matching settings.|\r\n| VehicleTypeListItem| The GUID and description of the vehicle type associated to the route template.|\r\n| ZeroWeightAlertThreshold| The zero weight alert threshold associated to the route template.|\r\n| TeamBoardListItem| The GUID and description of the TeamBoard associated to the route template.|\r\n| IsManagedExternally| Whether the route template is created by Master Route Module Team.|"
+      operationId: RouteTemplate_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRouteTemplateResource]'
+    post:
+      tags:
+      - RouteTemplate
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route.| No |\r\n| AcceptedMaterials| An array of accepted materials.| No |\r\n| AcceptedMaterials.Guid| Guid of accepted material.| No |\r\n| AcceptedMaterials.IsDeleted| Whether the accepted material is deleted.| Yes |\r\n| AcceptedMaterials.MaterialClassItem| Guid and description of material class.| Yes |\r\n| ArchiveMissedRouteVisitReasonListItem| The GUID and description of the archive missed route visit reason associated to the route template. | No |\r\n| ArchiveRouteVisitDays| The archive route visit days associated to the route template.| No |\r\n| AreaOfOriginListItem| The GUID and description of the area of origin associated to the route template. | Yes |\r\n| AuditDays| The audit days associated to the route template.| No |\r\n| AuditStartDate| The audit start date associated to the route template.| No |\r\n| AutoSend| Whether auto send associated to the route template.| No |\r\n| BuildDaysBeforeNextPlannedDate| The build days before next planned date associated to the route template.| No |\r\n| BuildSimpleRouteInstance| Whether build simple route instance associated to the route template.| No | \r\n| CanRunOnSchedule| Whether can run on schedule associated to the route template.| Yes |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the route template. | Yes |\r\n| DayOccurrenceInMonthListItem| The GUID and description of the day occurrence in month associated to the route template. | No |\r\n| DayOfWeekListItem| The GUID and description of the day of week associated to the route template. | Yes |\r\n| DaysBeforeExpiry| The days before expiry associated to the route template.| No | \r\n| DefaultTipMaterialListItem| The GUID and description of the material associated to the route template. | No |\r\n| Description| The description associated to the route.| Yes |\r\n| DiffReasonRequired| Whether different reason required associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromHandheld| Whether exclude municipal customer from handheld associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromRouteConfirmation| Whether exclude municipal customer from route confirmation associated to the route template.| No |\r\n| ExcludeMunicipalCustomerFromRouteWorksheet| Whether exclude municipal customer from route worksheet associated to the route template.| No |\r\n| ForceWeightsOnRouteCompletion| Whether force weights on route completion associated to the route template.| No |\r\n| GuidedNavigationPassword| The guided navigation password associated to the route.| No |\r\n| GuidedNavigationUsername| The guided navigation username associated to the route.| No |\r\n| GuideVersion| The guide version associated to the route.| No |\r\n| IsAutoCompleteOnBuild| Whether the route template is auto complete on build.| No |\r\n| IsDeleted| Whether the route template is deleted.| No |\r\n| IsNightRoute| Whether the route template is for night route.| No |\r\n| IsRouteNavigationEnabled| Whether the route template has route navigation enabled.| No |\r\n| IsRouteStatisticGenerationOn| Whether the route template is route statistic generation is On.| No |\r\n| MarketListItem| The GUID and description of the market associated to the route template. | No |\r\n| MissedReasonRequired| Whether the missed reason is required for route template.| No |\r\n| MobileSettingsProfileListItem| The GUID and description of the mobile settings profile associated to the route template.| Yes |\r\n| NextPlannedDate| The next planned date associated to the route template.| Yes |\r\n| Notes| The notes associated to the route template.| No |\r\n| PickupIntervalListItem| The GUID and description of the pick up interval associated to the route template.| Yes |\r\n| PlannedEndTime| The planned end time associated to the route template.| No |\r\n| PlannedStartTime| The planned start time associated to the route template.| No |\r\n| PrintExceptionsOnly| Whether the route template should print exceptions only.| No |\r\n| RelatedCompanyOutletGuidFilter| Used to filter by the related company outlet GUID.| No |\r\n| RelatedLocationDestinationGuid| The GUID of location destination associated to the route template. Filterable.| No |\r\n| RelatedMasterRouteGuid| The GUID of master route associated to the route template. Filterable.| No |\r\n| RelatedSupplierSiteGuid| The GUID of supplier site associated to the route template. Filterable.| No |\r\n| RelatedSupplierSiteTransportGuid| The GUID of supplier site transport associated to the route template. Filterable.| No |\r\n| RelatedVehicleDefaultExternalGuid| The GUID of external vehicle associated to the route template. Filterable.| No |\r\n| RelatedVehicleDefaultGuid| The GUID of vehicle associated to the route template. Filterable.| No |\r\n| RelatedUserDefaultDriverGuid| The GUID of driver user associated to the route template. Filterable.| No |\r\n| RouteManagementTypeListItem| The GUID and description of the route management type associated to the route template.| Yes |\r\n| RouteNo| The route number associated to the route template.| Yes |\r\n| SupplierEmailAddress| The supplier email address associated to the route template.| Yes |\r\n| UseOrderSupplierForCostGeneration| Whether the route template can use order supplier for cost generation.| No |\r\n| VehicleTypeListItem| The GUID and description of the vehicle type associated to the route template.| Yes |\r\n| IsManagedExternally| Whether the route template is created by Master Route Module Team.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| No RouteTemplates should have the same values of CompanyOutlet.GUID, RouteNo and DayOfWeek.GUID | Failed to save. RouteTemplate already exists with CompanyOutlet.GUID of <> and RouteNo of <> and DayOfWeek.GUID of <> |\r\n| If IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| Updating a deleted RouteTemplate | Failed to save/update RouteTemplate because attempt to update a deleted RouteTemplate is not allowed. Could not process the request. |\r\n| AcceptedMaterials.MaterialClassListItem is being edited | AcceptedMaterials.MaterialClassListItem is a read-only property. |\r\n| AcceptedMaterials.MaterialClassListItem.Guid is duplicate | The MaterialClassListItem must be unique per AcceptedMaterials |\r\n\r\n"
+      operationId: RouteTemplate_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteTemplateResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorRouteTemplateResource:
+      type: object
+      properties:
+        AcceptedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAcceptedMaterialsResource'
+        ArchiveMissedRouteVisitReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ArchiveRouteVisitDays:
+          type: integer
+          format: int32
+        AreaOfOriginListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AuditDays:
+          type: integer
+          format: int32
+        AuditStartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        AutoCompleteVisits:
+          type: boolean
+        AutoSend:
+          type: boolean
+        BuildDaysBeforeNextPlannedDate:
+          type: integer
+          format: int32
+        BuildSimpleRouteInstance:
+          type: boolean
+        CanRunOnSchedule:
+          type: boolean
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOccurrenceInMonthListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DaysBeforeExpiry:
+          type: integer
+          format: int32
+        DefaultTipMaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Description:
+          type: string
+        DiffReasonRequired:
+          type: boolean
+        DoubleDumpTimeInSeconds:
+          type: integer
+          format: int32
+        ExcludeMunicipalCustomerFromHandheld:
+          type: boolean
+        ExcludeMunicipalCustomerFromRouteConfirmation:
+          type: boolean
+        ExcludeMunicipalCustomerFromRouteWorksheet:
+          type: boolean
+        ForceWeightsOnRouteCompletion:
+          type: boolean
+        GPSMatchingEnabled:
+          type: boolean
+        GpsMatchingMaxRange:
+          type: number
+          format: float
+        GpsmatchingMinProximity:
+          type: number
+          format: float
+        GuidedNavigationPassword:
+          type: string
+        GuidedNavigationUsername:
+          type: string
+        GuideVersion:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        HideTipLocationMapMarkers:
+          type: boolean
+        IsAutoCompleteOnBuild:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        IsNightRoute:
+          type: boolean
+        IsProximityOrderedVisits:
+          type: boolean
+        IsRouteNavigationEnabled:
+          type: boolean
+        IsRouteStatisticGenerationOn:
+          type: boolean
+        IsSubContracted:
+          type: boolean
+        MarketListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MissedReasonRequired:
+          type: boolean
+        MobileForceManualLiftMatching:
+          type: boolean
+        MobileSettingsProfileListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        NextPlannedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        NoMatchAlertThreshold:
+          type: integer
+          format: int32
+        NoTagStopEnabled:
+          type: boolean
+        Notes:
+          type: string
+        PickupIntervalListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PlannedEndTime:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        PlannedStartTime:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        PlannedEndTimeV2:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        PlannedStartTimeV2:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        PrintExceptionsOnly:
+          type: boolean
+        PromptForLiftsOnVisitCompletion:
+          type: boolean
+        RelatedCompanyOutletGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationDestinationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedMasterRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteGroupGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteTransportGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleDefaultExternalGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleDefaultGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDefaultDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RFIDAlertThreshold:
+          type: integer
+          format: int32
+        RouteManagementTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RouteNo:
+          type: integer
+          format: int32
+        RouteVisitProximityRadius:
+          type: integer
+          format: int32
+        StoplistPollingRate:
+          type: integer
+          format: int32
+        SupplierEmailAddress:
+          type: string
+        UseOrderSupplierForCostGeneration:
+          type: boolean
+        UseSystemGPSMatchingSettings:
+          type: boolean
+        VehicleTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ZeroWeightAlertThreshold:
+          type: integer
+          format: int32
+        TeamBoardListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsManagedExternally:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorRouteTemplateResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorRouteTemplateResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRouteTemplateResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorRouteTemplateAcceptedMaterialsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        MaterialClassListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultCollection[ApiIntegratorRouteTemplateResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

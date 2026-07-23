@@ -1,0 +1,185 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PaymentType API
+  version: core
+tags:
+- name: PaymentType
+paths:
+  /lists/paymentTypes/{guid}:
+    get:
+      tags:
+      - PaymentType
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the payment type                                  |\r\n| Description               | The description of the payment type                                      |\r\n| IsDirectDebit             | Whether the payment type is direct debit                                 |    \r\n| IsCash                    | Whether the payment type is cash                                         |    \r\n| IsAutoPay                 | Whether the payment type is auto pay   |    \r\n| IsCard                    | Whether the payment type is card   |    \r\n| IsElectronic              | Whether the payment type is electronic   |    \r\n| IsCheque                  | Whether the payment type is cheque       |    \r\n| AcceptLowValue            | Whether the payment type accepts a low value   |    \r\n| IsSystemPayment           | Whether the payment type is a system payment   |    \r\n| CanMarkAsBad              | Whether the payment type can be marked as bad   |    \r\n| IsNegative                | Whether the payment type is negative     |    \r\n| IsForLodgement            | Whether the payment type is for lodgement   |    \r\n| ShortCode                 | The payment type short code              |    \r\n| IsDeleted                 | Whether the payment type is deleted       |    \r\n"
+      operationId: PaymentType_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPaymentTypeResource]'
+  /lists/paymentTypes:
+    get:
+      tags:
+      - PaymentType
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the payment type                                  |\r\n| Description               | The description of the payment type                                      |\r\n| IsDirectDebit             | Whether the payment type is direct debit                                 |    \r\n| IsCash                    | Whether the payment type is cash                                         |    \r\n| IsAutoPay                 | Whether the payment type is auto pay   |    \r\n| IsCard                    | Whether the payment type is card   |    \r\n| IsElectronic              | Whether the payment type is electronic   |    \r\n| IsCheque                  | Whether the payment type is cheque       |    \r\n| AcceptLowValue            | Whether the payment type accepts a low value   |    \r\n| IsSystemPayment           | Whether the payment type is a system payment   |    \r\n| CanMarkAsBad              | Whether the payment type can be marked as bad   |    \r\n| IsNegative                | Whether the payment type is negative     |    \r\n| IsForLodgement            | Whether the payment type is for lodgement   |    \r\n| ShortCode                 | The payment type short code              |    \r\n| IsDeleted                 | Whether the payment type is deleted       |    \r\n"
+      operationId: PaymentType_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPaymentTypeResource]'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorPaymentTypeResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorPaymentTypeResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPaymentTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorPaymentTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        IsDirectDebit:
+          type: boolean
+        IsCash:
+          type: boolean
+        IsAutoPay:
+          type: boolean
+        IsCard:
+          type: boolean
+        IsElectronic:
+          type: boolean
+        IsCheque:
+          type: boolean
+        AcceptLowValue:
+          type: boolean
+        IsSystemPayment:
+          type: boolean
+        CanMarkAsBad:
+          type: boolean
+        IsNegative:
+          type: boolean
+        IsForLodgement:
+          type: boolean
+        ShortCode:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

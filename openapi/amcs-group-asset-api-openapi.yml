@@ -1,0 +1,190 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Asset API
+  version: core
+tags:
+- name: Asset
+paths:
+  /visionai/api/integrator/assets:
+    post:
+      tags:
+      - Asset
+      summary: Create or Update an Asset (Vehicle)
+      description: "# Create or Update an Asset (Vehicle)\r\n\r\n| Parameter    | Type   | Description                                                     |\r\n|--------------|--------|-----------------------------------------------------------------|\r\n| AssetId      | GUID   | ID of the Asset                                                 |\r\n| AssetName    | string | Display name (vehicle registration plate)                       |\r\n| AssetType    | string | Front Loader, Side Loader, Rear End Loader                      |\r\n| OutletId     | GUID   | ID of the Company Outlet associated with the Asset              |\r\n| CompanyCode  | string | Company code associated with the Asset              |\r\n| IsDeleted    | bool   | Asset is no longer in use                                       |\r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"AssetId\": \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\",\r\n  \"AssetName\": \"VEH 001\",\r\n  \"AssetType\": \"Front Loader\",\r\n  \"OutletId\": \"2FAD788D-A748-4520-9120-923DA1E42942\",\r\n  \"CompanyCode\": \"Trux Company 1\",\r\n  \"IsDeleted\": false \r\n}\r\n```\r\n\r\n## Sample API Response\r\n```\r\n{\r\n    \"resource\" : \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Asset.ApiAsset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Unauthorized
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiauthTokens500Error'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+components:
+  responses:
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+  schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: guid
+      additionalProperties: false
+    ApiauthTokens500Error:
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        stackTrace:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.Asset.ApiAsset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          format: uuid
+          nullable: true
+        assetName:
+          type: string
+          nullable: true
+        assetType:
+          type: string
+          nullable: true
+        outletId:
+          type: string
+          format: uuid
+          nullable: true
+        companyCode:
+          type: string
+          nullable: true
+        isDeleted:
+          type: boolean
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

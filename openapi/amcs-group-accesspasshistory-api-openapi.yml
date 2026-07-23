@@ -1,0 +1,101 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AccessPassHistory API
+  version: core
+tags:
+- name: AccessPassHistory
+paths:
+  /stosag/accessPassHistories:
+    post:
+      tags:
+      - AccessPassHistory
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ----------------------------------------------------------|-------------------------------------------------------------------------------------- |----------|\r\n| AccessPassHistory[0].ContainerGuid| The GUID of the Container associated to the shared container.|   Yes    |\r\n| AccessPassHistory[0].ContainerTagId| The ContainerTagId of the municipal account associated to the shared container.|   Yes    | \r\n| AccessPassHistory[0].Timestamp| The timestamp of the access pass history recorded.|   Yes   |\r\n| AccessPassHistory[0].Volume| The Volume of the waste disposed by the acess pass.|   No   |\r\n| AccessPassHistory[0].Netweight| The netweight of the waste disposed by the acess pass.|No   |\r\n| AccessPassHistory[0].NoOfDrops| The No of times waste disposed by the acess pass.|No   |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ----------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------- |\r\n| If AccessPassHistory[0].ContainerGuid not linked to shared container.| Container ({0}) Not found in shared container associated with timestamp.|\r\n| AccessPassHistory[0].ContainerTagId not linked to municipal account of the shared container.| Municipal Account Access ({0}) Pass is not associated with Shared Container.|\r\n| AccessPassHistory[0].ContainerTagId not linked to municipalities of the shared container.| Master Access Pass ({0}) is not associated with Municipalities of the Shared Container.|"
+      operationId: AccessPassHistory_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorAccessPassesHistoryResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorAccessPassesHistoryResource:
+      type: object
+      properties:
+        AccessPassHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessPassHistoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorAccessPassHistoryResource:
+      type: object
+      properties:
+        ContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTagId:
+          type: string
+        TimeStamp:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Netweight:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        NoOfDrops:
+          type: integer
+          format: int32
+        ContainerId:
+          type: integer
+          format: int32
+        SharedContainerAccessPassId:
+          type: integer
+          format: int32
+        ClusterAccountId:
+          type: integer
+          format: int32
+        AccessPassHistoryId:
+          type: integer
+          format: int32
+        MaterialId:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

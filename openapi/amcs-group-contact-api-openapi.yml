@@ -1,0 +1,333 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Contact API
+  version: core
+tags:
+- name: Contact
+paths:
+  /directory/contacts/changes:
+    get:
+      tags:
+      - Contact
+      summary: Retrieve changes
+      description: "| Property| Description   |\r\n| --------------------------------- |------------------------------------------------------------------------  |\r\n| GUID| The GUID associated to the contact.   |\r\n| Salutation                        | The contact's Salutation.                                                |\r\n| Forename| The contact's Forename.   |\r\n| Surname| The contact's Surname.   |\r\n| JobTitle| The contact's Job Title.   |\r\n| ActivationCode| The contact's Activation code.   |\r\n| ContactRegistrationStatusListItem | The Guid and Description associated to the contract registration status. |\r\n| AccessGroupListItem| The Guid and Description associated to the access group.                 |\r\n| PinCode| The Pin code of the contact.       |\r\n| ContactPassword| The password of the contact   |\r\n| ConfirmContactPassword| The password confirmation of the contact.   |\r\n| ContactMethods| The contact's contact methods.                                           |\r\n| ContactMethods.TelNo| The contact's telephone number.   |\r\n| ContactMethods.OtherTelNo| The contact's other telephone number.   |\r\n| ContactMethods Email| The contact's email address.   |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the contact.   |\r\n| ContactTypeListItems| The list of contact types associated to the contact.   |\r\n| ContactTypeListItems[0].ContactTypeListItem | The GUID and description of contact types associated to the contact.|\r\n| RelatedLocationGuids| The list of related location guid associated to the contact.|\r\n| RelatedLocationGuids[0].RelatedLocationGuid| The GUID associated to the location of the contact.|\r\n| RelatedLocationGuids[0].IsPrimary| The IsPrimary associated to the location contact of the contact.|\r\n| RelatedLocationGuids[0].GUID| The GUID associated to the location contact of the contact.|\r\n| IsDeleted| Whether the contact is deleted.|\r\n| RelatedLocationGuidFilter                      | Used to filter the related location guid linked to the contact    |\r\n\r\n"
+      operationId: Contact_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorContactResource]'
+  /directory/contacts/{guid}:
+    get:
+      tags:
+      - Contact
+      summary: Find with GUID
+      description: "| Property| Description   |\r\n| --------------------------------- |------------------------------------------------------------------------  |\r\n| GUID| The GUID associated to the contact.   |\r\n| Salutation                        | The contact's Salutation.                                                |\r\n| Forename| The contact's Forename.   |\r\n| Surname| The contact's Surname.   |\r\n| JobTitle| The contact's Job Title.   |\r\n| ActivationCode| The contact's Activation code.   |\r\n| ContactRegistrationStatusListItem | The Guid and Description associated to the contract registration status. |\r\n| AccessGroupListItem| The Guid and Description associated to the access group.                 |\r\n| PinCode| The Pin code of the contact.       |\r\n| ContactPassword| The password of the contact   |\r\n| ConfirmContactPassword| The password confirmation of the contact.   |\r\n| ContactMethods| The contact's contact methods.                                           |\r\n| ContactMethods.TelNo| The contact's telephone number.   |\r\n| ContactMethods.OtherTelNo| The contact's other telephone number.   |\r\n| ContactMethods Email| The contact's email address.   |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the contact.   |\r\n| ContactTypeListItems| The list of contact types associated to the contact.   |\r\n| ContactTypeListItems[0].ContactTypeListItem | The GUID and description of contact types associated to the contact.|\r\n| RelatedLocationGuids| The list of related location guid associated to the contact.|\r\n| RelatedLocationGuids[0].RelatedLocationGuid| The GUID associated to the location of the contact.|\r\n| RelatedLocationGuids[0].IsPrimary| The IsPrimary associated to the location contact of the contact.|\r\n| RelatedLocationGuids[0].GUID| The GUID associated to the location contact of the contact.|\r\n| IsDeleted| Whether the contact is deleted.|\r\n| RelatedLocationGuidFilter                      | Used to filter the related location guid linked to the contact    |\r\n\r\n"
+      operationId: Contact_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContactResource]'
+    put:
+      tags:
+      - Contact
+      summary: Partial update
+      description: "| Property| Description   | Required |\r\n| --------------------------------- |------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the contact.   | No  |\r\n| Salutation                        | The contact's Salutation.                                                | No       |\r\n| Forename| The contact's Forename.   | No       |\r\n| Surname| The contact's Surname.   | Yes      |\r\n| JobTitle| The contact's Job Title.   | No  |\r\n| ActivationCode| The contact's Activation code.   | No  |\r\n| ContactRegistrationStatusListItem | The Guid and Description associated to the contract registration status. | Yes  |\r\n| AccessGroupListItem| The Guid and Description associated to the access group.                 | Yes  |\r\n| PinCode| The contact's Pin code.       | Yes  |\r\n| ContactPassword| The contact's password.   | Yes  |\r\n| ConfirmContactPassword| The contact's password confirmation.   | Yes  |\r\n| ContactMethods| The contact's contact methods.                                           | No   |\r\n| ContactMethods.TelNo| The contact's telephone number.   | No   |\r\n| ContactMethods.OtherTelNo| The contact's other telephone number.   | No  |\r\n| ContactMethods.Email| The contact's email address.   | No       |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the contact.   | Yes  |\r\n| ContactTypeListItems| The list of contact types associated to the contact.   | No  |\r\n| ContactTypeListItems[0].ContactTypeListItem | The GUID and description of contact types associated to the contact.| No  |\r\n| RelatedLocationGuids| The list of related location guid associated to the contact.| No |\r\n| RelatedLocationGuids[0].RelatedLocationGuid| The GUID associated to the location of the contact.| Yes |\r\n| RelatedLocationGuids[0].IsPrimary| The IsPrimary associated to the location contact of the contact.| No |\r\n| RelatedLocationGuids[0].GUID| The GUID associated to the location contact of the contact.| No |\r\n| IsDeleted| Whether the contact is deleted.| No      |\r\n| RelatedLocationGuidFilter         | Used to filter the related location guid linked to the contact        | No  |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If invalid telephone number | Tel No: Must match a valid telephone number format. |\r\n| If activationCode is provided | ContactRegistrationStatusListItem, AccessGroupListItem, PinCode, ContactMethods.Email, ContactMethods.TelNo, ContactPassword & ConfirmContactPassword are required  |\r\n| If contact is a portal contact the Activation code cannot be set to null | \"Activation Code: Must have a value for portal contacts and be no more than 16 characters long\". |\r\n| If ContactTypeListItems[0].ContactTypeListItem.GUID is duplicated on another ContactTypeListItem | Failed to save. ContactTypeListItems already exists with Guid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx |\r\n| RelatedLocationGuids replace existing | All existing RelatedLocationGuids are deleted and replaced when the resource is updated. |\r\n| If same Location Guid is provided to a contact| LocationContact already exists with RelatedLocationGuids.RelatedLocationGuid of {value of RelatedLocationGuid}. |\r\n| If trying to update the deleted resource | Attempt to update a deleted Contact. Could not process the request. |\r\n| If activation code is Duplicated | Failed to save. Entity already exists with ActivationCode of {value of ActivationCode}. | "
+      operationId: Contact_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorContactResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/contacts:
+    get:
+      tags:
+      - Contact
+      summary: Find with Filters
+      description: "| Property| Description   |\r\n| --------------------------------- |------------------------------------------------------------------------  |\r\n| GUID| The GUID associated to the contact.   |\r\n| Salutation                        | The contact's Salutation.                                                |\r\n| Forename| The contact's Forename.   |\r\n| Surname| The contact's Surname.   |\r\n| JobTitle| The contact's Job Title.   |\r\n| ActivationCode| The contact's Activation code.   |\r\n| ContactRegistrationStatusListItem | The Guid and Description associated to the contract registration status. |\r\n| AccessGroupListItem| The Guid and Description associated to the access group.                 |\r\n| PinCode| The Pin code of the contact.       |\r\n| ContactPassword| The password of the contact   |\r\n| ConfirmContactPassword| The password confirmation of the contact.   |\r\n| ContactMethods| The contact's contact methods.                                           |\r\n| ContactMethods.TelNo| The contact's telephone number.   |\r\n| ContactMethods.OtherTelNo| The contact's other telephone number.   |\r\n| ContactMethods Email| The contact's email address.   |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the contact.   |\r\n| ContactTypeListItems| The list of contact types associated to the contact.   |\r\n| ContactTypeListItems[0].ContactTypeListItem | The GUID and description of contact types associated to the contact.|\r\n| RelatedLocationGuids| The list of related location guid associated to the contact.|\r\n| RelatedLocationGuids[0].RelatedLocationGuid| The GUID associated to the location of the contact.|\r\n| RelatedLocationGuids[0].IsPrimary| The IsPrimary associated to the location contact of the contact.|\r\n| RelatedLocationGuids[0].GUID| The GUID associated to the location contact of the contact.|\r\n| IsDeleted| Whether the contact is deleted.|\r\n| RelatedLocationGuidFilter                      | Used to filter the related location guid linked to the contact    |\r\n\r\n"
+      operationId: Contact_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContactResource]'
+    post:
+      tags:
+      - Contact
+      summary: Create or update
+      description: "| Property| Description   | Required |\r\n| --------------------------------- |------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the contact.   | No  |\r\n| Salutation                        | The contact's Salutation.                                                | No       |\r\n| Forename| The contact's Forename.   | No       |\r\n| Surname| The contact's Surname.   | Yes      |\r\n| JobTitle| The contact's Job Title.   | No  |\r\n| ActivationCode| The contact's Activation code.   | No  |\r\n| ContactRegistrationStatusListItem | The Guid and Description associated to the contract registration status. | Yes  |\r\n| AccessGroupListItem| The Guid and Description associated to the access group.                 | Yes  |\r\n| PinCode| The contact's Pin code.       | Yes  |\r\n| ContactPassword| The contact's password.   | Yes  |\r\n| ConfirmContactPassword| The contact's password confirmation.   | Yes  |\r\n| ContactMethods| The contact's contact methods.                                           | No   |\r\n| ContactMethods.TelNo| The contact's telephone number.   | No   |\r\n| ContactMethods.OtherTelNo| The contact's other telephone number.   | No  |\r\n| ContactMethods.Email| The contact's email address.   | No       |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the contact.   | Yes  |\r\n| ContactTypeListItems| The list of contact types associated to the contact.   | No  |\r\n| ContactTypeListItems[0].ContactTypeListItem | The GUID and description of contact types associated to the contact.| No  |\r\n| RelatedLocationGuids| The list of related location guid associated to the contact.| No |\r\n| RelatedLocationGuids[0].RelatedLocationGuid| The GUID associated to the location of the contact.| Yes |\r\n| RelatedLocationGuids[0].IsPrimary| The IsPrimary associated to the location contact of the contact.| No |\r\n| RelatedLocationGuids[0].GUID| The GUID associated to the location contact of the contact.| No |\r\n| IsDeleted| Whether the contact is deleted.| No      |\r\n| RelatedLocationGuidFilter         | Used to filter the related location guid linked to the contact       | No      |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If invalid telephone number | Tel No: Must match a valid telephone number format. |\r\n| If activationCode is provided | ContactRegistrationStatusListItem, AccessGroupListItem, PinCode, ContactMethods.Email, ContactMethods.TelNo, ContactPassword & ConfirmContactPassword are required  |\r\n| If contact is a portal contact the Activation code cannot be set to null | \"Activation Code: Must have a value for portal contacts and be no more than 16 characters long\". |\r\n| If ContactTypeListItems[0].ContactTypeListItem.GUID is duplicated on another ContactTypeListItem | Failed to save. ContactTypeListItems already exists with Guid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx |\r\n| RelatedLocationGuids replace existing | All existing RelatedLocationGuids are deleted and replaced when the resource is updated. |\r\n| If same Location Guid is provided to a contact| LocationContact already exists with RelatedLocationGuids.RelatedLocationGuid of {value of RelatedLocationGuid}. |\r\n| If isDeleted true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If activation code is Duplicated | Failed to save. Entity already exists with ActivationCode of {value of ActivationCode}. | "
+      operationId: Contact_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorContactResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorContactResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContactResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorContactResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContactResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorLocationContactResource:
+      type: object
+      properties:
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsPrimary:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorContactResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContactResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorContactMethodsResource:
+      type: object
+      properties:
+        TelNo:
+          type: string
+        OtherTelNo:
+          type: string
+        Email:
+          type: string
+    ApiIntegratorContactContactTypeResource:
+      type: object
+      properties:
+        ContactTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorContactResource:
+      type: object
+      properties:
+        Salutation:
+          type: string
+        Forename:
+          type: string
+        Surname:
+          type: string
+        JobTitle:
+          type: string
+        ActivationCode:
+          type: string
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationGuids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLocationContactResource'
+        ContactMethods:
+          $ref: '#/components/schemas/ApiIntegratorContactMethodsResource'
+        ContactRegistrationStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccessGroupListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PinCode:
+          type: string
+        ContactPassword:
+          type: string
+        ConfirmContactPassword:
+          type: string
+        ContactTypeListItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContactContactTypeResource'
+        RelatedLocationGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

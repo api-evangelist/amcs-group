@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/*.json
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Core, ERP Platform, Pay, TLV and Vision AI specs declare openapi 3.0.1.
+- id: swagger-2.0
+  conforms: true
+  evidence: The Scale REST API spec is published as swagger 2.0.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme declared; auth is PAT + session cookie.
+- id: openid-connect
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses are application/json with an ApiResourceErrors envelope, not application/problem+json.
+- id: json-api
+  conforms: false
+- id: hateoas
+  conforms: true
+  evidence: Response envelopes carry links (self, associations, expand, operations).
+- id: pagination
+  conforms: true
+  evidence: Collection endpoints expose a page query parameter and an extra.count total.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key contract declared.
+- id: fhir
+  conforms: false
+- id: scim
+  conforms: false
+- id: odata
+  conforms: false

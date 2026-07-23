@@ -1,0 +1,316 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Supplier API
+  version: core
+tags:
+- name: Supplier
+paths:
+  /directory/suppliers/changes:
+    get:
+      tags:
+      - Supplier
+      summary: Retrieve changes
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                         | The GUID associated to the supplier. |\r\n| ApAccountCode                | The account code used for accounts payable associated to the supplier. |\r\n| BankDetails       | The object where bank details are specified.         |\r\n| BankDetails.AccountName      | The account name associated to the bank details. |\r\n| BankDetails.AccountNo        | The account number associated to the bank details. |\r\n| BankDetails.Address.Address1 | The address1 associated to the bank details. |\r\n| BankDetails.Address.Address2 | The address2 associated to the bank details. |\r\n| BankDetails.Address.Address3 | The address3 associated to the bank details. |\r\n| BankDetails.Address.Address4 | The address4 associated to the bank details. |\r\n| BankDetails.Address.Address5 | The address5 associated to the bank details. |\r\n| BankDetails.Address.Postcode | The postcode associated to the bank details. |\r\n| BankDetails.BankName         | The bank name associated to the bank details. |\r\n| BankDetails.BIC              | The Bank Identifier Code associated to the bank details. |\r\n| BankDetails.IBAN             | The International Bank Account Number associated to the bank details. |\r\n| BankDetails.SortCode         | The sort code associated to the bank details. |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and name of the direct debit run config associated to the bank details. |\r\n| CompanyOutletListItem        | The GUID and name of the company outlet associated to the supplier. |\r\n| CurrencyListItem             | The GUID and name of the currency associated to the supplier. |\r\n| Description                  | The description associated to the supplier. |\r\n| IsTransportSupplier          | Is this a transport supplier? |\r\n| PaymentTermListItem          | The GUID and name of the payment term associated to the supplier. |\r\n| PaymentTypeListItem          | The GUID and name of the payment type associated to the supplier. |\r\n"
+      operationId: Supplier_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorSupplierAccountResource]'
+  /directory/suppliers/{guid}:
+    get:
+      tags:
+      - Supplier
+      summary: Find with GUID
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                         | The GUID associated to the supplier. |\r\n| ApAccountCode                | The account code used for accounts payable associated to the supplier. |\r\n| BankDetails       | The object where bank details are specified.         |\r\n| BankDetails.AccountName      | The account name associated to the bank details. |\r\n| BankDetails.AccountNo        | The account number associated to the bank details. |\r\n| BankDetails.Address.Address1 | The address1 associated to the bank details. |\r\n| BankDetails.Address.Address2 | The address2 associated to the bank details. |\r\n| BankDetails.Address.Address3 | The address3 associated to the bank details. |\r\n| BankDetails.Address.Address4 | The address4 associated to the bank details. |\r\n| BankDetails.Address.Address5 | The address5 associated to the bank details. |\r\n| BankDetails.Address.Postcode | The postcode associated to the bank details. |\r\n| BankDetails.BankName         | The bank name associated to the bank details. |\r\n| BankDetails.BIC              | The Bank Identifier Code associated to the bank details. |\r\n| BankDetails.IBAN             | The International Bank Account Number associated to the bank details. |\r\n| BankDetails.SortCode         | The sort code associated to the bank details. |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and name of the direct debit run config associated to the bank details. |\r\n| CompanyOutletListItem        | The GUID and name of the company outlet associated to the supplier. |\r\n| CurrencyListItem             | The GUID and name of the currency associated to the supplier. |\r\n| Description                  | The description associated to the supplier. |\r\n| IsTransportSupplier          | Is this a transport supplier? |\r\n| PaymentTermListItem          | The GUID and name of the payment term associated to the supplier. |\r\n| PaymentTypeListItem          | The GUID and name of the payment type associated to the supplier. |\r\n"
+      operationId: Supplier_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSupplierAccountResource]'
+    put:
+      tags:
+      - Supplier
+      summary: Partial update
+      description: "| Property       | Description                                                  | Required |\r\n| -------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                         | The GUID associated to the supplier. | No |\r\n| ApAccountCode                | The account code used for accounts payable associated to the supplier. | Yes |\r\n| BankDetails       | The object where bank details are specified.         | No |\r\n| BankDetails.AccountName      | The account name associated to the bank details. | Yes |\r\n| BankDetails.AccountNo        | The account number associated to the bank details. | Yes |\r\n| BankDetails.Address.Address1 | The address1 associated to the bank details. | No |\r\n| BankDetails.Address.Address2 | The address2 associated to the bank details. | No |\r\n| BankDetails.Address.Address3 | The address3 associated to the bank details. | No |\r\n| BankDetails.Address.Address4 | The address4 associated to the bank details. | No |\r\n| BankDetails.Address.Address5 | The address5 associated to the bank details. | No |\r\n| BankDetails.Address.Postcode | The postcode associated to the bank details. | No |\r\n| BankDetails.BankName         | The bank name associated to the bank details. | Yes |\r\n| BankDetails.BIC              | The Bank Identifier Code associated to the bank details. | No |\r\n| BankDetails.IBAN             | The International Bank Account Number associated to the bank details. | No |\r\n| BankDetails.SortCode         | The sort code associated to the bank details. | No |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and name of the direct debit run config associated to the bank details. | Yes |\r\n| CompanyOutletListItem        | The GUID and name of the company outlet associated to the supplier. | No |\r\n| CurrencyListItem             | The GUID and name of the currency associated to the supplier. | Yes |\r\n| Description                  | The description associated to the supplier. | Yes |\r\n| IsTransportSupplier          | Is this a transport supplier? | No |\r\n| PaymentTermListItem          | The GUID and name of the payment term associated to the supplier. | No |\r\n| PaymentTypeListItem          | The GUID and name of the payment type associated to the supplier. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| CompanyOutlet not found with value CompanyOutletListItem.Guid | Failed to retrieve CompanyOutlet with GUID of {value of CompanyOutletListItem.Guid} |\r\n| PaymentType not found with value PaymentTypeListItem.Guid | Failed to retrieve PaymentType with GUID of {value of PaymentTypeListItem.Guid} |\r\n| PaymentTerm not found with value PaymentTermListItem.Guid | Failed to retrieve PaymentTerm with GUID of {value of PaymentTermListItem.Guid} |\r\n| Currency not found with value CurrencyListItem.Guid | Failed to retrieve Currency with GUID of {value of CurrencyListItem.Guid} |\r\n| DirectDebitRunConfig not found with value BankDetails.DirectDebitRunConfigListItem.Guid | Failed to retrieve DirectDebitRunConfig with GUID of {value of BankDetails.DirectDebitRunConfigListItem.Guid} |\r\n| When APAccountCode is not unique | The ApAccountCode must be unique per supplier |\r\n| Description not unique per supplier | The description must be unique per supplier |\r\n| When Description is null/empty/more than 60 chars | Supplier/Haulier Description: Must have a value. Must be no more than 100 characters long |\r\n| When APAccountCode is null/empty/more than 20 chars | APAccountCode: Must have a value. Must be no more than 20 characters long |"
+      operationId: SupplierAccount_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorSupplierAccountResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/suppliers:
+    get:
+      tags:
+      - Supplier
+      summary: Find with Filters
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                         | The GUID associated to the supplier. |\r\n| ApAccountCode                | The account code used for accounts payable associated to the supplier. |\r\n| BankDetails       | The object where bank details are specified.         |\r\n| BankDetails.AccountName      | The account name associated to the bank details. |\r\n| BankDetails.AccountNo        | The account number associated to the bank details. |\r\n| BankDetails.Address.Address1 | The address1 associated to the bank details. |\r\n| BankDetails.Address.Address2 | The address2 associated to the bank details. |\r\n| BankDetails.Address.Address3 | The address3 associated to the bank details. |\r\n| BankDetails.Address.Address4 | The address4 associated to the bank details. |\r\n| BankDetails.Address.Address5 | The address5 associated to the bank details. |\r\n| BankDetails.Address.Postcode | The postcode associated to the bank details. |\r\n| BankDetails.BankName         | The bank name associated to the bank details. |\r\n| BankDetails.BIC              | The Bank Identifier Code associated to the bank details. |\r\n| BankDetails.IBAN             | The International Bank Account Number associated to the bank details. |\r\n| BankDetails.SortCode         | The sort code associated to the bank details. |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and name of the direct debit run config associated to the bank details. |\r\n| CompanyOutletListItem        | The GUID and name of the company outlet associated to the supplier. |\r\n| CurrencyListItem             | The GUID and name of the currency associated to the supplier. |\r\n| Description                  | The description associated to the supplier. |\r\n| IsTransportSupplier          | Is this a transport supplier? |\r\n| PaymentTermListItem          | The GUID and name of the payment term associated to the supplier. |\r\n| PaymentTypeListItem          | The GUID and name of the payment type associated to the supplier. |\r\n"
+      operationId: Supplier_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSupplierAccountResource]'
+    post:
+      tags:
+      - Supplier
+      summary: Create or update
+      description: "| Property       | Description                                                  | Required |\r\n| -------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                         | The GUID associated to the supplier. | No |\r\n| ApAccountCode                | The account code used for accounts payable associated to the supplier. | Yes |\r\n| BankDetails       | The object where bank details are specified.         | No |\r\n| BankDetails.AccountName      | The account name associated to the bank details. | Yes |\r\n| BankDetails.AccountNo        | The account number associated to the bank details. | Yes |\r\n| BankDetails.Address.Address1 | The address1 associated to the bank details. | No |\r\n| BankDetails.Address.Address2 | The address2 associated to the bank details. | No |\r\n| BankDetails.Address.Address3 | The address3 associated to the bank details. | No |\r\n| BankDetails.Address.Address4 | The address4 associated to the bank details. | No |\r\n| BankDetails.Address.Address5 | The address5 associated to the bank details. | No |\r\n| BankDetails.Address.Postcode | The postcode associated to the bank details. | No |\r\n| BankDetails.BankName         | The bank name associated to the bank details. | Yes |\r\n| BankDetails.BIC              | The Bank Identifier Code associated to the bank details. | No |\r\n| BankDetails.IBAN             | The International Bank Account Number associated to the bank details. | No |\r\n| BankDetails.SortCode         | The sort code associated to the bank details. | No |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and name of the direct debit run config associated to the bank details. | Yes |\r\n| CompanyOutletListItem        | The GUID and name of the company outlet associated to the supplier. | No |\r\n| CurrencyListItem             | The GUID and name of the currency associated to the supplier. | Yes |\r\n| Description                  | The description associated to the supplier. | Yes |\r\n| IsTransportSupplier          | Is this a transport supplier? | No |\r\n| PaymentTermListItem          | The GUID and name of the payment term associated to the supplier. | No |\r\n| PaymentTypeListItem          | The GUID and name of the payment type associated to the supplier. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| CompanyOutlet not found with value CompanyOutletListItem.Guid | Failed to retrieve CompanyOutlet with GUID of {value of CompanyOutletListItem.Guid} |\r\n| PaymentType not found with value PaymentTypeListItem.Guid | Failed to retrieve PaymentType with GUID of {value of PaymentTypeListItem.Guid} |\r\n| PaymentTerm not found with value PaymentTermListItem.Guid | Failed to retrieve PaymentTerm with GUID of {value of PaymentTermListItem.Guid} |\r\n| Currency not found with value CurrencyListItem.Guid | Failed to retrieve Currency with GUID of {value of CurrencyListItem.Guid} |\r\n| DirectDebitRunConfig not found with value BankDetails.DirectDebitRunConfigListItem.Guid | Failed to retrieve DirectDebitRunConfig with GUID of {value of BankDetails.DirectDebitRunConfigListItem.Guid} |\r\n| When APAccountCode is not unique | The ApAccountCode must be unique per supplier |\r\n| When Description is null/empty/more than 60 chars | Supplier/Haulier Description: Must have a value. Must be no more than 100 characters long |\r\n| When APAccountCode is null/empty/more than 20 chars | APAccountCode: Must have a value. Must be no more than 20 characters long |"
+      operationId: SupplierAccount_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorSupplierAccountResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorSupplierAccountResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSupplierAccountResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorSupplierAccountResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSupplierAccountResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSupplierAccountResource:
+      type: object
+      properties:
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ApAccountCode:
+          type: string
+        Description:
+          type: string
+        IsTransportSupplier:
+          type: boolean
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        BankDetails:
+          $ref: '#/components/schemas/ApiIntegratorSupplierAccountBankDetailsResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorSupplierAccountResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSupplierAccountResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorSupplierAccountBankDetailsResource:
+      type: object
+      properties:
+        BankName:
+          type: string
+        AccountName:
+          type: string
+        AccountNo:
+          type: string
+        SortCode:
+          type: string
+        BIC:
+          type: string
+        IBAN:
+          type: string
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorSupplierAccountBankDetailsAddressResource'
+        DirectDebitRunConfigListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorSupplierAccountBankDetailsAddressResource:
+      type: object
+      properties:
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

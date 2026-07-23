@@ -1,0 +1,90 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup RecyclingCentreServiceStatus API
+  version: core
+tags:
+- name: RecyclingCentreServiceStatus
+paths:
+  /municipal/recyclingCentreServiceStatuses:
+    get:
+      tags:
+      - RecyclingCentreServiceStatus
+      summary: Find with Filters
+      operationId: RecyclingCentreServiceStatus_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRecyclingCentreServiceStatusResource]'
+components:
+  schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection[ApiIntegratorRecyclingCentreServiceStatusResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRecyclingCentreServiceStatusResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRecyclingCentreServiceStatusResource:
+      type: object
+      properties:
+        AccessPassId:
+          type: string
+        FunctionalID:
+          type: string
+        IsOrderActive:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

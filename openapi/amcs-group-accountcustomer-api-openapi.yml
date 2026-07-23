@@ -1,0 +1,694 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AccountCustomer API
+  version: core
+tags:
+- name: AccountCustomer
+paths:
+  /accounting/accountCustomers/changes:
+    get:
+      tags:
+      - AccountCustomer
+      summary: Retrieve changes
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.                               |\r\n| FederalId                 | The customer's local authority / government / tax reference.             |\r\n| IsInternal                | Whether the customer is an internal customer.                            |\r\n| ARAccountCode             | Used to filter customers on the accounts receivable code.           |\r\n| APAccountCode             | Used to filter customers on the accounts payable code.                   |\r\n| Notes| Notes of customer.   |\r\n| AMICENumber| AMICE Number of customer.   |\r\n| CoCNumber| CoC Number of customer.   |\r\n| HasRedLight               | Red light indicator passed to driver to indicate the mood of the end customer.|\r\n| CombineChargesRebates     | Rebate are included on the invoice, otherwise a separate bill is generated for rebates. |\r\n| ExternalVehicleValidation | The customer uses their own vehicles and the weighbridge will need to validate the vehicle registrations against a list held on the AMCS Platform. |\r\n| TicketsRequiredWithInvoice | Tickets are required with invoice.                                      |\r\n| RctCustomer               | In the Republic of Ireland the customer is a contractor liable for Relevent Contractors Tax. |\r\n| ProofOfServiceRequired    | Customers need to sign tickets.                      |\r\n| ExcludeFromStatementRun   | Excludes them from the batch statement run.          |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem               | The GUID and name of the company this customer is associated to.           |\r\n| CustomerStateListItem         | The GUID and status of the customer (eg. Active, Suspended, etc.).         |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                        | \r\n| CustomerTypeListItem          | The GUID and type of customer (eg. Residential, Commerical, Municipal).    |\r\n| CustomerCategoryListItem      | The GUID and category of the customer (various values).                    |\r\n| CustomerGroupListItem         | The GUID and group of the customer (various values).                       |\r\n| VisitStatusListItem        | The GUID and description of the visit status of the customer |\r\n| CurrencyListItem              | The GUID and currency of the customer (various values).                    |\r\n| CustomerTemplateListItem| The GUID and customer template of the customer (various values).           |\r\n| BusinessTypeListItem          | The GUID and business type of the customer (various values).               |\r\n| AutoArAccountCode| The object allowing for creation of an ArAccountCode, depending on system configuration. |\r\n| AutoArAccountCode.CompanyOutletGuid | The GUID of the company outlet used for creation of an ArAccountCode, depending on system configuration. |\r\n| RelatedUserSalesRepGuid   | The GUID of the related sales rep.                                       |     \r\n| RelatedUserCreditControllerGuid | The GUID of the related credit controller.                         |     \r\n| RelatedMasterAccountGuid  | The GUID of the related master account.                                  |     \r\n| RelatedBillToCustomerGuid | The GUID of the related customer where the bills must be send to.        |     \r\n| RelatedLocationHQGuid| The GUID associated to the HQ location of the customer.   |     \r\n| BankDetails| The object where bank details are specified.   |\r\n| BankDetails.BankName      | The bank name of the direct debit.                                       |\r\n| BankDetails.AccountName   | The account name of the direct debit.                           |\r\n| BankDetails.AccountNo     | The account number of the direct debit.               |\r\n| BankDetails.SortCode      | The sort code of the direct debit.   |\r\n| BankDetails.BIC           | The Bank Identifier Code of the direct debit.   |\r\n| BankDetails.IBAN          | The International Bank Account Number of the direct debit.   |\r\n| BankDetails.NationalBankCode | The National Bank Code of the direct debit.   |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and description of the direct debit run configuration. |\r\n| BankDetails.DirectDebitAccountTypeListItem | The GUID and description of the direct debit account type. |\r\n| BankDetails.Address       | The object where bank address details are specified.   |\r\n| BankDetails.Address.Address1 | The Address1 of the bank.   |\r\n| BankDetails.Address.Address2 | The Address2 of the bank.   |\r\n| BankDetails.Address.Address3 | The Address3 of the bank.   |\r\n| BankDetails.Address.Address4 | The Address4 of the bank.   |\r\n| BankDetails.Address.Address5 | The Address5 of the bank.   |\r\n| BankDetails.Address.Postcode | The Postcode of the bank.   |\r\n| Contract| The object allowing for creation of the contract.      |\r\n| Contract.StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD).      |\r\n| Contract.ApprovedDate              | The approved date of the contract in ISO format (YYYY-MM-DD).   |\r\n| Contract.CreditLimit               | The maximum credit limit stipulated on this contract.                    |\r\n| Contract.BalanceMigrated           | The balance which has been migrated. |\r\n| Contract.InvoiceCycleId            | The Id of the invoice cycle this contract will be invoice under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| Contract.VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| Contract.VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| Contract.VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number.    |\r\n| Contract.RollUpInvoiceBySite | Whether the roll up of invoice are done by site.    |\r\n| Contract.RollUpInvoiceByService    | Whether the roll up of invoice are done by service.    |\r\n| Contract.IsInvoiceCollated | Whether the invoice are collated.|\r\n| Contract.DepartmentListItem            | The GUID and name of the department this contract is associated to.       |\r\n| Contract.ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| Contract.PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| Contract.PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| Contract.InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency term (eg. Quarterly, Immediate, etc.). |\r\n| Contract.InvoiceDocumentDeliveryMethods[]| The array of document delivery types associated to the Contract.|\r\n| Contract.InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the InvoiceDocumentDeliveryMethods. |\r\n| Balance| The object which allows creation of Customer Balance.|\r\n| Balance.OutstandingAmount | The Outstanding Amount on the customers account.| \r\n| Balance.UnallocatedAmount | The Unallocated Amount on the customers account.| \r\n| Balance.UnconfirmedBalance | The Unconfirmed Balance Amount on the customers account.| \r\n| Balance.LedgerBalance | The Ledger Balance Amount on the customers account.| \r\n| TradingNames.Guid | The TradingNames Guid on the customers account.    | \r\n| TradingNames.Description | The TradingNames Description on the customers account.| \r\n| TradingNames.TradingNameTypeListItem.Guid | The Guid associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.TradingNameTypeListItem.Description | The Description associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.IsDeleted | Is the TradingName Deleted. | \r\n| TradingNames.IsForAllSites | IsForAllSites set for the TradingNames. | \r\n| PaymentProviderSettings[0].Name | The Name of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].Value | The Value of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].IsDeleted | Is the PaymentProviderSettings deleted. |\r\n| PaymentProviderSettings[0].Guid | The Guid of the Payment Provider Settings. |\r\n| CreditCards[0].Forename | The Forename of the credit card holder. | \r\n| CreditCards[0].Surname | The Surname of the credit card holder. | \r\n| CreditCards[0].Postcode | The Postcode associated to the credit card. | \r\n| CreditCards[0].Province | The Province associated to the credit card. | \r\n| CreditCards[0].DateCreated | The DateCreated associated to the credit card. | \r\n| CreditCards[0].MaskedCreditCardNumber | The MaskedCreditCardNumber associated to the credit card. | \r\n| CreditCards[0].Address1 | The Address1 associated to the credit card. | \r\n| CreditCards[0].City | The City associated to the credit card. | \r\n| CreditCards[0].RelatedContactGuid | The RelatedContactGuid associated to the credit card. | \r\n| CreditCards[0].Country | The Country associated to the credit card. | \r\n| CreditCards[0].CreditCardExpiryDate | The CreditCardExpiryDate associated to the credit card. | \r\n| CreditCards[0].Currency | The Currency associated to the credit card. | \r\n| CreditCards[0].ExternalVaultCardReference | The ExternalVaultCardReference associated to the credit card. | \r\n| CreditCards[0].ExternalVaultReference | The ExternalVaultReference associated to the credit card. | \r\n| CreditCards[0].IsACH | Is the payment an ACH payment. | \r\n| CreditCards[0].Deleted | Is the CreditCard deleted. |\r\n| CreditCards[0].IsRequestWithImmediateResponse | The IsRequestWithImmediateResponse associated to the credit card.  | \r\n| CreditCards[0].PayerReference | The payer reference associated to the credit card.  | \r\n| CreditCards[0].PaymentReference | The payment reference associated to the credit card.  | \r\n| CreditCards[0].PaymentPointListItem | The Guid and Description associated to the PaymentPointListItem to the credit card. | \r\n| CreditCards[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem to the credit card.  | \r\n| CreditCards[0].Guid | The Guid associated to the credit card.  |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the account customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report. |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedExternalVehicles| The array of related external vehicles associated to the account customer.|\r\n| RelatedExternalVehicles[0].RelatedExternalVehicleGuid| The related external vehicleguid associated to the account customer.    |\r\n| RelatedExternalVehicles[0].IsForAllMaterials                | Whether the related external vehicle is for all Materials.        |\r\n| RelatedExternalVehicles[0].IsForAllSites                    | Whether the related external vehicle is for all Sites.|\r\n| RelatedExternalVehicles[0].ValidFrom                        | The valid from date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].ValidTo                        | The valid to date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].IsDeleted                        | Whether the related external vehicle is deleted.|\r\n| RelatedExternalVehicles[0].Guid                            | The Guid associated to the related external vehicle.|\r\n| CustomerBusinessType| The array of related customer business type associated to the account customer. |\r\n| CustomerBusinessType[0].Guid| The customer business type Guid associated to the account customer.|\r\n| CustomerBusinessType[0].BusinessTypeOptionListItem| The Guid and Description associated to the BusinessTypeOptionListItem to the customer business type.|\r\n| DefaultSicCodeListItem| The Guid and Description associated to the DefaultSicCodeListItem to the account customer.|\r\n| IsTaxExempt| Whether the account customer is tax exempt. |\r\n| TradingNameGuidFilter| Filter by the Guid of the Trading Name. |\r\n| TradingNameFilter| Filter by the Trading Name. |\r\n| RelatedExternalVehicleGuidFilter| Filter by the Guid of the Related External Vehicle. |"
+      operationId: AccountCustomer_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorAccountCustomerResource]'
+  /accounting/accountCustomers/{guid}:
+    get:
+      tags:
+      - AccountCustomer
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.                               |\r\n| FederalId                 | The customer's local authority / government / tax reference.             |\r\n| IsInternal                | Whether the customer is an internal customer.                            |\r\n| ARAccountCode             | Used to filter customers on the accounts receivable code.           |\r\n| APAccountCode             | Used to filter customers on the accounts payable code.                   |\r\n| Notes| Notes of customer.   |\r\n| AMICENumber| AMICE Number of customer.   |\r\n| CoCNumber| CoC Number of customer.   |\r\n| HasRedLight               | Red light indicator passed to driver to indicate the mood of the end customer.|\r\n| CombineChargesRebates     | Rebate are included on the invoice, otherwise a separate bill is generated for rebates. |\r\n| ExternalVehicleValidation | The customer uses their own vehicles and the weighbridge will need to validate the vehicle registrations against a list held on the AMCS Platform. |\r\n| TicketsRequiredWithInvoice | Tickets are required with invoice.                                      |\r\n| RctCustomer               | In the Republic of Ireland the customer is a contractor liable for Relevent Contractors Tax. |\r\n| ProofOfServiceRequired    | Customers need to sign tickets.                      |\r\n| ExcludeFromStatementRun   | Excludes them from the batch statement run.          |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem               | The GUID and name of the company this customer is associated to.           |\r\n| CustomerStateListItem         | The GUID and status of the customer (eg. Active, Suspended, etc.).         |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                        | \r\n| CustomerTypeListItem          | The GUID and type of customer (eg. Residential, Commerical, Municipal).    |\r\n| CustomerCategoryListItem      | The GUID and category of the customer (various values).                    |\r\n| CustomerGroupListItem         | The GUID and group of the customer (various values).                       |\r\n| VisitStatusListItem        | The GUID and description of the visit status of the customer |\r\n| CurrencyListItem              | The GUID and currency of the customer (various values).                    |\r\n| CustomerTemplateListItem| The GUID and customer template of the customer (various values).           |\r\n| BusinessTypeListItem          | The GUID and business type of the customer (various values).               |\r\n| AutoArAccountCode| The object allowing for creation of an ArAccountCode, depending on system configuration. |\r\n| AutoArAccountCode.CompanyOutletGuid | The GUID of the company outlet used for creation of an ArAccountCode, depending on system configuration. |\r\n| RelatedUserSalesRepGuid   | The GUID of the related sales rep.                                       |     \r\n| RelatedUserCreditControllerGuid | The GUID of the related credit controller.                         |     \r\n| RelatedMasterAccountGuid  | The GUID of the related master account.                                  |     \r\n| RelatedBillToCustomerGuid | The GUID of the related customer where the bills must be send to.        |     \r\n| RelatedLocationHQGuid| The GUID associated to the HQ location of the customer.   |     \r\n| BankDetails| The object where bank details are specified.   |\r\n| BankDetails.BankName      | The bank name of the direct debit.                                       |\r\n| BankDetails.AccountName   | The account name of the direct debit.                           |\r\n| BankDetails.AccountNo     | The account number of the direct debit.               |\r\n| BankDetails.SortCode      | The sort code of the direct debit.   |\r\n| BankDetails.BIC           | The Bank Identifier Code of the direct debit.   |\r\n| BankDetails.IBAN          | The International Bank Account Number of the direct debit.   |\r\n| BankDetails.NationalBankCode | The National Bank Code of the direct debit.   |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and description of the direct debit run configuration. |\r\n| BankDetails.DirectDebitAccountTypeListItem | The GUID and description of the direct debit account type. |\r\n| BankDetails.Address       | The object where bank address details are specified.   |\r\n| BankDetails.Address.Address1 | The Address1 of the bank.   |\r\n| BankDetails.Address.Address2 | The Address2 of the bank.   |\r\n| BankDetails.Address.Address3 | The Address3 of the bank.   |\r\n| BankDetails.Address.Address4 | The Address4 of the bank.   |\r\n| BankDetails.Address.Address5 | The Address5 of the bank.   |\r\n| BankDetails.Address.Postcode | The Postcode of the bank.   |\r\n| Contract| The object allowing for creation of the contract.      |\r\n| Contract.StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD).      |\r\n| Contract.ApprovedDate              | The approved date of the contract in ISO format (YYYY-MM-DD).   |\r\n| Contract.CreditLimit               | The maximum credit limit stipulated on this contract.                    |\r\n| Contract.BalanceMigrated           | The balance which has been migrated. |\r\n| Contract.InvoiceCycleId            | The Id of the invoice cycle this contract will be invoice under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| Contract.VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| Contract.VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| Contract.VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number.    |\r\n| Contract.RollUpInvoiceBySite | Whether the roll up of invoice are done by site.    |\r\n| Contract.RollUpInvoiceByService    | Whether the roll up of invoice are done by service.    |\r\n| Contract.IsInvoiceCollated | Whether the invoice are collated.|\r\n| Contract.DepartmentListItem            | The GUID and name of the department this contract is associated to.       |\r\n| Contract.ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| Contract.PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| Contract.PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| Contract.InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency term (eg. Quarterly, Immediate, etc.). |\r\n| Contract.InvoiceDocumentDeliveryMethods[]| The array of document delivery types associated to the Contract.|\r\n| Contract.InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the InvoiceDocumentDeliveryMethods. |\r\n| Balance| The object which allows creation of Customer Balance.|\r\n| Balance.OutstandingAmount | The Outstanding Amount on the customers account.| \r\n| Balance.UnallocatedAmount | The Unallocated Amount on the customers account.| \r\n| Balance.UnconfirmedBalance | The Unconfirmed Balance Amount on the customers account.| \r\n| Balance.LedgerBalance | The Ledger Balance Amount on the customers account.| \r\n| TradingNames.Guid | The TradingNames Guid on the customers account.    | \r\n| TradingNames.Description | The TradingNames Description on the customers account.| \r\n| TradingNames.TradingNameTypeListItem.Guid | The Guid associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.TradingNameTypeListItem.Description | The Description associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.IsDeleted | Is the TradingName Deleted. | \r\n| TradingNames.IsForAllSites | IsForAllSites set for the TradingNames. | \r\n| PaymentProviderSettings[0].Name | The Name of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].Value | The Value of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].IsDeleted | Is the PaymentProviderSettings deleted. |\r\n| PaymentProviderSettings[0].Guid | The Guid of the Payment Provider Settings. |\r\n| CreditCards[0].Forename | The Forename of the credit card holder. | \r\n| CreditCards[0].Surname | The Surname of the credit card holder. | \r\n| CreditCards[0].Postcode | The Postcode associated to the credit card. | \r\n| CreditCards[0].Province | The Province associated to the credit card. | \r\n| CreditCards[0].DateCreated | The DateCreated associated to the credit card. | \r\n| CreditCards[0].MaskedCreditCardNumber | The MaskedCreditCardNumber associated to the credit card. | \r\n| CreditCards[0].Address1 | The Address1 associated to the credit card. | \r\n| CreditCards[0].City | The City associated to the credit card. | \r\n| CreditCards[0].RelatedContactGuid | The RelatedContactGuid associated to the credit card. | \r\n| CreditCards[0].Country | The Country associated to the credit card. | \r\n| CreditCards[0].CreditCardExpiryDate | The CreditCardExpiryDate associated to the credit card. | \r\n| CreditCards[0].Currency | The Currency associated to the credit card. | \r\n| CreditCards[0].ExternalVaultCardReference | The ExternalVaultCardReference associated to the credit card. | \r\n| CreditCards[0].ExternalVaultReference | The ExternalVaultReference associated to the credit card. | \r\n| CreditCards[0].IsACH | Is the payment an ACH payment. | \r\n| CreditCards[0].Deleted | Is the CreditCard deleted. |\r\n| CreditCards[0].IsRequestWithImmediateResponse | The IsRequestWithImmediateResponse associated to the credit card.  | \r\n| CreditCards[0].PayerReference | The payer reference associated to the credit card.  | \r\n| CreditCards[0].PaymentReference | The payment reference associated to the credit card.  | \r\n| CreditCards[0].PaymentPointListItem | The Guid and Description associated to the PaymentPointListItem to the credit card. | \r\n| CreditCards[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem to the credit card.  | \r\n| CreditCards[0].Guid | The Guid associated to the credit card.  |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the account customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report. |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedExternalVehicles| The array of related external vehicles associated to the account customer.|\r\n| RelatedExternalVehicles[0].RelatedExternalVehicleGuid| The related external vehicleguid associated to the account customer.    |\r\n| RelatedExternalVehicles[0].IsForAllMaterials                | Whether the related external vehicle is for all Materials.        |\r\n| RelatedExternalVehicles[0].IsForAllSites                    | Whether the related external vehicle is for all Sites.|\r\n| RelatedExternalVehicles[0].ValidFrom                        | The valid from date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].ValidTo                        | The valid to date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].IsDeleted                        | Whether the related external vehicle is deleted.|\r\n| RelatedExternalVehicles[0].Guid                            | The Guid associated to the related external vehicle.|\r\n| CustomerBusinessType| The array of related customer business type associated to the account customer. |\r\n| CustomerBusinessType[0].Guid| The customer business type Guid associated to the account customer.|\r\n| CustomerBusinessType[0].BusinessTypeOptionListItem| The Guid and Description associated to the BusinessTypeOptionListItem to the customer business type.|\r\n| DefaultSicCodeListItem| The Guid and Description associated to the DefaultSicCodeListItem to the account customer.|\r\n| IsTaxExempt| Whether the account customer is tax exempt. |\r\n| TradingNameGuidFilter| Filter by the Guid of the Trading Name. |\r\n| TradingNameFilter| Filter by the Trading Name. |\r\n| RelatedExternalVehicleGuidFilter| Filter by the Guid of the Related External Vehicle. |"
+      operationId: AccountCustomer_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorAccountCustomerResource]'
+    put:
+      tags:
+      - AccountCustomer
+      summary: Partial update
+      description: "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the customer.                                       | No |\r\n| Name                      | The customer's name.                                                       | No |\r\n| Reference                 | An alternative name used for the customer.                                 | No |\r\n| FederalId                 | The customer's local authority / government / tax reference.               | No |\r\n| IsInternal                | Whether the customer is an internal customer.                              | No |\r\n| ARAccountCode             | The account code used for accounts receivable.                             | No |\r\n| APAccountCode             | The account code used for accounts payable.                                | No |\r\n| Notes| Notes of customer. | No |\r\n| AMICENumber| AMICE Number of customer. | No |\r\n| CoCNumber| CoC Number of customer. | No |\r\n| HasRedLight               | Red light indicator passed to driver to indicate the mood of the end customer.| No |\r\n| CombineChargesRebates     | Rebate are included on the invoice, otherwise a separate bill is generated for rebates. | Yes |\r\n| ExternalVehicleValidation | The customer uses their own vehicles and the weighbridge will need to validate the vehicle registrations against a list held on the AMCS Platform. | No |\r\n| TicketsRequiredWithInvoice | Tickets are required with invoice.                                        | No |\r\n| RctCustomer               | In the Republic of Ireland the customer is a contractor liable for Relevent Contractors Tax. | No |\r\n| ProofOfServiceRequired    | Customers need to sign tickets.                      | No |\r\n| ExcludeFromStatementRun   | Excludes them from the batch statement run.          | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     | No |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      | No |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   | No |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    | No |\r\n| CompanyListItem               | The GUID and name of the company this customer is associated to.           | Yes |\r\n| CustomerStateListItem         | The GUID and status of the customer (eg. Active, Suspended, etc.).         | No |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                        | No |\r\n| CustomerCategoryListItem      | The GUID and category of the customer (various values).                    | No |\r\n| CustomerGroupListItem         | The GUID and group of the customer (various values).                       | No |\r\n| VisitStatusListItem        | The GUID and description of the visit status of the customer | No |\r\n| CurrencyListItem              | The GUID and currency of the customer (various values).                    | Yes |\r\n| CustomerTemplateListItem| The GUID and customer template of the customer (various values).           | No |\r\n| BusinessTypeListItem          | The GUID and business type of the customer (various values).               | No |\r\n| AutoArAccountCode| The object allowing for creation of an ArAccountCode, depending on system configuration. | No |\r\n| AutoArAccountCode.CompanyOutletGUID | The GUID of the company outlet used for creation of an ArAccountCode, depending on system configuration. | No |\r\n| RelatedUserSalesRepGuid   | The GUID of the related sales rep.                                         | No |\r\n| RelatedUserCreditControllerGuid | The GUID of the related credit controller.                           | No |\r\n| RelatedMasterAccountGuid  | The GUID of the related master account.                                    | No |\r\n| RelatedBillToCustomerGuid | The GUID of the related customer where the bills must be send to.          | No |   \r\n| RelatedLocationHQGuid| The GUID associated to the HQ location of the customer. | No |   \r\n| BankDetails| The object where bank details are specified.             | No |\r\n| BankDetails.BankName      | The bank name of the direct debit.                                         | Yes |\r\n| BankDetails.AccountName   | The account name of the direct debit.                             | Yes |\r\n| BankDetails.AccountNo     | The account number of the direct debit.                 | Yes |\r\n| BankDetails.SortCode      | The sort code of the direct debit.     | Yes |\r\n| BankDetails.BIC           | The Bank Identifier Code of the direct debit.         | No |\r\n| BankDetails.IBAN          | The International Bank Account Number of the direct debit.     | No |\r\n| BankDetails.NationalBankCode | The National Bank Code of the direct debit. | No |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and description of the direct debit run configuration  | No |\r\n| BankDetails.DirectDebitAccountTypeListItem | The GUID and description of the direct debit account type. | Yes |\r\n| BankDetails.Address       | The object where bank address details are specified.     | No |\r\n| BankDetails.Address.Address1 | The Address1 of the bank.     | No |\r\n| BankDetails.Address.Address2 | The Address2 of the bank.     | No |\r\n| BankDetails.Address.Address3 | The Address3 of the bank.     | No |\r\n| BankDetails.Address.Address4 | The Address4 of the bank.     | No |\r\n| BankDetails.Address.Address5 | The Address5 of the bank.     | No |\r\n| BankDetails.Address.Postcode | The Postcode of the bank.     | No |\r\n| Contract| The object allowing for creation of the contract.        | Yes |\r\n| Contract.StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD).        | No |\r\n| Contract.ApprovedDate              | The approved date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| Contract.CreditLimit               | The maximum credit limit stipulated on this contract.             | No |\r\n| Contract.BalanceMigrated           | The balance which has been migrated.                              | No |\r\n| Contract.InvoiceCycleId            | The Id of the invoice cycle this contract will be invoice under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| Contract.VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| Contract.VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| Contract.VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| Contract.RollUpInvoiceBySite | Whether the roll up of invoice are done by site.    | No |\r\n| Contract.RollUpInvoiceByService    | Whether the roll up of invoice are done by service.    | No |\r\n| Contract.IsInvoiceCollated | Whether the invoice are collated.| Yes |\r\n| Contract.DepartmentListItem            | The GUID and name of the department this contract is associated to.  | Yes |\r\n| Contract.ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | Yes |\r\n| Contract.PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| Contract.PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| Contract.InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency term (eg. Quarterly, Immediate, etc.). | Yes |\r\n| Contract.InvoiceDocumentDeliveryMethods[]| The array of document delivery types associated to the Contract.| No |\r\n| Contract.InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the InvoiceDocumentDeliveryMethods. | No |\r\n| Balance| The object which allows creation of Customer Balance| No |\r\n| Balance.OutstandingAmount | The outstanding amount on the customers account| Yes |\r\n| Balance.UnallocatedAmount | The Unallocated amount on the customers account| Yes |\r\n| Balance.UnconfirmedBalance | The Unconfirmed Balance amount on the customers account| Yes |\r\n| Balance.LedgerBalance | The Ledger Balance on the customers account| Yes |\r\n| TradingNames.Guid | The TradingNames Guid on the customers account.    | No  |\r\n| TradingNames.Description | The TradingNames Description on the customers account.| Yes | \r\n| TradingNames.TradingNameTypeListItem | The Guid and Description of the TradingNameTypeListItem associated to the TradingNames on the customers account. | Yes | \r\n| TradingNames.IsDeleted | Is the TradingName Deleted. | Yes | \r\n| TradingNames.IsForAllSites | IsForAllSites set for the TradingNames. | Yes | \r\n| PaymentProviderSettings[0].Name | The Name of the Payment Provider Settings. | Yes |\r\n| PaymentProviderSettings[0].Value | The Value of the Payment Provider Settings. | No |\r\n| PaymentProviderSettings[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem of the Payment Provider Settings. | Yes |\r\n| PaymentProviderSettings[0].IsDeleted | Is the PaymentProviderSettings deleted. | No |\r\n| PaymentProviderSettings[0].Guid | The Guid of the Payment Provider Settings. | No |\r\n| CreditCards[0].Forename | The Forename of the credit card holder. | No |\r\n| CreditCards[0].Surname | The Surname of the credit card holder. | No | \r\n| CreditCards[0].Postcode | The Postcode associated to the credit card. | No |\r\n| CreditCards[0].Province | The Province associated to the credit card. | No |\r\n| CreditCards[0].DateCreated | The DateCreated associated to the credit card. | Yes |\r\n| CreditCards[0].MaskedCreditCardNumber | The MaskedCreditCardNumber associated to the credit card. | Yes |\r\n| CreditCards[0].Address1 | The Address1 associated to the credit card. | No |\r\n| CreditCards[0].City | The City associated to the credit card. | No |\r\n| CreditCards[0].RelatedContactGuid | The RelatedContactGuid associated to the credit card. | No |\r\n| CreditCards[0].Country | The Country associated to the credit card. | No |\r\n| CreditCards[0].CreditCardExpiryDate | The CreditCardExpiryDate associated to the credit card. | No |\r\n| CreditCards[0].Currency | The Currency associated to the credit card. | No |\r\n| CreditCards[0].ExternalVaultCardReference | The ExternalVaultCardReference associated to the credit card. | No |\r\n| CreditCards[0].ExternalVaultReference | The ExternalVaultReference associated to the credit card. | No |\r\n| CreditCards[0].IsACH | Is the payment an ACH payment. | No |\r\n| CreditCards[0].Deleted | Is the CreditCard deleted. | No |\r\n| CreditCards[0].IsRequestWithImmediateResponse | The IsRequestWithImmediateResponse associated to the credit card.  | No |\r\n| CreditCards[0].PayerReference | The payer reference associated to the credit card.  | No |\r\n| CreditCards[0].PaymentReference | The payment reference associated to the credit card.  | No |\r\n| CreditCards[0].PaymentPointListItem | The Guid and Description associated to the PaymentPointListItem to the credit card. | No |\r\n| CreditCards[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem to the credit card.  | No |\r\n| CreditCards[0].Guid | The Guid associated to the credit card.  | No |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the account customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. | No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedExternalVehicles| The array of related external vehicles associated to the account customer.| No |\r\n| RelatedExternalVehicles[0].RelatedExternalVehicleGuid| The related external vehicleguid associated to the account customer.    | Yes |\r\n| RelatedExternalVehicles[0].IsForAllMaterials                | Whether the related external vehicle is for all Materials.        | Yes |\r\n| RelatedExternalVehicles[0].IsForAllSites                    | Whether the related external vehicle is for all Sites.| Yes |\r\n| RelatedExternalVehicles[0].ValidFrom                        | The valid from date of the related external vehicles in ISO format (YYYY-MM-DD).| Yes |\r\n| RelatedExternalVehicles[0].ValidTo                        | The valid to date of the related external vehicles in ISO format (YYYY-MM-DD).| Yes |\r\n| RelatedExternalVehicles[0].IsDeleted                        | Whether the related external vehicle is deleted.| Yes |\r\n| RelatedExternalVehicles[0].Guid                            | The Guid associated to the related external vehicle.| Yes |\r\n| CustomerBusinessType| The array of related customer business type associated to the account customer.| No |\r\n| CustomerBusinessType[0].Guid| The customer business type Guid associated to the account customer.| No |\r\n| CustomerBusinessType[0].BusinessTypeOptionListItem| The Guid and Description associated to the BusinessTypeOptionListItem to the customer business type.| No |\r\n| DefaultSicCodeListItem| The Guid and Description associated to the DefaultSicCodeListItem to the account customer.| No |\r\n| IsTaxExempt| Whether the account customer is tax exempt.| No |\r\n| TradingNameGuidFilter| Filter by the Guid of the Trading Name.| No |\r\n| TradingNameFilter| Filter by the Trading Name.| No |\r\n| RelatedExternalVehicleGuidFilter| Filter by the Guid of the Related External Vehicle.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| autoGenerateAccountNumbers and Update and (ARAccountCode is null or AutoArAccountCode is not null) | ARAccountCode should not be null and AutoArAccountCode should be null |\r\n| autoGenerateAccountNumbers and (ARAccountCode is not null or AutoArAccountCode is null) | AutoArAccountCode should not be null and ARAccountCode should be null |\r\n| autoGenerateAccountNumbers is No and (ARAccountCode is null or AutoArAccountCode is not null) | ARAccountCode should not be null and AutoArAccountCode should be null |\r\n| Update and ARAccountCode not equal to saved ARAccountCode | ARAccountCode is a read-only property |\r\n| Update ARAccountCode to be null | ARAccountCode is a read-only property |\r\n| Update and AutoArAccountCode not equal to saved AutoArAccountCode | A value for AutoARAccountCode has been included as part of an update. Could not update the resource. Only include a value for AutoARAccountCode when an AR Account code is to be system generated as part of creating a customer.|\r\n| CompanyOutlet not found with value AutoArAccountCode.CompanyOutletGuid | Failed to retrieve CompanyOutlet with AutoArAccountCode.CompanyOutletGuid of {value of AutoArAccountCode.CompanyOutletGUID} |\r\n| MasterAccount not found with value RelatedMasterAccountGuid | Failed to retrieve MasterAccount with RelatedMasterAccountGuid of {value of RelatedMasterAccountGuid} |\r\n| Customer not found with value RelatedBillToCustomerGuid | Failed to retrieve Customer with RelatedBillToCustomerGuid of {value of RelatedBillToCustomerGuid} |\r\n| SysUser not found with value RelatedUserSalesRepGuid | Failed to retrieve SysUser with RelatedUserSalesRepGuid of {value of RelatedUserSalesRepGuid} |\r\n| SysUser not found with value RelatedUserCreditControllerGuid | Failed to retrieve SysUser with RelatedUserCreditControllerGuid of {value of RelatedUserCreditControllerGuid} |\r\n| ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |\r\n| DirectDebit not found for the AccountCustomer | The mandatory property DirectDebitId has a null value. The request could not be processed. Supply a value for the DirectDebitId property of the submitted resource. |\r\n| Provide TradingNames.Guid which is not linked to the customer | Failed to save/update AccountCustomer because Trading name with Guid {guid} is not linked to the customer. Could not update the customer. Ensure that the trading names listed in The TradingNames array are those for the customer. |\r\n| Duplicate TradingNames Description in the trading names array for the customer | Failed to save. Entity already exists with TradingNames.Description of {Description}  |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update AccountCustomer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update AccountCustomer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. AccountCustomer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to AccountCustomer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| CustomerTemplateListItem.Guid is deleted | The provided CustomerTemplateListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| BusinessTypeListItem.Guid is not active | The provided BusinessTypeListItem is not active. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType.Guid is not active | The provided DocumentDeliveryType is not active. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| PaymentProviderSettings[0].Guid is provided for new account customer | Attempting to update payment provider settings when creating a customer. Could not process the request. Provide payment provider setting with out a Guid property to create new settings rather than attempting an update. |\r\n| PaymentProviderSettings[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| CreditCards[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If the value for CreditCards.IsDeleted is changed on update | CreditCards.IsDeleted is a read-only property |\r\n| If the value for any {property} is changed on update for a deleted CreditCard | Attempt to update the {property} of a CreditCard that is deleted. Could not process the request |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n"
+      operationId: AccountCustomer_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /accounting/accountCustomers:
+    get:
+      tags:
+      - AccountCustomer
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.                               |\r\n| FederalId                 | The customer's local authority / government / tax reference.             |\r\n| IsInternal                | Whether the customer is an internal customer.                            |\r\n| ARAccountCode             | Used to filter customers on the accounts receivable code.           |\r\n| APAccountCode             | Used to filter customers on the accounts payable code.                   |\r\n| Notes| Notes of customer.   |\r\n| AMICENumber| AMICE Number of customer.   |\r\n| CoCNumber| CoC Number of customer.   |\r\n| HasRedLight               | Red light indicator passed to driver to indicate the mood of the end customer.|\r\n| CombineChargesRebates     | Rebate are included on the invoice, otherwise a separate bill is generated for rebates. |\r\n| ExternalVehicleValidation | The customer uses their own vehicles and the weighbridge will need to validate the vehicle registrations against a list held on the AMCS Platform. |\r\n| TicketsRequiredWithInvoice | Tickets are required with invoice.                                      |\r\n| RctCustomer               | In the Republic of Ireland the customer is a contractor liable for Relevent Contractors Tax. |\r\n| ProofOfServiceRequired    | Customers need to sign tickets.                      |\r\n| ExcludeFromStatementRun   | Excludes them from the batch statement run.          |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem               | The GUID and name of the company this customer is associated to.           |\r\n| CustomerStateListItem         | The GUID and status of the customer (eg. Active, Suspended, etc.).         |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                        | \r\n| CustomerTypeListItem          | The GUID and type of customer (eg. Residential, Commerical, Municipal).    |\r\n| CustomerCategoryListItem      | The GUID and category of the customer (various values).                    |\r\n| CustomerGroupListItem         | The GUID and group of the customer (various values).                       |\r\n| VisitStatusListItem        | The GUID and description of the visit status of the customer |\r\n| CurrencyListItem              | The GUID and currency of the customer (various values).                    |\r\n| CustomerTemplateListItem| The GUID and customer template of the customer (various values).           |\r\n| BusinessTypeListItem          | The GUID and business type of the customer (various values).               |\r\n| AutoArAccountCode| The object allowing for creation of an ArAccountCode, depending on system configuration. |\r\n| AutoArAccountCode.CompanyOutletGuid | The GUID of the company outlet used for creation of an ArAccountCode, depending on system configuration. |\r\n| RelatedUserSalesRepGuid   | The GUID of the related sales rep.                                       |     \r\n| RelatedUserCreditControllerGuid | The GUID of the related credit controller.                         |     \r\n| RelatedMasterAccountGuid  | The GUID of the related master account.                                  |     \r\n| RelatedBillToCustomerGuid | The GUID of the related customer where the bills must be send to.        |     \r\n| RelatedLocationHQGuid| The GUID associated to the HQ location of the customer.   |     \r\n| BankDetails| The object where bank details are specified.   |\r\n| BankDetails.BankName      | The bank name of the direct debit.                                       |\r\n| BankDetails.AccountName   | The account name of the direct debit.                           |\r\n| BankDetails.AccountNo     | The account number of the direct debit.               |\r\n| BankDetails.SortCode      | The sort code of the direct debit.   |\r\n| BankDetails.BIC           | The Bank Identifier Code of the direct debit.   |\r\n| BankDetails.IBAN          | The International Bank Account Number of the direct debit.   |\r\n| BankDetails.NationalBankCode | The National Bank Code of the direct debit.   |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and description of the direct debit run configuration. |\r\n| BankDetails.DirectDebitAccountTypeListItem | The GUID and description of the direct debit account type. |\r\n| BankDetails.Address       | The object where bank address details are specified.   |\r\n| BankDetails.Address.Address1 | The Address1 of the bank.   |\r\n| BankDetails.Address.Address2 | The Address2 of the bank.   |\r\n| BankDetails.Address.Address3 | The Address3 of the bank.   |\r\n| BankDetails.Address.Address4 | The Address4 of the bank.   |\r\n| BankDetails.Address.Address5 | The Address5 of the bank.   |\r\n| BankDetails.Address.Postcode | The Postcode of the bank.   |\r\n| Contract| The object allowing for creation of the contract.      |\r\n| Contract.StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD).      |\r\n| Contract.ApprovedDate              | The approved date of the contract in ISO format (YYYY-MM-DD).   |\r\n| Contract.CreditLimit               | The maximum credit limit stipulated on this contract.                    |\r\n| Contract.BalanceMigrated           | The balance which has been migrated. |\r\n| Contract.InvoiceCycleId            | The Id of the invoice cycle this contract will be invoice under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| Contract.VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| Contract.VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| Contract.VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number.    |\r\n| Contract.RollUpInvoiceBySite | Whether the roll up of invoice are done by site.    |\r\n| Contract.RollUpInvoiceByService    | Whether the roll up of invoice are done by service.    |\r\n| Contract.IsInvoiceCollated | Whether the invoice are collated.|\r\n| Contract.DepartmentListItem            | The GUID and name of the department this contract is associated to.       |\r\n| Contract.ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| Contract.PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| Contract.PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| Contract.InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency term (eg. Quarterly, Immediate, etc.). |\r\n| Contract.InvoiceDocumentDeliveryMethods[]| The array of document delivery types associated to the Contract.|\r\n| Contract.InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the InvoiceDocumentDeliveryMethods. |\r\n| Balance| The object which allows creation of Customer Balance.|\r\n| Balance.OutstandingAmount | The Outstanding Amount on the customers account.| \r\n| Balance.UnallocatedAmount | The Unallocated Amount on the customers account.| \r\n| Balance.UnconfirmedBalance | The Unconfirmed Balance Amount on the customers account.| \r\n| Balance.LedgerBalance | The Ledger Balance Amount on the customers account.| \r\n| TradingNames.Guid | The TradingNames Guid on the customers account.    | \r\n| TradingNames.Description | The TradingNames Description on the customers account.| \r\n| TradingNames.TradingNameTypeListItem.Guid | The Guid associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.TradingNameTypeListItem.Description | The Description associated to the TradingNameTypeListItem on the customers account. | \r\n| TradingNames.IsDeleted | Is the TradingName Deleted. | \r\n| TradingNames.IsForAllSites | IsForAllSites set for the TradingNames. | \r\n| PaymentProviderSettings[0].Name | The Name of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].Value | The Value of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem of the Payment Provider Settings. |\r\n| PaymentProviderSettings[0].IsDeleted | Is the PaymentProviderSettings deleted. |\r\n| PaymentProviderSettings[0].Guid | The Guid of the Payment Provider Settings. |\r\n| CreditCards[0].Forename | The Forename of the credit card holder. | \r\n| CreditCards[0].Surname | The Surname of the credit card holder. | \r\n| CreditCards[0].Postcode | The Postcode associated to the credit card. | \r\n| CreditCards[0].Province | The Province associated to the credit card. | \r\n| CreditCards[0].DateCreated | The DateCreated associated to the credit card. | \r\n| CreditCards[0].MaskedCreditCardNumber | The MaskedCreditCardNumber associated to the credit card. | \r\n| CreditCards[0].Address1 | The Address1 associated to the credit card. | \r\n| CreditCards[0].City | The City associated to the credit card. | \r\n| CreditCards[0].RelatedContactGuid | The RelatedContactGuid associated to the credit card. | \r\n| CreditCards[0].Country | The Country associated to the credit card. | \r\n| CreditCards[0].CreditCardExpiryDate | The CreditCardExpiryDate associated to the credit card. | \r\n| CreditCards[0].Currency | The Currency associated to the credit card. | \r\n| CreditCards[0].ExternalVaultCardReference | The ExternalVaultCardReference associated to the credit card. | \r\n| CreditCards[0].ExternalVaultReference | The ExternalVaultReference associated to the credit card. | \r\n| CreditCards[0].IsACH | Is the payment an ACH payment. | \r\n| CreditCards[0].Deleted | Is the CreditCard deleted. |\r\n| CreditCards[0].IsRequestWithImmediateResponse | The IsRequestWithImmediateResponse associated to the credit card.  | \r\n| CreditCards[0].PayerReference | The payer reference associated to the credit card.  | \r\n| CreditCards[0].PaymentReference | The payment reference associated to the credit card.  | \r\n| CreditCards[0].PaymentPointListItem | The Guid and Description associated to the PaymentPointListItem to the credit card. | \r\n| CreditCards[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem to the credit card.  | \r\n| CreditCards[0].Guid | The Guid associated to the credit card.  |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the account customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report. |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedExternalVehicles| The array of related external vehicles associated to the account customer.|\r\n| RelatedExternalVehicles[0].RelatedExternalVehicleGuid| The related external vehicleguid associated to the account customer.    |\r\n| RelatedExternalVehicles[0].IsForAllMaterials                | Whether the related external vehicle is for all Materials.        |\r\n| RelatedExternalVehicles[0].IsForAllSites                    | Whether the related external vehicle is for all Sites.|\r\n| RelatedExternalVehicles[0].ValidFrom                        | The valid from date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].ValidTo                        | The valid to date of the related external vehicles in ISO format (YYYY-MM-DD).|\r\n| RelatedExternalVehicles[0].IsDeleted                        | Whether the related external vehicle is deleted.|\r\n| RelatedExternalVehicles[0].Guid                            | The Guid associated to the related external vehicle.|\r\n| CustomerBusinessType| The array of related customer business type associated to the account customer. |\r\n| CustomerBusinessType[0].Guid| The customer business type Guid associated to the account customer.|\r\n| CustomerBusinessType[0].BusinessTypeOptionListItem| The Guid and Description associated to the BusinessTypeOptionListItem to the customer business type.|\r\n| DefaultSicCodeListItem| The Guid and Description associated to the DefaultSicCodeListItem to the account customer.|\r\n| IsTaxExempt| Whether the account customer is tax exempt. |\r\n| TradingNameGuidFilter| Filter by the Guid of the Trading Name. |\r\n| TradingNameFilter| Filter by the Trading Name. |\r\n| RelatedExternalVehicleGuidFilter| Filter by the Guid of the Related External Vehicle. |"
+      operationId: AccountCustomer_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorAccountCustomerResource]'
+    post:
+      tags:
+      - AccountCustomer
+      summary: Create or update
+      description: "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the customer.                                       | No |\r\n| Name                      | The customer's name.                                                       | No |\r\n| Reference                 | An alternative name used for the customer.                                 | No |\r\n| FederalId                 | The customer's local authority / government / tax reference.               | No |\r\n| IsInternal                | Whether the customer is an internal customer.                              | No |\r\n| ARAccountCode             | The account code used for accounts receivable.                             | No |\r\n| APAccountCode             | The account code used for accounts payable.                                | No |\r\n| Notes| Notes of customer. | No |\r\n| AMICENumber| AMICE Number of customer. | No |\r\n| CoCNumber| CoC Number of customer. | No |\r\n| HasRedLight               | Red light indicator passed to driver to indicate the mood of the end customer.| No |\r\n| CombineChargesRebates     | Rebate are included on the invoice, otherwise a separate bill is generated for rebates. | Yes |\r\n| ExternalVehicleValidation | The customer uses their own vehicles and the weighbridge will need to validate the vehicle registrations against a list held on the AMCS Platform. | No |\r\n| TicketsRequiredWithInvoice | Tickets are required with invoice.                                        | No |\r\n| RctCustomer               | In the Republic of Ireland the customer is a contractor liable for Relevent Contractors Tax. | No |\r\n| ProofOfServiceRequired    | Customers need to sign tickets.                      | No |\r\n| ExcludeFromStatementRun   | Excludes them from the batch statement run.          | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     | No |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      | No |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   | No |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    | No |\r\n| CompanyListItem               | The GUID and name of the company this customer is associated to.           | Yes |\r\n| CustomerStateListItem         | The GUID and status of the customer (eg. Active, Suspended, etc.).         | No |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                        | No |\r\n| CustomerCategoryListItem      | The GUID and category of the customer (various values).                    | No |\r\n| CustomerGroupListItem         | The GUID and group of the customer (various values).                       | No |\r\n| VisitStatusListItem        | The GUID and description of the visit status of the customer | No |\r\n| CurrencyListItem              | The GUID and currency of the customer (various values).                    | Yes |\r\n| CustomerTemplateListItem| The GUID and customer template of the customer (various values).           | No |\r\n| BusinessTypeListItem          | The GUID and business type of the customer (various values).               | No |\r\n| AutoArAccountCode| The object allowing for creation of an ArAccountCode, depending on system configuration. | No |\r\n| AutoArAccountCode.CompanyOutletGUID | The GUID of the company outlet used for creation of an ArAccountCode, depending on system configuration. | No |\r\n| RelatedUserSalesRepGuid   | The GUID of the related sales rep.                                         | No |\r\n| RelatedUserCreditControllerGuid | The GUID of the related credit controller.                           | No |\r\n| RelatedMasterAccountGuid  | The GUID of the related master account.                                    | No |\r\n| RelatedBillToCustomerGuid | The GUID of the related customer where the bills must be send to.          | No |   \r\n| RelatedLocationHQGuid| The GUID associated to the HQ location of the customer. | No |   \r\n| BankDetails| The object where bank details are specified.             | No |\r\n| BankDetails.BankName      | The bank name of the direct debit.                                         | Yes |\r\n| BankDetails.AccountName   | The account name of the direct debit.                             | Yes |\r\n| BankDetails.AccountNo     | The account number of the direct debit.                 | Yes |\r\n| BankDetails.SortCode      | The sort code of the direct debit.     | Yes |\r\n| BankDetails.BIC           | The Bank Identifier Code of the direct debit.         | No |\r\n| BankDetails.IBAN          | The International Bank Account Number of the direct debit.     | No |\r\n| BankDetails.NationalBankCode | The National Bank Code of the direct debit. | No |\r\n| BankDetails.DirectDebitRunConfigListItem | The GUID and description of the direct debit run configuration  | No |\r\n| BankDetails.DirectDebitAccountTypeListItem | The GUID and description of the direct debit account type. | Yes |\r\n| BankDetails.Address       | The object where bank address details are specified.     | No |\r\n| BankDetails.Address.Address1 | The Address1 of the bank.     | No |\r\n| BankDetails.Address.Address2 | The Address2 of the bank.     | No |\r\n| BankDetails.Address.Address3 | The Address3 of the bank.     | No |\r\n| BankDetails.Address.Address4 | The Address4 of the bank.     | No |\r\n| BankDetails.Address.Address5 | The Address5 of the bank.     | No |\r\n| BankDetails.Address.Postcode | The Postcode of the bank.     | No |\r\n| Contract| The object allowing for creation of the contract.        | Yes |\r\n| Contract.StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD).        | No |\r\n| Contract.ApprovedDate              | The approved date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| Contract.CreditLimit               | The maximum credit limit stipulated on this contract.             | No |\r\n| Contract.BalanceMigrated           | The balance which has been migrated.                              | No |\r\n| Contract.InvoiceCycleId            | The Id of the invoice cycle this contract will be invoice under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| Contract.VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| Contract.VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| Contract.VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| Contract.RollUpInvoiceBySite | Whether the roll up of invoice are done by site.    | No |\r\n| Contract.RollUpInvoiceByService    | Whether the roll up of invoice are done by service.    | No |\r\n| Contract.IsInvoiceCollated | Whether the invoice are collated.| Yes |\r\n| Contract.DepartmentListItem            | The GUID and name of the department this contract is associated to.  | Yes |\r\n| Contract.ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | Yes |\r\n| Contract.PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| Contract.PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| Contract.InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency term (eg. Quarterly, Immediate, etc.). | Yes |\r\n| Contract.InvoiceDocumentDeliveryMethods[]| The array of document delivery types associated to the Contract.| No |\r\n| Contract.InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the InvoiceDocumentDeliveryMethods. | No |\r\n| Balance| The object which allows creation of Customer Balance| No |\r\n| Balance.OutstandingAmount | The outstanding amount on the customers account| Yes |\r\n| Balance.UnallocatedAmount | The Unallocated amount on the customers account| Yes |\r\n| Balance.UnconfirmedBalance | The Unconfirmed Balance amount on the customers account| Yes |\r\n| Balance.LedgerBalance | The Ledger Balance on the customers account| Yes |\r\n| TradingNames.Guid | The TradingNames Guid on the customers account.    | No  |\r\n| TradingNames.Description | The TradingNames Description on the customers account.| Yes | \r\n| TradingNames.TradingNameTypeListItem | The Guid and Description of the TradingNameTypeListItem associated to the TradingNames on the customers account. | Yes |\r\n| TradingNames.IsDeleted | Is the TradingName Deleted. | Yes | \r\n| TradingNames.IsForAllSites | IsForAllSites set for the TradingNames. | Yes | \r\n| PaymentProviderSettings[0].Name | The Name of the Payment Provider Settings. | Yes |\r\n| PaymentProviderSettings[0].Value | The Value of the Payment Provider Settings. | No |\r\n| PaymentProviderSettings[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem of the Payment Provider Settings. | Yes |\r\n| PaymentProviderSettings[0].IsDeleted | Is the PaymentProviderSettings deleted. | No |\r\n| PaymentProviderSettings[0].Guid | The Guid of the Payment Provider Settings. | No |\r\n| CreditCards[0].Forename | The Forename of the credit card holder. | No |\r\n| CreditCards[0].Surname | The Surname of the credit card holder. | No | \r\n| CreditCards[0].Postcode | The Postcode associated to the credit card. | No |\r\n| CreditCards[0].Province | The Province associated to the credit card. | No |\r\n| CreditCards[0].DateCreated | The DateCreated associated to the credit card. | Yes |\r\n| CreditCards[0].MaskedCreditCardNumber | The MaskedCreditCardNumber associated to the credit card. | Yes |\r\n| CreditCards[0].Address1 | The Address1 associated to the credit card. | No |\r\n| CreditCards[0].City | The City associated to the credit card. | No |\r\n| CreditCards[0].RelatedContactGuid | The RelatedContactGuid associated to the credit card. | No |\r\n| CreditCards[0].Country | The Country associated to the credit card. | No |\r\n| CreditCards[0].CreditCardExpiryDate | The CreditCardExpiryDate associated to the credit card. | No |\r\n| CreditCards[0].Currency | The Currency associated to the credit card. | No |\r\n| CreditCards[0].ExternalVaultCardReference | The ExternalVaultCardReference associated to the credit card. | No |\r\n| CreditCards[0].ExternalVaultReference | The ExternalVaultReference associated to the credit card. | No |\r\n| CreditCards[0].IsACH | Is the payment an ACH payment. | No |\r\n| CreditCards[0].Deleted | Is the CreditCard deleted. | No |\r\n| CreditCards[0].IsRequestWithImmediateResponse | The IsRequestWithImmediateResponse associated to the credit card.  | No |\r\n| CreditCards[0].PayerReference | The payer reference associated to the credit card.  | No |\r\n| CreditCards[0].PaymentReference | The payment reference associated to the credit card.  | No |\r\n| CreditCards[0].PaymentPointListItem | The Guid and Description associated to the PaymentPointListItem to the credit card. | No |\r\n| CreditCards[0].PaymentProviderListItem | The Guid and Description associated to the PaymentProviderListItem to the credit card.  | No |\r\n| CreditCards[0].Guid | The Guid associated to the credit card.  | No |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the account customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. | No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedExternalVehicles| The array of related external vehicles associated to the account customer.| No |\r\n| RelatedExternalVehicles[0].RelatedExternalVehicleGuid| The related external vehicleguid associated to the account customer.    | Yes |\r\n| RelatedExternalVehicles[0].IsForAllMaterials                | Whether the related external vehicle is for all Materials.        | Yes |\r\n| RelatedExternalVehicles[0].IsForAllSites                    | Whether the related external vehicle is for all Sites.| Yes |\r\n| RelatedExternalVehicles[0].ValidFrom                        | The valid from date of the related external vehicles in ISO format (YYYY-MM-DD).| Yes |\r\n| RelatedExternalVehicles[0].ValidTo                        | The valid to date of the related external vehicles in ISO format (YYYY-MM-DD).| Yes |\r\n| RelatedExternalVehicles[0].IsDeleted                        | Whether the related external vehicle is deleted.| Yes |\r\n| RelatedExternalVehicles[0].Guid                            | The Guid associated to the related external vehicle.| Yes |\r\n| CustomerBusinessType| The array of related customer business type associated to the account customer.| No |\r\n| CustomerBusinessType[0].Guid| The customer business type Guid associated to the account customer.| No |\r\n| CustomerBusinessType[0].BusinessTypeOptionListItem| The Guid and Description associated to the BusinessTypeOptionListItem to the customer business type.| No |\r\n| DefaultSicCodeListItem| The Guid and Description associated to the DefaultSicCodeListItem to the account customer.| No |\r\n| IsTaxExempt| Whether the account customer is tax exempt.| No |\r\n| TradingNameGuidFilter| Filter by the Guid of the Trading Name.| No |\r\n| TradingNameFilter| Filter by the Trading Name.| No |\r\n| RelatedExternalVehicleGuidFilter| Filter by the Guid of the Related External Vehicle.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| autoGenerateAccountNumbers and Update and (ARAccountCode is null or AutoArAccountCode is not null) | ARAccountCode should not be null and AutoArAccountCode should be null |\r\n| autoGenerateAccountNumbers and (ARAccountCode is not null or AutoArAccountCode is null) | AutoArAccountCode should not be null and ARAccountCode should be null |\r\n| autoGenerateAccountNumbers is No and (ARAccountCode is null or AutoArAccountCode is not null) | ARAccountCode should not be null and AutoArAccountCode should be null |\r\n| Update and ARAccountCode not equal to saved ARAccountCode | ARAccountCode is a read-only property |\r\n| Update and AutoArAccountCode not equal to saved AutoArAccountCode | A value for AutoARAccountCode has been included as part of an update. Could not update the resource. Only include a value for AutoARAccountCode when an AR Account code is to be system generated as part of creating a customer.|\r\n| CompanyOutlet not found with value AutoArAccountCode.CompanyOutletGuid | Failed to retrieve CompanyOutlet with AutoArAccountCode.CompanyOutletGuid of {value of AutoArAccountCode.CompanyOutletGUID} |\r\n| MasterAccount not found with value RelatedMasterAccountGuid | Failed to retrieve MasterAccount with RelatedMasterAccountGuid of {value of RelatedMasterAccountGuid} |\r\n| Customer not found with value RelatedBillToCustomerGuid | Failed to retrieve Customer with RelatedBillToCustomerGuid of {value of RelatedBillToCustomerGuid} |\r\n| SysUser not found with value RelatedUserSalesRepGuid | Failed to retrieve SysUser with RelatedUserSalesRepGuid of {value of RelatedUserSalesRepGuid} |\r\n| SysUser not found with value RelatedUserCreditControllerGuid | Failed to retrieve SysUser with RelatedUserCreditControllerGuid of {value of RelatedUserCreditControllerGuid} |\r\n| ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |\r\n| Provide TradingNames.Guid which is not linked to the customer | Failed to save/update AccountCustomer because Trading name with Guid {guid} is not linked to the customer. Could not update the customer. Ensure that the trading names listed in The TradingNames array are those for the customer. |\r\n| Duplicate TradingNames Description in the trading names array for the customer | Failed to save. Entity already exists with TradingNames.Description of {Description} |\r\n| RelatedBlobHashes[0].Hash is not null for Insert | Failed to save/update AccountCustomer because RelatedBlobHashes creation is not permitted |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update AccountCustomer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs is not empty for Insert | Failed to save/update AccountCustomer because RelatedReportBlobs creation is not permitted |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update AccountCustomer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. AccountCustomer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to AccountCustomer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| CustomerTemplateListItem.Guid is deleted | The provided CustomerTemplateListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| BusinessTypeListItem.Guid is not active | The provided BusinessTypeListItem is not active. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| InvoiceDocumentDeliveryMethods[0].DocumentDeliveryType.Guid is not active | The provided DocumentDeliveryType is not active. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| PaymentProviderSettings[0].Guid is provided for new account customer | Attempting to update payment provider settings when creating a customer. Could not process the request. Provide payment provider setting with out a Guid property to create new settings rather than attempting an update. |\r\n| PaymentProviderSettings[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| CreditCards[0].Guid is not null on insert | Attempting to update credit card settings when creating the customer. Could not process the request. Provide credit card setting without a Guid property to create new settings rather than attempting an update. |\r\n| CreditCards[0].IsDeleted is true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If the value for CreditCards.IsDeleted is changed on update | CreditCards.IsDeleted is a read-only property |\r\n| If the value for any {property} is changed on update for a deleted CreditCard | Attempt to update the {property} of a CreditCard that is deleted. Could not process the request |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n| A CustomerStateChangeReason is supplied on a insert | CustomerStateChangeReasonListItem is not supported for create |\r\n"
+      operationId: AccountCustomer_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorAccountCustomerBankDetailsAddressResource:
+      type: object
+      properties:
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiIntegratorAccountCustomerCreditCardsResource:
+      type: object
+      properties:
+        Forename:
+          type: string
+        Surname:
+          type: string
+        Postcode:
+          type: string
+        Province:
+          type: string
+        DateCreated:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        MaskedCreditCardNumber:
+          type: string
+        Address1:
+          type: string
+        City:
+          type: string
+        RelatedContactGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Country:
+          type: string
+        CreditCardExpiryDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Currency:
+          type: string
+        ExternalVaultCardReference:
+          type: string
+        ExternalVaultReference:
+          type: string
+        IsACH:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        IsRequestWithImmediateResponse:
+          type: boolean
+        PayerReference:
+          type: string
+        PaymentPointListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentReference:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PaymentTypeId:
+          type: integer
+          format: int32
+    ApiIntegratorAccountCustomerPaymentProviderSettingsResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Value:
+          type: string
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountCustomerContractResource:
+      type: object
+      properties:
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        CreditLimit:
+          type: number
+          format: double
+        BalanceMigrated:
+          type: number
+          format: double
+        VATExemptNumber:
+          type: string
+        VATExemptionExpiryDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        VATRegistrationNumber:
+          type: string
+        ApprovedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsInvoiceCollated:
+          type: boolean
+        RollUpInvoiceBySite:
+          type: boolean
+        RollUpInvoiceByService:
+          type: boolean
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContractStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceFrequencyTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceDocumentDeliveryMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryMethodsResource'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorAccountCustomerResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        Reference:
+          type: string
+        FederalId:
+          type: string
+        IsInternal:
+          type: boolean
+        ARAccountCode:
+          type: string
+        APAccountCode:
+          type: string
+        Notes:
+          type: string
+        AMICENumber:
+          type: string
+        CoCNumber:
+          type: string
+        CompanyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerStateChangeReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerCategoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerGroupListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerTemplateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        BusinessTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        VisitStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        BankDetails:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerBankDetailsResource'
+        Contract:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerContractResource'
+        AutoArAccountCode:
+          $ref: '#/components/schemas/ApiIntegratorAutoArAccountCodeResource'
+        Balance:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerBalanceResource'
+        RelatedUserSalesRepGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserCreditControllerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedMasterAccountGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedBillToCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationHQGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CombineChargesRebates:
+          type: boolean
+        HasRedLight:
+          type: boolean
+        ExternalVehicleValidation:
+          type: boolean
+        TicketsRequiredWithInvoice:
+          type: boolean
+        RctCustomer:
+          type: boolean
+        ProofOfServiceRequired:
+          type: boolean
+        ExcludeFromStatementRun:
+          type: boolean
+        ReceiveServiceUpdatesByEmail:
+          type: boolean
+        ReceiveServiceUpdatesByText:
+          type: boolean
+        ReceiveMarketingUpdatesByEmail:
+          type: boolean
+        ReceiveMarketingUpdatesByText:
+          type: boolean
+        TradingNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerTradingNamesResource'
+        PaymentProviderSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerPaymentProviderSettingsResource'
+        CreditCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerCreditCardsResource'
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerBlobHashesResource'
+        RelatedReportBlobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportBlobHashesResource'
+        RelatedExternalVehicles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerExternalVehicleResource'
+        RelatedCustomerStateChangeRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerStateChangeRequestResource'
+        RelatedCustomerStateChangeRequest:
+          $ref: '#/components/schemas/ApiIntegratorCustomerStateChangeRequestResource'
+        CustomerBusinessTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerBusinessTypeOptionResource'
+        DefaultSicCodeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsTaxExempt:
+          type: boolean
+        TradingNameGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TradingNameFilter:
+          type: string
+        RelatedExternalVehicleGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountCustomerExternalVehicleResource:
+      type: object
+      properties:
+        RelatedExternalVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsForAllMaterials:
+          type: boolean
+        IsForAllSites:
+          type: boolean
+        ValidFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ValidTo:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges[ApiIntegratorAccountCustomerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorAccountCustomerResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorAutoArAccountCodeResource:
+      type: object
+      properties:
+        CompanyOutletGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerStateChangeRequestResource:
+      type: object
+      properties:
+        EffectiveDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerStateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedChangeReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountCustomerBalanceResource:
+      type: object
+      properties:
+        OutstandingAmount:
+          type: number
+          format: double
+        UnallocatedAmount:
+          type: number
+          format: double
+        UnconfirmedBalance:
+          type: number
+          format: double
+        LedgerBalance:
+          type: number
+          format: double
+    ApiIntegratorDocumentDeliveryMethodsResource:
+      type: object
+      properties:
+        DocumentDeliveryType:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorAccountCustomerTradingNamesResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        TradingNameTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        IsForAllSites:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerReportBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DocumentDescription:
+          type: string
+        DocumentName:
+          type: string
+        Hash:
+          type: string
+        IsForAllSites:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+        RelatedExcludedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCustomerBlobHashesResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorAccountCustomerResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorAccountCustomerBankDetailsResource:
+      type: object
+      properties:
+        BankName:
+          type: string
+        AccountName:
+          type: string
+        AccountNo:
+          type: string
+        SortCode:
+          type: string
+        BIC:
+          type: string
+        IBAN:
+          type: string
+        NationalBankCode:
+          type: string
+        DirectDebitRunConfigListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DirectDebitAccountTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerBankDetailsAddressResource'
+    ApiIntegratorAccountCustomerBusinessTypeOptionResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        BusinessTypeOptionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCustomerReportRelatedSiteResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

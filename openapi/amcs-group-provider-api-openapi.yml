@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Provider API
+  version: core
+tags:
+- name: Provider
+paths:
+  /services/api/workflow/providers:
+    get:
+      tags:
+      - Provider
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: includeCount
+        in: query
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowProviderResource]'
+components:
+  schemas:
+    AMCS.Data.Entity.Workflow.ApiWorkflowProvider:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        workflowProviderId:
+          type: integer
+          format: int32
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        systemCategory:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        endpoint:
+          type: string
+          nullable: true
+        apiVersion:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultCollection[ApiWorkflowProviderResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowProvider'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

@@ -1,0 +1,124 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup InventoryProductionShift API
+  version: core
+tags:
+- name: InventoryProductionShift
+paths:
+  /mirror/imm/inventoryProductionShifts:
+    post:
+      tags:
+      - InventoryProductionShift
+      summary: Create or update
+      operationId: InventoryProductionShift_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorInventoryProductionShiftResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /mirror/imm/inventoryProductionShifts/{guid}:
+    put:
+      tags:
+      - InventoryProductionShift
+      summary: Partial update
+      operationId: InventoryProductionShift_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorInventoryProductionShiftResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorInventoryProductionShiftResource:
+      type: object
+      properties:
+        CompanyOutletGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Reference:
+          type: string
+        StartDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        EndDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        StartTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        EndTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        CustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsCompleted:
+          type: boolean
+        Notes:
+          type: string
+        Title:
+          type: string
+        CreatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

@@ -1,0 +1,273 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup CustomerHomeCache API
+  version: core
+tags:
+- name: CustomerHomeCache
+paths:
+  /accounting/customerHomeCaches/changes:
+    get:
+      tags:
+      - CustomerHomeCache
+      summary: Retrieve changes
+      description: "| Property                       | Description                                                           |\r\n| -------------------------------| --------------------------------------------------------------------- |\r\n| GUID                           | The GUID associated to the customerhomecache                          |\r\n| CustomerId                     | Value associated to the customer id                                   |\r\n| CustomerSites                  | Number of sites associated to the customer                            |\r\n| ServiceAgreements              | Number of Service aggreements associated to the customer              |\r\n| InvoiceableWork                | Amount of invoiceable works                                           |\r\n| Rentals                        | Number of rentals                                                     |\r\n| AgedDebt0To30                  | Aged debt associated to the customer between 0 to 30 days             |\r\n| AgedDebt30To60                 | Aged debt associated to the customer between 30 to 60 days            |\r\n| AgedDebt60To90                 | Aged debt associated to the customer between 60 to 90 days            |\r\n| AgedDebt90Plus                 | Aged debt associated to the customer above 90 days                    |\r\n| OutstandingAmount              | Outstanding amount associated to the customer                         |\r\n| UnallocatedAmount              | Unallocated amount associated to the customer                         |\r\n| Balance                        | Balance amount available                                              |\r\n| UnconfirmedBalance             | Unconfirmed balance amount associated to the customer                 |\r\n| APInvoice                      | Amount in APInvoice                                                   |\r\n| POInvoice                      | Amount in POInvoice                                                   |\r\n| PONumbers                      | Number of PO's                                                        |\r\n| Communications                 | Number of communications                                              |\r\n| CommunicationsWithDocuments    | Number of communications with documents                               |\r\n| PortalReportsCount             | Count of reports                                                      |\r\n| CreditLimit                    | Credit limit amount                                                   |\r\n| CacheDate                      | Data cached date                                                      |\r\n| AdvanceDeposit                 | Amount of deposit done in advance                                     |\r\n| PrePayment                     | Amount of prepayment done                                             |\r\n| RemainingCredit                | Total amount of remaining credit                                      |"
+      operationId: CustomerHomeCache_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCustomerHomeCacheResource]'
+  /accounting/customerHomeCaches/{guid}:
+    get:
+      tags:
+      - CustomerHomeCache
+      summary: Find with GUID
+      description: "| Property                       | Description                                                           |\r\n| -------------------------------| --------------------------------------------------------------------- |\r\n| GUID                           | The GUID associated to the customerhomecache                          |\r\n| CustomerId                     | Value associated to the customer id                                   |\r\n| CustomerSites                  | Number of sites associated to the customer                            |\r\n| ServiceAgreements              | Number of Service aggreements associated to the customer              |\r\n| InvoiceableWork                | Amount of invoiceable works                                           |\r\n| Rentals                        | Number of rentals                                                     |\r\n| AgedDebt0To30                  | Aged debt associated to the customer between 0 to 30 days             |\r\n| AgedDebt30To60                 | Aged debt associated to the customer between 30 to 60 days            |\r\n| AgedDebt60To90                 | Aged debt associated to the customer between 60 to 90 days            |\r\n| AgedDebt90Plus                 | Aged debt associated to the customer above 90 days                    |\r\n| OutstandingAmount              | Outstanding amount associated to the customer                         |\r\n| UnallocatedAmount              | Unallocated amount associated to the customer                         |\r\n| Balance                        | Balance amount available                                              |\r\n| UnconfirmedBalance             | Unconfirmed balance amount associated to the customer                 |\r\n| APInvoice                      | Amount in APInvoice                                                   |\r\n| POInvoice                      | Amount in POInvoice                                                   |\r\n| PONumbers                      | Number of PO's                                                        |\r\n| Communications                 | Number of communications                                              |\r\n| CommunicationsWithDocuments    | Number of communications with documents                               |\r\n| PortalReportsCount             | Count of reports                                                      |\r\n| CreditLimit                    | Credit limit amount                                                   |\r\n| CacheDate                      | Data cached date                                                      |\r\n| AdvanceDeposit                 | Amount of deposit done in advance                                     |\r\n| PrePayment                     | Amount of prepayment done                                             |\r\n| RemainingCredit                | Total amount of remaining credit                                      |"
+      operationId: CustomerHomeCache_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCustomerHomeCacheResource]'
+  /accounting/customerHomeCaches:
+    get:
+      tags:
+      - CustomerHomeCache
+      summary: Find with Filters
+      description: "| Property                       | Description                                                           |\r\n| -------------------------------| --------------------------------------------------------------------- |\r\n| GUID                           | The GUID associated to the customerhomecache                          |\r\n| CustomerId                     | Value associated to the customer id                                   |\r\n| CustomerSites                  | Number of sites associated to the customer                            |\r\n| ServiceAgreements              | Number of Service aggreements associated to the customer              |\r\n| InvoiceableWork                | Amount of invoiceable works                                           |\r\n| Rentals                        | Number of rentals                                                     |\r\n| AgedDebt0To30                  | Aged debt associated to the customer between 0 to 30 days             |\r\n| AgedDebt30To60                 | Aged debt associated to the customer between 30 to 60 days            |\r\n| AgedDebt60To90                 | Aged debt associated to the customer between 60 to 90 days            |\r\n| AgedDebt90Plus                 | Aged debt associated to the customer above 90 days                    |\r\n| OutstandingAmount              | Outstanding amount associated to the customer                         |\r\n| UnallocatedAmount              | Unallocated amount associated to the customer                         |\r\n| Balance                        | Balance amount available                                              |\r\n| UnconfirmedBalance             | Unconfirmed balance amount associated to the customer                 |\r\n| APInvoice                      | Amount in APInvoice                                                   |\r\n| POInvoice                      | Amount in POInvoice                                                   |\r\n| PONumbers                      | Number of PO's                                                        |\r\n| Communications                 | Number of communications                                              |\r\n| CommunicationsWithDocuments    | Number of communications with documents                               |\r\n| PortalReportsCount             | Count of reports                                                      |\r\n| CreditLimit                    | Credit limit amount                                                   |\r\n| CacheDate                      | Data cached date                                                      |\r\n| AdvanceDeposit                 | Amount of deposit done in advance                                     |\r\n| PrePayment                     | Amount of prepayment done                                             |\r\n| RemainingCredit                | Total amount of remaining credit                                      |"
+      operationId: CustomerHomeCache_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCustomerHomeCacheResource]'
+components:
+  schemas:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorCustomerHomeCacheResource:
+      type: object
+      properties:
+        CustomerId:
+          type: integer
+          format: int32
+        CustomerSites:
+          type: integer
+          format: int32
+        ServiceAgreements:
+          type: integer
+          format: int32
+        InvoiceableWork:
+          type: number
+          format: double
+        RemainingCredit:
+          type: number
+          format: double
+        Rentals:
+          type: integer
+          format: int32
+        AgedDebt0To30:
+          type: number
+          format: double
+        AgedDebt30To60:
+          type: number
+          format: double
+        AgedDebt60To90:
+          type: number
+          format: double
+        AgedDebt90Plus:
+          type: number
+          format: double
+        OutstandingAmount:
+          type: number
+          format: double
+        UnallocatedAmount:
+          type: number
+          format: double
+        Balance:
+          type: number
+          format: double
+        UnconfirmedBalance:
+          type: number
+          format: double
+        APInvoice:
+          type: number
+          format: double
+        POInvoice:
+          type: number
+          format: double
+        PONumbers:
+          type: integer
+          format: int32
+        Communications:
+          type: integer
+          format: int32
+        CommunicationsWithDocuments:
+          type: integer
+          format: int32
+        PortalReportsCount:
+          type: integer
+          format: int32
+        CreditLimit:
+          type: number
+          format: double
+        CacheDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        AdvanceDeposit:
+          type: number
+          format: double
+        PrePayment:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceChanges[ApiIntegratorCustomerHomeCacheResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerHomeCacheResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorCustomerHomeCacheResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerHomeCacheResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorCustomerHomeCacheResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCustomerHomeCacheResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

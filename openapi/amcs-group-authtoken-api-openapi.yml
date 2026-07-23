@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AuthToken API
+  version: core
+tags:
+- name: AuthToken
+paths:
+  /authTokens:
+    get:
+      tags:
+      - AuthToken
+      parameters:
+      - name: userName
+        in: query
+        schema:
+          type: string
+      - name: password
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+    post:
+      tags:
+      - AuthToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.UserCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.UserCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.UserCredentials'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+      - AuthToken
+      responses:
+        '200':
+          description: Success
+  /authTokens/checkPluginAccess:
+    post:
+      tags:
+      - AuthToken
+      parameters:
+      - name: sysUserGuid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: pluginId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+  /authTokens/verifyIdentity:
+    post:
+      tags:
+      - AuthToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.VerifyIdentityCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.VerifyIdentityCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.VerifyIdentityCredentials'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.ApiService.Controllers.UserCredentials:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        temporaryToken:
+          type: string
+          nullable: true
+        privateKey:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.ApiService.Controllers.VerifyIdentityCredentials:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false

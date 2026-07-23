@@ -1,0 +1,28 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiSignalRService API
+  version: core
+tags:
+- name: ApiSignalRService
+paths:
+  /services/api/signalr/addToGroup:
+    post:
+      tags:
+      - ApiSignalRService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.SignalR.SignalRAddToGroupResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.Core.Entity.Api.SignalR.SignalRAddToGroupResponse'
+components:
+  schemas:
+    AMCS.Core.Entity.Api.SignalR.SignalRAddToGroupResponse:
+      type: object
+      additionalProperties: false

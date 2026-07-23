@@ -1,0 +1,481 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Site API
+  version: core
+tags:
+- name: Site
+paths:
+  /directory/sites/changes:
+    get:
+      tags:
+      - Site
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site.|\r\n| Name| The site's name.|\r\n| Reference| An alternative name used for the site. Filterable|\r\n| FederalId| The site's local authority / government / tax reference.|\r\n| AnalysisCode| The site's analysis code|\r\n| UniqueCustomerSiteCode| The unique code assigned to the site if system configuration \"UniqueCustomerSiteCodeGeneration\" was set to true when site was created. |\r\n| IsNonServiceSite  | Whether the site is non-service.          |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this site. Filterable.|\r\n| SiteTypeListItem| The GUID and type of the site (eg. Unoccupied Location, Residential, Non Residential).|\r\n| SICCodeListItem| The GUID and 2007 description of SICCode|\r\n| SalesTerritoryListItem| The GUID and name of the sales territory this site is associated to.|\r\n| CompanyOutletListItem| The GUID and name of the default company outlet this site is associated to.|\r\n| CustomerSiteStateListItem| The GUID and state of the site (eg. Active, Closed, Suspended).|\r\n| ZoneListItem| The GUID and description of the zone.|\r\n| RebatePaymentTypeListItem| The GUID and description of the rebate payment type.|\r\n| RebatePaymentTermListItem| The GUID and description of the rebate payment term.|\r\n| ContactMethods.Email| The Email associated to the site.|\r\n| PaymentHandlingCodeListItem| The GUID and description of the payment handling code.|\r\n| ReminderLetterPolicyListItem| The GUID and description of the reminder letter policy.|\r\n| VisitStatusListItem| The GUID and description of the visit status.|\r\n| RelatedLocationInvoiceGuid| Used to filter the related invoice location guid associated to the invoice location of this site.|\r\n| RelatedLocationRemitGuid| Used to filter the related remit location guid associated to the remit location of this site.|\r\n| RelatedLocationGuid| Used to filter the related location guid associated to the location of the site.|\r\n| RelatedTaxJurisdictionGuid| The GUID associated to the tax jurisdiction of this site. Filterable.|\r\n| AccessTimes[0]| A list of objects containing customer site access time.|\r\n| AccessTimes[0].Guid| The GUID associated to the site access time.|\r\n| AccessTimes[0].AccessContact| The access contact name to associated site.|\r\n| AccessTimes[0].AccessNotes| The access notes to associated site.|\r\n| AccessTimes[0].AccessStartTime| The access start time to associated site.|\r\n| AccessTimes[0].AccessEndTime| The access end time to associated site.|\r\n| AccessTimes[0].DayOfWeekListItem| The GUID and description of the day of week to access.|\r\n| DocumentDeliveryMethods[]| The array of document delivery types associated to the customer site.|\r\n| DocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the DocumentDeliveryMethods. |\r\n| RelatedLocationDocumentGuid| Used to filter the related document location guid associated to this site.|\r\n| RelatedLocationStatementGuid| Used to filter the related statement location guid associated to this site.|\r\n| RelatedLocationQuotationGuid| Used to filter the related quotation location guid associated to this site.|\r\n| RelatedTradingNames[]| The array of customer trading names associated to the customer site.| \r\n| RelatedTradingNames[0].Guid| The guid associated to the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].RelatedTradingNameGuid| The guid of the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].Description| The description of customer trading name associated to the customer site.| \r\n| RelatedTradingNameGuidFilter| Used to filter on related trading name guid.| \r\n| Areas| A list of objects containing customer site area.|\r\n| Areas[0].Guid| The GUID associated to the customer site area.|\r\n| Areas[0].Description| The description associated to the customer site area.|\r\n| Areas[0].RelatedLocationGuid| The related location guid associated to the location of the customer site area.|\r\n| Areas[0].IsDeleted| Whether the customer site area is deleted.|\r\n| AreasGuidFilter| Used to filter the customer site area by GUID.|\r\n| AreasRelatedLocationGuidFilter| Used to filter the related location guid associated to the location of the customer site area.|\r\n| RelatedHealthAndSafetyBlobs| The array of related health and safety blobs to this site.|\r\n| RelatedHealthAndSafetyBlobs[0].Guid| The GUID associated to the RelatedHealthAndSafetyBlob.|\r\n| RelatedHealthAndSafetyBlobs[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName| The document name|\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference| The document reference|\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom| The valid from date|\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil| The valid until date|\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk| Whether the document contains high risk items|\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle| Whether the document is sent to vehicle|\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem| The GUID and description of the health and safety document type|\r\n| IsDeleted| Whether site is deleted.|\r\n| LocalAuthorityListItem| The GUID and description of the local authority related to customer site.|\r\n| LocalAuthorityGuidFilter| Used to filter the local Authority Guid associated to the customer site|\r\n| CoCNumber| CoC Number of Customer Site.| \r\n| IsHeadQuarter| The site's customer head quarter location.|\r\n| EPAId| The site's EPA id.|\r\n| WasteCarrierLicenceNumber| The site's waste carrier licence number.|\r\n| WasteExemptionExpiryDate| The site's waste exemption expiry date.|\r\n| NVWANumber| The site's NVWA number.|"
+      operationId: Site_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorSiteResource]'
+  /directory/sites/{guid}:
+    get:
+      tags:
+      - Site
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site.|\r\n| Name| The site's name.|\r\n| Reference| An alternative name used for the site. Filterable|\r\n| FederalId| The site's local authority / government / tax reference.|\r\n| AnalysisCode| The site's analysis code|\r\n| UniqueCustomerSiteCode| The unique code assigned to the site if system configuration \"UniqueCustomerSiteCodeGeneration\" was set to true when site was created. |\r\n| IsNonServiceSite  | Whether the site is non-service.          |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this site. Filterable.|\r\n| SiteTypeListItem| The GUID and type of the site (eg. Unoccupied Location, Residential, Non Residential).|\r\n| SICCodeListItem| The GUID and 2007 description of SICCode|\r\n| SalesTerritoryListItem| The GUID and name of the sales territory this site is associated to.|\r\n| CompanyOutletListItem| The GUID and name of the default company outlet this site is associated to.|\r\n| CustomerSiteStateListItem| The GUID and state of the site (eg. Active, Closed, Suspended).|\r\n| ZoneListItem| The GUID and description of the zone.|\r\n| RebatePaymentTypeListItem| The GUID and description of the rebate payment type.|\r\n| RebatePaymentTermListItem| The GUID and description of the rebate payment term.|\r\n| ContactMethods.Email| The Email associated to the site.|\r\n| PaymentHandlingCodeListItem| The GUID and description of the payment handling code.|\r\n| ReminderLetterPolicyListItem| The GUID and description of the reminder letter policy.|\r\n| VisitStatusListItem| The GUID and description of the visit status.|\r\n| RelatedLocationInvoiceGuid| Used to filter the related invoice location guid associated to the invoice location of this site.|\r\n| RelatedLocationRemitGuid| Used to filter the related remit location guid associated to the remit location of this site.|\r\n| RelatedLocationGuid| Used to filter the related location guid associated to the location of the site.|\r\n| RelatedTaxJurisdictionGuid| The GUID associated to the tax jurisdiction of this site. Filterable.|\r\n| AccessTimes[0]| A list of objects containing customer site access time.|\r\n| AccessTimes[0].Guid| The GUID associated to the site access time.|\r\n| AccessTimes[0].AccessContact| The access contact name to associated site.|\r\n| AccessTimes[0].AccessNotes| The access notes to associated site.|\r\n| AccessTimes[0].AccessStartTime| The access start time to associated site.|\r\n| AccessTimes[0].AccessEndTime| The access end time to associated site.|\r\n| AccessTimes[0].DayOfWeekListItem| The GUID and description of the day of week to access.|\r\n| DocumentDeliveryMethods[]| The array of document delivery types associated to the customer site.|\r\n| DocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the DocumentDeliveryMethods. |\r\n| RelatedLocationDocumentGuid| Used to filter the related document location guid associated to this site.|\r\n| RelatedLocationStatementGuid| Used to filter the related statement location guid associated to this site.|\r\n| RelatedLocationQuotationGuid| Used to filter the related quotation location guid associated to this site.|\r\n| RelatedTradingNames[]| The array of customer trading names associated to the customer site.| \r\n| RelatedTradingNames[0].Guid| The guid associated to the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].RelatedTradingNameGuid| The guid of the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].Description| The description of customer trading name associated to the customer site.| \r\n| RelatedTradingNameGuidFilter| Used to filter on related trading name guid.| \r\n| Areas| A list of objects containing customer site area.|\r\n| Areas[0].Guid| The GUID associated to the customer site area.|\r\n| Areas[0].Description| The description associated to the customer site area.|\r\n| Areas[0].RelatedLocationGuid| The related location guid associated to the location of the customer site area.|\r\n| Areas[0].IsDeleted| Whether the customer site area is deleted.|\r\n| AreasGuidFilter| Used to filter the customer site area by GUID.|\r\n| AreasRelatedLocationGuidFilter| Used to filter the related location guid associated to the location of the customer site area.|\r\n| RelatedHealthAndSafetyBlobs| The array of related health and safety blobs to this site.|\r\n| RelatedHealthAndSafetyBlobs[0].Guid| The GUID associated to the RelatedHealthAndSafetyBlob.|\r\n| RelatedHealthAndSafetyBlobs[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName| The document name|\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference| The document reference|\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom| The valid from date|\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil| The valid until date|\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk| Whether the document contains high risk items|\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle| Whether the document is sent to vehicle|\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem| The GUID and description of the health and safety document type|\r\n| IsDeleted| Whether site is deleted.|\r\n| LocalAuthorityListItem| The GUID and description of the local authority related to customer site.|\r\n| LocalAuthorityGuidFilter| Used to filter the local Authority Guid associated to the customer site|\r\n| CoCNumber| CoC Number of Customer Site.| \r\n| IsHeadQuarter| The site's customer head quarter location.|\r\n| EPAId| The site's EPA id.|\r\n| WasteCarrierLicenceNumber| The site's waste carrier licence number.|\r\n| WasteExemptionExpiryDate| The site's waste exemption expiry date.|\r\n| NVWANumber| The site's NVWA number.|"
+      operationId: Site_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSiteResource]'
+    put:
+      tags:
+      - Site
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the site.| No   |\r\n| Name| The site's name.| Yes      |\r\n| Reference| An alternative name used for the site.| No   |\r\n| FederalId| The site's local authority / government / tax reference.| No   |\r\n| AnalysisCode| The site's analysis code.| No   |\r\n| UniqueCustomerSiteCode| The unique code assigned to the site, this will be automatically set if system configuration \"UniqueCustomerSiteCodeGeneration\" is set to true when posting. | No |\r\n| IsNonServiceSite  | Whether the site is non-service.          | Yes      |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this site.| Yes   |\r\n| SICCodeListItem| The GUID and 2007 description this site is associated to.| No      |\r\n| SiteTypeListItem| The GUID and type of the site (eg. Unoccupied Location, Residential, Non Residential).| No   |\r\n| SalesTerritoryListItem| The GUID and name of the sales territory this site is associated to.| No   |\r\n| CompanyOutletListItem| The GUID and name of the default company outlet this site is associated to.| Yes   |\r\n| CustomerSiteStateListItem| The GUID and state of the site (eg. Active, Closed, Suspended).| Yes   |\r\n| ZoneListItem| The GUID and description of the zone.| No   |\r\n| RebatePaymentTypeListItem| The GUID and description of the rebate payment type.| No   |\r\n| RebatePaymentTermListItem| The GUID and description of the rebate payment term.| No   |\r\n| ReminderLetterPolicyListItem| The GUID and description of the reminder letter policy.| No   |\r\n| VisitStatusListItem| The GUID and description of the visit status.| No   |\r\n| ContactMethods.Email| The Email associated to the site.| No   |\r\n| PaymentHandlingCodeListItem| The GUID and description of the payment handling code.| No   |\r\n| RelatedLocationInvoiceGuid| The GUID associated to the invoice location of this site.| Yes   |\r\n| RelatedLocationRemitGuid| The GUID associated to the remit location of this site.| No   |\r\n| RelatedLocationGuid| The GUID associated to the location of the site.| Yes   |\r\n| RelatedTaxJurisdictionGuid| The GUID associated to the tax jurisdiction of this site.| No       |\r\n| AccessTimes[0]| A list of objects containing customer site access time.| No   |\r\n| AccessTimes[0].Guid| The GUID associated to the site access time.| No   |\r\n| AccessTimes[0].AccessContact| The access contact name to associated site.| No   |\r\n| AccessTimes[0].AccessNotes| The access notes to associated site.| No   |\r\n| AccessTimes[0].AccessStartTime| The access start time to associated site.| Yes   |\r\n| AccessTimes[0].AccessEndTime| The access end time to associated site.| Yes   |\r\n| AccessTimes[0].DayOfWeekListItem| The GUID and description of the day of week to access.| Yes   |\r\n| DocumentDeliveryMethods[]| The array of document delivery types associated to the customer site.| No   |\r\n| DocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the DocumentDeliveryMethods. | No   |\r\n| RelatedLocationDocumentGuid| The guid associated to the document location of this site.| No   |\r\n| RelatedLocationStatementGuid| The guid associated to the statement location of this site.| No   |\r\n| RelatedLocationQuotationGuid| The guid associated to the quotation location of this site.| No   |\r\n| RelatedTradingNames[]| The array of customer trading names associated to the customer site.| No   |\r\n| RelatedTradingNames[0].Guid| The guid associated to the customer trading name associated to the customer site.| No   |\r\n| RelatedTradingNames[0].RelatedTradingNameGuid| The guid of the customer trading name associated to the customer site.| Yes   |\r\n| RelatedTradingNames[0].Description| The description of customer trading name associated to the customer site.| No   |\r\n| RelatedTradingNameGuidFilter| Used to filter on related trading name guid.| No   |\r\n| Areas| A list of objects containing customer site area.| No   |\r\n| Areas[0].Guid| The GUID associated to the customer site area.| No   |\r\n| Areas[0].Description| The description associated to the customer site area.| Yes   |\r\n| Areas[0].RelatedLocationGuid| The related location guid associated to the location of the customer site area.| Yes   |\r\n| Areas[0].IsDeleted| Whether the customer site area is deleted.| No   |\r\n| AreasGuidFilter| Used to filter the customer site area by GUID.| No   |\r\n| AreasRelatedLocationGuidFilter| Used to filter the related location guid associated to the location of the customer site area.| No   |\r\n| RelatedHealthAndSafetyBlobs| The array of related health and safety blobs to this site.| No   |\r\n| RelatedHealthAndSafetyBlobs[0].Guid| The GUID associated to the RelatedHealthAndSafetyBlob.| No   |\r\n| RelatedHealthAndSafetyBlobs[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName| The document name| No   |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference| The document reference| No   |\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom| The valid from date| No   |\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil| The valid until date| No   |\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk| Whether the document contains high risk items| No   |\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle| Whether the document is sent to vehicle| No   |\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem| The GUID and description of the health and safety document type| No   |\r\n| IsDeleted| Whether site is deleted.| Yes      |\r\n| LocalAuthorityListItem| The GUID and description of the local authority related to customer site.| No       |\r\n| LocalAuthorityGuidFilter| Used to filter the local Authority Guid associated to the customer site| No       |\r\n| CoCNumber| CoC Number of Customer Site| No       |\r\n| EPAId| The site's EPA id.| No       |\r\n| WasteCarrierLicenceNumber| The site's waste carrier licence number.| No       |\r\n| WasteExemptionExpiryDate| The site's waste exemption expiry date.| No       |\r\n| NVWANumber| The site's NVWA number.| No       |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Customer not found with value RelatedCustomerGuid | Failed to retrieve Customer with RelatedCustomerGuid of {value of RelatedCustomerGuid} |\r\n| Provided Customer is not same as existing Customer | Relationship between Site and Customer cannot be updated | \r\n| Location does not belong to the Customer | Failed to save. CustomerSite with RelatedLocationGuid of {value of RelatedLocationGuid} cannot be set if it is not a site of the related Customer.|\r\n| Location does not belong to the Customer | Failed to save. CustomerSite with RelatedLocationInvoiceGuid of {value of RelatedLocationInvoiceGuid} cannot be set if it is not a site of the related Customer.|\r\n| Location does not belong to the Customer | Failed to save. CustomerSite with RelatedLocationRemitGuid of {value of RelatedLocationRemitGuid} cannot be set if it is not a site of the related Customer.|\r\n| ZoneListItem isDeleted flag is set to true | Failed to save entity. IsDeleted flag set to true for given property with GUID {ZoneListItem.Guid} |\r\n| Failed to save/update Site because the supplied CustomerTradingName is not valid. The update has been rejected. Change RelatedTradingNames.RelatedTradingNameGuid to the Guid of a valid and undeleted CustomerTradingName. |\r\n| If Areas.Guid is not null on POST | One of the Areas in the request is an update. The request could not be processed. Ensure that none of the Areas has a guid. |\r\n| If Areas.IsDeleted is not null/true on POST | Attempt to has been made to set Areas.IsDeleted. The request could not be processed. Ensure that Areas.IsDeleted has default value. |\r\n| If Areas.IsDeleted is changed. | Areas.IsDeleted is a read-only property. The request could not be processed. Ensure that Areas.IsDeleted is not changed. |\r\n| If RelatedTradingNames.Guid is not null on POST | One of the RelatedTradingNames in the request is an update. The request could not be processed. Ensure that none of the RelatedTradingNames has a guid. |\r\n| If RelatedTradingNames.Guid is not unique | Failed to save/update Site because duplicate Guid listed in The RelatedTradingNames array. |\r\n| If RelatedTradingNames.Description is not null or changed. | Attempt to has been made to set RelatedTradingNames.Description. The request could not be processed. Ensure that RelatedTradingNames.Description has default value. |\r\n| If RelatedTradingNames.RelatedTradingNameGuid is not unique | Failed to save/update Site because duplicate RelatedTradingNameGuid listed in The RelatedTradingNames array. |\r\n| If RelatedTradingNameGuid is not related to RelatedCustomerGuid | The CustomerTradingName and Customer do not match. The resource could not be created/updated. Ensure that RelatedCustomerGuid references a CustomerTradingName of CustomerId. |\r\n| If RelatedTradingNames.Guid is not related to CustomerSite Guid | The CustomerTradingNameCustomerSite and CustomerSite do not match. The resource could not be created/updated. Ensure that Guid references a CustomerTradingNameCustomerSite of CustomerSiteId. |\r\n| RelatedHealthAndSafetyBlobs[0].Guid is changed for Update | RelatedHealthAndSafetyBlobs.Guid is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].Hash is changed for Update | RelatedHealthAndSafetyBlobs.Hash is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName is changed for Update | RelatedHealthAndSafetyBlobs.DocumentName is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference is changed for Update | RelatedHealthAndSafetyBlobs.DocumentReference is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle is changed for Update | RelatedHealthAndSafetyBlobs.IsSentToVehicle is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk is changed for Update | RelatedHealthAndSafetyBlobs.IsHighRisk is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom is changed for Update | RelatedHealthAndSafetyBlobs.ValidFrom is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil is changed for Update | RelatedHealthAndSafetyBlobs.ValidUntil is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem.Guid is changed for Update | RelatedHealthAndSafetyBlobs.HealthAndSafetyDocumentTypeListItem.Guid is a read-only property |\r\n| If RelatedTaxJurisdictionGuid value is deleted | Failed to save/update Site because the supplied TaxJurisdiction is not valid. The update has been rejected. Change the RelatedTaxJurisdictionGuid to the Guid of a valid and undeleted TaxJurisdiction |\r\n| If EPAId is more than 25 characters long | Failed to save/update Site because EPAId must be no more than 25 characters long. |\r\n| If WasteCarrierLicenceNumber is more than 20 characters long | Failed to save/update Site because WasteCarrierLicenceNumber must be no more than 20 characters long. |\r\n| If NVWANumber is more than 25 characters long | Failed to save/update Site because NVWANumber must be no more than 25 characters long. |\r\n\r\n##  Information\r\n\r\n| Information |\r\n| ----------- |\r\n| If the related invoice location guid is not same as the related location guid then the related statement location guid will be nullified. |\r\n"
+      operationId: Site_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/sites:
+    get:
+      tags:
+      - Site
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the site.|\r\n| Name| The site's name.|\r\n| Reference| An alternative name used for the site. Filterable|\r\n| FederalId| The site's local authority / government / tax reference.|\r\n| AnalysisCode| The site's analysis code|\r\n| UniqueCustomerSiteCode| The unique code assigned to the site if system configuration \"UniqueCustomerSiteCodeGeneration\" was set to true when site was created. |\r\n| IsNonServiceSite  | Whether the site is non-service.          |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this site. Filterable.|\r\n| SiteTypeListItem| The GUID and type of the site (eg. Unoccupied Location, Residential, Non Residential).|\r\n| SICCodeListItem| The GUID and 2007 description of SICCode|\r\n| SalesTerritoryListItem| The GUID and name of the sales territory this site is associated to.|\r\n| CompanyOutletListItem| The GUID and name of the default company outlet this site is associated to.|\r\n| CustomerSiteStateListItem| The GUID and state of the site (eg. Active, Closed, Suspended).|\r\n| ZoneListItem| The GUID and description of the zone.|\r\n| RebatePaymentTypeListItem| The GUID and description of the rebate payment type.|\r\n| RebatePaymentTermListItem| The GUID and description of the rebate payment term.|\r\n| ContactMethods.Email| The Email associated to the site.|\r\n| PaymentHandlingCodeListItem| The GUID and description of the payment handling code.|\r\n| ReminderLetterPolicyListItem| The GUID and description of the reminder letter policy.|\r\n| VisitStatusListItem| The GUID and description of the visit status.|\r\n| RelatedLocationInvoiceGuid| Used to filter the related invoice location guid associated to the invoice location of this site.|\r\n| RelatedLocationRemitGuid| Used to filter the related remit location guid associated to the remit location of this site.|\r\n| RelatedLocationGuid| Used to filter the related location guid associated to the location of the site.|\r\n| RelatedTaxJurisdictionGuid| The GUID associated to the tax jurisdiction of this site. Filterable.|\r\n| AccessTimes[0]| A list of objects containing customer site access time.|\r\n| AccessTimes[0].Guid| The GUID associated to the site access time.|\r\n| AccessTimes[0].AccessContact| The access contact name to associated site.|\r\n| AccessTimes[0].AccessNotes| The access notes to associated site.|\r\n| AccessTimes[0].AccessStartTime| The access start time to associated site.|\r\n| AccessTimes[0].AccessEndTime| The access end time to associated site.|\r\n| AccessTimes[0].DayOfWeekListItem| The GUID and description of the day of week to access.|\r\n| DocumentDeliveryMethods[]| The array of document delivery types associated to the customer site.|\r\n| DocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the DocumentDeliveryMethods. |\r\n| RelatedLocationDocumentGuid| Used to filter the related document location guid associated to this site.|\r\n| RelatedLocationStatementGuid| Used to filter the related statement location guid associated to this site.|\r\n| RelatedLocationQuotationGuid| Used to filter the related quotation location guid associated to this site.|\r\n| RelatedTradingNames[]| The array of customer trading names associated to the customer site.| \r\n| RelatedTradingNames[0].Guid| The guid associated to the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].RelatedTradingNameGuid| The guid of the customer trading name associated to the customer site.| \r\n| RelatedTradingNames[0].Description| The description of customer trading name associated to the customer site.| \r\n| RelatedTradingNameGuidFilter| Used to filter on related trading name guid.| \r\n| Areas| A list of objects containing customer site area.|\r\n| Areas[0].Guid| The GUID associated to the customer site area.|\r\n| Areas[0].Description| The description associated to the customer site area.|\r\n| Areas[0].RelatedLocationGuid| The related location guid associated to the location of the customer site area.|\r\n| Areas[0].IsDeleted| Whether the customer site area is deleted.|\r\n| AreasGuidFilter| Used to filter the customer site area by GUID.|\r\n| AreasRelatedLocationGuidFilter| Used to filter the related location guid associated to the location of the customer site area.|\r\n| RelatedHealthAndSafetyBlobs| The array of related health and safety blobs to this site.|\r\n| RelatedHealthAndSafetyBlobs[0].Guid| The GUID associated to the RelatedHealthAndSafetyBlob.|\r\n| RelatedHealthAndSafetyBlobs[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName| The document name|\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference| The document reference|\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom| The valid from date|\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil| The valid until date|\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk| Whether the document contains high risk items|\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle| Whether the document is sent to vehicle|\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem| The GUID and description of the health and safety document type|\r\n| IsDeleted| Whether site is deleted.|\r\n| LocalAuthorityListItem| The GUID and description of the local authority related to customer site.|\r\n| LocalAuthorityGuidFilter| Used to filter the local Authority Guid associated to the customer site|\r\n| CoCNumber| CoC Number of Customer Site.| \r\n| IsHeadQuarter| The site's customer head quarter location.|\r\n| EPAId| The site's EPA id.|\r\n| WasteCarrierLicenceNumber| The site's waste carrier licence number.|\r\n| WasteExemptionExpiryDate| The site's waste exemption expiry date.|\r\n| NVWANumber| The site's NVWA number.|"
+      operationId: Site_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSiteResource]'
+    post:
+      tags:
+      - Site
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the site.| No   |\r\n| Name| The site's name.| Yes      |\r\n| Reference| An alternative name used for the site.| No   |\r\n| FederalId| The site's local authority / government / tax reference.| No   |\r\n| AnalysisCode| The site's analysis code.| No   |\r\n| UniqueCustomerSiteCode| The unique code assigned to the site, this will be automatically set if system configuration \"UniqueCustomerSiteCodeGeneration\" is set to true when posting. | No |\r\n| IsNonServiceSite  | Whether the site is non-service.          | Yes      |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this site.| Yes   |\r\n| SICCodeListItem| The GUID and 2007 description this site is associated to.| No       |\r\n| SiteTypeListItem| The GUID and type of the site (eg. Unoccupied Location, Residential, Non Residential).| No   |\r\n| SalesTerritoryListItem| The GUID and name of the sales territory this site is associated to.| No   |\r\n| CompanyOutletListItem| The GUID and name of the default company outlet this site is associated to.| Yes   |\r\n| CustomerSiteStateListItem| The GUID and state of the site (eg. Active, Closed, Suspended).| Yes   |\r\n| ZoneListItem| The GUID and description of the zone.| No   |\r\n| RebatePaymentTypeListItem| The GUID and description of the rebate payment type.| No   |\r\n| RebatePaymentTermListItem| The GUID and description of the rebate payment term.| No   |\r\n| ReminderLetterPolicyListItem| The GUID and description of the reminder letter policy.| No   |\r\n| VisitStatusListItem| The GUID and description of the visit status.| No   |\r\n| ContactMethods.Email| The Email associated to the site.| No   |\r\n| PaymentHandlingCodeListItem| The GUID and description of the payment handling code.| No   |\r\n| RelatedLocationInvoiceGuid| The GUID associated to the invoice location of this site.| Yes   |\r\n| RelatedLocationRemitGuid| The GUID associated to the remit location of this site.| No   |\r\n| RelatedLocationGuid| The GUID associated to the location of the site.| Yes   |\r\n| RelatedTaxJurisdictionGuid| The GUID associated to the tax jurisdiction of this site.| No       |\r\n| AccessTimes[0]| A list of objects containing customer site access time.| No   |\r\n| AccessTimes[0].Guid| The GUID associated to the site access time.| No   |\r\n| AccessTimes[0].AccessContact| The access contact name to associated site.| No   |\r\n| AccessTimes[0].AccessNotes| The access notes to associated site.| No   |\r\n| AccessTimes[0].AccessStartTime| The access start time to associated site.| Yes   |\r\n| AccessTimes[0].AccessEndTime| The access end time to associated site.| Yes   |\r\n| AccessTimes[0].DayOfWeekListItem| The GUID and description of the day of week to access.| Yes   |\r\n| DocumentDeliveryMethods[]| The array of document delivery types associated to the customer site.| No   |\r\n| DocumentDeliveryMethods[0].DocumentDeliveryType| The GUID and description of the document delivery type associated to the DocumentDeliveryMethods. | No   |\r\n| RelatedLocationDocumentGuid| The guid associated to the document location of this site.| No   |\r\n| RelatedLocationStatementGuid| The guid associated to the statement location of this site.| No   |\r\n| RelatedLocationQuotationGuid| The guid associated to the quotation location of this site.| No   |\r\n| RelatedTradingNames[]| The array of customer trading names associated to the customer site.| No   |\r\n| RelatedTradingNames[0].Guid| The guid associated to the customer trading name associated to the customer site.| No   |\r\n| RelatedTradingNames[0].RelatedTradingNameGuid| The guid of the customer trading name associated to the customer site.| Yes   |\r\n| RelatedTradingNames[0].Description| The description of customer trading name associated to the customer site.| No   |\r\n| RelatedTradingNameGuidFilter| Used to filter on related trading name guid.| No   |\r\n| Areas| A list of objects containing customer site area.| No   |\r\n| Areas[0].Guid| The GUID associated to the customer site area.| No   |\r\n| Areas[0].Description| The description associated to the customer site area.| Yes   |\r\n| Areas[0].RelatedLocationGuid| The related location guid associated to the location of the customer site area.| Yes   |\r\n| Areas[0].IsDeleted| Whether the customer site area is deleted.| No   |\r\n| AreasGuidFilter| Used to filter the customer site area by GUID.| No   |\r\n| AreasRelatedLocationGuidFilter| Used to filter the related location guid associated to the location of the customer site area.| No   |\r\n| RelatedHealthAndSafetyBlobs| The array of related health and safety blobs to this site.| No   |\r\n| RelatedHealthAndSafetyBlobs[0].Guid| The GUID associated to the RelatedHealthAndSafetyBlob.| No   |\r\n| RelatedHealthAndSafetyBlobs[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName| The document name| No   |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference| The document reference| No   |\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom| The valid from date| No   |\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil| The valid until date| No   |\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk| Whether the document contains high risk items| No   |\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle| Whether the document is sent to vehicle| No   |\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem| The GUID and description of the health and safety document type| No   |\r\n| IsDeleted| Whether site is deleted.| Yes      |\r\n| LocalAuthorityListItem| The GUID and description of the local authority related to customer site.| No       |\r\n| LocalAuthorityGuidFilter| Used to filter the local Authority Guid associated to the customer site| No       |\r\n| CoCNumber| CoC Number of Customer Site| No       |\r\n| EPAId| The site's EPA id.| No       |\r\n| WasteCarrierLicenceNumber| The site's waste carrier licence number.| No       |\r\n| WasteExemptionExpiryDate| The site's waste exemption expiry date.| No       |\r\n| NVWANumber| The site's NVWA number.| No       |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Customer not found with value RelatedCustomerGuid | Failed to retrieve Customer with RelatedCustomerGuid of {value of RelatedCustomerGuid} |\r\n| ZoneListItem isDeleted flag is set to true | Failed to save entity. IsDeleted flag set to true for given property with GUID {ZoneListItem.Guid} |\r\n| Failed to save/update Site because the supplied CustomerTradingName is not valid. The update has been rejected. Change RelatedTradingNames.RelatedTradingNameGuid to the Guid of a valid and undeleted CustomerTradingName. |\r\n| If Areas.Guid is not null on POST | One of the Areas in the request is an update. The request could not be processed. Ensure that none of the Areas has a guid. |\r\n| If Areas.IsDeleted is not null/true on POST | Attempt to has been made to set Areas.IsDeleted. The request could not be processed. Ensure that Areas.IsDeleted has default value. |\r\n| If Areas.IsDeleted is changed. | Areas.IsDeleted is a read-only property. The request could not be processed. Ensure that Areas.IsDeleted is not changed. |\r\n| If RelatedTradingNames.Guid is not null on POST | One of the RelatedTradingNames in the request is an update. The request could not be processed. Ensure that none of the RelatedTradingNames has a guid. |\r\n| If RelatedTradingNames.Guid is not unique | Failed to save/update Site because duplicate Guid listed in The RelatedTradingNames array. |\r\n| If RelatedTradingNames.Description is not null or changed. | Attempt to has been made to set RelatedTradingNames.Description. The request could not be processed. Ensure that RelatedTradingNames.Description has default value. |\r\n| If RelatedTradingNames.RelatedTradingNameGuid is not unique | Failed to save/update Site because duplicate RelatedTradingNameGuid listed in The RelatedTradingNames array. |\r\n| If RelatedTradingNameGuid is not related to RelatedCustomerGuid | The CustomerTradingName and Customer do not match. The resource could not be created/updated. Ensure that RelatedCustomerGuid references a CustomerTradingName of CustomerId. |\r\n| If RelatedTradingNames.Guid is not related to CustomerSite Guid | The CustomerTradingNameCustomerSite and CustomerSite do not match. The resource could not be created/updated. Ensure that Guid references a CustomerTradingNameCustomerSite of CustomerSiteId. |\r\n| RelatedHealthAndSafetyBlobs is not null for Insert | Failed to save/update site because RelatedHealthAndSafetyBlobs creation is not permitted |\r\n| RelatedHealthAndSafetyBlobs[0].Guid is changed for Update | RelatedHealthAndSafetyBlobs.Guid is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].Hash is changed for Update | RelatedHealthAndSafetyBlobs.Hash is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentName is changed for Update | RelatedHealthAndSafetyBlobs.DocumentName is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].DocumentReference is changed for Update | RelatedHealthAndSafetyBlobs.DocumentReference is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].IsSentToVehicle is changed for Update | RelatedHealthAndSafetyBlobs.IsSentToVehicle is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].IsHighRisk is changed for Update | RelatedHealthAndSafetyBlobs.IsHighRisk is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].ValidFrom is changed for Update | RelatedHealthAndSafetyBlobs.ValidFrom is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].ValidUntil is changed for Update | RelatedHealthAndSafetyBlobs.ValidUntil is a read-only property |\r\n| RelatedHealthAndSafetyBlobs[0].HealthAndSafetyDocumentTypeListItem.Guid is changed for Update | RelatedHealthAndSafetyBlobs.HealthAndSafetyDocumentTypeListItem.Guid is a read-only property |\r\n| If RelatedTaxJurisdictionGuid value is deleted | Failed to save/update Site because the supplied TaxJurisdiction is not valid. The update has been rejected. Change the RelatedTaxJurisdictionGuid to the Guid of a valid and undeleted TaxJurisdiction |\r\n| If EPAId is more than 25 characters long | Failed to save/update Site because EPAId must be no more than 25 characters long. |\r\n| If WasteCarrierLicenceNumber is more than 20 characters long | Failed to save/update Site because WasteCarrierLicenceNumber must be no more than 20 characters long. |\r\n| If NVWANumber is more than 25 characters long | Failed to save/update Site because NVWANumber must be no more than 25 characters long. |\r\n\r\n##  Information\r\n\r\n| Information |\r\n| ----------- |\r\n| Creating a new site with related location guid will create a new location with same information and it will be linked to the site which is created, so we will get different related location guid on getting the site  |\r\n| If related invoice location guid is same as related location guid then related invoice location guid will be using the location guid created on the site |\r\n| If related invoice location guid is not same as related location guid then the site will be created with the invoice location guid passed from the request |\r\n| If related remit location guid is same as related location guid then related remit location guid will be using the location guid created on the site |\r\n| If related remit location guid is not same as related location guid then the site will be created with the remit location guid passed from the request |\r\n"
+      operationId: Site_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorSiteResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorSiteResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSiteAccessTimeResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessContact:
+          type: string
+        AccessNotes:
+          type: string
+        AccessStartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccessEndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceChanges[ApiIntegratorSiteResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorSiteTradingNameResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedTradingNameGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Description:
+          type: string
+    ApiIntegratorCustomerSiteHealthAndSafetyBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Hash:
+          type: string
+        DocumentName:
+          type: string
+        DocumentReference:
+          type: string
+        HealthAndSafetyDocumentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ValidFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ValidUntil:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsHighRisk:
+          type: boolean
+        IsSentToVehicle:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorSiteResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        Reference:
+          type: string
+        SiteTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        FederalId:
+          type: string
+        AnalysisCode:
+          type: string
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        UniqueCustomerSiteCode:
+          type: string
+        IsNonServiceSite:
+          type: boolean
+        SICCodeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        SalesTerritoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CustomerSiteStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ZoneListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RebatePaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RebatePaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContactMethods:
+          $ref: '#/components/schemas/ApiIntegratorSiteContactMethodsResource'
+        PaymentHandlingCodeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReminderLetterPolicyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DocumentDeliveryMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryMethodsResource'
+        RelatedLocationInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationRemitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationDocumentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationStatementGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationQuotationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedTaxJurisdictionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        NumberOfUnits:
+          type: integer
+          format: int32
+        AccessTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteAccessTimeResource'
+        RelatedTradingNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteTradingNameResource'
+        RelatedHealthAndSafetyBlobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerSiteHealthAndSafetyBlobHashesResource'
+        RelatedTradingNameGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteAreaResource'
+        VisitStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LocalAuthorityListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AreasGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AreasRelatedLocationGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        LocalAuthorityGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CoCNumber:
+          type: string
+        EPAId:
+          type: string
+        WasteCarrierLicenceNumber:
+          type: string
+        WasteExemptionExpiryDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        NVWANumber:
+          type: string
+        IsHeadQuarter:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorSiteContactMethodsResource:
+      type: object
+      properties:
+        Email:
+          type: string
+    ApiIntegratorDocumentDeliveryMethodsResource:
+      type: object
+      properties:
+        DocumentDeliveryType:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorSiteAreaResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Description:
+          type: string
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

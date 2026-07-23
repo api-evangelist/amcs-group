@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: none
+summary: >-
+  Probed the /.well-known/ discovery surface on the marketing host and the REST
+  API sandbox host. No document returned 200; the OIDC/OAuth/api-catalog paths on
+  www.amcsgroup.com return 301 redirects (to marketing pages, not discovery
+  documents) and the sandbox host requires a session (000). No raw files saved.
+hosts:
+- host: https://www.amcsgroup.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://rstapi-sbx-svc-core.amcsplatform.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 000
+  - path: /.well-known/openid-configuration
+    status: 000
+  - path: /.well-known/oauth-authorization-server
+    status: 000

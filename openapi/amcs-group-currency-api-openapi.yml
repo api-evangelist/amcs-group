@@ -1,0 +1,219 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Currency API
+  version: core
+tags:
+- name: Currency
+paths:
+  /lists/currencies/changes:
+    get:
+      tags:
+      - Currency
+      summary: Retrieve changes
+      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      operationId: Currency_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCurrencyResource]'
+  /lists/currencies/{guid}:
+    get:
+      tags:
+      - Currency
+      summary: Find with GUID
+      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      operationId: Currency_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCurrencyResource]'
+  /lists/currencies:
+    get:
+      tags:
+      - Currency
+      summary: Find with Filters
+      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      operationId: Currency_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCurrencyResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorCurrencyResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCurrencyResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorCurrencyResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCurrencyResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCurrencyResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Symbol:
+          type: string
+        IntegrationCode:
+          type: string
+        CurrencyRoundingTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorCurrencyResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCurrencyResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

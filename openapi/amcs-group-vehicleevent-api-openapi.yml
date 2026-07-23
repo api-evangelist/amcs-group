@@ -1,0 +1,336 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup VehicleEvent API
+  version: core
+tags:
+- name: VehicleEvent
+paths:
+  /fleet/vehicleEvents/changes:
+    get:
+      tags:
+      - VehicleEvent
+      summary: Retrieve changes
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle event.|\r\n| AdditionalInformation| The additional information associated to the vehicle event.|\r\n| BinVisitedCount| The bin visited count associated to the vehicle event.|\r\n| CurrentWeight | The current weight associated to the vehicle event.|\r\n| Distance | The distance associated to the vehicle event.|\r\n| EventDate | The event date associated to the vehicle event.|\r\n| FlexibleData| The flexible data associated to the vehicle event.|\r\n| IsAcknowledged| Whether the vehicle event is acknowledged.|\r\n| IsGeoCompressed| Whether the vehicle event is geo compressed.|\r\n| Location| The location associated to the vehicle event.|\r\n| NumberOfPictures| The number of pictures associated to the vehicle event.|\r\n| Speed| The speed associated to the vehicle event.|\r\n| SpeedLimit| The speed limit associated to the vehicle event.|\r\n| SysUserName| The system user name associated to the vehicle event.|\r\n| TimeStamp| The time stamp associated to the vehicle event.|\r\n| TotalDistance| The total distance associated to the vehicle event.|\r\n| VehicleCode| The vehicle code associated to the vehicle event.|\r\n| VehicleEventXML| The vehicle event XML associated to the vehicle event.|\r\n| VehicleEventTypeListItem| The GUID and description associated to the vehicle event.|\r\n| RelatedJobGuid| The related job GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteGuid| The related route GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteVisitGroupGuid| The related route visit group GUID associated to the vehicle event. Filterable|\r\n| RelatedScheduleGuid| The related schedule GUID associated to the vehicle event. Filterable|\r\n| RelatedVehicleGuid| The related vehicle GUID associated to the vehicle event.|\r\n| IsDeleted| Whether the vehicle event is deleted|"
+      operationId: VehicleEvent_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorVehicleEventResource]'
+  /fleet/vehicleEvents/{guid}:
+    get:
+      tags:
+      - VehicleEvent
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle event.|\r\n| AdditionalInformation| The additional information associated to the vehicle event.|\r\n| BinVisitedCount| The bin visited count associated to the vehicle event.|\r\n| CurrentWeight | The current weight associated to the vehicle event.|\r\n| Distance | The distance associated to the vehicle event.|\r\n| EventDate | The event date associated to the vehicle event.|\r\n| FlexibleData| The flexible data associated to the vehicle event.|\r\n| IsAcknowledged| Whether the vehicle event is acknowledged.|\r\n| IsGeoCompressed| Whether the vehicle event is geo compressed.|\r\n| Location| The location associated to the vehicle event.|\r\n| NumberOfPictures| The number of pictures associated to the vehicle event.|\r\n| Speed| The speed associated to the vehicle event.|\r\n| SpeedLimit| The speed limit associated to the vehicle event.|\r\n| SysUserName| The system user name associated to the vehicle event.|\r\n| TimeStamp| The time stamp associated to the vehicle event.|\r\n| TotalDistance| The total distance associated to the vehicle event.|\r\n| VehicleCode| The vehicle code associated to the vehicle event.|\r\n| VehicleEventXML| The vehicle event XML associated to the vehicle event.|\r\n| VehicleEventTypeListItem| The GUID and description associated to the vehicle event.|\r\n| RelatedJobGuid| The related job GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteGuid| The related route GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteVisitGroupGuid| The related route visit group GUID associated to the vehicle event. Filterable|\r\n| RelatedScheduleGuid| The related schedule GUID associated to the vehicle event. Filterable|\r\n| RelatedVehicleGuid| The related vehicle GUID associated to the vehicle event.|\r\n| IsDeleted| Whether the vehicle event is deleted|"
+      operationId: VehicleEvent_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorVehicleEventResource]'
+    put:
+      tags:
+      - VehicleEvent
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle event.|   No    |\r\n| AdditionalInformation| The additional information associated to the vehicle event.|   No    |\r\n| BinVisitedCount| The bin visited count associated to the vehicle event.|   No    |\r\n| CurrentWeight | The current weight associated to the vehicle event.|   No    |\r\n| Distance | The distance associated to the vehicle event.|   No    |\r\n| EventDate | The event date associated to the vehicle event.|   No    |\r\n| FlexibleData| The flexible data associated to the vehicle event.|   No    |\r\n| IsAcknowledged| Whether the vehicle event is acknowledged.|   Yes   |\r\n| IsGeoCompressed| Whether the vehicle event is geo compressed.|   Yes   |\r\n| Location| The location associated to the vehicle event.|   No    |\r\n| NumberOfPictures| The number of pictures associated to the vehicle event.|   No    |\r\n| Speed| The speed associated to the vehicle event.|   No    |\r\n| SpeedLimit| The speed limit associated to the vehicle event.|   No    |\r\n| SysUserName| The system user name associated to the vehicle event.|   No    |\r\n| TimeStamp| The time stamp associated to the vehicle event.|   No    |\r\n| TotalDistance| The total distance associated to the vehicle event.|   No    |\r\n| VehicleCode| The vehicle code associated to the vehicle event.|   Yes   |\r\n| VehicleEventXML| The vehicle event XML associated to the vehicle event.|   No    |\r\n| VehicleEventTypeListItem| The GUID and description associated to the vehicle event.|   No    |\r\n| RelatedJobGuid| The related job GUID associated to the vehicle event.|   No    |\r\n| RelatedRouteGuid| The related route GUID associated to the vehicle event.|   No    |\r\n| RelatedRouteVisitGroupGuid| The related route visit group GUID associated to the vehicle event.|   No    |\r\n| RelatedScheduleGuid| The related schedule GUID associated to the vehicle event.|   No    |\r\n| RelatedVehicleGuid| The related vehicle GUID associated to the vehicle event.|   Yes   |\r\n| IsDeleted| Whether the vehicle event is deleted|   No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Invalid RelatedJobGuid | Failed to retrieve Job with RelatedJobGuid of {Guid} |\r\n| Invalid RelatedRouteGuid | Failed to retrieve Route with RelatedRouteGuid of {Guid} |\r\n| Invalid RelatedScheduleGuid | Failed to retrieve Schedule with RelatedScheduleGuid of {Guid} |\r\n| Invalid RelatedVehicleGuid | Failed to retrieve Vehicle with RelatedVehicleGuid of {Guid} |\r\n| VehicleEventType not found with value VehicleEventTypeListItem.Guid | Failed to retrieve VehicleEventType with GUID of {value of VehicleEventTypeListItem.Guid} |\r\n| If IsDeleted is set as true on the payload | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| Location.Lat value not in range between -90 and 90 or Location.Long value not in range between -180 and 180 | Location.Lat value must be between -90 and 90. Location.Long value must be between -180 and 180. |"
+      operationId: VehicleEvent_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /fleet/vehicleEvents:
+    get:
+      tags:
+      - VehicleEvent
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle event.|\r\n| AdditionalInformation| The additional information associated to the vehicle event.|\r\n| BinVisitedCount| The bin visited count associated to the vehicle event.|\r\n| CurrentWeight | The current weight associated to the vehicle event.|\r\n| Distance | The distance associated to the vehicle event.|\r\n| EventDate | The event date associated to the vehicle event.|\r\n| FlexibleData| The flexible data associated to the vehicle event.|\r\n| IsAcknowledged| Whether the vehicle event is acknowledged.|\r\n| IsGeoCompressed| Whether the vehicle event is geo compressed.|\r\n| Location| The location associated to the vehicle event.|\r\n| NumberOfPictures| The number of pictures associated to the vehicle event.|\r\n| Speed| The speed associated to the vehicle event.|\r\n| SpeedLimit| The speed limit associated to the vehicle event.|\r\n| SysUserName| The system user name associated to the vehicle event.|\r\n| TimeStamp| The time stamp associated to the vehicle event.|\r\n| TotalDistance| The total distance associated to the vehicle event.|\r\n| VehicleCode| The vehicle code associated to the vehicle event.|\r\n| VehicleEventXML| The vehicle event XML associated to the vehicle event.|\r\n| VehicleEventTypeListItem| The GUID and description associated to the vehicle event.|\r\n| RelatedJobGuid| The related job GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteGuid| The related route GUID associated to the vehicle event. Filterable|\r\n| RelatedRouteVisitGroupGuid| The related route visit group GUID associated to the vehicle event. Filterable|\r\n| RelatedScheduleGuid| The related schedule GUID associated to the vehicle event. Filterable|\r\n| RelatedVehicleGuid| The related vehicle GUID associated to the vehicle event.|\r\n| IsDeleted| Whether the vehicle event is deleted|"
+      operationId: VehicleEvent_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorVehicleEventResource]'
+    post:
+      tags:
+      - VehicleEvent
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle event.|   No    |\r\n| AdditionalInformation| The additional information associated to the vehicle event.|   No    |\r\n| BinVisitedCount| The bin visited count associated to the vehicle event.|   No    |\r\n| CurrentWeight | The current weight associated to the vehicle event.|   No    |\r\n| Distance | The distance associated to the vehicle event.|   No    |\r\n| EventDate | The event date associated to the vehicle event.|   No    |\r\n| FlexibleData| The flexible data associated to the vehicle event.|   No    |\r\n| IsAcknowledged| Whether the vehicle event is acknowledged.|   Yes   |\r\n| IsGeoCompressed| Whether the vehicle event is geo compressed.|   Yes   |\r\n| Location| The location associated to the vehicle event.|   No    |\r\n| NumberOfPictures| The number of pictures associated to the vehicle event.|   No    |\r\n| Speed| The speed associated to the vehicle event.|   No    |\r\n| SpeedLimit| The speed limit associated to the vehicle event.|   No    |\r\n| SysUserName| The system user name associated to the vehicle event.|   No    |\r\n| TimeStamp| The time stamp associated to the vehicle event.|   No    |\r\n| TotalDistance| The total distance associated to the vehicle event.|   No    |\r\n| VehicleCode| The vehicle code associated to the vehicle event.|   Yes   |\r\n| VehicleEventXML| The vehicle event XML associated to the vehicle event.|   No    |\r\n| VehicleEventTypeListItem| The GUID and description associated to the vehicle event.|   No    |\r\n| RelatedJobGuid| The related job GUID associated to the vehicle event.|   No    |\r\n| RelatedRouteGuid| The related route GUID associated to the vehicle event.|   No    |\r\n| RelatedRouteVisitGroupGuid| The related route visit group GUID associated to the vehicle event.|   No    |\r\n| RelatedScheduleGuid| The related schedule GUID associated to the vehicle event.|   No    |\r\n| RelatedVehicleGuid| The related vehicle GUID associated to the vehicle event.|   Yes   |\r\n| IsDeleted| Whether the vehicle event is deleted|   No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Invalid RelatedJobGuid | Failed to retrieve Job with RelatedJobGuid of {Guid} |\r\n| Invalid RelatedRouteGuid | Failed to retrieve Route with RelatedRouteGuid of {Guid} |\r\n| Invalid RelatedScheduleGuid | Failed to retrieve Schedule with RelatedScheduleGuid of {Guid} |\r\n| Invalid RelatedVehicleGuid | Failed to retrieve Vehicle with RelatedVehicleGuid of {Guid} |\r\n| VehicleEventType not found with value VehicleEventTypeListItem.Guid | Failed to retrieve VehicleEventType with GUID of {value of VehicleEventTypeListItem.Guid} |\r\n| If IsDeleted is set as true on the payload | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| Location.Lat value not in range between -90 and 90 or Location.Long value not in range between -180 and 180 | Location.Lat value must be between -90 and 90. Location.Long value must be between -180 and 180. |"
+      operationId: VehicleEvent_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorVehicleEventResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorVehicleEventResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection[ApiIntegratorVehicleEventResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorVehicleEventResource:
+      type: object
+      properties:
+        AdditionalInformation:
+          type: string
+        BinVisitedCount:
+          type: integer
+          format: int32
+        CurrentWeight:
+          type: number
+          format: double
+        Distance:
+          type: number
+          format: double
+        FlexibleData:
+          type: string
+        IsGeoCompressed:
+          type: boolean
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
+        NumberOfPictures:
+          type: integer
+          format: int32
+        TimeStamp:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        TotalDistance:
+          type: number
+          format: double
+        VehicleCode:
+          type: string
+        VehicleEventXML:
+          type: string
+        VehicleEventTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedScheduleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGroupGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        EventDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsAcknowledged:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorLocationGeoLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "description": "# Getting Started\n\n## Document Purpose and Scope\n\nThe Transport Live View REST API endpoints are technically described in this document. This document's goal is to instruct readers on how to interface with the Transport Live View External REST API.\n\n## Security\n\nWe use PAT Tokens for authentication over HTTPS encrypted comms.\n\nA PAT token will be provided for you to use in your integration.\n\nYou will use this PAT token to authenticate as follows.\n\n### Request Format:\n\nPOST: /tlv/api/authTokens\n\nBody: {\"privateKey\":\"PATtokenstring\"}\n\n### Response Format:\n\nThe response passes a SessionToken as a cookie.\n\nThis cookie should be included in the subsequent calls to the REST API.\n\nThe API endpoints that are currently available are detailed below.",
+    "title": "External API",
+    "version": "external"
+  },
+  "paths": {
+    "/integrator/gpsdata/changes": {
+      "get": {
+        "tags": [
+          "ApiGpsDataExternal"
+        ],
+        "summary": "Response: API GPS Data External",
+        "description": "# API GPS Data Changes\n\nProvides a structured response for changes in GPS Data Points.\n\n## How to Use This API\n\nThis API retrieves GPS data point changes using either a timestamp (`Since`) or a pagination cursor (`Cursor`).\n\n### **Usage Guidelines**\n- If `Since` is provided, the API returns data changes from that timestamp onwards.\n- If `Cursor` is provided, the API retrieves the next set of results from the given position.\n- If both `Since` and `Cursor` are omitted, the result is the same as using `Cursor`, meaning it will retrieve the most recent set of changes.\n- `Links.Next` contains both a URL and a `Cursor`. This will have data only if the response contains a `Cursor` value.\n- **A maximum of 2000 items can be retrieved per request.** If more data is required, use pagination via the `Cursor` parameter.\n\n## **Request Parameters**\n\n| Parameter   | Type        | Required | Description |\n|------------|------------|----------|-------------|\n| **Since**  | `DateTime?` | No       | The timestamp from which to retrieve changes. |\n| **Cursor** | `string`    | No       | A pagination cursor to fetch the next set of data. |\n\n---\n\n## **Response Structure**\n\n### **Main Response Object**\n| Property   | Type                                   | Description                                                   |\n|------------|---------------------------------------|---------------------------------------------------------------|\n| **Resource**   | `List<GpsDataPointChangeResourceDto>` | List of GPS data point changes.                               |\n| **Links**      | `GpsDataPointChangesLink`         | Links object containing navigation links.                     |\n| **Links.Next** | `string`                          | Contains the next page URL and cursor if there are more results. Will be present only if `Cursor` is included in the response. |\n| **Extra**      | `GpsDataPointChangesExtra`        | Extra information for pagination, including cursors and until. |\n\n---\n\n### **Links Object**\n| Property   | Type   | Description                     |\n|------------|--------|---------------------------------|\n| **Next**   | `string` | Link to the next page of data. Will only be present if `Cursor` is included in the response. |\n\n---\n\n### **Extra Object**\n| Property   | Type   | Description                                                                 |\n|------------|--------|---------------------------------------------------------------------------|\n| **Cursor** | `string` | Bookmark for navigating through pages.                                   |\n| **Until**  | `string` | Timestamp indicating the end of the range. If the `Cursor` is lost or unavailable, this `Until` timestamp can be used as the `Since` value in a new request to continue retrieving data from the last known point. |\n\n---\n\n### **GpsDataPointChangeResourceDto Object**\n| Property     | Type                        | Description                                  |\n|--------------|----------------------------|----------------------------------------------|\n| **Resource** | `GpsDataPointChangeDto`    | The GPS data point change details.          |\n\n---\n\n### **GpsDataPointChangeDto Object**\n| Property     | Type       | Description                                  |\n|--------------|-----------|----------------------------------------------|\n| **Id**       | `string`     | Unique identifier for the GPS data point.  |\n| **PlateNo**  | `string`     | Vehicle plate number associated with the data point. |\n| **Timestamp** | `DateTime`   | Date and time of the GPS data point.       |\n| **Latitude**  | `double`     | Latitude of the GPS data point.            |\n| **Longitude** | `double`     | Longitude of the GPS data point.           |\n| **SpeedKmh**  | `int`        | Speed in kilometers per hour.              |\n| **TenantId**  | `Guid`       | Identifier for the associated tenant.      |\n\n---\n\n### **Example Request**\n```json\n{\n  \"Since\": \"2024-02-21T12:00:00Z\",\n  \"Cursor\": \"abcdef\"\n}\n```\n\n---\n\n### **Example Response**\n```json\n{\n  \"Resource\": [\n    {\n      \"Resource\": {\n        \"Id\": \"12345\",\n        \"PlateNo\": \"ABC123\",\n        \"Timestamp\": \"2024-02-21T14:30:00Z\",\n        \"Latitude\": 14.5995,\n        \"Longitude\": 120.9842,\n        \"SpeedKmh\": 60,\n        \"TenantId\": \"550e8400-e29b-41d4-a716-446655440000\"\n      }\n    }\n  ],\n  \"Links\": {\n    \"Next\": \"/integrator/gpsdata/changes?cursor=abcdef\"\n  },\n  \"Extra\": {\n    \"Cursor\": \"abcdef\",\n    \"Until\": \"2024-02-21T15:00:00Z\"\n  }\n}\n```\n\n---\n\n### **Pagination Instructions**\n- If the response includes a `Next` link, call the API again using the `Cursor` parameter from the `Extra` object to fetch the next batch of data.\n- If the `Cursor` is lost or unavailable, use the `Until` timestamp as the `Since` value in a new request to continue retrieving data.\n- **Each request can return a maximum of 2000 items.** To retrieve more data, continue calling the API with the `Next` link until no `Next` link is provided.\n\n---\n\n### **HTTP Status Codes**\n- **`200 OK`** – Successful response with GPS data point changes.\n- **`400 Bad Request`** – Invalid request parameters.\n- **`500 Internal Server Error`** – Unexpected server error.",
+        "parameters": [
+          {
+            "name": "Since",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "The timestamp to retrieve changes from."
+          },
+          {
+            "name": "Cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A cursor for paginated results."											   
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with GPS data point changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GpsDataPointChangesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/integrator/gpsTrail": {
+      "post": {
+        "tags": [
+          "ApiGpsTrailExportService"
+        ],
+        "summary": "Get list of Vehicle Gps Trails",
+        "description": "# Get list of Vehicle Gps Trail\r\n\r\n## Input\r\n| Parameter\t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t          |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |         \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| DateFrom \t\t\t  | DateTime | Timestamp when the start date of the gps trail to be extracted                     |\r\n| DateTo              | DateTime | Timestamp when the end date of the gps trail to be extracted                       |\r\n\t\t\t\t                                              \r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"AssetName\": \"M879 EUS\",\r\n  \"DateFrom\": \"2024-06-28\",\r\n  \"DateTo\": \"\"2024-06-30\"\r\n}\r\n```\r\n\r\n## Output\r\n| Property \t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |                   \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| Timestamp \t\t  | DateTime | Timestamp of the asset                                                      |\r\n| Lat\t\t\t\t  | DateTime | Latitude where the asset at that point                       |\r\n| Lon \t\t\t\t  | DateTime | Longitude where the asset at that point                    |\r\n\r\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/trips/changes": {
+      "get": {
+        "tags": [
+          "ApiTripExternal"
+        ],
+        "summary": "Get List of Completed Trip Changes",
+        "description": "# Get List of Completed Trip Changes\n\nRetrieves completed trips with their associated vehicle information and trip summaries. This endpoint supports incremental data extraction by tracking changes using SQL Server's row version mechanism.\n\n---\n\n## Query Parameters\n| Parameter | Type   | Required | Description                                                                 |\n|-----------|--------|----------|-----------------------------------------------------------------------------|\n| since     | string | No       | Base64-encoded row version (from `@@DBTS`). Only returns trips changed after this version. **Must be URL-encoded.** |\n| cursor    | string | No       | Pagination cursor for retrieving next page of results (not used with row version tracking). |\n\n---\n\n## Authentication\nRequires authentication via the standard authentication mechanism. The tenant context is automatically determined from the authenticated user.\n\n---\n\n## Output Structure\n\n### Main Response Object\n| Property | Type                          | Description                                    |\n|----------|-------------------------------|------------------------------------------------|\n| Resource | List\\<ApiTripExternalDto\\>    | List of completed trips with summaries.        |\n| Extra    | object                        | Additional pagination information (if needed). |\n\n---\n\n### ApiTripExternalDto Object\n| Property     | Type              | Description                                           |\n|--------------|-------------------|-------------------------------------------------------|\n| VehicleId    | Guid?             | Unique identifier for the vehicle (Asset GUID).      |\n| VehicleName  | string            | Name of the vehicle.                                 |\n| TripId       | int               | Unique identifier for the trip.                      |\n| StartTime    | DateTimeOffset    | Trip start timestamp.                                |\n| EndTime      | DateTimeOffset?   | Trip end timestamp.                                  |\n| Status       | int               | Trip status (0=Started, 1=Completed, 2=Invalid).     |\n| TripSummary  | ApiTripSummary    | Calculated trip summary with metrics.                |\n\n---\n\n### ApiTripSummary Object\n| Property                         | Type    | Description                                                  |\n|----------------------------------|---------|--------------------------------------------------------------|\n| TripId                           | int     | Trip identifier.                                            |\n| TotalTripMileage                 | double | Total mileage covered during the trip. Unit of Measure - KM                 |\n| TotalPloughEnabledMileage        | double | Mileage covered while plough was enabled. Unit of Measure - KM                |\n| TotalSpreaderEnabledMileage      | double | Mileage covered while spreader was enabled. Unit of Measure - KM               |\n| SpreaderWidth                    | double | Spreader width setting. Unit of Measure - Meters                   |\n| TotalSolidMaterialDelivered      | double | Total solid material delivered during the trip. Unit of Measure - KG     |\n| TotalPrewetMaterialDelivered    | double | Total prewet material delivered during the trip. Unit of Measure - Liters    |\n| TotalTripDuration                | double | Total trip duration in minutes. Unit of Measure - Minutes      |\n\n---",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Must be URL-encoded."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination cursor for retrieving next page of results."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with completed trip changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripChangesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters."
+          },
+          "401": {
+            "description": "Unauthorized - authentication required."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse": {
+        "type": "object",
+        "properties": {
+          "assetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "gpsTrail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lon": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GpsDataPointChangesResponse": {
+        "type": "object",
+        "properties": {
+          "Resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GpsDataPointChangeResourceDto"
+            }
+          },
+          "Extra": {
+            "$ref": "#/components/schemas/GpsDataPointChangesExtra"
+          },
+          "Links": {
+            "$ref": "#/components/schemas/GpsDataPointChangesLink"
+          }
+        }
+      },
+      "GpsDataPointChangesLink": {
+        "type": "object",
+        "properties": {
+          "Next": {
+            "type": "string"
+          }
+        }
+      },
+      "GpsDataPointChangesExtra": {
+        "type": "object",
+        "properties": {
+          "Cursor": {
+            "type": "string"
+          },
+          "Until": {
+            "type": "string"
+          }
+        }
+      },
+      "GpsDataPointChangeResourceDto": {
+        "type": "object",
+        "properties": {
+          "Resource": {
+            "$ref": "#/components/schemas/GpsDataPointChangeDto"
+          }
+        }
+      },
+      "GpsDataPointChangeDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "PlateNo": {
+            "type": "string"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "SpeedKmh": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TenantId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "TripChangesResponse": {
+        "type": "object",
+        "properties": {
+          "Resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiTripExternalDto"
+            }
+          },
+          "Extra": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "ApiTripExternalDto": {
+        "type": "object",
+        "properties": {
+          "VehicleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Unique identifier for the vehicle (Asset GUID)."
+          },
+          "VehicleName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the vehicle."
+          },
+          "TripId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier for the trip."
+          },
+          "StartTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Trip start timestamp."
+          },
+          "EndTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Trip end timestamp."
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Trip status (0=Started, 1=Completed, 2=Invalid)."
+          },
+          "TripSummary": {
+            "$ref": "#/components/schemas/ApiTripSummary",
+            "description": "Calculated trip summary with metrics."
+          }
+        }
+      },
+      "ApiTripSummary": {
+        "type": "object",
+        "properties": {
+          "TripId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Trip identifier."
+          },
+          "TotalTripMileage": {
+            "type": "number",
+            "format": "double",
+            "description": "Total mileage covered during the trip. Unit of Measure - Liters"
+          },
+          "TotalPloughEnabledMileage": {
+            "type": "number",
+            "format": "double",
+            "description": "Mileage covered while plough was enabled. Unit of Measure - Meters"
+          },
+          "TotalSpreaderEnabledMileage": {
+            "type": "number",
+            "format": "double",
+            "description": "Mileage covered while spreader was enabled. Unit of Measure - Meters"
+          },
+          "SpreaderWidth": {
+            "type": "number",
+            "format": "double",
+            "description": "Spreader width setting. Unit of Measure - Meters"
+          },
+          "TotalSolidMaterialDelivered": {
+            "type": "number",
+            "format": "double",
+            "description": "Total solid material delivered during the trip. Unit of Measure - KG"
+          },
+          "TotalPrewetMaterialDelivered": {
+            "type": "number",
+            "format": "double",
+            "description": "Total prewet material delivered during the trip. Unit of Measure - Liters"
+          },
+          "TotalTripDuration": {
+            "type": "number",
+            "format": "double",
+            "description": "Total trip duration in minutes. Unit of Measure - Minutes"
+          }
+        }
+      }
+    }
+  }
+}

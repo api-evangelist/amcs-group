@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AccountingPeriodInventoryBatch API
+  version: core
+tags:
+- name: AccountingPeriodInventoryBatch
+paths:
+  /mirror/imm/accountingPeriodInventoryBatches:
+    post:
+      tags:
+      - AccountingPeriodInventoryBatch
+      summary: Create or update
+      operationId: AccountingPeriodInventoryBatch_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryBatchResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /mirror/imm/accountingPeriodInventoryBatches/{guid}:
+    put:
+      tags:
+      - AccountingPeriodInventoryBatch
+      summary: Partial update
+      operationId: AccountingPeriodInventoryBatch_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryBatchResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorAccountingPeriodInventoryResource:
+      type: object
+      properties:
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialClassListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialFinishedStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TipLocationListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsInventoryInTransitIncluded:
+          type: boolean
+        StartWeight:
+          type: number
+          format: double
+        EndWeight:
+          type: number
+          format: double
+        StartCost:
+          type: number
+          format: double
+        EndCost:
+          type: number
+          format: double
+        WeightedAverageCost:
+          type: number
+          format: double
+        StartUnits:
+          type: integer
+          format: int32
+        EndUnits:
+          type: integer
+          format: int32
+        EstimatedStartCost:
+          type: number
+          format: double
+        EstimatedEndCost:
+          type: number
+          format: double
+        EstimatedUnitCost:
+          type: number
+          format: double
+        NonSaleStartWeight:
+          type: number
+          format: double
+        NonSaleEndWeight:
+          type: number
+          format: double
+        NonSaleStartCost:
+          type: number
+          format: double
+        NonSaleEndCost:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorAccountingPeriodInventoryBatchResource:
+      type: object
+      properties:
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodInventories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

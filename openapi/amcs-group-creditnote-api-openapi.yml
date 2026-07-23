@@ -1,0 +1,500 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup CreditNote API
+  version: core
+tags:
+- name: CreditNote
+paths:
+  /accounting/creditNotes/changes:
+    get:
+      tags:
+      - CreditNote
+      summary: Retrieve changes
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the credit note.                               |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of this credit note.              |\r\n| CreditNoteNumber     | The credit note number.                                               |\r\n| Reference            | An alternative name used for the credit note.                         |\r\n| ExternalReference    | The external reference associated to the credit note.   |\r\n| IsCreditJournal      | If true this credit note is a credit journal.                         |\r\n| IsTaxAdjustment      | If true this credit note is a tax adjustment.                         |\r\n| IsApproved           | If true this credit note is approved.                                 |\r\n| Notes   | The notes associated to the credit note.                              |\r\n| IsForClosingCustomer | If true this credit note is for closing a customer.                   |\r\n| WriteOffReasonListItem   | The GUID and writeoff reason of the credit note.                      |\r\n| AccountingPeriodListItem | The GUID and accounting period of the credit note.                    |\r\n| ReasonListItem           | The GUID and reason of the credit note.                               |\r\n| DepartmentListItem       | The GUID and department of the credit note.                           |\r\n| OutletListItem           | The GUID and outlet of the credit note.                               |\r\n| ReceivedDate   | The received date of the credit note.                               |\r\n| InputDate   | The input date of the credit note.   |\r\n| ExportedDate   | The exported date of the credit note.                               |\r\n| Amount               | The object where the amount is specified.                             |\r\n| Amount.ExchangeRate  | The object where the exchange rate of the amount is specified.        |\r\n| Amount.ExchangeRate.Rate                 | The exchange rate of the amount.                  |\r\n| Amount.ExchangeRate.ExchangeDate         | The exchange date in ISO format of the exchange rate. |\r\n| Amount.ExchangeRate.BaseCurrencyListItem     | The GUID and base currency of the exchange rate.      |\r\n| Amount.ExchangeRate.ExchangeCurrencyListItem | The GUID and exchange currency of the exchange rate.  |\r\n| Amount.Amount        | The amount of the credit note.                                        |\r\n| Amount.BaseAmount    | The base amount of the credit note.                                   |\r\n| RelatedLocationInvoiceGuid | Used to filter the related invoice location guid associated to the invoice of the credit note. |\r\n| PrintAddress                   | The object where the print address is specified.            |\r\n| PrintAddress.HouseNumber       | The house number of the print address.                      |\r\n| PrintAddress.Address1 till 5   | The 5 address lines of the print address.                   |\r\n| PrintAddress.Postcode          | The postcode of the print address.                          |\r\n| Details[0]                               | A list of objects containing credit note details.                         |\r\n| Details[0].SiteName                      | The site name of the credit note detail.                                  |\r\n| Details[0].SiteAddress                   | The object where the site address of the credit note detail is specified. |                   \r\n| Details[0].SiteAddress.HouseNumber       | The house number of the site address of the credit note detail.           |\r\n| Details[0].SiteAddress.Address1 till 5   | The 5 address lines of the site address of the credit note detail.        |\r\n| Details[0].SiteAddress.Postcode          | The postcode of the site address of the credit note detail.               |\r\n| Details[0].Reference                     | An alternative name used for the credit note detail.                      |\r\n| Details[0].ServiceListItem                   | The GUID and service of the credit note detail.                           |\r\n| Details[0].ActionListItem                    | The GUID and action of the credit note detail.                            |\r\n| Details[0].ContainerTypeListItem             | The GUID and container type of the credit note detail.                    |\r\n| Details[0].MaterialTypeListItem              | The GUID and material type of the credit note detail.                     |\r\n| Details[0].OutletListItem                    | The GUID and outlet of the credit note detail.                            |\r\n| Details[0].DepartmentListItem                | The GUID and department of the credit note detail.                        |\r\n| Details[0].StartDate                     | The start date of the credit note detail in ISO format (YYYY-MM-DD).      |\r\n| Details[0].EndDate                       | The end date of the credit note detail in ISO format (YYYY-MM-DD).        |\r\n| Details[0].Quantity                      | The quantity of the credit note detail.                                   |\r\n| Details[0].Volume                        | The volume of the credit note detail.                                     |\r\n| Details[0].NetWeight                     | The net weight of the credit note detail.                                 |\r\n| Details[0].Amount                        | The amount of the credit note detail.                                     |\r\n| Details[0].AmountIncVAT                  | The amount including VAT of the credit note detail.                       |\r\n| Details[0].RelatedInvoiceDetailGuid      | The GUID associated to the invoice detail of the credit note detail.      |\r\n| Details[0].Notes   | The notes associated to the credit note detail.   |\r\n| Details[0].IsDeleted       | Whether the credit note detail is deleted.   |\r\n| Details[0].GUID       | The GUID of the credit note detail.   |\r\n| Allocations[0].Amount| The amount of the invoice credit note.|\r\n| Allocations[0].DateInput| The date input of the invoice credit note.                        |\r\n| Allocations[0].RelatedInvoiceGuid             | The GUID associated to the invoice of the credit note.            |\r\n| Allocations[0].AccountingPeriodListItem       | The GUID and accounting period of the invoice credit note.        |\r\n| Allocations[0].IsDeleted| Whether the invoice credit note is deleted.                       |\r\n| Allocations[0].GUID| The GUID of the invoice credit note.|\r\n| Deallocations[0].Amount| The amount of the deallocated invoice.|\r\n| Deallocations[0].DateDeallocated| The date of invoice credit note deallocation.|\r\n| Deallocations[0].DateInput| The date input of the invoice credit note.|\r\n| Deallocations[0].IsDeleted| Whether the invoice credit note is deleted.|\r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice.|\r\n| Deallocations[0].RelatedCreditNoteAllocationGuid| The GUID associated to the invoice credit note.|\r\n| Deallocations[0].RelatedInvoiceGuid| The GUID associated to the invoice.|\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period.|\r\n| Deallocations[0].GUID| The GUID of the invoice credit note deallocation.|\r\n| RelatedInvoiceGuidFilter                      | Used to filter the related invoice guid associated to the invoice of the credit note.|\r\n| RelatedInvoiceDetailGuidFilter| Used to filter the related invoice detail guid associated to the invoice detail of the credit note detail.|\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice credit note deallocation.|\r\n| RelatedCreditNoteAllocationGuidFilter| Used to filter the related invoice credit note guid associated to the invoice credit note deallocation.|\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the credit note.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| VATListItem | The GUID and description of the VAT associated to the Credit Note.                 |\r\n| VATListItems | The GUID and description of the VATs associated to the Credit Note.               |\r\n| UnallocatedAmount | The unallocated amount associated to the Credit Note.               |\r\n"
+      operationId: CreditNote_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCreditNoteResource]'
+  /accounting/creditNotes/{guid}:
+    get:
+      tags:
+      - CreditNote
+      summary: Find with GUID
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the credit note.                               |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of this credit note.              |\r\n| CreditNoteNumber     | The credit note number.                                               |\r\n| Reference            | An alternative name used for the credit note.                         |\r\n| ExternalReference    | The external reference associated to the credit note.   |\r\n| IsCreditJournal      | If true this credit note is a credit journal.                         |\r\n| IsTaxAdjustment      | If true this credit note is a tax adjustment.                         |\r\n| IsApproved           | If true this credit note is approved.                                 |\r\n| Notes   | The notes associated to the credit note.                              |\r\n| IsForClosingCustomer | If true this credit note is for closing a customer.                   |\r\n| WriteOffReasonListItem   | The GUID and writeoff reason of the credit note.                      |\r\n| AccountingPeriodListItem | The GUID and accounting period of the credit note.                    |\r\n| ReasonListItem           | The GUID and reason of the credit note.                               |\r\n| DepartmentListItem       | The GUID and department of the credit note.                           |\r\n| OutletListItem           | The GUID and outlet of the credit note.                               |\r\n| ReceivedDate   | The received date of the credit note.                               |\r\n| InputDate   | The input date of the credit note.   |\r\n| ExportedDate   | The exported date of the credit note.                               |\r\n| Amount               | The object where the amount is specified.                             |\r\n| Amount.ExchangeRate  | The object where the exchange rate of the amount is specified.        |\r\n| Amount.ExchangeRate.Rate                 | The exchange rate of the amount.                  |\r\n| Amount.ExchangeRate.ExchangeDate         | The exchange date in ISO format of the exchange rate. |\r\n| Amount.ExchangeRate.BaseCurrencyListItem     | The GUID and base currency of the exchange rate.      |\r\n| Amount.ExchangeRate.ExchangeCurrencyListItem | The GUID and exchange currency of the exchange rate.  |\r\n| Amount.Amount        | The amount of the credit note.                                        |\r\n| Amount.BaseAmount    | The base amount of the credit note.                                   |\r\n| RelatedLocationInvoiceGuid | Used to filter the related invoice location guid associated to the invoice of the credit note. |\r\n| PrintAddress                   | The object where the print address is specified.            |\r\n| PrintAddress.HouseNumber       | The house number of the print address.                      |\r\n| PrintAddress.Address1 till 5   | The 5 address lines of the print address.                   |\r\n| PrintAddress.Postcode          | The postcode of the print address.                          |\r\n| Details[0]                               | A list of objects containing credit note details.                         |\r\n| Details[0].SiteName                      | The site name of the credit note detail.                                  |\r\n| Details[0].SiteAddress                   | The object where the site address of the credit note detail is specified. |                   \r\n| Details[0].SiteAddress.HouseNumber       | The house number of the site address of the credit note detail.           |\r\n| Details[0].SiteAddress.Address1 till 5   | The 5 address lines of the site address of the credit note detail.        |\r\n| Details[0].SiteAddress.Postcode          | The postcode of the site address of the credit note detail.               |\r\n| Details[0].Reference                     | An alternative name used for the credit note detail.                      |\r\n| Details[0].ServiceListItem                   | The GUID and service of the credit note detail.                           |\r\n| Details[0].ActionListItem                    | The GUID and action of the credit note detail.                            |\r\n| Details[0].ContainerTypeListItem             | The GUID and container type of the credit note detail.                    |\r\n| Details[0].MaterialTypeListItem              | The GUID and material type of the credit note detail.                     |\r\n| Details[0].OutletListItem                    | The GUID and outlet of the credit note detail.                            |\r\n| Details[0].DepartmentListItem                | The GUID and department of the credit note detail.                        |\r\n| Details[0].StartDate                     | The start date of the credit note detail in ISO format (YYYY-MM-DD).      |\r\n| Details[0].EndDate                       | The end date of the credit note detail in ISO format (YYYY-MM-DD).        |\r\n| Details[0].Quantity                      | The quantity of the credit note detail.                                   |\r\n| Details[0].Volume                        | The volume of the credit note detail.                                     |\r\n| Details[0].NetWeight                     | The net weight of the credit note detail.                                 |\r\n| Details[0].Amount                        | The amount of the credit note detail.                                     |\r\n| Details[0].AmountIncVAT                  | The amount including VAT of the credit note detail.                       |\r\n| Details[0].RelatedInvoiceDetailGuid      | The GUID associated to the invoice detail of the credit note detail.      |\r\n| Details[0].Notes   | The notes associated to the credit note detail.   |\r\n| Details[0].IsDeleted       | Whether the credit note detail is deleted.   |\r\n| Details[0].GUID       | The GUID of the credit note detail.   |\r\n| Allocations[0].Amount| The amount of the invoice credit note.|\r\n| Allocations[0].DateInput| The date input of the invoice credit note.                        |\r\n| Allocations[0].RelatedInvoiceGuid             | The GUID associated to the invoice of the credit note.            |\r\n| Allocations[0].AccountingPeriodListItem       | The GUID and accounting period of the invoice credit note.        |\r\n| Allocations[0].IsDeleted| Whether the invoice credit note is deleted.                       |\r\n| Allocations[0].GUID| The GUID of the invoice credit note.|\r\n| Deallocations[0].Amount| The amount of the deallocated invoice.|\r\n| Deallocations[0].DateDeallocated| The date of invoice credit note deallocation.|\r\n| Deallocations[0].DateInput| The date input of the invoice credit note.|\r\n| Deallocations[0].IsDeleted| Whether the invoice credit note is deleted.|\r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice.|\r\n| Deallocations[0].RelatedCreditNoteAllocationGuid| The GUID associated to the invoice credit note.|\r\n| Deallocations[0].RelatedInvoiceGuid| The GUID associated to the invoice.|\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period.|\r\n| Deallocations[0].GUID| The GUID of the invoice credit note deallocation.|\r\n| RelatedInvoiceGuidFilter                      | Used to filter the related invoice guid associated to the invoice of the credit note.|\r\n| RelatedInvoiceDetailGuidFilter| Used to filter the related invoice detail guid associated to the invoice detail of the credit note detail.|\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice credit note deallocation.|\r\n| RelatedCreditNoteAllocationGuidFilter| Used to filter the related invoice credit note guid associated to the invoice credit note deallocation.|\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the credit note.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| VATListItem | The GUID and description of the VAT associated to the Credit Note.                 |\r\n| VATListItems | The GUID and description of the VATs associated to the Credit Note.               |\r\n| UnallocatedAmount | The unallocated amount associated to the Credit Note.               |\r\n"
+      operationId: CreditNote_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCreditNoteResource]'
+  /accounting/creditNotes:
+    get:
+      tags:
+      - CreditNote
+      summary: Find with Filters
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the credit note.                               |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of this credit note.              |\r\n| CreditNoteNumber     | The credit note number.                                               |\r\n| Reference            | An alternative name used for the credit note.                         |\r\n| ExternalReference    | The external reference associated to the credit note.   |\r\n| IsCreditJournal      | If true this credit note is a credit journal.                         |\r\n| IsTaxAdjustment      | If true this credit note is a tax adjustment.                         |\r\n| IsApproved           | If true this credit note is approved.                                 |\r\n| Notes   | The notes associated to the credit note.                              |\r\n| IsForClosingCustomer | If true this credit note is for closing a customer.                   |\r\n| WriteOffReasonListItem   | The GUID and writeoff reason of the credit note.                      |\r\n| AccountingPeriodListItem | The GUID and accounting period of the credit note.                    |\r\n| ReasonListItem           | The GUID and reason of the credit note.                               |\r\n| DepartmentListItem       | The GUID and department of the credit note.                           |\r\n| OutletListItem           | The GUID and outlet of the credit note.                               |\r\n| ReceivedDate   | The received date of the credit note.                               |\r\n| InputDate   | The input date of the credit note.   |\r\n| ExportedDate   | The exported date of the credit note.                               |\r\n| Amount               | The object where the amount is specified.                             |\r\n| Amount.ExchangeRate  | The object where the exchange rate of the amount is specified.        |\r\n| Amount.ExchangeRate.Rate                 | The exchange rate of the amount.                  |\r\n| Amount.ExchangeRate.ExchangeDate         | The exchange date in ISO format of the exchange rate. |\r\n| Amount.ExchangeRate.BaseCurrencyListItem     | The GUID and base currency of the exchange rate.      |\r\n| Amount.ExchangeRate.ExchangeCurrencyListItem | The GUID and exchange currency of the exchange rate.  |\r\n| Amount.Amount        | The amount of the credit note.                                        |\r\n| Amount.BaseAmount    | The base amount of the credit note.                                   |\r\n| RelatedLocationInvoiceGuid | Used to filter the related invoice location guid associated to the invoice of the credit note. |\r\n| PrintAddress                   | The object where the print address is specified.            |\r\n| PrintAddress.HouseNumber       | The house number of the print address.                      |\r\n| PrintAddress.Address1 till 5   | The 5 address lines of the print address.                   |\r\n| PrintAddress.Postcode          | The postcode of the print address.                          |\r\n| Details[0]                               | A list of objects containing credit note details.                         |\r\n| Details[0].SiteName                      | The site name of the credit note detail.                                  |\r\n| Details[0].SiteAddress                   | The object where the site address of the credit note detail is specified. |                   \r\n| Details[0].SiteAddress.HouseNumber       | The house number of the site address of the credit note detail.           |\r\n| Details[0].SiteAddress.Address1 till 5   | The 5 address lines of the site address of the credit note detail.        |\r\n| Details[0].SiteAddress.Postcode          | The postcode of the site address of the credit note detail.               |\r\n| Details[0].Reference                     | An alternative name used for the credit note detail.                      |\r\n| Details[0].ServiceListItem                   | The GUID and service of the credit note detail.                           |\r\n| Details[0].ActionListItem                    | The GUID and action of the credit note detail.                            |\r\n| Details[0].ContainerTypeListItem             | The GUID and container type of the credit note detail.                    |\r\n| Details[0].MaterialTypeListItem              | The GUID and material type of the credit note detail.                     |\r\n| Details[0].OutletListItem                    | The GUID and outlet of the credit note detail.                            |\r\n| Details[0].DepartmentListItem                | The GUID and department of the credit note detail.                        |\r\n| Details[0].StartDate                     | The start date of the credit note detail in ISO format (YYYY-MM-DD).      |\r\n| Details[0].EndDate                       | The end date of the credit note detail in ISO format (YYYY-MM-DD).        |\r\n| Details[0].Quantity                      | The quantity of the credit note detail.                                   |\r\n| Details[0].Volume                        | The volume of the credit note detail.                                     |\r\n| Details[0].NetWeight                     | The net weight of the credit note detail.                                 |\r\n| Details[0].Amount                        | The amount of the credit note detail.                                     |\r\n| Details[0].AmountIncVAT                  | The amount including VAT of the credit note detail.                       |\r\n| Details[0].RelatedInvoiceDetailGuid      | The GUID associated to the invoice detail of the credit note detail.      |\r\n| Details[0].Notes   | The notes associated to the credit note detail.   |\r\n| Details[0].IsDeleted       | Whether the credit note detail is deleted.   |\r\n| Details[0].GUID       | The GUID of the credit note detail.   |\r\n| Allocations[0].Amount| The amount of the invoice credit note.|\r\n| Allocations[0].DateInput| The date input of the invoice credit note.                        |\r\n| Allocations[0].RelatedInvoiceGuid             | The GUID associated to the invoice of the credit note.            |\r\n| Allocations[0].AccountingPeriodListItem       | The GUID and accounting period of the invoice credit note.        |\r\n| Allocations[0].IsDeleted| Whether the invoice credit note is deleted.                       |\r\n| Allocations[0].GUID| The GUID of the invoice credit note.|\r\n| Deallocations[0].Amount| The amount of the deallocated invoice.|\r\n| Deallocations[0].DateDeallocated| The date of invoice credit note deallocation.|\r\n| Deallocations[0].DateInput| The date input of the invoice credit note.|\r\n| Deallocations[0].IsDeleted| Whether the invoice credit note is deleted.|\r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice.|\r\n| Deallocations[0].RelatedCreditNoteAllocationGuid| The GUID associated to the invoice credit note.|\r\n| Deallocations[0].RelatedInvoiceGuid| The GUID associated to the invoice.|\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period.|\r\n| Deallocations[0].GUID| The GUID of the invoice credit note deallocation.|\r\n| RelatedInvoiceGuidFilter                      | Used to filter the related invoice guid associated to the invoice of the credit note.|\r\n| RelatedInvoiceDetailGuidFilter| Used to filter the related invoice detail guid associated to the invoice detail of the credit note detail.|\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice credit note deallocation.|\r\n| RelatedCreditNoteAllocationGuidFilter| Used to filter the related invoice credit note guid associated to the invoice credit note deallocation.|\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the credit note.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| VATListItem | The GUID and description of the VAT associated to the Credit Note.                 |\r\n| VATListItems | The GUID and description of the VATs associated to the Credit Note.               |\r\n| UnallocatedAmount | The unallocated amount associated to the Credit Note.               |\r\n"
+      operationId: CreditNote_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCreditNoteResource]'
+    post:
+      tags:
+      - CreditNote
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------- |--------- |\r\n| GUID| The GUID associated to the credit note.| No       |\r\n| RelatedCustomerGuid| The GUID associated to the customer of this credit note.| Yes      |\r\n| CreditNoteNumber| The credit note number.| No       |\r\n| Reference| An alternative name used for the credit note.| No       |\r\n| ExternalReference| The external reference associated to the credit note.| No       |\r\n| IsCreditJournal| If true this credit note is a credit journal.| No       |\r\n| IsTaxAdjustment| If true this credit note is a tax adjustment.| No       |\r\n| IsApproved| If true this credit note is approved.| No       |\r\n| Notes| The notes associated to the credit note.| No       |\r\n| IsForClosingCustomer| If true this credit note is for closing a customer.| No       |\r\n| WriteOffReasonListItem| The GUID and writeoff reason of the credit note.| No       |\r\n| AccountingPeriodListItem| The GUID and accounting period of the credit note.| Yes      |\r\n| ReasonListItem| The GUID and reason of the credit note.| Yes      |\r\n| DepartmentListItem| The GUID and department of the credit note.| Yes      |\r\n| OutletListItem| The GUID and outlet of the credit note.| Yes      |\r\n| ReceivedDate| The received date of the credit note.| Yes      |\r\n| InputDate| The input date of the credit note.| No       |\r\n| ExportedDate| The exported date of the credit note.| No       |\r\n| Amount| The object where the amount is specified.| Yes      |\r\n| Amount.ExchangeRate| The object where the exchange rate of the amount is specified.| No      |\r\n| Amount.ExchangeRate.Rate| The exchange rate of the amount.| No       |\r\n| Amount.ExchangeRate.ExchangeDate| The exchange date in ISO format of the exchange rate.| No       |\r\n| Amount.ExchangeRate.BaseCurrencyListItem| The GUID and base currency of the exchange rate.| No      |\r\n| Amount.ExchangeRate.ExchangeCurrencyListItem| The GUID and exchange currency of the exchange rate.| No      |\r\n| Amount.Amount| The amount of the credit note.| Yes      |\r\n| Amount.BaseAmount| The base amount of the credit note.| Yes      |\r\n| RelatedLocationInvoiceGuid| Used to filter the related invoice location guid associated to the invoice of the credit note.| Yes      |\r\n| PrintAddress| The object where the print address is specified.| No       |\r\n| PrintAddress.HouseNumber| The house number of the print address.| No       |\r\n| PrintAddress.Address1| The 5 address lines of the print address.| No       |\r\n| PrintAddress.Address2| The 5 address lines of the print address.| No       |\r\n| PrintAddress.Address3| The 5 address lines of the print address.| No       |\r\n| PrintAddress.Address4| The 5 address lines of the print address.| No       |\r\n| PrintAddress.Address5| The 5 address lines of the print address.| No       |\r\n| PrintAddress.Postcode| The postcode of the print address.| No       |\r\n| Details[0]| A list of objects containing credit note details.| Yes      |\r\n| Details[0].SiteName| The site name of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress| The object where the site address of the credit note detail is specified.| Yes      |\r\n| Details[0].SiteAddress.HouseNumber| The house number of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Address1| The 5 address lines of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Address2| The 5 address lines of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Address3| The 5 address lines of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Address4| The 5 address lines of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Address5| The 5 address lines of the site address of the credit note detail.| Yes      |\r\n| Details[0].SiteAddress.Postcode| The postcode of the site address of the credit note detail.| Yes      |\r\n| Details[0].Reference| An alternative name used for the credit note detail.| No       |\r\n| Details[0].ServiceListItem| The GUID and service of the credit note detail.| Yes      |\r\n| Details[0].ActionListItem| The GUID and action of the credit note detail.| Yes      |\r\n| Details[0].ContainerTypeListItem| The GUID and container type of the credit note detail.| No       |\r\n| Details[0].MaterialTypeListItem| The GUID and material type of the credit note detail.| No       |\r\n| Details[0].OutletListItem| The GUID and outlet of the credit note detail.| Yes      |\r\n| Details[0].DepartmentListItem| The GUID and department of the credit note detail.| Yes      |\r\n| Details[0].StartDate| The start date of the credit note detail in ISO format (YYYY-MM-DD).| No       |\r\n| Details[0].EndDate| The end date of the credit note detail in ISO format (YYYY-MM-DD).| No       |\r\n| Details[0].Quantity| The quantity of the credit note detail.| Yes      |\r\n| Details[0].Volume| The volume of the credit note detail.| No       |\r\n| Details[0].NetWeight| The net weight of the credit note detail.| No       |\r\n| Details[0].Amount| The amount of the credit note detail.| Yes      |\r\n| Details[0].AmountIncVAT| The amount including VAT of the credit note detail.| Yes      |\r\n| Details[0].RelatedInvoiceDetailGuid| The GUID associated to the invoice detail of the credit note detail.| No       |\r\n| Details[0].Notes| The notes associated to the credit note detail.| No       |\r\n| Details[0].IsDeleted| Whether the credit note detail is deleted.| No       |\r\n| Details[0].GUID| The GUID of the credit note detail.| No       |\r\n| Allocations[0].Amount| The amount of the invoice credit note.| No       |\r\n| Allocations[0].DateInput| The date input of the invoice credit note.| No       |\r\n| Allocations[0].RelatedInvoiceGuid| The GUID associated to the invoice of the credit note.| No       |\r\n| Allocations[0].AccountingPeriodListItem| The GUID and accounting period of the invoice credit note.| No       |\r\n| Allocations[0].IsDeleted| Whether the invoice credit note is deleted.| No       |\r\n| Allocations[0].GUID| The GUID of the invoice credit note.| No       |\r\n| Deallocations[0].Amount| The amount of the deallocated invoice.| No       |\r\n| Deallocations[0].DateDeallocated| The date of invoice credit note deallocation.| No       |\r\n| Deallocations[0].DateInput| The date input of the invoice credit note.| No       |\r\n| Deallocations[0].IsDeleted| Whether the invoice credit note is deleted.| No       |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice.| No       |\r\n| Deallocations[0].RelatedCreditNoteAllocationGuid| The GUID associated to the invoice credit note.| No       |\r\n| Deallocations[0].RelatedInvoiceGuid| The GUID associated to the invoice.| No       |\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.| No       |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period.| No       |\r\n| Deallocations[0].GUID| The GUID of the invoice credit note deallocation.| No       |\r\n| RelatedInvoiceGuidFilter| Used to filter the related invoice guid associated to the invoice of the credit note.| No         |\r\n| RelatedInvoiceDetailGuidFilter| Used to filter the related invoice detail guid associated to the invoice detail of the credit note detail.| No       |\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice credit note deallocation.| No       |\r\n| RelatedCreditNoteAllocationGuidFilter| Used to filter the related invoice credit note guid associated to the invoice credit note deallocation.| No       |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the credit note.| No       |\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.| No       |\r\n| VATListItem| The GUID and description of the VAT associated to the Credit Note.| No       |\r\n| VATListItems| The GUID and description of the VATs associated to the Credit Note.| Yes      |\r\n\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ------------------------- | ------------------------------------- |\r\n| If CreditNoteNumber is not null | CreditNoteNumber is a read-only property |\r\n| If InputDate is not null | InputDate is a read-only property |\r\n| If ExchangeRate is not null | ExchangeRate is a read-only property |"
+      operationId: CreditNote_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CreditNoteNumber:
+          type: string
+        Reference:
+          type: string
+        ExternalReference:
+          type: string
+        IsCreditJournal:
+          type: boolean
+        IsTaxAdjustment:
+          type: boolean
+        IsApproved:
+          type: boolean
+        Notes:
+          type: string
+        IsForClosingCustomer:
+          type: boolean
+        WriteOffReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountResource'
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        VATListItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteVatBreakdownResource'
+        RelatedLocationInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceDetailGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDeallocatedByGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCreditNoteAllocationGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PrintAddress:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteDetailResource'
+        Allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteInvoiceResource'
+        Deallocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteDeallocationResource'
+        ReceivedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        InputDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExportedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteOutputResource'
+        UnallocatedAmount:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorCreditNoteAmountResource:
+      type: object
+      properties:
+        ExchangeRate:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountExchangeRateResource'
+        Amount:
+          type: number
+          format: double
+        BaseAmount:
+          type: number
+          format: double
+    ApiIntegratorCreditNoteDetailResource:
+      type: object
+      properties:
+        SiteName:
+          type: string
+        SiteAddress:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
+        Reference:
+          type: string
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        NetWeight:
+          type: number
+          format: double
+        Amount:
+          type: number
+          format: double
+        AmountIncVAT:
+          type: number
+          format: double
+        RelatedInvoiceDetailGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Notes:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCreditNoteAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorCreditNoteResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCreditNoteAmountExchangeRateResource:
+      type: object
+      properties:
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExchangeCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCreditNoteDeallocationResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        DateDeallocated:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        RelatedUserDeallocatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCreditNoteAllocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AllocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DeallocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorCreditNoteResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCreditNoteVatBreakdownResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorCreditNoteInvoiceResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges[ApiIntegratorCreditNoteResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCreditNoteOutputResource:
+      type: object
+      properties:
+        Hash:
+          type: string

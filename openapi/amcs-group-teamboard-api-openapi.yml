@@ -1,0 +1,163 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup TeamBoard API
+  version: core
+tags:
+- name: TeamBoard
+paths:
+  /lists/teamBoards/{guid}:
+    get:
+      tags:
+      - TeamBoard
+      summary: Find with GUID
+      description: "| Property   | Description                                 |\r\n| ---------- | ------------------------------------------- |\r\n| GUID       | The GUID associated to the team board.      |\r\n| Name       | The Name associated to the team board.      |\r\n| ExpireDate | The ExpireDate associated to the team board |\r\n"
+      operationId: TeamBoard_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorTeamBoardResource]'
+  /lists/teamBoards:
+    get:
+      tags:
+      - TeamBoard
+      summary: Find with Filters
+      description: "| Property   | Description                                 |\r\n| ---------- | ------------------------------------------- |\r\n| GUID       | The GUID associated to the team board.      |\r\n| Name       | The Name associated to the team board.      |\r\n| ExpireDate | The ExpireDate associated to the team board |\r\n"
+      operationId: TeamBoard_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorTeamBoardResource]'
+components:
+  schemas:
+    ApiResourceResultEntity[ApiIntegratorTeamBoardResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorTeamBoardResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorTeamBoardResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        ExpireDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorTeamBoardResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorTeamBoardResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

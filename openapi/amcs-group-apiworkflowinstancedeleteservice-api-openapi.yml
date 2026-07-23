@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiWorkflowInstanceDeleteService API
+  version: core
+tags:
+- name: ApiWorkflowInstanceDeleteService
+paths:
+  /services/api/workflow/instances/{id}/op/delete:
+    post:
+      tags:
+      - ApiWorkflowInstanceDeleteService
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowInstanceDeleteResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowInstanceDeleteResponse'
+components:
+  schemas:
+    AMCS.ApiService.Workflow.ApiWorkflowInstanceDeleteResponse:
+      type: object
+      additionalProperties: false

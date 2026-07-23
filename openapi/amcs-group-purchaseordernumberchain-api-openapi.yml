@@ -1,0 +1,316 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PurchaseOrderNumberChain API
+  version: core
+tags:
+- name: PurchaseOrderNumberChain
+paths:
+  /accounting/purchaseOrderNumberChains/changes:
+    get:
+      tags:
+      - PurchaseOrderNumberChain
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      operationId: PurchaseOrderNumberChain_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorPurchaseOrderNumberChainResource]'
+  /accounting/purchaseOrderNumberChains/{guid}:
+    get:
+      tags:
+      - PurchaseOrderNumberChain
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      operationId: PurchaseOrderNumberChain_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPurchaseOrderNumberChainResource]'
+    put:
+      tags:
+      - PurchaseOrderNumberChain
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| --------------------------------- | ------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the purchase order number chain.| No |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |\r\n| Description| The description of the purchase order number chain.| Yes |\r\n| StartDate| The start date of the purchase order number chain.| Yes |\r\n| EndDate| The end date of the purchase order number chain.| Yes |\r\n| IsDeleted| Whether the purchase order number chain is deleted.| No |\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.| No |\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |\r\n| Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |\r\n| PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |\r\n| PONumbers date overlap. | Start and end dates overlap an existing PO number. |\r\n| PONumbers.Guid should link with PONumberChain | Failed to save. PONumberChain with PONumbers.Guid of [value] cannot be set if PONumbers.Guid is not related to PONumberChain. |\r\n| If IsDeleted is changed. | IsDeleted is a read-only property. | \r\n| If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. | "
+      operationId: PurchaseOrderNumberChain_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /accounting/purchaseOrderNumberChains:
+    get:
+      tags:
+      - PurchaseOrderNumberChain
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      operationId: PurchaseOrderNumberChain_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPurchaseOrderNumberChainResource]'
+    post:
+      tags:
+      - PurchaseOrderNumberChain
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| --------------------------------- | ------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the purchase order number chain.| No |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |\r\n| Description| The description of the purchase order number chain.| Yes |\r\n| StartDate| The start date of the purchase order number chain.| Yes |\r\n| EndDate| The end date of the purchase order number chain.| Yes |\r\n| IsDeleted| Whether the purchase order number chain is deleted.| No |\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.| No |\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |\r\n| Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |\r\n| IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with IsDeleted cannot be set if IsDeleted is not null on PONumberChain creation.\r\n| PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |\r\n| PONumbers date overlap. | Start and end dates overlap an existing PO number. |\r\n| PONumbers.Guid should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.Guid cannot be set if PONumbers.Guid is not null on PONumberChain creation.\r\n| PONumbers.IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.IsDeleted cannot be set if PONumbers.IsDeleted is not null on PONumberChain creation.\r\n| If IsDeleted is changed. | IsDeleted is a read-only property. | \r\n| If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. | "
+      operationId: PurchaseOrderNumberChain_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorPurchaseOrderNumberChainResource:
+      type: object
+      properties:
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Description:
+          type: string
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsDeleted:
+          type: boolean
+        PONumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPONumberResource'
+        RelatedPONumberGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberFilter:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorPurchaseOrderNumberChainResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorPONumberResource:
+      type: object
+      properties:
+        PONumber:
+          type: string
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Amount:
+          type: number
+          format: double
+        AmountTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceChanges[ApiIntegratorPurchaseOrderNumberChainResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection[ApiIntegratorPurchaseOrderNumberChainResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,333 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Vehicle API
+  version: core
+tags:
+- name: Vehicle
+paths:
+  /fleet/vehicles/changes:
+    get:
+      tags:
+      - Vehicle
+      summary: Retrieve changes
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associated to the vehicle.|\r\n| Make | The make associated to the vehicle.        |\r\n| Model | The model associated to the vehicle.        |\r\n| MaxWeight | The maximum weight associated to the vehicle.        |\r\n| TareWeight | The tare weight associated to the vehicle.    |\r\n| VolumeCapacity         | The volume capacity associated to the vehicle.    |\r\n| Notes     | The notes associated to the vehicle.        |\r\n| RelatedSupplierGuid| The related supplier GUID associated to the vehicle.|\r\n| RelatedSupplierSiteGuid| The related supplier site GUID associated to the vehicle.|\r\n| ContainerTypeListItems[0]| The list of container types associated to the vehicle.|\r\n| ContainerTypeListItems[0].ContainerTypeListItem| The GUID and description of the container type associated to vehicle.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| FilterCompanyOutletListItemGuid| Filter by the company outlet GUID.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| Trailers[0]| The list of trailers associated to the vehicle.|\r\n| Trailers[0].Guid| The GUID associated to the trailers vehicle.|\r\n| Trailers[0].RelatedTrailerGuid| The related trailer GUID associated to the trailer.|\r\n| RelatedTrailerGuidFilter| Used to filter on the related trailer GUID.|"
+      operationId: Vehicle_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorVehicleResource]'
+  /fleet/vehicles/{guid}:
+    get:
+      tags:
+      - Vehicle
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associated to the vehicle.|\r\n| Make | The make associated to the vehicle.        |\r\n| Model | The model associated to the vehicle.        |\r\n| MaxWeight | The maximum weight associated to the vehicle.        |\r\n| TareWeight | The tare weight associated to the vehicle.    |\r\n| VolumeCapacity         | The volume capacity associated to the vehicle.    |\r\n| Notes     | The notes associated to the vehicle.        |\r\n| RelatedSupplierGuid| The related supplier GUID associated to the vehicle.|\r\n| RelatedSupplierSiteGuid| The related supplier site GUID associated to the vehicle.|\r\n| ContainerTypeListItems[0]| The list of container types associated to the vehicle.|\r\n| ContainerTypeListItems[0].ContainerTypeListItem| The GUID and description of the container type associated to vehicle.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| FilterCompanyOutletListItemGuid| Filter by the company outlet GUID.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| Trailers[0]| The list of trailers associated to the vehicle.|\r\n| Trailers[0].Guid| The GUID associated to the trailers vehicle.|\r\n| Trailers[0].RelatedTrailerGuid| The related trailer GUID associated to the trailer.|\r\n| RelatedTrailerGuidFilter| Used to filter on the related trailer GUID.|"
+      operationId: Vehicle_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorVehicleResource]'
+    put:
+      tags:
+      - Vehicle
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle.            |   No    |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|   Yes   |\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|   Yes   |\r\n| RegistrationNo| The registration number associated to the vehicle.|   Yes   |\r\n| VehicleCode | The vehicle code associated to the vehicle.|   Yes   |\r\n| Make | The make associated to the vehicle.        |   Yes   |\r\n| Model | The model associated to the vehicle.        |   Yes   |\r\n| MaxWeight | The maximum weight associated to the vehicle.        |   No    |\r\n| TareWeight | The tare weight associated to the vehicle.    |   No    |\r\n| VolumeCapacity         | The volume capacity associated to the vehicle.    |   No    |\r\n| Notes     | The notes associated to the vehicle.        |   No    |\r\n| RelatedSupplierGuid| The related supplier GUID associated to the vehicle.|   No    |\r\n| RelatedSupplierSiteGuid| The related supplier site GUID associated to the vehicle.|   No    |\r\n| ContainerTypeListItems[0]| The list of container types associated to the vehicle.|   No    |\r\n| ContainerTypeListItems[0].ContainerTypeListItem| The GUID and description of the container type associated to vehicle.|   No    |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|   No    |\r\n| FilterCompanyOutletListItemGuid| Filter by the company outlet GUID.|   No    |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|   No    |\r\n| Trailers[0]| The list of trailers associated to the vehicle.|   No    |\r\n| Trailers[0].Guid| The GUID associated to the trailers vehicle.|   No    |\r\n| Trailers[0].RelatedTrailerGuid| The related trailer GUID associated to the trailer.|   No    |\r\n| RelatedTrailerGuidFilter| Used to filter on the related trailer GUID.|   No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedSupplierGuid has a value but RelatedSupplierSiteGuid is null | The mandatory property RelatedSupplierSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedSupplierSiteGuid property of the submitted resource. |\r\n| CompanyOutletListItem.Guid is duplicate | The Guid must be unique per ContainerTypeListItem |\r\n| If Make is more than 30 characters long | Make must be no more than 30 characters long. |\r\n| If Model is more than 30 characters long | Model must be no more than 30 characters long. |\r\n| If RegistrationNo is more than 30 characters long | RegistrationNo must be no more than 30 characters long. |\r\n| If VehicleCode is more than 60 characters long | VehicleCode must be no more than 60 characters long. |\r\n| If MaxWeight value is more than 10 characters long | MaxWeight must be no more than 10 characters long. |\r\n| If TareWeight value is more than 10 characters long | TareWeight must be no more than 10 characters long. |\r\n| If VolumeCapacity value is more than 10 characters long | VolumeCapacity must be no more than 10 characters long. |\r\n| If VolumeCapacity has negative value | VolumeCapacity must be a positive number. |\r\n| Both RegistrationNo and VehicleCode values already exist | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Registration Number and Vehicle Code |\r\n| RegistrationNo value already exists | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Registration Number |\r\n| VehicleCode value already exists | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Vehicle Code |\r\n| If RelatedTrailerGuid is deleted | Failed to save. IsDeleted flag set to true for RelatedTrailerGuid property with GUID XXXXXXXX-XXXXX-XXXX-XXXX-XXXXXXXXXXXX |\r\n| If RelatedTrailerGuid has IsExternal flag to true | Failed to save/update Vehicle because the given Trailers.Guid has the IsExternal to true, provide the Trailers.Guid that has IsExternal to false. |"
+      operationId: Vehicle_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /fleet/vehicles:
+    get:
+      tags:
+      - Vehicle
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associated to the vehicle.|\r\n| Make | The make associated to the vehicle.        |\r\n| Model | The model associated to the vehicle.        |\r\n| MaxWeight | The maximum weight associated to the vehicle.        |\r\n| TareWeight | The tare weight associated to the vehicle.    |\r\n| VolumeCapacity         | The volume capacity associated to the vehicle.    |\r\n| Notes     | The notes associated to the vehicle.        |\r\n| RelatedSupplierGuid| The related supplier GUID associated to the vehicle.|\r\n| RelatedSupplierSiteGuid| The related supplier site GUID associated to the vehicle.|\r\n| ContainerTypeListItems[0]| The list of container types associated to the vehicle.|\r\n| ContainerTypeListItems[0].ContainerTypeListItem| The GUID and description of the container type associated to vehicle.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| FilterCompanyOutletListItemGuid| Filter by the company outlet GUID.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| Trailers[0]| The list of trailers associated to the vehicle.|\r\n| Trailers[0].Guid| The GUID associated to the trailers vehicle.|\r\n| Trailers[0].RelatedTrailerGuid| The related trailer GUID associated to the trailer.|\r\n| RelatedTrailerGuidFilter| Used to filter on the related trailer GUID.|"
+      operationId: Vehicle_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorVehicleResource]'
+    post:
+      tags:
+      - Vehicle
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle.            |   No    |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|   Yes   |\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|   Yes   |\r\n| RegistrationNo| The registration number associated to the vehicle.|   Yes   |\r\n| VehicleCode | The vehicle code associated to the vehicle.|   Yes   |\r\n| Make | The make associated to the vehicle.        |   Yes   |\r\n| Model | The model associated to the vehicle.        |   Yes   |\r\n| MaxWeight | The maximum weight associated to the vehicle.        |   No    |\r\n| TareWeight | The tare weight associated to the vehicle.    |   No    |\r\n| VolumeCapacity         | The volume capacity associated to the vehicle.    |   No    |\r\n| Notes     | The notes associated to the vehicle.        |   No    |\r\n| RelatedSupplierGuid| The related supplier GUID associated to the vehicle.|   No    |\r\n| RelatedSupplierSiteGuid| The related supplier site GUID associated to the vehicle.|   No    |\r\n| ContainerTypeListItems[0]| The list of container types associated to the vehicle.|   No    |\r\n| ContainerTypeListItems[0].ContainerTypeListItem| The GUID and description of the container type associated to vehicle.|   No    |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|   No    |\r\n| FilterCompanyOutletListItemGuid| Filter by the company outlet GUID.|   No    |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|   No    |\r\n| Trailers[0]| The list of trailers associated to the vehicle.|   No    |\r\n| Trailers[0].Guid| The GUID associated to the trailers vehicle.|   No    |\r\n| Trailers[0].RelatedTrailerGuid| The related trailer GUID associated to the trailer.|   No    |\r\n| RelatedTrailerGuidFilter| Used to filter on the related trailer GUID.|   No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedSupplierGuid has a value but RelatedSupplierSiteGuid is null | The mandatory property RelatedSupplierSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedSupplierSiteGuid property of the submitted resource. |\r\n| CompanyOutletListItem.Guid is duplicate | The Guid must be unique per ContainerTypeListItem |\r\n| If Make is more than 30 characters long | Make must be no more than 30 characters long. |\r\n| If Model is more than 30 characters long | Model must be no more than 30 characters long. |\r\n| If RegistrationNo is more than 30 characters long | RegistrationNo must be no more than 30 characters long. |\r\n| If VehicleCode is more than 60 characters long | VehicleCode must be no more than 60 characters long. |\r\n| If MaxWeight value is more than 10 characters long | MaxWeight must be no more than 10 characters long. |\r\n| If TareWeight value is more than 10 characters long | TareWeight must be no more than 10 characters long. |\r\n| If VolumeCapacity value is more than 10 characters long | VolumeCapacity must be no more than 10 characters long. |\r\n| If VolumeCapacity has negative value | VolumeCapacity must be a positive number. |\r\n| Both RegistrationNo and VehicleCode values already exist | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Registration Number and Vehicle Code |\r\n| RegistrationNo value already exists | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Registration Number |\r\n| VehicleCode value already exists | The Vehicle that you are trying to save conflicts with an existing item. Each Vehicle must be unique in terms of Vehicle Code |\r\n| If RelatedTrailerGuid is deleted | Failed to save. IsDeleted flag set to true for RelatedTrailerGuid property with GUID XXXXXXXX-XXXXX-XXXX-XXXX-XXXXXXXXXXXX |\r\n| If RelatedTrailerGuid has IsExternal flag to true | Failed to save/update Vehicle because the given Trailers.Guid has the IsExternal to true, provide the Trailers.Guid that has IsExternal to false. |"
+      operationId: Vehicle_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultCollection[ApiIntegratorVehicleResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorVehicleResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorVehicleResource:
+      type: object
+      properties:
+        IsZeroWeightBinAccumulated:
+          type: boolean
+        IsNoTagStopEnabled:
+          type: boolean
+        RegistrationNo:
+          type: string
+        VehicleCode:
+          type: string
+        Make:
+          type: string
+        Model:
+          type: string
+        MaxWeight:
+          type: number
+          format: double
+        TareWeight:
+          type: number
+          format: double
+        VolumeCapacity:
+          type: number
+          format: double
+        Notes:
+          type: string
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        FilterCompanyOutletListItemGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleContainerTypeResource'
+        VehicleTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedSupplierGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Trailers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleTrailerResource'
+        RelatedTrailerGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorVehicleTrailerResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedTrailerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorVehicleResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorVehicleContainerTypeResource:
+      type: object
+      properties:
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

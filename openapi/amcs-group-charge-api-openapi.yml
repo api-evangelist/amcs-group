@@ -1,0 +1,346 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Charge API
+  version: core
+tags:
+- name: Charge
+paths:
+  /accounting/charges/changes:
+    get:
+      tags:
+      - Charge
+      summary: Retrieve changes
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The Guid associated to the contact. Filterable        |\r\n| RelatedSiteOrderGuid| The related site order Guid. Filterable  |  \r\n| RelatedJobGuid| The related Job Guid. Filterable  | \r\n| RelatedLiftEventGuid| The related Lift event Guid. Filterable          | \r\n| RelatedPriceGuid| The related Price Guid. Filterable       |\r\n| RelatedRouteVisitGuid| The related Route visit Guid. Filterable  | \r\n| RelatedRouteVisitJobGuid| The related Route visit job Guid. Filterable  | \r\n| RelatedWeighingInGuid| The related Weighing In Guid. Filterable      |\r\n| RelatedWeighingOutGuid| The related Weighing Out Guid. Filterable  |\r\n| RelatedPONumberGuid| The related PO Number Guid. Filterable      | \r\n| RelatedPriceModifierGuid| The related Price modifier Guid.Filterable  |\r\n| RelatedInvoiceGuid| The related Invoice Guid.Filterable          |\r\n| RelatedDepartmentGuid| The related Department Guid.Filterable      |\r\n| RelatedServiceGuid| The related Service Guid.Filterable          |\r\n| PONumber| The related PO Number.  |\r\n| Amount.IsEstimate    | Is the Amount an Estimation.   |\r\n| Amount.Price| The price of the Amount.  |\r\n| Amount.PriceExVat    | The Price not including the Vat.  |\r\n| Amount.Rate| The Rate of the Amount.  |\r\n| DoNotInvoice| If the charge has not been invoiced or not.              |\r\n| DoNotInvoiceReasonListItem    | The Guid and Description associated to the Reason.              |\r\n| ActionListItem                | The Guid and Description associated to the Action.              |\r\n| ActionGuidFilter                | Used to filter the action guid associated to the charge.          |\r\n| ChargeDateTime                | The date and time when the charge happened          |\r\n| ChargeStartDateFilter            | Used to filter by the Start of ChargeDateTime  |\r\n| ChargeEndDateFilter            | Used to filter by the End of ChargeDateTime  |\r\n"
+      operationId: Charge_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorChargeResource]'
+  /accounting/charges/{guid}:
+    get:
+      tags:
+      - Charge
+      summary: Find with GUID
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The Guid associated to the contact. Filterable        |\r\n| RelatedSiteOrderGuid| The related site order Guid. Filterable  |  \r\n| RelatedJobGuid| The related Job Guid. Filterable  | \r\n| RelatedLiftEventGuid| The related Lift event Guid. Filterable          | \r\n| RelatedPriceGuid| The related Price Guid. Filterable       |\r\n| RelatedRouteVisitGuid| The related Route visit Guid. Filterable  | \r\n| RelatedRouteVisitJobGuid| The related Route visit job Guid. Filterable  | \r\n| RelatedWeighingInGuid| The related Weighing In Guid. Filterable      |\r\n| RelatedWeighingOutGuid| The related Weighing Out Guid. Filterable  |\r\n| RelatedPONumberGuid| The related PO Number Guid. Filterable      | \r\n| RelatedPriceModifierGuid| The related Price modifier Guid.Filterable  |\r\n| RelatedInvoiceGuid| The related Invoice Guid.Filterable          |\r\n| RelatedDepartmentGuid| The related Department Guid.Filterable      |\r\n| RelatedServiceGuid| The related Service Guid.Filterable          |\r\n| PONumber| The related PO Number.  |\r\n| Amount.IsEstimate    | Is the Amount an Estimation.   |\r\n| Amount.Price| The price of the Amount.  |\r\n| Amount.PriceExVat    | The Price not including the Vat.  |\r\n| Amount.Rate| The Rate of the Amount.  |\r\n| DoNotInvoice| If the charge has not been invoiced or not.              |\r\n| DoNotInvoiceReasonListItem    | The Guid and Description associated to the Reason.              |\r\n| ActionListItem                | The Guid and Description associated to the Action.              |\r\n| ActionGuidFilter                | Used to filter the action guid associated to the charge.          |\r\n| ChargeDateTime                | The date and time when the charge happened          |\r\n| ChargeStartDateFilter            | Used to filter by the Start of ChargeDateTime  |\r\n| ChargeEndDateFilter            | Used to filter by the End of ChargeDateTime  |\r\n"
+      operationId: Charge_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorChargeResource]'
+    put:
+      tags:
+      - Charge
+      summary: Partial update
+      description: "| Property| Description   | Required |\r\n| --------------------------------- |--------------------------------------------------------------------- | -------- |\r\n| GUID| The Guid associated to the contact.                     | Yes      |\r\n| RelatedSiteOrderGuid| The related site order Guid.   | Yes      | \r\n| RelatedJobGuid| The related Job Guid.   | No       |\r\n| RelatedLiftEventGuid| The related Lift event Guid.   | No       |\r\n| RelatedPriceGuid| The related Price Guid.    | No       |\r\n| RelatedRouteVisitGuid| The related Route visit Guid.   | No       |\r\n| RelatedRouteVisitJobGuid| The related Route visit job Guid.   | No       |\r\n| RelatedWeighingInGuid| The related Weighing In Guid.   | No       |\r\n| RelatedWeighingOutGuid| The related Weighing Out Guid.   | No       |\r\n| RelatedPONumberGuid| The related PO Number Guid.    | No       |\r\n| RelatedPriceModifierGuid| The related Price modifier Guid.       | No       |\r\n| RelatedInvoiceGuid| The related Invoice Guid.       | No       |\r\n| RelatedDepartmentGuid| The related Department Guid.   | No       |\r\n| RelatedServiceGuid| The related Service Guid.   | No       |\r\n| PONumber| The related PO Number.   | No  |\r\n| Amount.IsEstimate    | Is the Amount an Estimation.   | Yes      |\r\n| Amount.Price| The price of the Amount.   | Yes      |\r\n| Amount.PriceExVat    | The Price not including the Vat.       | Yes      |\r\n| Amount.Rate| The Rate of the Amount.       | Yes      |\r\n| DoNotInvoice| If the charge can be invoiced or not.   | No       |\r\n| DoNotInvoiceReasonListItem    | The Guid and Description associated to the reason for DoNotInvoice.  | No      |\r\n| ActionListItem                | The Guid and Description associated to the Action.   | No       |\r\n| ActionGuidFilter                | Used to filter the action guid associated to the charge.   | No       |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| RelatedSiteOrderGuid is being edited | RelatedSiteOrderGuid is a read-only property. |\r\n| RelatedJobGuid is being edited | RelatedJobGuid is a read-only property. |\r\n| RelatedLiftEventGuid is being edited | RelatedLiftEventGuid is a read-only property. |\r\n| RelatedPriceGuid is being edited | RelatedPriceGuid is a read-only property. |\r\n| RelatedRouteVisitGuid is being edited | RelatedRouteVisitGuid is a read-only property. |\r\n| RelatedRouteVisitJobGuid is being edited | RelatedRouteVisitJobGuid is a read-only property. |\r\n| RelatedWeighingInGuid is being edited | RelatedWeighingInGuid is a read-only property. |\r\n| RelatedWeighingOutGuid is being edited | RelatedWeighingOutGuid is a read-only property. |\r\n| RelatedPriceModifierGuid is being edited | RelatedPriceModifierGuid is a read-only property. |\r\n| RelatedInvoiceGuid is being edited | RelatedInvoiceGuid is a read-only property. |\r\n| RelatedDepartmentGuid is being edited | RelatedDepartmentGuid is a read-only property. |\r\n| RelatedServiceGuid is being edited | RelatedServiceGuid is a read-only property. |\r\n| ActionListItem.Guid is being edited | ActionListItem.Guid is a read-only property. |\r\n| Amount.IsEstimate is being edited | Amount.IsEstimate is a read-only property. |\r\n| Amount.Price is being edited | Amount.Price is a read-only property. |\r\n| Amount.PriceExVat is being edited | Amount.PriceExVat is a read-only property. |\r\n| Amount.Rate is being edited | Amount.Rate is a read-only property. |\r\n| Amount was set null | Amount field is not editable and cannot be null |\r\n| DoNotInvoiceReasonListItem is not in one of the following reason categories: DoNotInvoice | DoNotInvoiceReasonListItem must be in one of the following reason categories: DoNotInvoice. |\r\n| DoNotInvoice was set to true and DoNotInvoiceReasonListItem was null | Charge with DoNotInvoiceReasonListItem cannot be null if DoNotInvoice is true. |\r\n| DoNotInvoiceReasonListItem value was provided and DoNotInvoice was set to false | Charge with DoNotInvoice cannot be set if DoNotInvoiceReasonListItem has a value. |\r\n| RelatedPONumberGuid supplied belongs to a deleted PONumber | Failed to save/update Charge because the supplied PONumber is not valid. The update has been rejected. Change the RelatedPONumberGuid to the Guid of a valid and undeleted PONumber |\r\n| PONumber supplied is longer than 120 characters | Charge has the property PONumber with value of {value} that is not supported. PONumber should not be longer than 120 characters |"
+      operationId: Charge_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorChargeResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /accounting/charges:
+    get:
+      tags:
+      - Charge
+      summary: Find with Filters
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The Guid associated to the contact. Filterable        |\r\n| RelatedSiteOrderGuid| The related site order Guid. Filterable  |  \r\n| RelatedJobGuid| The related Job Guid. Filterable  | \r\n| RelatedLiftEventGuid| The related Lift event Guid. Filterable          | \r\n| RelatedPriceGuid| The related Price Guid. Filterable       |\r\n| RelatedRouteVisitGuid| The related Route visit Guid. Filterable  | \r\n| RelatedRouteVisitJobGuid| The related Route visit job Guid. Filterable  | \r\n| RelatedWeighingInGuid| The related Weighing In Guid. Filterable      |\r\n| RelatedWeighingOutGuid| The related Weighing Out Guid. Filterable  |\r\n| RelatedPONumberGuid| The related PO Number Guid. Filterable      | \r\n| RelatedPriceModifierGuid| The related Price modifier Guid.Filterable  |\r\n| RelatedInvoiceGuid| The related Invoice Guid.Filterable          |\r\n| RelatedDepartmentGuid| The related Department Guid.Filterable      |\r\n| RelatedServiceGuid| The related Service Guid.Filterable          |\r\n| PONumber| The related PO Number.  |\r\n| Amount.IsEstimate    | Is the Amount an Estimation.   |\r\n| Amount.Price| The price of the Amount.  |\r\n| Amount.PriceExVat    | The Price not including the Vat.  |\r\n| Amount.Rate| The Rate of the Amount.  |\r\n| DoNotInvoice| If the charge has not been invoiced or not.              |\r\n| DoNotInvoiceReasonListItem    | The Guid and Description associated to the Reason.              |\r\n| ActionListItem                | The Guid and Description associated to the Action.              |\r\n| ActionGuidFilter                | Used to filter the action guid associated to the charge.          |\r\n| ChargeDateTime                | The date and time when the charge happened          |\r\n| ChargeStartDateFilter            | Used to filter by the Start of ChargeDateTime  |\r\n| ChargeEndDateFilter            | Used to filter by the End of ChargeDateTime  |\r\n"
+      operationId: Charge_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorChargeResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorChargeResource:
+      type: object
+      properties:
+        RelatedSiteOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedLiftEventGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceModifierGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedDepartmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedServiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PONumber:
+          type: string
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorChargeAmountResource'
+        DoNotInvoice:
+          type: boolean
+        DoNotInvoiceReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ChargeDateTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        ChargeStartDateFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        ChargeEndDateFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        RelatedOneOffActionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedDefaultActionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorChargeAmountResource:
+      type: object
+      properties:
+        IsEstimate:
+          type: boolean
+        Price:
+          type: number
+          format: double
+        PriceExVat:
+          type: number
+          format: double
+        Rate:
+          type: number
+          format: double
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges[ApiIntegratorChargeResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorChargeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorChargeResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorChargeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection[ApiIntegratorChargeResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorChargeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,756 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Invoice API
+  version: core
+tags:
+- name: Invoice
+paths:
+  /accounting/invoices/changes:
+    get:
+      tags:
+      - Invoice
+      summary: Retrieve changes
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                                  | The GUID associated to the invoice.                          |\r\n| RelatedCustomerGuid                   | The GUID associated to the customer of to the invoice. | \r\n| InvoiceNumber                         | The invoice number associated to the invoice. Filterable. |\r\n| CustomerInvoiceNumber                 | The customer invoice number associated to the invoice. | \r\n| AccountingPeriodListItem              | The GUID and name of the accounting period associated to the invoice. | \r\n| InvoiceCycleListItem                  | The GUID and name of the invoice cycle associated to the invoice. | \r\n| RebateInvoiceCycleListItem            | The GUID and name of the rebate invoice cycle associated to the invoice. | \r\n| VATExemptNumber                       | The VAT exempt number associated to the invoice. | \r\n| OutletListItem                        | The GUID and name of the company outlet associated to the invoice. | \r\n| DepartmentListItem                    | The GUID and name of the department associated to the invoice. | \r\n| IsCash                                | The isCash boolean associated to the invoice. | \r\n| IsAccepted                            | The isAccepted boolean associated to the invoice. | \r\n| IsDebit                               | The isDebit boolean associated to the invoice. | \r\n| IsRebilled                            | The isRebilled boolean associated to the invoice. | \r\n| IsTaxAdjustment                       | The isTaxAdjustment boolean associated to the invoice. | \r\n| IsRequestForPayment                   | The isRequestForPayment boolean associated to the invoice. | \r\n| InputDate                             | The input date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| InvoiceDate                           | The invoice date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| DueDate                               | The due date and time associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| WriteOffReasonListItem                | The GUID and name of the writeoffReason associated to the invoice. | \r\n| ExchangeRate                          | The exchange rate associated to the invoice. | \r\n| Rate                                  | The rate associated to the invoice. | \r\n| ExchangeDate                          | The exchange date associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| BaseCurrencyListItem                  | The GUID and name of the base currency associated to the invoice. | \r\n| ExchangeCurrencyListItem              | The GUID and name of the exchange currency associated to the invoice. | \r\n| RelatedOrderGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedWeighingGuid| Used to filter the related weighing guid associated to the details. | \r\n| RelatedWeighingInGuid| Used to filter the related weighing in guid associated to the details. | \r\n| RelatedWeighingOutGuid| Used to filter the related weighing out guid associated to the details. | \r\n| RelatedJobGuid| Used to filter the related job guid associated to the details. | \r\n| RelatedSiteGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedRouteVisitGuid| Used to filter the related route visit guid associated to the details. |\r\n| RelatedPONumberGuidFilter| Used to filter the related PO Number guid associated to the details. |\r\n| RelatedRouteVisitJobGuid| Used to filter the related route visit job guid associated to the details. |\r\n| ReferenceFilter| Used to filter the reference associated to the details. |\r\n| RelatedBatchGuid| Used to filter the related batch associated to the invoice. |\r\n| RelatedUserGeneratedGuid| Used to filter the related user generated guid associated to the batch. |\r\n| RelatedUserAcceptedByGuid| Used to filter the related user acceptedby guid associated to the batch. |\r\n| RelatedInvoiceAllocatedToGuidFilter| Used to filter the related invoice guid associated to the invoice bill dealloaction. |\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice bill deallocation.|\r\n| Amount                                | The amount associated to the invoice. | \r\n| BaseAmount                            | The base amount associated to the invoice. | \r\n| RelatedLocationGuid| Used to filter the related location guid associated to the invoice. |\r\n| PrintAddress                          | The print address object associated to the invoice. | \r\n| PrintAddress.HouseNumber              | The house number associated to the print address. | \r\n| PrintAddress.Address1                 | The address1 associated to the print address. | \r\n| PrintAddress.Address2                 | The address2 associated to the print address. | \r\n| PrintAddress.Address3                 | The address3 associated to the print address. | \r\n| PrintAddress.Address4                 | The address4 associated to the print address. | \r\n| PrintAddress.Address5                 | The address5 associated to the print address. | \r\n| PrintAddress.Postcode                 | The postcode associated to the print address. | \r\n| RemitAddress                          | The remit address object associated to the invoice. | \r\n| RemitAddress.SiteName| The site name associated to the remit address. | \r\n| RemitAddress.HouseNumber              | The house number associated to the remit address. | \r\n| RemitAddress.Address1                 | The address1 associated to the remit address. | \r\n| RemitAddress.Address2                 | The address2 associated to the remit address. | \r\n| RemitAddress.Address3                 | The address3 associated to the remit address. | \r\n| RemitAddress.Address4                 | The address4 associated to the remit address. | \r\n| RemitAddress.Address5                 | The address5 associated to the remit address. | \r\n| RemitAddress.Postcode                 | The postcode associated to the remit address. |\r\n| Notes                                 | The notes associated to the invoice. | \r\n| Details[0]                            | List of details associated to the invoice. | \r\n| Details[0].ItemDate                   | The item date associated to the details in ISO format (YYYY-MM-DD). | \r\n| Details[0].OrderNo                    | The order number associated to the details. | \r\n| Details[0].CustomerOrderNo            | The customer order number associated to the details. | \r\n| Details[0].CustomerLoadReference      | The customer load reference associated to the details. | \r\n| Details[0].PoNumber                   | The po number associated to the details. | \r\n| Details[0].PriceFactor                | The price factor associated to the details. | \r\n| Details[0].ReleaseNumber              | The release number associated to the details. | \r\n| Details[0].DepartmentListItem         | The GUID and name of the department associated to the details. | \r\n| Details[0].ServiceDescriptionOverride | The service description override associated to the details. | \r\n| Details[0].ActionDescriptionOverride  | The action description override associated to the details. | \r\n| Details[0].UnitOfMeasurementListItem  | The GUID and name of the unit of measurement associated to the details. | \r\n| Details[0].SiteAddress                | The site address object associated to the details. | \r\n| Details[0].SiteAddress.HouseNumber    | The house number associated to the site address. | \r\n| Details[0].SiteAddress.Address1       | The address1 associated to the site address. | \r\n| Details[0].SiteAddress.Address2       | The address2 associated to the site address. | \r\n| Details[0].SiteAddress.Address3       | The address3 associated to the site address. | \r\n| Details[0].SiteAddress.Address4       | The address4 associated to the site address. | \r\n| Details[0].SiteAddress.Address5       | The address5 associated to the site address. | \r\n| Details[0].SiteAddress.Postcode       | The postcode associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods | The contact methods associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods.TelNo | The telephone number associated to the site address contact methods. | \r\n| Details[0].SiteAddress.ContactMethods.FaxNo | The fax number associated to the site address contact methods. | \r\n| Details[0].Reason                     | The reason associated to the details. | \r\n| Details[0].ServiceListItem            | The GUID and name of the service associated to the details. | \r\n| Details[0].ActionListItem             | The GUID and name of the action associated to the details. | \r\n| Details[0].ContainerTypeListItem      | The GUID and name of the container type associated to the details. | \r\n| Details[0].MaterialListItem           | The GUID and name of the material associated to the details. | \r\n| Details[0].ServiceFrequencyListItem   | The GUID and name of the service frequency associated to the details. | \r\n| Details[0].DefaultActionListItem      | The GUID and name of the default action associated to the details. | \r\n| Details[0].Rent                       | The rent object associated to the details. | \r\n| Details[0].Rent.RentTermListItem      | The GUID and name of the associated to the details. | \r\n| Details[0].Rent.From                  | The from date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Rent.To                    | The to date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Amount                     | The amount object associated to the details. | \r\n| Details[0].Amount.Rate                | The rate associated to the amount. | \r\n| Details[0].Amount.IsRebilled          | Is this amount rebilled? | \r\n| Details[0].Amount.Quantity            | The quantity associated to the amount. | \r\n| Details[0].Amount.Volume              | The volume associated to the amount. | \r\n| Details[0].Amount.Weight              | The weight associated to the amount. | \r\n| Details[0].Amount.Price               | The price associated to the amount. | \r\n| Details[0].Amount.PriceIncVAT         | The price including VAT associated to the amount. | \r\n| Details[0].Amount.ChargeableHours     | The chargable hours associated to the amount. | \r\n| Details[0].Amount.MinimumCharge       | The minimum charge associated to the amount. | \r\n| Details[0].Amount.MaximumCharge       | The maximum charge associated to the amount. | \r\n| Details[0].Amount.Allowance           | The allowance associated to the amount. | \r\n| Details[0].Amount.RebillQuantity      | The rebill quantity associated to the amount. | \r\n| Details[0].Amount.RebillVolume        | The rebill volume associated to the amount. | \r\n| Details[0].Amount.RebillWeight        | The rebill weight associated to the amount. | \r\n| Details[0].Amount.RebilledPrice       | The rebilled price associated to the amount. | \r\n| Details[0].Amount.RebilledPriceIncVAT | The rebilled price including VAT associated to the amount. | \r\n| Details[0].Amount.RebilledChargeableHours | The rebilled chargeable hours associated to the amount. | \r\n| Details[0].Amount.RebilledMinimumCharge | The rebilled minimum charge associated to the amount. | \r\n| Details[0].Amount.RebilledMaximumCharge | The rebilled maximum charge associated to the amount. | \r\n| Details[0].Amount.RebilledAllowance   | The rebilled allowance associated to the amount. | \r\n| Details[0].NotDueAmount               | The not due amount associated to the details. | \r\n| Details[0].RelatedWeighingGuid        | The related weighing guid associated to the details. | \r\n| Details[0].RelatedWeighingInGuid      | The related weighing in guid associated to the details. | \r\n| Details[0].RelatedWeighingOutGuid     | The related weighing out guid associated to the details. | \r\n| Details[0].RelatedJobGuid             | The related job guid associated to the details. | \r\n| Details[0].RelatedSiteGuid            | The related site guid associated to the details. | \r\n| Details[0].RelatedRouteVisitGuid      | The related route visit guid associated to the details. |\r\n| Details[0].RelatedPONumberGuid| The related PO Number guid associated to the details. |\r\n| Details[0].RelatedOrderGuid           | The related order guid associated to the details. | \r\n| Details[0].RelatedRouteVisitJobGuid   | The related route visit job guid associated to the details. | \r\n| Details[0].VATListItem| The GUID and name of the VAT associated to the details. | \r\n| Details[0].Notes                      | The notes associated to the details. |\r\n| Details[0].Reference                  | The reference associated to the details. |\r\n| Details[0].TaxTemplateCollection              | The TaxTemplateCollection associated to the details. |\r\n| Details[0].TaxTemplateCollection.Description  | The Description associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.Code         | The Code associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.IsDeleted    | Whether the tax template collection is deleted. |\r\n| Details[0].TaxTemplateCollection.Guid         | The Guid associated to the tax template collection. |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the invoice.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| Batch.GeneratedTimestamp| The generated timestamp associated to the batch. |\r\n| Batch.AcceptedTimestamp| The accepted timestamp associated to the batch. |\r\n| Batch.InvoiceDate| The invoice date associated to the batch. |\r\n| Batch.InvoiceUntil| The invoice until associated to the batch. |\r\n| Batch.IsAcceptanceInProgress| The isAcceptanceInProgress boolean associated to the batch. |\r\n| Batch.IsGenerationInProgress| The isGenerationInProgress boolean associated to the batch. |\r\n| Batch.IsExported| The isExported boolean associated to the batch. |\r\n| Batch.RelatedUserGeneratedGuid| The related user generated guid associated to the batch. |\r\n| Batch.RelatedUserAcceptedByGuid| The related user acceptedby guid associated to the batch. |\r\n| Batch.AnalysisCode| The analysis code associated to the batch. |\r\n| Batch.Notes| The notes associated to the batch. |\r\n| Batch.InvoiceBatchStatusListItem| The Guid and name of invoice batch status associated to the batch. |\r\n| Batch.IsDeleted| The isDeleted boolean associated to the batch. |\r\n| Batch.BatchGuid| The guid associated to the batch. |\r\n| Deallocations[0]| List of invoice bill deallocations. | \r\n| Deallocations[0].Amount| The amount of the deallocated invoice bill. | \r\n| Deallocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Deallocations[0].DateDeallocated| The date of invoice bill deallocation. | \r\n| Deallocations[0].DateInput| The date input of the invoice bill deallocation. | \r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice bill. | \r\n| Deallocations[0].IsExported| Whether deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillDeallocationExported| Whether the invoice bill deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillExported| Whether the invoice bill is exported. |\r\n| Deallocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DateExported| The deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillDeallocationExported| The invoice bill deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillExported| The invoice bill exported date. | \r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period. |\r\n| Deallocations[0].Guid| The GUID associated to the invoice deallocation. |\r\n| Allocations[0]| List of invoice bill allocations. | \r\n| Allocations[0].Amount| The amount of the allocated invoice bill. | \r\n| Allocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Allocations[0].DateInput| The date input of the invoice bill allocation. | \r\n| Allocations[0].IsExported| Whether allocation is exported. | \r\n| Allocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Allocations[0].AccountingPeriodListItem| The GUID and description of accounting period. |\r\n| Allocations[0].DateExported| The invoice bill allocation exported date. |\r\n| Allocations[0].Guid| The GUID associated to the invoice allocation. |\r\n| BatchGeneratedTimestampUtcFilter| Used to filter the GeneratedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| BatchAcceptedTimestampUtcFilter| Used to filter the AcceptedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| UnallocatedAmount | The unallocated amount associated to the Invoice.               |\r\n"
+      operationId: Invoice_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorInvoiceResource]'
+  /accounting/invoices/{guid}:
+    get:
+      tags:
+      - Invoice
+      summary: Find with GUID
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                                  | The GUID associated to the invoice.                          |\r\n| RelatedCustomerGuid                   | The GUID associated to the customer of to the invoice. | \r\n| InvoiceNumber                         | The invoice number associated to the invoice. Filterable. |\r\n| CustomerInvoiceNumber                 | The customer invoice number associated to the invoice. | \r\n| AccountingPeriodListItem              | The GUID and name of the accounting period associated to the invoice. | \r\n| InvoiceCycleListItem                  | The GUID and name of the invoice cycle associated to the invoice. | \r\n| RebateInvoiceCycleListItem            | The GUID and name of the rebate invoice cycle associated to the invoice. | \r\n| VATExemptNumber                       | The VAT exempt number associated to the invoice. | \r\n| OutletListItem                        | The GUID and name of the company outlet associated to the invoice. | \r\n| DepartmentListItem                    | The GUID and name of the department associated to the invoice. | \r\n| IsCash                                | The isCash boolean associated to the invoice. | \r\n| IsAccepted                            | The isAccepted boolean associated to the invoice. | \r\n| IsDebit                               | The isDebit boolean associated to the invoice. | \r\n| IsRebilled                            | The isRebilled boolean associated to the invoice. | \r\n| IsTaxAdjustment                       | The isTaxAdjustment boolean associated to the invoice. | \r\n| IsRequestForPayment                   | The isRequestForPayment boolean associated to the invoice. | \r\n| InputDate                             | The input date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| InvoiceDate                           | The invoice date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| DueDate                               | The due date and time associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| WriteOffReasonListItem                | The GUID and name of the writeoffReason associated to the invoice. | \r\n| ExchangeRate                          | The exchange rate associated to the invoice. | \r\n| Rate                                  | The rate associated to the invoice. | \r\n| ExchangeDate                          | The exchange date associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| BaseCurrencyListItem                  | The GUID and name of the base currency associated to the invoice. | \r\n| ExchangeCurrencyListItem              | The GUID and name of the exchange currency associated to the invoice. | \r\n| RelatedOrderGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedWeighingGuid| Used to filter the related weighing guid associated to the details. | \r\n| RelatedWeighingInGuid| Used to filter the related weighing in guid associated to the details. | \r\n| RelatedWeighingOutGuid| Used to filter the related weighing out guid associated to the details. | \r\n| RelatedJobGuid| Used to filter the related job guid associated to the details. | \r\n| RelatedSiteGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedRouteVisitGuid| Used to filter the related route visit guid associated to the details. |\r\n| RelatedPONumberGuidFilter| Used to filter the related PO Number guid associated to the details. |\r\n| RelatedRouteVisitJobGuid| Used to filter the related route visit job guid associated to the details. |\r\n| ReferenceFilter| Used to filter the reference associated to the details. |\r\n| RelatedBatchGuid| Used to filter the related batch associated to the invoice. |\r\n| RelatedUserGeneratedGuid| Used to filter the related user generated guid associated to the batch. |\r\n| RelatedUserAcceptedByGuid| Used to filter the related user acceptedby guid associated to the batch. |\r\n| RelatedInvoiceAllocatedToGuidFilter| Used to filter the related invoice guid associated to the invoice bill dealloaction. |\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice bill deallocation.|\r\n| Amount                                | The amount associated to the invoice. | \r\n| BaseAmount                            | The base amount associated to the invoice. | \r\n| RelatedLocationGuid| Used to filter the related location guid associated to the invoice. |\r\n| PrintAddress                          | The print address object associated to the invoice. | \r\n| PrintAddress.HouseNumber              | The house number associated to the print address. | \r\n| PrintAddress.Address1                 | The address1 associated to the print address. | \r\n| PrintAddress.Address2                 | The address2 associated to the print address. | \r\n| PrintAddress.Address3                 | The address3 associated to the print address. | \r\n| PrintAddress.Address4                 | The address4 associated to the print address. | \r\n| PrintAddress.Address5                 | The address5 associated to the print address. | \r\n| PrintAddress.Postcode                 | The postcode associated to the print address. | \r\n| RemitAddress                          | The remit address object associated to the invoice. | \r\n| RemitAddress.SiteName| The site name associated to the remit address. | \r\n| RemitAddress.HouseNumber              | The house number associated to the remit address. | \r\n| RemitAddress.Address1                 | The address1 associated to the remit address. | \r\n| RemitAddress.Address2                 | The address2 associated to the remit address. | \r\n| RemitAddress.Address3                 | The address3 associated to the remit address. | \r\n| RemitAddress.Address4                 | The address4 associated to the remit address. | \r\n| RemitAddress.Address5                 | The address5 associated to the remit address. | \r\n| RemitAddress.Postcode                 | The postcode associated to the remit address. |\r\n| Notes                                 | The notes associated to the invoice. | \r\n| Details[0]                            | List of details associated to the invoice. | \r\n| Details[0].ItemDate                   | The item date associated to the details in ISO format (YYYY-MM-DD). | \r\n| Details[0].OrderNo                    | The order number associated to the details. | \r\n| Details[0].CustomerOrderNo            | The customer order number associated to the details. | \r\n| Details[0].CustomerLoadReference      | The customer load reference associated to the details. | \r\n| Details[0].PoNumber                   | The po number associated to the details. | \r\n| Details[0].PriceFactor                | The price factor associated to the details. | \r\n| Details[0].ReleaseNumber              | The release number associated to the details. | \r\n| Details[0].DepartmentListItem         | The GUID and name of the department associated to the details. | \r\n| Details[0].ServiceDescriptionOverride | The service description override associated to the details. | \r\n| Details[0].ActionDescriptionOverride  | The action description override associated to the details. | \r\n| Details[0].UnitOfMeasurementListItem  | The GUID and name of the unit of measurement associated to the details. | \r\n| Details[0].SiteAddress                | The site address object associated to the details. | \r\n| Details[0].SiteAddress.HouseNumber    | The house number associated to the site address. | \r\n| Details[0].SiteAddress.Address1       | The address1 associated to the site address. | \r\n| Details[0].SiteAddress.Address2       | The address2 associated to the site address. | \r\n| Details[0].SiteAddress.Address3       | The address3 associated to the site address. | \r\n| Details[0].SiteAddress.Address4       | The address4 associated to the site address. | \r\n| Details[0].SiteAddress.Address5       | The address5 associated to the site address. | \r\n| Details[0].SiteAddress.Postcode       | The postcode associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods | The contact methods associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods.TelNo | The telephone number associated to the site address contact methods. | \r\n| Details[0].SiteAddress.ContactMethods.FaxNo | The fax number associated to the site address contact methods. | \r\n| Details[0].Reason                     | The reason associated to the details. | \r\n| Details[0].ServiceListItem            | The GUID and name of the service associated to the details. | \r\n| Details[0].ActionListItem             | The GUID and name of the action associated to the details. | \r\n| Details[0].ContainerTypeListItem      | The GUID and name of the container type associated to the details. | \r\n| Details[0].MaterialListItem           | The GUID and name of the material associated to the details. | \r\n| Details[0].ServiceFrequencyListItem   | The GUID and name of the service frequency associated to the details. | \r\n| Details[0].DefaultActionListItem      | The GUID and name of the default action associated to the details. | \r\n| Details[0].Rent                       | The rent object associated to the details. | \r\n| Details[0].Rent.RentTermListItem      | The GUID and name of the associated to the details. | \r\n| Details[0].Rent.From                  | The from date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Rent.To                    | The to date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Amount                     | The amount object associated to the details. | \r\n| Details[0].Amount.Rate                | The rate associated to the amount. | \r\n| Details[0].Amount.IsRebilled          | Is this amount rebilled? | \r\n| Details[0].Amount.Quantity            | The quantity associated to the amount. | \r\n| Details[0].Amount.Volume              | The volume associated to the amount. | \r\n| Details[0].Amount.Weight              | The weight associated to the amount. | \r\n| Details[0].Amount.Price               | The price associated to the amount. | \r\n| Details[0].Amount.PriceIncVAT         | The price including VAT associated to the amount. | \r\n| Details[0].Amount.ChargeableHours     | The chargable hours associated to the amount. | \r\n| Details[0].Amount.MinimumCharge       | The minimum charge associated to the amount. | \r\n| Details[0].Amount.MaximumCharge       | The maximum charge associated to the amount. | \r\n| Details[0].Amount.Allowance           | The allowance associated to the amount. | \r\n| Details[0].Amount.RebillQuantity      | The rebill quantity associated to the amount. | \r\n| Details[0].Amount.RebillVolume        | The rebill volume associated to the amount. | \r\n| Details[0].Amount.RebillWeight        | The rebill weight associated to the amount. | \r\n| Details[0].Amount.RebilledPrice       | The rebilled price associated to the amount. | \r\n| Details[0].Amount.RebilledPriceIncVAT | The rebilled price including VAT associated to the amount. | \r\n| Details[0].Amount.RebilledChargeableHours | The rebilled chargeable hours associated to the amount. | \r\n| Details[0].Amount.RebilledMinimumCharge | The rebilled minimum charge associated to the amount. | \r\n| Details[0].Amount.RebilledMaximumCharge | The rebilled maximum charge associated to the amount. | \r\n| Details[0].Amount.RebilledAllowance   | The rebilled allowance associated to the amount. | \r\n| Details[0].NotDueAmount               | The not due amount associated to the details. | \r\n| Details[0].RelatedWeighingGuid        | The related weighing guid associated to the details. | \r\n| Details[0].RelatedWeighingInGuid      | The related weighing in guid associated to the details. | \r\n| Details[0].RelatedWeighingOutGuid     | The related weighing out guid associated to the details. | \r\n| Details[0].RelatedJobGuid             | The related job guid associated to the details. | \r\n| Details[0].RelatedSiteGuid            | The related site guid associated to the details. | \r\n| Details[0].RelatedRouteVisitGuid      | The related route visit guid associated to the details. |\r\n| Details[0].RelatedPONumberGuid| The related PO Number guid associated to the details. |\r\n| Details[0].RelatedOrderGuid           | The related order guid associated to the details. | \r\n| Details[0].RelatedRouteVisitJobGuid   | The related route visit job guid associated to the details. | \r\n| Details[0].VATListItem| The GUID and name of the VAT associated to the details. | \r\n| Details[0].Notes                      | The notes associated to the details. |\r\n| Details[0].Reference                  | The reference associated to the details. |\r\n| Details[0].TaxTemplateCollection              | The TaxTemplateCollection associated to the details. |\r\n| Details[0].TaxTemplateCollection.Description  | The Description associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.Code         | The Code associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.IsDeleted    | Whether the tax template collection is deleted. |\r\n| Details[0].TaxTemplateCollection.Guid         | The Guid associated to the tax template collection. |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the invoice.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| Batch.GeneratedTimestamp| The generated timestamp associated to the batch. |\r\n| Batch.AcceptedTimestamp| The accepted timestamp associated to the batch. |\r\n| Batch.InvoiceDate| The invoice date associated to the batch. |\r\n| Batch.InvoiceUntil| The invoice until associated to the batch. |\r\n| Batch.IsAcceptanceInProgress| The isAcceptanceInProgress boolean associated to the batch. |\r\n| Batch.IsGenerationInProgress| The isGenerationInProgress boolean associated to the batch. |\r\n| Batch.IsExported| The isExported boolean associated to the batch. |\r\n| Batch.RelatedUserGeneratedGuid| The related user generated guid associated to the batch. |\r\n| Batch.RelatedUserAcceptedByGuid| The related user acceptedby guid associated to the batch. |\r\n| Batch.AnalysisCode| The analysis code associated to the batch. |\r\n| Batch.Notes| The notes associated to the batch. |\r\n| Batch.InvoiceBatchStatusListItem| The Guid and name of invoice batch status associated to the batch. |\r\n| Batch.IsDeleted| The isDeleted boolean associated to the batch. |\r\n| Batch.BatchGuid| The guid associated to the batch. |\r\n| Deallocations[0]| List of invoice bill deallocations. | \r\n| Deallocations[0].Amount| The amount of the deallocated invoice bill. | \r\n| Deallocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Deallocations[0].DateDeallocated| The date of invoice bill deallocation. | \r\n| Deallocations[0].DateInput| The date input of the invoice bill deallocation. | \r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice bill. | \r\n| Deallocations[0].IsExported| Whether deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillDeallocationExported| Whether the invoice bill deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillExported| Whether the invoice bill is exported. |\r\n| Deallocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DateExported| The deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillDeallocationExported| The invoice bill deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillExported| The invoice bill exported date. | \r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period. |\r\n| Deallocations[0].Guid| The GUID associated to the invoice deallocation. |\r\n| Allocations[0]| List of invoice bill allocations. | \r\n| Allocations[0].Amount| The amount of the allocated invoice bill. | \r\n| Allocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Allocations[0].DateInput| The date input of the invoice bill allocation. | \r\n| Allocations[0].IsExported| Whether allocation is exported. | \r\n| Allocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Allocations[0].AccountingPeriodListItem| The GUID and description of accounting period. |\r\n| Allocations[0].DateExported| The invoice bill allocation exported date. |\r\n| Allocations[0].Guid| The GUID associated to the invoice allocation. |\r\n| BatchGeneratedTimestampUtcFilter| Used to filter the GeneratedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| BatchAcceptedTimestampUtcFilter| Used to filter the AcceptedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| UnallocatedAmount | The unallocated amount associated to the Invoice.               |\r\n"
+      operationId: Invoice_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorInvoiceResource]'
+  /accounting/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: Find with Filters
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                                  | The GUID associated to the invoice.                          |\r\n| RelatedCustomerGuid                   | The GUID associated to the customer of to the invoice. | \r\n| InvoiceNumber                         | The invoice number associated to the invoice. Filterable. |\r\n| CustomerInvoiceNumber                 | The customer invoice number associated to the invoice. | \r\n| AccountingPeriodListItem              | The GUID and name of the accounting period associated to the invoice. | \r\n| InvoiceCycleListItem                  | The GUID and name of the invoice cycle associated to the invoice. | \r\n| RebateInvoiceCycleListItem            | The GUID and name of the rebate invoice cycle associated to the invoice. | \r\n| VATExemptNumber                       | The VAT exempt number associated to the invoice. | \r\n| OutletListItem                        | The GUID and name of the company outlet associated to the invoice. | \r\n| DepartmentListItem                    | The GUID and name of the department associated to the invoice. | \r\n| IsCash                                | The isCash boolean associated to the invoice. | \r\n| IsAccepted                            | The isAccepted boolean associated to the invoice. | \r\n| IsDebit                               | The isDebit boolean associated to the invoice. | \r\n| IsRebilled                            | The isRebilled boolean associated to the invoice. | \r\n| IsTaxAdjustment                       | The isTaxAdjustment boolean associated to the invoice. | \r\n| IsRequestForPayment                   | The isRequestForPayment boolean associated to the invoice. | \r\n| InputDate                             | The input date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| InvoiceDate                           | The invoice date and time associated to the invoice in ISO format (YYYY-MM-DD). Filterable. | \r\n| DueDate                               | The due date and time associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| WriteOffReasonListItem                | The GUID and name of the writeoffReason associated to the invoice. | \r\n| ExchangeRate                          | The exchange rate associated to the invoice. | \r\n| Rate                                  | The rate associated to the invoice. | \r\n| ExchangeDate                          | The exchange date associated to the invoice in ISO format (YYYY-MM-DD). | \r\n| BaseCurrencyListItem                  | The GUID and name of the base currency associated to the invoice. | \r\n| ExchangeCurrencyListItem              | The GUID and name of the exchange currency associated to the invoice. | \r\n| RelatedOrderGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedWeighingGuid| Used to filter the related weighing guid associated to the details. | \r\n| RelatedWeighingInGuid| Used to filter the related weighing in guid associated to the details. | \r\n| RelatedWeighingOutGuid| Used to filter the related weighing out guid associated to the details. | \r\n| RelatedJobGuid| Used to filter the related job guid associated to the details. | \r\n| RelatedSiteGuid| Used to filter the related site guid associated to the details. |\r\n| RelatedRouteVisitGuid| Used to filter the related route visit guid associated to the details. |\r\n| RelatedPONumberGuidFilter| Used to filter the related PO Number guid associated to the details. |\r\n| RelatedRouteVisitJobGuid| Used to filter the related route visit job guid associated to the details. |\r\n| ReferenceFilter| Used to filter the reference associated to the details. |\r\n| RelatedBatchGuid| Used to filter the related batch associated to the invoice. |\r\n| RelatedUserGeneratedGuid| Used to filter the related user generated guid associated to the batch. |\r\n| RelatedUserAcceptedByGuid| Used to filter the related user acceptedby guid associated to the batch. |\r\n| RelatedInvoiceAllocatedToGuidFilter| Used to filter the related invoice guid associated to the invoice bill dealloaction. |\r\n| RelatedUserDeallocatedByGuidFilter| Used to filter the related user guid associated to the invoice bill deallocation.|\r\n| Amount                                | The amount associated to the invoice. | \r\n| BaseAmount                            | The base amount associated to the invoice. | \r\n| RelatedLocationGuid| Used to filter the related location guid associated to the invoice. |\r\n| PrintAddress                          | The print address object associated to the invoice. | \r\n| PrintAddress.HouseNumber              | The house number associated to the print address. | \r\n| PrintAddress.Address1                 | The address1 associated to the print address. | \r\n| PrintAddress.Address2                 | The address2 associated to the print address. | \r\n| PrintAddress.Address3                 | The address3 associated to the print address. | \r\n| PrintAddress.Address4                 | The address4 associated to the print address. | \r\n| PrintAddress.Address5                 | The address5 associated to the print address. | \r\n| PrintAddress.Postcode                 | The postcode associated to the print address. | \r\n| RemitAddress                          | The remit address object associated to the invoice. | \r\n| RemitAddress.SiteName| The site name associated to the remit address. | \r\n| RemitAddress.HouseNumber              | The house number associated to the remit address. | \r\n| RemitAddress.Address1                 | The address1 associated to the remit address. | \r\n| RemitAddress.Address2                 | The address2 associated to the remit address. | \r\n| RemitAddress.Address3                 | The address3 associated to the remit address. | \r\n| RemitAddress.Address4                 | The address4 associated to the remit address. | \r\n| RemitAddress.Address5                 | The address5 associated to the remit address. | \r\n| RemitAddress.Postcode                 | The postcode associated to the remit address. |\r\n| Notes                                 | The notes associated to the invoice. | \r\n| Details[0]                            | List of details associated to the invoice. | \r\n| Details[0].ItemDate                   | The item date associated to the details in ISO format (YYYY-MM-DD). | \r\n| Details[0].OrderNo                    | The order number associated to the details. | \r\n| Details[0].CustomerOrderNo            | The customer order number associated to the details. | \r\n| Details[0].CustomerLoadReference      | The customer load reference associated to the details. | \r\n| Details[0].PoNumber                   | The po number associated to the details. | \r\n| Details[0].PriceFactor                | The price factor associated to the details. | \r\n| Details[0].ReleaseNumber              | The release number associated to the details. | \r\n| Details[0].DepartmentListItem         | The GUID and name of the department associated to the details. | \r\n| Details[0].ServiceDescriptionOverride | The service description override associated to the details. | \r\n| Details[0].ActionDescriptionOverride  | The action description override associated to the details. | \r\n| Details[0].UnitOfMeasurementListItem  | The GUID and name of the unit of measurement associated to the details. | \r\n| Details[0].SiteAddress                | The site address object associated to the details. | \r\n| Details[0].SiteAddress.HouseNumber    | The house number associated to the site address. | \r\n| Details[0].SiteAddress.Address1       | The address1 associated to the site address. | \r\n| Details[0].SiteAddress.Address2       | The address2 associated to the site address. | \r\n| Details[0].SiteAddress.Address3       | The address3 associated to the site address. | \r\n| Details[0].SiteAddress.Address4       | The address4 associated to the site address. | \r\n| Details[0].SiteAddress.Address5       | The address5 associated to the site address. | \r\n| Details[0].SiteAddress.Postcode       | The postcode associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods | The contact methods associated to the site address. | \r\n| Details[0].SiteAddress.ContactMethods.TelNo | The telephone number associated to the site address contact methods. | \r\n| Details[0].SiteAddress.ContactMethods.FaxNo | The fax number associated to the site address contact methods. | \r\n| Details[0].Reason                     | The reason associated to the details. | \r\n| Details[0].ServiceListItem            | The GUID and name of the service associated to the details. | \r\n| Details[0].ActionListItem             | The GUID and name of the action associated to the details. | \r\n| Details[0].ContainerTypeListItem      | The GUID and name of the container type associated to the details. | \r\n| Details[0].MaterialListItem           | The GUID and name of the material associated to the details. | \r\n| Details[0].ServiceFrequencyListItem   | The GUID and name of the service frequency associated to the details. | \r\n| Details[0].DefaultActionListItem      | The GUID and name of the default action associated to the details. | \r\n| Details[0].Rent                       | The rent object associated to the details. | \r\n| Details[0].Rent.RentTermListItem      | The GUID and name of the associated to the details. | \r\n| Details[0].Rent.From                  | The from date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Rent.To                    | The to date of the associated to the details.Rent in ISO format (YYYY-MM-DD). | \r\n| Details[0].Amount                     | The amount object associated to the details. | \r\n| Details[0].Amount.Rate                | The rate associated to the amount. | \r\n| Details[0].Amount.IsRebilled          | Is this amount rebilled? | \r\n| Details[0].Amount.Quantity            | The quantity associated to the amount. | \r\n| Details[0].Amount.Volume              | The volume associated to the amount. | \r\n| Details[0].Amount.Weight              | The weight associated to the amount. | \r\n| Details[0].Amount.Price               | The price associated to the amount. | \r\n| Details[0].Amount.PriceIncVAT         | The price including VAT associated to the amount. | \r\n| Details[0].Amount.ChargeableHours     | The chargable hours associated to the amount. | \r\n| Details[0].Amount.MinimumCharge       | The minimum charge associated to the amount. | \r\n| Details[0].Amount.MaximumCharge       | The maximum charge associated to the amount. | \r\n| Details[0].Amount.Allowance           | The allowance associated to the amount. | \r\n| Details[0].Amount.RebillQuantity      | The rebill quantity associated to the amount. | \r\n| Details[0].Amount.RebillVolume        | The rebill volume associated to the amount. | \r\n| Details[0].Amount.RebillWeight        | The rebill weight associated to the amount. | \r\n| Details[0].Amount.RebilledPrice       | The rebilled price associated to the amount. | \r\n| Details[0].Amount.RebilledPriceIncVAT | The rebilled price including VAT associated to the amount. | \r\n| Details[0].Amount.RebilledChargeableHours | The rebilled chargeable hours associated to the amount. | \r\n| Details[0].Amount.RebilledMinimumCharge | The rebilled minimum charge associated to the amount. | \r\n| Details[0].Amount.RebilledMaximumCharge | The rebilled maximum charge associated to the amount. | \r\n| Details[0].Amount.RebilledAllowance   | The rebilled allowance associated to the amount. | \r\n| Details[0].NotDueAmount               | The not due amount associated to the details. | \r\n| Details[0].RelatedWeighingGuid        | The related weighing guid associated to the details. | \r\n| Details[0].RelatedWeighingInGuid      | The related weighing in guid associated to the details. | \r\n| Details[0].RelatedWeighingOutGuid     | The related weighing out guid associated to the details. | \r\n| Details[0].RelatedJobGuid             | The related job guid associated to the details. | \r\n| Details[0].RelatedSiteGuid            | The related site guid associated to the details. | \r\n| Details[0].RelatedRouteVisitGuid      | The related route visit guid associated to the details. |\r\n| Details[0].RelatedPONumberGuid| The related PO Number guid associated to the details. |\r\n| Details[0].RelatedOrderGuid           | The related order guid associated to the details. | \r\n| Details[0].RelatedRouteVisitJobGuid   | The related route visit job guid associated to the details. | \r\n| Details[0].VATListItem| The GUID and name of the VAT associated to the details. | \r\n| Details[0].Notes                      | The notes associated to the details. |\r\n| Details[0].Reference                  | The reference associated to the details. |\r\n| Details[0].TaxTemplateCollection              | The TaxTemplateCollection associated to the details. |\r\n| Details[0].TaxTemplateCollection.Description  | The Description associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.Code         | The Code associated to the tax template collection. |\r\n| Details[0].TaxTemplateCollection.IsDeleted    | Whether the tax template collection is deleted. |\r\n| Details[0].TaxTemplateCollection.Guid         | The Guid associated to the tax template collection. |\r\n| RelatedBlobHashes| The array of related blob hashes and descriptions associated to the invoice.|\r\n| RelatedBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| Batch.GeneratedTimestamp| The generated timestamp associated to the batch. |\r\n| Batch.AcceptedTimestamp| The accepted timestamp associated to the batch. |\r\n| Batch.InvoiceDate| The invoice date associated to the batch. |\r\n| Batch.InvoiceUntil| The invoice until associated to the batch. |\r\n| Batch.IsAcceptanceInProgress| The isAcceptanceInProgress boolean associated to the batch. |\r\n| Batch.IsGenerationInProgress| The isGenerationInProgress boolean associated to the batch. |\r\n| Batch.IsExported| The isExported boolean associated to the batch. |\r\n| Batch.RelatedUserGeneratedGuid| The related user generated guid associated to the batch. |\r\n| Batch.RelatedUserAcceptedByGuid| The related user acceptedby guid associated to the batch. |\r\n| Batch.AnalysisCode| The analysis code associated to the batch. |\r\n| Batch.Notes| The notes associated to the batch. |\r\n| Batch.InvoiceBatchStatusListItem| The Guid and name of invoice batch status associated to the batch. |\r\n| Batch.IsDeleted| The isDeleted boolean associated to the batch. |\r\n| Batch.BatchGuid| The guid associated to the batch. |\r\n| Deallocations[0]| List of invoice bill deallocations. | \r\n| Deallocations[0].Amount| The amount of the deallocated invoice bill. | \r\n| Deallocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Deallocations[0].DateDeallocated| The date of invoice bill deallocation. | \r\n| Deallocations[0].DateInput| The date input of the invoice bill deallocation. | \r\n| Deallocations[0].RelatedUserDeallocatedByGuid| The GUID associated to the user who deallocated the invoice bill. | \r\n| Deallocations[0].IsExported| Whether deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillDeallocationExported| Whether the invoice bill deallocation is exported. | \r\n| Deallocations[0].IsInvoiceBillExported| Whether the invoice bill is exported. |\r\n| Deallocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem| The GUID and description of allocation accounting period.|\r\n| Deallocations[0].DateExported| The deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillDeallocationExported| The invoice bill deallocation exported date. | \r\n| Deallocations[0].DateInvoiceBillExported| The invoice bill exported date. | \r\n| Deallocations[0].DeallocationAccountingPeriodListItem| The GUID and description of deallocation accounting period. |\r\n| Deallocations[0].Guid| The GUID associated to the invoice deallocation. |\r\n| Allocations[0]| List of invoice bill allocations. | \r\n| Allocations[0].Amount| The amount of the allocated invoice bill. | \r\n| Allocations[0].RelatedInvoiceAllocatedToGuid| The GUID associated to the invoice allocated to. |\r\n| Allocations[0].DateInput| The date input of the invoice bill allocation. | \r\n| Allocations[0].IsExported| Whether allocation is exported. | \r\n| Allocations[0].IsDeleted| Whether the invoice bill is deleted. |\r\n| Allocations[0].AccountingPeriodListItem| The GUID and description of accounting period. |\r\n| Allocations[0].DateExported| The invoice bill allocation exported date. |\r\n| Allocations[0].Guid| The GUID associated to the invoice allocation. |\r\n| BatchGeneratedTimestampUtcFilter| Used to filter the GeneratedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| BatchAcceptedTimestampUtcFilter| Used to filter the AcceptedTimestamp associated to the batch. Should be in datetime utc format. |\r\n| UnallocatedAmount | The unallocated amount associated to the Invoice.               |\r\n"
+      operationId: Invoice_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorInvoiceResource]'
+components:
+  schemas:
+    ApiIntegratorInvoiceDetailRentResource:
+      type: object
+      properties:
+        RentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        From:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        To:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+    ApiIntegratorInvoiceDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ItemDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        OrderNo:
+          type: string
+        CustomerOrderNo:
+          type: string
+        CustomerLoadReference:
+          type: string
+        PoNumber:
+          type: string
+        ReleaseNumber:
+          type: string
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceDescriptionOverride:
+          type: string
+        ActionDescriptionOverride:
+          type: string
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        SiteAddress:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailSiteAddressResource'
+        Reason:
+          type: string
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceFrequencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Rent:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailRentResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailAmountResource'
+        NotDueAmount:
+          type: number
+          format: double
+        RelatedOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Reference:
+          type: string
+        Notes:
+          type: string
+        TaxTemplateCollection:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailTaxTemplateCollectionResource'
+        PriceFactor:
+          type: number
+          format: double
+    ApiIntegratorPrintAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorInvoiceAmountResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        BaseAmount:
+          type: number
+          format: double
+        ExchangeRate:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceAmountExchangeRateResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorInvoiceAmountExchangeRateResource:
+      type: object
+      properties:
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExchangeCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorInvoiceOutputResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiIntegratorInvoiceDetailSiteAddressContactMethodsResource:
+      type: object
+      properties:
+        TelNo:
+          type: string
+        FaxNo:
+          type: string
+    ApiIntegratorRemitAddressResource:
+      type: object
+      properties:
+        SiteName:
+          type: string
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiIntegratorInvoiceDetailSiteAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+        ContactMethods:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailSiteAddressContactMethodsResource'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorInvoiceDetailTaxTemplateCollectionResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Code:
+          type: string
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorInvoiceResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorInvoiceResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorInvoiceDeallocationResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        RelatedInvoiceAllocatedToGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DateDeallocated:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        RelatedUserDeallocatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsExported:
+          type: boolean
+        IsInvoiceBillDeallocationExported:
+          type: boolean
+        IsInvoiceBillExported:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        AllocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateExported:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DateInvoiceBillDeallocationExported:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DateInvoiceBillExported:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DeallocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorInvoiceAllocationResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        RelatedInvoiceAllocatedToGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsExported:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateExported:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorInvoiceResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorInvoiceBatchResource:
+      type: object
+      properties:
+        GeneratedTimestamp:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        AcceptedTimestamp:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        InvoiceDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        InvoiceUntil:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsAcceptanceInProgress:
+          type: boolean
+        IsGenerationInProgress:
+          type: boolean
+        IsExported:
+          type: boolean
+        RelatedUserGeneratedGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserAcceptedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AnalysisCode:
+          type: string
+        Notes:
+          type: string
+        InvoiceBatchStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        BatchGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorInvoiceDetailAmountResource:
+      type: object
+      properties:
+        Rate:
+          type: number
+          format: double
+        IsRebilled:
+          type: boolean
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        Weight:
+          type: number
+          format: double
+        Price:
+          type: number
+          format: double
+        PriceIncVat:
+          type: number
+          format: double
+        ChargeableHours:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        Allowance:
+          type: number
+          format: double
+        RebillQuantity:
+          type: number
+          format: double
+        RebillVolume:
+          type: number
+          format: double
+        RebillWeight:
+          type: number
+          format: double
+        RebilledPrice:
+          type: number
+          format: double
+        RebilledPriceIncVat:
+          type: number
+          format: double
+        RebilledChargeableHours:
+          type: number
+          format: double
+        RebilledMinimumCharge:
+          type: number
+          format: double
+        RebilledMaximumCharge:
+          type: number
+          format: double
+        RebilledAllowance:
+          type: number
+          format: double
+    ApiIntegratorInvoiceResource:
+      type: object
+      properties:
+        InvoiceNumber:
+          type: string
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CustomerInvoiceNumber:
+          type: string
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RebateInvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        VATExemptNumber:
+          type: string
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsCash:
+          type: boolean
+        IsAccepted:
+          type: boolean
+        IsDebit:
+          type: boolean
+        IsRebilled:
+          type: boolean
+        IsTaxAdjustment:
+          type: boolean
+        IsRequestForPayment:
+          type: boolean
+        InputDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        InvoiceDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DueDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        WriteOffReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceAmountResource'
+        RelatedLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PrintAddress:
+          $ref: '#/components/schemas/ApiIntegratorPrintAddressResource'
+        RemitAddress:
+          $ref: '#/components/schemas/ApiIntegratorRemitAddressResource'
+        Notes:
+          type: string
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceDetailResource'
+        Batch:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceBatchResource'
+        Deallocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceDeallocationResource'
+        Allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceAllocationResource'
+        RelatedOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedBatchGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserGeneratedGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserAcceptedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceAllocatedToGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDeallocatedByGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReferenceFilter:
+          type: string
+        BatchGeneratedTimestampUtcFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        BatchAcceptedTimestampUtcFilter:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceOutputResource'
+        UnallocatedAmount:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

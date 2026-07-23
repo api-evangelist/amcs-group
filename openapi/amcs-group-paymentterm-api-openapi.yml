@@ -1,0 +1,163 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PaymentTerm API
+  version: core
+tags:
+- name: PaymentTerm
+paths:
+  /lists/paymentTerms/{guid}:
+    get:
+      tags:
+      - PaymentTerm
+      summary: Find with GUID
+      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the payment term                              |\r\n| Description               | The description of the payment term                                  |\r\n| ShortCode| The Short code of the payment term   |\r\n| IsDeleted                 | Whether the payment term is deleted    |  "
+      operationId: PaymentTerm_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPaymentTermResource]'
+  /lists/paymentTerms:
+    get:
+      tags:
+      - PaymentTerm
+      summary: Find with Filters
+      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the payment term                              |\r\n| Description               | The description of the payment term                                  |\r\n| ShortCode| The Short code of the payment term   |\r\n| IsDeleted                 | Whether the payment term is deleted    |  "
+      operationId: PaymentTerm_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPaymentTermResource]'
+components:
+  schemas:
+    ApiResourceResultEntity[ApiIntegratorPaymentTermResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPaymentTermResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorPaymentTermResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        ShortCode:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorPaymentTermResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentTermResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

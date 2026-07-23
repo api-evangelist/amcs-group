@@ -1,0 +1,39 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/amcsplatform/amcsrestapi/tree/master/quickstart
+docs: https://stack.amcsplatform.com/13/how-do-i-access-the-dev-sandbox
+summary: >-
+  AMCS ships a hosted REST API sandbox running the latest AMCS Platform release
+  against known baseline data, part of the API Accelerator Program (Sandbox +
+  Integration Hub + Integration Experts). Sandbox PAT credentials are issued
+  through the developer stack forum; no self-service test keys are published.
+environments:
+- name: sandbox
+  base_uri: https://rstapi-sbx-svc-core.amcsplatform.com/erp/api/
+  data_base_uri: https://rstapi-sbx-svc-core.amcsplatform.com/erp/api/integrator/erp
+  description: >-
+    REST API sandbox with the latest Platform release installed and known data
+    for baseline testing.
+- name: pay-developer
+  base_uri: https://eu1-pay-dev.amcsplatform.com/
+  description: AMCS Pay external API developer environment.
+- name: visionai-developer
+  base_uri: https://o1-dev-svc-core.amcsplatform.com/
+  description: AMCS Vision AI developer environment.
+auth:
+  mechanism: Personal Access Token (PrivateKey) -> authTokens -> session cookie
+  credential_source: >-
+    Sandbox PAT and logon credentials are published on the developer stack forum
+    thread "how do I access the dev sandbox".
+accelerator:
+  program: API Accelerator Program
+  accelerator_project:
+    description: >-
+      Pre-coded integration template covering 80-90% of a typical integration
+      project, released under an MIT public-domain license to fast-track builds.
+    license: MIT
+  integration_hub: Direct threaded access to the AMCS developers who build the APIs.
+  integration_experts: AMCS specialists supporting critical integration issues.
+notes:
+- No published test card numbers / magic values (AMCS is an enterprise waste, recycling and transport platform, not a self-serve card acquirer).
+- Never invent sandbox credentials; they are gated behind the stack forum.

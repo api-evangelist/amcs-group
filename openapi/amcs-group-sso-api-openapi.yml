@@ -1,0 +1,30 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Sso API
+  version: core
+tags:
+- name: Sso
+paths:
+  /services/api/sso/login:
+    get:
+      tags:
+      - Sso
+      parameters:
+      - name: return
+        in: query
+        schema:
+          type: string
+      - name: accessDeniedUrl
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /services/api/sso/logout:
+    get:
+      tags:
+      - Sso
+      responses:
+        '200':
+          description: Success

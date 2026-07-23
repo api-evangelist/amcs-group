@@ -1,0 +1,417 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup RouteVisit API
+  version: core
+tags:
+- name: RouteVisit
+paths:
+  /transport/routeVisits/changes:
+    get:
+      tags:
+      - RouteVisit
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the route visit.|\r\n| ExclusionTypeListItem| The GUID and description of the exclusion type associated to the route visit.|\r\n| RelatedSiteOrderRouteAssignmentGuid| Used to filter on the related site order route assignment GUID.|\r\n| TicketNo| Used to filter on the ticket no.|\r\n| ManualTicketNo| Used to filter on the manual ticket no.|\r\n| Position| The position associated to the route visit.|\r\n| IntendedPrice| The intended price associated to the route visit.|\r\n| IntendedVatListItem| The GUID and description of the intended VAT associated to the route visit.|\r\n| DriverNotes| The driver notes associated to the route visit.|\r\n| Notes| The notes associated to the route visit. Filterable.|\r\n| Access[0].GUID| The Guid associated to the route visit access time.|\r\n| Access[0].AccessNotes| The access notes associated to the route visit access time.|\r\n| Access[0].AccessContact| The access contact associated to the route visit access time.|\r\n| Access[0].StartTimeAccess| The access start time associated to the route visit access time.|\r\n| Access[0].EndTimeAccess| The access end time associated to the route visit access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the route visit access time.|\r\n| RejectedReasonListItem| The GUID and description of the Rejected Reason associated to the route visit.|\r\n| RejectReasonAdditionalNotes| The reject reason additional notes associated to the route visit.|\r\n| VisitStatusListItem| The GUID and description of the visit status associated to the route visit.|\r\n| IsAcknowledgementRequired| Is acknowledgement required?|\r\n| MaxLiftQuantity| The max lift quantity associated to the route visit.|\r\n| MinLiftQuantity| The min lift quantity associated to the route visit.|\r\n| IsQuantityRequired| Is the quantity required?|\r\n| QuantityPlanned| The planned quantity associated to the route visit.|\r\n| QuantityOverride| The quantity associated to the route visit.|\r\n| Weight| The weight associated to the route visit.|\r\n| QuantityNotPlannedReasonListItem| The GUID and description of the quantity not planned reason associated to the route visit.|\r\n| QuantityConfirmed| The quantity confirmed associated to the route visit.|\r\n| QuantityProblem| The quantity problem associated to the route visit.|\r\n| MinBillLevelShortfall| The min bill level shortfall associated to the route visit.|\r\n| StartTimeActual| The actual start time associated to the route visit.|\r\n| EndTimeActual| The actual end time associated to the route visit.|\r\n| IsFinanciallyConfirmed| Is the route visit financially confirmed?|\r\n| RelatedUserFinanciallyConfirmedGuid| Used to filter on the related financially confirmed by user.|\r\n| IsFleetPlannerCompleted| If fleet planner completed?|\r\n| IsCancelled| Whether to cancel the route visit|\r\n| OnDeallocatedReasonListItem| The GUID and description of the deallocated reason associated to the route visit.|\r\n| PONumber| The PO number associated to the route visit.|\r\n| OriginalDate| The original date associated to the route visit.|\r\n| RelatedLocationDestinationGuid| The GUID related to the Location.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the route visit.|\r\n| DriverFeedback| The driver feedback associated to the route visit. |\r\n"
+      operationId: RouteVisit_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorRouteVisitResource]'
+  /transport/routeVisits/{guid}:
+    get:
+      tags:
+      - RouteVisit
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the route visit.|\r\n| ExclusionTypeListItem| The GUID and description of the exclusion type associated to the route visit.|\r\n| RelatedSiteOrderRouteAssignmentGuid| Used to filter on the related site order route assignment GUID.|\r\n| TicketNo| Used to filter on the ticket no.|\r\n| ManualTicketNo| Used to filter on the manual ticket no.|\r\n| Position| The position associated to the route visit.|\r\n| IntendedPrice| The intended price associated to the route visit.|\r\n| IntendedVatListItem| The GUID and description of the intended VAT associated to the route visit.|\r\n| DriverNotes| The driver notes associated to the route visit.|\r\n| Notes| The notes associated to the route visit. Filterable.|\r\n| Access[0].GUID| The Guid associated to the route visit access time.|\r\n| Access[0].AccessNotes| The access notes associated to the route visit access time.|\r\n| Access[0].AccessContact| The access contact associated to the route visit access time.|\r\n| Access[0].StartTimeAccess| The access start time associated to the route visit access time.|\r\n| Access[0].EndTimeAccess| The access end time associated to the route visit access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the route visit access time.|\r\n| RejectedReasonListItem| The GUID and description of the Rejected Reason associated to the route visit.|\r\n| RejectReasonAdditionalNotes| The reject reason additional notes associated to the route visit.|\r\n| VisitStatusListItem| The GUID and description of the visit status associated to the route visit.|\r\n| IsAcknowledgementRequired| Is acknowledgement required?|\r\n| MaxLiftQuantity| The max lift quantity associated to the route visit.|\r\n| MinLiftQuantity| The min lift quantity associated to the route visit.|\r\n| IsQuantityRequired| Is the quantity required?|\r\n| QuantityPlanned| The planned quantity associated to the route visit.|\r\n| QuantityOverride| The quantity associated to the route visit.|\r\n| Weight| The weight associated to the route visit.|\r\n| QuantityNotPlannedReasonListItem| The GUID and description of the quantity not planned reason associated to the route visit.|\r\n| QuantityConfirmed| The quantity confirmed associated to the route visit.|\r\n| QuantityProblem| The quantity problem associated to the route visit.|\r\n| MinBillLevelShortfall| The min bill level shortfall associated to the route visit.|\r\n| StartTimeActual| The actual start time associated to the route visit.|\r\n| EndTimeActual| The actual end time associated to the route visit.|\r\n| IsFinanciallyConfirmed| Is the route visit financially confirmed?|\r\n| RelatedUserFinanciallyConfirmedGuid| Used to filter on the related financially confirmed by user.|\r\n| IsFleetPlannerCompleted| If fleet planner completed?|\r\n| IsCancelled| Whether to cancel the route visit|\r\n| OnDeallocatedReasonListItem| The GUID and description of the deallocated reason associated to the route visit.|\r\n| PONumber| The PO number associated to the route visit.|\r\n| OriginalDate| The original date associated to the route visit.|\r\n| RelatedLocationDestinationGuid| The GUID related to the Location.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the route visit.|\r\n| DriverFeedback| The driver feedback associated to the route visit. |\r\n"
+      operationId: RouteVisit_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRouteVisitResource]'
+    put:
+      tags:
+      - RouteVisit
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| ActionListItem| The GUID and description associated to the action type.| Yes |\r\n| ContainerTypeListItem| The GUID and description associated to the container type.| Yes |\r\n| ExclusionTypeListItem| The GUID and description associated to the exclusion type.| No |\r\n| IntendedVatListItem| The GUID and description associated to the intended vat.| No |\r\n| RejectedReasonListItem| The GUID and description associated to the rejected reason.| No |\r\n| VisitStatusListItem| The GUID and description associated to the visit status. | No |\r\n| QuantityNotPlannedReasonListItem| The GUID and description associated to the reason for quantity not planned| No |\r\n| RelatedSiteOrderGuid| The GUID related to the Site.| Yes |\r\n| RelatedRouteGuid | The GUID related to the Route.| Yes |\r\n| RelatedSiteOrderRouteAssignmentGuid| The GUID related to the Site Route Assignment. | No |\r\n| RelatedUserFinanciallyConfirmedGuid| The GUID relaed to the user financially confirmed.| No |\r\n| IsAcknowledgementRequired| Is the acknowledgement required?| Yes |\r\n| IsQuantityRequired| Is the quantity required?| No |\r\n| IsFleetPlannerCompleted| Is the fleet planner completed?| Yes |\r\n| IsFinanciallyConfirmed| Is the financials confirmed?| Yes |\r\n| TicketNo| The ticket number associated to the route visit job.| No |\r\n| Position| The position associated to the route visit job.| No |\r\n| IntendedPrice| The intended price associated to the route visit job.| No |\r\n| RejectReasonAdditionalNotes| The reject reason for additional notes associated to the route visit job.| No |\r\n| MaxLiftQuantity| The maximum lift quantity associated to the route visit job.| No |\r\n| MinLiftQuantity| The minimum lift quantity associated to the route visit job.| No |\r\n| QuantityPlanned| The quantity planned associated to the route visit job.| No |\r\n| QuantityOverride| The quantity associated to the route visit job.| No |\r\n| Weight    | The weight associated to the route visit job.| No |\r\n| QuantityConfirmed| The quantity confirmed associated to the route visit job.| No |\r\n| QuantityProblem| The quantuty problem associated to the route visit job.| No |\r\n| MinBillLevelShortfall| The minimum bill level shortfall associated to the route visit job. | No |\r\n| StartTimeActual| The actual start time associated to the route visit job.| No |\r\n| EndTimeActual| The actual end time associated to the route visit job.| No |\r\n| OriginalDate| The originial date associated to the route visit job.| No |\r\n| EndTimeActual| The actual end time associated to the route visit job.| No |\r\n| ManualTicketNo | The associated to the route visit job.| No |\r\n| DriverNotes| The manual ticket number associated to the route visit job.| No |\r\n| Notes| The driver notes associated to the route visit job. Editable.| No |\r\n| Access[0].GUID| The Guid associated to the route visit access time.| Yes |\r\n| Access[0].AccessNotes| The access notes associated to the route visit access time.| No |\r\n| Access[0].AccessContact| The access contact associated to the route visit access time.| No |\r\n| Access[0].StartTimeAccess    | The access start time associated to the route visit access time.| Yes |\r\n| Access[0].EndTimeAccess    | The access end time associated to the route visit access time.| Yes |\r\n| Access[0].DayOfWeekId      | The day of the week associated to the route visit access time.| Yes |\r\n| PONumber| The PO number associated to the route visit job.| No |\r\n| IsCancelled| Whether to cancel the route visit| No |\r\n| OnDeallocatedReasonListItem| The GUID and description of the deallocated reason associated to the route visit.| No |\r\n| RelatedLocationDestinationGuid| The GUID related to the Location.| No |\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the route visit.| No |\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| DriverFeedback| The driver feedback associated to the route visit. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If the Access.StartTimeAccess is greater than Access.EndTimeAccess | Failed to save. RouteVisit with Access cannot be set if StartTimeAccess is greater than EndTimeAccess. |\r\n| Cancelling the route visit when the related route is already completed | The related route is already completed. This route visit cannot be cancelled. |\r\n| Cancelling the route visit while it is assigned to an existing job | This route visit is assigned to an existing job. This route visit cannot be cancelled. |\r\n| Updating QuantityPlanned when route is already completed | Failed to save/update QuantityPlanned because the related route is already completed. Could not process the request. |\r\n| If RelatedRouteGuid is updated and the associated route is already completed | Failed to save/update RelatedRouteGuid because the related route is already completed. Could not process the request. |\r\n| If RelatedRouteGuid is updated and the associated route is already deleted | Failed to save/update RouteVisit because the supplied Route is not valid. The update has been rejected. Change the RelatedRouteGuid to the Guid of a valid and undeleted Route |\r\n| If IsCancelled is true and OnDeallocatedReasonListItem is null | The mandatory property OnDeallocatedReasonListItem.Guid has a null value. The request could not be processed. Supply a value for the OnDeallocatedReasonListItem.Guid property of the submitted resource. |\r\n| If IsCancelled is false and OnDeallocatedReasonListItem has value | Failed to save/update RouteVisit because OnDeallocationReasonListItem property has been set, therefore IsCancelled property must be set to true. |\r\n| If IsCancelled is true and OnDeallocatedReasonListItem is belong to Lift Problem Reason category | Invalid OnDeallocatedReasonListItem. Reason must be from 'Lift Problem' reason category. |\r\n| If DriverFeedback is more than 1000 characters long | Failed to save/update RouteVisit because DriverFeedback must be no more than 1000 characters long. |"
+      operationId: RouteVisit_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteVisitResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/routeVisits:
+    get:
+      tags:
+      - RouteVisit
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the route visit.|\r\n| ExclusionTypeListItem| The GUID and description of the exclusion type associated to the route visit.|\r\n| RelatedSiteOrderRouteAssignmentGuid| Used to filter on the related site order route assignment GUID.|\r\n| TicketNo| Used to filter on the ticket no.|\r\n| ManualTicketNo| Used to filter on the manual ticket no.|\r\n| Position| The position associated to the route visit.|\r\n| IntendedPrice| The intended price associated to the route visit.|\r\n| IntendedVatListItem| The GUID and description of the intended VAT associated to the route visit.|\r\n| DriverNotes| The driver notes associated to the route visit.|\r\n| Notes| The notes associated to the route visit. Filterable.|\r\n| Access[0].GUID| The Guid associated to the route visit access time.|\r\n| Access[0].AccessNotes| The access notes associated to the route visit access time.|\r\n| Access[0].AccessContact| The access contact associated to the route visit access time.|\r\n| Access[0].StartTimeAccess| The access start time associated to the route visit access time.|\r\n| Access[0].EndTimeAccess| The access end time associated to the route visit access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the route visit access time.|\r\n| RejectedReasonListItem| The GUID and description of the Rejected Reason associated to the route visit.|\r\n| RejectReasonAdditionalNotes| The reject reason additional notes associated to the route visit.|\r\n| VisitStatusListItem| The GUID and description of the visit status associated to the route visit.|\r\n| IsAcknowledgementRequired| Is acknowledgement required?|\r\n| MaxLiftQuantity| The max lift quantity associated to the route visit.|\r\n| MinLiftQuantity| The min lift quantity associated to the route visit.|\r\n| IsQuantityRequired| Is the quantity required?|\r\n| QuantityPlanned| The planned quantity associated to the route visit.|\r\n| QuantityOverride| The quantity associated to the route visit.|\r\n| Weight| The weight associated to the route visit.|\r\n| QuantityNotPlannedReasonListItem| The GUID and description of the quantity not planned reason associated to the route visit.|\r\n| QuantityConfirmed| The quantity confirmed associated to the route visit.|\r\n| QuantityProblem| The quantity problem associated to the route visit.|\r\n| MinBillLevelShortfall| The min bill level shortfall associated to the route visit.|\r\n| StartTimeActual| The actual start time associated to the route visit.|\r\n| EndTimeActual| The actual end time associated to the route visit.|\r\n| IsFinanciallyConfirmed| Is the route visit financially confirmed?|\r\n| RelatedUserFinanciallyConfirmedGuid| Used to filter on the related financially confirmed by user.|\r\n| IsFleetPlannerCompleted| If fleet planner completed?|\r\n| IsCancelled| Whether to cancel the route visit|\r\n| OnDeallocatedReasonListItem| The GUID and description of the deallocated reason associated to the route visit.|\r\n| PONumber| The PO number associated to the route visit.|\r\n| OriginalDate| The original date associated to the route visit.|\r\n| RelatedLocationDestinationGuid| The GUID related to the Location.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the route visit.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the route visit.|\r\n| DriverFeedback| The driver feedback associated to the route visit. |\r\n"
+      operationId: RouteVisit_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRouteVisitResource]'
+    post:
+      tags:
+      - RouteVisit
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| ActionListItem| The GUID and description associated to the action type.| Yes |\r\n| ContainerTypeListItem| The GUID and description associated to the container type.| Yes |\r\n| ExclusionTypeListItem| The GUID and description associated to the exclusion type.| No |\r\n| IntendedVatListItem| The GUID and description associated to the intended vat.| No |\r\n| RejectedReasonListItem| The GUID and description associated to the rejected reason.| No |\r\n| VisitStatusListItem| The GUID and description associated to the visit status. | No |\r\n| QuantityNotPlannedReasonListItem| The GUID and description associated to the reason for quantity not planned| No |\r\n| RelatedSiteOrderGuid| The GUID related to the Site.| Yes |\r\n| RelatedRouteGuid | The GUID related to the Route.| Yes |\r\n| RelatedSiteOrderRouteAssignmentGuid| The GUID related to the Site Route Assignment. | No |\r\n| RelatedUserFinanciallyConfirmedGuid| The GUID relaed to the user financially confirmed.| No |\r\n| IsAcknowledgementRequired| Is the acknowledgement required?| Yes |\r\n| IsQuantityRequired| Is the quantity required?| No |\r\n| IsFleetPlannerCompleted| Is the fleet planner completed?| Yes |\r\n| IsFinanciallyConfirmed| Is the financials confirmed?| Yes |\r\n| TicketNo| The ticket number associated to the route visit job.| No |\r\n| Position| The position associated to the route visit job.| No |\r\n| IntendedPrice| The intended price associated to the route visit job.| No |\r\n| RejectReasonAdditionalNotes| The reject reason for additional notes associated to the route visit job.| No |\r\n| MaxLiftQuantity| The maximum lift quantity associated to the route visit job.| No |\r\n| MinLiftQuantity| The minimum lift quantity associated to the route visit job.| No |\r\n| QuantityPlanned| The quantity planned associated to the route visit job.| No |\r\n| QuantityOverride| The quantity associated to the route visit job.| No |\r\n| Weight    | The weight associated to the route visit job.| No |\r\n| QuantityConfirmed| The quantity confirmed associated to the route visit job.| No |\r\n| QuantityProblem| The quantuty problem associated to the route visit job.| No |\r\n| MinBillLevelShortfall| The minimum bill level shortfall associated to the route visit job. | No |\r\n| StartTimeActual| The actual start time associated to the route visit job.| No |\r\n| EndTimeActual| The actual end time associated to the route visit job.| No |\r\n| OriginalDate| The originial date associated to the route visit job.| No |\r\n| EndTimeActual| The actual end time associated to the route visit job.| No |\r\n| ManualTicketNo | The associated to the route visit job.| No |\r\n| DriverNotes| The manual ticket number associated to the route visit job.| No |\r\n| Notes| The driver notes associated to the route visit job. Editable.| No |\r\n| Access[0].GUID| The Guid associated to the route visit access time.| No |\r\n| Access[0].AccessNotes| The access notes associated to the route visit access time.| No |\r\n| Access[0].AccessContact| The access contact associated to the route visit access time.| No |\r\n| Access[0].StartTimeAccess    | The access start time associated to the route visit access time.| Yes |\r\n| Access[0].EndTimeAccess    | The access end time associated to the route visit access time.| Yes |\r\n| Access[0].DayOfWeekId      | The day of the week associated to the route visit access time.| Yes |\r\n| PONumber| The PO number associated to the route visit job.| No |\r\n| IsCancelled| Whether to cancel the route visit| No |\r\n| OnDeallocatedReasonListItem| The GUID and description of the deallocated reason associated to the route visit.| No |\r\n| RelatedLocationDestinationGuid| The GUID related to the Location.| No |\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the route visit.| No |\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| DriverFeedback| The driver feedback associated to the route visit. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If the Access.StartTimeAccess is greater than Access.EndTimeAccess | Failed to save. RouteVisit with Access cannot be set if StartTimeAccess is greater than EndTimeAccess. |\r\n| If Access.Guid is not null on insert | Access.Guid: is not supported. |\r\n| If IsCancelled is true on insert | IsCancelled cannot be set to true on Create. |\r\n| Cancelling the route visit when the related route is already completed | The related route is already completed. This route visit cannot be cancelled. |\r\n| Cancelling the route visit while it is assigned to an existing job | This route visit is assigned to an existing job. This route visit cannot be cancelled. |\r\n| Updating QuantityPlanned when route is already completed | Failed to save/update QuantityPlanned because the related route is already completed. Could not process the request. |\r\n| If RelatedRouteGuid is updated and the associated route is already completed | Failed to save/update RelatedRouteGuid because the related route is already completed. Could not process the request. |\r\n| If RelatedRouteGuid is updated and the associated route is already deleted | Failed to save/update RouteVisit because the supplied Route is not valid. The update has been rejected. Change the RelatedRouteGuid to the Guid of a valid and undeleted Route |\r\n| If DriverFeedback is more than 1000 characters long | Failed to save/update RouteVisit because DriverFeedback must be no more than 1000 characters long. |"
+      operationId: RouteVisit_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorRouteVisitResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceChanges[ApiIntegratorRouteVisitResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVisitResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRouteVisitResource:
+      type: object
+      properties:
+        RelatedSiteOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExclusionTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedSiteOrderRouteAssignmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        ManualTicketNo:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        IntendedPrice:
+          type: number
+          format: double
+        IntendedVatListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DriverNotes:
+          type: string
+        Notes:
+          type: string
+        Access:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessArrayResource'
+        RejectedReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RejectReasonAdditionalNotes:
+          type: string
+        VisitStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsAcknowledgementRequired:
+          type: boolean
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        MinLiftQuantity:
+          type: integer
+          format: int32
+        IsQuantityRequired:
+          type: boolean
+        QuantityPlanned:
+          type: number
+          format: double
+        QuantityOverride:
+          type: number
+          format: double
+        Weight:
+          type: number
+          format: double
+        QuantityNotPlannedReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        QuantityConfirmed:
+          type: integer
+          format: int32
+        QuantityProblem:
+          type: integer
+          format: int32
+        MinBillLevelShortfall:
+          type: integer
+          format: int32
+        StartTimeActual:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        EndTimeActual:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        IsFinanciallyConfirmed:
+          type: boolean
+        RelatedUserFinanciallyConfirmedGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsFleetPlannerCompleted:
+          type: boolean
+        IsCancelled:
+          type: boolean
+        OnDeallocatedReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PONumber:
+          type: string
+        OriginalDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedLocationDestinationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReScheduledDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedPictureBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVisitPictureResource'
+        DriverFeedback:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorRouteVisitPictureResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Hash:
+          type: string
+        PictureTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PictureSourceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorAccessArrayResource:
+      type: object
+      properties:
+        AccessNotes:
+          type: string
+        AccessContact:
+          type: string
+        StartTimeAccess:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        EndTimeAccess:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DayOfWeekId:
+          type: integer
+          format: int32
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorRouteVisitResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRouteVisitResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection[ApiIntegratorRouteVisitResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVisitResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

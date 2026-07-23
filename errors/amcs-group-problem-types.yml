@@ -1,0 +1,48 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/amcs-group-pay-openapi-original.json, openapi/amcs-group-tlv-openapi-original.json, openapi/amcs-group-visionai-openapi-original.json
+format: http-status
+envelope: >-
+  Errors are returned with a standard HTTP status code plus an ApiResource
+  envelope carrying ApiResourceErrors.errors (message) and ApiResourceStatus
+  (id, isSuccess). Responses are application/json (not application/problem+json,
+  so this is not an RFC 9457 catalog).
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid request parameters or malformed body.
+  source: openapi/amcs-group-pay-openapi-original.json, openapi/amcs-group-tlv-openapi-original.json
+- status: 401
+  title: Unauthorized
+  description: Authentication required or session token missing/expired.
+  source: openapi/amcs-group-pay-openapi-original.json, openapi/amcs-group-tlv-openapi-original.json, openapi/amcs-group-visionai-openapi-original.json
+- status: 403
+  title: Forbidden
+  description: Authenticated principal lacks access to the resource.
+  source: openapi/amcs-group-visionai-openapi-original.json
+- status: 404
+  title: Not Found
+  description: Requested resource does not exist.
+  source: openapi/amcs-group-pay-openapi-original.json
+- status: 415
+  title: Unsupported Media Type
+  description: Request Content-Type is not supported.
+  source: openapi/amcs-group-pay-openapi-original.json
+- status: 500
+  title: Internal Server Error
+  description: Unexpected server error.
+  source: openapi/amcs-group-pay-openapi-original.json, openapi/amcs-group-tlv-openapi-original.json, openapi/amcs-group-visionai-openapi-original.json
+- status: 501
+  title: Not Implemented
+  source: openapi/amcs-group-visionai-openapi-original.json
+- status: 502
+  title: Bad Gateway
+  source: openapi/amcs-group-visionai-openapi-original.json
+- status: 503
+  title: Service Unavailable
+  source: openapi/amcs-group-visionai-openapi-original.json
+- status: 504
+  title: Gateway Timeout
+  source: openapi/amcs-group-visionai-openapi-original.json
+notes:
+- The Core, ERP Platform and Scale specs document 2xx responses but do not enumerate 4xx/5xx per-operation; error status codes above are harvested from the Pay, TLV and Vision AI specs and apply platform-wide.

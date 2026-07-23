@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup User API
+  version: core
+tags:
+- name: User
+paths:
+  /services/api/user:
+    get:
+      tags:
+      - User
+      responses:
+        '200':
+          description: Success
+  /directory/users/{guid}:
+    get:
+      tags:
+      - User
+      summary: Find with GUID
+      description: "| Property | Description                                                  |\r\n| -------- | ------------------------------------------------------------ |\r\n| GUID     | The GUID associated to the user.                             |\r\n| UserName | The username assigned to the user (usually what they use to log-in). |\r\n| Forename | The user's first name.                                       |\r\n| Surname  | The user's last name.                                        |\r\n| Code     | The users code.  |\r\n| Email   | The user's email.                                            |\r\n| MobileTelNo     | The MobileTelNo associated to the user.               |\r\n| IsOwnerDriver | Whether the user is Owner Driver.  |\r\n| AccessRightEnumFilter | Used to filter users by access right.  |\r\n| CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |\r\n| StaffTypeListItem | The GUID and Description of the staff type associated to the user. |"
+      operationId: User_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorUserResource]'
+  /directory/users:
+    get:
+      tags:
+      - User
+      summary: Find with Filters
+      description: "| Property | Description                                                  |\r\n| -------- | ------------------------------------------------------------ |\r\n| GUID     | The GUID associated to the user.                             |\r\n| UserName | The username assigned to the user (usually what they use to log-in). |\r\n| Forename | The user's first name.                                       |\r\n| Surname  | The user's last name.                                        |\r\n| Code     | The users code.  |\r\n| Email   | The user's email.                                            |\r\n| MobileTelNo     | The MobileTelNo associated to the user.               |\r\n| IsOwnerDriver | Whether the user is Owner Driver.  |\r\n| AccessRightEnumFilter | Used to filter users by access right.  |\r\n| CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |\r\n| StaffTypeListItem | The GUID and Description of the staff type associated to the user. |"
+      operationId: User_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorUserResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorUserResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorUserResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorUserResource:
+      type: object
+      properties:
+        UserName:
+          type: string
+        Forename:
+          type: string
+        Surname:
+          type: string
+        IsOwnerDriver:
+          type: boolean
+        Email:
+          type: string
+        Code:
+          type: string
+        AccessRightEnumFilter:
+          type: integer
+          format: int32
+        MobileTelNo:
+          type: string
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StaffTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorUserResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorUserResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

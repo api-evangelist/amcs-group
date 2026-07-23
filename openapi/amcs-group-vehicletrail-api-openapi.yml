@@ -1,0 +1,234 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup VehicleTrail API
+  version: core
+tags:
+- name: VehicleTrail
+paths:
+  /fleet/vehicleTrails/changes:
+    get:
+      tags:
+      - VehicleTrail
+      summary: Retrieve changes
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|"
+      operationId: VehicleTrail_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorVehicleTrailResource]'
+  /fleet/vehicleTrails/{guid}:
+    get:
+      tags:
+      - VehicleTrail
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|"
+      operationId: VehicleTrail_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorVehicleTrailResource]'
+  /fleet/vehicleTrails:
+    get:
+      tags:
+      - VehicleTrail
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|"
+      operationId: VehicleTrail_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorVehicleTrailResource]'
+components:
+  schemas:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorVehicleTrailResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleTrailResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    GeographyPointResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges[ApiIntegratorVehicleTrailResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleTrailResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorVehicleTrailResource:
+      type: object
+      properties:
+        RelatedRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        EventDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        GeoCoordinates:
+          $ref: '#/components/schemas/GeographyPointResource'
+        TimeStamp:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorVehicleTrailResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVehicleTrailResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

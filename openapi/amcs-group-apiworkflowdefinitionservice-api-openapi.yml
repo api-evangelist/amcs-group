@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiWorkflowDefinitionService API
+  version: core
+tags:
+- name: ApiWorkflowDefinitionService
+paths:
+  /services/api/workflow/definitions/{id}/op/delete:
+    post:
+      tags:
+      - ApiWorkflowDefinitionService
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowDefinitionDeleteResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowDefinitionDeleteResponse'
+components:
+  schemas:
+    AMCS.ApiService.Workflow.ApiWorkflowDefinitionDeleteResponse:
+      type: object
+      additionalProperties: false

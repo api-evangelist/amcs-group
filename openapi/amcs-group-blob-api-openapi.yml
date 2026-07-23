@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Blob API
+  version: core
+tags:
+- name: Blob
+paths:
+  /blob/{hash}:
+    get:
+      tags:
+      - Blob
+      parameters:
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: embed
+        in: query
+        schema:
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: Success

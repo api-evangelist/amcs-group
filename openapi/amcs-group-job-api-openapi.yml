@@ -1,0 +1,1086 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Job API
+  version: core
+tags:
+- name: Job
+paths:
+  /jobsystem/jobs/changes:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiJobResource]'
+  /jobsystem/jobs/template:
+    get:
+      tags:
+      - Job
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResult[ApiJobResource]'
+  /jobsystem/jobs/{id}:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: include
+        in: query
+        schema:
+          type: string
+      - name: expand
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiJobResource]'
+    put:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+    delete:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResource'
+  /jobsystem/jobs/{id}/blob/{blobMemberName}:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: blobMemberName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        schema:
+          type: string
+      - name: contentType
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /jobsystem/jobs:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: includeCount
+        in: query
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiJobResource]'
+    post:
+      tags:
+      - Job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/jobs/changes:
+    get:
+      tags:
+      - Job
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ---------------------------------------------------------| -------------------------------------------------------------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the job.|\r\n| DeleteRouteAssignmentsOnCompletion| Whether to delete route assignments on completion of the job.|\r\n| InProgress| Is the job in progress?|\r\n| IsAdhoc| Is the job ad hoc?|\r\n| IsCompleted| Is the job completed?Filterable.|\r\n| CompletedDate| The completed date of the job|\r\n| IsConfirmed| Is the job confirmed?|\r\n| IsExternalTransport| Is the job using external transport?|\r\n| IsFinanciallyConfirmed| Is the job financially confirmed?|\r\n| IsHazardousPaperworkComplete| Is the hazardous paperwork complete?|\r\n| IsScheduledTransfer| Is the job a scheduled transfer?|\r\n| IsWarranty| Is the job a warranty?|\r\n| IsDeleted| Whether to delete the job|\r\n| DeleteReasonGuid| The GUID of delete reason|\r\n| RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|\r\n| RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|\r\n| RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|\r\n| RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|\r\n| RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|\r\n| ActionListItem| The GUID and description of the action associated to the job.|  \r\n| CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the job. |\r\n| DepartmentListItem| The GUID and description of the department associated to the job. |\r\n| MaterialListItem| The GUID and description of the material associated to the job. |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the job. |\r\n| RepairReasonListItem| The GUID and description of the repair reason associated to the job. |\r\n| Access[]| The array of job access time associated to the job.|\r\n| Access[0].Contact| The contact associated to the job access time.|\r\n| Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].Notes| The notes time associated to the job access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the job access time.|\r\n| Access[0].GUID| The Guid associated to the job access time.|\r\n| ContainerDetails| The container details object associated to the job.|\r\n| ContainerDetails.Delivered| The container delivered to the job.|\r\n| ContainerDetails.Delivered.RelatedContainerGuid| The GUID of the container delivered to the job.|\r\n| ContainerDetails.Delivered.ContainerTypeListItem| The GUID and description of the container type delivered to the job.|\r\n| ContainerDetails.Delivered.Notes| The delivered container notes.|\r\n| ContainerDetails.Delivered.SerialNo| The delivered container serial number.|\r\n| ContainerDetails.Delivered.Tag| The delivered container tag.|\r\n| ContainerDetails.Removed| The container removed from the job.|\r\n| ContainerDetails.Removed.RelatedContainerGuid| The GUID of the container removed from the job.|\r\n| ContainerDetails.Removed.ContainerTypeListItem| The GUID and description of the container type removed from to the job.|\r\n| ContainerDetails.Removed.Notes| The removed container notes.|\r\n| ContainerDetails.Removed.SerialNo| The removed container serial number.|\r\n| ContainerDetails.Removed.Tag| The removed container tag.|\r\n| VisitDetails| The visit details object associated to the job.|\r\n| VisitDetails.DriverNotes| The driver notes on the visit associated to the job.|\r\n| VisitDetails.TimeInCustomerSite| The time in on the visit associated to the job.|\r\n| VisitDetails.TimeOutCustomerSite| The time out on the visit associated to the job.|\r\n| VisitDetails.HoursChargable| The hours chargeable on the visit associated to the job.|\r\n| VisitDetails.HoursNotChargable| The hours not chargeable on the visit associated to the job.|\r\n| CustomerOrderNo| The customer order number associated to the job. Filterable.|\r\n| DateRequired| The date the job is required.|\r\n| HazardousLoadReference| The hazardous load reference associated to the job. Filterable.|\r\n| ManualTicketNo| The manual ticket number associated to the job. Filterable. |\r\n| Notes| The notes associated to the job. Filterable.|\r\n| PONumber| The PO number associated to the job.|\r\n| Quantity| The quantity associated to the job.|\r\n| ReleaseNumber| The release number associated to the job.|\r\n| TicketNo| The ticket number associated to the job. Filterable. |\r\n| RejectedReasonListItem| The GUID and description of the job rejection reason. |\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the job. Filterable.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the job.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the job.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the job.|\r\n| PriceOverrides| The array of price overrides associated to the job.|\r\n| PriceOverrides[0].RelatedPriceGuid| The GUID of the price associated to the job price override.|\r\n| PriceOverrides[0].OverrideRate| The override rate associated to the job price override.|\r\n| PriceOverrides[0].Guid| The GUID associated to the job price override.|\r\n| PriceOverrides[0].IsSelected| The price isselected associated to the job price override.|\r\n| PriceOverrides[0].Breakdowns| The array of price breakdowns associated to the job price.|\r\n| PriceOverrides[0].Breakdowns[0].Guid| The GUID associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsDeleted| Whether the price breakdown is deleted.|\r\n| PriceOverrides[0].Breakdowns[0].FillLevel| The fill level associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].Quantity| The quantity associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsReceived| Whether the price breakdown is received.|\r\n| PriceOverrides[0].Breakdowns[0].Barcode| The BarCode associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].JobPriceBreakdownTypeEnum| The Job Price Breakdown Type associated to the price breakdown.|\r\n| RelatedPriceGuidFilter| Used to filter on the related price GUID.|\r\n| RelatedBlobJobDocketPdfHashes| The array of related job docket blob hashes.|\r\n| RelatedBlobJobDocketPdfHashes[0].Hash| The hash of the job docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedWTNBlobHashes| The array of related waste transfer note blob hashes.|\r\n| RelatedWTNBlobHashes[0].Guid| The guid of the job waste transfer note blob.|\r\n| RelatedWTNBlobHashes[0].Hash| The hash of the job waste transfer note blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| VATIntendedListItem| The GUID and description (code + rate) of the VAT associated to the job.|\r\n| RequiredStartTime| The start time at which the job is required.|\r\n| RequiredEndTime| The end time at which the job is required.|\r\n| ServiceListItem| The GUID and description of the Service associated to the job.|\r\n| LastChangeReasonListItem| The GUID and description of the last change reason associated to the job. |\r\n| LinkedJobs| The array of linked jobs associated to the job.|\r\n| LinkedJobs[0].Guid| The guid of the linked job associated to the job.|\r\n| LinkedJobs[0].IsDeleted| Whether the linked job is deleted.|\r\n| LinkedJobs[0].RelatedJobGuid| The job guid of the linked job associated to the job.|\r\n| Position| The position associated to the job.|\r\n| RelatedCreatedByUserGuid| The created by sys user guid associated to the job. Filterable.|\r\n| LinkedJobGuidFilter| Used to filter on linked job guid.|\r\n| RelatedJobGuidFilter| Used to filer on the job guid of the linked job.|\r\n| MaterialSaleSlots| The array of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].SlotNumber| The slot number associated to the jobmaterial sale slot.|\r\n| MaterialSaleSlots[0].SlotDate| The slot date associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].SlotTime| The slot time associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].CompanyOutletListItem| The GUID and description of the CompanyOutlet associated to the material sale slot. |\r\n| MaterialSaleSlots[0].MaterialListItem| The GUID and description of the Material associated to the material sale slot.|\r\n| MaterialSaleSlots[0].Notes| The notes associated to the job.|\r\n| MaterialSaleSlots[0].RelatedBookingSlotGuid| The guid of booking slot associated to the material sale slot.|\r\n| MaterialSaleSlots[0].RelatedCustomerGuid| The guid of customer associated to the material sale slot.|\r\n| MaterialSaleSlots[0].IsSchedule| The Schedule of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsManuallyAssigned| The IsManuallyAssigned of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsDeleted| Whether the material sale slot is deleted.|\r\n| MaterialSaleSlots[0].Guid| The GUID associated to the material sale slot.|\r\n| MaterialSaleSlotSlotNumberFilter|  Used to filter on the material sale slot slot number.|\r\n| MaterialSaleSlotGuidFilter| Used to filter on the material sale slot guid.|\r\n| MaterialSaleSlotRelatedBookingSlotGuidFilter| Used to filter on the material sale slot related booking slot guid.|\r\n| MaterialSaleSlotRelatedCustomerGuidFilter| Used to filter on the material sale slot related customer guid.|\r\n| PriorityListItem| The GUID and description of the priority associated to the job. |\r\n| DriverFeedback| The driver feedback associated to the job. |"
+      operationId: Job_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorJobResource]'
+  /transport/jobs/{guid}:
+    get:
+      tags:
+      - Job
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ---------------------------------------------------------| -------------------------------------------------------------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the job.|\r\n| DeleteRouteAssignmentsOnCompletion| Whether to delete route assignments on completion of the job.|\r\n| InProgress| Is the job in progress?|\r\n| IsAdhoc| Is the job ad hoc?|\r\n| IsCompleted| Is the job completed?Filterable.|\r\n| CompletedDate| The completed date of the job|\r\n| IsConfirmed| Is the job confirmed?|\r\n| IsExternalTransport| Is the job using external transport?|\r\n| IsFinanciallyConfirmed| Is the job financially confirmed?|\r\n| IsHazardousPaperworkComplete| Is the hazardous paperwork complete?|\r\n| IsScheduledTransfer| Is the job a scheduled transfer?|\r\n| IsWarranty| Is the job a warranty?|\r\n| IsDeleted| Whether to delete the job|\r\n| DeleteReasonGuid| The GUID of delete reason|\r\n| RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|\r\n| RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|\r\n| RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|\r\n| RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|\r\n| RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|\r\n| ActionListItem| The GUID and description of the action associated to the job.|  \r\n| CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the job. |\r\n| DepartmentListItem| The GUID and description of the department associated to the job. |\r\n| MaterialListItem| The GUID and description of the material associated to the job. |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the job. |\r\n| RepairReasonListItem| The GUID and description of the repair reason associated to the job. |\r\n| Access[]| The array of job access time associated to the job.|\r\n| Access[0].Contact| The contact associated to the job access time.|\r\n| Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].Notes| The notes time associated to the job access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the job access time.|\r\n| Access[0].GUID| The Guid associated to the job access time.|\r\n| ContainerDetails| The container details object associated to the job.|\r\n| ContainerDetails.Delivered| The container delivered to the job.|\r\n| ContainerDetails.Delivered.RelatedContainerGuid| The GUID of the container delivered to the job.|\r\n| ContainerDetails.Delivered.ContainerTypeListItem| The GUID and description of the container type delivered to the job.|\r\n| ContainerDetails.Delivered.Notes| The delivered container notes.|\r\n| ContainerDetails.Delivered.SerialNo| The delivered container serial number.|\r\n| ContainerDetails.Delivered.Tag| The delivered container tag.|\r\n| ContainerDetails.Removed| The container removed from the job.|\r\n| ContainerDetails.Removed.RelatedContainerGuid| The GUID of the container removed from the job.|\r\n| ContainerDetails.Removed.ContainerTypeListItem| The GUID and description of the container type removed from to the job.|\r\n| ContainerDetails.Removed.Notes| The removed container notes.|\r\n| ContainerDetails.Removed.SerialNo| The removed container serial number.|\r\n| ContainerDetails.Removed.Tag| The removed container tag.|\r\n| VisitDetails| The visit details object associated to the job.|\r\n| VisitDetails.DriverNotes| The driver notes on the visit associated to the job.|\r\n| VisitDetails.TimeInCustomerSite| The time in on the visit associated to the job.|\r\n| VisitDetails.TimeOutCustomerSite| The time out on the visit associated to the job.|\r\n| VisitDetails.HoursChargable| The hours chargeable on the visit associated to the job.|\r\n| VisitDetails.HoursNotChargable| The hours not chargeable on the visit associated to the job.|\r\n| CustomerOrderNo| The customer order number associated to the job. Filterable.|\r\n| DateRequired| The date the job is required.|\r\n| HazardousLoadReference| The hazardous load reference associated to the job. Filterable.|\r\n| ManualTicketNo| The manual ticket number associated to the job. Filterable. |\r\n| Notes| The notes associated to the job. Filterable.|\r\n| PONumber| The PO number associated to the job.|\r\n| Quantity| The quantity associated to the job.|\r\n| ReleaseNumber| The release number associated to the job.|\r\n| TicketNo| The ticket number associated to the job. Filterable. |\r\n| RejectedReasonListItem| The GUID and description of the job rejection reason. |\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the job. Filterable.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the job.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the job.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the job.|\r\n| PriceOverrides| The array of price overrides associated to the job.|\r\n| PriceOverrides[0].RelatedPriceGuid| The GUID of the price associated to the job price override.|\r\n| PriceOverrides[0].OverrideRate| The override rate associated to the job price override.|\r\n| PriceOverrides[0].Guid| The GUID associated to the job price override.|\r\n| PriceOverrides[0].IsSelected| The price isselected associated to the job price override.|\r\n| PriceOverrides[0].Breakdowns| The array of price breakdowns associated to the job price.|\r\n| PriceOverrides[0].Breakdowns[0].Guid| The GUID associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsDeleted| Whether the price breakdown is deleted.|\r\n| PriceOverrides[0].Breakdowns[0].FillLevel| The fill level associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].Quantity| The quantity associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsReceived| Whether the price breakdown is received.|\r\n| PriceOverrides[0].Breakdowns[0].Barcode| The BarCode associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].JobPriceBreakdownTypeEnum| The Job Price Breakdown Type associated to the price breakdown.|\r\n| RelatedPriceGuidFilter| Used to filter on the related price GUID.|\r\n| RelatedBlobJobDocketPdfHashes| The array of related job docket blob hashes.|\r\n| RelatedBlobJobDocketPdfHashes[0].Hash| The hash of the job docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedWTNBlobHashes| The array of related waste transfer note blob hashes.|\r\n| RelatedWTNBlobHashes[0].Guid| The guid of the job waste transfer note blob.|\r\n| RelatedWTNBlobHashes[0].Hash| The hash of the job waste transfer note blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| VATIntendedListItem| The GUID and description (code + rate) of the VAT associated to the job.|\r\n| RequiredStartTime| The start time at which the job is required.|\r\n| RequiredEndTime| The end time at which the job is required.|\r\n| ServiceListItem| The GUID and description of the Service associated to the job.|\r\n| LastChangeReasonListItem| The GUID and description of the last change reason associated to the job. |\r\n| LinkedJobs| The array of linked jobs associated to the job.|\r\n| LinkedJobs[0].Guid| The guid of the linked job associated to the job.|\r\n| LinkedJobs[0].IsDeleted| Whether the linked job is deleted.|\r\n| LinkedJobs[0].RelatedJobGuid| The job guid of the linked job associated to the job.|\r\n| Position| The position associated to the job.|\r\n| RelatedCreatedByUserGuid| The created by sys user guid associated to the job. Filterable.|\r\n| LinkedJobGuidFilter| Used to filter on linked job guid.|\r\n| RelatedJobGuidFilter| Used to filer on the job guid of the linked job.|\r\n| MaterialSaleSlots| The array of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].SlotNumber| The slot number associated to the jobmaterial sale slot.|\r\n| MaterialSaleSlots[0].SlotDate| The slot date associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].SlotTime| The slot time associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].CompanyOutletListItem| The GUID and description of the CompanyOutlet associated to the material sale slot. |\r\n| MaterialSaleSlots[0].MaterialListItem| The GUID and description of the Material associated to the material sale slot.|\r\n| MaterialSaleSlots[0].Notes| The notes associated to the job.|\r\n| MaterialSaleSlots[0].RelatedBookingSlotGuid| The guid of booking slot associated to the material sale slot.|\r\n| MaterialSaleSlots[0].RelatedCustomerGuid| The guid of customer associated to the material sale slot.|\r\n| MaterialSaleSlots[0].IsSchedule| The Schedule of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsManuallyAssigned| The IsManuallyAssigned of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsDeleted| Whether the material sale slot is deleted.|\r\n| MaterialSaleSlots[0].Guid| The GUID associated to the material sale slot.|\r\n| MaterialSaleSlotSlotNumberFilter|  Used to filter on the material sale slot slot number.|\r\n| MaterialSaleSlotGuidFilter| Used to filter on the material sale slot guid.|\r\n| MaterialSaleSlotRelatedBookingSlotGuidFilter| Used to filter on the material sale slot related booking slot guid.|\r\n| MaterialSaleSlotRelatedCustomerGuidFilter| Used to filter on the material sale slot related customer guid.|\r\n| PriorityListItem| The GUID and description of the priority associated to the job. |\r\n| DriverFeedback| The driver feedback associated to the job. |"
+      operationId: Job_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorJobResource]'
+    put:
+      tags:
+      - Job
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the job.| Yes |\r\n| DeleteRouteAssignmentsOnCompletion| Whether to delete route assignments on completion of the job.| Yes |\r\n| InProgress| Is the job in progress?| Yes |\r\n| IsAdhoc| Is the job ad hoc?| Yes |\r\n| IsCompleted| Is the job completed?| Yes |\r\n| CompletedDate| The completed date of the job| No |\r\n| IsConfirmed| Is the job confirmed?| Yes |\r\n| IsExternalTransport| Is the job using external transport?| Yes |\r\n| IsFinanciallyConfirmed| Is the job financially confirmed?| Yes |\r\n| IsHazardousPaperworkComplete| Is the hazardous paperwork complete?| Yes |\r\n| IsScheduledTransfer| Is the job a scheduled transfer?| Yes |\r\n| IsWarranty| Is the job a warranty?| Yes |\r\n| IsDeleted| Whether to delete the job| No  |\r\n| DeleteReasonGuid| The GUID of delete reason| No  (Required only if IsDeleted=true) |\r\n| RelatedPONumberGuid| The GUID of related PONumber associated to the job. | No |\r\n| RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. | No |\r\n| RelatedScheduleGuid| The GUID of related schedule associated to the job. Set to null to un-assign the job. | No |\r\n| RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. | Yes (Not required for Transfer out weighingType)|\r\n| RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. | No (Required Only for Container Jobs(Except Start of cycle)) |\r\n| RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. | No |\r\n| RelatedExternalVehicleGuid            | The GUID of related external vehicle associated to the job.                   | No |\r\n| ActionListItem| The GUID and description of the action associated to the job.| Yes |\r\n| CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. | No |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the job. | Yes |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the job. | Yes (Only for Container & Collection Jobs) |\r\n| DepartmentListItem| The GUID and description of the department associated to the job. | No |\r\n| MaterialListItem| The GUID and description of the material associated to the job. | Yes (Only for Container & Collection Jobs)|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the job. | No |\r\n| RepairReasonListItem| The GUID and description of the repair reason associated to the job. | No |\r\n| Access[]| The array of job access time associated to the job.| No |\r\n| Access[0].Contact| The contact associated to the job access time.| No |\r\n| Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |\r\n| Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |\r\n| Access[0].Notes| The notes time associated to the job access time.| No |\r\n| Access[0].DayOfWeekId      | The day of the week associated to the job access time.| Yes |\r\n| Access[0].GUID| The Guid associated to the job access time.| Yes |\r\n| ContainerDetails| The container details object associated to the job.| No |\r\n| ContainerDetails.Delivered| The container delivered to the job.| No |\r\n| ContainerDetails.Delivered.RelatedContainerGuid | The GUID of the container delivered to the job.| No |\r\n| ContainerDetails.Delivered.ContainerTypeListItem | The GUID and description of the container type delivered to the job. | No |\r\n| ContainerDetails.Delivered.Notes| The delivered container notes.| No |\r\n| ContainerDetails.Delivered.SerialNo| The delivered container serial number.| Yes |\r\n| ContainerDetails.Delivered.Tag| The delivered container tag.| Yes |\r\n| ContainerDetails.Removed| The container removed from the job.| No |\r\n| ContainerDetails.Removed.RelatedContainerGuid| The GUID of the container removed from the job.| No |\r\n| ContainerDetails.Removed.ContainerTypeListItem | The GUID and description of the container type removed from to the job. | No |\r\n| ContainerDetails.Removed.Notes| The removed container notes.| No |\r\n| ContainerDetails.Removed.SerialNo| The removed container serial number.| Yes |\r\n| ContainerDetails.Removed.Tag| The removed container tag.| Yes |\r\n| VisitDetails| The visit details object associated to the job.| No |\r\n| VisitDetails.DriverNotes| The driver notes on the visit associated to the job.| No |\r\n| VisitDetails.TimeInCustomerSite| The time in on the visit associated to the job.| No |\r\n| VisitDetails.TimeOutCustomerSite| The time out on the visit associated to the job.| No |\r\n| VisitDetails.HoursChargeable| The hours chargeable on the visit associated to the job.| No |\r\n| VisitDetails.HoursNotChargeable| The hours not chargeable on the visit associated to the job.| No |\r\n| CustomerOrderNo| The customer order number associated to the job.| No |\r\n| DateRequired| The date the job is required.| Yes |\r\n| HazardousLoadReference| The hazardous load reference associated to the job.| No |\r\n| ManualTicketNo| The manual ticket number associated to the job.| No |\r\n| Notes| The notes associated to the job. Editable.| No |\r\n| PONumber| The PO number associated to the job.| No |\r\n| Quantity| The quantity associated to the job.| No |\r\n| ReleaseNumber| The release number associated to the job.| No |\r\n| TicketNo| The ticket number associated to the job.| No |\r\n| RejectedReasonListItem| The GUID and description of the job rejection reason. | No |\r\n| RelatedLocationDestinationGuid| The GUID of the destination location associated with the job.| Yes |\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the job.| No |\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| PriceOverrides| The array of price overrides associated to the job.| No |\r\n| PriceOverrides[0].RelatedPriceGuid| The GUID of the price associated to the job price override.| Yes |\r\n| PriceOverrides[0].OverrideRate| The override rate associated to the job price override.| No |\r\n| PriceOverrides[0].Guid| The GUID associated to the job price override.| Yes |\r\n| PriceOverrides[0].IsSelected| The price isselected associated to the job price override.| Yes |\r\n| PriceOverrides[0].Breakdowns| The array of price breakdowns associated to the job price.| No |\r\n| PriceOverrides[0].Breakdowns[0].Guid| The GUID associated to the price breakdown.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].IsDeleted| Whether the price breakdown is deleted.| No |\r\n| PriceOverrides[0].Breakdowns[0].FillLevel| The fill level associated to the price breakdown.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].Quantity| The quantity associated to the price breakdown.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].IsReceived| Whether the price breakdown is received.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].Barcode| The BarCode associated to the price breakdown.| No |\r\n| PriceOverrides[0].Breakdowns[0].JobPriceBreakdownTypeEnum| The Job Price Breakdown Type associated to the price breakdown.| Yes |\r\n| RelatedPriceGuidFilter| Used to filter on the related price GUID.| No |\r\n| RelatedBlobJobDocketPdfHashes| The array of related job docket blob hashes. | No |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash| The hash of the job docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedWTNBlobHashes| The array of related waste transfer note blob hashes. | No |\r\n| RelatedWTNBlobHashes[0].Guid| The guid of the job waste transfer note blob.| No |\r\n| RelatedWTNBlobHashes[0].Hash| The hash of the job waste transfer note blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| VATIntendedListItem| The GUID and description (code + rate) of the VAT associated to the job.| No |\r\n| RequiredStartTime| The start time at which the job is required.| No |\r\n| RequiredEndTime| The end time at which the job is required.| No |\r\n| ServiceListItem| The GUID and description of the Service associated to the job.| No |\r\n| LastChangeReasonListItem| The GUID and description of the last change reason associated to the job. | No |\r\n| LinkedJobs| The array of linked jobs associated to the job.| No  |\r\n| LinkedJobs[0].Guid| The guid of the linked job-job associated to the job.| Yes |\r\n| LinkedJobs[0].IsDeleted| Whether the linked job-job is deleted.| Yes |\r\n| LinkedJobs[0].RelatedJobGuid| The guid of the linked job associated to the job.| Yes |\r\n| Position| The position associated to the job.| No |\r\n| RelatedCreatedByUserGuid| The created by sys user guid associated to the job.   | No |\r\n| MaterialSaleSlots| The array of material sale slots associated to the job.| No |\r\n| MaterialSaleSlots[0].SlotNumber| The slot number associated to the jobmaterial sale slot.| Yes |\r\n| MaterialSaleSlots[0].SlotDate| The slot date associated to the job material sale slot.| Yes |\r\n| MaterialSaleSlots[0].SlotTime| The slot time associated to the job material sale slot.| No |\r\n| MaterialSaleSlots[0].CompanyOutletListItem    | The GUID and description of the CompanyOutlet associated to the material sale slot. | Yes |\r\n| MaterialSaleSlots[0].MaterialListItem| The GUID and description of the Material associated to the material sale slot.| Yes |\r\n| MaterialSaleSlots[0].Notes| The notes associated to the job.| No |\r\n| MaterialSaleSlots[0].RelatedBookingSlotGuid| The guid of booking slot associated to the material sale slot.| No |\r\n| MaterialSaleSlots[0].RelatedCustomerGuid | The guid of customer associated to the material sale slot.| No |\r\n| MaterialSaleSlots[0].IsSchedule| The Schedule of material sale slots associated to the job.| Yes |\r\n| MaterialSaleSlots[0].IsManuallyAssigned| The IsManuallyAssigned of material sale slots associated to the job.| Yes |\r\n| MaterialSaleSlots[0].IsDeleted| Whether the material sale slot is deleted.| Yes |\r\n| MaterialSaleSlots[0].Guid| The GUID associated to the material sale slot.| No |\r\n| MaterialSaleSlotSlotNumberFilter |  Used to filter on the material sale slot slot number. | No |\r\n| MaterialSaleSlotGuidFilter | Used to filter on the material sale slot guid. | No |\r\n| MaterialSaleSlotRelatedBookingSlotGuidFilter | Used to filter on the material sale slot related booking slot guid. | No |\r\n| MaterialSaleSlotRelatedCustomerGuidFilter | Used to filter on the material sale slot related customer guid. | No |\r\n| PriorityListItem| The GUID and description of the priority associated to the job. | No |\r\n| DriverFeedback| The driver feedback associated to the job. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Both Tag and SerialNo are null | Tag Or Serial Number: Must be entered. |\r\n| VisitDetails.HoursChargeable is changed on update | VisitDetails.HoursChargeable is a read-only property. |\r\n| ContainerDetails.Delivered is not null and ContainerDetails.Delivered.ContainerTypeListItem is not null | ContainerDetails.Delivered.ContainerTypeListItem is a read-only property. |\r\n| ContainerDetails.Removed is not null and ContainerDetails.Removed.ContainerTypeListItem is not null | ContainerDetails.Removed.ContainerTypeListItem is a read-only property. |\r\n| RejectedReasonListItem is not in one of the following reason categories: Callout Rejects, Lift Problem, Job Scheduled for Unexpected Day, Reject Schedule, Job Cancelled | RejectedReasonListItem must be in one of the following reason categories: Callout Rejects, Lift Problem, Job Scheduled for Unexpected Day, Reject Schedule, Job Cancelled. |\r\n| Job access times cannot overlap | Job.Access.StartTime and Job.Access.EndTime cannot overlap. |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash is not null for Update and the Job did not have RelatedBlobJobDocketPdfHashes initially | Failed to save/update Job because RelatedBlobJobDocketPdfHashes do not exist for the Job. |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash is not null for Update and Invalid Hash | Could not find JobDocketOutput matching template. |\r\n| If the GUID passed to VATIntendedListItem has a value that is not in the VAT table OR is deleted | Failed to save/update Job because The supplied VAT is not valid. The update has been rejected. Change the VATIntendedListItem to the Guid of a valid and undeleted VAT. |\r\n| If the RequiredEndTime is before RequiredStartTime | Failed to save/update Job because RequiredEndTime should not be before RequiredStartDate. |\r\n| If action type belongs to container job(Container Exchange, Container Repair , Container Remove) | RelatedSiteOrderItemGuid is required. |\r\n| If action type belongs to container job(Container Drop) OR scheduled job(Drop) | RelatedSiteOrderItemGuid is not required. |\r\n| If updating any created jobs | RelatedSiteOrderItemGuid should not be changed as it is readonly field while updating. |\r\n| If Action or ContainerType or Material changed on PriceOverrides PUT | Failed to save. Job with PriceOverrides cannot be set if Action or ContainerType or Material are changed. |\r\n| ActionListItem or ContainerTypeListItem is not valid for job prices | Failed to save/update Job because related SiteOrder does not have prices for given Action and ContainerType. |\r\n| If ServiceListItem is changed or not null | ServiceListItem.Guid is a read-only property. |\r\n| If the GUID passed to ActionListItem has a value that is not in the Action table OR is deleted | Failed to save/update Job because the supplied Action is not valid. The update has been rejected. Change the ActionListItem to the Guid of a valid and undeleted Action |\r\n| If the GUID passed to LastChangeReasonListItem has a value that is deleted | The provided LastChangeReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If an Invalid value for JobPriceBreakdownTypeEnum is provided | An invalid JobPriceBreakdownType was provided. Could not action the request. Please provide one of the following values: Collected,LeftOnSite |\r\n| If the Breakdowns provided do not match the PriceOverrides | The Breakdowns and PriceOverrides do not match. The resource could not be created/updated. Ensure that Breakdowns.Guid references a Breakdowns of PriceOverrides. |\r\n| If LinkedJobs.IsDeleted is null | The mandatory property LinkedJobs.IsDeleted has a null value. The request could not be processed. Supply a value for the LinkedJobs.IsDeleted property of the submitted resource. |\r\n| If LinkedJobs.IsDeleted is true | IsDeleted is TRUE. Could not process the request. LinkedJobs can not be deleted via the REST API. |\r\n| If RelatedCreatedByUserGuid is changed on update | RelatedCreatedByUserGuid is a read-only property. |\r\n| If RelatedWTNBlobHashes array value is being edited | RelatedWTNBlobHashes is a read-only property. |\r\n| If RelatedWTNBlobHashes Guid is duplicate | The Guid must be unique per RelatedWTNBlobHashes |\r\n| If DeleteReasonGuid has value but IsDeleted is not set to true | Failed to save/update Job because DeleteReasonGuid property has been set, therefore IsDeleted property must be set to true. |\r\n| Deleting a job that is already completed | Job could not be deleted if job is completed. |\r\n| Deleting a job when Job is assigned to a weighing | This job is assigned to a weighing. This job cannot be deleted. |\r\n| Deleting a job if the job type is Container Jobs and is sent to mobile | Failed to save/update because Job (TicketNo) could not be deleted, as it is scheduled. |\r\n| Cancelling a job if the job type is Container Jobs and is sent to mobile | Failed to save/update because Job (TicketNo) could not be cancelled, as it is scheduled. |\r\n| Deleting a job when DeleteReasonGuid is not from 'Delete Job' reason category | Invalid DeleteReasonGuid. Reason must be from 'Delete Job' reason category. |\r\n| Cancelling a job when CancelledReasonListItem.Guid is not from 'Job Cancelled' reason category | Invalid CancelledReasonListItem. Reason must be from 'Job Cancelled' reason category. |\r\n| Cancelling and deleting a job | Failed to save/update Job. Job with CancelledReasonListItem cannot be set if DeletedReasonGuid is set. |\r\n| Updating a cancelled job | Failed to save/update Job. Job could not be updated, as it is Cancelled. |\r\n| If DriverFeedback is more than 1000 characters long | Failed to save/update Job because DriverFeedback must be no more than 1000 characters long. |"
+      operationId: Job_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorJobResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId_2'
+  /transport/jobs:
+    get:
+      tags:
+      - Job
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ---------------------------------------------------------| -------------------------------------------------------------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the job.|\r\n| DeleteRouteAssignmentsOnCompletion| Whether to delete route assignments on completion of the job.|\r\n| InProgress| Is the job in progress?|\r\n| IsAdhoc| Is the job ad hoc?|\r\n| IsCompleted| Is the job completed?Filterable.|\r\n| CompletedDate| The completed date of the job|\r\n| IsConfirmed| Is the job confirmed?|\r\n| IsExternalTransport| Is the job using external transport?|\r\n| IsFinanciallyConfirmed| Is the job financially confirmed?|\r\n| IsHazardousPaperworkComplete| Is the hazardous paperwork complete?|\r\n| IsScheduledTransfer| Is the job a scheduled transfer?|\r\n| IsWarranty| Is the job a warranty?|\r\n| IsDeleted| Whether to delete the job|\r\n| DeleteReasonGuid| The GUID of delete reason|\r\n| RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|\r\n| RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|\r\n| RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|\r\n| RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|\r\n| RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|\r\n| RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|\r\n| ActionListItem| The GUID and description of the action associated to the job.|  \r\n| CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the job. |\r\n| DepartmentListItem| The GUID and description of the department associated to the job. |\r\n| MaterialListItem| The GUID and description of the material associated to the job. |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the job. |\r\n| RepairReasonListItem| The GUID and description of the repair reason associated to the job. |\r\n| Access[]| The array of job access time associated to the job.|\r\n| Access[0].Contact| The contact associated to the job access time.|\r\n| Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).|\r\n| Access[0].Notes| The notes time associated to the job access time.|\r\n| Access[0].DayOfWeekId  | The day of the week associated to the job access time.|\r\n| Access[0].GUID| The Guid associated to the job access time.|\r\n| ContainerDetails| The container details object associated to the job.|\r\n| ContainerDetails.Delivered| The container delivered to the job.|\r\n| ContainerDetails.Delivered.RelatedContainerGuid| The GUID of the container delivered to the job.|\r\n| ContainerDetails.Delivered.ContainerTypeListItem| The GUID and description of the container type delivered to the job.|\r\n| ContainerDetails.Delivered.Notes| The delivered container notes.|\r\n| ContainerDetails.Delivered.SerialNo| The delivered container serial number.|\r\n| ContainerDetails.Delivered.Tag| The delivered container tag.|\r\n| ContainerDetails.Removed| The container removed from the job.|\r\n| ContainerDetails.Removed.RelatedContainerGuid| The GUID of the container removed from the job.|\r\n| ContainerDetails.Removed.ContainerTypeListItem| The GUID and description of the container type removed from to the job.|\r\n| ContainerDetails.Removed.Notes| The removed container notes.|\r\n| ContainerDetails.Removed.SerialNo| The removed container serial number.|\r\n| ContainerDetails.Removed.Tag| The removed container tag.|\r\n| VisitDetails| The visit details object associated to the job.|\r\n| VisitDetails.DriverNotes| The driver notes on the visit associated to the job.|\r\n| VisitDetails.TimeInCustomerSite| The time in on the visit associated to the job.|\r\n| VisitDetails.TimeOutCustomerSite| The time out on the visit associated to the job.|\r\n| VisitDetails.HoursChargable| The hours chargeable on the visit associated to the job.|\r\n| VisitDetails.HoursNotChargable| The hours not chargeable on the visit associated to the job.|\r\n| CustomerOrderNo| The customer order number associated to the job. Filterable.|\r\n| DateRequired| The date the job is required.|\r\n| HazardousLoadReference| The hazardous load reference associated to the job. Filterable.|\r\n| ManualTicketNo| The manual ticket number associated to the job. Filterable. |\r\n| Notes| The notes associated to the job. Filterable.|\r\n| PONumber| The PO number associated to the job.|\r\n| Quantity| The quantity associated to the job.|\r\n| ReleaseNumber| The release number associated to the job.|\r\n| TicketNo| The ticket number associated to the job. Filterable. |\r\n| RejectedReasonListItem| The GUID and description of the job rejection reason. |\r\n| RelatedLocationDestinationGuid| Used to filter the related destination location guid associated to the job. Filterable.|\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the job.|\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.|\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedPictureBlobHashes[0].PictureSourceListItem| The GUID and description of the Picture Source associated to the job.|\r\n| RelatedPictureBlobHashes[0].PictureTypeListItem| The GUID and description of the Picture Type associated to the job.|\r\n| PriceOverrides| The array of price overrides associated to the job.|\r\n| PriceOverrides[0].RelatedPriceGuid| The GUID of the price associated to the job price override.|\r\n| PriceOverrides[0].OverrideRate| The override rate associated to the job price override.|\r\n| PriceOverrides[0].Guid| The GUID associated to the job price override.|\r\n| PriceOverrides[0].IsSelected| The price isselected associated to the job price override.|\r\n| PriceOverrides[0].Breakdowns| The array of price breakdowns associated to the job price.|\r\n| PriceOverrides[0].Breakdowns[0].Guid| The GUID associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsDeleted| Whether the price breakdown is deleted.|\r\n| PriceOverrides[0].Breakdowns[0].FillLevel| The fill level associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].Quantity| The quantity associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].IsReceived| Whether the price breakdown is received.|\r\n| PriceOverrides[0].Breakdowns[0].Barcode| The BarCode associated to the price breakdown.|\r\n| PriceOverrides[0].Breakdowns[0].JobPriceBreakdownTypeEnum| The Job Price Breakdown Type associated to the price breakdown.|\r\n| RelatedPriceGuidFilter| Used to filter on the related price GUID.|\r\n| RelatedBlobJobDocketPdfHashes| The array of related job docket blob hashes.|\r\n| RelatedBlobJobDocketPdfHashes[0].Hash| The hash of the job docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| RelatedWTNBlobHashes| The array of related waste transfer note blob hashes.|\r\n| RelatedWTNBlobHashes[0].Guid| The guid of the job waste transfer note blob.|\r\n| RelatedWTNBlobHashes[0].Hash| The hash of the job waste transfer note blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted.|\r\n| VATIntendedListItem| The GUID and description (code + rate) of the VAT associated to the job.|\r\n| RequiredStartTime| The start time at which the job is required.|\r\n| RequiredEndTime| The end time at which the job is required.|\r\n| ServiceListItem| The GUID and description of the Service associated to the job.|\r\n| LastChangeReasonListItem| The GUID and description of the last change reason associated to the job. |\r\n| LinkedJobs| The array of linked jobs associated to the job.|\r\n| LinkedJobs[0].Guid| The guid of the linked job associated to the job.|\r\n| LinkedJobs[0].IsDeleted| Whether the linked job is deleted.|\r\n| LinkedJobs[0].RelatedJobGuid| The job guid of the linked job associated to the job.|\r\n| Position| The position associated to the job.|\r\n| RelatedCreatedByUserGuid| The created by sys user guid associated to the job. Filterable.|\r\n| LinkedJobGuidFilter| Used to filter on linked job guid.|\r\n| RelatedJobGuidFilter| Used to filer on the job guid of the linked job.|\r\n| MaterialSaleSlots| The array of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].SlotNumber| The slot number associated to the jobmaterial sale slot.|\r\n| MaterialSaleSlots[0].SlotDate| The slot date associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].SlotTime| The slot time associated to the job material sale slot.|\r\n| MaterialSaleSlots[0].CompanyOutletListItem| The GUID and description of the CompanyOutlet associated to the material sale slot. |\r\n| MaterialSaleSlots[0].MaterialListItem| The GUID and description of the Material associated to the material sale slot.|\r\n| MaterialSaleSlots[0].Notes| The notes associated to the job.|\r\n| MaterialSaleSlots[0].RelatedBookingSlotGuid| The guid of booking slot associated to the material sale slot.|\r\n| MaterialSaleSlots[0].RelatedCustomerGuid| The guid of customer associated to the material sale slot.|\r\n| MaterialSaleSlots[0].IsSchedule| The Schedule of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsManuallyAssigned| The IsManuallyAssigned of material sale slots associated to the job.|\r\n| MaterialSaleSlots[0].IsDeleted| Whether the material sale slot is deleted.|\r\n| MaterialSaleSlots[0].Guid| The GUID associated to the material sale slot.|\r\n| MaterialSaleSlotSlotNumberFilter|  Used to filter on the material sale slot slot number.|\r\n| MaterialSaleSlotGuidFilter| Used to filter on the material sale slot guid.|\r\n| MaterialSaleSlotRelatedBookingSlotGuidFilter| Used to filter on the material sale slot related booking slot guid.|\r\n| MaterialSaleSlotRelatedCustomerGuidFilter| Used to filter on the material sale slot related customer guid.|\r\n| PriorityListItem| The GUID and description of the priority associated to the job. |\r\n| DriverFeedback| The driver feedback associated to the job. |"
+      operationId: Job_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorJobResource]'
+    post:
+      tags:
+      - Job
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the job.| No |\r\n| DeleteRouteAssignmentsOnCompletion| Whether to delete route assignments on completion of the job.| Yes |\r\n| InProgress| Is the job in progress?| Yes |\r\n| IsAdhoc| Is the job ad hoc?| Yes |\r\n| IsCompleted| Is the job completed?| Yes |\r\n| CompletedDate| The completed date of the job| No |\r\n| IsConfirmed| Is the job confirmed?| Yes |\r\n| IsExternalTransport| Is the job using external transport?| Yes |\r\n| IsFinanciallyConfirmed| Is the job financially confirmed?| Yes |\r\n| IsHazardousPaperworkComplete| Is the hazardous paperwork complete?| Yes |\r\n| IsScheduledTransfer| Is the job a scheduled transfer?| Yes |\r\n| IsWarranty| Is the job a warranty?| Yes |\r\n| IsDeleted| Whether to delete the job| No  |\r\n| DeleteReasonGuid| The GUID of delete reason| No  (Required only if IsDeleted=true) |\r\n| RelatedPONumberGuid| The GUID of related PONumber associated to the job. | No |\r\n| RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. | No |\r\n| RelatedScheduleGuid| The GUID of related schedule associated to the job. Set to null to un-assign the job. | No |\r\n| RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. | Yes (Not required for Transfer out weighingType)|\r\n| RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. | No (Required Only for Container Jobs(Except Start of cycle)) |\r\n| RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. | No |\r\n| RelatedExternalVehicleGuid            | The GUID of related external vehicle associated to the job.                   | No |\r\n| ActionListItem| The GUID and description of the action associated to the job.| Yes |\r\n| CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. | No |\r\n| CompanyOutletListItem| The GUID and description of the company outlet associated to the job. | Yes |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the job. | Yes (Only for Container & Collection Jobs) |\r\n| DepartmentListItem| The GUID and description of the department associated to the job. | No |\r\n| MaterialListItem| The GUID and description of the material associated to the job. | Yes (Only for Container & Collection Jobs)|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the job. | No |\r\n| RepairReasonListItem| The GUID and description of the repair reason associated to the job. | No |\r\n| Access[]| The array of job access time associated to the job.| No |\r\n| Access[0].Contact| The contact associated to the job access time.| No |\r\n| Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |\r\n| Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |\r\n| Access[0].Notes| The notes time associated to the job access time.| No |\r\n| Access[0].DayOfWeekId      | The day of the week associated to the job access time.| Yes |\r\n| Access[0].GUID| The Guid associated to the job access time.| No |\r\n| ContainerDetails| The container details object associated to the job.| No |\r\n| ContainerDetails.Delivered| The container delivered to the job.| No |\r\n| ContainerDetails.Delivered.RelatedContainerGuid | The GUID of the container delivered to the job.| No |\r\n| ContainerDetails.Delivered.ContainerTypeListItem | The GUID and description of the container type delivered to the job. | No |\r\n| ContainerDetails.Delivered.Notes| The delivered container notes.| No |\r\n| ContainerDetails.Delivered.SerialNo| The delivered container serial number.| Yes |\r\n| ContainerDetails.Delivered.Tag| The delivered container tag.| Yes |\r\n| ContainerDetails.Removed| The container removed from the job.| No |\r\n| ContainerDetails.Removed.RelatedContainerGuid| The GUID of the container removed from the job.| No |\r\n| ContainerDetails.Removed.ContainerTypeListItem | The GUID and description of the container type removed from to the job. | No |\r\n| ContainerDetails.Removed.Notes| The removed container notes.| No |\r\n| ContainerDetails.Removed.SerialNo| The removed container serial number.| Yes |\r\n| ContainerDetails.Removed.Tag| The removed container tag.| Yes |\r\n| VisitDetails| The visit details object associated to the job.| No |\r\n| VisitDetails.DriverNotes| The driver notes on the visit associated to the job.| No |\r\n| VisitDetails.TimeInCustomerSite| The time in on the visit associated to the job.| No |\r\n| VisitDetails.TimeOutCustomerSite| The time out on the visit associated to the job.| No |\r\n| VisitDetails.HoursChargeable| The hours chargeable on the visit associated to the job.| No |\r\n| VisitDetails.HoursNotChargeable| The hours not chargeable on the visit associated to the job.| No |\r\n| CustomerOrderNo| The customer order number associated to the job.| No |\r\n| DateRequired| The date the job is required.| Yes |\r\n| HazardousLoadReference| The hazardous load reference associated to the job.| No |\r\n| ManualTicketNo| The manual ticket number associated to the job.| No |\r\n| Notes| The notes associated to the job. Editable.| No |\r\n| PONumber| The PO number associated to the job.| No |\r\n| Quantity| The quantity associated to the job.| No |\r\n| ReleaseNumber| The release number associated to the job.| No |\r\n| TicketNo| The ticket number associated to the job.| No |\r\n| RejectedReasonListItem| The GUID and description of the job rejection reason. | No |\r\n| RelatedLocationDestinationGuid| The GUID of the destination location associated with the job.| Yes |\r\n| RelatedPictureBlobHashes| The array of related blob hashes and descriptions associated to the job.| No |\r\n| RelatedPictureBlobHashes[0].Description| The description of the blob.| No |\r\n| RelatedPictureBlobHashes[0].Hash| The hash of the blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| PriceOverrides| The array of price overrides associated to the job.| No |\r\n| PriceOverrides[0].RelatedPriceGuid| The GUID of the price associated to the job price override.| Yes |\r\n| PriceOverrides[0].OverrideRate| The override rate associated to the job price override.| No |\r\n| PriceOverrides[0].Guid| The GUID associated to the job price override.| No |\r\n| PriceOverrides[0].IsSelected| The price isselected associated to the job price override.| Yes |\r\n| PriceOverrides[0].Breakdowns| The array of price breakdowns associated to the job price.| No |\r\n| PriceOverrides[0].Breakdowns[0].Guid| The GUID associated to the price breakdown.| No |\r\n| PriceOverrides[0].Breakdowns[0].IsDeleted| Whether the price breakdown is deleted.| No |\r\n| PriceOverrides[0].Breakdowns[0].FillLevel| The fill level associated to the price breakdown.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].Quantity| The quantity associated to the price breakdown.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].IsReceived| Whether the price breakdown is received.| Yes |\r\n| PriceOverrides[0].Breakdowns[0].Barcode| The BarCode associated to the price breakdown.| No |\r\n| PriceOverrides[0].Breakdowns[0].JobPriceBreakdownTypeEnum| The Job Price Breakdown Type associated to the price breakdown.| Yes |\r\n| RelatedPriceGuidFilter| Used to filter on the related price GUID.| No |\r\n| RelatedBlobJobDocketPdfHashes| The array of related job docket blob hashes. | No |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash| The hash of the job docket blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedWTNBlobHashes| The array of related waste transfer note blob hashes. | No |\r\n| RelatedWTNBlobHashes[0].Guid| The guid of the job waste transfer note blob.| No |\r\n| RelatedWTNBlobHashes[0].Hash| The hash of the job waste transfer note blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| VATIntendedListItem| The GUID and description (code + rate) of the VAT associated to the job.| No |\r\n| RequiredStartTime| The start time at which the job is required.| No |\r\n| RequiredEndTime| The end time at which the job is required.| No |\r\n| ServiceListItem| The GUID and description of the Service associated to the job.| No |\r\n| LastChangeReasonListItem| The GUID and description of the last change reason associated to the job. | No |\r\n| LinkedJobs| The array of linked jobs associated to the job.| No  |\r\n| LinkedJobs[0].Guid| The guid of the linked job-job associated to the job.| No  |\r\n| LinkedJobs[0].IsDeleted| Whether the linked job-job is deleted.| Yes |\r\n| LinkedJobs[0].RelatedJobGuid| The guid of the linked job associated to the job.| Yes |\r\n| Position| The position associated to the job.| No |\r\n| RelatedCreatedByUserGuid| The created by sys user guid associated to the job.| No |\r\n| MaterialSaleSlots| The array of material sale slots associated to the job.| No |\r\n| MaterialSaleSlots[0].SlotNumber| The slot number associated to the jobmaterial sale slot.| Yes |\r\n| MaterialSaleSlots[0].SlotDate| The slot date associated to the job material sale slot.| Yes |\r\n| MaterialSaleSlots[0].SlotTime| The slot time associated to the job material sale slot.| No |\r\n| MaterialSaleSlots[0].CompanyOutletListItem    | The GUID and description of the CompanyOutlet associated to the material sale slot. | Yes |\r\n| MaterialSaleSlots[0].MaterialListItem| The GUID and description of the Material associated to the material sale slot.| Yes |\r\n| MaterialSaleSlots[0].Notes| The notes associated to the job.| No |\r\n| MaterialSaleSlots[0].RelatedBookingSlotGuid| The guid of booking slot associated to the material sale slot.| No |\r\n| MaterialSaleSlots[0].RelatedCustomerGuid | The guid of customer associated to the material sale slot.| No |\r\n| MaterialSaleSlots[0].IsSchedule| The Schedule of material sale slots associated to the job.| Yes |\r\n| MaterialSaleSlots[0].IsManuallyAssigned| The IsManuallyAssigned of material sale slots associated to the job.| Yes |\r\n| MaterialSaleSlots[0].IsDeleted| Whether the material sale slot is deleted.| Yes |\r\n| MaterialSaleSlots[0].Guid| The GUID associated to the material sale slot.| No |\r\n| MaterialSaleSlotSlotNumberFilter |  Used to filter on the material sale slot slot number. | No |\r\n| MaterialSaleSlotGuidFilter | Used to filter on the material sale slot guid. | No |\r\n| MaterialSaleSlotRelatedBookingSlotGuidFilter | Used to filter on the material sale slot related booking slot guid. | No |\r\n| MaterialSaleSlotRelatedCustomerGuidFilter | Used to filter on the material sale slot related customer guid. | No |\r\n| PriorityListItem| The GUID and description of the priority associated to the job. | No |\r\n| DriverFeedback| The driver feedback associated to the job. | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Both Tag and SerialNo are null | Tag Or Serial Number: Must be entered. |\r\n| VisitDetails.HoursChargeable is not null | VisitDetails.HoursChargeable is a read-only property. |\r\n| ContainerDetails.Delivered is not null and ContainerDetails.Delivered.ContainerTypeListItem is not null | ContainerDetails.Delivered.ContainerTypeListItem is a read-only property. |\r\n| ContainerDetails.Removed is not null and ContainerDetails.Removed.ContainerTypeListItem is not null | ContainerDetails.Removed.ContainerTypeListItem is a read-only property. |\r\n| RejectedReasonListItem is not in one of the following reason categories: Callout Rejects, Lift Problem, Job Scheduled for Unexpected Day, Reject Schedule, Job Cancelled | RejectedReasonListItem must be in one of the following reason categories: Callout Rejects, Lift Problem, Job Scheduled for Unexpected Day, Reject Schedule, Job Cancelled. |\r\n| Job access times cannot overlap | Job.Access.StartTime and Job.Access.EndTime cannot overlap. |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash is not null for Insert | Failed to save Job because RelatedBlobJobDocketPdfHashes creation is not permitted. |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash is not null for Update and the Job did not have RelatedBlobJobDocketPdfHashes initially | Failed to save/update Job because RelatedBlobJobDocketPdfHashes do not exist for the Job. |\r\n| RelatedBlobJobDocketPdfHashes[0].Hash is not null for Update and Invalid Hash | Could not find JobDocketOutput matching template. |\r\n| If the GUID passed to VATIntendedListItem has a value that is not in the VAT table OR is deleted | Failed to save/update Job because The supplied VAT is not valid. The update has been rejected. Change the VATIntendedListItem to the Guid of a valid and undeleted VAT. |\r\n| If the RequiredEndTime is before RequiredStartTime | Failed to save/update Job because RequiredEndTime should not be before RequiredStartDate. |\r\n| If action type belongs to container job(Container Exchange, Container Repair , Container Remove) | RelatedSiteOrderItemGuid is required. |\r\n| If action type belongs to container job(Container Drop) OR scheduled job(Drop) | RelatedSiteOrderItemGuid is not required. |\r\n| If updating any created jobs | RelatedSiteOrderItemGuid should not be changed as it is readonly field while updating. |\r\n| If Action or ContainerType or Material changed on PriceOverrides update | Failed to save. Job with PriceOverrides cannot be set if Action or ContainerType or Material are changed. |\r\n| ActionListItem or ContainerTypeListItem is not valid for job prices | Failed to save/update Job because related SiteOrder does not have prices for given Action and ContainerType. |\r\n| If ServiceListItem is not null | ServiceListItem.Guid: is not supported. |\r\n| If the GUID passed to ActionListItem has a value that is not in the Action table OR is deleted | Failed to save/update Job because the supplied Action is not valid. The update has been rejected. Change the ActionListItem to the Guid of a valid and undeleted Action |\r\n| If the GUID passed to LastChangeReasonListItem has a value that is deleted | The provided LastChangeReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If an Invalid value for JobPriceBreakdownTypeEnum is provided on update | An invalid JobPriceBreakdownType was provided. Could not action the request. Please provide one of the following values: Collected,LeftOnSite |\r\n| If the Breakdowns provided do not match the PriceOverrides on update | The Breakdowns and PriceOverrides do not match. The resource could not be created/updated. Ensure that Breakdowns.Guid references a Breakdowns of PriceOverrides. |\r\n| If LinkedJobs.Guid is not null | LinkedJobs.Guid: is not supported. |\r\n| If LinkedJobs.IsDeleted is null | The mandatory property LinkedJobs.IsDeleted has a null value. The request could not be processed. Supply a value for the LinkedJobs.IsDeleted property of the submitted resource. |\r\n| If LinkedJobs.IsDeleted is true | IsDeleted is TRUE. Could not process the request. LinkedJobs can not be deleted via the REST API. |\r\n| Slot number already exists | Failed to save/update Job because the material sale slot that you are trying to save conflicts with an existing item. Each material sale slot must be unique in terms of SlotNumber. |\r\n| If RelatedWTNBlobHashes is not null for Insert | Failed to save Job because RelatedWTNBlobHashes creation is not permitted. |\r\n| If RelatedWTNBlobHashes array value is being edited | RelatedWTNBlobHashes is a read-only property. |\r\n| If RelatedWTNBlobHashes Guid is duplicate | The Guid must be unique per RelatedWTNBlobHashes |\r\n| If PriceOverrides[0].Guid is not null on insert | PriceOverrides.Guid: is not supported. |\r\n| If PriceOverrides[0]Breakdowns[0].Guid is not null on insert | PriceOverrides.Breakdowns.Guid: is not supported. |\r\n| If IsDeleted is true on insert | IsDeleted cannot be set to true on Create. |\r\n| If DeleteReasonGuid has value but IsDeleted is not set to true | Failed to save/update Job because DeleteReasonGuid property has been set, therefore IsDeleted property must be set to true. |\r\n| Deleting a job that is already completed | Job could not be deleted if job is completed. |\r\n| Deleting a job when Job is assigned to a weighing | This job is assigned to a weighing. This job cannot be deleted. |\r\n| Deleting a job if the job type is Container Jobs and is sent to mobile | Failed to save/update because Job (TicketNo) could not be deleted, as it is scheduled. |\r\n| Cancelling a job if the job type is Container Jobs and is sent to mobile | Failed to save/update because Job (TicketNo) could not be cancelled, as it is scheduled. |\r\n| Deleting a job when DeleteReasonGuid is not from 'Delete Job' reason category | Invalid DeleteReasonGuid. Reason must be from 'Delete Job' reason category. |\r\n| Cancelling a job when CancelledReasonListItem.Guid is not from 'Job Cancelled' reason category | Invalid CancelledReasonListItem. Reason must be from 'Job Cancelled' reason category. |\r\n| Deleting a job that is already cancelled | Failed to save/update Job. Job could not be updated, as it is Cancelled. |\r\n| CancelledReasonListItem is not null | CancelledReasonListItem is not supported on Create. |\r\n| DeleteReasonGuid is not null | DeleteReasonGuid is not supported on Create. |\r\n| If DriverFeedback is more than 1000 characters long | Failed to save/update Job because DriverFeedback must be no more than 1000 characters long. |"
+      operationId: Job_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorJobResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId_2'
+components:
+  schemas:
+    ApiIntegratorJobContainerDetailsRemovedResource:
+      type: object
+      properties:
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+    ApiResourceResultUpdatesExtra_2:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiIntegratorJobMaterialSaleSlotResource:
+      type: object
+      properties:
+        SlotNumber:
+          type: string
+        SlotDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        SlotTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        SlotEndTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedBookingSlotGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Notes:
+          type: string
+        IsSchedule:
+          type: boolean
+        IsManuallyAssigned:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorJobResource:
+      type: object
+      properties:
+        DeleteRouteAssignmentsOnCompletion:
+          type: boolean
+        InProgress:
+          type: boolean
+        IsAdhoc:
+          type: boolean
+        IsCompleted:
+          type: boolean
+        CompletedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsConfirmed:
+          type: boolean
+        IsExternalTransport:
+          type: boolean
+        IsFinanciallyConfirmed:
+          type: boolean
+        IsHazardousPaperworkComplete:
+          type: boolean
+        IsScheduledTransfer:
+          type: boolean
+        IsWarranty:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        DeleteReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedExternalVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedScheduleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteOrderItemGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSupplierSiteTransportGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CancelledReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RepairReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Access:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobAccessTimeResource'
+        ContainerDetails:
+          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsResource'
+        VisitDetails:
+          $ref: '#/components/schemas/ApiIntegratorJobVisitDetailsResource'
+        CustomerOrderNo:
+          type: string
+        DateRequired:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        HazardousLoadReference:
+          type: string
+        ManualTicketNo:
+          type: string
+        MaterialSaleSlots:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobMaterialSaleSlotResource'
+        Notes:
+          type: string
+        PONumber:
+          type: string
+        Quantity:
+          type: number
+          format: double
+        ReleaseNumber:
+          type: string
+        TicketNo:
+          type: string
+        RejectedReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedLocationDestinationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPictureBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPictureResource'
+        RelatedBlobJobDocketPdfHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobDocketPdfResource'
+        RelatedWTNBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobWasteTransferNoteResource'
+        PriceOverrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPriceResource'
+        RelatedPriceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RequiredStartTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        RequiredEndTime:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        VATIntendedListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LastChangeReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedCreatedByUserGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Position:
+          type: integer
+          format: int32
+        PriorityListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LinkedJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLinkedJobResource'
+        DriverFeedback:
+          type: string
+        LinkedJobGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialSaleSlotSlotNumberFilter:
+          type: string
+        MaterialSaleSlotGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialSaleSlotRelatedBookingSlotGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialSaleSlotRelatedCustomerGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorJobVisitDetailsResource:
+      type: object
+      properties:
+        DriverNotes:
+          type: string
+        TimeInCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TimeOutCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        HoursChargeable:
+          type: number
+          format: double
+        HoursNotChargeable:
+          type: number
+          format: double
+    ApiResourceResult[ApiJobResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollection[ApiIntegratorJobResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiIntegratorJobPriceBreakdownResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        FillLevel:
+          type: number
+          format: double
+        Quantity:
+          type: integer
+          format: int32
+        IsReceived:
+          type: boolean
+        Barcode:
+          type: string
+        JobPriceBreakdownTypeEnum:
+          type: string
+    ApiResourceResultCollectionExtra_2:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity[ApiJobResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    AMCS.Core.Entity.Api.JobSystem.ApiJob:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        jobId:
+          type: integer
+          format: int32
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        friendlyName:
+          type: string
+          nullable: true
+        handler:
+          type: string
+          nullable: true
+        queue:
+          type: string
+          nullable: true
+        parameters:
+          type: string
+          nullable: true
+        deadline:
+          type: string
+          format: dateTimeOffset
+          nullable: true
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        duplicateMode:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        updated:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        status:
+          type: integer
+          format: int32
+        result:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+        log:
+          type: string
+          nullable: true
+        checkpoint:
+          type: string
+          nullable: true
+        runtime:
+          type: integer
+          format: int32
+          nullable: true
+        scheduledJobId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ApiIntegratorJobPriceResource:
+      type: object
+      properties:
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        OverrideRate:
+          type: number
+          format: double
+        IsSelected:
+          type: boolean
+        Breakdowns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPriceBreakdownResource'
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorJobWasteTransferNoteResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Hash:
+          type: string
+    ApiResourceResultEntityExtra_2:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiIntegratorJobPictureResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Hash:
+          type: string
+        PictureTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PictureSourceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorJobAccessTimeResource:
+      type: object
+      properties:
+        Contact:
+          type: string
+        StartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        EndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        Notes:
+          type: string
+        DayOfWeekId:
+          type: integer
+          format: int32
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks_2:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorJobContainerDetailsResource:
+      type: object
+      properties:
+        Delivered:
+          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsDeliveredResource'
+        Removed:
+          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsRemovedResource'
+    ApiIntegratorJobContainerDetailsDeliveredResource:
+      type: object
+      properties:
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+            nullable: true
+          nullable: true
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties: {}
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          nullable: true
+        associations:
+          type: array
+          items:
+            type: string
+          nullable: true
+        expand:
+          type: array
+          items:
+            type: string
+          nullable: true
+        operations:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceChanges[ApiJobResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceId_2:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiIntegratorLinkedJobResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorJobDocketPdfResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+          nullable: true
+        cursor:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultCollection[ApiJobResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceChanges[ApiIntegratorJobResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiResourceResultEntity[ApiIntegratorJobResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorJobResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks_2'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

@@ -1,0 +1,138 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PluginWebHook API
+  version: core
+tags:
+- name: PluginWebHook
+paths:
+  /plugin/web-hooks:
+    post:
+      tags:
+      - PluginWebHook
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+      - PluginWebHook
+      parameters:
+      - name: webHookGuid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /plugins/web-hook:
+    post:
+      tags:
+      - PluginWebHook
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.PluginWebHook'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+      - PluginWebHook
+      parameters:
+      - name: targetPlugin
+        in: query
+        schema:
+          type: string
+      - name: webHookGuid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /plugins/web-hook/ui:
+    get:
+      tags:
+      - PluginWebHook
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.PluginData.Data.WebHook.BasicCredentials:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.PluginData.Data.WebHook.PluginWebHook:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        trigger:
+          enum:
+          - None
+          - Save
+          - Insert
+          - Update
+          - Delete
+          - PreSave
+          - PreInsert
+          - PreUpdate
+          - PreDelete
+          type: string
+        triggerFromString:
+          type: string
+          nullable: true
+        format:
+          enum:
+          - Simple
+          - Full
+          - Coalesce
+          type: string
+        httpMethod:
+          type: string
+          nullable: true
+        basicCredentials:
+          $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.BasicCredentials'
+        url:
+          type: string
+          nullable: true
+        filter:
+          type: string
+          nullable: true
+        headers:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false

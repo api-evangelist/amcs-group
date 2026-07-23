@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiWorkflowInstanceCancelService API
+  version: core
+tags:
+- name: ApiWorkflowInstanceCancelService
+paths:
+  /services/api/workflow/instances/{id}/op/cancel:
+    post:
+      tags:
+      - ApiWorkflowInstanceCancelService
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowInstanceCancelResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowInstanceCancelResponse'
+components:
+  schemas:
+    AMCS.ApiService.Workflow.ApiWorkflowInstanceCancelResponse:
+      type: object
+      additionalProperties: false

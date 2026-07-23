@@ -1,0 +1,361 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup OneOffAction API
+  version: core
+tags:
+- name: OneOffAction
+paths:
+  /transport/oneOffActions/changes:
+    get:
+      tags:
+      - OneOffAction
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off action. Filterable.|\r\n| RelatedUserFinanciallyConfirmedByGuid| The GUID associated to the financially confirmed sysuser of the one-off action. Filterable.|\r\n| RelatedJobGuid| The GUID associated to the job of the one-off action. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the one-off action.Filterable.|\r\n| RelatedPONumberGuid| The GUID associated to the PO number of the one-off action. Filterable.|\r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the one-off action. Filterable.|\r\n| RelatedWeighingInGuid| The GUID associated to the weighing in of the one-off action.Filterable.|\r\n| RelatedWeighingOutGuid| The GUID associated to the weighing out of the one-off action. Filterable.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the one-off action.|\r\n| MaterialListItem| The GUID and description of the material associated to the one-off action.|\r\n| ReasonListItem| The GUID and description of the reason associated to the one-off action.|\r\n| ServiceListItem| The GUID and description of the service associated to the one-off action.|\r\n| ActionListItem| The GUID and description of the action associated to the one-off action.|\r\n| DateCreated| The created date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| DateRequired| The required date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| IsDiscount| Is discount in the one-off action?|\r\n| IsFinanciallyConfirmed| Is financially confirmed in the one-off action?|\r\n| IsQuantityAdjustment| Is quantity adjustment in the one-off action?|\r\n| IsRateAdjustment| Is rate adjustment in the one-off action?|\r\n| IsWeightAdjustment| Is weight adjustment in the one-off action?|\r\n| PriceOverride| Price override of the one-off action.|\r\n| AdjustedRate| Adjusted rate of the one-off action.|\r\n| AdjustedWeight| Adjusted weight of the one-off action.|\r\n| CustomerOrderNo| Customer order no of the one-off action.|\r\n| DateTo| The date to associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| HoursChargable| Chargable hours of the one-off action.|\r\n| Notes| Notes of the one-off action.|\r\n| PONumber| PONumber of the one-off action.|\r\n| Quantity| Quantity of the one-off action.|\r\n| ReferenceNo| ReferenceNo of the one-off action. Filterable.|"
+      operationId: OneOffAction_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorOneOffActionResource]'
+  /transport/oneOffActions/{guid}:
+    get:
+      tags:
+      - OneOffAction
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off action. Filterable.|\r\n| RelatedUserFinanciallyConfirmedByGuid| The GUID associated to the financially confirmed sysuser of the one-off action. Filterable.|\r\n| RelatedJobGuid| The GUID associated to the job of the one-off action. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the one-off action.Filterable.|\r\n| RelatedPONumberGuid| The GUID associated to the PO number of the one-off action. Filterable.|\r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the one-off action. Filterable.|\r\n| RelatedWeighingInGuid| The GUID associated to the weighing in of the one-off action.Filterable.|\r\n| RelatedWeighingOutGuid| The GUID associated to the weighing out of the one-off action. Filterable.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the one-off action.|\r\n| MaterialListItem| The GUID and description of the material associated to the one-off action.|\r\n| ReasonListItem| The GUID and description of the reason associated to the one-off action.|\r\n| ServiceListItem| The GUID and description of the service associated to the one-off action.|\r\n| ActionListItem| The GUID and description of the action associated to the one-off action.|\r\n| DateCreated| The created date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| DateRequired| The required date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| IsDiscount| Is discount in the one-off action?|\r\n| IsFinanciallyConfirmed| Is financially confirmed in the one-off action?|\r\n| IsQuantityAdjustment| Is quantity adjustment in the one-off action?|\r\n| IsRateAdjustment| Is rate adjustment in the one-off action?|\r\n| IsWeightAdjustment| Is weight adjustment in the one-off action?|\r\n| PriceOverride| Price override of the one-off action.|\r\n| AdjustedRate| Adjusted rate of the one-off action.|\r\n| AdjustedWeight| Adjusted weight of the one-off action.|\r\n| CustomerOrderNo| Customer order no of the one-off action.|\r\n| DateTo| The date to associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| HoursChargable| Chargable hours of the one-off action.|\r\n| Notes| Notes of the one-off action.|\r\n| PONumber| PONumber of the one-off action.|\r\n| Quantity| Quantity of the one-off action.|\r\n| ReferenceNo| ReferenceNo of the one-off action. Filterable.|"
+      operationId: OneOffAction_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorOneOffActionResource]'
+    put:
+      tags:
+      - OneOffAction
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the one-off action.| No    |\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action.| Yes   |\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.| Yes   |\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off action.| No    |\r\n| RelatedUserFinanciallyConfirmedByGuid| The GUID associated to the financially confirmed sysuser of the one-off action.| No    |\r\n| RelatedJobGuid| The GUID associated to the job of the one-off action.| No    |\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the one-off action.| No    |\r\n| RelatedPONumberGuid| The GUID associated to the PO number of the one-off action.| No    |\r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the one-off action.| No    |\r\n| RelatedWeighingInGuid| The GUID associated to the weighing in of the one-off action.| No    |\r\n| RelatedWeighingOutGuid| The GUID associated to the weighing out of the one-off action.| No    |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the one-off action.| No    |\r\n| MaterialListItem| The GUID and description of the material associated to the one-off action.| No    |\r\n| ReasonListItem| The GUID and description of the reason associated to the one-off action.| No    |\r\n| ServiceListItem| The GUID and description of the service associated to the one-off action.| No    |\r\n| ActionListItem| The GUID and description of the action associated to the one-off action.| Yes   |\r\n| DateCreated| The created date associated to the one-off action in ISO format (YYYY-MM-DD).| Yes   |\r\n| DateRequired| The required date associated to the one-off action in ISO format (YYYY-MM-DD).| Yes   |\r\n| IsDiscount| Is discount in the one-off action?| Yes   |\r\n| IsFinanciallyConfirmed| Is financially confirmed in the one-off action?| Yes   |\r\n| IsQuantityAdjustment| Is quantity adjustment in the one-off action?| Yes   |\r\n| IsRateAdjustment| Is rate adjustment in the one-off action?| Yes   |\r\n| IsWeightAdjustment| Is weight adjustment in the one-off action?| Yes   |\r\n| PriceOverride| Price override of the one-off action.| No    |\r\n| AdjustedRate| Adjusted rate of the one-off action.| No    |\r\n| AdjustedWeight| Adjusted weight of the one-off action.| No    |\r\n| CustomerOrderNo| Customer order no of the one-off action.| No    |\r\n| DateTo| The date to associated to the one-off action in ISO format (YYYY-MM-DD).| No    |\r\n| HoursChargable| Chargable hours of the one-off action.| No    |\r\n| Notes| Notes of the one-off action.| No    |\r\n| PONumber| PONumber of the one-off action.| No    |\r\n| Quantity| Quantity of the one-off action.| No    |\r\n| ReferenceNo| ReferenceNo of the one-off action.| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| When an existing one-off action IsFinancialyConfirmed is true  | Attempted to update a financially confirmed one-off action. Could not update the one-off action. |\r\n| If RelatedOrderGuid is being edited | RelatedOrderGuid is a read-only property. |\r\n| If the provided RelatedPriceGuid is not in site order price with the provide ActionListItem.Guid.  | OneOffAction has the property RelatedPriceGuid with value of guid that is not supported. The given RelatedPriceGuid is not found in siteorder price with ActionListItem.Guid - guid. |\r\n| If RelatedPriceGuid is being edited | RelatedPriceGuid is a read-only property. |\r\n| If RelatedPriceAdjustmentGuid is being edited | RelatedPriceAdjustmentGuid is a read-only property. |\r\n| If RelatedUserFinanciallyConfirmedByGuid is being edited | RelatedUserFinanciallyConfirmedByGuid is a read-only property. |\r\n| If RelatedJobGuid is being edited | RelatedJobGuid is a read-only property. |\r\n| If RelatedRouteVisitGuid is being edited | RelatedRouteVisitGuid is a read-only property. |\r\n| If RelatedPONumberGuid is being edited | RelatedPONumberGuid is a read-only property. |\r\n| If RelatedServiceAgreementGuid is being edited | RelatedServiceAgreementGuid is a read-only property. |\r\n| If RelatedWeighingInGuid is being edited | RelatedWeighingInGuid is a read-only property. |\r\n| If RelatedWeighingOutGuid is being edited | RelatedWeighingOutGuid is a read-only property. |\r\n| If ContainerTypeListItem.Guid is being edited | ContainerTypeListItem.Guid is a read-only property. |\r\n| If MaterialListItem.Guid is being edited | MaterialListItem.Guid is a read-only property. |\r\n| If ReasonListItem.Guid is being edited | ReasonListItem.Guid is a read-only property. |\r\n| If ServiceListItem.Guid is being edited | ServiceListItem.Guid is a read-only property. |\r\n| If ActionListItem.Guid is being edited | ActionListItem.Guid is a read-only property. |\r\n| If DateRequired is being edited | DateRequired is a read-only property. |\r\n| If IsDiscount is being edited | IsDiscount is a read-only property. |\r\n| If IsFinanciallyConfirmed is being edited | IsFinanciallyConfirmed is a read-only property. |\r\n| If IsQuantityAdjustment is being edited | IsQuantityAdjustment is a read-only property. |\r\n| If IsRateAdjustment is being edited | IsRateAdjustment is a read-only property. |\r\n| If IsWeightAdjustment is being edited | IsWeightAdjustment is a read-only property. |\r\n| If AdjustedRate is being edited | AdjustedRate is a read-only property. |\r\n| If AdjustedWeight is being edited | AdjustedWeight is a read-only property. |\r\n| If CustomerOrderNo is being edited | CustomerOrderNo is a read-only property. |\r\n| If DateTo is being edited | DateTo is a read-only property. |\r\n| If HoursChargable is being edited | HoursChargable is a read-only property. |\r\n| If Notes is being edited | Notes is a read-only property. |\r\n| If PONumber is being edited | PONumber is a read-only property. |\r\n| If Quantity is being edited | Quantity is a read-only property. |\r\n| If ReferenceNo is being edited | ReferenceNo is a read-only property. |"
+      operationId: OneOffAction_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorOneOffActionResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/oneOffActions:
+    get:
+      tags:
+      - OneOffAction
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off action. Filterable.|\r\n| RelatedUserFinanciallyConfirmedByGuid| The GUID associated to the financially confirmed sysuser of the one-off action. Filterable.|\r\n| RelatedJobGuid| The GUID associated to the job of the one-off action. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the one-off action.Filterable.|\r\n| RelatedPONumberGuid| The GUID associated to the PO number of the one-off action. Filterable.|\r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the one-off action. Filterable.|\r\n| RelatedWeighingInGuid| The GUID associated to the weighing in of the one-off action.Filterable.|\r\n| RelatedWeighingOutGuid| The GUID associated to the weighing out of the one-off action. Filterable.|\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the one-off action.|\r\n| MaterialListItem| The GUID and description of the material associated to the one-off action.|\r\n| ReasonListItem| The GUID and description of the reason associated to the one-off action.|\r\n| ServiceListItem| The GUID and description of the service associated to the one-off action.|\r\n| ActionListItem| The GUID and description of the action associated to the one-off action.|\r\n| DateCreated| The created date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| DateRequired| The required date associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| IsDiscount| Is discount in the one-off action?|\r\n| IsFinanciallyConfirmed| Is financially confirmed in the one-off action?|\r\n| IsQuantityAdjustment| Is quantity adjustment in the one-off action?|\r\n| IsRateAdjustment| Is rate adjustment in the one-off action?|\r\n| IsWeightAdjustment| Is weight adjustment in the one-off action?|\r\n| PriceOverride| Price override of the one-off action.|\r\n| AdjustedRate| Adjusted rate of the one-off action.|\r\n| AdjustedWeight| Adjusted weight of the one-off action.|\r\n| CustomerOrderNo| Customer order no of the one-off action.|\r\n| DateTo| The date to associated to the one-off action in ISO format (YYYY-MM-DD).|\r\n| HoursChargable| Chargable hours of the one-off action.|\r\n| Notes| Notes of the one-off action.|\r\n| PONumber| PONumber of the one-off action.|\r\n| Quantity| Quantity of the one-off action.|\r\n| ReferenceNo| ReferenceNo of the one-off action. Filterable.|"
+      operationId: OneOffAction_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorOneOffActionResource]'
+    post:
+      tags:
+      - OneOffAction
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | --------------------------------------------------------------------------------------------------| -------- |\r\n| GUID| The GUID associated to the one-off action.| No    |\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action.| Yes   |\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.| Yes   |\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off action.| No    |\r\n| RelatedUserFinanciallyConfirmedByGuid| The GUID associated to the financially confirmed sysuser of the one-off action.| No    |\r\n| RelatedJobGuid| The GUID associated to the job of the one-off action.| No    |\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the one-off action.| No    |\r\n| RelatedPONumberGuid| The GUID associated to the PO number of the one-off action.| No    |\r\n| RelatedServiceAgreementGuid| The GUID associated to the service agreement of the one-off action.| No    |\r\n| RelatedWeighingInGuid| The GUID associated to the weighing in of the one-off action.| No    |\r\n| RelatedWeighingOutGuid| The GUID associated to the weighing out of the one-off action.| No    |\r\n| ContainerTypeListItem| The GUID and description of the container type associated to the one-off action.| No    |\r\n| MaterialListItem| The GUID and description of the material associated to the one-off action.| No    |\r\n| ReasonListItem| The GUID and description of the reason associated to the one-off action.| No    |\r\n| ServiceListItem| The GUID and description of the service associated to the one-off action.| No    |\r\n| ActionListItem| The GUID and description of the action associated to the one-off action.| Yes   |\r\n| DateCreated| The created date associated to the one-off action in ISO format (YYYY-MM-DD).| No    |\r\n| DateRequired| The required date associated to the one-off action in ISO format (YYYY-MM-DD).| Yes   |\r\n| IsDiscount| Is discount in the one-off action?| Yes   |\r\n| IsFinanciallyConfirmed| Is financially confirmed in the one-off action?| Yes   |\r\n| IsQuantityAdjustment| Is quantity adjustment in the one-off action?| Yes   |\r\n| IsRateAdjustment| Is rate adjustment in the one-off action?| Yes   |\r\n| IsWeightAdjustment| Is weight adjustment in the one-off action?| Yes   |\r\n| PriceOverride| Price override of the one-off action.| No    |\r\n| AdjustedRate| Adjusted rate of the one-off action.| No    |\r\n| AdjustedWeight| Adjusted weight of the one-off action.| No    |\r\n| CustomerOrderNo| Customer order no of the one-off action.| No    |\r\n| DateTo| The date to associated to the one-off action in ISO format (YYYY-MM-DD).| No    |\r\n| HoursChargable| Chargable hours of the one-off action.| No    |\r\n| Notes| Notes of the one-off action.| No    |\r\n| PONumber| PONumber of the one-off action.| No    |\r\n| Quantity| Quantity of the one-off action.| No    |\r\n| ReferenceNo| ReferenceNo of the one-off action.| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If ReasonListItem is not in one of the following reason categories: One Off Charge. | ReasonListItem must be in one of the following reason categories: One Off Charge. |\r\n| If the provided RelatedPriceGuid is not in site order price with the provide ActionListItem.Guid.  | OneOffAction has the property RelatedPriceGuid with value of guid that is not supported. The given RelatedPriceGuid is not found in siteorder price with ActionListItem.Guid - guid. |\r\n| If the action in the ActionListItem is not linked to Activity Type OneOffCharge | The given ActionListItem.Guid is not supported by OneOffAction. |\r\n| If we provide value to DateCreated(As DateCreated would be auto populated with todays date).  | DateCreated is not supported. |\r\n| If RelatedOrderGuid provided is Deleted. | The provided RelatedOrderGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedPriceGuid provided is Deleted. | The provided RelatedPriceGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedPriceAdjustmentGuid provided is Deleted. | The provided RelatedPriceAdjustmentGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedUserFinanciallyConfirmedByGuid provided is Deleted. | The provided RelatedUserFinanciallyConfirmedByGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedPONumberGuid provided is Deleted. | The provided RelatedPONumberGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ContainerTypeListItem.Guid provided is Deleted. | The provided ContainerTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If MaterialListItem.Guid provided is Deleted. | The provided MaterialListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonListItem.Guid provided is Deleted. | The provided ReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ServiceListItem.Guid provided is Deleted. | The provided ServiceListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ActionListItem.Guid provided is Deleted. | The provided ActionListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |"
+      operationId: OneOffAction_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorOneOffActionResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorOneOffActionResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOneOffActionResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorOneOffActionResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorOneOffActionResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorOneOffActionResource:
+      type: object
+      properties:
+        RelatedOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceAdjustmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserFinanciallyConfirmedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedServiceAgreementGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateCreated:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        DateRequired:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsDiscount:
+          type: boolean
+        IsFinanciallyConfirmed:
+          type: boolean
+        IsQuantityAdjustment:
+          type: boolean
+        IsRateAdjustment:
+          type: boolean
+        IsWeightAdjustment:
+          type: boolean
+        PriceOverride:
+          type: number
+          format: double
+        AdjustedRate:
+          type: number
+          format: double
+        AdjustedWeight:
+          type: number
+          format: double
+        CustomerOrderNo:
+          type: string
+        DateTo:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        HoursChargable:
+          type: number
+          format: double
+        Notes:
+          type: string
+        PONumber:
+          type: string
+        Quantity:
+          type: integer
+          format: int32
+        ReferenceNo:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceChanges[ApiIntegratorOneOffActionResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOneOffActionResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

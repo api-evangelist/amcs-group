@@ -1,0 +1,90 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup SharedContainerHistory API
+  version: core
+tags:
+- name: SharedContainerHistory
+paths:
+  /stosag/sharedContainerHistories:
+    post:
+      tags:
+      - SharedContainerHistory
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ----------------------------------------------------------|-------------------------------------------------------------------------------------------|----------|\r\n| SharedContainerHistory[0].ContainerGuid| The GUID of the Container associated to the shared container.|   Yes    |\r\n| SharedContainerHistory[0].Timestamp| The timestamp of the shared container history recorded.|   Yes   |\r\n| SharedContainerHistory[0].MaximumLoad| The maximum load of the container associated to the shared container.|   Yes   |\r\n| SharedContainerHistory[0].CurrentLoad| The current load of the waste disposed in container associated to the shared container.|Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ----------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------- |\r\n| If AccessPassHistory[0].ContainerGuid not linked to shared container.| Container ({0}) Not found in shared container associated with timestamp.|"
+      operationId: SharedContainerHistory_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorSharedContainersHistoryResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorSharedContainersHistoryResource:
+      type: object
+      properties:
+        SharedContainerHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSharedContainerHistoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorSharedContainerHistoryResource:
+      type: object
+      properties:
+        ContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TimeStamp:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        MaximumLoad:
+          type: number
+          format: double
+        CurrentLoad:
+          type: number
+          format: double
+        ClusterAccountId:
+          type: integer
+          format: int32
+        ContainerId:
+          type: integer
+          format: int32
+        SharedContainerHistoryId:
+          type: integer
+          format: int32
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

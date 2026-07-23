@@ -1,0 +1,74 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PluginInstall API
+  version: core
+tags:
+- name: PluginInstall
+paths:
+  /plugins/PluginMetadatas:
+    post:
+      tags:
+      - PluginInstall
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Plugin.ApiPluginMetadata'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Plugin.ApiPluginMetadata'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Plugin.ApiPluginMetadata'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.Core.Entity.Api.Plugin.ApiPluginMetadata:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        pluginMetadataId:
+          type: integer
+          format: int32
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        credentials:
+          type: string
+          nullable: true
+        endpoint:
+          type: string
+          nullable: true
+        dependsOnPlugins:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Plugin.ApiPluginMetadata'
+          nullable: true
+        isOptionalDependency:
+          type: boolean
+      additionalProperties: false

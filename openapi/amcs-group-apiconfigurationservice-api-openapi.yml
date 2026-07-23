@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiConfigurationService API
+  version: core
+tags:
+- name: ApiConfigurationService
+paths:
+  /configuration/dynamicAppConfiguration:
+    post:
+      tags:
+      - ApiConfigurationService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigurationResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigurationResponse'
+components:
+  schemas:
+    AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigValue:
+      type: object
+      properties:
+        configId:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigurationResponse:
+      type: object
+      properties:
+        configurationValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigValue'
+          nullable: true
+      additionalProperties: false

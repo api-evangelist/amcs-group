@@ -1,0 +1,488 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Payment API
+  version: core
+tags:
+- name: Payment
+paths:
+  /accounting/payments/changes:
+    get:
+      tags:
+      - Payment
+      summary: Retrieve changes
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                 | The GUID associated to the payment. |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of the payment. Filterable. | \r\n| PaymentTypeListItem  | The GUID and description of the payment type.          |\r\n| PaymentPointListItem | The GUID and description of the payment point.         |\r\n| Amount               | The amount associated to the payment. |\r\n| Reference            | The reference associated to the payment. |\r\n| EndToEndReference    | The end to end reference associated to the payment. |\r\n| Notes   | The Notes associated to the payment. |\r\n| IsBad   | The IsBad associated to the payment. |\r\n| DateBad   | The bad date associated to the payment. |\r\n| DateBadExported      | The bad date exported associated to the payment. |\r\n| DateCleared   | The cleared date associated to the payment. |\r\n| DateExported   | The exported date associated to the payment. |\r\n| DateProcessed   | The processed date associated to the payment. |\r\n| DateInput   | The input date associated to the payment. |\r\n| DateReceived   | The received date associated to the payment. |\r\n| IsAutoAllocated   | Whether the payment is auto allocated, null by default. |\r\n| AccountingPeriodListItem | The GUID and description of the accounting period of the payment. |\r\n| Allocations   | The list of allocations associated to the payment. |\r\n| Allocations[0].Guid   | The GUID associated to the allocation. |\r\n| Allocations[0].Amount   | The Amount associated to the allocation. |\r\n| Allocations[0].DateInput   | The DateInput associated to the allocation. |\r\n| Allocations[0].AccountingPeriodListItem | The GUID and descriptopn of the accounting period associated to the allocation. |\r\n| Allocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the allocation. |\r\n| Deallocations   | The list of deallocations associated to the payment. |\r\n| Deallocations[0].Guid   | The GUID associated to the deallocation. |\r\n| Deallocations[0].Amount   | The amount associated to the deallocation. |\r\n| Deallocations[0].DateInput   | The date input associated to the deallocation. |\r\n| Deallocations[0].DateDeallocated   | The date deallocated associated to the deallocation. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem | The GUID and descriptopn of the allocation accounting period associated to the deallocation. |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem | The GUID and descriptopn of the deallocation accounting period associated to the deallocation. |\r\n| Deallocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the deallocation. |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid | The GUID associated to the sysuser of the deallocation. |\r\n| RelatedInvoiceGuidFilter | Used to filter by the related invoice GUID. |\r\n| RelatedJobGuids   | The list of job GUIDs associated to the payment. |\r\n| RelatedSysUserGuid       | The GUID associated to the sys user of the payment. Filterable. | \r\n| RelatedJobGuids[0].RelatedJobGuid   | The GUID associated to the job. |\r\n| AccountingPeriodBadListItem | The GUID and description of the bad accounting period of the payment. |\r\n| ReasonBadListItem | The GUID and description of the bad reason of the payment. |\r\n| PaymentTransactions | The list of Payment Transactions associated to the payment. |\r\n| PaymentTransactions[0].Guid| The guid associated to the payment transaction. |\r\n| PaymentTransactions[0].IsDeleted| Whether the payment transaction is deleted. |\r\n| PaymentTransactions[0].CardType| The CardType associated to the payment transaction. |\r\n| PaymentTransactions[0].MaskedCardNumber| The MaskedCardNumber associated to the payment transaction. |\r\n| PaymentTransactions[0].DateReceived| The DateReceived associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentReference| The PaymentReference associated to the payment transaction. |\r\n| PaymentTransactions[0].Reference| The Reference associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentProvider| The PaymentProvider associated to the payment transaction. |\r\n| PaymentTransactions[0].ResultMessage| The ResultMessage associated to the payment transaction. |\r\n| PaymentTransactions[0].Notes| The Notes associated to the payment transaction. |\r\n| PaymentTransactions[0].ResponseCode| The ResponseCode associated to the payment transaction. |\r\n| PaymentTransactions[0].CurrencyCode| The CurrencyCode associated to the payment transaction. |\r\n| PaymentTransactions[0].Amount| The Amount associated to the payment transaction. |\r\n| PaymentTransactions[0].ContactGuid| The Guid associated to the contact of the payment transaction. |\r\n| PaymentTransactions[0].AmountRefundable   | The AmountRefundable associated to the payment transaction. |\r\n| PaymentTransactions[0].ReasonListItem     | The GUID and description of the reason of the payment transaction. |\r\n| PaymentTransactions[0].PaymentProviderListItem  | The GUID and description of the Payment Provider of the payment transaction. |\r\n| PaymentTransactions[0].PaymentPointListItem     | The GUID and description of the Payment Point of the payment transaction. |\r\n| PaymentTransactions[0].TransactionStatusListItem     | The GUID and description of the Transaction Status of the payment transaction. |\r\n| PaymentTransactions[0].PaymentTypeListItem     | The GUID and description of the Payment Type of the payment transaction. |\r\n| IsRefund   | The IsRefund associated to the payment. |\r\n| TransactionPaymentReferenceFilter | Used to filter by Payment Reference of the Payment Transaction. |\r\n| TransactionReferenceFilter | Used to filter by Reference of the Payment Transaction. |\r\n| RelatedRemitLocationGuid  | The GUID associated to the Remit Location for this payment. Filterable.| \r\n| UnallocatedAmount | The unallocated amount associated to the payment.               |\r\n"
+      operationId: Payment_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorPaymentResource]'
+  /accounting/payments/{guid}:
+    get:
+      tags:
+      - Payment
+      summary: Find with GUID
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                 | The GUID associated to the payment. |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of the payment. Filterable. | \r\n| PaymentTypeListItem  | The GUID and description of the payment type.          |\r\n| PaymentPointListItem | The GUID and description of the payment point.         |\r\n| Amount               | The amount associated to the payment. |\r\n| Reference            | The reference associated to the payment. |\r\n| EndToEndReference    | The end to end reference associated to the payment. |\r\n| Notes   | The Notes associated to the payment. |\r\n| IsBad   | The IsBad associated to the payment. |\r\n| DateBad   | The bad date associated to the payment. |\r\n| DateBadExported      | The bad date exported associated to the payment. |\r\n| DateCleared   | The cleared date associated to the payment. |\r\n| DateExported   | The exported date associated to the payment. |\r\n| DateProcessed   | The processed date associated to the payment. |\r\n| DateInput   | The input date associated to the payment. |\r\n| DateReceived   | The received date associated to the payment. |\r\n| IsAutoAllocated   | Whether the payment is auto allocated, null by default. |\r\n| AccountingPeriodListItem | The GUID and description of the accounting period of the payment. |\r\n| Allocations   | The list of allocations associated to the payment. |\r\n| Allocations[0].Guid   | The GUID associated to the allocation. |\r\n| Allocations[0].Amount   | The Amount associated to the allocation. |\r\n| Allocations[0].DateInput   | The DateInput associated to the allocation. |\r\n| Allocations[0].AccountingPeriodListItem | The GUID and descriptopn of the accounting period associated to the allocation. |\r\n| Allocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the allocation. |\r\n| Deallocations   | The list of deallocations associated to the payment. |\r\n| Deallocations[0].Guid   | The GUID associated to the deallocation. |\r\n| Deallocations[0].Amount   | The amount associated to the deallocation. |\r\n| Deallocations[0].DateInput   | The date input associated to the deallocation. |\r\n| Deallocations[0].DateDeallocated   | The date deallocated associated to the deallocation. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem | The GUID and descriptopn of the allocation accounting period associated to the deallocation. |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem | The GUID and descriptopn of the deallocation accounting period associated to the deallocation. |\r\n| Deallocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the deallocation. |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid | The GUID associated to the sysuser of the deallocation. |\r\n| RelatedInvoiceGuidFilter | Used to filter by the related invoice GUID. |\r\n| RelatedJobGuids   | The list of job GUIDs associated to the payment. |\r\n| RelatedSysUserGuid       | The GUID associated to the sys user of the payment. Filterable. | \r\n| RelatedJobGuids[0].RelatedJobGuid   | The GUID associated to the job. |\r\n| AccountingPeriodBadListItem | The GUID and description of the bad accounting period of the payment. |\r\n| ReasonBadListItem | The GUID and description of the bad reason of the payment. |\r\n| PaymentTransactions | The list of Payment Transactions associated to the payment. |\r\n| PaymentTransactions[0].Guid| The guid associated to the payment transaction. |\r\n| PaymentTransactions[0].IsDeleted| Whether the payment transaction is deleted. |\r\n| PaymentTransactions[0].CardType| The CardType associated to the payment transaction. |\r\n| PaymentTransactions[0].MaskedCardNumber| The MaskedCardNumber associated to the payment transaction. |\r\n| PaymentTransactions[0].DateReceived| The DateReceived associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentReference| The PaymentReference associated to the payment transaction. |\r\n| PaymentTransactions[0].Reference| The Reference associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentProvider| The PaymentProvider associated to the payment transaction. |\r\n| PaymentTransactions[0].ResultMessage| The ResultMessage associated to the payment transaction. |\r\n| PaymentTransactions[0].Notes| The Notes associated to the payment transaction. |\r\n| PaymentTransactions[0].ResponseCode| The ResponseCode associated to the payment transaction. |\r\n| PaymentTransactions[0].CurrencyCode| The CurrencyCode associated to the payment transaction. |\r\n| PaymentTransactions[0].Amount| The Amount associated to the payment transaction. |\r\n| PaymentTransactions[0].ContactGuid| The Guid associated to the contact of the payment transaction. |\r\n| PaymentTransactions[0].AmountRefundable   | The AmountRefundable associated to the payment transaction. |\r\n| PaymentTransactions[0].ReasonListItem     | The GUID and description of the reason of the payment transaction. |\r\n| PaymentTransactions[0].PaymentProviderListItem  | The GUID and description of the Payment Provider of the payment transaction. |\r\n| PaymentTransactions[0].PaymentPointListItem     | The GUID and description of the Payment Point of the payment transaction. |\r\n| PaymentTransactions[0].TransactionStatusListItem     | The GUID and description of the Transaction Status of the payment transaction. |\r\n| PaymentTransactions[0].PaymentTypeListItem     | The GUID and description of the Payment Type of the payment transaction. |\r\n| IsRefund   | The IsRefund associated to the payment. |\r\n| TransactionPaymentReferenceFilter | Used to filter by Payment Reference of the Payment Transaction. |\r\n| TransactionReferenceFilter | Used to filter by Reference of the Payment Transaction. |\r\n| RelatedRemitLocationGuid  | The GUID associated to the Remit Location for this payment. Filterable.| \r\n| UnallocatedAmount | The unallocated amount associated to the payment.               |\r\n"
+      operationId: Payment_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPaymentResource]'
+    put:
+      tags:
+      - Payment
+      summary: Partial update
+      description: "| Property       | Description                                                  | Required |\r\n| -------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                 | The GUID associated to the payment.                    | No |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of to the payment. | Yes |\r\n| PaymentTypeListItem  | The GUID and description of the payment type.          | Yes |\r\n| PaymentPointListItem | The GUID and description of the payment point.         | Yes |\r\n| Amount               | The amount associated to the payment.                  | Yes |\r\n| Reference            | The reference associated to the payment.               | No |\r\n| EndToEndReference    | The end to end reference associated to the payment.    | No |\r\n| Notes   | The Notes associated to the payment. | No |\r\n| IsBad   | The IsBad associated to the payment. | No |\r\n| DateBad   | The bad date associated to the payment.| No |\r\n| DateBadExported      | The bad date exported associated to the payment.| No |\r\n| DateCleared   | The cleared date associated to the payment.| No |\r\n| DateExported   | The exported date associated to the payment.| No |\r\n| DateProcessed   | The processed date associated to the payment.| No |\r\n| DateInput   | The input date associated to the payment.| Yes |\r\n| DateReceived   | The received date associated to the payment.| Yes |\r\n| IsAutoAllocated   | Whether the payment is auto allocated, null by default. | No |\r\n| AccountingPeriodListItem | The GUID and description of the accounting period of the payment. | No |\r\n| Allocations   | The list of allocations associated to the payment. | No |\r\n| Allocations[0].Guid   | The GUID associated to the allocation. | No |\r\n| Allocations[0].Amount   | The Amount associated to the allocation. | Yes |\r\n| Allocations[0].DateInput   | The DateInput associated to the allocation. | No |\r\n| Allocations[0].AccountingPeriodListItem | The GUID and description of the accounting period associated to the allocation. | No |\r\n| Allocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the allocation. | Yes |\r\n| Deallocations   | The list of deallocations associated to the payment. | No |\r\n| Deallocations[0].Guid   | The GUID associated to the deallocation. | No |\r\n| Deallocations[0].Amount   | The amount associated to the deallocation. | Yes |\r\n| Deallocations[0].DateInput   | The date input associated to the deallocation. | No |\r\n| Deallocations[0].DateDeallocated   | The date deallocated associated to the deallocation. | No |\r\n| Deallocations[0].AllocationAccountingPeriodListItem | The GUID and descriptopn of the allocation accounting period associated to the deallocation. | No |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem | The GUID and descriptopn of the deallocation accounting period associated to the deallocation. | No |\r\n| Deallocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the deallocation. | Yes |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid | The GUID associated to the sysuser of the deallocation. | Yes |\r\n| RelatedInvoiceGuidFilter | Used to filter by the related invoice GUID. | No |\r\n| RelatedJobGuids   | The list of job GUIDs associated to the payment. | No |\r\n| RelatedSysUserGuid       | The GUID associated to the sys user of the payment. | Yes |\r\n| RelatedJobGuids[0].RelatedJobGuid   | The GUID associated to the job. | No |\r\n| AccountingPeriodBadListItem | The GUID and description of the bad accounting period of the payment. | No |\r\n| ReasonBadListItem | The GUID and description of the bad reason of the payment. | No |\r\n| PaymentTransactions | The list of Payment Transactions associated to the payment. | No |\r\n| PaymentTransactions[0].Guid| The guid associated to the payment transaction. | No |\r\n| PaymentTransactions[0].IsDeleted| Whether the payment transaction is deleted. | No |\r\n| PaymentTransactions[0].CardType| The CardType associated to the payment transaction. | No |\r\n| PaymentTransactions[0].MaskedCardNumber| The MaskedCardNumber associated to the payment transaction. | No |\r\n| PaymentTransactions[0].DateReceived| The DateReceived associated to the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentReference| The PaymentReference associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Reference| The Reference associated to the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentProvider| The PaymentProvider associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ResultMessage| The ResultMessage associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Notes| The Notes associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ResponseCode| The ResponseCode associated to the payment transaction. | No |\r\n| PaymentTransactions[0].CurrencyCode| The CurrencyCode associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Amount| The Amount associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ContactGuid| The Guid associated to the contact of the payment transaction. | No |\r\n| PaymentTransactions[0].AmountRefundable   | The AmountRefundable associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ReasonListItem     | The GUID and description of the reason of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentProviderListItem  | The GUID and description of the Payment Provider of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentPointListItem     | The GUID and description of the Payment Point of the payment transaction. | No |\r\n| PaymentTransactions[0].TransactionStatusListItem     | The GUID and description of the Transaction Status of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentTypeListItem     | The GUID and description of the Payment Type of the payment transaction. | No |\r\n| IsRefund   | The IsRefund associated to the payment. | No |\r\n| RelatedRemitLocationGuid  | The RemitLocaion GUID associated to the payment(For refund only). | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Customer not found with value RelatedCustomerGuid | Failed to retrieve Customer with RelatedCustomerGuid of {value of RelatedCustomerGuid} |\r\n| PaymentType not found with value PaymentTypeListItem.Guid | Failed to retrieve PaymentType with PaymentTypeListItem.Guid of {value of PaymentTypeListItem.Guid} |\r\n| PaymentPoint not found with value PaymentPointListItem.Guid | Failed to retrieve PaymentPoint with PaymentPointListItem.Guid of {value of PaymentPointListItem.Guid} |\r\n| A new value for date received should not provided as part of an update | Request a payment update with an unchanged date received or make a PUT request leaving date received property out of the resource |\r\n| A new value for date input should not provided as part of an update | Request a payment update with an unchanged date input or make a PUT request leaving date input property out of the resource |\r\n| Date cleared must be on or after date received | Request a payment update with date cleared are null or after the date received |\r\n| Date processed must be on or after date received | Request a payment update with date processed are null or after the date received |\r\n| Date bad must be on or after date received | Request a payment update with date bad are null or after the date received |\r\n| Date bad must be provided | Request a payment update with date bad to mark bad export |\r\n| Date bad exported must be on or after date bad | Request a payment update with date bad exported are null or after the date bad |\r\n| Date exported must be on or after date received | Request a payment update with date exported are null or after the date received |\r\n| The accounting period is closed | Failed to save. Payment with AccountingPeriodListItem.GUID of xxxxxx-xxxxxxx is not a valid accounting period because it is closed |\r\n| Deallocations is a read-only property | Request a payment update with deallocations are null or empty |\r\n| Updating a bad payment | Payment is bad. Could not update the payment. Create a new payment rather than attempting to update the payment that has been marked as bad |\r\n| Updating a payment to make it bad if required fields DateBad, ReasonBadListItem, and Accounting PeriodBadListItem are not found | Details for marking a payment as bad missing. Could not update the payment. To mark a payment as bad set the DateBad, ReasonBadListItem, and Accounting PeriodBadListItem |\r\n| AccountingPeriodBadListItem for a closed accounting period | AccountingPeriodBad is closed. Could not mark the payment as bad. Set the AccountingPeriodBadListItem to an open accounting period |\r\n| ReasonBadListItem value from different reason category other than Bad Payment | ReasonListItem must be in one of the following reason categories: BadPayment. |\r\n| ReasonBadListItem with deleted reason value from Bad Payment reason category | The provided ReasonBadListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PaymentTransactions is not null on Update | PaymentTransactions is a read-only property. |\r\n| If the payment is already allocated and IsAutoAllocated is true on update | Failed to save/update Payment because the payment is already allocated. |\r\n| If IsRefund is null or false and RemitLocation has a value | IsRefund flag is false, RelatedRemitLocationGuid can only be supplied for refund payments. |\r\n| If IsRefund is true and RemitLocation doesn't have a value | IsRefund flag is true, RelatedRemitLocationGuid must be supplied for refund payments. |\r\n| If RelatedRemitLocationGuid doesn't relate to customer site's locations | The provided RelatedRemitLocationGuid doesn't relate to any of the customer sites location. |\r\n| If RelatedSysUserGuid is changed on Update | RelatedSysUserGuid is a read-only property. |\r\n"
+      operationId: Payment_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /accounting/payments:
+    get:
+      tags:
+      - Payment
+      summary: Find with Filters
+      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| GUID                 | The GUID associated to the payment. |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of the payment. Filterable. | \r\n| PaymentTypeListItem  | The GUID and description of the payment type.          |\r\n| PaymentPointListItem | The GUID and description of the payment point.         |\r\n| Amount               | The amount associated to the payment. |\r\n| Reference            | The reference associated to the payment. |\r\n| EndToEndReference    | The end to end reference associated to the payment. |\r\n| Notes   | The Notes associated to the payment. |\r\n| IsBad   | The IsBad associated to the payment. |\r\n| DateBad   | The bad date associated to the payment. |\r\n| DateBadExported      | The bad date exported associated to the payment. |\r\n| DateCleared   | The cleared date associated to the payment. |\r\n| DateExported   | The exported date associated to the payment. |\r\n| DateProcessed   | The processed date associated to the payment. |\r\n| DateInput   | The input date associated to the payment. |\r\n| DateReceived   | The received date associated to the payment. |\r\n| IsAutoAllocated   | Whether the payment is auto allocated, null by default. |\r\n| AccountingPeriodListItem | The GUID and description of the accounting period of the payment. |\r\n| Allocations   | The list of allocations associated to the payment. |\r\n| Allocations[0].Guid   | The GUID associated to the allocation. |\r\n| Allocations[0].Amount   | The Amount associated to the allocation. |\r\n| Allocations[0].DateInput   | The DateInput associated to the allocation. |\r\n| Allocations[0].AccountingPeriodListItem | The GUID and descriptopn of the accounting period associated to the allocation. |\r\n| Allocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the allocation. |\r\n| Deallocations   | The list of deallocations associated to the payment. |\r\n| Deallocations[0].Guid   | The GUID associated to the deallocation. |\r\n| Deallocations[0].Amount   | The amount associated to the deallocation. |\r\n| Deallocations[0].DateInput   | The date input associated to the deallocation. |\r\n| Deallocations[0].DateDeallocated   | The date deallocated associated to the deallocation. |\r\n| Deallocations[0].AllocationAccountingPeriodListItem | The GUID and descriptopn of the allocation accounting period associated to the deallocation. |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem | The GUID and descriptopn of the deallocation accounting period associated to the deallocation. |\r\n| Deallocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the deallocation. |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid | The GUID associated to the sysuser of the deallocation. |\r\n| RelatedInvoiceGuidFilter | Used to filter by the related invoice GUID. |\r\n| RelatedJobGuids   | The list of job GUIDs associated to the payment. |\r\n| RelatedSysUserGuid       | The GUID associated to the sys user of the payment. Filterable. | \r\n| RelatedJobGuids[0].RelatedJobGuid   | The GUID associated to the job. |\r\n| AccountingPeriodBadListItem | The GUID and description of the bad accounting period of the payment. |\r\n| ReasonBadListItem | The GUID and description of the bad reason of the payment. |\r\n| PaymentTransactions | The list of Payment Transactions associated to the payment. |\r\n| PaymentTransactions[0].Guid| The guid associated to the payment transaction. |\r\n| PaymentTransactions[0].IsDeleted| Whether the payment transaction is deleted. |\r\n| PaymentTransactions[0].CardType| The CardType associated to the payment transaction. |\r\n| PaymentTransactions[0].MaskedCardNumber| The MaskedCardNumber associated to the payment transaction. |\r\n| PaymentTransactions[0].DateReceived| The DateReceived associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentReference| The PaymentReference associated to the payment transaction. |\r\n| PaymentTransactions[0].Reference| The Reference associated to the payment transaction. |\r\n| PaymentTransactions[0].PaymentProvider| The PaymentProvider associated to the payment transaction. |\r\n| PaymentTransactions[0].ResultMessage| The ResultMessage associated to the payment transaction. |\r\n| PaymentTransactions[0].Notes| The Notes associated to the payment transaction. |\r\n| PaymentTransactions[0].ResponseCode| The ResponseCode associated to the payment transaction. |\r\n| PaymentTransactions[0].CurrencyCode| The CurrencyCode associated to the payment transaction. |\r\n| PaymentTransactions[0].Amount| The Amount associated to the payment transaction. |\r\n| PaymentTransactions[0].ContactGuid| The Guid associated to the contact of the payment transaction. |\r\n| PaymentTransactions[0].AmountRefundable   | The AmountRefundable associated to the payment transaction. |\r\n| PaymentTransactions[0].ReasonListItem     | The GUID and description of the reason of the payment transaction. |\r\n| PaymentTransactions[0].PaymentProviderListItem  | The GUID and description of the Payment Provider of the payment transaction. |\r\n| PaymentTransactions[0].PaymentPointListItem     | The GUID and description of the Payment Point of the payment transaction. |\r\n| PaymentTransactions[0].TransactionStatusListItem     | The GUID and description of the Transaction Status of the payment transaction. |\r\n| PaymentTransactions[0].PaymentTypeListItem     | The GUID and description of the Payment Type of the payment transaction. |\r\n| IsRefund   | The IsRefund associated to the payment. |\r\n| TransactionPaymentReferenceFilter | Used to filter by Payment Reference of the Payment Transaction. |\r\n| TransactionReferenceFilter | Used to filter by Reference of the Payment Transaction. |\r\n| RelatedRemitLocationGuid  | The GUID associated to the Remit Location for this payment. Filterable.| \r\n| UnallocatedAmount | The unallocated amount associated to the payment.               |\r\n"
+      operationId: Payment_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPaymentResource]'
+    post:
+      tags:
+      - Payment
+      summary: Create or update
+      description: "| Property       | Description                                                  | Required |\r\n| -------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                 | The GUID associated to the payment.                    | No |\r\n| RelatedCustomerGuid  | The GUID associated to the customer of to the payment. | Yes |\r\n| PaymentTypeListItem  | The GUID and description of the payment type.          | Yes |\r\n| PaymentPointListItem | The GUID and description of the payment point.         | Yes |\r\n| Amount               | The amount associated to the payment.                  | Yes |\r\n| Reference            | The reference associated to the payment.               | No |\r\n| EndToEndReference    | The end to end reference associated to the payment.    | No |\r\n| Notes   | The Notes associated to the payment. | No |\r\n| IsBad   | The IsBad associated to the payment. | No |\r\n| DateBad   | The bad date associated to the payment.| No |\r\n| DateBadExported      | The bad date exported associated to the payment.| No |\r\n| DateCleared   | The cleared date associated to the payment.| No |\r\n| DateExported   | The exported date associated to the payment.| No |\r\n| DateProcessed   | The processed date associated to the payment.| No |\r\n| DateInput   | The input date associated to the payment.| Yes |\r\n| DateReceived   | The received date associated to the payment.| Yes |\r\n| IsAutoAllocated   | Whether the payment is auto allocated, null by default. | No |\r\n| AccountingPeriodListItem | The GUID and description of the accounting period of the payment. | No |\r\n| Allocations   | The list of allocations associated to the payment. | No |\r\n| Allocations[0].Guid   | The GUID associated to the allocation. | No |\r\n| Allocations[0].Amount   | The Amount associated to the allocation. | Yes |\r\n| Allocations[0].DateInput   | The DateInput associated to the allocation. | No |\r\n| Allocations[0].AccountingPeriodListItem | The GUID and description of the accounting period associated to the allocation. | No |\r\n| Allocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the allocation. | Yes |\r\n| Deallocations   | The list of deallocations associated to the payment. | No |\r\n| Deallocations[0].Guid   | The GUID associated to the deallocation. | No |\r\n| Deallocations[0].Amount   | The amount associated to the deallocation. | Yes |\r\n| Deallocations[0].DateInput   | The date input associated to the deallocation. | No |\r\n| Deallocations[0].DateDeallocated   | The date deallocated associated to the deallocation. | No |\r\n| Deallocations[0].AllocationAccountingPeriodListItem | The GUID and descriptopn of the allocation accounting period associated to the deallocation. | No |\r\n| Deallocations[0].DeallocationAccountingPeriodListItem | The GUID and descriptopn of the deallocation accounting period associated to the deallocation. | No |\r\n| Deallocations[0].RelatedInvoiceGuid | The GUID associated to the invoice of the deallocation. | Yes |\r\n| Deallocations[0].RelatedUserDeallocatedByGuid | The GUID associated to the sysuser of the deallocation. | Yes |\r\n| RelatedInvoiceGuidFilter | Used to filter by the related invoice GUID. | No |\r\n| RelatedJobGuids   | The list of job GUIDs associated to the payment. | No |\r\n| RelatedSysUserGuid       | The GUID associated to the sys user of the payment. | No |\r\n| RelatedJobGuids[0].RelatedJobGuid   | The GUID associated to the job. | No |\r\n| AccountingPeriodBadListItem | The GUID and description of the bad accounting period of the payment. | No |\r\n| ReasonBadListItem | The GUID and description of the bad reason of the payment. | No |\r\n| PaymentTransactions | The list of Payment Transactions associated to the payment. | No |\r\n| PaymentTransactions[0].Guid| The guid associated to the payment transaction. | No |\r\n| PaymentTransactions[0].IsDeleted| Whether the payment transaction is deleted. | No |\r\n| PaymentTransactions[0].CardType| The CardType associated to the payment transaction. | No |\r\n| PaymentTransactions[0].MaskedCardNumber| The MaskedCardNumber associated to the payment transaction. | No |\r\n| PaymentTransactions[0].DateReceived| The DateReceived associated to the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentReference| The PaymentReference associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Reference| The Reference associated to the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentProvider| The PaymentProvider associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ResultMessage| The ResultMessage associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Notes| The Notes associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ResponseCode| The ResponseCode associated to the payment transaction. | No |\r\n| PaymentTransactions[0].CurrencyCode| The CurrencyCode associated to the payment transaction. | No |\r\n| PaymentTransactions[0].Amount| The Amount associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ContactGuid| The Guid associated to the contact of the payment transaction. | No |\r\n| PaymentTransactions[0].AmountRefundable   | The AmountRefundable associated to the payment transaction. | No |\r\n| PaymentTransactions[0].ReasonListItem     | The GUID and description of the reason of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentProviderListItem  | The GUID and description of the Payment Provider of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentPointListItem     | The GUID and description of the Payment Point of the payment transaction. | No |\r\n| PaymentTransactions[0].TransactionStatusListItem     | The GUID and description of the Transaction Status of the payment transaction. | No |\r\n| PaymentTransactions[0].PaymentTypeListItem     | The GUID and description of the Payment Type of the payment transaction. | No |\r\n| IsRefund   | The IsRefund associated to the payment. | No |\r\n| RelatedRemitLocationGuid  | The RemitLocaion GUID associated to the payment(For refund only). | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Customer not found with value RelatedCustomerGuid | Failed to retrieve Customer with RelatedCustomerGuid of {value of RelatedCustomerGuid} |\r\n| PaymentType not found with value PaymentTypeListItem.Guid | Failed to retrieve PaymentType with PaymentTypeListItem.Guid of {value of PaymentTypeListItem.Guid} |\r\n| PaymentPoint not found with value PaymentPointListItem.Guid | Failed to retrieve PaymentPoint with PaymentPointListItem.Guid of {value of PaymentPointListItem.Guid} |\r\n| BadAccountingPeriod not found with value AccountingPeriodBadListItem.Guid | Failed to retrieve BadAccountingPeriod with AccountingPeriodBadListItem.Guid of {value of AccountingPeriodBadListItem.Guid} |\r\n| BadReason not found with value ReasonBadListItem.Guid | Failed to retrieve BadReason with ReasonBadListItem.Guid of {value of ReasonBadListItem.Guid} |\r\n| DateInput is not today's date | Failed to save. Payment with DateInput of {value of DateInput} cannot be set if DateInput is not today's date |\r\n| A payment can not be marked as bad on creation |  Leave date bad as null when creating a payment |\r\n| A payment can not be marked as bad export on creation |  Leave date bad export as null when creating a payment |\r\n| A payment can not be marked as export on creation |  Leave date export as null when creating a payment |\r\n| A payment can not be marked as bad accounting period on creation |  Leave bad accounting period as null when creating a payment |\r\n| A payment can not be marked as bad reason on creation |  Leave bad reason as null when creating a payment |\r\n| Creating a bad payment is not allowed | Payment is bad. Could not create the payment. Set DateBad, ReasonBadListItem, AccountingPeriodBadListItem to null when creating a payment and then mark it as bad with a seperate call |\r\n| Date cleared must be on or after date received | Request creation of a resource where the date cleared are null or after the date received |\r\n| Date processed must be on or after date received | Request creation of a resource where the date processed are null or after the date received |\r\n| The accounting period is closed | Failed to save. Payment with AccountingPeriodListItem.GUID of xxxxxx-xxxxxxx is not a valid accounting period because it is closed |\r\n| Deallocations is a read-only property | Request a payment update with deallocations are null or empty |\r\n| If PaymentTransactions is not null on Insert | PaymentTransactions is a read-only property. |\r\n| If IsRefund is null or false and RemitLocation has a value | IsRefund flag is false, RelatedRemitLocationGuid can only be supplied for refund payments. |\r\n| If IsRefund is true and RemitLocation doesn't have a value | IsRefund flag is true, RelatedRemitLocationGuid must be supplied for refund payments. |\r\n| If RelatedRemitLocationGuid doesn't relate to customer site's locations | The provided RelatedRemitLocationGuid doesn't relate to any of the customer sites location. |\r\n| If RelatedSysUserGuid is not null on Create | RelatedSysUserGuid is not supported. |\r\n| If RelatedSysUserGuid is changed on Update  | RelatedSysUserGuid is a read-only property. |\r\n"
+      operationId: Payment_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorPaymentDeallocationResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDeallocatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Amount:
+          type: number
+          format: double
+        DateInput:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateDeallocated:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AllocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DeallocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorPaymentAllocationResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Amount:
+          type: number
+          format: double
+        DateInput:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorPaymentResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges[ApiIntegratorPaymentResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorPaymentTransactionResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        CardType:
+          type: string
+        MaskedCardNumber:
+          type: string
+        DateReceived:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TransactionStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContactGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PaymentReference:
+          type: string
+        Reference:
+          type: string
+        PaymentProvider:
+          type: string
+        ResultMessage:
+          type: string
+        Notes:
+          type: string
+        ResponseCode:
+          type: string
+        CurrencyCode:
+          type: string
+        Amount:
+          type: number
+          format: double
+        AmountRefundable:
+          type: number
+          format: double
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentPointListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultCollection[ApiIntegratorPaymentResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorJobPaymentResource:
+      type: object
+      properties:
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorPaymentResource:
+      type: object
+      properties:
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Amount:
+          type: number
+          format: double
+        Reference:
+          type: string
+        EndToEndReference:
+          type: string
+        Notes:
+          type: string
+        IsBad:
+          type: boolean
+        IsAutoAllocated:
+          type: boolean
+        PaymentPointListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateBad:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateBadExported:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateCleared:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateExported:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateProcessed:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateInput:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DateReceived:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentAllocationResource'
+        Deallocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentDeallocationResource'
+        PaymentTransactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentTransactionResource'
+        RelatedJobGuids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPaymentResource'
+        RelatedSysUserGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReasonBadListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodBadListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsRefund:
+          type: boolean
+        TransactionPaymentReferenceFilter:
+          type: string
+        TransactionReferenceFilter:
+          type: string
+        RelatedRemitLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        UnallocatedAmount:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

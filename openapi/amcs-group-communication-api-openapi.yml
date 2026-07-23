@@ -1,0 +1,337 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Communication API
+  version: core
+tags:
+- name: Communication
+paths:
+  /comms/communications/changes:
+    get:
+      tags:
+      - Communication
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ----------------------------------------- | --------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the communication.|\r\n| ClosedDate| The closed date of the communication.|\r\n| ExternalReference| The external reference of the communication.|\r\n| Notes| The notes of the communication.|\r\n| OutcomeNotes| The outcome notes of the communication.|\r\n| RelatedUserOwnerGuid| The GUID associated to the user owner of the communication. Filterable.|\r\n| ReviewDate| The review date of communication.|\r\n| CommunicationClassificationListItem| The GUID and description of the classification associated to the communication.|\r\n| CommunicationTypeListItem| The GUID and description of the type associated to the communication.|\r\n| CommunicationOutcomeListItem| The GUID and description of the outcome associated to the communication.|\r\n| Followups[0]                              | A list of objects containing communication followups.|\r\n| Followups[0].ClosedDate| The communication followup closed date.|\r\n| Followups[0].RelatedUserAssignedToGuid    | The GUID associated to the assigned user of communication followup.|\r\n| Followups[0].IsDeleted    | Whether the communication followup is deleted.|\r\n| Followups[0].GUID| The GUID of the communication followup.|\r\n| RouteVisits[0]                            | A list of objects containing communication routevisits.|\r\n| RouteVisits[0].RelatedRouteVisitGuid| The GUID of the related route visit associated to communication route visit.|\r\n| RouteVisits[0].IsDeleted    | Whether the communication route visit is deleted.|\r\n| RouteVisits[0].GUID| The GUID of the communication route visit.|\r\n| DocumentBlobs[0]| The list of document blobs associated to the communication.|\r\n| DocumentBlobs[0].GUID| The GUID associated to the document blob.|\r\n| DocumentBlobs[0].IsDeleted| Whether the document blob is deleted.|\r\n| DocumentBlobs[0].DocumentReference| The document reference of the document blob.|\r\n| DocumentBlobs[0].DocumentName| The document name of the document blob.|\r\n| DocumentBlobs[0].Description| The description of the document blob.|\r\n| Jobs[0]| A list of objects containing communication jobs.|\r\n| Jobs[0].RelatedJobGuid| The GUID of the related job associated to communication job.|\r\n| Jobs[0].IsDeleted| Whether the communication job is deleted.|\r\n| Jobs[0].GUID| The GUID of the communication job.|\r\n| IsDeleted| Whether the communication is deleted.|\r\n| RelatedUserAssignedToGuidFilter           | Used to filter the assigned to user guid associated to the communication followup.|\r\n| RelatedDocumentBlobGuidFilter| Used to filter the guid associated to the communication document blob.|\r\n| RelatedRouteVisitGuidFilter| Used to filter the guid of RouteVisit associated to the communication route visit.|\r\n| RelatedJobGuidFilter| Used to filter the guid of Job associated to the communication job.|\r\n| FollowupGuidFilter| Used to filter the guid associated to the communication followup.|\r\n| RouteVisitGuidFilter| Used to filter the guid associated to the communication route visit.|\r\n| JobGuidFilter| Used to filter the guid associated to the communication job.|"
+      operationId: Communication_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCommunicationResource]'
+  /comms/communications/{guid}:
+    get:
+      tags:
+      - Communication
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ----------------------------------------- | --------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the communication.|\r\n| ClosedDate| The closed date of the communication.|\r\n| ExternalReference| The external reference of the communication.|\r\n| Notes| The notes of the communication.|\r\n| OutcomeNotes| The outcome notes of the communication.|\r\n| RelatedUserOwnerGuid| The GUID associated to the user owner of the communication. Filterable.|\r\n| ReviewDate| The review date of communication.|\r\n| CommunicationClassificationListItem| The GUID and description of the classification associated to the communication.|\r\n| CommunicationTypeListItem| The GUID and description of the type associated to the communication.|\r\n| CommunicationOutcomeListItem| The GUID and description of the outcome associated to the communication.|\r\n| Followups[0]                              | A list of objects containing communication followups.|\r\n| Followups[0].ClosedDate| The communication followup closed date.|\r\n| Followups[0].RelatedUserAssignedToGuid    | The GUID associated to the assigned user of communication followup.|\r\n| Followups[0].IsDeleted    | Whether the communication followup is deleted.|\r\n| Followups[0].GUID| The GUID of the communication followup.|\r\n| RouteVisits[0]                            | A list of objects containing communication routevisits.|\r\n| RouteVisits[0].RelatedRouteVisitGuid| The GUID of the related route visit associated to communication route visit.|\r\n| RouteVisits[0].IsDeleted    | Whether the communication route visit is deleted.|\r\n| RouteVisits[0].GUID| The GUID of the communication route visit.|\r\n| DocumentBlobs[0]| The list of document blobs associated to the communication.|\r\n| DocumentBlobs[0].GUID| The GUID associated to the document blob.|\r\n| DocumentBlobs[0].IsDeleted| Whether the document blob is deleted.|\r\n| DocumentBlobs[0].DocumentReference| The document reference of the document blob.|\r\n| DocumentBlobs[0].DocumentName| The document name of the document blob.|\r\n| DocumentBlobs[0].Description| The description of the document blob.|\r\n| Jobs[0]| A list of objects containing communication jobs.|\r\n| Jobs[0].RelatedJobGuid| The GUID of the related job associated to communication job.|\r\n| Jobs[0].IsDeleted| Whether the communication job is deleted.|\r\n| Jobs[0].GUID| The GUID of the communication job.|\r\n| IsDeleted| Whether the communication is deleted.|\r\n| RelatedUserAssignedToGuidFilter           | Used to filter the assigned to user guid associated to the communication followup.|\r\n| RelatedDocumentBlobGuidFilter| Used to filter the guid associated to the communication document blob.|\r\n| RelatedRouteVisitGuidFilter| Used to filter the guid of RouteVisit associated to the communication route visit.|\r\n| RelatedJobGuidFilter| Used to filter the guid of Job associated to the communication job.|\r\n| FollowupGuidFilter| Used to filter the guid associated to the communication followup.|\r\n| RouteVisitGuidFilter| Used to filter the guid associated to the communication route visit.|\r\n| JobGuidFilter| Used to filter the guid associated to the communication job.|"
+      operationId: Communication_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCommunicationResource]'
+  /comms/communications:
+    get:
+      tags:
+      - Communication
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ----------------------------------------- | --------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the communication.|\r\n| ClosedDate| The closed date of the communication.|\r\n| ExternalReference| The external reference of the communication.|\r\n| Notes| The notes of the communication.|\r\n| OutcomeNotes| The outcome notes of the communication.|\r\n| RelatedUserOwnerGuid| The GUID associated to the user owner of the communication. Filterable.|\r\n| ReviewDate| The review date of communication.|\r\n| CommunicationClassificationListItem| The GUID and description of the classification associated to the communication.|\r\n| CommunicationTypeListItem| The GUID and description of the type associated to the communication.|\r\n| CommunicationOutcomeListItem| The GUID and description of the outcome associated to the communication.|\r\n| Followups[0]                              | A list of objects containing communication followups.|\r\n| Followups[0].ClosedDate| The communication followup closed date.|\r\n| Followups[0].RelatedUserAssignedToGuid    | The GUID associated to the assigned user of communication followup.|\r\n| Followups[0].IsDeleted    | Whether the communication followup is deleted.|\r\n| Followups[0].GUID| The GUID of the communication followup.|\r\n| RouteVisits[0]                            | A list of objects containing communication routevisits.|\r\n| RouteVisits[0].RelatedRouteVisitGuid| The GUID of the related route visit associated to communication route visit.|\r\n| RouteVisits[0].IsDeleted    | Whether the communication route visit is deleted.|\r\n| RouteVisits[0].GUID| The GUID of the communication route visit.|\r\n| DocumentBlobs[0]| The list of document blobs associated to the communication.|\r\n| DocumentBlobs[0].GUID| The GUID associated to the document blob.|\r\n| DocumentBlobs[0].IsDeleted| Whether the document blob is deleted.|\r\n| DocumentBlobs[0].DocumentReference| The document reference of the document blob.|\r\n| DocumentBlobs[0].DocumentName| The document name of the document blob.|\r\n| DocumentBlobs[0].Description| The description of the document blob.|\r\n| Jobs[0]| A list of objects containing communication jobs.|\r\n| Jobs[0].RelatedJobGuid| The GUID of the related job associated to communication job.|\r\n| Jobs[0].IsDeleted| Whether the communication job is deleted.|\r\n| Jobs[0].GUID| The GUID of the communication job.|\r\n| IsDeleted| Whether the communication is deleted.|\r\n| RelatedUserAssignedToGuidFilter           | Used to filter the assigned to user guid associated to the communication followup.|\r\n| RelatedDocumentBlobGuidFilter| Used to filter the guid associated to the communication document blob.|\r\n| RelatedRouteVisitGuidFilter| Used to filter the guid of RouteVisit associated to the communication route visit.|\r\n| RelatedJobGuidFilter| Used to filter the guid of Job associated to the communication job.|\r\n| FollowupGuidFilter| Used to filter the guid associated to the communication followup.|\r\n| RouteVisitGuidFilter| Used to filter the guid associated to the communication route visit.|\r\n| JobGuidFilter| Used to filter the guid associated to the communication job.|"
+      operationId: Communication_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCommunicationResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorCommunicationDocumentBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        DocumentReference:
+          type: string
+        Description:
+          type: string
+        DocumentName:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorCommunicationResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges[ApiIntegratorCommunicationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorCommunicationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorCommunicationFollowupResource:
+      type: object
+      properties:
+        ClosedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedUserAssignedToGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCommunicationJobResource:
+      type: object
+      properties:
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCommunicationResource:
+      type: object
+      properties:
+        ClosedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExternalReference:
+          type: string
+        Notes:
+          type: string
+        OutcomeNotes:
+          type: string
+        RelatedUserOwnerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReviewDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        CommunicationClassificationListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CommunicationTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CommunicationOutcomeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Followups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationFollowupResource'
+        RouteVisits:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationRouteVisitResource'
+        DocumentBlobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationDocumentBlobHashesResource'
+        Jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationJobResource'
+        RelatedUserAssignedToGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedDocumentBlobGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        FollowupGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RouteVisitGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        JobGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorCommunicationRouteVisitResource:
+      type: object
+      properties:
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

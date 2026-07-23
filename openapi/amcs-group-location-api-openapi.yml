@@ -1,0 +1,347 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Location API
+  version: core
+tags:
+- name: Location
+paths:
+  /directory/locations/changes:
+    get:
+      tags:
+      - Location
+      summary: Retrieve changes
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the location.                                  |\r\n| Description   | The description associated to the location.                           |\r\n| TimeZone       | The TimeZone associated to the location.                              |\r\n| LegalName   | The LegalName associated to the location.                             |\r\n| Directions   | The Directions associated to the location.                            |\r\n| UniqueReference   | The UniqueReference associated to the location.                       |\r\n| Acreage   | The Acreage associated to the location.   |\r\n| IsDeleted   | Whether the location is deleted.               |\r\n| Address   | The Address object associated to the location.   |\r\n| Address.HouseNumber  | The HouseNumber associated address object of the location.            |\r\n| Address.Address1   | The Address1 associated to the address object of the location.               |\r\n| Address.Address2   | The Address2 associated to the address object of the location.               |\r\n| Address.Address3   | The Address3 associated to the address object of the location.               |\r\n| Address.Address4   | The Address4 associated to the address object of the location.               |\r\n| Address.Address5   | The Address5 associated to the address object of the location.               |\r\n| Address.Address6   | The Address6 associated to the address object of the location.               |\r\n| Address.Address7   | The Address7 associated to the address object of the location.               |\r\n| Address.Address8   | The Address8 associated to the address object of the location.               |\r\n| Address.Address9   | The Address9 associated to the address object of the location.               |\r\n| Address.Postcode   | The Postcode associated to the address object of the location.               |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location. |\r\n| Address.RegionCodeListItem  | The GUID and region code associated to the address object of the location. |\r\n| Address.ContactMethods | The ContactMethods object associated to the address object of the location. |\r\n| Address.ContactMethods.TelNo | The telephone number object associated to the ContactMethods object of the address object of the location. |\r\n| Address.ContactMethods.FaxNo | The fax number object associated to the ContactMethods object of the address object of the location. |\r\n| Geo| The Geo object associated to the location.   |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location. |\r\n| Geo.ParcelBoundaryListItem | The GUID and description of the parcel boundary associated to the Geo object of the location. |\r\n| Geo.Location| The location object associated to the Geo object of the location. |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location. |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location. |"
+      operationId: Location_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorLocationResource]'
+  /directory/locations/{guid}:
+    get:
+      tags:
+      - Location
+      summary: Find with GUID
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the location.                                  |\r\n| Description   | The description associated to the location.                           |\r\n| TimeZone       | The TimeZone associated to the location.                              |\r\n| LegalName   | The LegalName associated to the location.                             |\r\n| Directions   | The Directions associated to the location.                            |\r\n| UniqueReference   | The UniqueReference associated to the location.                       |\r\n| Acreage   | The Acreage associated to the location.   |\r\n| IsDeleted   | Whether the location is deleted.               |\r\n| Address   | The Address object associated to the location.   |\r\n| Address.HouseNumber  | The HouseNumber associated address object of the location.            |\r\n| Address.Address1   | The Address1 associated to the address object of the location.               |\r\n| Address.Address2   | The Address2 associated to the address object of the location.               |\r\n| Address.Address3   | The Address3 associated to the address object of the location.               |\r\n| Address.Address4   | The Address4 associated to the address object of the location.               |\r\n| Address.Address5   | The Address5 associated to the address object of the location.               |\r\n| Address.Address6   | The Address6 associated to the address object of the location.               |\r\n| Address.Address7   | The Address7 associated to the address object of the location.               |\r\n| Address.Address8   | The Address8 associated to the address object of the location.               |\r\n| Address.Address9   | The Address9 associated to the address object of the location.               |\r\n| Address.Postcode   | The Postcode associated to the address object of the location.               |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location. |\r\n| Address.RegionCodeListItem  | The GUID and region code associated to the address object of the location. |\r\n| Address.ContactMethods | The ContactMethods object associated to the address object of the location. |\r\n| Address.ContactMethods.TelNo | The telephone number object associated to the ContactMethods object of the address object of the location. |\r\n| Address.ContactMethods.FaxNo | The fax number object associated to the ContactMethods object of the address object of the location. |\r\n| Geo| The Geo object associated to the location.   |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location. |\r\n| Geo.ParcelBoundaryListItem | The GUID and description of the parcel boundary associated to the Geo object of the location. |\r\n| Geo.Location| The location object associated to the Geo object of the location. |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location. |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location. |"
+      operationId: Location_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorLocationResource]'
+    put:
+      tags:
+      - Location
+      summary: Partial update
+      description: "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Description   | The description associated to the location.                           | Yes |\r\n| TimeZone       | The TimeZone associated to the location.                              | No |\r\n| LegalName   | The LegalName associated to the location.                             | No |\r\n| Directions   | The Directions associated to the location.                            | No |\r\n| UniqueReference   | The UniqueReference associated to the location.                       | No |\r\n| Acreage   | The Acreage associated to the location.   | No |\r\n| Address   | The Address object associated to the location.   | Yes |\r\n| Address.HouseNumber  | The HouseNumber associated address object of the location.            | No |\r\n| Address.Address1   | The Address1 associated to the address object of the location.               | No |\r\n| Address.Address2   | The Address2 associated to the address object of the location.               | No |\r\n| Address.Address3   | The Address3 associated to the address object of the location.               | No |\r\n| Address.Address4   | The Address4 associated to the address object of the location.               | No |\r\n| Address.Address5   | The Address5 associated to the address object of the location.               | No |\r\n| Address.Address6   | The Address6 associated to the address object of the location.               | No |\r\n| Address.Address7   | The Address7 associated to the address object of the location.               | No |\r\n| Address.Address8   | The Address8 associated to the address object of the location.               | No |\r\n| Address.Address9   | The Address9 associated to the address object of the location.               | No |\r\n| Address.Postcode   | The Postcode associated to the address object of the location.               | No |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location. | No |\r\n| Address.RegionCodeListItem  | The GUID and region code associated to the address object of the location. | No |\r\n| Address.ContactMethods | The ContactMethods object associated to the address object of the location. | No |\r\n| Address.ContactMethods.TelNo | The telephone number object associated to the ContactMethods object of the address object of the location. | No |\r\n| Address.ContactMethods.FaxNo | The fax number object associated to the ContactMethods object of the address object of the location. | No |\r\n| Geo| The Geo object associated to the location.   | No |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location. | No |\r\n| Geo.ParcelBoundaryListItem | The GUID and description of the parcel boundary associated to the Geo object of the location. | No |\r\n| Geo.Location| The location object associated to the Geo object of the location. | No |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location. | No |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location. | No |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location. | No |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location. | No |\r\n| IsDeleted| Whether the location is deleted.              | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If TimeZone value has been changed | TimeZone is a read-only property |\r\n| If IsDeleted true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If we attempt to delete a Location | An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value. |\r\n| If Geo.Location.Lat value has been changed | Geo.Location.Lat is a read-only property |\r\n| If Geo.Location.Long value has been changed | Geo.Location.Long is a read-only property |\r\n| Geo.Latitude value not in range between -90 and 90 or Geo.Longitude value not in range between -180 and 180 | Geo.Latitude value must be between -90 and 90. Geo.Longitude value must be between -180 and 180. |"
+      operationId: Location_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /directory/locations:
+    get:
+      tags:
+      - Location
+      summary: Find with Filters
+      description: "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the location.                                  |\r\n| Description   | The description associated to the location.                           |\r\n| TimeZone       | The TimeZone associated to the location.                              |\r\n| LegalName   | The LegalName associated to the location.                             |\r\n| Directions   | The Directions associated to the location.                            |\r\n| UniqueReference   | The UniqueReference associated to the location.                       |\r\n| Acreage   | The Acreage associated to the location.   |\r\n| IsDeleted   | Whether the location is deleted.               |\r\n| Address   | The Address object associated to the location.   |\r\n| Address.HouseNumber  | The HouseNumber associated address object of the location.            |\r\n| Address.Address1   | The Address1 associated to the address object of the location.               |\r\n| Address.Address2   | The Address2 associated to the address object of the location.               |\r\n| Address.Address3   | The Address3 associated to the address object of the location.               |\r\n| Address.Address4   | The Address4 associated to the address object of the location.               |\r\n| Address.Address5   | The Address5 associated to the address object of the location.               |\r\n| Address.Address6   | The Address6 associated to the address object of the location.               |\r\n| Address.Address7   | The Address7 associated to the address object of the location.               |\r\n| Address.Address8   | The Address8 associated to the address object of the location.               |\r\n| Address.Address9   | The Address9 associated to the address object of the location.               |\r\n| Address.Postcode   | The Postcode associated to the address object of the location.               |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location. |\r\n| Address.RegionCodeListItem  | The GUID and region code associated to the address object of the location. |\r\n| Address.ContactMethods | The ContactMethods object associated to the address object of the location. |\r\n| Address.ContactMethods.TelNo | The telephone number object associated to the ContactMethods object of the address object of the location. |\r\n| Address.ContactMethods.FaxNo | The fax number object associated to the ContactMethods object of the address object of the location. |\r\n| Geo| The Geo object associated to the location.   |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location. |\r\n| Geo.ParcelBoundaryListItem | The GUID and description of the parcel boundary associated to the Geo object of the location. |\r\n| Geo.Location| The location object associated to the Geo object of the location. |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location. |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location. |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location. |"
+      operationId: Location_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorLocationResource]'
+    post:
+      tags:
+      - Location
+      summary: Create or update
+      description: "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Description   | The description associated to the location.                           | Yes |\r\n| TimeZone       | The TimeZone associated to the location.                              | No |\r\n| LegalName   | The LegalName associated to the location.                             | No |\r\n| Directions   | The Directions associated to the location.                            | No |\r\n| UniqueReference   | The UniqueReference associated to the location.                       | No |\r\n| Acreage   | The Acreage associated to the location.   | No |\r\n| Address   | The Address object associated to the location.   | Yes |\r\n| Address.HouseNumber  | The HouseNumber associated address object of the location.            | No |\r\n| Address.Address1   | The Address1 associated to the address object of the location.               | No |\r\n| Address.Address2   | The Address2 associated to the address object of the location.               | No |\r\n| Address.Address3   | The Address3 associated to the address object of the location.               | No |\r\n| Address.Address4   | The Address4 associated to the address object of the location.               | No |\r\n| Address.Address5   | The Address5 associated to the address object of the location.               | No |\r\n| Address.Address6   | The Address6 associated to the address object of the location.               | No |\r\n| Address.Address7   | The Address7 associated to the address object of the location.               | No |\r\n| Address.Address8   | The Address8 associated to the address object of the location.               | No |\r\n| Address.Address9   | The Address9 associated to the address object of the location.               | No |\r\n| Address.Postcode   | The Postcode associated to the address object of the location.               | No |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location. | No |\r\n| Address.RegionCodeListItem  | The GUID and region code associated to the address object of the location. | No |\r\n| Address.ContactMethods | The ContactMethods object associated to the address object of the location. | No |\r\n| Address.ContactMethods.TelNo | The telephone number object associated to the ContactMethods object of the address object of the location. | No |\r\n| Address.ContactMethods.FaxNo | The fax number object associated to the ContactMethods object of the address object of the location. | No |\r\n| Geo| The Geo object associated to the location.   | No |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location. | No |\r\n| Geo.ParcelBoundaryListItem | The GUID and description of the parcel boundary associated to the Geo object of the location. | No |\r\n| Geo.Location| The location object associated to the Geo object of the location. | No |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location. | No |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location. | No |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location. | No |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location. | No |\r\n| IsDeleted| Whether the location is deleted.              | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| TimeZone has a value | TimeZone must be set to null. |\r\n| If IsDeleted true | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If we attempt to delete a Location | An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value. |\r\n| Geo.Location has a value | Geo.Location must be set to null. |\r\n| Geo.Latitude value not in range between -90 and 90 or Geo.Longitude value not in range between -180 and 180 | Geo.Latitude value must be between -90 and 90. Geo.Longitude value must be between -180 and 180. |"
+      operationId: Location_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollection[ApiIntegratorLocationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceChanges[ApiIntegratorLocationResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorLocationAddressContactMethodsResource:
+      type: object
+      properties:
+        TelNo:
+          type: string
+        FaxNo:
+          type: string
+    ApiIntegratorLocationGeoResource:
+      type: object
+      properties:
+        ZoneListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ParcelBoundaryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
+        Latitude:
+          type: number
+          format: double
+        Longitude:
+          type: number
+          format: double
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorLocationAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Address6:
+          type: string
+        Address7:
+          type: string
+        Address8:
+          type: string
+        Address9:
+          type: string
+        Postcode:
+          type: string
+        ContactMethods:
+          $ref: '#/components/schemas/ApiIntegratorLocationAddressContactMethodsResource'
+        PostTownListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RegionCodeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity[ApiIntegratorLocationResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorLocationGeoLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorLocationResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorLocationAddressResource'
+        TimeZone:
+          type: string
+        LegalName:
+          type: string
+        Directions:
+          type: string
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoResource'
+        UniqueReference:
+          type: string
+        Acreage:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

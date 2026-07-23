@@ -1,0 +1,248 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup OrderCombinationGrouping API
+  version: core
+tags:
+- name: OrderCombinationGrouping
+paths:
+  /accounting/orderCombinationGroupings/changes:
+    get:
+      tags:
+      - OrderCombinationGrouping
+      summary: Retrieve changes
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| The related payment guid. Filterable       |\r\n| IsDeleted| Whether the order combination grouping is deleted   |"
+      operationId: OrderCombinationGrouping_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorOrderCombinationGroupingResource]'
+  /accounting/orderCombinationGroupings/{guid}:
+    get:
+      tags:
+      - OrderCombinationGrouping
+      summary: Find with GUID
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| The related payment guid. Filterable       |\r\n| IsDeleted| Whether the order combination grouping is deleted   |"
+      operationId: OrderCombinationGrouping_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorOrderCombinationGroupingResource]'
+  /accounting/orderCombinationGroupings:
+    get:
+      tags:
+      - OrderCombinationGrouping
+      summary: Find with Filters
+      description: "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| The related payment guid. Filterable       |\r\n| IsDeleted| Whether the order combination grouping is deleted   |"
+      operationId: OrderCombinationGrouping_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorOrderCombinationGroupingResource]'
+    post:
+      tags:
+      - OrderCombinationGrouping
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| --------------------------------- |-----------------------------------------------------------|--------- |\r\n| GUID| The guid associated to the order combination grouping.    |No     |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable|Yes   |\r\n| RelatedSiteGuid| The related site guid. Filterable|Yes   |\r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable|No   |\r\n| RelatedPaymentGuid| The related payment guid. Filterable |No   |\r\n| IsDeleted| Whether the order combination grouping is deleted |No   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedOrderCombinationGroupGuid is null | The mandatory property RelatedOrderCombinationGroupGuid has a null value. The request could not be processed. Supply a value for the RelatedOrderCombinationGroupGuid property of the submitted resource. |\r\n| If RelatedSiteGuid is null  | The mandatory property RelatedSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedSiteGuid property of the submitted resource. |\r\n| If IsDeleted is true  | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |"
+      operationId: OrderCombinationGrouping_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorOrderCombinationGroupingResource:
+      type: object
+      properties:
+        RelatedOrderCombinationGroupGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceBatchGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPaymentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity[ApiIntegratorOrderCombinationGroupingResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges[ApiIntegratorOrderCombinationGroupingResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorOrderCombinationGroupingResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

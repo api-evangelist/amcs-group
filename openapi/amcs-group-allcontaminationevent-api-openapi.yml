@@ -1,0 +1,213 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AllContaminationEvent API
+  version: core
+tags:
+- name: AllContaminationEvent
+paths:
+  /visionai/api/integrator/allContaminationEvents/changes:
+    get:
+      tags:
+      - AllContaminationEvent
+      summary: Request list of All Contamination Event changes
+      description: "# Request list of All Contamination Event changes\r\n\r\nRetrieve changes in the list of Contamination Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false\r\n\r\n## Input\r\n\r\n| Parameter               | Description                |\r\n| ----------------------- | -------------------------- |\r\n| since                   | Bookmark from extra.until  |\r\n| cursor                  | Bookmark from extra.cursor |\r\n| links                   | N/A                        |\r\n\r\n## Output\r\n\r\n| Property\t\t\t\t\t\t| Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |\r\n| GUID\t\t\t\t\t\t\t\t| GUID     | ID of the Contamination Event.\t\t\t\t\t\t\t\t\t\t\t\t\t                          \t|\r\n| TenantId\t\t\t\t\t\t| GUID     | ID of the Tenant associated with the Contamination Event\t\t                        |\r\n| CustomerName\t\t\t\t\t|string| Name of the customer of the Contamination Event|\r\n| CompanyOutletId\t\t\t| GUID     | ID of the Company Outlet associated with the Contamination Event                  \t|\r\n| OutletName\t\t\t| string     | Name of the Company Outlet associated with the Contamination Event                  \t|\r\n| CustomerSiteId\t\t\t| GUID     | ID of the Customer Site associated with the Contamination Event                     |\r\n| SiteName\t\t\t| string     | Name of the Site associated with the Contamination Event                     |\r\n| CustomerType\t\t\t| string     | Type of customer associated with the Contamination Event                     |\r\n| CustomerAddress\t\t\t| string     | Address of customer associated with the Contamination Event                     |\r\n| VehicleId\t\t\t\t\t\t| GUID     | ID of the Vehicle associated with the Contamination Event\t\t\t\t                  \t|\r\n| Latitude\t   \t\t\t  | double   | Location of the Contamination Event                                                |\r\n| Longitude\t\t\t\t\t\t| double   | Location of the Contamination Event                                                |\r\n| Timestamp\t\t\t\t\t\t| DateTime | Timestamp of the Contamination Event\t                                              |\r\n| ContaminationScore \t| int      | Degree of Contamination found                                                      |\r\n| GrossWeight\t\t\t|double|Gross weight of the Contamination Event\t|\r\n| TareWeight\t\t\t\t|double| Tare weight of the Contamination Event |\r\n| NetWeight\t\t\t\t|double| Net weight of the Contamination Event|\r\n| Seq\t\t\t\t\t|int|Sequence of the Contamination Event |\r\n| RFID\t\t\t| GUID | RFID of the Contamination Event |\r\n| WeighErrorCode\t\t| int | Weight error code of the Contamination Event |\r\n| Lifter\t\t\t\t|int|Lifter of the Contamination Event\t|\r\n| ContainerId\t\t\t|string|Conntainer Id of the Contamination Event |\r\n| WasteType\t\t\t\t|string|Waste type of the Contamination Event |\r\n| QRCodeRawText\t\t\t|string| Raw QR code value of the COntamination Event |\r\n| TotalSurfaceAreaVolume\t\t\t|double| The total surface area of the Contamination Event |\r\n| Materials\t\t\t|string| The materials detected of the Contamination Event |\r\n| ExternalEventId\t\t\t|string| The external event Id of the Contamination Event |\r\n| ImageSas\t\t\t|string| The image SAS url of the Contamination Event expires within 24 hours|\r\n| extra.until         | string   | Bookmark to put in as \"since\" later - appears when there are no more pages for now |\r\n| link.next           | URI      | Link to follow to get next page with changes                                       |"
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiAllContaminationEventExternalResource]'
+components:
+  schemas:
+    ApiResourceChanges[ApiAllContaminationEventExternalResource]:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal'
+          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+          nullable: true
+        cursor:
+          type: string
+          nullable: true
+        since:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type: integer
+          format: int32
+          nullable: true
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          nullable: true
+        lastChangeReasonId:
+          type: integer
+          format: int32
+          nullable: true
+        tempIdentifier:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          format: uuid
+        customerName:
+          type: string
+          nullable: true
+        companyOutletId:
+          type: string
+          format: uuid
+          nullable: true
+        outletName:
+          type: string
+          nullable: true
+        customerSiteId:
+          type: string
+          format: uuid
+          nullable: true
+        siteName:
+          type: string
+          nullable: true
+        customerType:
+          type: string
+          nullable: true
+        customerAddress:
+          type: string
+          nullable: true
+        vehicleId:
+          type: string
+          format: uuid
+          nullable: true
+        vehicleReg:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        timestamp:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        contaminationScore:
+          type: integer
+          format: int32
+          nullable: true
+        grossWeight:
+          type: number
+          format: double
+          nullable: true
+        tareWeight:
+          type: number
+          format: double
+          nullable: true
+        netWeight:
+          type: number
+          format: double
+          nullable: true
+        seq:
+          type: integer
+          format: int32
+          nullable: true
+        rfid:
+          type: string
+          format: uuid
+          nullable: true
+        weighErrorCode:
+          type: integer
+          format: int32
+          nullable: true
+        lifter:
+          type: integer
+          format: int32
+          nullable: true
+        containerId:
+          type: string
+          nullable: true
+        wasteType:
+          type: string
+          nullable: true
+        qrCodeRawText:
+          type: string
+          nullable: true
+        totalSurfaceAreaVolume:
+          type: number
+          format: double
+          nullable: true
+        materials:
+          type: string
+          nullable: true
+        externalEventId:
+          type: string
+          nullable: true
+        imageSas:
+          type: string
+          format: byte
+          nullable: true
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        isSuccess:
+          type: boolean
+      additionalProperties: false

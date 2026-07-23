@@ -1,0 +1,33 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup PluginMetadataExchange API
+  version: core
+tags:
+- name: PluginMetadataExchange
+paths:
+  /plugin/mex:
+    post:
+      tags:
+      - PluginMetadataExchange
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.PluginData.Data.IPluginAction'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.PluginData.Data.IPluginAction:
+      type: object
+      additionalProperties: false

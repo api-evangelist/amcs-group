@@ -1,0 +1,272 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Service API
+  version: core
+tags:
+- name: Service
+paths:
+  /lists/services/{guid}:
+    get:
+      tags:
+      - Service
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the service                               |\r\n| Description               | The description of the service                   |\r\n| ExternalDescription       | The external description of the service                                  |\r\n| ShortName                 | The short name description of the service                                |\r\n| AnalysisCode              | The analysis code of the service                       |\r\n| IsDeleted                 | Whether the service is deleted  |\r\n| AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |\r\n| AllowBulkMovements        | Is bulk movements allowable for this service?|\r\n| AllowDriverResequence     | Is driver resequence allowable for this service?|\r\n| AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|\r\n| AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|\r\n| AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|\r\n| AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|\r\n| AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|\r\n| CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |\r\n| CreditAccountRequired| Is credit account required for this service?|\r\n| DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|\r\n| EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|\r\n| ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|\r\n| AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|\r\n| FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|\r\n| IsAccountsPayable| Is accounts payable for this service?|\r\n| IsBookable| Is this service bookable?|\r\n| IsBrokerageOnly| Is this service brokerage only?|\r\n| IsCollection| Is this service collection?|\r\n| IsDirectMovement| Is this service direct movement?|\r\n| IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|\r\n| IsExport| Is this service export?|\r\n| IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|\r\n| IsManagement| Is this service management?|\r\n| IsManifest| Is this service manifest?|\r\n| IsMaterialOut| Is material out for this service?|\r\n| IsQuantityBased| Is this service quantity based?|\r\n| IsRouteWeighing| Is this service route weighing?|\r\n| IsScheduled| Is this service scheduled?|\r\n| IsScheduledBag| Is scheduled bag for this service?|\r\n| IsStandingOrder| Is standing order for this service?|\r\n| IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|\r\n| IsTipper| Is this service tripper?|\r\n| IsTransferOut| Is this service transfer out?|\r\n| IsUnScheduledMaterial| Is this service unscheduled material?|\r\n| IsWeighingSignatureRequired | Is weighing signature required for this service?|\r\n| IsWorkOrder| Is work order for this service?|\r\n| OneInvoicePerJobDefault| The one invoice per job default of the service|\r\n| RecordSummaryQuantity| The record summary quantity of the service|\r\n| RequiresPeriodicDoC| The requires periodic DoC of the service|\r\n| ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|\r\n| ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|\r\n| WarnOnOutOfCycle| The warn on out of cycle of the service|\r\n| JobStatusTrackingLevel| The job status tracking level of teh service|\r\n| PremiumHireDayThreshold| The premium hire day threshold of the service|\r\n| BusinessTypeListItem| The GUID and description of the business type of the service|\r\n| ServiceCategoryListItem| The GUID and description of the service category of the service|\r\n\r\n"
+      operationId: Service_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorServiceResource]'
+  /lists/services:
+    get:
+      tags:
+      - Service
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the service                               |\r\n| Description               | The description of the service                   |\r\n| ExternalDescription       | The external description of the service                                  |\r\n| ShortName                 | The short name description of the service                                |\r\n| AnalysisCode              | The analysis code of the service                       |\r\n| IsDeleted                 | Whether the service is deleted  |\r\n| AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |\r\n| AllowBulkMovements        | Is bulk movements allowable for this service?|\r\n| AllowDriverResequence     | Is driver resequence allowable for this service?|\r\n| AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|\r\n| AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|\r\n| AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|\r\n| AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|\r\n| AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|\r\n| CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |\r\n| CreditAccountRequired| Is credit account required for this service?|\r\n| DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|\r\n| EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|\r\n| ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|\r\n| AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|\r\n| FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|\r\n| IsAccountsPayable| Is accounts payable for this service?|\r\n| IsBookable| Is this service bookable?|\r\n| IsBrokerageOnly| Is this service brokerage only?|\r\n| IsCollection| Is this service collection?|\r\n| IsDirectMovement| Is this service direct movement?|\r\n| IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|\r\n| IsExport| Is this service export?|\r\n| IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|\r\n| IsManagement| Is this service management?|\r\n| IsManifest| Is this service manifest?|\r\n| IsMaterialOut| Is material out for this service?|\r\n| IsQuantityBased| Is this service quantity based?|\r\n| IsRouteWeighing| Is this service route weighing?|\r\n| IsScheduled| Is this service scheduled?|\r\n| IsScheduledBag| Is scheduled bag for this service?|\r\n| IsStandingOrder| Is standing order for this service?|\r\n| IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|\r\n| IsTipper| Is this service tripper?|\r\n| IsTransferOut| Is this service transfer out?|\r\n| IsUnScheduledMaterial| Is this service unscheduled material?|\r\n| IsWeighingSignatureRequired | Is weighing signature required for this service?|\r\n| IsWorkOrder| Is work order for this service?|\r\n| OneInvoicePerJobDefault| The one invoice per job default of the service|\r\n| RecordSummaryQuantity| The record summary quantity of the service|\r\n| RequiresPeriodicDoC| The requires periodic DoC of the service|\r\n| ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|\r\n| ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|\r\n| WarnOnOutOfCycle| The warn on out of cycle of the service|\r\n| JobStatusTrackingLevel| The job status tracking level of teh service|\r\n| PremiumHireDayThreshold| The premium hire day threshold of the service|\r\n| BusinessTypeListItem| The GUID and description of the business type of the service|\r\n| ServiceCategoryListItem| The GUID and description of the service category of the service|\r\n\r\n"
+      operationId: Service_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorServiceResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorServiceResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorServiceResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorServiceResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        ExternalDescription:
+          type: string
+        ShortName:
+          type: string
+        AnalysisCode:
+          type: string
+        AllowBarcodeScanningOnQuantityBasedBreakdown:
+          type: boolean
+        AllowBulkMovements:
+          type: boolean
+        AllowDriverResequence:
+          type: boolean
+        AllowManualBarcodeEntry:
+          type: boolean
+        AllowQuantityBasedBreakdown:
+          type: boolean
+        AllowRecordBreakdownNotCollected:
+          type: boolean
+        AllowWasteTransferFormatSignatures:
+          type: boolean
+        AllowZeroWeightsOnMobile:
+          type: boolean
+        CaptureFillLevelOnQuantityBasedBreakdown:
+          type: boolean
+        CreditAccountRequired:
+          type: boolean
+        DynamicOptimisationEnabled:
+          type: boolean
+        EnableChargeExcessWeightPerBin:
+          type: boolean
+        ExcludeAssetTracking:
+          type: boolean
+        AssetTrackingUsingSerialOrTag:
+          type: boolean
+        FilterOrderActionsbyMaterialProfile:
+          type: boolean
+        IsAccountsPayable:
+          type: boolean
+        IsBookable:
+          type: boolean
+        IsBrokerageOnly:
+          type: boolean
+        IsCollection:
+          type: boolean
+        IsDirectMovement:
+          type: boolean
+        IsDisposalMaterialChangeEnabled:
+          type: boolean
+        IsExport:
+          type: boolean
+        IsIncludedWhereDOCRequired:
+          type: boolean
+        IsManagement:
+          type: boolean
+        IsManifest:
+          type: boolean
+        IsMaterialOut:
+          type: boolean
+        IsQuantityBased:
+          type: boolean
+        IsRouteWeighing:
+          type: boolean
+        IsScheduled:
+          type: boolean
+        IsScheduledBag:
+          type: boolean
+        IsStandingOrder:
+          type: boolean
+        IsSupplierConfirmationRequired:
+          type: boolean
+        IsTipper:
+          type: boolean
+        IsTransferOut:
+          type: boolean
+        IsUnScheduledMaterial:
+          type: boolean
+        IsWeighingSignatureRequired:
+          type: boolean
+        IsWorkOrder:
+          type: boolean
+        OneInvoicePerJobDefault:
+          type: boolean
+        RecordSummaryQuantity:
+          type: boolean
+        RequiresPeriodicDoC:
+          type: boolean
+        ShowJobPaymentDetailsOnMobile:
+          type: boolean
+        ShowOrderDefaultsOnBaleCollection:
+          type: boolean
+        WarnOnOutOfCycle:
+          type: boolean
+        JobStatusTrackingLevel:
+          type: integer
+          format: int32
+        PremiumHireDayThreshold:
+          type: integer
+          format: int32
+        ServiceCategoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        BusinessTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection[ApiIntegratorServiceResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

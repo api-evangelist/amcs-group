@@ -1,0 +1,52 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup Picture API
+  version: core
+tags:
+- name: Picture
+paths:
+  /integrator/pictures:
+    post:
+      tags:
+      - Picture
+      summary: Create or update
+      description: "| Property\t\t\t\t\t\t\t\t| Description                                   | Required\t|\r\n|---------------------------------------|-----------------------------------------------|-----------|\r\n| DateTime\t\t\t\t\t\t\t\t| The date and time of the picture.\t\t\t\t|   Yes\t\t|\r\n| Description\t\t\t\t\t\t\t| The description of the picture.\t\t\t\t|   No\t\t|\r\n| RelatedVehicleReg\t\t\t\t\t\t| The related vehicle reg.\t\t\t\t\t\t|   No\t\t|\r\n| Base64Picture\t\t\t\t\t\t\t| The Base64Picture blob hash of the picture.\t|   Yes\t\t|\r\n| RelatedWeighingGuid\t\t\t\t\t| The weighing guid.\t\t\t\t\t\t\t|   No\t\t|\r\n| IsAnpr\t\t\t\t\t\t\t\t| The Anpr picture type.\t\t\t\t\t\t|   No\t\t|\r\n| CompanyOutletGuid\t\t\t\t\t\t| The CompanyOutlet guid.\t\t\t\t\t\t|   No\t\t|\r\n| SubscriberGuid\t\t\t\t\t\t| The Subscriber guid.\t\t\t\t\t\t\t|   Yes\t\t|\r\n\r\n## Extra validations\r\n\r\n| Condition | Error message |\r\n|-----------|---------------|\r\n| If RelatedVehicleReg and RelatedWeighingGuid are both null | Either RelatedVehicleReg or RelatedWeighingGuid property must have a value. |\r\n| If no Weighing is found associated to the ANPR data | Weighing not found for this ANPR data. |\r\n| If Subscriber isnt subscribed to Outlet | Subscriber isnt subscribed to Outlet. |\r\n| If no Outlets were found for Subscriber | No Outlets were found for Subscriber. |"
+      operationId: Picture_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ApiResourceId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApiResourceId'
+definitions:
+  ApiResourceId:
+    type: object
+    properties:
+      resource:
+        format: int32
+        type: integer
+      errors:
+        $ref: '#/definitions/ApiResourceErrors'
+      status:
+        $ref: '#/definitions/ApiResourceStatus'
+  ApiResourceStatus:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      isSuccess:
+        type: boolean
+  ApiResourceErrors:
+    type: object
+    properties:
+      errors:
+        type: string

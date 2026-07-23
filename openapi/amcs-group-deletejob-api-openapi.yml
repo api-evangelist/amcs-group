@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup DeleteJob API
+  version: core
+tags:
+- name: DeleteJob
+paths:
+  /transport/deleteJobs:
+    post:
+      tags:
+      - DeleteJob
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| JobGuid                               | The JobGuid associated to the about to be deleted job.| Yes |\r\n| DeleteReasonGuid                  | Delete Reason GUID IDthat match to the job                       | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| JobGuid is null | JobGuid is required. |\r\n| DeleteReasonGuid is null | DeleteReasonGuid is required. |\r\n| DeleteReasonGuid does not apply to the job | The supplied Delete Reason does not apply to the job type of the job being deleted. |\r\n| DeleteReasonGuid cannot be found | This Delete Reason cannot be found. |\r\n| Job GUID cannot be found | This job cannot be found. |\r\n| Job is already allocated | The job must be unallocated before it can be deleted. |\r\n| Job GUID is not a scheduled job | This job type cannot be deleted. |\r\n"
+      operationId: DeleteJob_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorDeleteJobResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorDeleteJobResource:
+      type: object
+      properties:
+        JobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DeleteReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

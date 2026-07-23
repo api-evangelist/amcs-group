@@ -1,0 +1,59 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/amcs-group-erp-openapi-original.json
+docs: https://amcsplatform.github.io/amcsrestapi/
+summary: >-
+  Cross-cutting request/response semantics of the AMCS Platform REST API, derived
+  from the published OpenAPI specs and the quickstart guide.
+authentication:
+  style: Personal Access Token (PrivateKey) exchanged for a session cookie
+  detail: authentication/amcs-group-authentication.yml
+idempotency:
+  supported: false
+  detail: >-
+    No Idempotency-Key header or parameter is declared in any published spec;
+    writes are not documented as idempotent-by-key.
+pagination:
+  style: page-number
+  params:
+  - name: page
+    in: query
+    description: 1-based page index on collection (GetCollection) endpoints.
+  response_fields:
+  - extra.count (total count on ApiResourceResultCollection)
+  - links.self
+  detail: >-
+    Collection endpoints return an ApiResourceResultCollection envelope carrying
+    a results array plus an extra.count total and HATEOAS links.
+field_expansion:
+  supported: true
+  mechanism: >-
+    Entity envelopes expose a links.expand array (alongside links.associations and
+    links.operations) advertising related resources that can be expanded.
+metadata:
+  envelope: >-
+    Responses wrap payloads in an ApiResource* envelope with links (self,
+    associations, expand, operations), status (id, isSuccess) and errors.
+delta_sync:
+  supported: true
+  mechanism: >-
+    Most resources expose a "/{resource}/changes" collection (operationId
+    Entity_GetChanges) for polling incremental changes since a prior point.
+request_tracing:
+  header: null
+  detail: No dedicated request-id/correlation header is documented in the specs.
+versioning:
+  scheme: platform-release
+  detail: >-
+    APIs are versioned with the AMCS Platform release train (8.x -> 9.1); the
+    docs publish a Swagger set per release. See lifecycle/amcs-group-lifecycle.yml.
+error_envelope:
+  shape: >-
+    Errors surface on the ApiResourceErrors object (errors) and the
+    ApiResourceStatus object (id, isSuccess) within the response envelope; HTTP
+    4xx/5xx status codes are also returned.
+  detail: errors/amcs-group-problem-types.yml
+rate_limiting:
+  signal: null
+  detail: No rate-limit headers or quotas are documented in the published specs.
+operation_id_convention: "Entity_Verb (e.g. Customer_Get, Customer_GetCollection, Customer_Create, Customer_Update, Customer_GetChanges)"

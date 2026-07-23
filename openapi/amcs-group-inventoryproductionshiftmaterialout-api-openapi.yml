@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup InventoryProductionShiftMaterialOut API
+  version: core
+tags:
+- name: InventoryProductionShiftMaterialOut
+paths:
+  /mirror/imm/inventoryProductionShiftMaterialOuts:
+    post:
+      tags:
+      - InventoryProductionShiftMaterialOut
+      summary: Create or update
+      operationId: InventoryProductionShiftMaterialOut_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorInventoryProductionShiftMaterialOutResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /mirror/imm/inventoryProductionShiftMaterialOuts/{guid}:
+    put:
+      tags:
+      - InventoryProductionShiftMaterialOut
+      summary: Partial update
+      operationId: InventoryProductionShiftMaterialOut_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorInventoryProductionShiftMaterialOutResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorInventoryProductionShiftMaterialOutResource:
+      type: object
+      properties:
+        InventoryProductionShiftGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialClassGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialFinishedStateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TipLocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Percentage:
+          type: number
+          format: double
+        Weight:
+          type: number
+          format: double
+        UnitCost:
+          type: number
+          format: double
+        CostRatio:
+          type: number
+          format: double
+        TotalCost:
+          type: number
+          format: double
+        Units:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

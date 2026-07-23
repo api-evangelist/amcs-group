@@ -1,0 +1,293 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup AreaOfOrigin API
+  version: core
+tags:
+- name: AreaOfOrigin
+paths:
+  /lists/areaOfOrigins/{guid}:
+    get:
+      tags:
+      - AreaOfOrigin
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the area of origin. |\r\n| Description               | The description of the area of origin.|\r\n| CompanyOutletListItem     | The GUID and description of the company outlet this area of origin is associated to.|\r\n| IsDeleted                 | Whether the area of origin is deleted.                       |\r\n"
+      operationId: AreaOfOrigin_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorAreaOfOriginResource]'
+  /lists/areaOfOrigins:
+    get:
+      tags:
+      - AreaOfOrigin
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the area of origin. |\r\n| Description               | The description of the area of origin.|\r\n| CompanyOutletListItem     | The GUID and description of the company outlet this area of origin is associated to.|\r\n| IsDeleted                 | Whether the area of origin is deleted.                       |\r\n"
+      operationId: AreaOfOrigin_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorAreaOfOriginResource]'
+  /integrator/areaOfOrigins/{id}:
+    get:
+      tags:
+      - AreaOfOrigin
+      summary: Find with GUID
+      description: "\r\n\r\n\r\n| Property                                              | Description                                                    |\r\n| ----------------------------------------------------- | -------------------------------------------------------------- |\r\n| SubscriberGUID                                        | The guid of the Subscriber                                     |\r\n| AreaOfOrigin[].AreaOfOriginGUID                       | The guid of the AreaOfOrigin                                   |\r\n| AreaOfOrigin[].AreaOfOrigin\t                        | The description of the AreaOfOrigin                            |\r\n| AreaOfOrigin[].AreaOfOriginShortCode\t                | The shortcode of the AreaOfOrigin\t\t\t\t\t\t\t\t |"
+      operationId: AreaOfOrigin_Get
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: uuid
+      - name: links
+        in: query
+        required: false
+        type: string
+      - name: include
+        in: query
+        required: false
+        type: string
+      - name: expand
+        in: query
+        required: false
+        type: string
+      - name: udf
+        in: query
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApiResourceResultEntity[ApiSubscriberAreaOfOriginResource]'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntity[ApiIntegratorAreaOfOriginResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection[ApiIntegratorAreaOfOriginResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+definitions:
+  ApiSubscriberAreaOfOriginResource:
+    type: object
+    properties:
+      SubscriberGUID:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      AreaOfOrigin:
+        type: array
+        items:
+          $ref: '#/definitions/SubscriberAreaOfOriginResource'
+  SubscriberAreaOfOriginResource:
+    type: object
+    properties:
+      AreaOfOriginGUID:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      AreaOfOrigin:
+        type: string
+      AreaOfOriginShortCode:
+        type: string
+  ApiResourceErrors:
+    type: object
+    properties:
+      errors:
+        type: string
+  ApiResourceResultEntity[ApiSubscriberAreaOfOriginResource]:
+    type: object
+    properties:
+      resource:
+        $ref: '#/definitions/ApiSubscriberAreaOfOriginResource'
+      links:
+        $ref: '#/definitions/ApiResourceResultEntityLinks'
+      extra:
+        $ref: '#/definitions/ApiResourceResultEntityExtra'
+      errors:
+        $ref: '#/definitions/ApiResourceErrors'
+      status:
+        $ref: '#/definitions/ApiResourceStatus'
+  ApiResourceStatus:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      isSuccess:
+        type: boolean
+  ApiResourceResultEntityExtra:
+    type: object
+    properties:
+      expand:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+      include:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+  ApiResourceResultEntityLinks:
+    type: object
+    properties:
+      self:
+        type: string
+      associations:
+        type: array
+        items:
+          type: string
+      expand:
+        type: array
+        items:
+          type: string
+      operations:
+        type: array
+        items:
+          type: string

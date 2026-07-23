@@ -1,0 +1,427 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup LiftEvent API
+  version: core
+tags:
+- name: LiftEvent
+paths:
+  /transport/liftEvents/changes:
+    get:
+      tags:
+      - LiftEvent
+      summary: Retrieve changes
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lift event?|\r\n| IsDriverGPSMatching| Is DriverGPSMatching in the lift event?|\r\n| IsDriverGPSMatchingResult| Is DriverGPSMatchingResult in the lift event?|\r\n| IsDumped| Is Dumped in the lift event?|\r\n| IsAdHoc| Is AdHoc in the lift event?|\r\n| IsCombinedLift| Is CombinedLift in the lift event?|\r\n| IsGeoCompressed| Is GeoCompressed in the lift event?|\r\n| IsManual| Is Manual in the lift event?|\r\n| IsOnHold| Is OnHold in the lift event?|\r\n| IsOverridden| Is Overridden in the lift event?|\r\n| IsStopListed| Is StopListed in the lift event?|\r\n| BaseWeight| Base weight of the lift event.|\r\n| ChargeWeight| Charge weight of the lift event.|\r\n| GrossWeight| Gross weight of the lift event.|\r\n| NetWeight| Net weight of the lift event.|\r\n| TareWeight| Tare weight of the lift event.|\r\n| Weight| Weight of the lift event.|\r\n| DoubleDumps| Double dumps of the lift event.|\r\n| ErrorCodeWeight| Error code weight of the lift event.|\r\n| ErrorCodeTag| Error code tag of the lift event.|\r\n| LifterSide| Lifter side of the lift event.|\r\n| NumberOfPictures| Number of pictures of the lift event.|\r\n| QuantityCollected| Quantity collected of the lift event.|\r\n| RouteInstanceOrderNumber| Route instance order number of the lift event.|\r\n| RouteVersion| Route version of the lift event.|\r\n| GPSMatchingSourceListItem| The GUID and description of the GPS matching source associated to the lift event.|\r\n| ReasonLastChangeListItem| The GUID and description of the reason for last change associated to the lift event.|\r\n| ReasonLiftInformationListItem| The GUID and description of the reason for lift information associated to the lift event.|\r\n| ReasonLiftProblemListItem| The GUID and description of the reason for lift problem associated to the lift event.|\r\n| ContainerTypeNewOfficeListItem| The GUID and description of the container type associated to the lift event.|\r\n| MaterialTypeNewOfficeListItem| The GUID and description of the material associated to the lift event.|\r\n| UnitOfMeasurementListItem| The GUID and description of the unit of measurement associated to the lift event.|\r\n| WeightChangeReasonListItem| The GUID and description of the reason for weight change associated to the lift event.|\r\n| Location| The latitude and longitude of the location associated to the lift event.|\r\n| VehicleCode| The vehicle code associated to the lift event. Filterable.|\r\n| InformationText| The information text associated to the lift event.|\r\n| LiftDataXml| The lift data xml associated to the lift event.|\r\n| LiftText| The lift text associated to the lift event.|\r\n| ProblemText| The problem text associated to the lift event.|\r\n| Tag| The tag associated to the lift event. Filterable.|\r\n| CollectionDate| The collection date associated to the lift event. Filterable.|\r\n| CollectionTimeStamp| The collection timestamp associated to the lift event.|\r\n| ImportTimeStamp| The import timestamp associated to the lift event.|\r\n| InstrumentTimeStamp| The instrument timestamp associated to the lift event.|\r\n| RouteInstanceStartTime| The route instance start time associated to the lift event.|\r\n| RelatedUserRecordedByGuid| The GUID associated to the user of the lift event. Filterable.|\r\n| RelatedRouteGuid| The GUID associated to the route of the lift event. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the lift event. Filterable.|\r\n| RelatedSiteOrderContainerGuid| The GUID associated to the site order item of the lift event. Filterable.|\r\n| RelatedVehicleGuid| The GUID associated to the vehicle of the lift event.Filterable.\r\n| RelatedRejectedReasonGuid| The GUID associated to the reason of the lift event.Filterable.\r\n| IsDeleted| Lift event is being deleted?|\r\n"
+      operationId: LiftEvent_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorLiftEventResource]'
+  /transport/liftEvents/{guid}:
+    get:
+      tags:
+      - LiftEvent
+      summary: Find with GUID
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lift event?|\r\n| IsDriverGPSMatching| Is DriverGPSMatching in the lift event?|\r\n| IsDriverGPSMatchingResult| Is DriverGPSMatchingResult in the lift event?|\r\n| IsDumped| Is Dumped in the lift event?|\r\n| IsAdHoc| Is AdHoc in the lift event?|\r\n| IsCombinedLift| Is CombinedLift in the lift event?|\r\n| IsGeoCompressed| Is GeoCompressed in the lift event?|\r\n| IsManual| Is Manual in the lift event?|\r\n| IsOnHold| Is OnHold in the lift event?|\r\n| IsOverridden| Is Overridden in the lift event?|\r\n| IsStopListed| Is StopListed in the lift event?|\r\n| BaseWeight| Base weight of the lift event.|\r\n| ChargeWeight| Charge weight of the lift event.|\r\n| GrossWeight| Gross weight of the lift event.|\r\n| NetWeight| Net weight of the lift event.|\r\n| TareWeight| Tare weight of the lift event.|\r\n| Weight| Weight of the lift event.|\r\n| DoubleDumps| Double dumps of the lift event.|\r\n| ErrorCodeWeight| Error code weight of the lift event.|\r\n| ErrorCodeTag| Error code tag of the lift event.|\r\n| LifterSide| Lifter side of the lift event.|\r\n| NumberOfPictures| Number of pictures of the lift event.|\r\n| QuantityCollected| Quantity collected of the lift event.|\r\n| RouteInstanceOrderNumber| Route instance order number of the lift event.|\r\n| RouteVersion| Route version of the lift event.|\r\n| GPSMatchingSourceListItem| The GUID and description of the GPS matching source associated to the lift event.|\r\n| ReasonLastChangeListItem| The GUID and description of the reason for last change associated to the lift event.|\r\n| ReasonLiftInformationListItem| The GUID and description of the reason for lift information associated to the lift event.|\r\n| ReasonLiftProblemListItem| The GUID and description of the reason for lift problem associated to the lift event.|\r\n| ContainerTypeNewOfficeListItem| The GUID and description of the container type associated to the lift event.|\r\n| MaterialTypeNewOfficeListItem| The GUID and description of the material associated to the lift event.|\r\n| UnitOfMeasurementListItem| The GUID and description of the unit of measurement associated to the lift event.|\r\n| WeightChangeReasonListItem| The GUID and description of the reason for weight change associated to the lift event.|\r\n| Location| The latitude and longitude of the location associated to the lift event.|\r\n| VehicleCode| The vehicle code associated to the lift event. Filterable.|\r\n| InformationText| The information text associated to the lift event.|\r\n| LiftDataXml| The lift data xml associated to the lift event.|\r\n| LiftText| The lift text associated to the lift event.|\r\n| ProblemText| The problem text associated to the lift event.|\r\n| Tag| The tag associated to the lift event. Filterable.|\r\n| CollectionDate| The collection date associated to the lift event. Filterable.|\r\n| CollectionTimeStamp| The collection timestamp associated to the lift event.|\r\n| ImportTimeStamp| The import timestamp associated to the lift event.|\r\n| InstrumentTimeStamp| The instrument timestamp associated to the lift event.|\r\n| RouteInstanceStartTime| The route instance start time associated to the lift event.|\r\n| RelatedUserRecordedByGuid| The GUID associated to the user of the lift event. Filterable.|\r\n| RelatedRouteGuid| The GUID associated to the route of the lift event. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the lift event. Filterable.|\r\n| RelatedSiteOrderContainerGuid| The GUID associated to the site order item of the lift event. Filterable.|\r\n| RelatedVehicleGuid| The GUID associated to the vehicle of the lift event.Filterable.\r\n| RelatedRejectedReasonGuid| The GUID associated to the reason of the lift event.Filterable.\r\n| IsDeleted| Lift event is being deleted?|\r\n"
+      operationId: LiftEvent_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorLiftEventResource]'
+    put:
+      tags:
+      - LiftEvent
+      summary: Partial update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the lift event.| No    |\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?| Yes   |\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?| Yes   |\r\n| IsBilled| Is Billed in the lift event?| Yes   |\r\n| IsCollected| Is Collected in the lift event?| Yes   |\r\n| IsContaminated| Is Contaminated in the lift event?| Yes   |\r\n| IsDriverGPSMatching| Is DriverGPSMatching in the lift event?| Yes   |\r\n| IsDriverGPSMatchingResult| Is DriverGPSMatchingResult in the lift event?| Yes   |\r\n| IsDumped| Is Dumped in the lift event?| Yes   |\r\n| IsAdHoc| Is AdHoc in the lift event?| Yes   |\r\n| IsCombinedLift| Is CombinedLift in the lift event?| Yes   |\r\n| IsGeoCompressed| Is GeoCompressed in the lift event?| Yes   |\r\n| IsManual| Is Manual in the lift event?| Yes   |\r\n| IsOnHold| Is OnHold in the lift event?| Yes   |\r\n| IsOverridden| Is Overridden in the lift event?| Yes   |\r\n| IsStopListed| Is StopListed in the lift event?| Yes   |\r\n| BaseWeight| Base weight of the lift event.| No    |\r\n| ChargeWeight| Charge weight of the lift event.| No    |\r\n| GrossWeight| Gross weight of the lift event.| No    |\r\n| NetWeight| Net weight of the lift event.| No    |\r\n| TareWeight| Tare weight of the lift event.| No    |\r\n| Weight| Weight of the lift event.| No    |\r\n| DoubleDumps| Double dumps of the lift event.| No    |\r\n| ErrorCodeWeight| Error code weight of the lift event.| No    |\r\n| ErrorCodeTag| Error code tag of the lift event.| No    |\r\n| LifterSide| Lifter side of the lift event.| No    |\r\n| NumberOfPictures| Number of pictures of the lift event.| No    |\r\n| QuantityCollected| Quantity collected of the lift event.| No    |\r\n| RouteInstanceOrderNumber| Route instance order number of the lift event.| No    |\r\n| RouteVersion| Route version of the lift event.| No    |\r\n| GPSMatchingSourceListItem| The GUID and description of the GPS matching source associated to the lift event.| No    |\r\n| ReasonLastChangeListItem| The GUID and description of the reason for last change associated to the lift event.| No    |\r\n| ReasonLiftInformationListItem| The GUID and description of the reason for lift information associated to the lift event.| No    |\r\n| ReasonLiftProblemListItem| The GUID and description of the reason for lift problem associated to the lift event.| No    |\r\n| ContainerTypeNewOfficeListItem| The GUID and description of the container type associated to the lift event.| No    |\r\n| MaterialTypeNewOfficeListItem| The GUID and description of the material associated to the lift event.| No    |\r\n| UnitOfMeasurementListItem| The GUID and description of the unit of measurement associated to the lift event.| No    |\r\n| WeightChangeReasonListItem| The GUID and description of the reason for weight change associated to the lift event.| No    |\r\n| Location| The latitude and longitude of the location associated to the lift event.| No    |\r\n| VehicleCode| The vehicle code associated to the lift event.| Yes   |\r\n| InformationText| The information text associated to the lift event.| No    |\r\n| LiftDataXml| The lift data xml associated to the lift event.| No    |\r\n| LiftText| The lift text associated to the lift event.| No    |\r\n| ProblemText| The problem text associated to the lift event.| No    |\r\n| Tag| The tag associated to the lift event.| No    |\r\n| CollectionDate| The collection date associated to the lift event.| No    |\r\n| CollectionTimeStamp| The collection timestamp associated to the lift event.| No    |\r\n| ImportTimeStamp| The import timestamp associated to the lift event.| No    |\r\n| InstrumentTimeStamp| The instrument timestamp associated to the lift event.| No    |\r\n| RouteInstanceStartTime| The route instance start time associated to the lift event.| No    |\r\n| RelatedUserRecordedByGuid| The GUID associated to the user of the lift event.| No    |\r\n| RelatedRouteGuid| The GUID associated to the route of the lift event.| No    |\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the lift event.| No    |\r\n| RelatedSiteOrderContainerGuid| The GUID associated to the site order item of the lift event.| No    |\r\n| RelatedVehicleGuid| The GUID associated to the vehicle of the lift event.| No    |\r\n| RelatedRejectedReasonGuid| The GUID associated to the reason of the lift event.| No    |\r\n| IsDeleted| Lift event is being deleted?| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If WeightChangeReasonListItem is not in one of the following reason categories: Lift Weight Change. | WeightChangeReasonListItem must be in one of the following reason categories: Lift Weight Change. |\r\n| If ReasonLiftInformationListItem is not in one of the following reason categories: Lift Information. | ReasonLiftInformationListItem must be in one of the following reason categories: Lift Information. |\r\n| If ReasonLiftProblemListItem is not in one of the following reason categories: Lift Problem. | ReasonLiftProblemListItem must be in one of the following reason categories: Lift Problem. |\r\n| If GPSMatchingSourceListItem.Guid provided is Deleted. | The provided GPSMatchingSourceListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLastChangeListItem.Guid provided is Deleted. | The provided ReasonLastChangeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLiftInformationListItem.Guid provided is Deleted. | The provided ReasonLiftInformationListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLiftProblemListItem.Guid provided is Deleted. | The provided ReasonLiftProblemListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ContainerTypeNewOfficeListItem.Guid provided is Deleted. | The provided ContainerTypeNewOfficeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If MaterialTypeNewOfficeListItem.Guid provided is Deleted. | The provided MaterialTypeNewOfficeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If UnitOfMeasurementListItem.Guid provided is Deleted. | The provided UnitOfMeasurementListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If WeightChangeReasonListItem.Guid provided is Deleted. | The provided WeightChangeReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedUserRecordedByGuid provided is Deleted. | The provided RelatedUserRecordedByGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRouteGuid provided is Deleted. | The provided RelatedRouteGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRouteVisitGuid provided is Deleted. | The provided RelatedRouteVisitGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedVehicleGuid provided is Deleted. | The provided RelatedVehicleGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRejectedReasonGuid provided is Deleted. | The provided RelatedRejectedReasonGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If the provided location is invalid. | Values of location lat/long is invalid. Could not process the request. Supply latitude and longitude as a decimal fraction of a degree. |\r\n| If we attempt to delete a lift event | IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |"
+      operationId: LiftEvent_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorLiftEventResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /transport/liftEvents:
+    get:
+      tags:
+      - LiftEvent
+      summary: Find with Filters
+      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lift event?|\r\n| IsDriverGPSMatching| Is DriverGPSMatching in the lift event?|\r\n| IsDriverGPSMatchingResult| Is DriverGPSMatchingResult in the lift event?|\r\n| IsDumped| Is Dumped in the lift event?|\r\n| IsAdHoc| Is AdHoc in the lift event?|\r\n| IsCombinedLift| Is CombinedLift in the lift event?|\r\n| IsGeoCompressed| Is GeoCompressed in the lift event?|\r\n| IsManual| Is Manual in the lift event?|\r\n| IsOnHold| Is OnHold in the lift event?|\r\n| IsOverridden| Is Overridden in the lift event?|\r\n| IsStopListed| Is StopListed in the lift event?|\r\n| BaseWeight| Base weight of the lift event.|\r\n| ChargeWeight| Charge weight of the lift event.|\r\n| GrossWeight| Gross weight of the lift event.|\r\n| NetWeight| Net weight of the lift event.|\r\n| TareWeight| Tare weight of the lift event.|\r\n| Weight| Weight of the lift event.|\r\n| DoubleDumps| Double dumps of the lift event.|\r\n| ErrorCodeWeight| Error code weight of the lift event.|\r\n| ErrorCodeTag| Error code tag of the lift event.|\r\n| LifterSide| Lifter side of the lift event.|\r\n| NumberOfPictures| Number of pictures of the lift event.|\r\n| QuantityCollected| Quantity collected of the lift event.|\r\n| RouteInstanceOrderNumber| Route instance order number of the lift event.|\r\n| RouteVersion| Route version of the lift event.|\r\n| GPSMatchingSourceListItem| The GUID and description of the GPS matching source associated to the lift event.|\r\n| ReasonLastChangeListItem| The GUID and description of the reason for last change associated to the lift event.|\r\n| ReasonLiftInformationListItem| The GUID and description of the reason for lift information associated to the lift event.|\r\n| ReasonLiftProblemListItem| The GUID and description of the reason for lift problem associated to the lift event.|\r\n| ContainerTypeNewOfficeListItem| The GUID and description of the container type associated to the lift event.|\r\n| MaterialTypeNewOfficeListItem| The GUID and description of the material associated to the lift event.|\r\n| UnitOfMeasurementListItem| The GUID and description of the unit of measurement associated to the lift event.|\r\n| WeightChangeReasonListItem| The GUID and description of the reason for weight change associated to the lift event.|\r\n| Location| The latitude and longitude of the location associated to the lift event.|\r\n| VehicleCode| The vehicle code associated to the lift event. Filterable.|\r\n| InformationText| The information text associated to the lift event.|\r\n| LiftDataXml| The lift data xml associated to the lift event.|\r\n| LiftText| The lift text associated to the lift event.|\r\n| ProblemText| The problem text associated to the lift event.|\r\n| Tag| The tag associated to the lift event. Filterable.|\r\n| CollectionDate| The collection date associated to the lift event. Filterable.|\r\n| CollectionTimeStamp| The collection timestamp associated to the lift event.|\r\n| ImportTimeStamp| The import timestamp associated to the lift event.|\r\n| InstrumentTimeStamp| The instrument timestamp associated to the lift event.|\r\n| RouteInstanceStartTime| The route instance start time associated to the lift event.|\r\n| RelatedUserRecordedByGuid| The GUID associated to the user of the lift event. Filterable.|\r\n| RelatedRouteGuid| The GUID associated to the route of the lift event. Filterable.|\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the lift event. Filterable.|\r\n| RelatedSiteOrderContainerGuid| The GUID associated to the site order item of the lift event. Filterable.|\r\n| RelatedVehicleGuid| The GUID associated to the vehicle of the lift event.Filterable.\r\n| RelatedRejectedReasonGuid| The GUID associated to the reason of the lift event.Filterable.\r\n| IsDeleted| Lift event is being deleted?|\r\n"
+      operationId: LiftEvent_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorLiftEventResource]'
+    post:
+      tags:
+      - LiftEvent
+      summary: Create or update
+      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the lift event.| No    |\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?| Yes   |\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?| Yes   |\r\n| IsBilled| Is Billed in the lift event?| Yes   |\r\n| IsCollected| Is Collected in the lift event?| Yes   |\r\n| IsContaminated| Is Contaminated in the lift event?| Yes   |\r\n| IsDriverGPSMatching| Is DriverGPSMatching in the lift event?| Yes   |\r\n| IsDriverGPSMatchingResult| Is DriverGPSMatchingResult in the lift event?| Yes   |\r\n| IsDumped| Is Dumped in the lift event?| Yes   |\r\n| IsAdHoc| Is AdHoc in the lift event?| Yes   |\r\n| IsCombinedLift| Is CombinedLift in the lift event?| Yes   |\r\n| IsGeoCompressed| Is GeoCompressed in the lift event?| Yes   |\r\n| IsManual| Is Manual in the lift event?| Yes   |\r\n| IsOnHold| Is OnHold in the lift event?| Yes   |\r\n| IsOverridden| Is Overridden in the lift event?| Yes   |\r\n| IsStopListed| Is StopListed in the lift event?| Yes   |\r\n| BaseWeight| Base weight of the lift event.| No    |\r\n| ChargeWeight| Charge weight of the lift event.| No    |\r\n| GrossWeight| Gross weight of the lift event.| No    |\r\n| NetWeight| Net weight of the lift event.| No    |\r\n| TareWeight| Tare weight of the lift event.| No    |\r\n| Weight| Weight of the lift event.| No    |\r\n| DoubleDumps| Double dumps of the lift event.| No    |\r\n| ErrorCodeWeight| Error code weight of the lift event.| No    |\r\n| ErrorCodeTag| Error code tag of the lift event.| No    |\r\n| LifterSide| Lifter side of the lift event.| No    |\r\n| NumberOfPictures| Number of pictures of the lift event.| No    |\r\n| QuantityCollected| Quantity collected of the lift event.| No    |\r\n| RouteInstanceOrderNumber| Route instance order number of the lift event.| No    |\r\n| RouteVersion| Route version of the lift event.| No    |\r\n| GPSMatchingSourceListItem| The GUID and description of the GPS matching source associated to the lift event.| No    |\r\n| ReasonLastChangeListItem| The GUID and description of the reason for last change associated to the lift event.| No    |\r\n| ReasonLiftInformationListItem| The GUID and description of the reason for lift information associated to the lift event.| No    |\r\n| ReasonLiftProblemListItem| The GUID and description of the reason for lift problem associated to the lift event.| No    |\r\n| ContainerTypeNewOfficeListItem| The GUID and description of the container type associated to the lift event.| No    |\r\n| MaterialTypeNewOfficeListItem| The GUID and description of the material associated to the lift event.| No    |\r\n| UnitOfMeasurementListItem| The GUID and description of the unit of measurement associated to the lift event.| No    |\r\n| WeightChangeReasonListItem| The GUID and description of the reason for weight change associated to the lift event.| No    |\r\n| Location| The latitude and longitude of the location associated to the lift event.| No    |\r\n| VehicleCode| The vehicle code associated to the lift event.| Yes   |\r\n| InformationText| The information text associated to the lift event.| No    |\r\n| LiftDataXml| The lift data xml associated to the lift event.| No    |\r\n| LiftText| The lift text associated to the lift event.| No    |\r\n| ProblemText| The problem text associated to the lift event.| No    |\r\n| Tag| The tag associated to the lift event.| No    |\r\n| CollectionDate| The collection date associated to the lift event.| No    |\r\n| CollectionTimeStamp| The collection timestamp associated to the lift event.| No    |\r\n| ImportTimeStamp| The import timestamp associated to the lift event.| No    |\r\n| InstrumentTimeStamp| The instrument timestamp associated to the lift event.| No    |\r\n| RouteInstanceStartTime| The route instance start time associated to the lift event.| No    |\r\n| RelatedUserRecordedByGuid| The GUID associated to the user of the lift event.| No    |\r\n| RelatedRouteGuid| The GUID associated to the route of the lift event.| No    |\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit of the lift event.| No    |\r\n| RelatedSiteOrderContainerGuid| The GUID associated to the site order item of the lift event.| No    |\r\n| RelatedVehicleGuid| The GUID associated to the vehicle of the lift event.| No    |\r\n| RelatedRejectedReasonGuid| The GUID associated to the reason of the lift event.| No    |\r\n| IsDeleted| Lift event is being deleted?| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If WeightChangeReasonListItem is not in one of the following reason categories: Lift Weight Change. | WeightChangeReasonListItem must be in one of the following reason categories: Lift Weight Change. |\r\n| If ReasonLiftInformationListItem is not in one of the following reason categories: Lift Information. | ReasonLiftInformationListItem must be in one of the following reason categories: Lift Information. |\r\n| If ReasonLiftProblemListItem is not in one of the following reason categories: Lift Problem. | ReasonLiftProblemListItem must be in one of the following reason categories: Lift Problem. |\r\n| If GPSMatchingSourceListItem.Guid provided is Deleted. | The provided GPSMatchingSourceListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLastChangeListItem.Guid provided is Deleted. | The provided ReasonLastChangeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLiftInformationListItem.Guid provided is Deleted. | The provided ReasonLiftInformationListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ReasonLiftProblemListItem.Guid provided is Deleted. | The provided ReasonLiftProblemListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If ContainerTypeNewOfficeListItem.Guid provided is Deleted. | The provided ContainerTypeNewOfficeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If MaterialTypeNewOfficeListItem.Guid provided is Deleted. | The provided MaterialTypeNewOfficeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If UnitOfMeasurementListItem.Guid provided is Deleted. | The provided UnitOfMeasurementListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If WeightChangeReasonListItem.Guid provided is Deleted. | The provided WeightChangeReasonListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedUserRecordedByGuid provided is Deleted. | The provided RelatedUserRecordedByGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRouteGuid provided is Deleted. | The provided RelatedRouteGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRouteVisitGuid provided is Deleted. | The provided RelatedRouteVisitGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedVehicleGuid provided is Deleted. | The provided RelatedVehicleGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedRejectedReasonGuid provided is Deleted. | The provided RelatedRejectedReasonGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If the provided location is invalid. | Values of location lat/long is invalid. Could not process the request. Supply latitude and longitude as a decimal fraction of a degree. |\r\n| If we attempt to delete a lift event | An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value. |\r\n"
+      operationId: LiftEvent_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorLiftEventResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceChanges[ApiIntegratorLiftEventResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLiftEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity[ApiIntegratorLiftEventResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLiftEventResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorLiftEventLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorLiftEventResource:
+      type: object
+      properties:
+        IsAutoGPSMatching:
+          type: boolean
+        IsAutoGPSMatchingResult:
+          type: boolean
+        IsBilled:
+          type: boolean
+        IsCollected:
+          type: boolean
+        IsContaminated:
+          type: boolean
+        IsDriverGPSMatching:
+          type: boolean
+        IsDriverGPSMatchingResult:
+          type: boolean
+        IsDumped:
+          type: boolean
+        IsAdHoc:
+          type: boolean
+        IsCombinedLift:
+          type: boolean
+        IsGeoCompressed:
+          type: boolean
+        IsManual:
+          type: boolean
+        IsOnHold:
+          type: boolean
+        IsOverridden:
+          type: boolean
+        IsStopListed:
+          type: boolean
+        BaseWeight:
+          type: number
+          format: double
+        ChargeWeight:
+          type: number
+          format: double
+        GrossWeight:
+          type: number
+          format: double
+        NetWeight:
+          type: number
+          format: double
+        TareWeight:
+          type: number
+          format: double
+        Weight:
+          type: number
+          format: double
+        DoubleDumps:
+          type: integer
+          format: int32
+        ErrorCodeWeight:
+          type: integer
+          format: int32
+        ErrorCodeTag:
+          type: integer
+          format: int32
+        LifterSide:
+          type: integer
+          format: int32
+        NumberOfPictures:
+          type: integer
+          format: int32
+        QuantityCollected:
+          type: integer
+          format: int32
+        RouteInstanceOrderNumber:
+          type: integer
+          format: int32
+        RouteVersion:
+          type: integer
+          format: int32
+        GPSMatchingSourceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonLastChangeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonLiftInformationListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonLiftProblemListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeNewOfficeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialTypeNewOfficeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        WeightChangeReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLiftEventLocationResource'
+        VehicleCode:
+          type: string
+        InformationText:
+          type: string
+        LiftDataXml:
+          type: string
+        LiftText:
+          type: string
+        ProblemText:
+          type: string
+        Tag:
+          type: string
+        CollectionDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        CollectionTimeStamp:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        ImportTimeStamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        InstrumentTimeStamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        RouteInstanceStartTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        RelatedUserRecordedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteOrderContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedVehicleGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRejectedReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection[ApiIntegratorLiftEventResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLiftEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

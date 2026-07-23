@@ -1,0 +1,83 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup UdfWorkflowActivity API
+  version: core
+tags:
+- name: UdfWorkflowActivity
+paths:
+  /plugin/activities/readUdf:
+    post:
+      tags:
+      - UdfWorkflowActivity
+      parameters:
+      - name: type
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest'
+      responses:
+        '200':
+          description: Success
+  /plugin/activities/writeUdf:
+    post:
+      tags:
+      - UdfWorkflowActivity
+      parameters:
+      - name: type
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.WriteUdfRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.WriteUdfRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Controllers.Plugin.RequestObjects.WriteUdfRequest'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest:
+      type: object
+      properties:
+        objectName:
+          type: string
+          nullable: true
+        id:
+          type: string
+          format: uuid
+        fieldName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AMCS.ApiService.Controllers.Plugin.RequestObjects.WriteUdfRequest:
+      type: object
+      properties:
+        objectName:
+          type: string
+          nullable: true
+        id:
+          type: string
+          format: uuid
+        fieldName:
+          type: string
+          nullable: true
+        value:
+          nullable: true
+      additionalProperties: false

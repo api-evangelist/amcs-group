@@ -1,0 +1,249 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ExternalVehicle API
+  version: core
+tags:
+- name: ExternalVehicle
+paths:
+  /fleet/externalVehicles/{guid}:
+    get:
+      tags:
+      - ExternalVehicle
+      summary: Find with GUID
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|"
+      operationId: ExternalVehicle_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorExternalVehicleResource]'
+    put:
+      tags:
+      - ExternalVehicle
+      summary: Partial update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |"
+      operationId: ExternalVehicle_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /fleet/externalVehicles:
+    get:
+      tags:
+      - ExternalVehicle
+      summary: Find with Filters
+      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|"
+      operationId: ExternalVehicle_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorExternalVehicleResource]'
+    post:
+      tags:
+      - ExternalVehicle
+      summary: Create or update
+      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |"
+      operationId: ExternalVehicle_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection[ApiIntegratorExternalVehicleResource]:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorExternalVehicleResource:
+      type: object
+      properties:
+        Registration:
+          type: string
+        Description:
+          type: string
+        VehicleTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedTransportSupplierSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        VolumeCapacity:
+          type: number
+          format: double
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaxGrossWeight:
+          type: number
+          format: double
+        RFID:
+          type: string
+        IsSystemUse:
+          type: boolean
+        IsWeighOutRequired:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity[ApiIntegratorExternalVehicleResource]:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

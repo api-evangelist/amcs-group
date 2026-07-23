@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Core AccessGroup ApiWorkflowGetInstanceStateService API
+  version: core
+tags:
+- name: ApiWorkflowGetInstanceStateService
+paths:
+  /services/api/workflow/instances/{id}/op/get:
+    post:
+      tags:
+      - ApiWorkflowGetInstanceStateService
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowGetInstanceStateResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowGetInstanceStateResponse'
+components:
+  schemas:
+    AMCS.ApiService.Workflow.ApiWorkflowGetInstanceStateResponse:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+        dataType:
+          type: string
+          nullable: true
+      additionalProperties: false
