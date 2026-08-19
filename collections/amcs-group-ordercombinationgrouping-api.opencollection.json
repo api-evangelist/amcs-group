@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup OrderCombinationGrouping API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrderCombinationGrouping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/orderCombinationGroupings/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| T"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/orderCombinationGroupings/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| T"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/orderCombinationGroupings",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description          |\r\n| --------------------------------- |-------------------------------------------------------------------------------- |\r\n| GUID| The guid associated to the order combination grouping.                  |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable  |  \r\n| RelatedSiteGuid| The related site guid. Filterable  | \r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable      | \r\n| RelatedPaymentGuid| T"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounting/orderCombinationGroupings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| --------------------------------- |-----------------------------------------------------------|--------- |\r\n| GUID| The guid associated to the order combination grouping.    |No     |\r\n| RelatedOrderCombinationGroupGuid| The related site order combination group guid. Filterable|Yes   |\r\n| RelatedSiteGuid| The related site guid. Filterable|Yes   |\r\n| RelatedInvoiceBatchGuid| The related invoice batch guid. Filterable|No   |\r\n| RelatedPaymentGuid| The related"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Trailer API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trailer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/trailers/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the trailer.    |\r\n| Description| The description associated to the trailer.|"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/trailers/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the trailer.    |\r\n| Description| The description associated to the trailer.|"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/trailers",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the trailer.    |\r\n| Description| The description associated to the trailer.|"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Schedule API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/schedules/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a contain"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/schedules/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a contain"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transport/schedules/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the schedule.                                          | No |\r\n| ScheduledDate| The date associated to the schedule.| Yes |\r\n| Description| The description associated to the schedule.| Yes |\r\n| IsConta"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/schedules",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the schedule.                                          |\r\n| ScheduledDate| The date associated to the schedule.|\r\n| Description| The description associated to the schedule.|\r\n| IsContainerSchedule| Is the schedule a contain"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transport/schedules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the schedule.                                          | No |\r\n| ScheduledDate| The date associated to the schedule.| Yes |\r\n| Description| The description associated to the schedule.| Yes |\r\n| IsConta"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

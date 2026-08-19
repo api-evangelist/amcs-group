@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "f3777763-c917-4aea-b80b-917f5cd846d3",
+      "name": "Currency",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24bb236b-cb4a-4cad-be46-0a60e3d77251",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                "currencies",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d69b1ac-1b70-4ae2-987c-bec6c31ece2c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    "currencies",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Description\": \"string\",\n      \"IsDeleted\": false,\n      \"Symbol\": \"string\",\n      \"IntegrationCode\": \"string\",\n      \"CurrencyRoundingTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Description\": \"string\",\n      \"IsDeleted\": true,\n      \"Symbol\": \"string\",\n      \"IntegrationCode\": \"string\",\n      \"CurrencyRoundingTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 1876,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d64e7f33-3c53-4f66-980c-8af2c3b588cb",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                "currencies",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43ab0f49-d8fd-4205-b8c1-6de145b866fe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    "currencies",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"Description\": \"string\",\n    \"IsDeleted\": true,\n    \"Symbol\": \"string\",\n    \"IntegrationCode\": \"string\",\n    \"CurrencyRoundingTypeListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_2\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 1886,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31f42acb-78a1-40a1-a24e-60ff2a919867",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b17b4b7-ddb3-4f69-9422-4babb4b706da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Description\": \"string\",\n      \"IsDeleted\": true,\n      \"Symbol\": \"string\",\n      \"IntegrationCode\": \"string\",\n      \"CurrencyRoundingTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Description\": \"string\",\n      \"IsDeleted\": true,\n      \"Symbol\": \"string\",\n      \"IntegrationCode\": \"string\",\n      \"CurrencyRoundingTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 7496\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 951,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f812098-bf8f-40d7-bee5-270c724e716e",
+    "name": "Core AccessGroup Currency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

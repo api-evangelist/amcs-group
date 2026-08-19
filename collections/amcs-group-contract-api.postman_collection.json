@@ -1,0 +1,456 @@
+{
+  "item": [
+    {
+      "id": "ba3a2fa5-d155-4ed0-8ff8-42c60ba1d9eb",
+      "name": "Contract",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9435641d-b1fe-465a-a3c9-8a98e56ff3f3",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "contracts",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b44ac3bd-1f64-4aae-a690-291c488e0c46",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "contracts",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"StartDate\": \"2000-01-01\",\n    \"CreditLimit\": 8023.782858206685,\n    \"BalanceMigrated\": 3327.981713417496,\n    \"VATExemptNumber\": \"string\",\n    \"VATExemptionExpiryDate\": \"2000-01-01\",\n    \"VATRegistrationNumber\": \"string\",\n    \"InvoiceCycleListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"DepartmentListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"ContractStatusListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"PaymentTypeListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"PaymentTermListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"InvoiceFrequencyTermListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"RebateInvoiceFrequencyTermListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        }\n      ],\n      \"key_2\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_3\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 1976,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "102b03a5-77bd-4b60-a50d-f108174a3fcb",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Yes |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. | No |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. | No |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| None | |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "contracts",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"StartDate\": \"<localDate>\",\n  \"CreditLimit\": \"<double>\",\n  \"BalanceMigrated\": \"<double>\",\n  \"VATExemptNumber\": \"<string>\",\n  \"VATExemptionExpiryDate\": \"<localDate>\",\n  \"VATRegistrationNumber\": \"<string>\",\n  \"InvoiceCycleListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"DepartmentListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"ContractStatusListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"PaymentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"PaymentTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"InvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RebateInvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d62b593-e128-42b4-9f6e-932f99dbb4ac",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "contracts",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"StartDate\": \"2000-01-01\",\n  \"CreditLimit\": \"<double>\",\n  \"BalanceMigrated\": \"<double>\",\n  \"VATExemptNumber\": \"<string>\",\n  \"VATExemptionExpiryDate\": \"2000-01-01\",\n  \"VATRegistrationNumber\": \"<string>\",\n  \"InvoiceCycleListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"DepartmentListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"ContractStatusListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"PaymentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"PaymentTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"InvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RebateInvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"59412289-1c05-ad43-006a-e6a574d186a2\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4751,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cf7dbeb-5530-427d-869e-81e0aae94a21",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3675ef5c-2e58-4bd3-9a3e-7dca218cd42e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"StartDate\": \"2000-01-01\",\n      \"CreditLimit\": \"<double>\",\n      \"BalanceMigrated\": \"<double>\",\n      \"VATExemptNumber\": \"<string>\",\n      \"VATExemptionExpiryDate\": \"2000-01-01\",\n      \"VATRegistrationNumber\": \"<string>\",\n      \"InvoiceCycleListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"DepartmentListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"ContractStatusListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"PaymentTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"PaymentTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"InvoiceFrequencyTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RebateInvoiceFrequencyTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"StartDate\": \"2000-01-01\",\n      \"CreditLimit\": \"<double>\",\n      \"BalanceMigrated\": \"<double>\",\n      \"VATExemptNumber\": \"<string>\",\n      \"VATExemptionExpiryDate\": \"2000-01-01\",\n      \"VATRegistrationNumber\": \"<string>\",\n      \"InvoiceCycleListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"DepartmentListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"ContractStatusListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"PaymentTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"PaymentTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"InvoiceFrequencyTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RebateInvoiceFrequencyTermListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 1567\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4966,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b49f1bc-65f9-4887-ad24-16a3a8d0a04b",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Yes |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. | No |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. | No |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| None | |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"StartDate\": \"<localDate>\",\n  \"CreditLimit\": \"<double>\",\n  \"BalanceMigrated\": \"<double>\",\n  \"VATExemptNumber\": \"<string>\",\n  \"VATExemptionExpiryDate\": \"<localDate>\",\n  \"VATRegistrationNumber\": \"<string>\",\n  \"InvoiceCycleListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"DepartmentListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"ContractStatusListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"PaymentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"PaymentTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"InvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RebateInvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "133fb67f-1e63-4049-8df1-b1e6dfe83cf2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"StartDate\": \"2000-01-01\",\n  \"CreditLimit\": \"<double>\",\n  \"BalanceMigrated\": \"<double>\",\n  \"VATExemptNumber\": \"<string>\",\n  \"VATExemptionExpiryDate\": \"2000-01-01\",\n  \"VATRegistrationNumber\": \"<string>\",\n  \"InvoiceCycleListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"DepartmentListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"ContractStatusListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"PaymentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"PaymentTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"InvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RebateInvoiceFrequencyTermListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"59412289-1c05-ad43-006a-e6a574d186a2\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4751,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39f4a3e4-9471-4793-be6b-8e09945fcc9f",
+    "name": "Core AccessGroup Contract API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

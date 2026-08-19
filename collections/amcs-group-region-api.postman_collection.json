@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "0c066eca-84bd-4f08-b0ea-f6dde6b2fa63",
+      "name": "Region",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "adb19dc1-d00b-4bb6-b682-a8fe60bbb9cc",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the region                               |\r\n| Description               | The description of the region                   |\r\n| Abbreviation| The abbreviation of the region                                       |\r\n| StateListItem             | The GUID and description of the state                       |\r\n| CompanyOutletListItem     | The GUID and description of the Company Outlet           |\r\n| IsNonSpecific             | Whether the region is non specific      |\r\n| IsDeleted                 | Whether the region is deleted    |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                "regions",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc3c117c-6ddc-4fac-bb7a-7fba19493da8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    "regions",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"Description\": \"string\",\n    \"Abbreviation\": \"string\",\n    \"StateListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CompanyOutletListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"IsNonSpecific\": false,\n    \"IsDeleted\": true,\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4513,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "790ead93-88b7-4556-85d9-2fe79f62c065",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the region                               |\r\n| Description               | The description of the region                   |\r\n| Abbreviation| The abbreviation of the region                                       |\r\n| StateListItem             | The GUID and description of the state                       |\r\n| CompanyOutletListItem     | The GUID and description of the Company Outlet           |\r\n| IsNonSpecific             | Whether the region is non specific      |\r\n| IsDeleted                 | Whether the region is deleted    |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                "regions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16e25496-f066-473b-8b2d-ff1cb396ff76",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    "regions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Description\": \"string\",\n      \"Abbreviation\": \"string\",\n      \"StateListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsNonSpecific\": true,\n      \"IsDeleted\": false,\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Description\": \"string\",\n      \"Abbreviation\": \"string\",\n      \"StateListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsNonSpecific\": false,\n      \"IsDeleted\": true,\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 264\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 8130,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff0fb663-68f2-4988-ace8-c74edb06b68b",
+    "name": "Core AccessGroup Region API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

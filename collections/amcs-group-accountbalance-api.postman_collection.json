@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "657c5916-4ab8-4462-a20f-c14933e6facb",
+      "name": "AccountBalance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "694afd2f-ecf3-4795-9c99-399421f4f663",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| APInvoice                      | The accounts payable invoice associated with the account balance.                                     |\r\n| CreditLimit                      | The maximum credit limit for the account.                                                     |\r\n| GUID                 | The GUID associated to the account balance.                               |\r\n| InvoiceableWork                 | The amount of work that can be invoiced.             |\r\n| POInvoice                | The purchase order invoice associated with the account balance.                            |\r\n| RelatedCustomerGuid             | The GUID associated to the customer.           |\r\n| RelatedCustomerSiteGuid             | The GUID associated to the customer site.                   |\r\n| RemainingCredit| The remaining credit available for the account.   |\r\n| OutstandingAmount| The total outstanding amount for the account.   |\r\n| UnallocatedAmount| The amount that has not been allocated to any specific purpose.   |\r\n| UnconfirmedBalance               | The balance that has not been confirmed.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountBalances",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "453289e3-defb-458b-9ab8-14b0722b0c72",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountBalances",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"InvoiceableWork\": 9648.409006385862,\n    \"OutstandingAmount\": 921.7077679696229,\n    \"UnallocatedAmount\": 8744.230183508476,\n    \"UnconfirmedBalance\": 4371.380185956887,\n    \"APInvoice\": 1281.7687796859723,\n    \"POInvoice\": 1412.1314029840337,\n    \"CreditLimit\": 2621.563379741908,\n    \"RemainingCredit\": 663.503780242356,\n    \"RelatedCustomerGUID\": \"00000000-0000-0000-0000-000000000000\",\n    \"RelatedCustomerSiteGUID\": \"00000000-0000-0000-0000-000000000000\",\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4362,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8906d86c-9bcb-4a52-bfbc-830e2550b68b",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| APInvoice                      | The accounts payable invoice associated with the account balance.                                     |\r\n| CreditLimit                      | The maximum credit limit for the account.                                                     |\r\n| GUID                 | The GUID associated to the account balance.                               |\r\n| InvoiceableWork                 | The amount of work that can be invoiced.             |\r\n| POInvoice                | The purchase order invoice associated with the account balance.                            |\r\n| RelatedCustomerGuid             | The GUID associated to the customer.           |\r\n| RelatedCustomerSiteGuid             | The GUID associated to the customer site.                   |\r\n| RemainingCredit| The remaining credit available for the account.   |\r\n| OutstandingAmount| The total outstanding amount for the account.   |\r\n| UnallocatedAmount| The amount that has not been allocated to any specific purpose.   |\r\n| UnconfirmedBalance               | The balance that has not been confirmed.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountBalances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc93a8d0-24d0-4ffc-9346-1af5bf94769d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"InvoiceableWork\": 3625.4381696515547,\n      \"OutstandingAmount\": 257.35776569721367,\n      \"UnallocatedAmount\": 5142.52009017442,\n      \"UnconfirmedBalance\": 1621.1985870790547,\n      \"APInvoice\": 6561.8879497779735,\n      \"POInvoice\": 1912.738204441523,\n      \"CreditLimit\": 9040.413153118272,\n      \"RemainingCredit\": 6459.604522977795,\n      \"RelatedCustomerGUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedCustomerSiteGUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"InvoiceableWork\": 267.70937111733065,\n      \"OutstandingAmount\": 7798.562303473138,\n      \"UnallocatedAmount\": 3453.6412587324085,\n      \"UnconfirmedBalance\": 4697.117539891491,\n      \"APInvoice\": 6146.384146842914,\n      \"POInvoice\": 4502.502590327916,\n      \"CreditLimit\": 26.452451447621648,\n      \"RemainingCredit\": 2232.9235170826,\n      \"RelatedCustomerGUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedCustomerSiteGUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 9212,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5c8568b8-ef1d-4bdc-bcc7-04a3fa772feb",
+    "name": "Core AccessGroup AccountBalance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "7bd31a19-f064-48a5-8e2d-eabc5290301a",
+      "name": "Lodgement",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2624c32e-e727-47db-a7b7-cb731d3494d3",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "lodgements",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "797f7d19-c2ff-4d84-b402-c73ba06301f5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "lodgements",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"IsDeleted\": true,\n      \"DateLodged\": \"2000-01-01\",\n      \"Reference\": \"string\",\n      \"LodgementTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"IsDeleted\": true,\n      \"DateLodged\": \"2000-01-01\",\n      \"Reference\": \"string\",\n      \"LodgementTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6242,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9cf5843-67e0-42bd-aa2e-ccce130fad47",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "lodgements",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "253bae42-93d5-42a5-8c0a-c400d2708ccc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "lodgements",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"IsDeleted\": false,\n    \"DateLodged\": \"2000-01-01\",\n    \"Reference\": \"string\",\n    \"LodgementTypeListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_2\": {\n        \"key_0\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3686,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c68ec59b-197b-4624-9884-b12be617500a",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "lodgements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddd170c4-068b-4393-9bd9-52d89e7f0ba3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "lodgements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"IsDeleted\": false,\n      \"DateLodged\": \"2000-01-01\",\n      \"Reference\": \"string\",\n      \"LodgementTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"IsDeleted\": false,\n      \"DateLodged\": \"2000-01-01\",\n      \"Reference\": \"string\",\n      \"LodgementTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 7845\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 744,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57ff4592-334f-4f08-85f2-2542b1ab3dc3",
+    "name": "Core AccessGroup Lodgement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

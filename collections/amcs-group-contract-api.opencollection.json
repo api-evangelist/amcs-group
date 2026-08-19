@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Contract API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contract",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/contracts/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | Th"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounting/contracts/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Y"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/contracts",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | Th"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounting/contracts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Y"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

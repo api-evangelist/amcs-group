@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "6e18e752-5773-4a10-8bf1-f892471ff2ff",
+      "name": "VehicleTrail",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d5d16c7d-7c92-4856-93d1-550a08ab1291",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "vehicleTrails",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "847bb474-2741-401a-81d4-cfb104b94334",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "vehicleTrails",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"RelatedRouteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedVehicleGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"EventDate\": \"2000-01-01\",\n      \"GeoCoordinates\": {\n        \"Lat\": 8326.995077728394,\n        \"Long\": 3874.9169483615533,\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\",\n        \"LastChangeReasonId\": 72\n      },\n      \"TimeStamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"RelatedRouteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedVehicleGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"EventDate\": \"2000-01-01\",\n      \"GeoCoordinates\": {\n        \"Lat\": 7069.6185274291565,\n        \"Long\": 5571.480152660601,\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\",\n        \"LastChangeReasonId\": 7735\n      },\n      \"TimeStamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6149,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c75025a-0d87-471e-a82f-909eac12b917",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "vehicleTrails",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "199b5701-81f3-4fd4-b9d3-6f148a1c45df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "vehicleTrails",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"RelatedRouteGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"RelatedVehicleGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"EventDate\": \"2000-01-01\",\n    \"GeoCoordinates\": {\n      \"Lat\": 6829.135959752225,\n      \"Long\": 7076.690981101009,\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"LastChangeReasonId\": 1369\n    },\n    \"TimeStamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {},\n          \"key_4\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3787,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "758bf394-be66-41a4-af84-eae52da2f0c6",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle trail.|\r\n| RelatedVehicleGuid| The GUID associated to the related vehicle of the vehicle trail.|\r\n| RelatedRouteGuid| The GUID associated to the related route of the vehicle trail.         |   \r\n| EventDate| The Event Date associated to the vehicle trail.|   \r\n| GeoCoordinates| The Geo Coordinates associated to the vehicle trail location.|\r\n| TimeStamp| The TimeStamp associated to the vehicle trail.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "vehicleTrails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86f69a92-c58f-435b-810d-4039ab952862",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "vehicleTrails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"RelatedRouteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedVehicleGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"EventDate\": \"2000-01-01\",\n      \"GeoCoordinates\": {\n        \"Lat\": 5594.518731358014,\n        \"Long\": 6392.367390289522,\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\",\n        \"LastChangeReasonId\": 2469\n      },\n      \"TimeStamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"RelatedRouteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedVehicleGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"EventDate\": \"2000-01-01\",\n      \"GeoCoordinates\": {\n        \"Lat\": 5635.055123704888,\n        \"Long\": 8057.654763756308,\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\",\n        \"LastChangeReasonId\": 5369\n      },\n      \"TimeStamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 3341\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4488,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f3f01ba5-b84e-4a7b-adeb-0d0fcf2e0c1a",
+    "name": "Core AccessGroup VehicleTrail API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

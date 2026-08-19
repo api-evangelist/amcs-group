@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup ApiTripExternal API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApiTripExternal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get List of Completed Trip Changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/integrator/trips/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Must be URL-encoded."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for retrieving next page of results."
+              }
+            ]
+          },
+          "docs": "# Get List of Completed Trip Changes\n\nRetrieves completed trips with their associated vehicle information and trip summaries. This endpoint supports incremental data extraction by tracking changes using SQL Server's row version mechanism.\n\n---\n\n## Query Parameters\n| Parameter | Type   | Required | Description                                                                 |\n|-----------|--------|----------|-----------------------------------------------------------------------------|\n| since    "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

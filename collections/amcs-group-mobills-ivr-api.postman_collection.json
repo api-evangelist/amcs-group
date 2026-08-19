@@ -1,0 +1,628 @@
+{
+  "item": [
+    {
+      "id": "8d438789-c954-44b9-92ff-1d062c7d53b3",
+      "name": "Mobills IVR",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f128e02-5961-40c0-a0ce-9ab6297f3ad1",
+          "name": "Get Customer Invoice Details",
+          "request": {
+            "name": "Get Customer Invoice Details",
+            "description": {
+              "content": "This endpoint creates a record in payment transaction table.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerARCode                      | The account code used for Accounts Receivable.        (AMCS will provide the account ARCode)                             |\r\n| Channel               | Channel can be only MOBILL OR IVR                         | \n\n ## Response\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerGuid                 | The GUID associated to the customer.        |\r\n| CustomerName               |The customer's name.        |\r\n| CustomerBalance               |The amount associated to the payment.        |\r\n| CustomerCurrency               | Customer Currency associated with the Customer account.        |\r\n| InvoiceDetails               |It will show all the invoices associated with the account               |\r\n| InvoiceNumber                   |The invoice number associated to the invoice. Filterable.        |\r\n| InvoiceGUID                     |The GUID associated to the invoice.        |\r\n| InvoiceDate                     |The invoiceDate associated to the invoice in ISO format (YYYY-MM-DD).        |\r\n| ZipCode                         |Zip code is associated with the account               |\r\n| InvoiceDueDate                  |The dueDate associated to the invoice in ISO format (YYYY-MM-DD).        |\r\n| UnallocatedAmount               |The Unallocated Amount on the customers account.        |\r\n| InvoiceCurrency                 |Invoice Currency asscoaited with the customer account             |\r\n| TransactionReference            |Transaction Reference associated with account                 |\r\n| ZipCode                         |ZipCode associated with the account address                                |\r\n| InvoiceDate                     |The invoiceDate associated to the invoice in ISO format (YYYY-MM-DD).        |\r\n| LastPaymentDate                 |When the last payment was made                     |\r\n| MakePaymentLink                 |It shows the payment link (if any invoice available)                     |\r\n| IsActive                 |Whether the customer is active              |\r\n| MobillsEnrollment               |Whether the mobills enrollment is active.              |\r\n| GUID         |Guid associated with the account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mobills",
+                "Ivr",
+                "Pay",
+                "GetCustomerInvoiceDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerARCode\": \"<string>\",\n  \"channel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "424e7d76-f3a8-4dd7-9224-84c53c0589ba",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mobills",
+                    "Ivr",
+                    "Pay",
+                    "GetCustomerInvoiceDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"customerName\": \"Mark Smith\",\n  \"customerBalance\": 4246,\n  \"customerCurrency\": \"EUR\",\n  \"invoiceDetails\": {\n    \"invoiceNumber\": \"INV001\",\n    \"invoiceGUID\": \"00000000-0000-0000-0000-000000000000\",\n    \"invoiceDate\": \"YYYY-MM-DD\",\n    \"zipCode\": \"00501\",\n    \"invoiceDueDate\": \"YYYY-MM-DD\",\n    \"unallocatedAmount\": 8047,\n    \"invoiceCurrency\": \"EUR\"\n  },\n  \"transactionReference\": \"00000000-0000-0000-0000-000000000000\",\n  \"zipCode\": \"00501\",\n  \"dueDate\": \"YYYY-MM-DD\",\n  \"invoiceDate\": \"YYYY-MM-DD\",\n  \"lastPaymentDate\": \"YYYY-MM-DD\",\n  \"lastPaymentAmount\": \"155.50\",\n  \"makePaymentLink\": \"https://localhost/paybylink?key=092159d8-9e57-41a5-af6c-745bd45ff2f7\",\n  \"isActive\": true,\n  \"mobillsEnrollment\": false,\n  \"guid\": \"00000000-0000-0000-0000-000000000000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82455b5b-4e7b-46f3-a715-a3422deae889",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mobills",
+                    "Ivr",
+                    "Pay",
+                    "GetCustomerInvoiceDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ed9826-96d2-4842-b9cd-e267b8b10992",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mobills",
+                    "Ivr",
+                    "Pay",
+                    "GetCustomerInvoiceDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e548415-294c-46ef-b71c-3a32d2cce989",
+          "name": "Post Back IVR Response",
+          "request": {
+            "name": "Post Back IVR Response",
+            "description": {
+              "content": "This endpoint updates an existing record in the payment transaction table and creates a record in the Amcs-Pay Database.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| TransactionReference                      | The Transaction Reference can get from the GetCustomerInvoce API.                           |\r\n| PaymentAmount               | The payment amount associated to the payment request.  |\r\n| Currency               | Currency associated with the Customer account.|\r\n| Timestamp                     | The time stamp associated to the response payload. |\r\n| TransactionPaymentType                     | Transaction payment type can be any of \"CARD\", \"ACH\".  |\r\n| IsIVR                     |IsIVR is a flag and should be set to true..  |\r\n| Code                     |The codes for successfully processed transactions.  |\r\n| Description                     |Description associated with the Code.  |\r\n| Bin                     |The first six digits of the card.number. |\r\n| Last4Digits                     |Last 4 digits of the \"Credit\", \"Debit\" Card.  |\r\n| PaymentType                     |Payment Type DB, Debit: Debits the account of the end customer and credits the merchant account. |\r\n| Holder                     |Holder of the credit card account. |\r\n| ExpiryMonth                    | The expiry month of the card. |\r\n| ExpiryYear                     |The expiry year of the card. |\r\n| ConfirmationNumber                     |The Confirmation Number (payment reference) data sent by the provider associated to the original payment response.| \n\n ## Response\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n|  |\r\n| Response                     |It returns the success response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payACIInteractiveVoiceResponse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionReference\": \"<uuid>\",\n  \"paymentAmount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"timestamp\": \"<datetime>\",\n  \"transactionPaymentType\": \"<string>\",\n  \"isIVR\": \"<boolean>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"bin\": \"<string>\",\n  \"last4Digits\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"holder\": \"<string>\",\n  \"expiryMonth\": \"<string>\",\n  \"expiryYear\": \"<string>\",\n  \"confirmationNumber\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66f0c8df-63af-4a66-a668-77b8169fede4",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payACIInteractiveVoiceResponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionReference\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\",\n  \"paymentAmount\": \"<integer>\",\n  \"currency\": \"EUR\",\n  \"timestamp\": \"2021-10-21-17:20:30\",\n  \"transactionPaymentType\": \"Credit Card\",\n  \"isIVR\": \"<boolean>\",\n  \"code\": \"000.100.112\",\n  \"description\": \"Request successfully processed in 'Merchant In Connect\",\n  \"bin\": \"545454\",\n  \"last4Digits\": \"5454\",\n  \"paymentType\": \"DB\",\n  \"holder\": \"SK_Test\",\n  \"expiryMonth\": \"06\",\n  \"expiryYear\": \"2034\",\n  \"confirmationNumber\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "421d2cad-3841-4969-99c0-de5968888dc1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payACIInteractiveVoiceResponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionReference\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\",\n  \"paymentAmount\": \"<integer>\",\n  \"currency\": \"EUR\",\n  \"timestamp\": \"2021-10-21-17:20:30\",\n  \"transactionPaymentType\": \"Credit Card\",\n  \"isIVR\": \"<boolean>\",\n  \"code\": \"000.100.112\",\n  \"description\": \"Request successfully processed in 'Merchant In Connect\",\n  \"bin\": \"545454\",\n  \"last4Digits\": \"5454\",\n  \"paymentType\": \"DB\",\n  \"holder\": \"SK_Test\",\n  \"expiryMonth\": \"06\",\n  \"expiryYear\": \"2034\",\n  \"confirmationNumber\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d6c713d-0dff-4603-a0cc-7b672d22eacf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payACIInteractiveVoiceResponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionReference\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\",\n  \"paymentAmount\": \"<integer>\",\n  \"currency\": \"EUR\",\n  \"timestamp\": \"2021-10-21-17:20:30\",\n  \"transactionPaymentType\": \"Credit Card\",\n  \"isIVR\": \"<boolean>\",\n  \"code\": \"000.100.112\",\n  \"description\": \"Request successfully processed in 'Merchant In Connect\",\n  \"bin\": \"545454\",\n  \"last4Digits\": \"5454\",\n  \"paymentType\": \"DB\",\n  \"holder\": \"SK_Test\",\n  \"expiryMonth\": \"06\",\n  \"expiryYear\": \"2034\",\n  \"confirmationNumber\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5973550-2cc6-4e22-92d9-b4e6f78f9e68",
+          "name": "Get Customer Account Detail",
+          "request": {
+            "name": "Get Customer Account Detail",
+            "description": {
+              "content": "If the credit balance flag is false, then this endpoint initiates a payment for the IVR and returns the customer's details. If it's true, then it returns the customer's name along with the available credit balance in the account.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerARCode                      | The account code used for Accounts Receivable.        (AMCS will provide the account ARCode)                             |\r\n| Channel               | Channel can be only MOBILL OR IVR.   |\r\n| Amount               | Amount that customer wants to make a payment. |\r\n| CreditBalance               | The credit balance flag can be true or false.                       | \n\n ## Response\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerId                      | The account code used for Accounts Receivable.        (AMCS will provide the account ARCode) |\r\n|CustomerGuid                 | The GUID associated to the customer.        |\r\n| CustomerName               |The customer's name.   |\r\n| CustomerBalance               |The amount associated to the payment.|\r\n| CustomerCurrency               | Customer Currency associated with the Customer account.|\r\n| CreditBalance               |The Credit Balance available balance.|\r\n| ZipCode                         |ZipCode associated with the account address                            |\r\n| LastPaymentAmount                 |what was the last payment amount.    |\r\n| LastPaymentDate                 |When the last payment was made. |\r\n| TransactionReference            |Transaction Reference associated with account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ivr",
+                "pay",
+                "getCustomerAccountDetail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerARCode\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"creditBalance\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7206e1e6-f86d-45a7-a6b5-f332e4a14641",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ivr",
+                    "pay",
+                    "getCustomerAccountDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\",\n  \"amount\": 10,\n  \"creditBalance\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creditBalanceAsTrue\": [\n    {\n      \"customerid\": \"ACC1001\",\n      \"customerName\": \"Mark Smith\",\n      \"creditBalance\": 196\n    },\n    {\n      \"customerid\": \"ACC1001\",\n      \"customerName\": \"Mark Smith\",\n      \"creditBalance\": 6150\n    }\n  ],\n  \"creditBalanceAsFalse\": [\n    {\n      \"customerid\": \"4d074f1a-68ac-7ff8-ea25-a800b7e3c098\",\n      \"customerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"customerName\": \"Mark Smith\",\n      \"customerBalance\": 3240,\n      \"customerCurrency\": \"EUR\",\n      \"creditBalance\": 3235,\n      \"zipCode\": \"00501\",\n      \"lastPaymentAmount\": \"155.50\",\n      \"lastPaymentDate\": \"YYYY-MM-DD\",\n      \"transactionReference\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"customerid\": \"3b1b5b47-6aae-88a4-4675-25b617c036da\",\n      \"customerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"customerName\": \"Mark Smith\",\n      \"customerBalance\": 3312,\n      \"customerCurrency\": \"EUR\",\n      \"creditBalance\": 1581,\n      \"zipCode\": \"00501\",\n      \"lastPaymentAmount\": \"155.50\",\n      \"lastPaymentDate\": \"YYYY-MM-DD\",\n      \"transactionReference\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0459bd2-2e3a-44f6-9cc7-9c66ece57b67",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ivr",
+                    "pay",
+                    "getCustomerAccountDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\",\n  \"amount\": 10,\n  \"creditBalance\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21cd9125-3463-484a-b0d1-2df758f1d693",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ivr",
+                    "pay",
+                    "getCustomerAccountDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\",\n  \"amount\": 10,\n  \"creditBalance\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c26edbd1-791b-4480-a9b3-593950a23ab8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ivr",
+                    "pay",
+                    "getCustomerAccountDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerARCode\": \"ACC1007\",\n  \"channel\": \"MOBILL / IVR\",\n  \"amount\": 10,\n  \"creditBalance\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d28cc372-5794-44d6-86cb-a8fbc1b7f41f",
+    "name": "Core AccessGroup Mobills IVR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

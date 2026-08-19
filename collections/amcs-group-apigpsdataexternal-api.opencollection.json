@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup ApiGpsDataExternal API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApiGpsDataExternal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Response: API GPS Data External",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/integrator/gpsdata/changes",
+            "params": [
+              {
+                "name": "Since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp to retrieve changes from."
+              },
+              {
+                "name": "Cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for paginated results."
+              }
+            ]
+          },
+          "docs": "# API GPS Data Changes\n\nProvides a structured response for changes in GPS Data Points.\n\n## How to Use This API\n\nThis API retrieves GPS data point changes using either a timestamp (`Since`) or a pagination cursor (`Cursor`).\n\n### **Usage Guidelines**\n- If `Since` is provided, the API returns data changes from that timestamp onwards.\n- If `Cursor` is provided, the API retrieves the next set of results from the given position.\n- If both `Since` and `Cursor` are omitted, the result is the same as us"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

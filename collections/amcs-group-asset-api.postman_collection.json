@@ -1,0 +1,537 @@
+{
+  "item": [
+    {
+      "id": "27a01f29-40f6-447f-bc63-8b4d5c01a95a",
+      "name": "Asset",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a2a034f-49d6-4b9b-8935-cb43539bc70b",
+          "name": "Create or Update an Asset (Vehicle)",
+          "request": {
+            "name": "Create or Update an Asset (Vehicle)",
+            "description": {
+              "content": "# Create or Update an Asset (Vehicle)\r\n\r\n| Parameter    | Type   | Description                                                     |\r\n|--------------|--------|-----------------------------------------------------------------|\r\n| AssetId      | GUID   | ID of the Asset                                                 |\r\n| AssetName    | string | Display name (vehicle registration plate)                       |\r\n| AssetType    | string | Front Loader, Side Loader, Rear End Loader                      |\r\n| OutletId     | GUID   | ID of the Company Outlet associated with the Asset              |\r\n| CompanyCode  | string | Company code associated with the Asset              |\r\n| IsDeleted    | bool   | Asset is no longer in use                                       |\r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"AssetId\": \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\",\r\n  \"AssetName\": \"VEH 001\",\r\n  \"AssetType\": \"Front Loader\",\r\n  \"OutletId\": \"2FAD788D-A748-4520-9120-923DA1E42942\",\r\n  \"CompanyCode\": \"Trux Company 1\",\r\n  \"IsDeleted\": false \r\n}\r\n```\r\n\r\n## Sample API Response\r\n```\r\n{\r\n    \"resource\" : \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\"\r\n}",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visionai",
+                "api",
+                "integrator",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c738a1f8-c2c3-44e1-8196-6a7c25d48ed2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa439139-9eb2-4d13-9060-ad11850f4670",
+              "name": "Bad Request - Invalid input parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid request. Please check your input parameters.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ccf4606-c69b-42d8-96b3-c577fc6bd540",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ae05c23-7e38-4554-a317-d886a56269fe",
+              "name": "Forbidden - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"You do not have permission to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cec5fcd-bdce-4ccb-bb4a-9b92a0b75843",
+              "name": "Not Found - The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "901d9bf1-bf24-4563-b0c5-0ad0e6ab490e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"type\": \"string\",\n  \"stackTrace\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c170ff2c-f9bf-4cb1-8ca7-6976be5c7695",
+              "name": "This feature is not implemented.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"This feature is not implemented.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f95aaf9a-b84a-4aaa-9754-e4ff10b94ce9",
+              "name": "Bad Gateway - The upstream server returned an invalid response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Temporary issue with the server. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8bbfda8-7788-4032-90ae-8a3d3d7c57de",
+              "name": "Service Unavailable - The server is currently unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service is currently unavailable. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bbe1c6c-36f7-427b-b40b-f252fe9ed624",
+              "name": "Gateway Timeout - The server took too long to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<uuid>\",\n  \"assetName\": \"<string>\",\n  \"assetType\": \"<string>\",\n  \"outletId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The request timed out. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "891cafc3-7afe-4229-8d4b-4a23a2dc688e",
+    "name": "Core AccessGroup Asset API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

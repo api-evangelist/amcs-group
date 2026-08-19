@@ -1,0 +1,456 @@
+{
+  "item": [
+    {
+      "id": "52320a33-0642-4d39-97e2-beae26e85973",
+      "name": "ExternalVehicle",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6786de36-1a49-485f-b925-3df1e34ef5bb",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "externalVehicles",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ffa7b47-eeb6-4ae9-8e5d-79b163daff8c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "externalVehicles",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"Registration\": \"string\",\n    \"Description\": \"string\",\n    \"VehicleTypeListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CompanyOutletListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"RelatedTransportSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"VolumeCapacity\": 6832.402885700659,\n    \"UnitOfMeasurementListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"MaxGrossWeight\": 9753.510635149716,\n    \"RFID\": \"string\",\n    \"IsSystemUse\": true,\n    \"IsWeighOutRequired\": true,\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_2\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3615,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76cfeb13-6e3f-4fdb-af7a-8d2ec7c72c8d",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "externalVehicles",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Registration\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"VehicleTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedTransportSupplierSiteGuid\": \"<uuid>\",\n  \"VolumeCapacity\": \"<double>\",\n  \"UnitOfMeasurementListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"MaxGrossWeight\": \"<double>\",\n  \"RFID\": \"<string>\",\n  \"IsSystemUse\": \"<boolean>\",\n  \"IsWeighOutRequired\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7efeac5b-1969-4852-b270-388f5a1662b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "externalVehicles",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Registration\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"VehicleTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedTransportSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"VolumeCapacity\": \"<double>\",\n  \"UnitOfMeasurementListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"MaxGrossWeight\": \"<double>\",\n  \"RFID\": \"<string>\",\n  \"IsSystemUse\": \"<boolean>\",\n  \"IsWeighOutRequired\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"81e64768-366c-5413-a519-669433cd5792\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 666,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10185bd9-822a-4ea3-9c85-b94645185a13",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "externalVehicles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ef16a6c-ffb8-4dad-b469-e193e9710d63",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "externalVehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Registration\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"VehicleTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedTransportSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"VolumeCapacity\": \"<double>\",\n      \"UnitOfMeasurementListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"MaxGrossWeight\": \"<double>\",\n      \"RFID\": \"<string>\",\n      \"IsSystemUse\": \"<boolean>\",\n      \"IsWeighOutRequired\": \"<boolean>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Registration\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"VehicleTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedTransportSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"VolumeCapacity\": \"<double>\",\n      \"UnitOfMeasurementListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"MaxGrossWeight\": \"<double>\",\n      \"RFID\": \"<string>\",\n      \"IsSystemUse\": \"<boolean>\",\n      \"IsWeighOutRequired\": \"<boolean>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 7842\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 1902,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4259b05c-6a21-435e-85a6-6b0208b7967d",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fleet",
+                "externalVehicles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Registration\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"VehicleTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedTransportSupplierSiteGuid\": \"<uuid>\",\n  \"VolumeCapacity\": \"<double>\",\n  \"UnitOfMeasurementListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"MaxGrossWeight\": \"<double>\",\n  \"RFID\": \"<string>\",\n  \"IsSystemUse\": \"<boolean>\",\n  \"IsWeighOutRequired\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c41ca21-4770-4adf-8ac6-477de3be3d94",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fleet",
+                    "externalVehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Registration\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"VehicleTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedTransportSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"VolumeCapacity\": \"<double>\",\n  \"UnitOfMeasurementListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"MaxGrossWeight\": \"<double>\",\n  \"RFID\": \"<string>\",\n  \"IsSystemUse\": \"<boolean>\",\n  \"IsWeighOutRequired\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"81e64768-366c-5413-a519-669433cd5792\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 666,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "abfbf8ba-5a49-4484-a88e-6cac7f437134",
+    "name": "Core AccessGroup ExternalVehicle API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

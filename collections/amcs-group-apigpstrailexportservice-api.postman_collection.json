@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "38617348-6119-4502-a608-266b1f76a098",
+      "name": "ApiGpsTrailExportService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a1e0d61-fe76-4e10-be8b-f4b471ddee4a",
+          "name": "Get list of Vehicle Gps Trails",
+          "request": {
+            "name": "Get list of Vehicle Gps Trails",
+            "description": {
+              "content": "# Get list of Vehicle Gps Trail\r\n\r\n## Input\r\n| Parameter\t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t          |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |         \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| DateFrom \t\t\t  | DateTime | Timestamp when the start date of the gps trail to be extracted                     |\r\n| DateTo              | DateTime | Timestamp when the end date of the gps trail to be extracted                       |\r\n\t\t\t\t                                              \r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"AssetName\": \"M879 EUS\",\r\n  \"DateFrom\": \"2024-06-28\",\r\n  \"DateTo\": \"\"2024-06-30\"\r\n}\r\n```\r\n\r\n## Output\r\n| Property \t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |                   \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| Timestamp \t\t  | DateTime | Timestamp of the asset                                                      |\r\n| Lat\t\t\t\t  | DateTime | Latitude where the asset at that point                       |\r\n| Lon \t\t\t\t  | DateTime | Longitude where the asset at that point                    |\r\n\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrator",
+                "gpsTrail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetName\": \"<string>\",\n  \"gpsTrail\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f549dcd5-88b3-4cc1-a47c-3c5cefdc9f38",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "gpsTrail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetName\": \"<string>\",\n  \"gpsTrail\": [\n    {\n      \"timestamp\": \"2000-01-01 00:00:00.000\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    },\n    {\n      \"timestamp\": \"2000-01-01 00:00:00.000\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assetName\": \"<string>\",\n  \"gpsTrail\": [\n    {\n      \"timestamp\": \"2000-01-01 00:00:00.000\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    },\n    {\n      \"timestamp\": \"2000-01-01 00:00:00.000\",\n      \"lat\": \"<double>\",\n      \"lon\": \"<double>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "79e2d175-a3ff-41f1-a515-5b748d822d95",
+    "name": "Core AccessGroup ApiGpsTrailExportService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

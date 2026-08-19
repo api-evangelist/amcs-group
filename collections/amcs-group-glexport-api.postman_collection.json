@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "fab09d88-71c1-4278-8ad0-b560a505feea",
+      "name": "GLExport",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dea5fac-8ee0-485c-b707-b4e2784b3d02",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                        | Description                                                  | Required |\r\n| ------------------------------  | ------------------------------------------------------------ | -------- |\r\n| IsDeleted              | Is the GLExport Deleted. | Yes      |\r\n| GeneralLedgerExportTypeBitmask  | The GeneralLedgerExportTypeBitmask of the GLExport.          | Yes      |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| GeneralLedgerExportTypeBitmask was set null | The mandatory property GeneralLedgerExportTypeBitmask has a null value. The request could not be processed. Supply a value for the GeneralLedgerExportTypeBitmask property of the submitted resource. |\r\n| IsDeleted was set null | The mandatory property IsDeleted has a null value. The request could not be processed. Supply a value for the IsDeleted property of the submitted resource. |\r\n| GLExport with Guid | GLExport has the property Guid with value of {0} that is not supported. The GLExport cannot be created with Guid. |\r\n| GLExport with IsDeleted true | IsDeleted is TRUE. Could not process the request. GLExports can not be deleted via the REST API. |\r\n| GeneralLedgerExportTypeBitmask with invalid bit mask | GLExport with GeneralLedgerExportTypeBitmask of {0} is not a valid general ledger export type bit mask. More than one transaction type is not allowed. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "glExports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"IsDeleted\": \"<boolean>\",\n  \"GeneralLedgerExportTypeBitmask\": \"<integer>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51e65a38-b091-4b7a-ada2-6bd46f1dd1b3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "glExports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"IsDeleted\": \"<boolean>\",\n  \"GeneralLedgerExportTypeBitmask\": \"<integer>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"e8909fc9-7b53-9a5f-dc8b-d886ae156d0e\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 8624,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9b963ae0-4c10-419f-bad9-7ed3fe087560",
+    "name": "Core AccessGroup GLExport API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

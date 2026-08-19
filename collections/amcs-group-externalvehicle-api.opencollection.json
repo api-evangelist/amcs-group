@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup ExternalVehicle API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExternalVehicle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/externalVehicles/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/fleet/externalVehicles/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/externalVehicles",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fleet/externalVehicles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

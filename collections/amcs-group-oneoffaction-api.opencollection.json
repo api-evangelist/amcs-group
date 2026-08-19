@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup OneOffAction API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OneOffAction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/oneOffActions/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off acti"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/oneOffActions/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off acti"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transport/oneOffActions/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the one-off action.| No    |\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action.| Yes   |\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.| Yes   |\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the pr"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/oneOffActions",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the one-off action.|\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action. Filterable.|\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.|\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the price adjustment of the one-off acti"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transport/oneOffActions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ------------------------------------------------- | --------------------------------------------------------------------------------------------------| -------- |\r\n| GUID| The GUID associated to the one-off action.| No    |\r\n| RelatedOrderGuid| The GUID associated to the site order of the one-off action.| Yes   |\r\n| RelatedPriceGuid| The GUID associated to the price of the one-off action.| Yes   |\r\n| RelatedPriceAdjustmentGuid| The GUID associated to the pr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Mobills IVR API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mobills IVR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Customer Invoice Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/Mobills/Ivr/Pay/GetCustomerInvoiceDetails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates a record in payment transaction table.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerARCode                      | The account code used for Accounts Receivable.        (AMCS will provide the account ARCode)                             |\r\n| Channel               | Channel can be only MOBILL OR IVR                         | \n\n ## Response\n\n| Propert"
+        },
+        {
+          "info": {
+            "name": "Post Back IVR Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/payACIInteractiveVoiceResponse",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates an existing record in the payment transaction table and creates a record in the Amcs-Pay Database.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| TransactionReference                      | The Transaction Reference can get from the GetCustomerInvoce API.                           |\r\n| PaymentAmount               | The payment amount associated to the payme"
+        },
+        {
+          "info": {
+            "name": "Get Customer Account Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ivr/pay/getCustomerAccountDetail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If the credit balance flag is false, then this endpoint initiates a payment for the IVR and returns the customer's details. If it's true, then it returns the customer's name along with the available credit balance in the account.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| CustomerARCode                      | The account code used for Accounts Receivable.        (AMCS will p"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

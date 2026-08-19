@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "id": "56f3637a-facb-4bc1-a9bb-c68cbc992488",
+      "name": "MasterAccount",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86427ef3-4117-44c8-8407-46d859b65a90",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the master account.                               |\r\n| Name                      | The master account's name.                                               |\r\n| ARAccountCode             | The account code used for accounts receivable.                           |\r\n| APAccountCode             | The account code used for accounts payable.                              |\r\n| CurrencyListItem          | The GUID and currency of the master account (various values).            |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "masterAccounts",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2eed928-efa8-4c74-b3a9-e0d684bfba66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "masterAccounts",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Name\": \"string\",\n      \"ARAccountCode\": \"string\",\n      \"APAccountCode\": \"string\",\n      \"CurrencyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Name\": \"string\",\n      \"ARAccountCode\": \"string\",\n      \"APAccountCode\": \"string\",\n      \"CurrencyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 9931,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17a01d9b-ac93-4d4b-8d75-6765172e33d8",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the master account.                               |\r\n| Name                      | The master account's name.                                               |\r\n| ARAccountCode             | The account code used for accounts receivable.                           |\r\n| APAccountCode             | The account code used for accounts payable.                              |\r\n| CurrencyListItem          | The GUID and currency of the master account (various values).            |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "masterAccounts",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7a61934-c7a5-4af2-871d-5f1b2a71d088",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "masterAccounts",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"Name\": \"string\",\n    \"ARAccountCode\": \"string\",\n    \"APAccountCode\": \"string\",\n    \"CurrencyListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 8346,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9713a267-9cd0-4c96-9caf-18e838ad8c3c",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property                  | Description                                                              | Required |\r\n| ------------------------- | ------------------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the master account.                               | No |\r\n| Name                      | The master account's name.                                               | Yes |\r\n| ARAccountCode             | The account code used for accounts receivable.                           | Yes |\r\n| APAccountCode             | The account code used for accounts payable.                              | No |\r\n| CurrencyListItem          | The GUID and currency of the master account (various values).            | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |\r\n|If the provided CurrencyListItem.Guid belongs to a deleted currency | The provided CurrencyListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "masterAccounts",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"APAccountCode\": \"<string>\",\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3169398d-5abe-4053-a930-a7e06b2a544e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "masterAccounts",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"APAccountCode\": \"<string>\",\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"8f84013d-97e6-2093-fde3-832ef46c67eb\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4787,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ea87832-367a-4a92-a64d-17a3e6c9cd21",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the master account.                               |\r\n| Name                      | The master account's name.                                               |\r\n| ARAccountCode             | The account code used for accounts receivable.                           |\r\n| APAccountCode             | The account code used for accounts payable.                              |\r\n| CurrencyListItem          | The GUID and currency of the master account (various values).            |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "masterAccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c42967c-2ddb-49a1-9c4f-4333d2151d9c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "masterAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Name\": \"<string>\",\n      \"ARAccountCode\": \"<string>\",\n      \"APAccountCode\": \"<string>\",\n      \"CurrencyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Name\": \"<string>\",\n      \"ARAccountCode\": \"<string>\",\n      \"APAccountCode\": \"<string>\",\n      \"CurrencyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 225\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 8166,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4561141-b812-44b8-8145-74491b4a582c",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                  | Description                                                              | Required |\r\n| ------------------------- | ------------------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the master account.                               | No |\r\n| Name                      | The master account's name.                                               | Yes |\r\n| ARAccountCode             | The account code used for accounts receivable.                           | Yes |\r\n| APAccountCode             | The account code used for accounts payable.                              | No |\r\n| CurrencyListItem          | The GUID and currency of the master account (various values).            | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |\r\n|If the provided CurrencyListItem.Guid belongs to a deleted currency | The provided CurrencyListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "masterAccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"APAccountCode\": \"<string>\",\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "309d3c7e-dd3b-46f4-a713-f1c4056c6ca2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "masterAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"APAccountCode\": \"<string>\",\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"8f84013d-97e6-2093-fde3-832ef46c67eb\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 4787,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "62d5d63b-65eb-45a2-b904-10bf8ce78d72",
+    "name": "Core AccessGroup MasterAccount API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

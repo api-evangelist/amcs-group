@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "id": "03eeadd1-766c-468d-9404-549c2d1f0ec4",
+      "name": "Customer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a5e6182-9de2-4ed0-b230-ce52028b65a4",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "customers",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc4bfb5a-4f37-459e-ab16-a6ba6bc5597b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "customers",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Name\": \"string\",\n      \"Reference\": \"string\",\n      \"ARAccountCode\": \"string\",\n      \"FederalId\": \"string\",\n      \"IsInternal\": false,\n      \"ReceiveServiceUpdatesByEmail\": true,\n      \"ReceiveServiceUpdatesByText\": false,\n      \"ReceiveMarketingUpdatesByEmail\": true,\n      \"ReceiveMarketingUpdatesByText\": false,\n      \"CompanyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateChangeReasonListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerCategoryListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerGroupListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CurrencyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedBlobHashes\": [\n        {\n          \"Hash\": \"string\"\n        },\n        {\n          \"Hash\": \"string\"\n        }\n      ],\n      \"RelatedReportBlobs\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"string\",\n          \"DocumentName\": \"string\",\n          \"Hash\": \"string\",\n          \"IsForAllSites\": true,\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"string\",\n          \"DocumentName\": \"string\",\n          \"Hash\": \"string\",\n          \"IsForAllSites\": false,\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"RelatedCustomerStateChangeRequests\": [\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedCustomerStateChangeRequest\": {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsResidential\": true,\n      \"AutoArAccountCode\": {\n        \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Reference\": \"string\",\n      \"ARAccountCode\": \"string\",\n      \"FederalId\": \"string\",\n      \"IsInternal\": false,\n      \"ReceiveServiceUpdatesByEmail\": true,\n      \"ReceiveServiceUpdatesByText\": true,\n      \"ReceiveMarketingUpdatesByEmail\": true,\n      \"ReceiveMarketingUpdatesByText\": true,\n      \"CompanyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateChangeReasonListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerTypeListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerCategoryListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerGroupListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CurrencyListItem\": {\n        \"Description\": \"string\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedBlobHashes\": [\n        {\n          \"Hash\": \"string\"\n        },\n        {\n          \"Hash\": \"string\"\n        }\n      ],\n      \"RelatedReportBlobs\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"string\",\n          \"DocumentName\": \"string\",\n          \"Hash\": \"string\",\n          \"IsForAllSites\": true,\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"string\",\n          \"DocumentName\": \"string\",\n          \"Hash\": \"string\",\n          \"IsForAllSites\": true,\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"RelatedCustomerStateChangeRequests\": [\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedCustomerStateChangeRequest\": {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsResidential\": true,\n      \"AutoArAccountCode\": {\n        \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 8840,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73699dad-4762-4edc-b003-d7b01e07229f",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "customers",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6779493-d89e-4862-a6fe-f6f7aa306341",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "customers",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"Name\": \"string\",\n    \"Reference\": \"string\",\n    \"ARAccountCode\": \"string\",\n    \"FederalId\": \"string\",\n    \"IsInternal\": true,\n    \"ReceiveServiceUpdatesByEmail\": false,\n    \"ReceiveServiceUpdatesByText\": true,\n    \"ReceiveMarketingUpdatesByEmail\": false,\n    \"ReceiveMarketingUpdatesByText\": true,\n    \"CompanyListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CustomerStateListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CustomerStateChangeReasonListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CustomerTypeListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CustomerCategoryListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CustomerGroupListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CurrencyListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"RelatedBlobHashes\": [\n      {\n        \"Hash\": \"string\"\n      },\n      {\n        \"Hash\": \"string\"\n      }\n    ],\n    \"RelatedReportBlobs\": [\n      {\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n        \"DocumentDescription\": \"string\",\n        \"DocumentName\": \"string\",\n        \"Hash\": \"string\",\n        \"IsForAllSites\": true,\n        \"RelatedSites\": [\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          },\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        ],\n        \"RelatedExcludedSites\": [\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          },\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        ]\n      },\n      {\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n        \"DocumentDescription\": \"string\",\n        \"DocumentName\": \"string\",\n        \"Hash\": \"string\",\n        \"IsForAllSites\": true,\n        \"RelatedSites\": [\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          },\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        ],\n        \"RelatedExcludedSites\": [\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          },\n          {\n            \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n            \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        ]\n      }\n    ],\n    \"RelatedCustomerStateChangeRequests\": [\n      {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      }\n    ],\n    \"RelatedCustomerStateChangeRequest\": {\n      \"EffectiveDate\": \"2000-01-01\",\n      \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"IsResidential\": false,\n    \"AutoArAccountCode\": {\n      \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_2\": {\n        \"key_0\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        }\n      ],\n      \"key_2\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 9766,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab7fde20-e1e4-4417-8039-523f9481248e",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Name                 | The customer's name.                                                  | Yes |\r\n| Reference            | An alternative name used for the customer.                            | No |\r\n| ARAccountCode        | The account code used for Accounts Receivable. This field must be null. Error \"ARAccountCode should be null\" is returned when not null. | No |\r\n| FederalId            | The customer's local authority / government /tax reference.           | No |\r\n| IsInternal           | Whether the customer is an internal customer.                         | Yes |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.                 | Yes |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.                  | Yes |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.               | Yes |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.                | Yes |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        | Yes |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       | Yes |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                | No |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). | No |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 | No |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    | No |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 | Yes |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the customer.| No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not null | ARAccountCode should be null |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update Customer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update Customer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. Customer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to Customer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "customers",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"Reference\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"FederalId\": \"<string>\",\n  \"IsInternal\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerStateListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerStateChangeReasonListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerGroupListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedBlobHashes\": [\n    {\n      \"Hash\": \"<string>\"\n    },\n    {\n      \"Hash\": \"<string>\"\n    }\n  ],\n  \"RelatedReportBlobs\": [\n    {\n      \"Guid\": \"<uuid>\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ]\n    },\n    {\n      \"Guid\": \"<uuid>\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ]\n    }\n  ],\n  \"RelatedCustomerStateChangeRequests\": [\n    {\n      \"EffectiveDate\": \"<localDate>\",\n      \"RelatedCustomerStateGuid\": \"<uuid>\",\n      \"RelatedChangeReasonGuid\": \"<uuid>\",\n      \"GUID\": \"<uuid>\"\n    },\n    {\n      \"EffectiveDate\": \"<localDate>\",\n      \"RelatedCustomerStateGuid\": \"<uuid>\",\n      \"RelatedChangeReasonGuid\": \"<uuid>\",\n      \"GUID\": \"<uuid>\"\n    }\n  ],\n  \"RelatedCustomerStateChangeRequest\": {\n    \"EffectiveDate\": \"<localDate>\",\n    \"RelatedCustomerStateGuid\": \"<uuid>\",\n    \"RelatedChangeReasonGuid\": \"<uuid>\",\n    \"GUID\": \"<uuid>\"\n  },\n  \"IsResidential\": \"<boolean>\",\n  \"AutoArAccountCode\": {\n    \"CompanyOutletGuid\": \"<uuid>\"\n  },\n  \"HQLocation\": \"<uuid>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a3411b4-fc55-4075-9903-f768ca6573cd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "customers",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"<string>\",\n  \"Reference\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"FederalId\": \"<string>\",\n  \"IsInternal\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerStateListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerStateChangeReasonListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerGroupListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedBlobHashes\": [\n    {\n      \"Hash\": \"<string>\"\n    },\n    {\n      \"Hash\": \"<string>\"\n    }\n  ],\n  \"RelatedReportBlobs\": [\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ]\n    },\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ]\n    }\n  ],\n  \"RelatedCustomerStateChangeRequests\": [\n    {\n      \"EffectiveDate\": \"2000-01-01\",\n      \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"EffectiveDate\": \"2000-01-01\",\n      \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"RelatedCustomerStateChangeRequest\": {\n    \"EffectiveDate\": \"2000-01-01\",\n    \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"IsResidential\": \"<boolean>\",\n  \"AutoArAccountCode\": {\n    \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"b1b0953c-055c-3b91-31a4-b0d05bee5958\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3277,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1b3396e-fb6d-4122-a101-a03e3b85ce37",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property             | Description                                                           |\r\n| -------------------- | --------------------------------------------------------------------- |\r\n| GUID                 | The GUID associated to the customer.                                  |\r\n| Name                 | The customer's name.                                                  |\r\n| Reference            | An alternative name used for the customer.                            |\r\n| ARAccountCode        | The account code used for Accounts Receivable.                        |\r\n| FederalId            | The customer's local authority / government /tax reference.           |\r\n| IsInternal           | Whether the customer is an internal customer.                       |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.     |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.      |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.   |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.    |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change .               |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 |\r\n| RelatedCustomerStateChangeRequests| The array of related customer state change requests|\r\n| RelatedCustomerStateChangeRequests[0].EffectiveDate| The effective date associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedCustomerStateGuid| The related customer state guid associated to the customer state change request|\r\n| RelatedCustomerStateChangeRequests[0].RelatedChangeReasonGuid| The related customer change reason guid associated to the customer state change request|\r\n| RelatedBlobHashes| The array of related external documents to the customer. |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs| The array of related report documents to the account customer. |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.|\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.|\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.|\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.|\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.|\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.|\r\n| RelatedHQLocationGuid| The guid associated to the customer head quarter location.                    |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "416bdc07-6650-43ee-9dbe-5a79811aefd9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"Name\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ARAccountCode\": \"<string>\",\n      \"FederalId\": \"<string>\",\n      \"IsInternal\": \"<boolean>\",\n      \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n      \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n      \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n      \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n      \"CompanyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateChangeReasonListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerCategoryListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerGroupListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CurrencyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedBlobHashes\": [\n        {\n          \"Hash\": \"<string>\"\n        },\n        {\n          \"Hash\": \"<string>\"\n        }\n      ],\n      \"RelatedReportBlobs\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"<string>\",\n          \"DocumentName\": \"<string>\",\n          \"Hash\": \"<string>\",\n          \"IsForAllSites\": \"<boolean>\",\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"<string>\",\n          \"DocumentName\": \"<string>\",\n          \"Hash\": \"<string>\",\n          \"IsForAllSites\": \"<boolean>\",\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"RelatedCustomerStateChangeRequests\": [\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedCustomerStateChangeRequest\": {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsResidential\": \"<boolean>\",\n      \"AutoArAccountCode\": {\n        \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Name\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ARAccountCode\": \"<string>\",\n      \"FederalId\": \"<string>\",\n      \"IsInternal\": \"<boolean>\",\n      \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n      \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n      \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n      \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n      \"CompanyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerStateChangeReasonListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerTypeListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerCategoryListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CustomerGroupListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CurrencyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"RelatedBlobHashes\": [\n        {\n          \"Hash\": \"<string>\"\n        },\n        {\n          \"Hash\": \"<string>\"\n        }\n      ],\n      \"RelatedReportBlobs\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"<string>\",\n          \"DocumentName\": \"<string>\",\n          \"Hash\": \"<string>\",\n          \"IsForAllSites\": \"<boolean>\",\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"DocumentDescription\": \"<string>\",\n          \"DocumentName\": \"<string>\",\n          \"Hash\": \"<string>\",\n          \"IsForAllSites\": \"<boolean>\",\n          \"RelatedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"RelatedExcludedSites\": [\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"RelatedSiteGuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"RelatedCustomerStateChangeRequests\": [\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"EffectiveDate\": \"2000-01-01\",\n          \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n          \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedCustomerStateChangeRequest\": {\n        \"EffectiveDate\": \"2000-01-01\",\n        \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"IsResidential\": \"<boolean>\",\n      \"AutoArAccountCode\": {\n        \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 6810\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 673,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b8a6ee1-652f-457a-ad4f-1ef4e76966bc",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| GUID                 | The GUID associated to the customer.                                  | No |\r\n| Name                 | The customer's name.                                                  | Yes |\r\n| Reference            | An alternative name used for the customer.                            | No |\r\n| ARAccountCode        | The account code used for Accounts Receivable. This field must be null. Error \"ARAccountCode should be null\" is returned when not null. | No |\r\n| FederalId            | The customer's local authority / government /tax reference.           | No |\r\n| IsInternal           | Whether the customer is an internal customer.                         | Yes |\r\n| IsResidential   | Whether the customer is a residential customer (as opposed to a commercial). | No |\r\n| ReceiveServiceUpdatesByEmail   | Customer receives service updates by email.                 | Yes |\r\n| ReceiveServiceUpdatesByText    | Customer receives service updates by text.                  | Yes |\r\n| ReceiveMarketingUpdatesByEmail | Customer receives marketing updates by email.               | Yes |\r\n| ReceiveMarketingUpdatesByText  | Customer receives marketing updates by text.                | Yes |\r\n| CompanyListItem          | The GUID and name of the company this customer is associated to.        | Yes |\r\n| CustomerStateListItem    | The GUID and status of the customer (eg. Active, Suspended, etc.)       | Yes |\r\n| CustomerStateChangeReasonListItem | The GUID and reason of the latest state change.                | No |\r\n| CustomerTypeListItem     | The GUID and type of customer (eg. Residential, Commerical, Municipal). | No |\r\n| CustomerCategoryListItem | The GUID and category of the customer (various values).                 | No |\r\n| CustomerGroupListItem    | The GUID and group of the customer (various values).                    | No |\r\n| CurrencyListItem         | The GUID and currency of the customer (various values).                 | Yes |\r\n| RelatedCustomerStateChangeRequest | The GUID, EffectiveDate, RelatedCustomerStateGuid and RelatedChangeReasonGuid of the customer state change request (various values) | No |\r\n| RelatedBlobHashes| The array of related external documents to the customer. | No |\r\n| RelatedBlobHashes[0].Hash| The hash of the external document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs| The array of related report documents to the customer.| No |\r\n| RelatedReportBlobs[0].Guid| The Guid associated to the customer report.| Yes |\r\n| RelatedReportBlobs[0].Hash| The hash of the report document blob to be used against the /blob endpoint. Files are provided as an octet stream which will need to be converted. | No |\r\n| RelatedReportBlobs[0].DocumentDescription| The description associated to the customer report.| No |\r\n| RelatedReportBlobs[0].DocumentName| The document name associated to the customer report.| No |\r\n| RelatedReportBlobs[0].IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| RelatedReportBlobs[0].RelatedSites| The list of related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites| The list of excluded related customer report sites.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedReportBlobs[0].RelatedExcludedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| ARAccountCode is not null | ARAccountCode should be null |\r\n| RelatedBlobHashes[0].Hash is not null for Insert | Failed to save/update Customer because RelatedBlobHashes creation is not permitted |\r\n| RelatedBlobHashes[0].Hash is not null for Update and the Customer did not have RelatedBlobHashes initially | Failed to save/update Customer because RelatedBlobHashes do not exist for the Customer. |\r\n| RelatedBlobHashes[0].Hash is not null for Update and Invalid Hash | Failed to retrieve CustomerExternalDocument with MediaContentHash of {value of Hash} |\r\n| RelatedReportBlobs[0].Hash is not null for Insert | Failed to save/update Customer because RelatedReportBlobs creation is not permitted |\r\n| RelatedReportBlobs is not empty for Insert | Failed to save/update Customer because RelatedReportBlobs creation is not permitted |\r\n| RelatedReportBlobs is not empty for Update and the Customer did not have RelatedReportBlobs initially | Failed to save/update Customer because RelatedReportBlobs do not exist for the Customer. |\r\n| RelatedReportBlobs[0].Guid is invalid | Failed to retrieve PortalReport with RelatedReportBlobs.Guid of {RelatedReportBlobs.Guid} |\r\n| RelatedReportBlobs[0].Guid is changed | Failed to save. Customer with RelatedReportBlobs.Guid cannot be set if CustomerReport is not linked to Customer |\r\n| RelatedReportBlobs[0].Hash is changed | RelatedReportBlobs.Hash is a read-only property |\r\n| RelatedReportBlobs[0].DocumentDescription is changed | RelatedReportBlobs.DocumentDescription is a read-only property |\r\n| RelatedReportBlobs[0].IsForAllSites is changed | RelatedReportBlobs.IsForAllSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites is changed | RelatedReportBlobs.RelatedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.Guid is changed | RelatedReportBlobs.RelatedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedSites.RelatedSiteGuid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites is changed | RelatedReportBlobs.RelatedExcludedSites is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.Guid is changed | RelatedReportBlobs.RelatedExcludedSites.Guid is a read-only property |\r\n| RelatedReportBlobs[0].RelatedExcludedSites.RelatedSiteGuid is changed | RelatedReportBlobs.RelatedExcludedSites.RelatedSiteGuid is a read-only property |\r\n| Reason Category for state change is not Customer Status Change Reason | Reason Category must be Customer Status Change Reason |\r\n| A CustomerStateChangeReason is supplied on a insert | CustomerStateChangeReasonListItem is not supported for create |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"Reference\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"FederalId\": \"<string>\",\n  \"IsInternal\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerStateListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerStateChangeReasonListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CustomerGroupListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedBlobHashes\": [\n    {\n      \"Hash\": \"<string>\"\n    },\n    {\n      \"Hash\": \"<string>\"\n    }\n  ],\n  \"RelatedReportBlobs\": [\n    {\n      \"Guid\": \"<uuid>\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ]\n    },\n    {\n      \"Guid\": \"<uuid>\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        },\n        {\n          \"Guid\": \"<uuid>\",\n          \"RelatedSiteGuid\": \"<uuid>\"\n        }\n      ]\n    }\n  ],\n  \"RelatedCustomerStateChangeRequests\": [\n    {\n      \"EffectiveDate\": \"<localDate>\",\n      \"RelatedCustomerStateGuid\": \"<uuid>\",\n      \"RelatedChangeReasonGuid\": \"<uuid>\",\n      \"GUID\": \"<uuid>\"\n    },\n    {\n      \"EffectiveDate\": \"<localDate>\",\n      \"RelatedCustomerStateGuid\": \"<uuid>\",\n      \"RelatedChangeReasonGuid\": \"<uuid>\",\n      \"GUID\": \"<uuid>\"\n    }\n  ],\n  \"RelatedCustomerStateChangeRequest\": {\n    \"EffectiveDate\": \"<localDate>\",\n    \"RelatedCustomerStateGuid\": \"<uuid>\",\n    \"RelatedChangeReasonGuid\": \"<uuid>\",\n    \"GUID\": \"<uuid>\"\n  },\n  \"IsResidential\": \"<boolean>\",\n  \"AutoArAccountCode\": {\n    \"CompanyOutletGuid\": \"<uuid>\"\n  },\n  \"HQLocation\": \"<uuid>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa03cb56-6630-4296-bb0a-7122a7fba64d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"<string>\",\n  \"Reference\": \"<string>\",\n  \"ARAccountCode\": \"<string>\",\n  \"FederalId\": \"<string>\",\n  \"IsInternal\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveServiceUpdatesByText\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByEmail\": \"<boolean>\",\n  \"ReceiveMarketingUpdatesByText\": \"<boolean>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerStateListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerStateChangeReasonListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CustomerGroupListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CurrencyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedBlobHashes\": [\n    {\n      \"Hash\": \"<string>\"\n    },\n    {\n      \"Hash\": \"<string>\"\n    }\n  ],\n  \"RelatedReportBlobs\": [\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ]\n    },\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"DocumentDescription\": \"<string>\",\n      \"DocumentName\": \"<string>\",\n      \"Hash\": \"<string>\",\n      \"IsForAllSites\": \"<boolean>\",\n      \"RelatedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"RelatedExcludedSites\": [\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        },\n        {\n          \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n        }\n      ]\n    }\n  ],\n  \"RelatedCustomerStateChangeRequests\": [\n    {\n      \"EffectiveDate\": \"2000-01-01\",\n      \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"EffectiveDate\": \"2000-01-01\",\n      \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"RelatedCustomerStateChangeRequest\": {\n    \"EffectiveDate\": \"2000-01-01\",\n    \"RelatedCustomerStateGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"RelatedChangeReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"IsResidential\": \"<boolean>\",\n  \"AutoArAccountCode\": {\n    \"CompanyOutletGuid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"HQLocation\": \"00000000-0000-0000-0000-000000000000\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"b1b0953c-055c-3b91-31a4-b0d05bee5958\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3277,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5dbf6a17-bdfc-4af6-8c6c-9c12c7e13fdd",
+    "name": "Core AccessGroup Customer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

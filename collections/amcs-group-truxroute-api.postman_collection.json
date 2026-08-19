@@ -1,0 +1,537 @@
+{
+  "item": [
+    {
+      "id": "7cc4e43a-68fc-46be-9461-e2630147a6bd",
+      "name": "TruxRoute",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9104de2b-239b-4b63-b8f6-53100046afb2",
+          "name": "Create or Update Trux Route Information",
+          "request": {
+            "name": "Create or Update Trux Route Information",
+            "description": {
+              "content": "# Create or Update Trux Route Information\r\n\r\nThis endpoint allows external systems to submit route information from Trux, which updates associated assets (vehicles) and creates or updates customer address records.\r\n\r\n| Parameter       | Type     | Description                                                         |\r\n|-----------------|----------|---------------------------------------------------------------------|\r\n| RouteNumber     | long     | Route identification number                                         |\r\n| RouteDate       | DateTime | Date and time of the route                                          |\r\n| VehicleId       | GUID     | ID of the vehicle (Asset) performing the route                      |\r\n| CompanyCode     | string   | Company code associated with the route                              |\r\n| CustomerNumber  | string   | Customer identification number                                      |\r\n| SiteNumber      | string   | Site identification number                                          |\r\n| ServiceNumber   | string   | Service type identification number                                  |\r\n| Country         | string   | Country of the customer address                                     |\r\n| City            | string   | City of the customer address                                        |\r\n| District        | string   | District of the customer address                                    |\r\n| Street          | string   | Street address of the customer                                      |\r\n| PostalCode      | string   | Postal/ZIP code of the customer address                             |\r\n| Latitude        | double   | Latitude coordinate of the customer address                         |\r\n| Longitude       | double   | Longitude coordinate of the customer address                        |\r\n| JobId           | string   | Job identification for the route                                    |\r\n\r\n## Sample API Request\r\n\r\n```json\r\n{\r\n  \"RouteNumber\": 12345678901,\r\n  \"RouteDate\": \"2026-01-26T08:30:00\",\r\n  \"VehicleId\": \"B3E43C4D-BC76-4E59-9E2E-25BC33EA2EC4\",\r\n  \"CompanyCode\": \"COMP123\",\r\n  \"CustomerNumber\": \"CUST-456789\",\r\n  \"SiteNumber\": \"SITE-001\",\r\n  \"ServiceNumber\": \"SVC-789\",\r\n  \"Country\": \"USA\",\r\n  \"City\": \"Los Angeles\",\r\n  \"District\": \"Downtown\",\r\n  \"Street\": \"123 Main Street\",\r\n  \"PostalCode\": \"90001\",\r\n  \"Latitude\": 34.0522,\r\n  \"Longitude\": -118.2437,\r\n  \"JobId\": \"JOB-2026-001\"\r\n}\r\n```\r\n\r\n## Sample API Response\r\n```json\r\n{\r\n  \"resource\": 1\r\n}\r\n```\r\n\r\n## Behavior\r\n\r\n- The system finds the asset by `VehicleId` and updates it with `RouteNumber`, `RouteDate`, and `JobId`\r\n- The system finds or creates a customer address record using `CustomerNumber` as the foreign ID\r\n- All address information (location, coordinates, site details) is saved to the customer address record\r\n- The tenant must be configured with Trux sync type for this endpoint to process data\r\n- If the vehicle is not found, a warning is logged but the customer address is still created/updated\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visionai",
+                "api",
+                "integrator",
+                "truxRoutes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"<dateTime>\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a077d4a-f8de-489f-a578-b13c25c10fb7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b67e500-7ee0-48c1-9379-597d57fc123f",
+              "name": "Bad Request - Invalid input parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid request. Please check your input parameters.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "570e1620-0d22-418e-898e-fc332469c32b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4c61824-c0c7-4c42-aa4e-ca975bfe6821",
+              "name": "Forbidden - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"You do not have permission to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f5855d5-5bdc-4f87-ba46-4c4217ffef2e",
+              "name": "Not Found - The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12abf98a-5e13-4b5f-96e5-420620defaaf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"type\": \"string\",\n  \"stackTrace\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88c97bca-9155-4c8a-800a-f8f5b9e4cf4f",
+              "name": "This feature is not implemented.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"This feature is not implemented.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "697a2c30-bcc2-4e84-8e8d-95ebb062f786",
+              "name": "Bad Gateway - The upstream server returned an invalid response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Temporary issue with the server. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b36377d2-775d-4e4c-bd3e-1490a91e92c8",
+              "name": "Service Unavailable - The server is currently unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service is currently unavailable. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d1d0fad-b92e-4a3e-9745-f6870a4ebf18",
+              "name": "Gateway Timeout - The server took too long to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "truxRoutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"routeNumber\": \"<long>\",\n  \"routeDate\": \"2000-01-01 00:00:00.000\",\n  \"vehicleId\": \"<uuid>\",\n  \"companyCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"siteNumber\": \"<string>\",\n  \"serviceNumber\": \"<string>\",\n  \"country\": \"<string>\",\n  \"city\": \"<string>\",\n  \"district\": \"<string>\",\n  \"street\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The request timed out. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e105ab00-047a-49d9-8928-6b4f1ea98995",
+    "name": "Core AccessGroup TruxRoute API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

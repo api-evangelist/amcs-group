@@ -1,0 +1,2793 @@
+{
+  "item": [
+    {
+      "id": "e1ef4270-e73d-42aa-9d64-07cedbb77f65",
+      "name": "ExternalTransaction",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a522a64-a8c4-4595-bae1-f4277f9c333f",
+          "name": "OneOff Payment",
+          "request": {
+            "name": "OneOff Payment",
+            "description": {
+              "content": "This endpoint is used to initiate a payment/tokenization request via the Provider's hosted payments page (HPP).\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| RequestType                      |Request Type can be any of \"OneOffPayment\", \"Tokenization\".                            |\r\n| PaymentType               | Payment Type can be any of \"CARD\", \"ACH\", \"EFT\".                      |\r\n| TransactionOrigin                 | Transaction Origin can be any of \"MOTO\", \"ECOM\"        |\r\n| CallerIdentifier               | The Caller Identification associated to the Payment request.             |\r\n| RequestId               | The Caller supplied GUID associated to the Payment request.        |\r\n| ProviderType                   |Provide Type can be any of \"ACICards\", \"ACIElectronic\", \"Heartland\", \"MerchantPartners\",  \"Payment Express\", \"Realex\"        |\r\n| ConfigurationId                      |The configuration id associated to the Tenant.                            |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.        |\r\n| CanStoreProfile                         | The flag suggests store the profile to vault.        |\r\n| CompletionURL                         | The Completion URL Request associated to the customer mandate for webhooks.        |\r\n| RedirectURL                         | The Redirect URL associated to the customer mandate for redirection.        |\r\n| Addresses                         | The List of addresses associated to the customer mandate for 3ds transaction (Billing address is mandatory for 3ds enabled transaction).        |\r\n| Addresses[0].AddressType                         | The AddressType associated to the address can be any of \"Billing\", \"Shipping\".        |\r\n| Addresses[0].StreetAddress1                         | The StreetAddress Line1 associated to the address.        |\r\n| Addresses[0].StreetAddress2                         | The StreetAddress Line2 associated to the address.        |\r\n| Addresses[0].StreetAddress3                         | The StreetAddress Line3 associated to the address (Conditionally required).        |\r\n| Addresses[0].City                         | The City associated to the address.        |\r\n| Addresses[0].State                         | The State associated to the address.        |\r\n| Addresses[0].PostCode                         | The PostCode associated to the address.        |\r\n| Addresses[0].Country                         | The Country associated to the address.        |\r\n| Addresses[0].ISO3166Numeric                         | The ISO3166Numeric associated to the address (Conditionally required).        |\r\n| Contacts                         | The Contacts associated to the customer mandate for 3ds transaction (Contact type 'Mobile' and 'Email' are mandatory for 3ds enabled transaction).        |\r\n| Contacts[0].ContactType                         | The Contact Type associated to the contact can be any of type \"Email\", \"Mobile\".        |\r\n| Contacts[0].ContactValue                         | The Contact Value associated to the contact type.        |\r\n| CustomerInfo                         | The Details associated to the customer mandate for risk assessment (Conditionally required for making payments using ACI Cards).        |\r\n| CustomerInfo.CustomerName                         | The Customer Name associated to the customer.        |\r\n| CustomerInfo.CustomerId                         | The Customer Id associated to the customer.        |\r\n| CustomerInfo.CustomerIP                         | The Customer Ip associated to the customer.        |\r\n| CustomerInfo.CustomerStatus                         | The Customer Status associated to the customer.        |\r\n| CustomerInfo.WebsiteUrl                         | The Website Url associated to the customer.\n\n## Response\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| HppUrl                      | The Hosted Payment Page Url to load in a frame/browser.        |\r\n| CallerTransactionId               |  The AMCS generated Request GUID associated to the Payment request.                              |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.                              |\r\n| TransactionStatus                 | The Transaction Status associated to the Payment request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "OneOff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": \"<decimal>\",\n    \"currency\": \"<string>\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"<uuid>\",\n  \"configurationId\": \"<uuid>\",\n  \"canStoreProfile\": \"<boolean>\",\n  \"completionURL\": \"<url>\",\n  \"redirectURL\": \"<url>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"streetAddress2\": \"<string>\",\n      \"streetAddress3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"iSO3166Numeric\": \"<string>\"\n    },\n    {\n      \"addressType\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"streetAddress2\": \"<string>\",\n      \"streetAddress3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"iSO3166Numeric\": \"<string>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"<string>\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"<string>\",\n      \"contactValue\": \"<string>\"\n    }\n  ],\n  \"customerInfo\": {\n    \"customerName\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"customerIP\": \"<string>\",\n    \"customerStatus\": \"<string>\",\n    \"websiteUrl\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c91eee64-71c4-4e0e-97f0-9a40f6c84fb5",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "OneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"canStoreProfile\": false,\n  \"completionURL\": \"<url>\",\n  \"redirectURL\": \"<url>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ],\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hppUrl\": \"https://localhost/paybylink?key=092159d8-9e57-41a5-af6c-745bd45ff2f7\",\n  \"callerTransactionId\": \"00000000-0000-0000-0000-000000000000\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"transactionStatus\": \"Initiated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aca923a-5f8e-4800-b8a1-90918aababdf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "OneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"canStoreProfile\": false,\n  \"completionURL\": \"<url>\",\n  \"redirectURL\": \"<url>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ],\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f5d80e0-6ca6-4d99-816e-a1127ea1d04e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "OneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"canStoreProfile\": false,\n  \"completionURL\": \"<url>\",\n  \"redirectURL\": \"<url>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ],\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ccf60c55-9356-4607-963d-9409bb93c858",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "OneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"canStoreProfile\": false,\n  \"completionURL\": \"<url>\",\n  \"redirectURL\": \"<url>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ],\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c92a11b-81d2-4204-96bb-8184f67bf899",
+          "name": "Immediate OneOff Payment",
+          "request": {
+            "name": "Immediate OneOff Payment",
+            "description": {
+              "content": "This endpoint is used to make an immediate payment/tokenization request.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| RequestType                      |Request Type can be any of \"OneOffPayment\", \"Tokenization\".                            |\r\n| PaymentType               | Payment Type can be any of \"ACH\", \"EFT\".                      |\r\n| CallerIdentifier               | The Caller Identification associated to the Payment request.             |\r\n| RequestId               | The Caller supplied GUID associated to the Payment request.        |\r\n| ProviderType                   |Provide Type can be \"EftCanada\"        |\r\n| ConfigurationId                      |The configuration id associated to the Tenant.                            |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.        |\r\n| Addresses                         | The List of addresses associated to the customer mandate for 3ds transaction (Billing address is mandatory for 3ds enabled transaction).        |\r\n| Addresses[0].AddressType                         | The AddressType associated to the address can be any of \"Billing\", \"Shipping\".        |\r\n| Addresses[0].StreetAddress1                         | The StreetAddress Line1 associated to the address.        |\r\n| Addresses[0].StreetAddress2                         | The StreetAddress Line2 associated to the address.        |\r\n| Addresses[0].StreetAddress3                         | The StreetAddress Line3 associated to the address (Conditionally required).        |\r\n| Addresses[0].City                         | The City associated to the address.        |\r\n| Addresses[0].State                         | The State associated to the address.        |\r\n| Addresses[0].PostCode                         | The PostCode associated to the address.        |\r\n| Addresses[0].Country                         | The Country associated to the address.        |\r\n| Addresses[0].ISO3166Numeric                         | The ISO3166Numeric associated to the address (Conditionally required).        |\r\n| Contacts                         | The Contacts associated to the customer mandate for 3ds transaction (Contact type 'Mobile' and 'Email' are mandatory for 3ds enabled transaction).        |\r\n| Contacts[0].ContactType                         | The Contact Type associated to the contact can be any of type \"Email\", \"Mobile\".        |\r\n| Contacts[0].ContactValue                         | The Contact Value associated to the contact type.        |\r\n| CustomerInfo                         | The Details associated to the customer mandate for risk assessment (Conditionally required for making payments using EftCanada).        |\r\n| CustomerInfo.CustomerName                         | The Customer Name associated to the customer(Conditionally required for making payments using EftCanada).        |\r\n| CustomerInfo.CustomerId                         | The Customer Id associated to the customer.        |\r\n| CustomerInfo.CustomerIP                         | The Customer Ip associated to the customer.        |\r\n| CustomerInfo.CustomerStatus                         | The Customer Status associated to the customer.        |\r\n| CustomerInfo.WebsiteUrl                         | The Website Url associated to the customer.        |\r\n| BankInfo                         | The Bank Info associated to the customer.        |\r\n| BankInfo.Ach                         | The Ach Bank Info associated to the customer (Required when Payment Type is ACH).        |\r\n| BankInfo.Ach.AccountNumber                         | The Ach Account Number associated to the customer.        |\r\n| BankInfo.Ach.AccountType                         | The Ach Account Type associated to the customer and could be one of \"PersonalSavings\", \"PersonalCheckings\", \"BusinessSavings\", \"BusinessCheckings\".        |\r\n| BankInfo.Ach.RoutingNumber                         | The Ach Routing Number associated to the customer.        |\r\n| BankInfo.Eft                         | The Eft Bank Info associated to the customer (Required when Payment Type is EFT).        |\r\n| BankInfo.Eft.AccountNumber                         | The Eft Account Number associated to the customer.        |\r\n| BankInfo.Eft.TransitNumber                         | The Eft Transit Number associated to the customer.        |\r\n| BankInfo.Eft.InstitutionNumber                         | The Eft Institution Number associated to the customer.\n\n## Response\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n|CallerTransactionId | The AMCS generated Request GUID associated to the payments. |\n| AMCSPayReferenceId | The AMCS generated Response GUID associated to the Payment request. |\n| ProviderReference | The reference number associated to the payment provider. |\n| ProviderResponseCode | The response code associated to the payment provider. |\n| Notes | More information associated to the payment. |\n| ProviderAuthCode | The authorization code associated to the payment provider.  |\n| ResponseTimeStamp | The Timestamp of the payment response payload. |\n| TransactionStatus | The Transaction Status associated to the payment can be any of type \"Initiated\", \"Success\", \"Failure\", \"Timeout\", \"Cancelled\". |\n| TokenReference | The Token Reference sent by the provider associated to the original payment (Tokenisation Response). |\n| HistoryReference | The history reference data sent by the provider associated to the original payment (Tokenisation Response). |\n| MaskedProfileNumber | The Profile/Card Number sent by the provider associated to the original payment (Tokenisation Response) (Conditionally required). |\n| ProfileType | The Profile/Card Type sent by the provider associated to the original payment (Tokenisation Response). |\n| ProfileHolder | The Profile/Card Holder Name sent by the provider associated to the original payment (Tokenisation Response). |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.        |\r\n| ErrorCondition                     |The error condition associated to the payment request.    ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "ImmediateOneOff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": \"<decimal>\",\n    \"currency\": \"<string>\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"<uuid>\",\n  \"customerInfo\": {\n    \"customerName\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"customerIP\": \"<string>\",\n    \"customerStatus\": \"<string>\",\n    \"websiteUrl\": \"<string>\"\n  },\n  \"bankInfo\": {\n    \"eft\": {\n      \"accountNumber\": \"<string>\",\n      \"transitNumber\": \"<string>\",\n      \"institutionNumber\": \"<string>\"\n    },\n    \"ach\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"routingNumber\": \"<string>\"\n    }\n  },\n  \"configurationId\": \"<uuid>\",\n  \"addresses\": [\n    {\n      \"addressType\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"streetAddress2\": \"<string>\",\n      \"streetAddress3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"iSO3166Numeric\": \"<string>\"\n    },\n    {\n      \"addressType\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"streetAddress2\": \"<string>\",\n      \"streetAddress3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"iSO3166Numeric\": \"<string>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"<string>\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"<string>\",\n      \"contactValue\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99655c3a-a5a5-434a-b145-8c926180591a",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "ImmediateOneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"bankInfo\": {\n    \"eft\": {\n      \"accountNumber\": \"<string>\",\n      \"transitNumber\": \"<string>\",\n      \"institutionNumber\": \"<string>\"\n    },\n    \"ach\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"routingNumber\": \"<string>\"\n    }\n  },\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callerTransactionId\": \"d0c645e2-4e7b-4dd8-b304-b02600e6179a\",\n  \"amcsPayReferenceId\": \"f9a50643-05e3-45f9-9bc0-87be0d5ae0e2\",\n  \"providerReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"providerResponseCode\": \"OK\",\n  \"providerAuthCode\": \"\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"responseTimeStamp\": \"2022-07-27 18:54:18.6767965 +08:00\",\n  \"notes\": \"\",\n  \"transactionStatus\": \"Success\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"XXXXX\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"profileType\": \"VISA\",\n  \"profileHolder\": \"Roofus Summers\",\n  \"errorCondition\": \"CANCEL\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f402a8b-6cd1-4445-87e5-52d1915828e1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "ImmediateOneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"bankInfo\": {\n    \"eft\": {\n      \"accountNumber\": \"<string>\",\n      \"transitNumber\": \"<string>\",\n      \"institutionNumber\": \"<string>\"\n    },\n    \"ach\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"routingNumber\": \"<string>\"\n    }\n  },\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15a036d7-1e00-4778-9ead-5745b4b5bc2e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "ImmediateOneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"bankInfo\": {\n    \"eft\": {\n      \"accountNumber\": \"<string>\",\n      \"transitNumber\": \"<string>\",\n      \"institutionNumber\": \"<string>\"\n    },\n    \"ach\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"routingNumber\": \"<string>\"\n    }\n  },\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06e26e4e-3974-4b7c-b5be-55cdaa4193d6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "ImmediateOneOff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"bankInfo\": {\n    \"eft\": {\n      \"accountNumber\": \"<string>\",\n      \"transitNumber\": \"<string>\",\n      \"institutionNumber\": \"<string>\"\n    },\n    \"ach\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"routingNumber\": \"<string>\"\n    }\n  },\n  \"configurationId\": \"928a3c6c-b80d-493d-a6aa-0fb8d2579860\",\n  \"addresses\": [\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    },\n    {\n      \"addressType\": \"Billing\",\n      \"streetAddress1\": \"27, Longwood Avenue\",\n      \"streetAddress2\": \"South Circular\",\n      \"streetAddress3\": \"Road Dublin-08\",\n      \"city\": \"Dublin\",\n      \"state\": \"Munster\",\n      \"postCode\": \"12345\",\n      \"country\": \"Ireland\",\n      \"iSO3166Numeric\": \"372\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    },\n    {\n      \"contactType\": \"Email\",\n      \"contactValue\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1a5ee4a-2b57-4afc-8c93-2bb3c4db55fc",
+          "name": "Poll Payment",
+          "request": {
+            "name": "Poll Payment",
+            "description": {
+              "content": "This endpoint is used to poll AmcsPay to ask for query transactions or to read the transaction response back to AmcsPay from the payment provider using CallerTransactionId or RequestId.\n\n## Request\n\n| **Property** | **Description** |\n| --- | --- |\n| CallerTransactionId | The AMCS generated Request GUID associated to the payments. |\n| RequestId | The Caller Supplied Request GUID associated to the payments. |\n\n## Response\n\n| **Property** | **Description** |\n| --- | --- |\n| CallerTransactionId | The AMCS generated Request GUID associated to the payments. |\n| AMCSPayReferenceId | The AMCS generated Response GUID associated to the Payment request. |\n| ProviderReference | The reference number associated to the payment provider. |\n| ProviderResponseCode | The response code associated to the payment provider. |\n| Notes | More information associated to the payment. |\n| ProviderAuthCode | The authorization code associated to the payment provider.  |\n| ResponseTimeStamp | The Timestamp of the payment response payload. |\n| TransactionStatus | The Transaction Status associated to the payment can be any of type \"Initiated\", \"Success\", \"Failure\", \"Timeout\", \"Cancelled\". |\n| TokenReference | The Token Reference sent by the provider associated to the original payment (Tokenisation Response). |\n| HistoryReference | The history reference data sent by the provider associated to the original payment (Tokenisation Response). |\n| MaskedProfileNumber | The Profile/Card Number sent by the provider associated to the original payment (Tokenisation Response) (Conditionally required). |\n| ProfileType | The Profile/Card Type sent by the provider associated to the original payment (Tokenisation Response). |\n| ProfileHolder | The Profile/Card Holder Name sent by the provider associated to the original payment (Tokenisation Response). |\n| ProfileExpiryDate | The Profile/Card expiry date sent by the  provider associated to the original payment in (MM/YY) format. |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.        |\r\n| ErrorCondition                     |The error condition associated to the payment request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "Poll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "callerTransactionId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c785e28b-245d-4a81-b667-cc099c3b6f84",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callerTransactionId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callerTransactionId\": \"d0c645e2-4e7b-4dd8-b304-b02600e6179a\",\n  \"amcsPayReferenceId\": \"f9a50643-05e3-45f9-9bc0-87be0d5ae0e2\",\n  \"providerReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"providerResponseCode\": \"OK\",\n  \"providerAuthCode\": \"\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"responseTimeStamp\": \"2022-07-27 18:54:18.6767965 +08:00\",\n  \"notes\": \"\",\n  \"transactionStatus\": \"Success\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"XXXXX\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"profileType\": \"VISA\",\n  \"profileHolder\": \"Roofus Summers\",\n  \"errorCondition\": \"CANCEL\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "124c7afb-84fe-47d0-a571-f0e5ad876c4d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callerTransactionId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04786edc-71ae-4029-ba33-e8db76e15d1d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callerTransactionId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa59f5d3-a79b-4615-88f7-4b23084ca904",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callerTransactionId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2090edd0-57aa-4ff7-b2da-bfe2a37df292",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callerTransactionId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "827b7e68-2c52-43aa-9820-b02f006fa971"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b777119-7ea4-401d-8107-5ac35baab75f",
+          "name": "Get All Payment Response Details",
+          "request": {
+            "name": "Get All Payment Response Details",
+            "description": {
+              "content": "This endpoint is used to get the payment transaction details based on the set filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "Poll",
+                "GetAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "DateFrom",
+                  "value": "<dateTimeOffset>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DateTo",
+                  "value": "<dateTimeOffset>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b91d2a38-5dca-4201-9d1a-c51d656324b5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll",
+                    "GetAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateFrom",
+                      "value": "2023-06-28T06:46:32.910Z"
+                    },
+                    {
+                      "key": "DateTo",
+                      "value": "2023-06-28T07:00:00.000Z"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"callerTransactionId\": \"5b1e280c-ba76-4f90-982a-b028006721f4\",\n    \"amcsPayReferenceId\": \"026b03bc-af5e-4615-8779-afe400ce9fdd\",\n    \"providerReference\": \"8ac7a4a1877ca1eb01877fc082da054f\",\n    \"providerResponseCode\": \"Success\",\n    \"providerAuthCode\": \"12345\",\n    \"responseTimestamp\": \"2023-04-14T20:32:35.1965037+08:00\",\n    \"notes\": \"ACI Cards Transaction Id 8ac7a4a1877ca1eb01877fc082da054f\\r\\n\\r\\n        Transaction Date 2023-04-14 12:32:15+0000\\r\\n\\r\\n        Result code 000.100.110\\r\\n\\r\\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\\r\\n\\r\\n        Payment Type DB\\r\\n\\r\\n        Card Holder jessah\\r\\n\\r\\n        Card Expiry 01/2025\\r\\n\\r\\n\",\n    \"transactionStatus\": \"Success\",\n    \"transactionAmount\": {\n      \"principalAmount\": 40.1,\n      \"currency\": \"EUR\"\n    },\n    \"requestType\": \"Tokenization\",\n    \"paymentType\": \"CARD\",\n    \"transactionOrigin\": \"MOTO\",\n    \"callerIdentifier\": \"Tenant Name\",\n    \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n    \"providerType\": \"ACICards\",\n    \"customerInfo\": {\n      \"customerName\": \"\",\n      \"customerId\": \"ACC1007\",\n      \"customerIP\": \"000.000.0.000\",\n      \"customerStatus\": \"NEW\",\n      \"websiteUrl\": \"\"\n    },\n    \"createdTimestamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n    \"tokenReference\": \"72573620\",\n    \"historyReference\": \"1234567\",\n    \"profileExpiryDate\": \"08/24\",\n    \"maskedProfileNumber\": \"************1234\",\n    \"profileType\": \"MasterCard\",\n    \"profileHolder\": \"Joe Bloggs\",\n    \"result\": {\n      \"code\": \"000.000.000\",\n      \"message\": \"Transaction succeeded\"\n    }\n  },\n  {\n    \"callerTransactionId\": \"5b1e280c-ba76-4f90-982a-b028006721f4\",\n    \"amcsPayReferenceId\": \"026b03bc-af5e-4615-8779-afe400ce9fdd\",\n    \"providerReference\": \"8ac7a4a1877ca1eb01877fc082da054f\",\n    \"providerResponseCode\": \"Success\",\n    \"providerAuthCode\": \"12345\",\n    \"responseTimestamp\": \"2023-04-14T20:32:35.1965037+08:00\",\n    \"notes\": \"ACI Cards Transaction Id 8ac7a4a1877ca1eb01877fc082da054f\\r\\n\\r\\n        Transaction Date 2023-04-14 12:32:15+0000\\r\\n\\r\\n        Result code 000.100.110\\r\\n\\r\\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\\r\\n\\r\\n        Payment Type DB\\r\\n\\r\\n        Card Holder jessah\\r\\n\\r\\n        Card Expiry 01/2025\\r\\n\\r\\n\",\n    \"transactionStatus\": \"Success\",\n    \"transactionAmount\": {\n      \"principalAmount\": 40.1,\n      \"currency\": \"EUR\"\n    },\n    \"requestType\": \"Tokenization\",\n    \"paymentType\": \"CARD\",\n    \"transactionOrigin\": \"MOTO\",\n    \"callerIdentifier\": \"Tenant Name\",\n    \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n    \"providerType\": \"ACICards\",\n    \"customerInfo\": {\n      \"customerName\": \"\",\n      \"customerId\": \"ACC1007\",\n      \"customerIP\": \"000.000.0.000\",\n      \"customerStatus\": \"NEW\",\n      \"websiteUrl\": \"\"\n    },\n    \"createdTimestamp\": \"2000-01-01T00:00:00.0000000+01:00\",\n    \"tokenReference\": \"72573620\",\n    \"historyReference\": \"1234567\",\n    \"profileExpiryDate\": \"08/24\",\n    \"maskedProfileNumber\": \"************1234\",\n    \"profileType\": \"MasterCard\",\n    \"profileHolder\": \"Joe Bloggs\",\n    \"result\": {\n      \"code\": \"000.000.000\",\n      \"message\": \"Transaction succeeded\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ee5d04a-e75b-4b4d-82df-130da290fcb5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll",
+                    "GetAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateFrom",
+                      "value": "2023-06-28T06:46:32.910Z"
+                    },
+                    {
+                      "key": "DateTo",
+                      "value": "2023-06-28T07:00:00.000Z"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53a25881-3725-4558-a637-44e891eb85c4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll",
+                    "GetAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateFrom",
+                      "value": "2023-06-28T06:46:32.910Z"
+                    },
+                    {
+                      "key": "DateTo",
+                      "value": "2023-06-28T07:00:00.000Z"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e229fa33-e154-4df5-ac83-a9c4df59169a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll",
+                    "GetAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateFrom",
+                      "value": "2023-06-28T06:46:32.910Z"
+                    },
+                    {
+                      "key": "DateTo",
+                      "value": "2023-06-28T07:00:00.000Z"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bae3b00-ea07-4dd9-8c14-f4fb4b209df7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Poll",
+                    "GetAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateFrom",
+                      "value": "2023-06-28T06:46:32.910Z"
+                    },
+                    {
+                      "key": "DateTo",
+                      "value": "2023-06-28T07:00:00.000Z"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84f824bd-1b9a-456f-b3ad-1444d0ad9e19",
+          "name": "Refund Payment",
+          "request": {
+            "name": "Refund Payment",
+            "description": {
+              "content": "This endpoint is used to request a refund for a Card/ACH payment already processed via AmcsPay.\n\n## Request\n\n| **Property** | **Description** |\n| --- | --- |\n| RequestType | Request Type is  \"Refund\". |\n| PaymentType | Payment Type can be any of \"CARD\", \"ACH\", \"EFT\", \"TERMINAL\".| \n| TransactionOrigin | For Refund, transaction origin can only be \"MOTO\". |\n| CallerIdentifier | The identification associated to the calling application.| \n| RequestId | The Caller supplied GUID associated to the Payment request.|\n| CallerIPAddress | The IP Address associated to the the customer's location.|\n| ProviderType | Provide Type can be any of \"ACICards\", \"ACIElectronic\", \"Heartland\", \"MerchantPartners\", \"Payment Express\", \"Realex\", \"EftCanada\", \"TerminalPay\", \"ElavonTerminalPay\".| \n| TransactionAmount | The amount subjected for refund.|\n| OriginalPaymentReference | The reference ID sent by the provider associated to the original payment being refunded.|\n| OriginalAmount | The original amount sent by the provider associated to the original payment being refunded. |\n| TokenValue | The Token value associated to the payment. |\n| ProfileExpiryDate | The Profile/Card expiry date sent by the provider associated to the original payment in (MM/YY) format. |\n| CustomerInfo | The customer details associated to the refund request. |\n\n## Response\n\n| **Property** | **Description** |\n| --- | --- |\n| AMCSPayReferenceId | The AMCS generated Response GUID associated to the Payment request. |\n| ProviderReference | The reference number associated to the payment provider response. |\n| ProviderResponseCode | The status code associated to the payment provider response. |\n| ProviderAuthCode | The authorization code associated to the payment provider. |\r\n| TransactionAmount                     |The amount associated to the payment request.        |\r\n| TransactionAmount.PrincipalAmount                     |The base amount associated to the payment request (This field is optional for Tokenization).        |\r\n| TransactionAmount.Currency                     |The currency associated to the payment request.    |\n| ResponseTimeStamp | The time stamp associated to the response payload. |\n| Notes | More information associated to the payment. |\n| TransactionStatus | The Transaction Status associated to the refund response can be any of type \"Initiated\" or \"Failure\". |\n| CustomerInfo | The customer details associated to the refund response. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "Refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"<uuid>\",\n  \"providerType\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": \"<decimal>\",\n    \"currency\": \"<string>\"\n  },\n  \"originalPaymentReference\": \"<string>\",\n  \"originalAmount\": \"<decimal>\",\n  \"tokenValue\": \"<string>\",\n  \"profileExpiryDate\": \"<datetime>\",\n  \"customerInfo\": {\n    \"customerName\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"customerIP\": \"<string>\",\n    \"customerStatus\": \"<string>\",\n    \"websiteUrl\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ceeb064-04c6-4f64-9d8b-b25256139636",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"Refund\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"originalPaymentReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"originalAmount\": 40.1,\n  \"tokenValue\": \"iLGOd76VSiaAQBcZswQf\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amcsPayReferenceId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"providerResponseCode\": \"Success\",\n  \"providerAuthCode\": \"\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"responseTimeStamp\": \"2022-07-27 18:54:18.6767965 +08:00\",\n  \"notes\": \"\",\n  \"transactionStatus\": \"Success\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f399de6-02f6-4c1b-a075-d56d00964d91",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"Refund\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"originalPaymentReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"originalAmount\": 40.1,\n  \"tokenValue\": \"iLGOd76VSiaAQBcZswQf\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21dc07ca-fe64-4fed-a7f3-0e9c10703eb7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"Refund\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"originalPaymentReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"originalAmount\": 40.1,\n  \"tokenValue\": \"iLGOd76VSiaAQBcZswQf\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eddc4174-d655-456c-9b95-40aa3420118d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"Refund\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"originalPaymentReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"originalAmount\": 40.1,\n  \"tokenValue\": \"iLGOd76VSiaAQBcZswQf\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7df5715c-8eac-40c5-a876-cc92d9ec1cff",
+          "name": "Vault Payment",
+          "request": {
+            "name": "Vault Payment",
+            "description": {
+              "content": "This endpoint is used to make a payment using the saved profile(Card / ACH) via AmcsPay.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "Vault"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"<uuid>\",\n  \"providerType\": \"<string>\",\n  \"tokenReference\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": \"<decimal>\",\n    \"currency\": \"<string>\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"customerIP\": \"<string>\",\n    \"customerStatus\": \"<string>\",\n    \"websiteUrl\": \"<string>\"\n  },\n  \"historyReference\": \"<string>\",\n  \"maskedProfileNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bca0d437-5db3-4668-b800-f518d816df67",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Vault"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"VaultOrAutoPayment\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"5454XXXXXXXX5454\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callerTransactionId\": \"16a56160-557b-4457-8f0f-b038006d0a8d\",\n  \"amcsPayReferenceId\": \"f8026905-9ec9-4bbb-aa42-b038006d0d3b\",\n  \"providerReference\": \"8ac7a4a28749242d01874c7e648327b7\",\n  \"providerResponseCode\": \"Success\",\n  \"providerAuthCode\": \"\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"responseTimeStamp\": \"2022-07-27 18:54:18.6767965 +08:00\",\n  \"notes\": \"        ACI Auto Pay Transaction Id 8ac7a4a2892d433501892f117c3a3173\\r\\n\\r\\n        Transaction Date 2023-07-07 06:37:02+0000\\r\\n\\r\\n        Result code 000.100.110\\r\\n\\r\\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\\r\\n\\r\\n        Payment Type DB\\r\\n\\r\\n    \",\n  \"transactionStatus\": \"Success\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d393dea-3577-432c-b72c-96bbbd17fb91",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Vault"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"VaultOrAutoPayment\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"5454XXXXXXXX5454\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66627695-879f-4d8f-8dfe-5d6a767e057d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Vault"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"VaultOrAutoPayment\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"5454XXXXXXXX5454\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "692f1737-4ee1-4256-9e61-ceb09d063f75",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Vault"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"VaultOrAutoPayment\",\n  \"paymentType\": \"CARD\",\n  \"transactionOrigin\": \"MOTO\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"00000000-0000-0000-0000-000000000000\",\n  \"providerType\": \"ACICards\",\n  \"tokenReference\": \"58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"customerInfo\": {\n    \"customerName\": \"\",\n    \"customerId\": \"ACC1007\",\n    \"customerIP\": \"000.000.0.000\",\n    \"customerStatus\": \"NEW\",\n    \"websiteUrl\": \"\"\n  },\n  \"historyReference\": \"123456789012345\",\n  \"maskedProfileNumber\": \"5454XXXXXXXX5454\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da56b46d-77a4-4bad-a569-2bfd3cc57d1a",
+          "name": "Terminal Payment",
+          "request": {
+            "name": "Terminal Payment",
+            "description": {
+              "content": "This endpoint is used to make a card payment using a terminal device.\n\n## Request\n\n| Property | Description |\n| --- | --- |\n| ProviderType | Provide Type can be any of \"TerminalPay\", and \"ElavonTerminalPay\". |\n| CallerIdentifier | The Caller Identification associated to the Payment request. |\n| RequestId | The Caller supplied Request GUID associated to the Payment request. |\n| TerminalId | The Terminal Id is the verifone terminal identity like a device serial number or a friendly name. |\n| TransactionAmount | The Amount associated to the payment request. |\n| TransactionAmount.PrincipalAmount | The Principal Amount associated to the payment request. |\n| TransactionAmount.Currency | The Currency associated to the payment request. |\n| CardEntryMode | The Card entry mode of the payment instrument information. |\n| EmailAddress | The e-mail address associated to the payment requestor. |\n\n## Response\n\n| **Property** | **Description** |\n| --- | --- |\n| TransactionStatus | The Transaction Status associated to the payment can be any of type \"Success\", \"Failure\", \"Partial\". For Partial, Check the device if payment is processed, Poll it. |\n| AMCSPayReferenceId | The AMCS generated response GUID associated to the Payment request. |\n| ProviderReference | The reference number associated to the payment provider. |\n| ProviderResponseCode | The response code associated to the payment provider. |\n| ProviderAuthCode | The authorization code associated to the payment provider. |\n| TokenValue | The Token value associated to the payment. |\n| ResponseTimeStamp | The Timestamp of the payment response payload. |\n| Notes | More information associated to the payment transaction. |\n| TransactionAmount | The Amount associated to the payment response. |\n| TransactionAmount.PrincipalAmount | The Principal Amount associated to the payment response. |\n| TransactionAmount.Currency | The Currency associated to the payment response. |\n| MaskedProfileNumber | The Profile/Card Number sent by the provider associated to the original payment. |\n| ProfileHolder | The Profile/Card Holder Name sent by the provider associated to the original payment. |\n| ProfileExpiryDate | The Profile/Card expiry date sent by the  provider associated to the original payment in (MM/YY) format. |\n| CallerTransactionId | The AMCS generated Request GUID associated to the hosted payments page. |\n| ErrorCondition                     |The error condition associated to the payment request. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "Terminal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"providerType\": \"<string>\",\n  \"callerIdentifier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"transactionAmount\": {\n    \"principalAmount\": \"<decimal>\",\n    \"currency\": \"<string>\"\n  },\n  \"cardEntryMode\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c17e5149-444c-484d-a2c2-86e17c8ab323",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Terminal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"cardEntryMode\": \"Keyed\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionStatus\": \"Success\",\n  \"amcsPayReferenceId\": \"c4521490-c0dd-40e5-94c6-afe90073aa1b\",\n  \"providerReference\": \"710718500049\",\n  \"providerResponseCode\": \"Success\",\n  \"providerAuthCode\": \"DEMO684\",\n  \"tokenValue\": \"iLGOd76VSiaAQBcZswQf\",\n  \"responseTimeStamp\": \"2022-07-27 18:54:18.6767965 +08:00\",\n  \"notes\": \"string\",\n  \"callerTransactionId\": \"00000000-0000-0000-0000-000000000000\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"maskedProfileNumber\": \"XXXXX\",\n  \"profileExpiryDate\": \"MM/YY\",\n  \"profileHolder\": \"Roofus Summers\",\n  \"errorCondition\": \"CANCEL\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "126aaac6-8611-4ba4-b124-c003ecfda6c2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Terminal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"cardEntryMode\": \"Keyed\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71dff2ed-da38-4100-8572-1c12efce758f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Terminal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"cardEntryMode\": \"Keyed\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfbc8642-b830-4c38-a8c5-9f5e6be57f00",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "Terminal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"transactionAmount\": {\n    \"principalAmount\": 40.1,\n    \"currency\": \"EUR\"\n  },\n  \"cardEntryMode\": \"Keyed\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "080fe482-c1f3-4353-8816-e531b40a70a7",
+          "name": "Terminal Payment Abort",
+          "request": {
+            "name": "Terminal Payment Abort",
+            "description": {
+              "content": "This endpoint is a signal used to abort a card payment requested using a terminal device.\n\n## Request\n\n| Property | Description |\n| --- | --- |\n| ProviderType | Provide Type can be any of \"ElavonTerminalPay\" and \"TerminalPay\". |\n| CallerIdentifier | The Caller Identification associated to the Payment request. |\n| RequestId | The Caller supplied Request GUID associated to the Payment request. |\n| RequestType | Request Type is \"Abort\". |\n| TerminalId | The Terminal Id is the verifone terminal device serial number. |\n| EmailAddress | The e-mail address associated to the abort request. |\n| Reason | The reason associated to the abort request is conditionally required. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "TerminalAbort"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"providerType\": \"<string>\",\n  \"callerIdentifier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3cf0514c-b4cc-4a04-93a2-d4f152c30df6",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "TerminalAbort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\",\n  \"reason\": \"Cancelled By POS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"info message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66dbd6d-7ca8-496d-9274-e3347b6ff36c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "TerminalAbort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\",\n  \"reason\": \"Cancelled By POS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1867640-ee39-4900-a8e2-c4e86ca99c9b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "TerminalAbort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\",\n  \"reason\": \"Cancelled By POS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ca3fbe2-408b-4ffe-a26d-51f318838134",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "TerminalAbort"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"0d920c06-b568-442b-94cc-afe60176708f\",\n  \"providerType\": \"TerminalPay\",\n  \"callerIdentifier\": \"client-name\",\n  \"terminalId\": \"450-829-523\",\n  \"requestType\": \"<string>\",\n  \"emailAddress\": \"amcspayuser@email.com\",\n  \"reason\": \"Cancelled By POS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1faedb18-9f56-4bfe-9861-3ae18689360a",
+          "name": "Delete Token",
+          "request": {
+            "name": "Delete Token",
+            "description": {
+              "content": "This endpoint is used to delete Card Tokens from the vault for both AMCS Pay and Payment provider gateway.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "DeleteToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"<string>\",\n  \"requestId\": \"<uuid>\",\n  \"referenceId\": \"<string>\",\n  \"providerType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23481f6a-fd3f-48d5-87e2-dd279b5879f7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "DeleteToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n  \"referenceId\": \"8ac7a49f8898f2af018899c2fb6d22b0\",\n  \"providerType\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amcsPayReferenceId\": \"f15da253-d85b-4e7d-99eb-b01b00de6dce\",\n  \"providerReference\": \"8ac7a49f8898f2af01889b33033902d1\",\n  \"providerResponseCode\": \"Success\",\n  \"providerAuthCode\": null,\n  \"responseTimestamp\": \"2023-06-08T21:29:51.915166+08:00\",\n  \"notes\": \"        ACI Vault Transaction Id 8ac7a49f8898f2af01889b33033902d1\\r\\n\\r\\n        Transaction Date 2023-06-08 13:29:51+0000\\r\\n\\r\\n        Result code 000.100.110\\r\\n\\r\\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\\r\\n\\r\\n        Payment Type \\r\\n\\r\\n    \",\n  \"transactionStatus\": \"Partial\",\n  \"result\": {\n    \"code\": \"000.000.000\",\n    \"message\": \"Transaction succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39d2d0d0-5450-450f-807c-87df2e238717",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "DeleteToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n  \"referenceId\": \"8ac7a49f8898f2af018899c2fb6d22b0\",\n  \"providerType\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1542f57-1e64-4082-8cd6-841f947dd509",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "DeleteToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n  \"referenceId\": \"8ac7a49f8898f2af018899c2fb6d22b0\",\n  \"providerType\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff359188-7e7e-469c-9a9e-6dbe85acf3d8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "DeleteToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n  \"referenceId\": \"8ac7a49f8898f2af018899c2fb6d22b0\",\n  \"providerType\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6b724f5-8869-48d9-8e0a-9f40a17b9965",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "DeleteToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestType\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"transactionOrigin\": \"<string>\",\n  \"callerIdentifier\": \"Elemos\",\n  \"requestId\": \"3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9\",\n  \"referenceId\": \"8ac7a49f8898f2af018899c2fb6d22b0\",\n  \"providerType\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62ef087e-5796-4d19-9ea6-3d7548c45791",
+          "name": "Get ServiceFee",
+          "request": {
+            "name": "Get ServiceFee",
+            "description": {
+              "content": "This endpoint is used to get the service fee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "GetServiceFee"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentType\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"principalAmount\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67c751b9-2630-4b6c-b777-17d3347e95d5",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "GetServiceFee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentType\": \"CARD\",\n  \"currency\": \"USD\",\n  \"principalAmount\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"serviceFee\": 3081.658153726227,\n  \"percentage\": 4137.476099223144,\n  \"principalAmount\": 414.0874302887021,\n  \"total\": 5374.635619419648,\n  \"termsAndConditions\": {\n    \"termsAndConditionsId\": 1,\n    \"termsAndConditionsContentId\": 1,\n    \"termsAndConditionsUrl\": \"https://na1-pay-dev.amcsplatform.com/TermsAndConditionsView/TermsAndConditions/54090c88-6451-485f-8e35-8037b9ae5ea0?termsAndConditionsContentId=3af76595-bf9d-4505-bef9-6e603dfc7ea8\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e2e1582-6654-430e-8d85-960f7f82ad32",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "GetServiceFee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentType\": \"CARD\",\n  \"currency\": \"USD\",\n  \"principalAmount\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d725b87-e38b-439b-a51e-ff54c49599ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "GetServiceFee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentType\": \"CARD\",\n  \"currency\": \"USD\",\n  \"principalAmount\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e38a57b-88fd-4767-b388-70b1eda76a72",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "GetServiceFee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentType\": \"CARD\",\n  \"currency\": \"USD\",\n  \"principalAmount\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a496f082-a2e0-4d64-ac75-60390df14540",
+          "name": "Retry Transaction",
+          "request": {
+            "name": "Retry Transaction",
+            "description": {
+              "content": "This endpoint is used to retry a previously failed transaction via AmcsPay",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "RetryTransaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"callerTransactionIdentifier\": \"<uuid>\",\n  \"paymentChannelId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "513c0e2c-2f24-4fdd-bd0f-987ee8351569",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "RetryTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callerTransactionIdentifier\": \"00000000-0000-0000-0000-000000000000\",\n  \"paymentChannelId\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callerTransactionGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"message\": \"Transaction retried successfully.\",\n  \"dateCreated\": \"2025-01-15T10:30:00Z\",\n  \"statusCode\": \"Success\",\n  \"payPortalResponseMessage\": \"string\",\n  \"payPortalCreditCardVaultResponseMessage\": \"string\",\n  \"requestType\": \"Payment\",\n  \"serviceFeeResponse\": {\n    \"principalAmount\": 10,\n    \"serviceFeeAmount\": 0.2,\n    \"total\": 10.2,\n    \"termsAndConditions\": {\n      \"termsAndConditionsId\": 1,\n      \"termsAndConditionsContentId\": 1,\n      \"termsAndConditionsUrl\": \"https://na1-pay-dev.amcsplatform.com/TermsAndConditionsView/TermsAndConditions/54090c88-6451-485f-8e35-8037b9ae5ea0?termsAndConditionsContentId=3af76595-bf9d-4505-bef9-6e603dfc7ea8\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541873b2-319a-4a61-ab62-6cacca3685be",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "RetryTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callerTransactionIdentifier\": \"00000000-0000-0000-0000-000000000000\",\n  \"paymentChannelId\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fffa1df-6397-4c12-8b95-57f3aea504a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "RetryTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callerTransactionIdentifier\": \"00000000-0000-0000-0000-000000000000\",\n  \"paymentChannelId\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "773527d6-8603-4cc9-8a3d-eed0dba7f2c0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "RetryTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callerTransactionIdentifier\": \"00000000-0000-0000-0000-000000000000\",\n  \"paymentChannelId\": \"ACICards\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"type\": \"error message\",\n  \"stackTrace\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d97f3b7-0ec0-4f7f-a141-cc77bbb22549",
+          "name": "Create Customer",
+          "request": {
+            "name": "Create Customer",
+            "description": {
+              "content": "This endpoint is used to create a new customer and optionally create a payment account for that customer with the specified payment provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExternalTransaction",
+                "CreateCustomer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerInfo\": {\n    \"customerId\": \"<string>\",\n    \"customerName\": \"<string>\"\n  },\n  \"isCreatePaymentAccount\": \"<boolean>\",\n  \"providerType\": \"<string>\",\n  \"paymentAccount\": {\n    \"paymentType\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ff13741-cf86-4aa9-913b-baf413a47410",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "CreateCustomer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerInfo\": {\n    \"customerId\": \"8114533e-7968-4b67-a600-832d29a0e1c8\",\n    \"customerName\": \"Jane Doe\"\n  },\n  \"isCreatePaymentAccount\": true,\n  \"providerType\": \"Stripe\",\n  \"paymentAccount\": {\n    \"paymentType\": \"CREDIT_TRANSFER\",\n    \"currency\": \"AUD\",\n    \"country\": \"AU\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"providerCustomerAccount\": \"cus_N6mXoX2aG2e4eH\",\n  \"paymentAccount\": {\n    \"accountHolderName\": \"Waste Management Ltd\",\n    \"bankName\": \"HSBC\",\n    \"bankCode\": \"341-000\",\n    \"accountNumber\": \"IE531653294928618999391\",\n    \"swiftCode\": \"HSBCAUTTXXX\",\n    \"currency\": \"AUD\",\n    \"paymentType\": \"CREDIT_TRANSFER\",\n    \"country\": \"AU\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe9a871-c066-4b5c-8931-fb8d68b63727",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "CreateCustomer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerInfo\": {\n    \"customerId\": \"8114533e-7968-4b67-a600-832d29a0e1c8\",\n    \"customerName\": \"Jane Doe\"\n  },\n  \"isCreatePaymentAccount\": true,\n  \"providerType\": \"Stripe\",\n  \"paymentAccount\": {\n    \"paymentType\": \"CREDIT_TRANSFER\",\n    \"currency\": \"AUD\",\n    \"country\": \"AU\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Payment Provider APG is not supported.\",\n  \"type\": \"System.Exception\",\n  \"stackTrace\": \"   at AMCS.Pay.Api.Controllers.PaymentsController.CreateCustomer(CreateCustomerRequest request) in /src/swaggerpay/AMCS.Pay.Api/Controllers/PaymentsController.cs:line 123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b266f707-c5f7-4492-acf1-c58db26bda39",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExternalTransaction",
+                    "CreateCustomer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerInfo\": {\n    \"customerId\": \"8114533e-7968-4b67-a600-832d29a0e1c8\",\n    \"customerName\": \"Jane Doe\"\n  },\n  \"isCreatePaymentAccount\": true,\n  \"providerType\": \"Stripe\",\n  \"paymentAccount\": {\n    \"paymentType\": \"CREDIT_TRANSFER\",\n    \"currency\": \"AUD\",\n    \"country\": \"AU\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Payment Provider APG is not supported.\",\n  \"type\": \"System.Exception\",\n  \"stackTrace\": \"   at AMCS.Pay.Api.Controllers.PaymentsController.CreateCustomer(CreateCustomerRequest request) in /src/swaggerpay/AMCS.Pay.Api/Controllers/PaymentsController.cs:line 123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "421c4eee-008a-4ed6-9c3f-8c86848d6de0",
+    "name": "Core AccessGroup ExternalTransaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

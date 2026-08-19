@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "440bf887-23e6-4abb-9af9-823da0de8563",
+      "name": "CustomerBlob",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b80e6efc-03c7-434d-af20-28dee20ffe21",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| MediaContentBase64   | The Image/PDF converted to base 64| Yes |\r\n| DocumentName   | The Document Name| Yes |\r\n| DocumentReference   | The Document Reference                                                     | Yes |\r\n| RelatedInvoiceGuid   | The Related Invoice Guid| No |\r\n| RelatedCustomerGuid   | The Related Customer Guid| Yes |\r\n| CustomerExternalDocumentCategoryListItem | The GUID and description of the document category related to the external document | Yes |\r\n| IsAvailableOnPortal   | The flag used to decide availability of document in portal| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| DocumentName is Null or not provided | The mandatory property DocumentName has a null value. The request could not be processed. Supply a value for the DocumentName property of the submitted resource. |\r\n| DocumentName has less than 5 characters  or more than 510 characters | CustomerExternalDocument has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should be at least 1 character and at most 506 characters, excluding the extension |\r\n| DocumentName does not have any of pdf/png/jpg/gif extension  | CustomerExternalDocument has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should have any of pdf/png/jpg/gif extension |\r\n| DocumentReference is Null or not provided | The mandatory property DocumentReference has a null value. The request could not be processed. Supply a value for the DocumentReference property of the submitted resource. |\r\n| RelatedCustomerGuid is Null or not provided | The mandatory property RelatedCustomerGuid has a null value. The request could not be processed. Supply a value for the RelatedCustomerGuid property of the submitted resource. |\r\n| Invalid RelatedCustomerGuid | Failed to retrieve Customer with RelatedCustomerGuid of {Guid} |\r\n| CustomerExternalDocumentCategoryListItem.Guid is Null or not provided | The mandatory property CustomerExternalDocumentCategoryListItem.Guid has a null value. The request could not be processed. Supply a value for the CustomerExternalDocumentCategoryListItem.Guid property of the submitted resource. |\r\n| Invalid CustomerExternalDocumentCategoryListItem.Guid | Failed to retrieve CustomerExternalDocumentCategory with CustomerExternalDocumentCategory.Guid of {Guid} |\r\n| MediaContentBase64 is Null or not provided | The mandatory property MediaContentBase64 has a null value. The request could not be processed. Supply a value for the MediaContentBase64 property of the submitted resource. |\r\n| MediaContentBase64 is not a valid base64 string | Failed to save/update CustomerExternalDocument because MediaContentBase64 has Invalid length for a Base-64 char array or string |\r\n\r\n##  Information\r\n| Information |\r\n| ----------- |\r\n| Currently we are only validating for a valid base64 string, we are not validating the string against the file extension |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs",
+                "customerBlobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"MediaContentBase64\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"DocumentReference\": \"<string>\",\n  \"CustomerExternalDocumentCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedInvoiceGuid\": \"<uuid>\",\n  \"RelatedCustomerGuid\": \"<uuid>\",\n  \"IsAvailableOnPortal\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd39c614-f790-4f65-9cfb-031858135ecc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    "customerBlobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MediaContentBase64\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"DocumentReference\": \"<string>\",\n  \"CustomerExternalDocumentCategoryListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedInvoiceGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"RelatedCustomerGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"IsAvailableOnPortal\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"18941a22-cb1a-745d-4e66-ddd9f8f27f4e\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 2808,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e4905126-b4f3-4402-b3db-f81883f74392",
+    "name": "Core AccessGroup CustomerBlob API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

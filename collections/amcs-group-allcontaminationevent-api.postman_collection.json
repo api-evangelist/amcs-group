@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "fd014bfa-1d7f-46a2-a367-75c57995c6e5",
+      "name": "AllContaminationEvent",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f561c982-cb02-48d3-b7e5-e16b162bf2d3",
+          "name": "Request list of All Contamination Event changes",
+          "request": {
+            "name": "Request list of All Contamination Event changes",
+            "description": {
+              "content": "# Request list of All Contamination Event changes\r\n\r\nRetrieve changes in the list of Contamination Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false\r\n\r\n## Input\r\n\r\n| Parameter               | Description                |\r\n| ----------------------- | -------------------------- |\r\n| since                   | Bookmark from extra.until  |\r\n| cursor                  | Bookmark from extra.cursor |\r\n| links                   | N/A                        |\r\n\r\n## Output\r\n\r\n| Property\t\t\t\t\t\t| Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |\r\n| GUID\t\t\t\t\t\t\t\t| GUID     | ID of the Contamination Event.\t\t\t\t\t\t\t\t\t\t\t\t\t                          \t|\r\n| TenantId\t\t\t\t\t\t| GUID     | ID of the Tenant associated with the Contamination Event\t\t                        |\r\n| CustomerName\t\t\t\t\t|string| Name of the customer of the Contamination Event|\r\n| CompanyOutletId\t\t\t| GUID     | ID of the Company Outlet associated with the Contamination Event                  \t|\r\n| OutletName\t\t\t| string     | Name of the Company Outlet associated with the Contamination Event                  \t|\r\n| CustomerSiteId\t\t\t| GUID     | ID of the Customer Site associated with the Contamination Event                     |\r\n| SiteName\t\t\t| string     | Name of the Site associated with the Contamination Event                     |\r\n| CustomerType\t\t\t| string     | Type of customer associated with the Contamination Event                     |\r\n| CustomerAddress\t\t\t| string     | Address of customer associated with the Contamination Event                     |\r\n| VehicleId\t\t\t\t\t\t| GUID     | ID of the Vehicle associated with the Contamination Event\t\t\t\t                  \t|\r\n| Latitude\t   \t\t\t  | double   | Location of the Contamination Event                                                |\r\n| Longitude\t\t\t\t\t\t| double   | Location of the Contamination Event                                                |\r\n| Timestamp\t\t\t\t\t\t| DateTime | Timestamp of the Contamination Event\t                                              |\r\n| ContaminationScore \t| int      | Degree of Contamination found                                                      |\r\n| GrossWeight\t\t\t|double|Gross weight of the Contamination Event\t|\r\n| TareWeight\t\t\t\t|double| Tare weight of the Contamination Event |\r\n| NetWeight\t\t\t\t|double| Net weight of the Contamination Event|\r\n| Seq\t\t\t\t\t|int|Sequence of the Contamination Event |\r\n| RFID\t\t\t| GUID | RFID of the Contamination Event |\r\n| WeighErrorCode\t\t| int | Weight error code of the Contamination Event |\r\n| Lifter\t\t\t\t|int|Lifter of the Contamination Event\t|\r\n| ContainerId\t\t\t|string|Conntainer Id of the Contamination Event |\r\n| WasteType\t\t\t\t|string|Waste type of the Contamination Event |\r\n| QRCodeRawText\t\t\t|string| Raw QR code value of the COntamination Event |\r\n| TotalSurfaceAreaVolume\t\t\t|double| The total surface area of the Contamination Event |\r\n| Materials\t\t\t|string| The materials detected of the Contamination Event |\r\n| ExternalEventId\t\t\t|string| The external event Id of the Contamination Event |\r\n| ImageSas\t\t\t|string| The image SAS url of the Contamination Event expires within 24 hours|\r\n| extra.until         | string   | Bookmark to put in as \"since\" later - appears when there are no more pages for now |\r\n| link.next           | URI      | Link to follow to get next page with changes                                       |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visionai",
+                "api",
+                "integrator",
+                "allContaminationEvents",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "links",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d7ffc22-077c-4aea-8c75-5788c504e1df",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "allContaminationEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6107,\n    \"isSuccess\": false\n  },\n  \"resource\": [\n    {\n      \"resource\": {\n        \"isValid\": true,\n        \"id\": 7173,\n        \"id32\": 5579,\n        \"guid\": \"6e31b602-f1a0-6db1-1933-3701ba7fd7e1\",\n        \"lastChangeReasonId\": 2539,\n        \"tempIdentifier\": \"string\",\n        \"tenantId\": \"e126d92e-98f9-e6c5-5de2-602da031d125\",\n        \"customerName\": \"string\",\n        \"companyOutletId\": \"1d120a2f-ab81-3849-4457-64c1bba62c22\",\n        \"outletName\": \"string\",\n        \"customerSiteId\": \"0c2d232f-1a87-8773-66e5-65ef94666c9d\",\n        \"siteName\": \"string\",\n        \"customerType\": \"string\",\n        \"customerAddress\": \"string\",\n        \"vehicleId\": \"81c1432b-ddf2-f776-0e87-c485956c15b7\",\n        \"vehicleReg\": \"string\",\n        \"latitude\": 4553.903082778391,\n        \"longitude\": 9805.477997002063,\n        \"timestamp\": \"2000-01-01 00:00:00.000\",\n        \"contaminationScore\": 3173,\n        \"grossWeight\": 4914.564023081187,\n        \"tareWeight\": 3007.4628497025933,\n        \"netWeight\": 6845.392214336291,\n        \"seq\": 9772,\n        \"rfid\": \"950f6a33-9cc4-5737-8550-a4ea31da38c3\",\n        \"weighErrorCode\": 8514,\n        \"lifter\": 4527,\n        \"containerId\": \"string\",\n        \"wasteType\": \"string\",\n        \"qrCodeRawText\": \"string\",\n        \"totalSurfaceAreaVolume\": 1827.0626639667776,\n        \"materials\": \"string\",\n        \"externalEventId\": \"string\",\n        \"imageSas\": \"string\"\n      }\n    },\n    {\n      \"resource\": {\n        \"isValid\": true,\n        \"id\": 7607,\n        \"id32\": 6006,\n        \"guid\": \"027e157e-afc7-63b4-3d2e-762f50d0fc0f\",\n        \"lastChangeReasonId\": 3770,\n        \"tempIdentifier\": \"string\",\n        \"tenantId\": \"c761bbf5-4049-c4bb-d233-332cacb6ecef\",\n        \"customerName\": \"string\",\n        \"companyOutletId\": \"efdcf680-c1f8-46d5-01e7-73389a7ce8fd\",\n        \"outletName\": \"string\",\n        \"customerSiteId\": \"8475e12e-5d7d-ecca-8454-91c105c27c7d\",\n        \"siteName\": \"string\",\n        \"customerType\": \"string\",\n        \"customerAddress\": \"string\",\n        \"vehicleId\": \"d4cb5685-1dd7-236b-755e-3d9243645fe4\",\n        \"vehicleReg\": \"string\",\n        \"latitude\": 6858.522818510873,\n        \"longitude\": 2316.3918774929016,\n        \"timestamp\": \"2000-01-01 00:00:00.000\",\n        \"contaminationScore\": 4125,\n        \"grossWeight\": 9692.850398993263,\n        \"tareWeight\": 5100.461805686174,\n        \"netWeight\": 1218.831882241722,\n        \"seq\": 2277,\n        \"rfid\": \"86d07d52-949a-2c92-9d69-4d63e6ae88b7\",\n        \"weighErrorCode\": 5909,\n        \"lifter\": 7239,\n        \"containerId\": \"string\",\n        \"wasteType\": \"string\",\n        \"qrCodeRawText\": \"string\",\n        \"totalSurfaceAreaVolume\": 2192.3231882754367,\n        \"materials\": \"string\",\n        \"externalEventId\": \"string\",\n        \"imageSas\": \"string\"\n      }\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\",\n    \"since\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "52b63d4d-7c73-48dc-a93b-bfbad27a1a07",
+    "name": "Core AccessGroup AllContaminationEvent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "343e40d7-2687-4e7b-8288-319dcdaf1ecf",
+      "name": "AccessPassHistory",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9a24c44-4ace-40ca-9531-5efe0cd27343",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property| Description| Required |\r\n| ----------------------------------------------------------|-------------------------------------------------------------------------------------- |----------|\r\n| AccessPassHistory[0].ContainerGuid| The GUID of the Container associated to the shared container.|   Yes    |\r\n| AccessPassHistory[0].ContainerTagId| The ContainerTagId of the municipal account associated to the shared container.|   Yes    | \r\n| AccessPassHistory[0].Timestamp| The timestamp of the access pass history recorded.|   Yes   |\r\n| AccessPassHistory[0].Volume| The Volume of the waste disposed by the acess pass.|   No   |\r\n| AccessPassHistory[0].Netweight| The netweight of the waste disposed by the acess pass.|No   |\r\n| AccessPassHistory[0].NoOfDrops| The No of times waste disposed by the acess pass.|No   |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ----------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------- |\r\n| If AccessPassHistory[0].ContainerGuid not linked to shared container.| Container ({0}) Not found in shared container associated with timestamp.|\r\n| AccessPassHistory[0].ContainerTagId not linked to municipal account of the shared container.| Municipal Account Access ({0}) Pass is not associated with Shared Container.|\r\n| AccessPassHistory[0].ContainerTagId not linked to municipalities of the shared container.| Master Access Pass ({0}) is not associated with Municipalities of the Shared Container.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stosag",
+                "accessPassHistories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessPassHistory\": [\n    {\n      \"ContainerGuid\": \"<uuid>\",\n      \"ContainerTagId\": \"<string>\",\n      \"TimeStamp\": \"<dateTime>\",\n      \"Netweight\": \"<double>\",\n      \"Volume\": \"<double>\",\n      \"NoOfDrops\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerAccessPassId\": \"<integer>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"AccessPassHistoryId\": \"<integer>\",\n      \"MaterialId\": \"<integer>\"\n    },\n    {\n      \"ContainerGuid\": \"<uuid>\",\n      \"ContainerTagId\": \"<string>\",\n      \"TimeStamp\": \"<dateTime>\",\n      \"Netweight\": \"<double>\",\n      \"Volume\": \"<double>\",\n      \"NoOfDrops\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerAccessPassId\": \"<integer>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"AccessPassHistoryId\": \"<integer>\",\n      \"MaterialId\": \"<integer>\"\n    }\n  ],\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6743d64c-1933-42e3-bdc1-89f6d15c0860",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stosag",
+                    "accessPassHistories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccessPassHistory\": [\n    {\n      \"ContainerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"ContainerTagId\": \"<string>\",\n      \"TimeStamp\": \"2000-01-01 00:00:00.000\",\n      \"Netweight\": \"<double>\",\n      \"Volume\": \"<double>\",\n      \"NoOfDrops\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerAccessPassId\": \"<integer>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"AccessPassHistoryId\": \"<integer>\",\n      \"MaterialId\": \"<integer>\"\n    },\n    {\n      \"ContainerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"ContainerTagId\": \"<string>\",\n      \"TimeStamp\": \"2000-01-01 00:00:00.000\",\n      \"Netweight\": \"<double>\",\n      \"Volume\": \"<double>\",\n      \"NoOfDrops\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerAccessPassId\": \"<integer>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"AccessPassHistoryId\": \"<integer>\",\n      \"MaterialId\": \"<integer>\"\n    }\n  ],\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"c22e6dcb-448a-660a-be07-652468dc8fd6\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 3361,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e4f83aff-b255-4b2d-943a-4f4eb206d417",
+    "name": "Core AccessGroup AccessPassHistory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

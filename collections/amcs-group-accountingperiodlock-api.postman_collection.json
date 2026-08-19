@@ -1,0 +1,456 @@
+{
+  "item": [
+    {
+      "id": "cae1b754-e492-4ae2-b228-0aa5d4463864",
+      "name": "AccountingPeriodLock",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9a6c8ac-bdda-4875-bd76-b685ba44f8cd",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period lock.                       |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.               |\r\n| Description               | The Description associated to the accounting period lock.                |\r\n| CompanyId                 | The Company associated to the accounting period lock.   |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.              |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                |\r\n| LockStatus            | Whether the Accounting Period is open or locked.   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountingPeriodLocks",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bbf72f3-d527-432b-aa76-0638cfcb345e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountingPeriodLocks",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"SourceModule\": \"00000000-0000-0000-0000-000000000000\",\n    \"Description\": \"string\",\n    \"CompanyListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"CompanyOutletListItem\": {\n      \"Description\": \"string\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"SysUserName\": \"string\",\n    \"LockStatus\": false,\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_2\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ],\n      \"key_3\": [\n        {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        {\n          \"key_0\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6708,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a3e7d41-c146-412f-bbe3-cfaacc91a5fb",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the accounting period lock. |  No    |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.                 |  No    |\r\n| Description               | The Description associated to the accounting period lock.                  |  Yes   |\r\n| CompanyId                 | The Company associated to the accounting period lock.     |  No    |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.                |  No    |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                  |  No    |\r\n| LockStatus            | Whether the Accounting Period is open or locked.     |  Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |\r\n| LockStatus not found for the AccountingPeriodLock  | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |\r\n| Company and Company outlet not found for the AccountingPeriodLock  | Either CompanyListItem or CompanyOutletListItem properties must be set. |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountingPeriodLocks",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SourceModule\": \"<uuid>\",\n  \"Description\": \"<string>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"SysUserName\": \"<string>\",\n  \"LockStatus\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95fac960-0c7a-49e1-b8ba-6f1d820ec841",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountingPeriodLocks",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SourceModule\": \"00000000-0000-0000-0000-000000000000\",\n  \"Description\": \"<string>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"SysUserName\": \"<string>\",\n  \"LockStatus\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"180d8405-5b8c-1054-c760-5c60adb0a8f3\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 7162,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56606fa1-af02-4802-8850-2d77c211a03c",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period lock.                       |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.               |\r\n| Description               | The Description associated to the accounting period lock.                |\r\n| CompanyId                 | The Company associated to the accounting period lock.   |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.              |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                |\r\n| LockStatus            | Whether the Accounting Period is open or locked.   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountingPeriodLocks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4de5cf22-a48c-4322-91eb-31bf747ba815",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountingPeriodLocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"SourceModule\": \"00000000-0000-0000-0000-000000000000\",\n      \"Description\": \"<string>\",\n      \"CompanyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"SysUserName\": \"<string>\",\n      \"LockStatus\": \"<boolean>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"SourceModule\": \"00000000-0000-0000-0000-000000000000\",\n      \"Description\": \"<string>\",\n      \"CompanyListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"CompanyOutletListItem\": {\n        \"Description\": \"<string>\",\n        \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n      },\n      \"SysUserName\": \"<string>\",\n      \"LockStatus\": \"<boolean>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 6119\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6418,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec49518d-d15f-4851-bbe1-f54850f918c6",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the accounting period lock. |  No    |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.                 |  No    |\r\n| Description               | The Description associated to the accounting period lock.                  |  Yes   |\r\n| CompanyId                 | The Company associated to the accounting period lock.     |  No    |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.                |  No    |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                  |  No    |\r\n| LockStatus            | Whether the Accounting Period is open or locked.     |  Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |\r\n| LockStatus not found for the AccountingPeriodLock  | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |\r\n| Company and Company outlet not found for the AccountingPeriodLock  | Either CompanyListItem or CompanyOutletListItem properties must be set. |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "accountingPeriodLocks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SourceModule\": \"<uuid>\",\n  \"Description\": \"<string>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"SysUserName\": \"<string>\",\n  \"LockStatus\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2adc315-4458-4ab2-9671-785cefdb69a4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "accountingPeriodLocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SourceModule\": \"00000000-0000-0000-0000-000000000000\",\n  \"Description\": \"<string>\",\n  \"CompanyListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"CompanyOutletListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"SysUserName\": \"<string>\",\n  \"LockStatus\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"180d8405-5b8c-1054-c760-5c60adb0a8f3\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 7162,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0fd49e68-1825-4cf2-ba26-9e9da79a8645",
+    "name": "Core AccessGroup AccountingPeriodLock API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

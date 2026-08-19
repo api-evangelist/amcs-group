@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup AccountCustomer API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountCustomer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/accountCustomers/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.    "
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/accountCustomers/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.    "
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounting/accountCustomers/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the customer.                                       | No |\r\n| Name                      | The customer's name.                                                       | No |\r\n| Reference                 | An alt"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/accountCustomers",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer.                                     |\r\n| Name                      | The customer's name.                                                     |\r\n| Reference                 | An alternative name used for the customer.    "
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounting/accountCustomers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the customer.                                       | No |\r\n| Name                      | The customer's name.                                                       | No |\r\n| Reference                 | An alt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

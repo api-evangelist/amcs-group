@@ -1,0 +1,248 @@
+{
+  "item": [
+    {
+      "id": "60cff797-dd92-43bd-b086-14693566339e",
+      "name": "ApiTripExternal",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "328c3d78-c923-4415-963d-68837dadfeb4",
+          "name": "Get List of Completed Trip Changes",
+          "request": {
+            "name": "Get List of Completed Trip Changes",
+            "description": {
+              "content": "# Get List of Completed Trip Changes\n\nRetrieves completed trips with their associated vehicle information and trip summaries. This endpoint supports incremental data extraction by tracking changes using SQL Server's row version mechanism.\n\n---\n\n## Query Parameters\n| Parameter | Type   | Required | Description                                                                 |\n|-----------|--------|----------|-----------------------------------------------------------------------------|\n| since     | string | No       | Base64-encoded row version (from `@@DBTS`). Only returns trips changed after this version. **Must be URL-encoded.** |\n| cursor    | string | No       | Pagination cursor for retrieving next page of results (not used with row version tracking). |\n\n---\n\n## Authentication\nRequires authentication via the standard authentication mechanism. The tenant context is automatically determined from the authenticated user.\n\n---\n\n## Output Structure\n\n### Main Response Object\n| Property | Type                          | Description                                    |\n|----------|-------------------------------|------------------------------------------------|\n| Resource | List\\<ApiTripExternalDto\\>    | List of completed trips with summaries.        |\n| Extra    | object                        | Additional pagination information (if needed). |\n\n---\n\n### ApiTripExternalDto Object\n| Property     | Type              | Description                                           |\n|--------------|-------------------|-------------------------------------------------------|\n| VehicleId    | Guid?             | Unique identifier for the vehicle (Asset GUID).      |\n| VehicleName  | string            | Name of the vehicle.                                 |\n| TripId       | int               | Unique identifier for the trip.                      |\n| StartTime    | DateTimeOffset    | Trip start timestamp.                                |\n| EndTime      | DateTimeOffset?   | Trip end timestamp.                                  |\n| Status       | int               | Trip status (0=Started, 1=Completed, 2=Invalid).     |\n| TripSummary  | ApiTripSummary    | Calculated trip summary with metrics.                |\n\n---\n\n### ApiTripSummary Object\n| Property                         | Type    | Description                                                  |\n|----------------------------------|---------|--------------------------------------------------------------|\n| TripId                           | int     | Trip identifier.                                            |\n| TotalTripMileage                 | double | Total mileage covered during the trip. Unit of Measure - KM                 |\n| TotalPloughEnabledMileage        | double | Mileage covered while plough was enabled. Unit of Measure - KM                |\n| TotalSpreaderEnabledMileage      | double | Mileage covered while spreader was enabled. Unit of Measure - KM               |\n| SpreaderWidth                    | double | Spreader width setting. Unit of Measure - Meters                   |\n| TotalSolidMaterialDelivered      | double | Total solid material delivered during the trip. Unit of Measure - KG     |\n| TotalPrewetMaterialDelivered    | double | Total prewet material delivered during the trip. Unit of Measure - Liters    |\n| TotalTripDuration                | double | Total trip duration in minutes. Unit of Measure - Minutes      |\n\n---",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrator",
+                "trips",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>",
+                  "description": "Must be URL-encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor for retrieving next page of results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3b8a755-cabb-45d1-ab16-e9f7557e3911",
+              "name": "Successful response with completed trip changes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "trips",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Resource\": [\n    {\n      \"VehicleId\": \"84ba9e95-aa4c-bcc3-f8f2-f216a412fc5b\",\n      \"VehicleName\": \"string\",\n      \"TripId\": 9037,\n      \"StartTime\": \"1969-03-02T01:04:04.189Z\",\n      \"EndTime\": \"1969-11-09T08:48:13.957Z\",\n      \"Status\": 8660,\n      \"TripSummary\": {\n        \"TripId\": 9155,\n        \"TotalTripMileage\": 5447.112334539478,\n        \"TotalPloughEnabledMileage\": 3103.74723563414,\n        \"TotalSpreaderEnabledMileage\": 2921.2738436267905,\n        \"SpreaderWidth\": 1171.3346239529722,\n        \"TotalSolidMaterialDelivered\": 8722.016623860713,\n        \"TotalPrewetMaterialDelivered\": 3305.1922559917125,\n        \"TotalTripDuration\": 1735.6128135734805\n      }\n    },\n    {\n      \"VehicleId\": \"50c73cf8-ae1b-c33e-4638-409d159fe8a0\",\n      \"VehicleName\": \"string\",\n      \"TripId\": 8148,\n      \"StartTime\": \"1955-06-23T14:22:01.085Z\",\n      \"EndTime\": \"2008-06-01T20:26:58.946Z\",\n      \"Status\": 2677,\n      \"TripSummary\": {\n        \"TripId\": 332,\n        \"TotalTripMileage\": 5152.646074124481,\n        \"TotalPloughEnabledMileage\": 5031.570431862718,\n        \"TotalSpreaderEnabledMileage\": 5591.4221048472455,\n        \"SpreaderWidth\": 8904.974390145271,\n        \"TotalSolidMaterialDelivered\": 5067.625445802404,\n        \"TotalPrewetMaterialDelivered\": 8763.434127670234,\n        \"TotalTripDuration\": 753.4060541260857\n      }\n    }\n  ],\n  \"Extra\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "280120a2-151e-46dc-a220-e8d6fec03562",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "trips",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "599fcd1d-2860-4473-855c-47715aaaf61b",
+              "name": "Unauthorized - authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "trips",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42c7123e-dcfd-4c13-8c2a-223f71979f1d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "trips",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7fb06eaf-ef55-4b10-91cc-00373b0a2c1e",
+    "name": "Core AccessGroup ApiTripExternal API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

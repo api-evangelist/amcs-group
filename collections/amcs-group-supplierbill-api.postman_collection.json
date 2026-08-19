@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "id": "0e11fab1-cba0-4702-b5b2-d193eb05890e",
+      "name": "SupplierBill",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae86cd3f-8754-47d0-bf76-d26132f88ecd",
+          "name": "Retrieve changes",
+          "request": {
+            "name": "Retrieve changes",
+            "description": {
+              "content": "| Property             | Description|\r\n| -------------------- | -------------------------------------------------------------------------- |\r\n| RelatedSupplierGuid  | The GUID associated to the supplier of the supplier bill.|\r\n| RelatedSupplierSiteGuid | The GUID associated to the supplier site of the supplier bill.|\r\n| Reference   | The reference associated to the supplier bill.|\r\n| Description   | The description associated to the supplier bill.|\r\n| Amount   | The amount associated to the supplier bill.|\r\n| AmountExVat   | The amount excluding VAT associated to the supplier bill.|\r\n| IsFinalised   | Is this supplier bill finalised?|\r\n| IsMatched   | Is this supplier bill matched?|\r\n| Date      | The date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| DueDate         | The due date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| Number   | The number associated to the supplier bill.    |\r\n| BillNo   | The bill number associated to the supplier bill.    |\r\n| RelatedGeneralLedgerExportGuid | The GUID of general ledger export associated to the supplier bill |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchasing",
+                "supplierBills",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4323eb4-f8a6-42e4-ab05-56a08e4ce62c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchasing",
+                    "supplierBills",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Reference\": \"string\",\n      \"Description\": \"string\",\n      \"Amount\": 6448.231663784812,\n      \"AmountExVat\": 5086.935027464715,\n      \"IsFinalised\": false,\n      \"IsMatched\": false,\n      \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Date\": \"2000-01-01\",\n      \"DueDate\": \"2000-01-01\",\n      \"Number\": \"string\",\n      \"BillNo\": 5864,\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Reference\": \"string\",\n      \"Description\": \"string\",\n      \"Amount\": 1239.5104483185305,\n      \"AmountExVat\": 2993.172685256239,\n      \"IsFinalised\": false,\n      \"IsMatched\": false,\n      \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Date\": \"2000-01-01\",\n      \"DueDate\": \"2000-01-01\",\n      \"Number\": \"string\",\n      \"BillNo\": 3230,\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\"\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 2,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7c3009e-e883-45f7-a987-22ee0903ac9d",
+          "name": "Find with GUID",
+          "request": {
+            "name": "Find with GUID",
+            "description": {
+              "content": "| Property             | Description|\r\n| -------------------- | -------------------------------------------------------------------------- |\r\n| RelatedSupplierGuid  | The GUID associated to the supplier of the supplier bill.|\r\n| RelatedSupplierSiteGuid | The GUID associated to the supplier site of the supplier bill.|\r\n| Reference   | The reference associated to the supplier bill.|\r\n| Description   | The description associated to the supplier bill.|\r\n| Amount   | The amount associated to the supplier bill.|\r\n| AmountExVat   | The amount excluding VAT associated to the supplier bill.|\r\n| IsFinalised   | Is this supplier bill finalised?|\r\n| IsMatched   | Is this supplier bill matched?|\r\n| Date      | The date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| DueDate         | The due date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| Number   | The number associated to the supplier bill.    |\r\n| BillNo   | The bill number associated to the supplier bill.    |\r\n| RelatedGeneralLedgerExportGuid | The GUID of general ledger export associated to the supplier bill |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchasing",
+                "supplierBills",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec66f18d-b06e-41e1-8005-34348d7b3b73",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchasing",
+                    "supplierBills",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"Reference\": \"string\",\n    \"Description\": \"string\",\n    \"Amount\": 8974.401664418863,\n    \"AmountExVat\": 7405.246662737095,\n    \"IsFinalised\": false,\n    \"IsMatched\": false,\n    \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n    \"Date\": \"2000-01-01\",\n    \"DueDate\": \"2000-01-01\",\n    \"Number\": \"string\",\n    \"BillNo\": 6127,\n    \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"associations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"expand\": [\n      \"string\",\n      \"string\"\n    ],\n    \"operations\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"extra\": {\n    \"expand\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"include\": {\n      \"key_0\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ],\n      \"key_1\": [\n        {\n          \"key_0\": {}\n        },\n        {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      ]\n    }\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 5212,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d05f25b-d817-4920-a24a-796b34310bb8",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| RelatedSupplierGuid  | The GUID associated to the supplier of the supplier bill.  | Yes |\r\n| RelatedSupplierSiteGuid | The GUID associated to the supplier site of the supplier bill.| No |\r\n| Reference   | The reference associated to the supplier bill.| No |\r\n| Description   | The description associated to the supplier bill.| Yes |\r\n| Amount   | The amount associated to the supplier bill.| Yes |\r\n| AmountExVat   | The amount excluding VAT associated to the supplier bill.| Yes |\r\n| IsFinalised   | Is this supplier bill finalised? | Yes |\r\n| IsMatched   | Is this supplier bill matched?| Yes |\r\n| Date      | The date associated to the supplier bill in ISO format (YYYY-MM-DD).| Yes |\r\n| DueDate      | The due date associated to the supplier bill in ISO format (YYYY-MM-DD).| Yes |\r\n| Number   | The number associated to the supplier bill    | Yes |\r\n| BillNo   | The bill number associated to the supplier bill.    | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| IsFinalised is true | Can only create applied costs if bill is not finalised |\r\n| SupplierSite not found with value RelatedSupplierSiteGuid | Failed to retrieve SupplierSite with RelatedSupplierSiteGuid of {value of RelatedSupplierSiteGuid} |\r\n| Supplier not found with value RelatedSupplierGuid | Failed to retrieve Supplier with RelatedSupplierGuid of {value of RelatedSupplierGuid} |\r\n| Description is more than 60 characters long | Description must be no more than 60 characters long. |\r\n| Number is more than 60 characters long | Number must be no more than 60 characters long. |\r\n| Number already exists for the current supplier | The bill number must be unique per supplier | \r\n| IsMatched is true | Can only create applied costs if bill is unmatched |\r\n| IsFinalised is true | Can only create applied costs if bill is not finalised |\r\n| IsProForma is true | IsProForma must be false |\r\n| BillNo is not null | BillNo is a read-only property. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchasing",
+                "supplierBills",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RelatedSupplierGuid\": \"<uuid>\",\n  \"RelatedSupplierSiteGuid\": \"<uuid>\",\n  \"Reference\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"Amount\": \"<double>\",\n  \"AmountExVat\": \"<double>\",\n  \"IsFinalised\": \"<boolean>\",\n  \"IsMatched\": \"<boolean>\",\n  \"RelatedGeneralLedgerExportGuid\": \"<uuid>\",\n  \"Date\": \"<localDate>\",\n  \"DueDate\": \"<localDate>\",\n  \"Number\": \"<string>\",\n  \"BillNo\": \"<integer>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57df6b4d-755a-451d-9c7d-d850746f8dcc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchasing",
+                    "supplierBills",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"Reference\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"Amount\": \"<double>\",\n  \"AmountExVat\": \"<double>\",\n  \"IsFinalised\": \"<boolean>\",\n  \"IsMatched\": \"<boolean>\",\n  \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"Date\": \"2000-01-01\",\n  \"DueDate\": \"2000-01-01\",\n  \"Number\": \"<string>\",\n  \"BillNo\": \"<integer>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"22891c68-291e-c0b6-4593-42394392632f\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 2239,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9e2254f-d6e0-4cdf-8a66-f6ee24f7d745",
+          "name": "Find with Filters",
+          "request": {
+            "name": "Find with Filters",
+            "description": {
+              "content": "| Property             | Description|\r\n| -------------------- | -------------------------------------------------------------------------- |\r\n| RelatedSupplierGuid  | The GUID associated to the supplier of the supplier bill.|\r\n| RelatedSupplierSiteGuid | The GUID associated to the supplier site of the supplier bill.|\r\n| Reference   | The reference associated to the supplier bill.|\r\n| Description   | The description associated to the supplier bill.|\r\n| Amount   | The amount associated to the supplier bill.|\r\n| AmountExVat   | The amount excluding VAT associated to the supplier bill.|\r\n| IsFinalised   | Is this supplier bill finalised?|\r\n| IsMatched   | Is this supplier bill matched?|\r\n| Date      | The date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| DueDate         | The due date associated to the supplier bill in ISO format (YYYY-MM-DD).|\r\n| Number   | The number associated to the supplier bill.    |\r\n| BillNo   | The bill number associated to the supplier bill.    |\r\n| RelatedGeneralLedgerExportGuid | The GUID of general ledger export associated to the supplier bill |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchasing",
+                "supplierBills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCount",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "udf",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c41c12b-49df-436b-b33e-34cfd7c1de4f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchasing",
+                    "supplierBills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCount",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "udf",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": [\n    {\n      \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Reference\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Amount\": \"<double>\",\n      \"AmountExVat\": \"<double>\",\n      \"IsFinalised\": \"<boolean>\",\n      \"IsMatched\": \"<boolean>\",\n      \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Date\": \"2000-01-01\",\n      \"DueDate\": \"2000-01-01\",\n      \"Number\": \"<string>\",\n      \"BillNo\": \"<integer>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Reference\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Amount\": \"<double>\",\n      \"AmountExVat\": \"<double>\",\n      \"IsFinalised\": \"<boolean>\",\n      \"IsMatched\": \"<boolean>\",\n      \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"Date\": \"2000-01-01\",\n      \"DueDate\": \"2000-01-01\",\n      \"Number\": \"<string>\",\n      \"BillNo\": \"<integer>\",\n      \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"extra\": {\n    \"count\": 1233\n  },\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6430,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38d43840-7e88-444c-9858-354a2f552cf6",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property             | Description                                                           | Required |\r\n| -------------------- | --------------------------------------------------------------------- | -------- |\r\n| RelatedSupplierGuid  | The GUID associated to the supplier of the supplier bill.  | Yes |\r\n| RelatedSupplierSiteGuid | The GUID associated to the supplier site of the supplier bill.| No |\r\n| Reference   | The reference associated to the supplier bill.| No |\r\n| Description   | The description associated to the supplier bill.| Yes |\r\n| Amount   | The amount associated to the supplier bill.| Yes |\r\n| AmountExVat   | The amount excluding VAT associated to the supplier bill.| Yes |\r\n| IsFinalised   | Is this supplier bill finalised? | Yes |\r\n| IsMatched   | Is this supplier bill matched?| Yes |\r\n| Date      | The date associated to the supplier bill in ISO format (YYYY-MM-DD).| Yes |\r\n| DueDate      | The due date associated to the supplier bill in ISO format (YYYY-MM-DD).| Yes |\r\n| Number   | The number associated to the supplier bill    | Yes |\r\n| BillNo   | The bill number associated to the supplier bill.    | No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| IsFinalised is true | Can only create applied costs if bill is not finalised |\r\n| SupplierSite not found with value RelatedSupplierSiteGuid | Failed to retrieve SupplierSite with RelatedSupplierSiteGuid of {value of RelatedSupplierSiteGuid} |\r\n| Supplier not found with value RelatedSupplierGuid | Failed to retrieve Supplier with RelatedSupplierGuid of {value of RelatedSupplierGuid} |\r\n| Description is more than 60 characters long | Description must be no more than 60 characters long. |\r\n| Number is more than 60 characters long | Number must be no more than 60 characters long. |\r\n| Number already exists for the current supplier | The bill number must be unique per supplier | \r\n| IsMatched is true | Can only create applied costs if bill is unmatched |\r\n| IsFinalised is true | Can only create applied costs if bill is not finalised |\r\n| IsProForma is true | IsProForma must be false |\r\n| BillNo is not null | BillNo is a read-only property. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchasing",
+                "supplierBills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RelatedSupplierGuid\": \"<uuid>\",\n  \"RelatedSupplierSiteGuid\": \"<uuid>\",\n  \"Reference\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"Amount\": \"<double>\",\n  \"AmountExVat\": \"<double>\",\n  \"IsFinalised\": \"<boolean>\",\n  \"IsMatched\": \"<boolean>\",\n  \"RelatedGeneralLedgerExportGuid\": \"<uuid>\",\n  \"Date\": \"<localDate>\",\n  \"DueDate\": \"<localDate>\",\n  \"Number\": \"<string>\",\n  \"BillNo\": \"<integer>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "569e9384-4cd8-4b8e-93f5-6767008b9a10",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchasing",
+                    "supplierBills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RelatedSupplierGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"RelatedSupplierSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"Reference\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"Amount\": \"<double>\",\n  \"AmountExVat\": \"<double>\",\n  \"IsFinalised\": \"<boolean>\",\n  \"IsMatched\": \"<boolean>\",\n  \"RelatedGeneralLedgerExportGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"Date\": \"2000-01-01\",\n  \"DueDate\": \"2000-01-01\",\n  \"Number\": \"<string>\",\n  \"BillNo\": \"<integer>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"22891c68-291e-c0b6-4593-42394392632f\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 2239,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d697079e-fb80-4494-8ff3-ce838d6ef527",
+    "name": "Core AccessGroup SupplierBill API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,601 @@
+{
+  "item": [
+    {
+      "id": "88761cef-41b5-4154-9209-15e11ff041c7",
+      "name": "OverfilledContainerEvent",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a6d141f-2a32-48a3-abf5-b461c1c71e90",
+          "name": "Request list of Overfilled Container Event changes",
+          "request": {
+            "name": "Request list of Overfilled Container Event changes",
+            "description": {
+              "content": "# Request list of Overfilled Container Event changes\r\n\r\nRetrieve changes in the list of Overfilled Container Events for all tenants, that have been made since a specific point in the history\r\n\r\n## Input\r\n\r\n| Parameter               | Description                |\r\n| ----------------------- | -------------------------- |\r\n| since                   | Bookmark from extra.until  |\r\n| cursor                  | Bookmark from extra.cursor |\r\n| links                   | N/A                        |\r\n\r\n## Output\r\n\r\n| Property              | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                              |\r\n| --------------------- | -------- | ---------------------------------------------------------------------------------- |\r\n| GUID\t\t\t\t\t\t\t  \t| GUID     | ID of the Overfilled Container Event.\t\t\t\t\t\t\t\t\t\t\t\t\t                    |\r\n| TenantId\t\t\t\t\t  \t| GUID     | ID of the Tenant associated with the Overfilled Container Event\t\t                |\r\n| CustomerName\t\t\t\t| string\t\t| Name of the Customer with Overfilled Container Event |\r\n| CompanyOutletId\t\t  \t| GUID     | ID of the Company Outlet associated with the Overfilled Container Event            |\r\n| OutletName\t\t\t\t| string\t| Name of the Company Outlet associated with the Overfilled Container Event\t\t|\r\n| CustomerSiteId\t  \t\t| GUID     | ID of the Customer Site associated with the Overfilled Container Event             |\r\n| SiteName\t\t\t\t\t| string\t| Name of the Site associated with the Overfilled Container Event\t|\r\n| CustomerType\t\t\t\t| string\t| Type of Customer associated withe Overfilled Container Event |\r\n| CustomerAddress\t\t\t| string\t| Address of the Customer associated withe Overfilled Container Event |\r\n| VehicleId\t\t\t\t\t  \t| GUID     | ID of the Vehicle associated with the Overfilled Container Event\t\t\t\t            |\r\n| VehicleReg\t\t\t\t| string\t| Vehicle Registration associated with the Overfilled Container Event |\r\n| Latitude\t   \t\t\t    | double   | Geographic coordinate of the Overfilled Container Event                                         |\r\n| Longitude\t\t\t\t\t\t  | double   | Geographic coordinate of the Overfilled Container Event                                         |\r\n| Timestamp\t\t\t\t   \t\t| DateTime | Timestamp of the Overfilled Container Event\t                                      |\r\n| GrossWeight\t\t\t| double |\tGross weight of the Overfilled Container Event |\r\n| TareWeight\t\t\t| double |\tTare weight  of the Overfilled Container Event |\r\n| NetWeight\t\t\t| double |\tNet weight of the Overfilled Container Event |\r\n| Seq\t\t\t| int |\tSequence of the Overfilled Container Event |\r\n| RFID\t\t\t| GUID | RFID of the Overfilled Container Event |\r\n| WeighErrorCode\t\t| int | Weight error code of the Overfilled Container Event |\r\n| ContainerId\t\t| string | ContainerId of the Overfilled Container Event |\r\n| WasteType\t\t| string | Waste type of the Overfilled Container Event |\r\n| QRCodeRawText\t\t| string | QRCode raw text of the Overfilled Container Event |\r\n|ExternalEventId\t\t| string | The external event id of the Overfilled Container Event |\r\n| ImageSas\t\t\t|byte[]| The image SAS url of the Overfilled Event expires within 24 hours\r\n| extra.until           | string   | Bookmark to put in as \"since\" later - appears when there are no more pages for now |\r\n| link.next             | URI      | Link to follow to get next page with changes                                       |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visionai",
+                "api",
+                "integrator",
+                "overfilledContainerEvents",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "links",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8e8cc2e-a243-434d-ac3b-bca2fc062ab4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 9613,\n    \"isSuccess\": false\n  },\n  \"resource\": [\n    {\n      \"resource\": {\n        \"guid\": \"fdeed4d2-57e9-24e3-5212-3b27d8a3d17c\",\n        \"lastChangeReasonId\": 2988,\n        \"tenantId\": \"fa9e90dd-19db-a76c-2fbd-dabfdbd6873e\",\n        \"customerName\": \"string\",\n        \"companyOutletId\": \"df7168b3-9761-390f-fc4a-9149dcfbe9fe\",\n        \"outletName\": \"string\",\n        \"customerSiteId\": \"f978bbd3-822a-8b25-a7ce-209052320998\",\n        \"siteName\": \"string\",\n        \"customerType\": \"string\",\n        \"customerAddress\": \"string\",\n        \"vehicleId\": \"8117837f-311e-ce9e-f6a8-60d95621a72f\",\n        \"vehicleReg\": \"string\",\n        \"latitude\": 221.1083446111295,\n        \"longitude\": 7398.468678955546,\n        \"timestamp\": \"2000-01-01 00:00:00.000\",\n        \"grossWeight\": 8947.715435483893,\n        \"tareWeight\": 6297.962846774823,\n        \"netWeight\": 9068.5194868162,\n        \"seq\": 8696,\n        \"rfid\": \"a2444bbc-1122-d528-673e-d44953d1b006\",\n        \"weighErrorCode\": 1778,\n        \"containerId\": \"string\",\n        \"wasteType\": \"string\",\n        \"qrCodeRawText\": \"string\",\n        \"totalSurfaceAreaVolume\": 6152.244744744379,\n        \"materials\": \"string\",\n        \"externalEventId\": \"string\",\n        \"imageSas\": \"string\"\n      }\n    },\n    {\n      \"resource\": {\n        \"guid\": \"58bbfbc7-0911-c8f3-2e73-ba6e6c9fbab2\",\n        \"lastChangeReasonId\": 3446,\n        \"tenantId\": \"1557e97e-152f-be1a-3e30-a0fb36d58245\",\n        \"customerName\": \"string\",\n        \"companyOutletId\": \"40a1cc0c-dac2-05bb-b689-d5dd51f412ee\",\n        \"outletName\": \"string\",\n        \"customerSiteId\": \"03ceb5b2-f34c-ea31-409e-74d41547c0a1\",\n        \"siteName\": \"string\",\n        \"customerType\": \"string\",\n        \"customerAddress\": \"string\",\n        \"vehicleId\": \"17c2c854-454e-84e0-0321-ffef90e6e724\",\n        \"vehicleReg\": \"string\",\n        \"latitude\": 6966.665935084274,\n        \"longitude\": 867.9902126579198,\n        \"timestamp\": \"2000-01-01 00:00:00.000\",\n        \"grossWeight\": 897.7159101321919,\n        \"tareWeight\": 22.78072269185749,\n        \"netWeight\": 3888.9090106539693,\n        \"seq\": 5367,\n        \"rfid\": \"5c81df40-9967-6eb6-e93a-a50bda9ad0e2\",\n        \"weighErrorCode\": 8462,\n        \"containerId\": \"string\",\n        \"wasteType\": \"string\",\n        \"qrCodeRawText\": \"string\",\n        \"totalSurfaceAreaVolume\": 1793.2946059688359,\n        \"materials\": \"string\",\n        \"externalEventId\": \"string\",\n        \"imageSas\": \"string\"\n      }\n    }\n  ],\n  \"extra\": {\n    \"until\": \"string\",\n    \"cursor\": \"string\",\n    \"since\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c334c84f-5a23-407e-a732-2d2cccb1efd8",
+              "name": "Bad Request - Invalid input parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid request. Please check your input parameters.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2043917b-d8ed-4307-b77a-aaddb71cd39a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ccc0ab9f-f417-4272-9454-0edc8490fbcb",
+              "name": "Forbidden - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"You do not have permission to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aff24f9-b81f-4df3-b9fb-473db1b7b7ba",
+              "name": "Not Found - The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71cdc405-df8f-462e-a7e9-12ebc92ac171",
+              "name": "Supplied properties are not valid, please try again with proper request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Supplied properties are not valid, please try again with proper request.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ef45796-92a4-4625-9b9e-b0160b1b94ed",
+              "name": "This feature is not implemented.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"This feature is not implemented.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52327b5f-e93a-4bca-8939-579348f3233a",
+              "name": "Bad Gateway - The upstream server returned an invalid response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Temporary issue with the server. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa1030a7-b5d9-45f1-977a-cf97b3a93d80",
+              "name": "Service Unavailable - The server is currently unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service is currently unavailable. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76095ed2-3f93-4821-a25c-af6c32a37331",
+              "name": "Gateway Timeout - The server took too long to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "overfilledContainerEvents",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "links",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The request timed out. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6c655dad-4ef3-493f-8fe1-37e725d327b8",
+    "name": "Core AccessGroup OverfilledContainerEvent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

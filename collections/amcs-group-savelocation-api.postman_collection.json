@@ -1,0 +1,236 @@
+{
+  "item": [
+    {
+      "id": "7175d0f1-eb58-4450-80a1-c63d013fbe84",
+      "name": "SaveLocation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3919c71d-8bdb-4f5e-a4b4-172ed37484c9",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property| Description| Required |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the customer.| No |\r\n| Description| The description associated to the location.| Yes |\r\n| TimeZone| The TimeZone associated to the location.| No |\r\n| LegalName| The LegalName associated to the location.| No |\r\n| Directions| The Directions associated to the location.| No |\r\n| UniqueReference| The UniqueReference associated to the location.| No |\r\n| Acreage| The Acreage associated to the location.| No |\r\n| Address| The Address object associated to the location.| Yes |\r\n| Address.HouseNumber| The HouseNumber associated address object of the location.| No |\r\n| Address.Address1| The Address1 associated to the address object of the location.| No |\r\n| Address.Address2| The Address2 associated to the address object of the location.| No |\r\n| Address.Address3| The Address3 associated to the address object of the location.| No |\r\n| Address.Address4| The Address4 associated to the address object of the location.| No |\r\n| Address.Address5| The Address5 associated to the address object of the location.| No |\r\n| Address.Address6| The Address6 associated to the address object of the location.| No |\r\n| Address.Address7| The Address7 associated to the address object of the location.| No |\r\n| Address.Address8| The Address8 associated to the address object of the location.| No |\r\n| Address.Address9| The Address9 associated to the address object of the location.| No |\r\n| Address.Postcode| The Postcode associated to the address object of the location.| No |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location.| No |\r\n| Address.RegionCodeListItem| The GUID and region code associated to the address object of the location.| No |\r\n| Address.ContactMethods| The ContactMethods object associated to the address object of the location.| No |\r\n| Address.ContactMethods.TelNo| The telephone number object associated to the ContactMethods object of the address object of the location.| No |\r\n| Address.ContactMethods.FaxNo| The fax number object associated to the ContactMethods object of the address object of the location.| No |\r\n| Geo| The Geo object associated to the location.| No |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location.| No |\r\n| Geo.ParcelBoundaryListItem| The GUID and description of the parcel boundary associated to the Geo object of the location.| No |\r\n| Geo.Location| The location object associated to the Geo object of the location.| No |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location.| No |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location.| No |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location.| No |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location.| No |\r\n| IsDeleted| Whether the location is deleted.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message |\r\n| ------------------------------------------------------------------------------------------------------------- | ------------- |\r\n| TimeZone has a value| TimeZone must be set to null. |\r\n| If IsDeleted true| IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If we attempt to delete a Location| An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value. |\r\n| Geo.Location has a value| Geo.Location must be set to null. |\r\n| Geo.Latitude value not in range between -90 and 90 or Geo.Longitude value not in range between -180 and 180| Geo.Latitude value must be between -90 and 90. Geo.Longitude value must be between -180 and 180. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "saveLocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"Address\": {\n    \"HouseNumber\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"Address2\": \"<string>\",\n    \"Address3\": \"<string>\",\n    \"Address4\": \"<string>\",\n    \"Address5\": \"<string>\",\n    \"Address6\": \"<string>\",\n    \"Address7\": \"<string>\",\n    \"Address8\": \"<string>\",\n    \"Address9\": \"<string>\",\n    \"Postcode\": \"<string>\",\n    \"ContactMethods\": {\n      \"TelNo\": \"<string>\",\n      \"FaxNo\": \"<string>\"\n    },\n    \"PostTownListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"RegionCodeListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    }\n  },\n  \"TimeZone\": \"<string>\",\n  \"LegalName\": \"<string>\",\n  \"Directions\": \"<string>\",\n  \"Geo\": {\n    \"ZoneListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"ParcelBoundaryListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"Location\": {\n      \"Lat\": \"<double>\",\n      \"Long\": \"<double>\"\n    },\n    \"Latitude\": \"<double>\",\n    \"Longitude\": \"<double>\"\n  },\n  \"UniqueReference\": \"<string>\",\n  \"Acreage\": \"<double>\",\n  \"IsDeleted\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "528c3665-cb19-4166-9bf6-68f905bf65b3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "saveLocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"<string>\",\n  \"Address\": {\n    \"HouseNumber\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"Address2\": \"<string>\",\n    \"Address3\": \"<string>\",\n    \"Address4\": \"<string>\",\n    \"Address5\": \"<string>\",\n    \"Address6\": \"<string>\",\n    \"Address7\": \"<string>\",\n    \"Address8\": \"<string>\",\n    \"Address9\": \"<string>\",\n    \"Postcode\": \"<string>\",\n    \"ContactMethods\": {\n      \"TelNo\": \"<string>\",\n      \"FaxNo\": \"<string>\"\n    },\n    \"PostTownListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"RegionCodeListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  },\n  \"TimeZone\": \"<string>\",\n  \"LegalName\": \"<string>\",\n  \"Directions\": \"<string>\",\n  \"Geo\": {\n    \"ZoneListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"ParcelBoundaryListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"Location\": {\n      \"Lat\": \"<double>\",\n      \"Long\": \"<double>\"\n    },\n    \"Latitude\": \"<double>\",\n    \"Longitude\": \"<double>\"\n  },\n  \"UniqueReference\": \"<string>\",\n  \"Acreage\": \"<double>\",\n  \"IsDeleted\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"efee0738-eb97-cbb4-15f5-799ee1a10b3f\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 7091,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6b07e57-a36f-4663-b330-2a49b1a8e3b6",
+          "name": "Partial update",
+          "request": {
+            "name": "Partial update",
+            "description": {
+              "content": "| Property| Description| Required |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the customer.| No |\r\n| Description| The description associated to the location.| Yes |\r\n| TimeZone| The TimeZone associated to the location.| No |\r\n| LegalName| The LegalName associated to the location.| No |\r\n| Directions| The Directions associated to the location.| No |\r\n| UniqueReference| The UniqueReference associated to the location.| No |\r\n| Acreage| The Acreage associated to the location.| No |\r\n| Address| The Address object associated to the location.| Yes |\r\n| Address.HouseNumber| The HouseNumber associated address object of the location.| No |\r\n| Address.Address1| The Address1 associated to the address object of the location.| No |\r\n| Address.Address2| The Address2 associated to the address object of the location.| No |\r\n| Address.Address3| The Address3 associated to the address object of the location.| No |\r\n| Address.Address4| The Address4 associated to the address object of the location.| No |\r\n| Address.Address5| The Address5 associated to the address object of the location.| No |\r\n| Address.Address6| The Address6 associated to the address object of the location.| No |\r\n| Address.Address7| The Address7 associated to the address object of the location.| No |\r\n| Address.Address8| The Address8 associated to the address object of the location.| No |\r\n| Address.Address9| The Address9 associated to the address object of the location.| No |\r\n| Address.Postcode| The Postcode associated to the address object of the location.| No |\r\n| Address.PostTownListItem| The GUID and post town associated to the address object of the location.| No |\r\n| Address.RegionCodeListItem| The GUID and region code associated to the address object of the location.| No |\r\n| Address.ContactMethods| The ContactMethods object associated to the address object of the location.| No |\r\n| Address.ContactMethods.TelNo| The telephone number object associated to the ContactMethods object of the address object of the location.| No |\r\n| Address.ContactMethods.FaxNo| The fax number object associated to the ContactMethods object of the address object of the location.| No |\r\n| Geo| The Geo object associated to the location.| No |\r\n| Geo.ZoneListItem| The GUID and description of the zone associated to the Geo object of the location.| No |\r\n| Geo.ParcelBoundaryListItem| The GUID and description of the parcel boundary associated to the Geo object of the location.| No |\r\n| Geo.Location| The location object associated to the Geo object of the location.| No |\r\n| Geo.Location.Lat| The latitude associated to the location object associated to the Geo object of the location.| No |\r\n| Geo.Location.Long| The longitude associated to the location object associated to the Geo object of the location.| No |\r\n| Geo.Latitude| The latitude associated to the Geo object of the location.| No |\r\n| Geo.Longitude| The longitude associated to the Geo object of the location.| No |\r\n| IsDeleted| Whether the location is deleted.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message |\r\n| ------------------------------------------------------------------------------------------------------------- | ------------- |\r\n| If TimeZone value has been changed| TimeZone is a read-only property |\r\n| If IsDeleted true| IsDeleted is TRUE. Could not process the request. Resources can not be deleted via the REST API. |\r\n| If we attempt to delete a Location| An attempt has been made to set IsDeleted. The request could not be processed. Ensure that IsDeleted has default value. |\r\n| If Geo.Location.Lat value has been changed| Geo.Location.Lat is a read-only property |\r\n| If Geo.Location.Long value has been changed| Geo.Location.Long is a read-only property |\r\n| Geo.Latitude value not in range between -90 and 90 or Geo.Longitude value not in range between -180 and 180| Geo.Latitude value must be between -90 and 90. Geo.Longitude value must be between -180 and 180. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory",
+                "saveLocations",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"Address\": {\n    \"HouseNumber\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"Address2\": \"<string>\",\n    \"Address3\": \"<string>\",\n    \"Address4\": \"<string>\",\n    \"Address5\": \"<string>\",\n    \"Address6\": \"<string>\",\n    \"Address7\": \"<string>\",\n    \"Address8\": \"<string>\",\n    \"Address9\": \"<string>\",\n    \"Postcode\": \"<string>\",\n    \"ContactMethods\": {\n      \"TelNo\": \"<string>\",\n      \"FaxNo\": \"<string>\"\n    },\n    \"PostTownListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"RegionCodeListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    }\n  },\n  \"TimeZone\": \"<string>\",\n  \"LegalName\": \"<string>\",\n  \"Directions\": \"<string>\",\n  \"Geo\": {\n    \"ZoneListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"ParcelBoundaryListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"<uuid>\"\n    },\n    \"Location\": {\n      \"Lat\": \"<double>\",\n      \"Long\": \"<double>\"\n    },\n    \"Latitude\": \"<double>\",\n    \"Longitude\": \"<double>\"\n  },\n  \"UniqueReference\": \"<string>\",\n  \"Acreage\": \"<double>\",\n  \"IsDeleted\": \"<boolean>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97f24700-ad1e-4527-9a0b-19f39db14013",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "saveLocations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"<string>\",\n  \"Address\": {\n    \"HouseNumber\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"Address2\": \"<string>\",\n    \"Address3\": \"<string>\",\n    \"Address4\": \"<string>\",\n    \"Address5\": \"<string>\",\n    \"Address6\": \"<string>\",\n    \"Address7\": \"<string>\",\n    \"Address8\": \"<string>\",\n    \"Address9\": \"<string>\",\n    \"Postcode\": \"<string>\",\n    \"ContactMethods\": {\n      \"TelNo\": \"<string>\",\n      \"FaxNo\": \"<string>\"\n    },\n    \"PostTownListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"RegionCodeListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  },\n  \"TimeZone\": \"<string>\",\n  \"LegalName\": \"<string>\",\n  \"Directions\": \"<string>\",\n  \"Geo\": {\n    \"ZoneListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"ParcelBoundaryListItem\": {\n      \"Description\": \"<string>\",\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    \"Location\": {\n      \"Lat\": \"<double>\",\n      \"Long\": \"<double>\"\n    },\n    \"Latitude\": \"<double>\",\n    \"Longitude\": \"<double>\"\n  },\n  \"UniqueReference\": \"<string>\",\n  \"Acreage\": \"<double>\",\n  \"IsDeleted\": \"<boolean>\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"efee0738-eb97-cbb4-15f5-799ee1a10b3f\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 7091,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b198f538-c9e5-426c-aea6-970889fe4cd1",
+    "name": "Core AccessGroup SaveLocation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

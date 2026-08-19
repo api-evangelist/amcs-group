@@ -1,0 +1,537 @@
+{
+  "item": [
+    {
+      "id": "1f441b62-eb0b-4fda-a585-fad06cd47113",
+      "name": "CameraEvent",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11c82e76-bd11-4cd4-9c66-4ea74e84db25",
+          "name": "Create a contamination/overfilled from  camera",
+          "request": {
+            "name": "Create a contamination/overfilled from  camera",
+            "description": {
+              "content": "# Create a contamination/overfilled from camera\r\n\r\n| Parameter   | Type   | Description                      |\r\n|-------------|--------|----------------------------------|\r\n| Asset\t\t  | string | Vehicle Identified Registration or Asset Id|\r\n| Timestamp   | DateTime | Local time or UTC time of the event|\r\n| Lat         | double   | Latitude       |\r\n| Lon         | double   | Longitude       |\r\n| EventType   | string   | Contamination or Overfilled event       |\r\n| EventId     | string   | Unique Id for each event       |\r\n| WasteType   | string   | The waste stream the truck is collecting       |\r\n| MediaLink   | string   | URL to access the media file associate with each event    |\r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n    \"Asset\": \"M879 EUS\",\r\n    \"Timestamp\": \"2025-04-23 11:00:00\",\r\n    \"Lon\":-121.56767,\r\n    \"Lat\":39.49120,\r\n    \"EventType\": \"Contamination\",\r\n    \"EventId\": \"12345\",\r\n    \"WasteType\": \"General Waste\",\r\n    \"MediaLink\" :\"https://tem-production.s3.amazonaws.com/final_files/2025_03_14/82416/AWTI_VIN_2025_03_14_14_19_19_14019_c2_1ffdc5a0-0c80-4f15-b8be-9a16f690b2d0.mp4\"\r\n}\r\n```\r\n\r\n## Sample API Response\r\n```\r\n{\r\n    \"resource\" : 1\r\n}\r\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visionai",
+                "api",
+                "integrator",
+                "cameraEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e80adf2-46c1-41c9-bf24-feb2f4b681ef",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfc84d61-53e1-40e2-b9ff-e4ba45d5c40d",
+              "name": "Bad Request - Invalid input parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid request. Please check your input parameters.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd804953-6d65-41f8-a2b8-96015fad4ca9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03198ba9-2066-4fc8-a9e4-04d324991a27",
+              "name": "Forbidden - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"You do not have permission to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "872be4b5-358c-4be4-8696-fa35b5924b0d",
+              "name": "Not Found - The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6f9a43a-6933-4a2a-a22b-775750994f82",
+              "name": "Supplied properties are not valid, please try again with proper request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Supplied properties are not valid, please try again with proper request.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cf3bb67-dedd-40b6-8d5e-53fea54ad8d8",
+              "name": "This feature is not implemented.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"This feature is not implemented.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "894a52e2-f179-459a-b1cb-db6f0470b44d",
+              "name": "Bad Gateway - The upstream server returned an invalid response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Temporary issue with the server. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dce16c46-6507-4a22-a79b-96c9204f4a9e",
+              "name": "Service Unavailable - The server is currently unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service is currently unavailable. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c15dbaed-a0d4-4851-9a07-887a7fc78f99",
+              "name": "Gateway Timeout - The server took too long to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visionai",
+                    "api",
+                    "integrator",
+                    "cameraEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"<uuid>\",\n  \"lastChangeReasonId\": \"<integer>\",\n  \"tempIdentifier\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"timestamp\": \"2000-01-01 00:00:00.000\",\n  \"lon\": \"<double>\",\n  \"lat\": \"<double>\",\n  \"eventType\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"wasteType\": \"<string>\",\n  \"mediaLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The request timed out. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4edd1cec-82f4-45da-8642-f5ddb9f16784",
+    "name": "Core AccessGroup CameraEvent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup AuthToken API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AuthToken",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /authTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/authTokens",
+            "params": [
+              {
+                "name": "userName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /authTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/authTokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /authTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/authTokens"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /authTokens/checkPluginAccess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/authTokens/checkPluginAccess",
+            "params": [
+              {
+                "name": "sysUserGuid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pluginId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /authTokens/verifyIdentity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/authTokens/verifyIdentity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

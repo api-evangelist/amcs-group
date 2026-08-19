@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup LiftEvent API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LiftEvent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/liftEvents/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lif"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/liftEvents/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lif"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transport/liftEvents/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the lift event.| No    |\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?| Yes   |\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?| Yes   |\r\n| IsBilled| Is Billed in the lift event?| Yes   |\r\n| IsCollected| Is Collected in the lift"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/liftEvents",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the lift event.|\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?|\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?|\r\n| IsBilled| Is Billed in the lift event?|\r\n| IsCollected| Is Collected in the lift event?|\r\n| IsContaminated| Is Contaminated in the lif"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transport/liftEvents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the lift event.| No    |\r\n| IsAutoGPSMatching| Is AutoGPSMatching in the lift event?| Yes   |\r\n| IsAutoGPSMatchingResult| Is AutoGPSMatchingResult in the lift event?| Yes   |\r\n| IsBilled| Is Billed in the lift event?| Yes   |\r\n| IsCollected| Is Collected in the lift"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

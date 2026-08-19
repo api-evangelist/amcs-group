@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Vehicle API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/vehicles/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associ"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/vehicles/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associ"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/fleet/vehicles/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle.            |   No    |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|   Yes   |\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|   Yes   |\r\n| RegistrationNo| The re"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fleet/vehicles",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the vehicle.            |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|\r\n| RegistrationNo| The registration number associated to the vehicle.|\r\n| VehicleCode | The vehicle code associ"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fleet/vehicles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the vehicle.            |   No    |\r\n| IsZeroWeightBinAccumulated| Is the zero weight bin accumulated.|   Yes   |\r\n| IsNoTagStopEnabled| Is the no tag stop enabled.|   Yes   |\r\n| RegistrationNo| The re"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

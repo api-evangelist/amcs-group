@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Weighing API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weighing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scale/weighings/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| Relate"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scale/weighings/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| Relate"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/scale/weighings/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          | No |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.          "
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scale/weighings",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.                          |\r\n| Relate"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/scale/weighings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID                                  | The GUID associated to the weighing.                                          | No |\r\n| RelatedScheduleGuid                   | The GUID associated to the schedule of the weighing.          "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

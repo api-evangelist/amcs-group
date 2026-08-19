@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup ExternalTransaction API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExternalTransaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OneOff Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/OneOff",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to initiate a payment/tokenization request via the Provider's hosted payments page (HPP).\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| RequestType                      |Request Type can be any of \"OneOffPayment\", \"Tokenization\".                            |\r\n| PaymentType               | Payment Type can be any of \"CARD\", \"ACH\", \"EFT\".                    "
+        },
+        {
+          "info": {
+            "name": "Immediate OneOff Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/ImmediateOneOff",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to make an immediate payment/tokenization request.\n\n## Request\n\n| Property                  | Description  |\r\n| ------------------------- | ------------------------------------------------------------------------|\r\n| RequestType                      |Request Type can be any of \"OneOffPayment\", \"Tokenization\".                            |\r\n| PaymentType               | Payment Type can be any of \"ACH\", \"EFT\".                      |\r\n| CallerIdentifier               | The Cal"
+        },
+        {
+          "info": {
+            "name": "Poll Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ExternalTransaction/Poll",
+            "params": [
+              {
+                "name": "callerTransactionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to poll AmcsPay to ask for query transactions or to read the transaction response back to AmcsPay from the payment provider using CallerTransactionId or RequestId.\n\n## Request\n\n| **Property** | **Description** |\n| --- | --- |\n| CallerTransactionId | The AMCS generated Request GUID associated to the payments. |\n| RequestId | The Caller Supplied Request GUID associated to the payments. |\n\n## Response\n\n| **Property** | **Description** |\n| --- | --- |\n| CallerTransactionId | Th"
+        },
+        {
+          "info": {
+            "name": "Get All Payment Response Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ExternalTransaction/Poll/GetAll",
+            "params": [
+              {
+                "name": "DateFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "DateTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "CustomerId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to get the payment transaction details based on the set filter criteria."
+        },
+        {
+          "info": {
+            "name": "Refund Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/Refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to request a refund for a Card/ACH payment already processed via AmcsPay.\n\n## Request\n\n| **Property** | **Description** |\n| --- | --- |\n| RequestType | Request Type is  \"Refund\". |\n| PaymentType | Payment Type can be any of \"CARD\", \"ACH\", \"EFT\", \"TERMINAL\".| \n| TransactionOrigin | For Refund, transaction origin can only be \"MOTO\". |\n| CallerIdentifier | The identification associated to the calling application.| \n| RequestId | The Caller supplied GUID associated to the Payme"
+        },
+        {
+          "info": {
+            "name": "Vault Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/Vault",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to make a payment using the saved profile(Card / ACH) via AmcsPay."
+        },
+        {
+          "info": {
+            "name": "Terminal Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/Terminal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to make a card payment using a terminal device.\n\n## Request\n\n| Property | Description |\n| --- | --- |\n| ProviderType | Provide Type can be any of \"TerminalPay\", and \"ElavonTerminalPay\". |\n| CallerIdentifier | The Caller Identification associated to the Payment request. |\n| RequestId | The Caller supplied Request GUID associated to the Payment request. |\n| TerminalId | The Terminal Id is the verifone terminal identity like a device serial number or a friendly name. |\n| Trans"
+        },
+        {
+          "info": {
+            "name": "Terminal Payment Abort",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/TerminalAbort",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is a signal used to abort a card payment requested using a terminal device.\n\n## Request\n\n| Property | Description |\n| --- | --- |\n| ProviderType | Provide Type can be any of \"ElavonTerminalPay\" and \"TerminalPay\". |\n| CallerIdentifier | The Caller Identification associated to the Payment request. |\n| RequestId | The Caller supplied Request GUID associated to the Payment request. |\n| RequestType | Request Type is \"Abort\". |\n| TerminalId | The Terminal Id is the verifone terminal devi"
+        },
+        {
+          "info": {
+            "name": "Delete Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/DeleteToken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to delete Card Tokens from the vault for both AMCS Pay and Payment provider gateway."
+        },
+        {
+          "info": {
+            "name": "Get ServiceFee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/GetServiceFee",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to get the service fee."
+        },
+        {
+          "info": {
+            "name": "Retry Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/RetryTransaction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to retry a previously failed transaction via AmcsPay"
+        },
+        {
+          "info": {
+            "name": "Create Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExternalTransaction/CreateCustomer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is used to create a new customer and optionally create a payment account for that customer with the specified payment provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

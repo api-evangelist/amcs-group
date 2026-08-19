@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "dc54ed82-ab49-4a5a-ae6f-991353356c70",
+      "name": "CustomerSiteHealthAndSafetyBlob",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f589b299-9668-4fe0-a6a8-930ff96cf48e",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| Guid| The GUID associated to the Customer Site Health and Safety blob| No  |\r\n| MediaContentBase64| The Image/PDF converted to base 64| Yes |\r\n| DocumentName| The Document Name| Yes |\r\n| DocumentReference| The Document Reference| Yes |\r\n| DocumentDescription| The Document Description| No |\r\n| RelatedCustomerSiteGuid| The Related Customer Site Guid| Yes |\r\n| HealthAndSafetyDocumentTypeListItem | The GUID and description of the health and safety document type| Yes |\r\n| ValidFrom| The valid from date| Yes |\r\n| ValidUntil| The valid until date| No |\r\n| IsHighRisk| Whether the document contains high risk items| No |\r\n| IsSentToVehicle| Whether the document is sent to vehicle| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| DocumentName is Null or not provided | The mandatory property DocumentName has a null value. The request could not be processed. Supply a value for the DocumentName property of the submitted resource.  |\r\n| DocumentName has less than 5 characters  or more than 100 characters | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should be at least 1 character and at most 100 characters, excluding the extension |\r\n| DocumentName does not have any of pdf/png/jpg/gif extension | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should have any of pdf/png/jpg/gif extension |\r\n| DocumentReference is Null or not provided | The mandatory property DocumentReference has a null value. The request could not be processed. Supply a value for the DocumentReference property of the submitted resource.  |\r\n| RelatedCustomerSiteGuid is Null or not provided | The mandatory property RelatedCustomerSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedCustomerSiteGuid property of the submitted resource.  |\r\n| Invalid RelatedCustomerSiteGuid | Failed to retrieve Customer Site with RelatedCustomerSiteGuid of {Guid} |\r\n| HealthAndSafetyDocumentTypeListItem.Guid is Null or not provided | The mandatory property HealthAndSafetyDocumentTypeListItem.Guid has a null value. The request could not be processed. Supply a value for the HealthAndSafetyDocumentTypeListItem.Guid property of the submitted resource. \r\n| Invalid HealthAndSafetyDocumentTypeListItem.Guid | Failed to retrieve HealthAndSafetyDocumentType with HealthAndSafetyDocumentTypeListItem.Guid of {Guid} |\r\n| MediaContentBase64 is Null or not provided | The mandatory property MediaContentBase64 has a null value. The request could not be processed. Supply a value for the MediaContentBase64 property of the submitted resource.  |\r\n| MediaContentBase64 is not a valid base64 string | Failed to save/update CustomerSiteHealthAndSafetyForm because ImageContentHash has Invalid length for a Base-64 char array or string |\r\n\r\n##  Information\r\n| Information |\r\n| ----------- |\r\n| Currently we are only validating for a valid base64 string, we are not validating the string against the file extension |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs",
+                "customerSiteHealthAndSafetyBlobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"MediaContentBase64\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"DocumentReference\": \"<string>\",\n  \"DocumentDescription\": \"<string>\",\n  \"HealthAndSafetyDocumentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"<uuid>\"\n  },\n  \"RelatedCustomerSiteGuid\": \"<uuid>\",\n  \"ValidFrom\": \"<localDate>\",\n  \"ValidUntil\": \"<localDate>\",\n  \"IsHighRisk\": \"<boolean>\",\n  \"IsSentToVehicle\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "639c6279-9b4a-44c5-b81f-25f751608711",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    "customerSiteHealthAndSafetyBlobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MediaContentBase64\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"DocumentReference\": \"<string>\",\n  \"DocumentDescription\": \"<string>\",\n  \"HealthAndSafetyDocumentTypeListItem\": {\n    \"Description\": \"<string>\",\n    \"Guid\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"RelatedCustomerSiteGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"ValidFrom\": \"2000-01-01\",\n  \"ValidUntil\": \"2000-01-01\",\n  \"IsHighRisk\": \"<boolean>\",\n  \"IsSentToVehicle\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"10b8f0b7-b9c2-4e6e-bd20-3ae8578f297f\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 6224,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5da732a5-8f0a-4d49-9f74-c86170809e5d",
+    "name": "Core AccessGroup CustomerSiteHealthAndSafetyBlob API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

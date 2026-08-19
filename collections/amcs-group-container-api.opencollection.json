@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup Container API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Container",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/directory/containers/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commer"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/directory/containers/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commer"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/directory/containers/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                            | Description                                                      | Required |\r\n| ----------------------------------- | ---------------------------------------------------------------- | -------- |\r\n| GUID                                | The GUID associated to the container.                            | No |\r\n| IsDeleted                           | Whether the container is deleted                                 | Yes |\r\n| IsCommercial                     "
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/directory/containers",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                            | Description                                                      |\r\n| ----------------------------------- | ---------------------------------------------------------------- |\r\n| GUID                                | The GUID associated to the container.                            |\r\n| IsDeleted                           | Whether the container is deleted                                 |\r\n| IsCommercial                        | Is this container for commer"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/directory/containers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                            | Description                                                      | Required |\r\n| ----------------------------------- | ---------------------------------------------------------------- | -------- |\r\n| GUID                                | The GUID associated to the container.                            | No |\r\n| IsDeleted                           | Whether the container is deleted                                 | Yes |\r\n| IsCommercial                     "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

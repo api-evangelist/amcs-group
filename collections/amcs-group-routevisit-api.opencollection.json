@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup RouteVisit API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RouteVisit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisits/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| Containe"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisits/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| Containe"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transport/routeVisits/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| ActionListItem| The GUID and description associated to the action type.| Yes |\r\n| ContainerTypeListItem| The GUID and description associated to the container type.| Yes |\r"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisits",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property| Description|\r\n| -------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit.|\r\n| RelatedSiteOrderGuid| Used to filter on the related siter order GUID.|\r\n| RelatedRouteGuid| Used to filter on the related route GUID.|\r\n| ActionListItem| The GUID and description of the action associated to the route visit.|\r\n| Containe"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transport/routeVisits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| ActionListItem| The GUID and description associated to the action type.| Yes |\r\n| ContainerTypeListItem| The GUID and description associated to the container type.| Yes |\r"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

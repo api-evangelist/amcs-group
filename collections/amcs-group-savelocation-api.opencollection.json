@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup SaveLocation API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SaveLocation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/directory/saveLocations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the customer.| No |\r\n| Description| The description associated to the location.| Yes |\r\n| TimeZone| The TimeZone associated to the location.| No |\r\n| LegalName| The LegalName associated to the location.| No |\r\n| Directions| The Directions associated to the location.| No |\r\n"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/directory/saveLocations/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property| Description| Required |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the customer.| No |\r\n| Description| The description associated to the location.| Yes |\r\n| TimeZone| The TimeZone associated to the location.| No |\r\n| LegalName| The LegalName associated to the location.| No |\r\n| Directions| The Directions associated to the location.| No |\r\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

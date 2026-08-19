@@ -1,0 +1,92 @@
+{
+  "item": [
+    {
+      "id": "ce4edbe3-4bb7-4abd-a143-700786b75620",
+      "name": "Picture",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "714d9ac6-6965-44fa-b0b1-fe7f137fce84",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property\t\t\t\t\t\t\t\t| Description                                   | Required\t|\r\n|---------------------------------------|-----------------------------------------------|-----------|\r\n| DateTime\t\t\t\t\t\t\t\t| The date and time of the picture.\t\t\t\t|   Yes\t\t|\r\n| Description\t\t\t\t\t\t\t| The description of the picture.\t\t\t\t|   No\t\t|\r\n| RelatedVehicleReg\t\t\t\t\t\t| The related vehicle reg.\t\t\t\t\t\t|   No\t\t|\r\n| Base64Picture\t\t\t\t\t\t\t| The Base64Picture blob hash of the picture.\t|   Yes\t\t|\r\n| RelatedWeighingGuid\t\t\t\t\t| The weighing guid.\t\t\t\t\t\t\t|   No\t\t|\r\n| IsAnpr\t\t\t\t\t\t\t\t| The Anpr picture type.\t\t\t\t\t\t|   No\t\t|\r\n| CompanyOutletGuid\t\t\t\t\t\t| The CompanyOutlet guid.\t\t\t\t\t\t|   No\t\t|\r\n| SubscriberGuid\t\t\t\t\t\t| The Subscriber guid.\t\t\t\t\t\t\t|   Yes\t\t|\r\n\r\n## Extra validations\r\n\r\n| Condition | Error message |\r\n|-----------|---------------|\r\n| If RelatedVehicleReg and RelatedWeighingGuid are both null | Either RelatedVehicleReg or RelatedWeighingGuid property must have a value. |\r\n| If no Weighing is found associated to the ANPR data | Weighing not found for this ANPR data. |\r\n| If Subscriber isnt subscribed to Outlet | Subscriber isnt subscribed to Outlet. |\r\n| If no Outlets were found for Subscriber | No Outlets were found for Subscriber. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrator",
+                "pictures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "533847db-aa55-4495-9412-d17099cdb95e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrator",
+                    "pictures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a79888c3-0c61-4ce8-8885-a687d1da989f",
+    "name": "Core AccessGroup Picture API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

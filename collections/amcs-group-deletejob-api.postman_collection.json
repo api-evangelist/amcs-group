@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "b84f8dfa-4881-4b2c-b32b-859edc5ad0dc",
+      "name": "DeleteJob",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3a53b73-0f78-42c8-953b-007ba9e1305d",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| JobGuid                               | The JobGuid associated to the about to be deleted job.| Yes |\r\n| DeleteReasonGuid                  | Delete Reason GUID IDthat match to the job                       | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| JobGuid is null | JobGuid is required. |\r\n| DeleteReasonGuid is null | DeleteReasonGuid is required. |\r\n| DeleteReasonGuid does not apply to the job | The supplied Delete Reason does not apply to the job type of the job being deleted. |\r\n| DeleteReasonGuid cannot be found | This Delete Reason cannot be found. |\r\n| Job GUID cannot be found | This job cannot be found. |\r\n| Job is already allocated | The job must be unallocated before it can be deleted. |\r\n| Job GUID is not a scheduled job | This job type cannot be deleted. |\r\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport",
+                "deleteJobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"JobGuid\": \"<uuid>\",\n  \"DeleteReasonGuid\": \"<uuid>\",\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e115dd5d-1db6-48cf-bd28-35fc28bd4435",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport",
+                    "deleteJobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"JobGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"DeleteReasonGuid\": \"00000000-0000-0000-0000-000000000000\",\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"204ae20a-7877-1861-8e4d-c02f8db269a0\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 9810,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d9f33d0d-ce80-491c-9b35-e548fb213aaa",
+    "name": "Core AccessGroup DeleteJob API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

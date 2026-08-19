@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "71d2951d-90cf-439d-b329-1265e67c1535",
+      "name": "SharedContainerHistory",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b86e9d4c-563a-41f4-bb16-cb8bd928a494",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| Property| Description| Required |\r\n| ----------------------------------------------------------|-------------------------------------------------------------------------------------------|----------|\r\n| SharedContainerHistory[0].ContainerGuid| The GUID of the Container associated to the shared container.|   Yes    |\r\n| SharedContainerHistory[0].Timestamp| The timestamp of the shared container history recorded.|   Yes   |\r\n| SharedContainerHistory[0].MaximumLoad| The maximum load of the container associated to the shared container.|   Yes   |\r\n| SharedContainerHistory[0].CurrentLoad| The current load of the waste disposed in container associated to the shared container.|Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ----------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------- |\r\n| If AccessPassHistory[0].ContainerGuid not linked to shared container.| Container ({0}) Not found in shared container associated with timestamp.|",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stosag",
+                "sharedContainerHistories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SharedContainerHistory\": [\n    {\n      \"ContainerGuid\": \"<uuid>\",\n      \"TimeStamp\": \"<dateTime>\",\n      \"MaximumLoad\": \"<double>\",\n      \"CurrentLoad\": \"<double>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerHistoryId\": \"<integer>\"\n    },\n    {\n      \"ContainerGuid\": \"<uuid>\",\n      \"TimeStamp\": \"<dateTime>\",\n      \"MaximumLoad\": \"<double>\",\n      \"CurrentLoad\": \"<double>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerHistoryId\": \"<integer>\"\n    }\n  ],\n  \"GUID\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62c7e25f-e1b5-4b6e-85be-94a931490d9a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stosag",
+                    "sharedContainerHistories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SharedContainerHistory\": [\n    {\n      \"ContainerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"TimeStamp\": \"2000-01-01 00:00:00.000\",\n      \"MaximumLoad\": \"<double>\",\n      \"CurrentLoad\": \"<double>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerHistoryId\": \"<integer>\"\n    },\n    {\n      \"ContainerGuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"TimeStamp\": \"2000-01-01 00:00:00.000\",\n      \"MaximumLoad\": \"<double>\",\n      \"CurrentLoad\": \"<double>\",\n      \"ClusterAccountId\": \"<integer>\",\n      \"ContainerId\": \"<integer>\",\n      \"SharedContainerHistoryId\": \"<integer>\"\n    }\n  ],\n  \"GUID\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"8c6aa2a2-8be9-7dc8-5f9a-73aa5f026c22\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 953,\n    \"isSuccess\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f53e6ba-b869-4014-b1a6-caa9826eeb7f",
+    "name": "Core AccessGroup SharedContainerHistory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

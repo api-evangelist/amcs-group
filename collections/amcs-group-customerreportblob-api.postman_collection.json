@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "0fe99627-713f-4a0c-bc06-caf61161a1e0",
+      "name": "CustomerReportBlob",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "770c3cf5-d25b-443b-990b-5133c6d63fa3",
+          "name": "Create or update",
+          "request": {
+            "name": "Create or update",
+            "description": {
+              "content": "| --------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| DocumentDescription| The description associated to the customer report.| Yes |\r\n| DocumentName| The document name associated to the customer report.| Yes |\r\n| IsForAllSites| Whether the customer report is for all sites of related customer.| No |\r\n| MediaContentBase64| The file converted to base 64.| Yes |\r\n| RelatedCustomerGuid| The related customer guid associated to the customer report.| Yes |\r\n| RelatedSites| The list of related customer site.| No |\r\n| RelatedSites[0].Guid| The guid associated to the customer report site.| No |\r\n| RelatedSites[0].RelatedSiteGuid| The related customer siteguid associated to the customer report site.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| DocumentDescription is Null or not provided | The mandatory property DocumentDescription has a null value. The request could not be processed. Supply a value for the DocumentDescription property of the submitted resource. |\r\n| DocumentName is Null or not provided | The mandatory property DocumentName has a null value. The request could not be processed. Supply a value for the DocumentName property of the submitted resource.  |\r\n| DocumentName has less than 5 characters  or more than 510 characters | CustomerReport has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should be at least 1 character and at most 506 characters, excluding the extension |\r\n| DocumentName does not have any of pdf/png/jpg/gif extension  | CustomerReport has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should have any of pdf/png/jpg/gif extension |\r\n| MediaContentBase64 is Null or not provided | The mandatory property MediaContentBase64 has a null value. The request could not be processed. Supply a value for the MediaContentBase64 property of the submitted resource.  |\r\n| MediaContentBase64 is not a valid base64 string | Failed to save/update CustomerReport because MediaContentBase64 has Invalid length for a Base-64 char array or string |\r\n| RelatedCustomerGuid is Null or not provided | The mandatory property RelatedCustomerGuid has a null value. The request could not be processed. Supply a value for the RelatedCustomerGuid property of the submitted resource.  |\r\n| RelatedSites is empty and IsForAllSites is false | Failed to save/update CustomerReport because if IsForAllSites = false, at least one site must be present in RelatedSites array. |\r\n| RelatedSites has all sites and IsForAllSites is true | Failed to save/update CustomerReport because if IsForAllSites = true, at least one site must not be present in RelatedSites array. |\r\n| RelatedSites has duplicate RelatedSiteGuid | Failed to save/update CustomerReport because duplicate RelatedSiteGuid listed in the RelatedSites array. |\r\n| RelatedSiteGuid is not related RelatedCustomerGuid | Failed to save. CustomerSite with RelatedSiteGuid of {RelatedSiteGuid} does not belong to Customer |\r\n| RelatedSites.Guid is not null | Failed to save/update CustomerReport because Guid is not permitted on creation. |\r\n\r\n##  Information\r\n| Information |\r\n| ----------- |\r\n| Currently we are only validating for a valid base64 string, we are not validating the string against the file extension |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs",
+                "customerReportBlobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DocumentDescription\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"IsForAllSites\": \"<boolean>\",\n  \"MediaContentBase64\": \"<string>\",\n  \"RelatedSites\": [\n    {\n      \"Guid\": \"<uuid>\",\n      \"RelatedSiteGuid\": \"<uuid>\"\n    },\n    {\n      \"Guid\": \"<uuid>\",\n      \"RelatedSiteGuid\": \"<uuid>\"\n    }\n  ],\n  \"RelatedCustomerGuid\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ec73ec5-9555-4026-a750-709fcd3999ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    "customerReportBlobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DocumentDescription\": \"<string>\",\n  \"DocumentName\": \"<string>\",\n  \"IsForAllSites\": \"<boolean>\",\n  \"MediaContentBase64\": \"<string>\",\n  \"RelatedSites\": [\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"Guid\": \"00000000-0000-0000-0000-000000000000\",\n      \"RelatedSiteGuid\": \"00000000-0000-0000-0000-000000000000\"\n    }\n  ],\n  \"RelatedCustomerGuid\": \"00000000-0000-0000-0000-000000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": \"42649656-2a32-f534-471f-7604449b1190\",\n  \"errors\": {\n    \"errors\": \"string\"\n  },\n  \"status\": {\n    \"id\": 7406,\n    \"isSuccess\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57e08cdc-e22d-4c63-ad2d-0eb28ea1a75a",
+    "name": "Core AccessGroup CustomerReportBlob API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

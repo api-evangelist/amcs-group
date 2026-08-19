@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Core AccessGroup RouteVisitJob API",
+    "version": "core"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RouteVisitJob",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisitJobs/changes",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route visit job.|\r\n| ActionListItem| The GUID and description associated to the action type.|\r\n| RelatedRouteVisitGuid| The GUID related to the route visit.|\r\n| MaterialListItem| The GUID and description associated to t"
+        },
+        {
+          "info": {
+            "name": "Find with GUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisitJobs/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route visit job.|\r\n| ActionListItem| The GUID and description associated to the action type.|\r\n| RelatedRouteVisitGuid| The GUID related to the route visit.|\r\n| MaterialListItem| The GUID and description associated to t"
+        },
+        {
+          "info": {
+            "name": "Partial update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transport/routeVisitJobs/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| RelatedRouteVisitGuid| The GUID related to the route visit.| Yes |\r\n| MaterialListItem| The GUID and description associated to the material.| No |\r\n| ContainerTypeListItem"
+        },
+        {
+          "info": {
+            "name": "Find with Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transport/routeVisitJobs",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "udf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the route visit job.|\r\n| ActionListItem| The GUID and description associated to the action type.|\r\n| RelatedRouteVisitGuid| The GUID related to the route visit.|\r\n| MaterialListItem| The GUID and description associated to t"
+        },
+        {
+          "info": {
+            "name": "Create or update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transport/routeVisitJobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit job.| No |\r\n| RelatedRouteVisitGuid| The GUID related to the route visit.| Yes |\r\n| MaterialListItem| The GUID and description associated to the material.| No |\r\n| ContainerTypeListItem"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
