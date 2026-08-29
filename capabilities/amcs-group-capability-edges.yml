@@ -3,7 +3,7 @@ provider: AMCS Group
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Transportation & Logistics
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,138 +11,198 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 20
+edge_count: 27
 edges:
 - tag: GLJournal
   spec_file: amcs-group-gljournal-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
-  confidence: 0.95
+  confidence: 0.9
   evidence: POST /accounting/glJournals  GLJournal_Create; schemas ApiIntegratorGLJournalHeaderResource,
-    ApiIntegratorGLJournalLineTaxResource, ApiIntegratorGLJournalLineExchangeRateResource
-  reason: Full journal header/line model with tax and exchange-rate lines posted to /accounting/glJournals
-    — unambiguously general ledger journal management.
+    ApiIntegratorGLJournalLineResource, ApiIntegratorGLJournalLineTaxResource
+  reason: Full journal header/line/tax/exchange-rate model under /accounting/glJournals — the creation
+    and retrieval of general-ledger journals, which is plainly General Ledger Management.
+- tag: Customer
+  spec_file: amcs-group-customer-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.85
+  evidence: POST /directory/customers  Customer_Create  Create or update; ApiIntegratorCustomerResource,
+    GET /directory/customers/changes  Customer_GetChanges
+  reason: Full CRUD and change-feed over customer records in the platform's directory, including AR account
+    codes and related sites — this is customer master data maintenance.
 - tag: GLBatch
   spec_file: amcs-group-glbatch-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
-  confidence: 0.9
-  evidence: GET /accounting/glBatches  GLBatch_GetCollection; schema ApiIntegratorGLBatchResource
-  reason: Operations manage general-ledger posting batches under the /accounting path, which is squarely
-    journal/period-posting administration in the general ledger.
+  confidence: 0.85
+  evidence: GET /accounting/glBatches  GLBatch_GetCollection; PUT /accounting/glBatches/{guid}  GLBatch_Update
+    — schema ApiIntegratorGLBatchResource
+  reason: Endpoints under /accounting/ manage general-ledger batches, which is core General Ledger Management
+    (journal batching and posting).
 - tag: SupplierPayment
   spec_file: amcs-group-supplierpayment-api-openapi.yml
   capability_id: BC-200.20
   capability_id_l1: BC-200
   capability_name: Accounts Payable Management
-  confidence: 0.88
-  evidence: POST /accounting/supplierPayments  SupplierPayment_Create; ApiIntegratorAllocationResource
-  reason: Records supplier payments under /accounting/ with allocation to open items — payments to vendors,
-    squarely Accounts Payable Management.
-- tag: GLExport
-  spec_file: amcs-group-glexport-api-openapi.yml
-  capability_id: BC-200.10
-  capability_id_l1: BC-200
-  capability_name: General Ledger Management
   confidence: 0.85
-  evidence: POST /accounting/glExports  GLExport_Create  Create or update; schema ApiIntegratorGLExportResource
-  reason: Creates general-ledger export records under /accounting, i.e. transfer of ledger postings to
-    the finance system. General Ledger Management is the clear fit; single generic operation caps confidence.
+  evidence: POST /accounting/supplierPayments  SupplierPayment_Create  Create or update; ApiIntegratorAllocationResource
+  reason: Records supplier payments under '/accounting' with allocation objects (payment applied to bills)
+    — vendor payment and accounting, i.e. Accounts Payable Management.
+- tag: Vehicle
+  spec_file: amcs-group-vehicle-api-openapi.yml
+  capability_id: BC-2430
+  capability_id_l1: BC-2430
+  capability_name: Fleet & Mobile Asset Management
+  confidence: 0.85
+  evidence: GET /fleet/vehicles, POST /fleet/vehicles Vehicle_Create, ApiIntegratorVehicleResource, ApiIntegratorVehicleTrailerResource
+  reason: CRUD over the fleet vehicle (and trailer) register — provisioning and maintaining mobile asset
+    master data. L1 fleet/mobile asset management is supported; no single sub-capability is named.
+- tag: ApiGpsTrailExportService
+  spec_file: amcs-group-apigpstrailexportservice-api-openapi.yml
+  capability_id: BC-2430.40
+  capability_id_l1: BC-2430
+  capability_name: Fleet Telematics and Monitoring
+  confidence: 0.82
+  evidence: POST /integrator/gpsTrail  'Get list of Vehicle Gps Trails'; AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint
+  reason: Explicitly returns vehicle GPS trails from a map-based alerting/telematics service, which is
+    asset position monitoring for a fleet — BC-2430.40 Fleet Telematics and Monitoring.
 - tag: SupplierBill
   spec_file: amcs-group-supplierbill-api-openapi.yml
   capability_id: BC-200.20
   capability_id_l1: BC-200
   capability_name: Accounts Payable Management
-  confidence: 0.85
+  confidence: 0.82
   evidence: POST /purchasing/supplierBills  SupplierBill_Create  Create or update
-  reason: Supplier bills (incoming vendor invoices) created and updated under /purchasing/ — invoice processing
-    and vendor accounting, i.e. Accounts Payable Management.
+  reason: Creation, update and retrieval of supplier bills under the '/purchasing' path is inbound vendor
+    invoice processing, which is Accounts Payable Management.
 - tag: CreditNote
   spec_file: amcs-group-creditnote-api-openapi.yml
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
   confidence: 0.8
-  evidence: GET /accounting/creditNotes, ApiIntegratorCreditNoteInvoiceResource, ApiIntegratorCreditNoteVatBreakdownResource,
+  evidence: POST /accounting/creditNotes  CreditNote_Create; ApiIntegratorCreditNoteInvoiceResource, ApiIntegratorCreditNoteVatBreakdownResource,
     ApiIntegratorCreditNoteDeallocationResource
-  reason: Creates and retrieves accounting credit notes linked to customer invoices with VAT breakdown
-    and allocation/deallocation — customer invoicing and receivables accounting.
-- tag: Customer
-  spec_file: amcs-group-customer-api-openapi.yml
-  capability_id: BC-420.10
-  capability_id_l1: BC-420
-  capability_name: Customer Data Management
-  confidence: 0.8
-  evidence: GET /directory/customers, POST /directory/customers  Customer_Create  Create or update, ApiIntegratorCustomerResource
-  reason: Full CRUD over the customer directory records including state-change requests and AR account
-    codes — maintenance of the customer master record.
-- tag: Route
-  spec_file: amcs-group-route-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
-  confidence: 0.8
-  evidence: GET /transport/routes, ApiIntegratorRouteVehicleCheckResource, ApiIntegratorRouteDriverResource,
-    ApiIntegratorRouteAcceptedMaterialsResource
-  reason: Routes under the /transport namespace carrying drivers, vehicle checks and accepted materials
-    are collection/transport route execution — logistics operations within the supply chain.
-- tag: RouteVisit
-  spec_file: amcs-group-routevisit-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
-  confidence: 0.8
-  evidence: GET /transport/routeVisits, ApiIntegratorRouteVisitPictureResource, ApiIntegratorAccessArrayResource
-  reason: Route visits are the individual service stops executed on a collection route, including proof
-    pictures and access details — clearly transport/logistics execution.
+  reason: Creation and retrieval of credit notes linked to invoices, with VAT breakdown and allocation/deallocation
+    against receivables — customer-side billing adjustment, i.e. accounts receivable accounting.
+- tag: GLExport
+  spec_file: amcs-group-glexport-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.78
+  evidence: POST /accounting/glExports  GLExport_Create  Create or update — schema ApiIntegratorGLExportResource
+  reason: Creates general-ledger exports under the accounting namespace, i.e. transfer of GL postings
+    to the ledger/finance system. Single operation so slightly thinner evidence, but the accounting/GL
+    context is unambiguous.
 - tag: Disbursements
   spec_file: amcs-group-disbursements-api-openapi.yml
   capability_id: BC-200.20
   capability_id_l1: BC-200
   capability_name: Accounts Payable Management
-  confidence: 0.78
-  evidence: POST /disbursement/AddSupplier ... POST /disbursement/AddDisbursement ... POST /pay/AptPay/GetTransactionStatus
-  reason: Registers suppliers and issues disbursements (outbound payments) with account verification and
-    transaction status via the AptPay rail — supplier payment execution, i.e. Accounts Payable. Some chance
-    it is better read as pure payment-rail plumbing, hence not 0.9.
-- tag: RouteAssignment
-  spec_file: amcs-group-routeassignment-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
   confidence: 0.75
-  evidence: POST /transport/routeAssignments  RouteAssignment_Create, ApiIntegratorRouteAssignmentAccessTimeResource
-  reason: Assignment of work/access times to transport routes is dispatch and route execution management,
-    i.e. logistics operations.
-- tag: RouteTemplate
-  spec_file: amcs-group-routetemplate-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
+  evidence: POST /disbursement/AddSupplier    Add Supplier; POST /disbursement/AddDisbursement    Add
+    Disbursement; POST /pay/AptPay/GetTransactionStatus
+  reason: Registers suppliers and creates disbursements (outbound payments) with account verification
+    and transaction status - vendor payment execution, i.e. accounts payable. Slight ambiguity as it could
+    also be read as treasury/payment-rails integration.
+- tag: Order
+  spec_file: amcs-group-order-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
   confidence: 0.75
-  evidence: POST /transport/routeTemplates  RouteTemplate_Create, ApiIntegratorRouteTemplateAcceptedMaterialsResource
-  reason: Templates defining recurring transport routes and the materials they accept are route planning
-    artefacts for collection logistics operations.
+  evidence: POST /transport/orders  Order_Create  Create or update; schemas ApiIntegratorOrderRouteAssignmentResource,
+    ApiIntegratorOrderContainerResource, ApiIntegratorOrderStandingJobResource, ApiIntegratorOrderRouteCalloutRequestResource
+  reason: Transport service orders with route assignment, container, standing-job and route call-out sub-resources
+    — i.e. collection/transport work orders that drive route execution. Clearly transport operations execution;
+    L2 left null because route assignment (dispatch) and order intake are both represented.
+- tag: Trailer
+  spec_file: amcs-group-trailer-api-openapi.yml
+  capability_id: BC-2430.30
+  capability_id_l1: BC-2430
+  capability_name: Equipment Pool Management
+  confidence: 0.75
+  evidence: GET /fleet/trailers  Trailer_GetCollection  Find with Filters
+  reason: Fleet trailer register exposed under /fleet/trailers with change tracking — mobile asset/equipment
+    (trailer) master data, mapping to Fleet & Mobile Asset Management; trailers are explicitly named in
+    the Equipment Pool sub-capability, though only read operations are shown.
+- tag: VehicleTrail
+  spec_file: amcs-group-vehicletrail-api-openapi.yml
+  capability_id: BC-2430.40
+  capability_id_l1: BC-2430
+  capability_name: Fleet Telematics and Monitoring
+  confidence: 0.75
+  evidence: GET /fleet/vehicleTrails ... ApiIntegratorVehicleTrailResource, GeographyPointResource
+  reason: Read-only vehicle trails composed of geography points — continuous tracking of asset position,
+    i.e. fleet telematics and monitoring.
+- tag: ExternalVehicle
+  spec_file: amcs-group-externalvehicle-api-openapi.yml
+  capability_id: BC-2430
+  capability_id_l1: BC-2430
+  capability_name: Fleet & Mobile Asset Management
+  confidence: 0.72
+  evidence: GET /fleet/externalVehicles  ExternalVehicle_GetCollection; POST /fleet/externalVehicles  ExternalVehicle_Create
+    — schema ApiIntegratorExternalVehicleResource
+  reason: CRUD over vehicle records under the /fleet/ namespace, i.e. registration of third-party/external
+    vehicles in the mobile-asset register. Fleet & Mobile Asset Management at L1; the plain master-data
+    operations do not identify a specific L2 such as maintenance or telematics.
+- tag: Invoice
+  spec_file: amcs-group-invoice-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.72
+  evidence: GET /accounting/invoices  Invoice_GetCollection; schemas ApiIntegratorInvoiceAllocationResource,
+    ApiIntegratorInvoiceDeallocationResource, ApiIntegratorRemitAddressResource
+  reason: Operations expose customer invoices under an /accounting/ path with remit addresses, tax templates
+    and allocation/deallocation (cash application) structures — i.e. receivables invoicing rather than
+    a generic technical object. Freight-specific billing (BC-2530.10) is possible for a waste/transport
+    vendor, but the surface is presented as general accounting invoicing, so the cross-industry AR capability
+    is the safer, evidenced read.
 - tag: AccountingPeriod
   spec_file: amcs-group-accountingperiod-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
   confidence: 0.7
-  evidence: GET /lists/accountingPeriods  AccountingPeriod_GetCollection; ApiIntegratorAccountingPeriodResource
-  reason: Exposes the accounting period calendar, a core general-ledger construct underpinning journals
-    and period close. Read-only list, so confidence is moderate.
+  evidence: GET /lists/accountingPeriods  AccountingPeriod_GetCollection
+  reason: Accounting period master data, a core General Ledger construct governing journals and period
+    close. Read-only list access keeps confidence moderate.
 - tag: AccountingPeriodLock
   spec_file: amcs-group-accountingperiodlock-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
   confidence: 0.7
-  evidence: POST /accounting/accountingPeriodLocks  AccountingPeriodLock_Create  Create or update; ApiIntegratorAccountingPeriodLockResource
-  reason: Locking of accounting periods is a period-close control in the general ledger, preventing further
-    postings to closed periods.
+  evidence: POST /accounting/accountingPeriodLocks  AccountingPeriodLock_Create  Create or update
+  reason: Creation and update of accounting period locks is period-close control within General Ledger
+    Management.
+- tag: ApiGpsDataExternal
+  spec_file: amcs-group-apigpsdataexternal-api-openapi.yml
+  capability_id: BC-2430.40
+  capability_id_l1: BC-2430
+  capability_name: Fleet Telematics and Monitoring
+  confidence: 0.7
+  evidence: 'GET /integrator/gpsdata/changes  ''Response: API GPS Data External''; schemas GpsDataPointChangeDto,
+    GpsDataPointChangesResponse'
+  reason: Feed of GPS position data points from the vendor's transport/fleet platform, i.e. continuous
+    monitoring of mobile asset position — Fleet Telematics and Monitoring. Confidence held at 0.7 because
+    the schemas name GPS points without explicitly binding them to vehicles.
+- tag: Asset
+  spec_file: amcs-group-asset-api-openapi.yml
+  capability_id: BC-2430
+  capability_id_l1: BC-2430
+  capability_name: Fleet & Mobile Asset Management
+  confidence: 0.7
+  evidence: POST /visionai/api/integrator/assets — Create or Update an Asset (Vehicle)
+  reason: The operation summary explicitly equates Asset with Vehicle, so this maintains the register
+    of mobile fleet assets used by the Vision AI service. Single CRUD operation gives no basis to pick
+    a specific sub-capability (acquisition vs telematics), so only the L1 is asserted.
 - tag: ExternalTransaction
   spec_file: amcs-group-externaltransaction-api-openapi.yml
   capability_id: BC-200.30
@@ -150,62 +210,81 @@ edges:
   capability_name: Accounts Receivable Management
   confidence: 0.7
   evidence: POST /ExternalTransaction/OneOff — OneOff Payment; POST /ExternalTransaction/Refund — Refund
-    Payment; POST /ExternalTransaction/Vault — Vault Payment; schema AMCSPayPaymentAccount, AMCSPayCreateCustomerRequest
-  reason: AMCS Pay surface that authorises customer payments, terminal/card payments, refunds and tokenised
-    payment profiles — collection of customer cash against receivables. Mapped to Accounts Receivable
-    (collections/cash application) rather than subscription billing, since nothing indicates recurring
-    SaaS subscriptions; some ambiguity between AR collections and payment-method management justifies
-    moderate confidence.
-- tag: Invoice
-  spec_file: amcs-group-invoice-api-openapi.yml
-  capability_id: BC-200.30
-  capability_id_l1: BC-200
-  capability_name: Accounts Receivable Management
+    Payment; POST /ExternalTransaction/Terminal — Terminal Payment; schemas AMCSPayInitiatePaymentRequest,
+    AMCSPayPaymentAccount
+  reason: AMCS Pay endpoints take customer payments (one-off, terminal, vault/tokenised card) and issue
+    refunds — i.e. collection and application of customer cash, which sits under Accounts Receivable Management.
+    Some ambiguity remains as the surface is a payment-gateway integration rather than full AR accounting.
+- tag: Job
+  spec_file: amcs-group-job-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
   confidence: 0.7
-  evidence: GET /accounting/invoices  Invoice_GetCollection ; ApiIntegratorInvoiceAllocationResource,
-    ApiIntegratorRemitAddressResource, ApiIntegratorInvoiceDetailTaxTemplateCollectionResource
-  reason: Accounting invoice retrieval with invoice detail, tax templates, remit/print addresses and allocation/deallocation
-    resources - outbound customer invoicing and cash allocation, i.e. accounts receivable. Some residual
-    ambiguity between AR and AP, hence 0.7.
-- tag: Order
-  spec_file: amcs-group-order-api-openapi.yml
-  capability_id: BC-520.40
-  capability_id_l1: BC-520
-  capability_name: Order Fulfilment Management
-  confidence: 0.7
-  evidence: POST /transport/orders  Order_Create  Create or update; schemas ApiIntegratorOrderRouteAssignmentResource,
-    ApiIntegratorOrderContainerResource, ApiIntegratorOrderStandingJobResource
-  reason: Service orders under /transport/ carrying route assignments, containers and standing jobs —
-    order capture and fulfilment orchestration for collection services rather than sales quoting. Mapped
-    to order fulfilment with moderate confidence.
+  evidence: GET /transport/jobs  Job_GetCollection; schemas ApiIntegratorJobContainerDetailsResource,
+    ApiIntegratorJobWasteTransferNoteResource, ApiIntegratorJobDocketPdfResource
+  reason: The transport-side operations manage transport jobs with container details, delivered-container
+    records, waste transfer notes and dockets — execution of collection/delivery movements. Left at L1
+    because the operations are CRUD over the job record rather than clearly dispatch, line-haul or last-mile
+    specifically; the co-mingled /jobsystem/jobs technical scheduler paths also dilute the signal.
 - tag: Payment
   spec_file: amcs-group-payment-api-openapi.yml
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
   confidence: 0.7
-  evidence: POST /accounting/payments  Payment_Create; schemas ApiIntegratorPaymentAllocationResource,
+  evidence: POST /accounting/payments  Payment_Create  Create or update; schemas ApiIntegratorPaymentAllocationResource,
     ApiIntegratorPaymentDeallocationResource, ApiIntegratorPaymentTransactionResource
-  reason: Creates and updates accounting payments with allocation/deallocation against transactions —
-    i.e. customer payment capture and cash application, which is accounts receivable operations. Some
-    residual chance it also serves payables, hence 0.7.
+  reason: Accounting-domain customer payments with allocation and deallocation against jobs/transactions
+    — receipt recording and cash application, the core of accounts receivable operations. Confidence moderate
+    because payer direction (customer vs. supplier) is inferred from allocation/job payment schemas rather
+    than stated.
+- tag: Route
+  spec_file: amcs-group-route-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
+  confidence: 0.7
+  evidence: GET /transport/routes ... schemas ApiIntegratorRouteDriverResource, ApiIntegratorRouteVehicleCheckResource,
+    ApiIntegratorRouteVehicleCheckCrewMembersResource
+  reason: Transport routes carrying driver, vehicle-check and crew-member sub-resources are collection/transport
+    execution objects. L1 transport operations is well supported; whether this is dispatch versus schedule
+    construction is ambiguous, so no L2 asserted.
+- tag: RouteVisit
+  spec_file: amcs-group-routevisit-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
+  confidence: 0.7
+  evidence: GET /transport/routeVisits ... ApiIntegratorRouteVisitPictureResource, ApiIntegratorAccessArrayResource
+  reason: Route visits are the individual stops executed on a transport route, with site access data and
+    photo evidence — transport execution. Whether the stop is a pickup or a delivery leg is not determinable,
+    so no L2.
 - tag: RouteVisitJob
   spec_file: amcs-group-routevisitjob-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
   confidence: 0.7
   evidence: POST /transport/routeVisitJobs  RouteVisitJob_Create  Create or update
-  reason: Jobs performed at a route visit represent the work executed during a collection stop; sits under
-    /transport and belongs with logistics execution.
-- tag: Schedule
-  spec_file: amcs-group-schedule-api-openapi.yml
-  capability_id: BC-520.50
-  capability_id_l1: BC-520
-  capability_name: Logistics Operations Management
+  reason: Jobs performed at a route visit (the work executed at a stop on a transport route) are transport
+    operations execution. Sub-capability between pickup and last-mile is not distinguishable from the
+    given context.
+- tag: VehicleEvent
+  spec_file: amcs-group-vehicleevent-api-openapi.yml
+  capability_id: BC-2430.40
+  capability_id_l1: BC-2430
+  capability_name: Fleet Telematics and Monitoring
   confidence: 0.7
-  evidence: GET /transport/schedules ... ApiIntegratorScheduleDriverResource, ApiIntegratorScheduleVehicleCheckResource
-  reason: Operations manage transport schedules with driver assignment and vehicle checks — transport/route
-    execution scheduling, i.e. logistics operations within the supply chain. Not a SaaS-platform capability
-    despite the frame; cross-industry logistics is the honest reading. Confidence held down because the
-    tag has no description and 'schedule' could also be a planning artefact.
+  evidence: GET /fleet/vehicleEvents, ApiIntegratorVehicleEventResource, ApiIntegratorLocationGeoLocationResource
+  reason: Fleet-scoped vehicle events carrying geo-location payloads — telematics/on-board event capture
+    for monitoring assets. Sub-capability inferred from the geolocation schema.
+- tag: VehicleEventGeoSummary
+  spec_file: amcs-group-vehicleeventgeosummary-api-openapi.yml
+  capability_id: BC-2430.40
+  capability_id_l1: BC-2430
+  capability_name: Fleet Telematics and Monitoring
+  confidence: 0.7
+  evidence: GET /fleet/vehicleEventGeoSummaries, ApiIntegratorVehicleEventGeoSummaryResource
+  reason: Aggregated geographic summaries of fleet vehicle events — position/condition monitoring of mobile
+    assets (telematics).
