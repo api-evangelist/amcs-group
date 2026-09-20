@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 27
+edge_count: 30
 edges:
 - tag: GLJournal
   spec_file: amcs-group-gljournal-api-openapi.yml
@@ -122,6 +122,26 @@ edges:
   reason: Transport service orders with route assignment, container, standing-job and route call-out sub-resources
     — i.e. collection/transport work orders that drive route execution. Clearly transport operations execution;
     L2 left null because route assignment (dispatch) and order intake are both represented.
+- tag: RouteAssignment
+  spec_file: amcs-group-routeassignment-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.75
+  evidence: POST /transport/routeAssignments  RouteAssignment_Create, ApiIntegratorRouteAssignmentAccessTimeResource
+  reason: Assignment of work/access times to transport routes is dispatch and route execution management,
+    i.e. logistics operations.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: RouteTemplate
+  spec_file: amcs-group-routetemplate-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.75
+  evidence: POST /transport/routeTemplates  RouteTemplate_Create, ApiIntegratorRouteTemplateAcceptedMaterialsResource
+  reason: Templates defining recurring transport routes and the materials they accept are route planning
+    artefacts for collection logistics operations.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Trailer
   spec_file: amcs-group-trailer-api-openapi.yml
   capability_id: BC-2430.30
@@ -271,6 +291,18 @@ edges:
   reason: Jobs performed at a route visit (the work executed at a stop on a transport route) are transport
     operations execution. Sub-capability between pickup and last-mile is not distinguishable from the
     given context.
+- tag: Schedule
+  spec_file: amcs-group-schedule-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.7
+  evidence: GET /transport/schedules ... ApiIntegratorScheduleDriverResource, ApiIntegratorScheduleVehicleCheckResource
+  reason: Operations manage transport schedules with driver assignment and vehicle checks — transport/route
+    execution scheduling, i.e. logistics operations within the supply chain. Not a SaaS-platform capability
+    despite the frame; cross-industry logistics is the honest reading. Confidence held down because the
+    tag has no description and 'schedule' could also be a planning artefact.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: VehicleEvent
   spec_file: amcs-group-vehicleevent-api-openapi.yml
   capability_id: BC-2430.40
