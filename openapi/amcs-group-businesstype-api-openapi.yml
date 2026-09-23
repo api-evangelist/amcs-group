@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup BusinessType API
-  version: core
+  title: AMCS Platform REST Business Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: BusinessType
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - BusinessType
       summary: Find with GUID
-      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------  |\r\n| GUID                      | The GUID associated to the business type   |\r\n| Description               | The description of the business type   |\r\n| IsDeleted                 | Whether the business type is deleted             |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the business type |
+
+        | Description | The description of the business type |
+
+        | IsDeleted | Whether the business type is deleted |'
       operationId: BusinessType_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorBusinessTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorBusinessTypeResource'
   /lists/businessTypes:
     get:
       tags:
       - BusinessType
       summary: Find with Filters
-      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------  |\r\n| GUID                      | The GUID associated to the business type   |\r\n| Description               | The description of the business type   |\r\n| IsDeleted                 | Whether the business type is deleted             |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the business type |
+
+        | Description | The description of the business type |
+
+        | IsDeleted | Whether the business type is deleted |'
       operationId: BusinessType_GetCollection
       parameters:
       - name: filter
@@ -66,10 +94,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorBusinessTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorBusinessTypeResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorBusinessTypeResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorBusinessTypeResource:
       type: object
       properties:
         resource:
@@ -82,45 +118,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorBusinessTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -138,7 +135,46 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorBusinessTypeResource]:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorBusinessTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntity_ApiIntegratorBusinessTypeResource:
       type: object
       properties:
         resource:
@@ -151,11 +187,3 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup MunicipalEventDetail API
-  version: core
+  title: AMCS Platform REST Municipal Event Detail API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: MunicipalEventDetail
 paths:
@@ -40,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMunicipalEventDetailResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalEventDetailResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -52,19 +64,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorMunicipalEventDetailResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalEventDetailResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorMunicipalCustomerSiteAreaResource:
       type: object
       properties:
@@ -80,11 +79,27 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorMunicipalEventDetailResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalEventDetailResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
-          type: string
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorMunicipalEventDetailResource:
       type: object
       properties:
@@ -124,17 +139,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

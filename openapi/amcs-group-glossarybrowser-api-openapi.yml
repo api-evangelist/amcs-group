@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup GlossaryBrowser API
+  title: Core Glossary Browser API
   version: core
 tags:
 - name: GlossaryBrowser
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiGlossaryBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiGlossaryBrowserResource'
+      summary: Get services api glossary glossary browsers changes
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryGlossaryBrowsersChanges
+      x-operation-id-source: derived
   /services/api/glossary/glossaryBrowsers/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiGlossaryBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiGlossaryBrowserResource'
+      summary: Get services api glossary glossary browsers template
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryGlossaryBrowsersTemplate
+      x-operation-id-source: derived
   /services/api/glossary/glossaryBrowsers/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiGlossaryBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiGlossaryBrowserResource'
+      summary: Get services api glossary glossary browsers by id
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryGlossaryBrowsersById
+      x-operation-id-source: derived
     put:
       tags:
       - GlossaryBrowser
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api glossary glossary browsers by id
+      x-summary-source: derived
+      operationId: putServicesApiGlossaryGlossaryBrowsersById
+      x-operation-id-source: derived
     delete:
       tags:
       - GlossaryBrowser
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api glossary glossary browsers by id
+      x-summary-source: derived
+      operationId: deleteServicesApiGlossaryGlossaryBrowsersById
+      x-operation-id-source: derived
   /services/api/glossary/glossaryBrowsers/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api glossary glossary browsers by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryGlossaryBrowsersByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/glossary/glossaryBrowsers:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiGlossaryBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiGlossaryBrowserResource'
+      summary: Get services api glossary glossary browsers
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryGlossaryBrowsers
+      x-operation-id-source: derived
     post:
       tags:
       - GlossaryBrowser
@@ -204,52 +232,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api glossary glossary browsers
+      x-summary-source: derived
+      operationId: postServicesApiGlossaryGlossaryBrowsers
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceChanges[ApiGlossaryBrowserResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntity[ApiGlossaryBrowserResource]:
+    ApiResourceResultEntity_ApiGlossaryBrowserResource:
       type: object
       properties:
         errors:
@@ -263,7 +264,18 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollection[ApiGlossaryBrowserResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollection_ApiGlossaryBrowserResource:
       type: object
       properties:
         errors:
@@ -271,30 +283,13 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceResult[ApiGlossaryBrowserResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
       additionalProperties: false
     AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser:
       type: object
@@ -303,45 +298,89 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         glossaryId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         original:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         translated:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         language:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         languageCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         languageId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceChanges_ApiGlossaryBrowserResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceResult_ApiGlossaryBrowserResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
       additionalProperties: false
     ApiResource:
       type: object
@@ -355,51 +394,69 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

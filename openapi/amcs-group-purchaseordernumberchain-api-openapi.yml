@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup PurchaseOrderNumberChain API
-  version: core
+  title: AMCS Platform REST Purchase Order Number Chain API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: PurchaseOrderNumberChain
 paths:
@@ -10,7 +22,41 @@ paths:
       tags:
       - PurchaseOrderNumberChain
       summary: Retrieve changes
-      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      description: '| Property| Description|
+
+        | --------------------------------- | ------------------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the purchase order number chain.|
+
+        | RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.|
+
+        | Description| The description of the purchase order number chain. Filterable.|
+
+        | StartDate| The start date of the purchase order number chain.|
+
+        | EndDate| The end date of the purchase order number chain.|
+
+        | IsDeleted| Whether the purchase order number chain is deleted.|
+
+        | PONumbers| The list of purchase order numbers associated to the purchase order number chain.|
+
+        | PONumbers[0].Guid| The GUID associated to the purchase order number.|
+
+        | PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|
+
+        | PONumbers[0].StartDate| The start date associated to the purchase order number.|
+
+        | PONumbers[0].EndDate| The end date associated to the purchase order number.|
+
+        | PONumbers[0].Amount| The amount associated to the purchase order number.|
+
+        | PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|
+
+        | PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|
+
+        | RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|
+
+        | RelatedPONumberFilter| Used to filter on the related purchase order number.|'
       operationId: PurchaseOrderNumberChain_GetChanges
       parameters:
       - name: since
@@ -27,13 +73,47 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorPurchaseOrderNumberChainResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorPurchaseOrderNumberChainResource'
   /accounting/purchaseOrderNumberChains/{guid}:
     get:
       tags:
       - PurchaseOrderNumberChain
       summary: Find with GUID
-      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      description: '| Property| Description|
+
+        | --------------------------------- | ------------------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the purchase order number chain.|
+
+        | RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.|
+
+        | Description| The description of the purchase order number chain. Filterable.|
+
+        | StartDate| The start date of the purchase order number chain.|
+
+        | EndDate| The end date of the purchase order number chain.|
+
+        | IsDeleted| Whether the purchase order number chain is deleted.|
+
+        | PONumbers| The list of purchase order numbers associated to the purchase order number chain.|
+
+        | PONumbers[0].Guid| The GUID associated to the purchase order number.|
+
+        | PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|
+
+        | PONumbers[0].StartDate| The start date associated to the purchase order number.|
+
+        | PONumbers[0].EndDate| The end date associated to the purchase order number.|
+
+        | PONumbers[0].Amount| The amount associated to the purchase order number.|
+
+        | PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|
+
+        | PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|
+
+        | RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|
+
+        | RelatedPONumberFilter| Used to filter on the related purchase order number.|'
       operationId: PurchaseOrderNumberChain_Get
       parameters:
       - name: guid
@@ -52,12 +132,68 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPurchaseOrderNumberChainResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorPurchaseOrderNumberChainResource'
     put:
       tags:
       - PurchaseOrderNumberChain
       summary: Partial update
-      description: "| Property| Description| Required |\r\n| --------------------------------- | ------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the purchase order number chain.| No |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |\r\n| Description| The description of the purchase order number chain.| Yes |\r\n| StartDate| The start date of the purchase order number chain.| Yes |\r\n| EndDate| The end date of the purchase order number chain.| Yes |\r\n| IsDeleted| Whether the purchase order number chain is deleted.| No |\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.| No |\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |\r\n| Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |\r\n| PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |\r\n| PONumbers date overlap. | Start and end dates overlap an existing PO number. |\r\n| PONumbers.Guid should link with PONumberChain | Failed to save. PONumberChain with PONumbers.Guid of [value] cannot be set if PONumbers.Guid is not related to PONumberChain. |\r\n| If IsDeleted is changed. | IsDeleted is a read-only property. | \r\n| If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. | "
+      description: '| Property| Description| Required |
+
+        | --------------------------------- | ------------------------------------------------------------------------------------- | -------- |
+
+        | GUID| The GUID associated to the purchase order number chain.| No |
+
+        | RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |
+
+        | Description| The description of the purchase order number chain.| Yes |
+
+        | StartDate| The start date of the purchase order number chain.| Yes |
+
+        | EndDate| The end date of the purchase order number chain.| Yes |
+
+        | IsDeleted| Whether the purchase order number chain is deleted.| No |
+
+        | PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |
+
+        | PONumbers[0].Guid| The GUID associated to the purchase order number.| No |
+
+        | PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |
+
+        | PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |
+
+        | PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |
+
+        | PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |
+
+        | PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |
+
+        | PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |
+
+        | RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |
+
+        | RelatedPONumberFilter| Used to filter on the related purchase order number.| No |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |
+
+        | Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |
+
+        | PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |
+
+        | PONumbers date overlap. | Start and end dates overlap an existing PO number. |
+
+        | PONumbers.Guid should link with PONumberChain | Failed to save. PONumberChain with PONumbers.Guid of [value] cannot be set if PONumbers.Guid is not related to PONumberChain. |
+
+        | If IsDeleted is changed. | IsDeleted is a read-only property. |
+
+        | If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. |'
       operationId: PurchaseOrderNumberChain_Update
       parameters:
       - name: guid
@@ -85,7 +221,41 @@ paths:
       tags:
       - PurchaseOrderNumberChain
       summary: Find with Filters
-      description: "| Property| Description|\r\n| --------------------------------- | ------------------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the purchase order number chain.|\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.| \r\n| Description| The description of the purchase order number chain. Filterable.|\r\n| StartDate| The start date of the purchase order number chain.|\r\n| EndDate| The end date of the purchase order number chain.|\r\n| IsDeleted| Whether the purchase order number chain is deleted.|\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.|\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.|\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.|\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.|\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.|\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| "
+      description: '| Property| Description|
+
+        | --------------------------------- | ------------------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the purchase order number chain.|
+
+        | RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain. Filterable.|
+
+        | Description| The description of the purchase order number chain. Filterable.|
+
+        | StartDate| The start date of the purchase order number chain.|
+
+        | EndDate| The end date of the purchase order number chain.|
+
+        | IsDeleted| Whether the purchase order number chain is deleted.|
+
+        | PONumbers| The list of purchase order numbers associated to the purchase order number chain.|
+
+        | PONumbers[0].Guid| The GUID associated to the purchase order number.|
+
+        | PONumbers[0].PONumber | The purchase order number associated to the purchase order number.|
+
+        | PONumbers[0].StartDate| The start date associated to the purchase order number.|
+
+        | PONumbers[0].EndDate| The end date associated to the purchase order number.|
+
+        | PONumbers[0].Amount| The amount associated to the purchase order number.|
+
+        | PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.|
+
+        | PONumbers[0].IsDeleted| Whether the purchase order number is deleted.|
+
+        | RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.|
+
+        | RelatedPONumberFilter| Used to filter on the related purchase order number.|'
       operationId: PurchaseOrderNumberChain_GetCollection
       parameters:
       - name: filter
@@ -116,12 +286,72 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPurchaseOrderNumberChainResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorPurchaseOrderNumberChainResource'
     post:
       tags:
       - PurchaseOrderNumberChain
       summary: Create or update
-      description: "| Property| Description| Required |\r\n| --------------------------------- | ------------------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the purchase order number chain.| No |\r\n| RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |\r\n| Description| The description of the purchase order number chain.| Yes |\r\n| StartDate| The start date of the purchase order number chain.| Yes |\r\n| EndDate| The end date of the purchase order number chain.| Yes |\r\n| IsDeleted| Whether the purchase order number chain is deleted.| No |\r\n| PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |\r\n| PONumbers[0].Guid| The GUID associated to the purchase order number.| No |\r\n| PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |\r\n| PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |\r\n| PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |\r\n| PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |\r\n| PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |\r\n| PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |\r\n| RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |\r\n| RelatedPONumberFilter| Used to filter on the related purchase order number.| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |\r\n| Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |\r\n| IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with IsDeleted cannot be set if IsDeleted is not null on PONumberChain creation.\r\n| PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |\r\n| PONumbers date overlap. | Start and end dates overlap an existing PO number. |\r\n| PONumbers.Guid should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.Guid cannot be set if PONumbers.Guid is not null on PONumberChain creation.\r\n| PONumbers.IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.IsDeleted cannot be set if PONumbers.IsDeleted is not null on PONumberChain creation.\r\n| If IsDeleted is changed. | IsDeleted is a read-only property. | \r\n| If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. | "
+      description: '| Property| Description| Required |
+
+        | --------------------------------- | ------------------------------------------------------------------------------------- | -------- |
+
+        | GUID| The GUID associated to the purchase order number chain.| No |
+
+        | RelatedCustomerGuid| The GUID associated to the customer of the purchase order number chain.| Yes |
+
+        | Description| The description of the purchase order number chain.| Yes |
+
+        | StartDate| The start date of the purchase order number chain.| Yes |
+
+        | EndDate| The end date of the purchase order number chain.| Yes |
+
+        | IsDeleted| Whether the purchase order number chain is deleted.| No |
+
+        | PONumbers| The list of purchase order numbers associated to the purchase order number chain.| No |
+
+        | PONumbers[0].Guid| The GUID associated to the purchase order number.| No |
+
+        | PONumbers[0].PONumber | The purchase order number associated to the purchase order number.| No |
+
+        | PONumbers[0].StartDate| The start date associated to the purchase order number.| Yes |
+
+        | PONumbers[0].EndDate| The end date associated to the purchase order number.| Yes |
+
+        | PONumbers[0].Amount| The amount associated to the purchase order number.| Yes |
+
+        | PONumbers[0].AmountTypeListItem | The GUID and description of the amount type associated to the purchase order number.| Yes |
+
+        | PONumbers[0].IsDeleted| Whether the purchase order number is deleted.| No |
+
+        | RelatedPONumberGuidFilter| Used to filter on the related purchase order number GUID.| No |
+
+        | RelatedPONumberFilter| Used to filter on the related purchase order number.| No |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | If RelatedCustomerGuid is changed. | Relationship between PONumberChain and Customer cannot be updated |
+
+        | Unique description for PONumberChain | Failed to save/update PONumberChain because the PO Number Chain that you are trying to save conflicts with an existing item. Each PO Number Chain must be unique in terms of Description. |
+
+        | IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with IsDeleted cannot be set if IsDeleted is not null on PONumberChain creation.
+
+        | PONumbers date out of range. | Start and end dates are outside the PO number chain dates. |
+
+        | PONumbers date overlap. | Start and end dates overlap an existing PO number. |
+
+        | PONumbers.Guid should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.Guid cannot be set if PONumbers.Guid is not null on PONumberChain creation.
+
+        | PONumbers.IsDeleted should be null on POST PONumberChain | Failed to save. PONumberChain with PONumbers.IsDeleted cannot be set if PONumbers.IsDeleted is not null on PONumberChain creation.
+
+        | If IsDeleted is changed. | IsDeleted is a read-only property. |
+
+        | If PONumber.IsDeleted is changed. | PONumber.IsDeleted is a read-only property. |'
       operationId: PurchaseOrderNumberChain_Create
       requestBody:
         content:
@@ -148,6 +378,34 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorPurchaseOrderNumberChainResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorPurchaseOrderNumberChainResource:
       type: object
       properties:
@@ -181,24 +439,12 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
+    ApiResourceErrors:
       type: object
       properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorPurchaseOrderNumberChainResource]:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorPurchaseOrderNumberChainResource:
       type: object
       properties:
         resource:
@@ -211,11 +457,19 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultCollection_ApiIntegratorPurchaseOrderNumberChainResource:
       type: object
       properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
-          type: string
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorPONumberResource:
       type: object
       properties:
@@ -240,25 +494,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceChanges[ApiIntegratorPurchaseOrderNumberChainResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -276,6 +511,22 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -293,24 +544,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection[ApiIntegratorPurchaseOrderNumberChainResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorPurchaseOrderNumberChainResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

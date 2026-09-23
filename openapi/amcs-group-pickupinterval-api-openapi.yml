@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup PickupInterval API
-  version: core
+  title: AMCS Platform REST Pickup Interval API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: PickupInterval
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - PickupInterval
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the pickup interval   |\r\n| Description               | The description of the pickup interval   |\r\n| NoOfDays| Total number of days of interval   |\r\n| NoOfMonths                | Total number of month of interval   |\r\n| IsWeekly| Whether the pickup interval is weekly   |\r\n| IsMonthly| Whether the pickup interval is monthly   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the pickup interval |
+
+        | Description | The description of the pickup interval |
+
+        | NoOfDays| Total number of days of interval |
+
+        | NoOfMonths | Total number of month of interval |
+
+        | IsWeekly| Whether the pickup interval is weekly |
+
+        | IsMonthly| Whether the pickup interval is monthly |'
       operationId: PickupInterval_Get
       parameters:
       - name: guid
@@ -29,13 +55,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPickupIntervalResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorPickupIntervalResource'
   /lists/pickupIntervals:
     get:
       tags:
       - PickupInterval
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the pickup interval   |\r\n| Description               | The description of the pickup interval   |\r\n| NoOfDays| Total number of days of interval   |\r\n| NoOfMonths                | Total number of month of interval   |\r\n| IsWeekly| Whether the pickup interval is weekly   |\r\n| IsMonthly| Whether the pickup interval is monthly   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the pickup interval |
+
+        | Description | The description of the pickup interval |
+
+        | NoOfDays| Total number of days of interval |
+
+        | NoOfMonths | Total number of month of interval |
+
+        | IsWeekly| Whether the pickup interval is weekly |
+
+        | IsMonthly| Whether the pickup interval is monthly |'
       operationId: PickupInterval_GetCollection
       parameters:
       - name: filter
@@ -66,9 +106,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPickupIntervalResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorPickupIntervalResource'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorPickupIntervalResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPickupIntervalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorPickupIntervalResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPickupIntervalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorPickupIntervalResource:
       type: object
       properties:
@@ -88,43 +162,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorPickupIntervalResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorPickupIntervalResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultCollection[ApiIntegratorPickupIntervalResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorPickupIntervalResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -142,6 +179,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -159,11 +207,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

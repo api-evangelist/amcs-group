@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup RouteVisitPrice API
-  version: core
+  title: AMCS Platform REST Route Visit Price API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: RouteVisitPrice
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - RouteVisitPrice
       summary: Find with GUID
-      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit price.|\r\n| RelatedRouteVisitGuid| Used to filter on the related route visit GUID.|\r\n| RelatedPriceGuid| Used to filter on the related price GUID.|\r\n| Quantity| The quantity associated to the route visit price.|\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- |
+
+        | Guid| The GUID associated to the route visit price.|
+
+        | RelatedRouteVisitGuid| Used to filter on the related route visit GUID.|
+
+        | RelatedPriceGuid| Used to filter on the related price GUID.|
+
+        | Quantity| The quantity associated to the route visit price.|'
       operationId: RouteVisitPrice_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRouteVisitPriceResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorRouteVisitPriceResource'
   /transport/routeVisitPrices:
     get:
       tags:
       - RouteVisitPrice
       summary: Find with Filters
-      description: "| Property                              | Description                                                                   |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- |\r\n| Guid| The GUID associated to the route visit price.|\r\n| RelatedRouteVisitGuid| Used to filter on the related route visit GUID.|\r\n| RelatedPriceGuid| Used to filter on the related price GUID.|\r\n| Quantity| The quantity associated to the route visit price.|\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- |
+
+        | Guid| The GUID associated to the route visit price.|
+
+        | RelatedRouteVisitGuid| Used to filter on the related route visit GUID.|
+
+        | RelatedPriceGuid| Used to filter on the related price GUID.|
+
+        | Quantity| The quantity associated to the route visit price.|'
       operationId: RouteVisitPrice_GetCollection
       parameters:
       - name: filter
@@ -66,12 +98,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRouteVisitPriceResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRouteVisitPriceResource'
     post:
       tags:
       - RouteVisitPrice
       summary: Create or update
-      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the route visit price.| No |\r\n| RelatedRouteVisitGuid| The GUID associated to the route visit.| Yes |\r\n| RelatedPriceGuid| The GUID associated to the price.| Yes |\r\n| Quantity| The Quantity associated to the route visit price.| Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition| Error message|\r\n| ----------------------------------------------------- | ----------------------------- |\r\n| If RelatedRouteVisitGUID is null on insert| The mandatory property RelatedRouteVisitGUID has a null value. The request could not be processed. Supply a value for the RelatedRouteVisitGUID property of the submitted resource.|\r\n| If RelatedPriceGUID is null on insert| The mandatory property RelatedPriceGUID has a null value. The request could not be processed. Supply a value for the RelatedPriceGUID property of the submitted resource.|\r\n| If Quantity is null on insert| The mandatory property Quantity has a null value. The request could not be processed. Supply a value for the Quantity property of the submitted resource.|\r\n"
+      description: '| Property | Description | Required |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+
+        | GUID| The GUID associated to the route visit price.| No |
+
+        | RelatedRouteVisitGuid| The GUID associated to the route visit.| Yes |
+
+        | RelatedPriceGuid| The GUID associated to the price.| Yes |
+
+        | Quantity| The Quantity associated to the route visit price.| Yes |
+
+
+        **Extra validations**
+
+
+        | Condition| Error message|
+
+        | ----------------------------------------------------- | ----------------------------- |
+
+        | If RelatedRouteVisitGUID is null on insert| The mandatory property RelatedRouteVisitGUID has a null value. The request could not be processed. Supply a value for the RelatedRouteVisitGUID property of the submitted resource.|
+
+        | If RelatedPriceGUID is null on insert| The mandatory property RelatedPriceGUID has a null value. The request could not be processed. Supply a value for the RelatedPriceGUID property of the submitted resource.|
+
+        | If Quantity is null on insert| The mandatory property Quantity has a null value. The request could not be processed. Supply a value for the Quantity property of the submitted resource.|'
       operationId: RouteVisitPrice_Create
       requestBody:
         content:
@@ -89,46 +145,33 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorRouteVisitPriceResource:
-      type: object
-      properties:
-        RelatedRouteVisitGUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedPriceGUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Quantity:
-          type: integer
-          format: int32
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
+    ApiResourceResultCollection_ApiIntegratorRouteVisitPriceResource:
       type: object
       properties:
         resource:
-          type: string
-          format: uuid
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity[ApiIntegratorRouteVisitPriceResource]:
+    ApiResourceResultEntity_ApiIntegratorRouteVisitPriceResource:
       type: object
       properties:
         resource:
@@ -158,19 +201,40 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection[ApiIntegratorRouteVisitPriceResource]:
+    ApiIntegratorRouteVisitPriceResource:
+      type: object
+      properties:
+        RelatedRouteVisitGUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceGUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Quantity:
+          type: integer
+          format: int32
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          type: string
+          format: uuid
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -188,11 +252,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

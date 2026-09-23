@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CustomerCategory API
-  version: core
+  title: AMCS Platform REST Customer Category API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: CustomerCategory
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - CustomerCategory
       summary: Find with GUID
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer category   |\r\n| Description               | The description of the customer category   |\r\n| ShortCode| The short code of the customer category   |\r\n| IsDeleted                 | Whether the customer category is deleted                   |\r\n   "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the customer category |
+
+        | Description | The description of the customer category |
+
+        | ShortCode| The short code of the customer category |
+
+        | IsDeleted | Whether the customer category is deleted |'
       operationId: CustomerCategory_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCustomerCategoryResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCustomerCategoryResource'
   /lists/customerCategories:
     get:
       tags:
       - CustomerCategory
       summary: Find with Filters
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer category   |\r\n| Description               | The description of the customer category   |\r\n| ShortCode| The short code of the customer category   |\r\n| IsDeleted                 | Whether the customer category is deleted                   |\r\n   "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the customer category |
+
+        | Description | The description of the customer category |
+
+        | ShortCode| The short code of the customer category |
+
+        | IsDeleted | Whether the customer category is deleted |'
       operationId: CustomerCategory_GetCollection
       parameters:
       - name: filter
@@ -66,23 +98,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCustomerCategoryResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCustomerCategoryResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorCustomerCategoryResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCustomerCategoryResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorCustomerCategoryResource]:
+    ApiResourceResultCollection_ApiIntegratorCustomerCategoryResource:
       type: object
       properties:
         resource:
@@ -95,17 +114,27 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultEntity_ApiIntegratorCustomerCategoryResource:
       type: object
       properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCustomerCategoryResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          type: string
-    ApiResourceResultCollectionExtra:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorCustomerCategoryResource:
       type: object
       properties:
@@ -136,6 +165,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -153,11 +193,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

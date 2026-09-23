@@ -1,0 +1,161 @@
+openapi: 3.2.0
+info:
+  description: '# Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The Scale REST API endpoints are technically described in this document.'
+  title: Scale REST Job Materials API
+  version: '9.1'
+servers:
+- url: http://{env}-svc-core.amcsplatform.com/scale/api/
+tags:
+- name: Job Materials
+paths:
+  /integrator/jobMaterials/{id}:
+    get:
+      tags:
+      - Job Materials
+      summary: Find with GUID
+      description: '| Property | Description |
+
+        |-------------------------------------------------------|-----------------------------------------------------------------------------------|
+
+        | JobGUID | The Job GUID. Filterable. |
+
+        | LinkedMaterials[] | The linked materials for the job. |
+
+        | LinkedMaterials[].MaterialGUID | The Material Guid |
+
+        | LinkedMaterials[].Material | The Material Description. |
+
+        | LinkedMaterials[].ShortCode | The Material ShortCode. |
+
+        | LinkedMaterials[].AnalysisCode | The Material AnalysisCode. |
+
+        | LinkedMaterials[].EWCCode | The Material EWCCode. |'
+      operationId: JobMaterials_Get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: links
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: udf
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobMaterialsResource'
+components:
+  schemas:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiJobMaterialsResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiJobMaterialsResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiMaterialResource:
+      type: object
+      properties:
+        MaterialGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Material:
+          type: string
+        ShortCode:
+          type: string
+        AnalysisCode:
+          type: string
+        EWCCode:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiJobMaterialsResource:
+      type: object
+      properties:
+        JobGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LinkedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiMaterialResource'

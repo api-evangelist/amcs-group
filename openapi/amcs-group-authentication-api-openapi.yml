@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Authentication API
+  title: Core Authentication API
   version: core
 tags:
 - name: Authentication
@@ -23,6 +23,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create services api login
+      x-summary-source: derived
+      operationId: postServicesApiLogin
+      x-operation-id-source: derived
   /services/api/loginPageConfiguration:
     get:
       tags:
@@ -30,6 +34,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get services api login page configuration
+      x-summary-source: derived
+      operationId: getServicesApiLoginPageConfiguration
+      x-operation-id-source: derived
   /services/api/verifyToken:
     get:
       tags:
@@ -37,17 +45,23 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get services api verify token
+      x-summary-source: derived
+      operationId: getServicesApiVerifyToken
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.Core.Entity.Api.Login.LoginDetails:
       type: object
       properties:
         username:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         password:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         stayLoggedIn:
           type: boolean
       additionalProperties: false

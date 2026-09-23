@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Subscription API
-  version: core
+  title: AMCS Platform REST Subscription API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Subscription
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - Subscription
       summary: Find with GUID
-      description: "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the subscription|\r\n| Description               | The description of the subscription|\r\n| IsDeleted                 | Whether the subscription is deleted |"
+      description: '| Property | Description |
+
+        | ------------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the subscription|
+
+        | Description | The description of the subscription|
+
+        | IsDeleted | Whether the subscription is deleted |'
       operationId: Subscription_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSubscriptionResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorSubscriptionResource'
   /lists/subscriptions:
     get:
       tags:
       - Subscription
       summary: Find with Filters
-      description: "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the subscription|\r\n| Description               | The description of the subscription|\r\n| IsDeleted                 | Whether the subscription is deleted |"
+      description: '| Property | Description |
+
+        | ------------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the subscription|
+
+        | Description | The description of the subscription|
+
+        | IsDeleted | Whether the subscription is deleted |'
       operationId: Subscription_GetCollection
       parameters:
       - name: filter
@@ -66,14 +94,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSubscriptionResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSubscriptionResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiIntegratorSubscriptionResource:
       type: object
       properties:
-        errors:
+        Description:
           type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -82,25 +116,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity[ApiIntegratorSubscriptionResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorSubscriptionResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -118,6 +133,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultEntity_ApiIntegratorSubscriptionResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSubscriptionResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -135,18 +174,7 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorSubscriptionResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorSubscriptionResource]:
+    ApiResourceResultCollection_ApiIntegratorSubscriptionResource:
       type: object
       properties:
         resource:

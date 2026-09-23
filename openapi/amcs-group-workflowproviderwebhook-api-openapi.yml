@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup WorkflowProviderWebHook API
+  title: Core Workflow Provider Web Hook API
   version: core
 tags:
 - name: WorkflowProviderWebHook
@@ -29,6 +29,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create web hook workflow provider callback
+      x-summary-source: derived
+      operationId: postWebHookWorkflowProviderCallback
+      x-operation-id-source: derived
   /web-hook/workflow-provider/delete-schedule:
     post:
       tags:
@@ -41,6 +45,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create web hook workflow provider delete schedule
+      x-summary-source: derived
+      operationId: postWebHookWorkflowProviderDeleteSchedule
+      x-operation-id-source: derived
   /services/api/workflow/workflowProviderWebHooks/changes:
     get:
       tags:
@@ -64,7 +72,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiWorkflowProviderWebHookResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiWorkflowProviderWebHookResource'
+      summary: Get services api workflow workflow provider web hooks changes
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowWorkflowProviderWebHooksChanges
+      x-operation-id-source: derived
   /services/api/workflow/workflowProviderWebHooks/template:
     get:
       tags:
@@ -75,7 +87,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiWorkflowProviderWebHookResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiWorkflowProviderWebHookResource'
+      summary: Get services api workflow workflow provider web hooks template
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowWorkflowProviderWebHooksTemplate
+      x-operation-id-source: derived
   /services/api/workflow/workflowProviderWebHooks/{id}:
     get:
       tags:
@@ -108,7 +124,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiWorkflowProviderWebHookResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiWorkflowProviderWebHookResource'
+      summary: Get services api workflow workflow provider web hooks by id
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowWorkflowProviderWebHooksById
+      x-operation-id-source: derived
     put:
       tags:
       - WorkflowProviderWebHook
@@ -130,6 +150,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api workflow workflow provider web hooks by id
+      x-summary-source: derived
+      operationId: putServicesApiWorkflowWorkflowProviderWebHooksById
+      x-operation-id-source: derived
     delete:
       tags:
       - WorkflowProviderWebHook
@@ -146,6 +170,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api workflow workflow provider web hooks by id
+      x-summary-source: derived
+      operationId: deleteServicesApiWorkflowWorkflowProviderWebHooksById
+      x-operation-id-source: derived
   /services/api/workflow/workflowProviderWebHooks/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -177,6 +205,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api workflow workflow provider web hooks by id blob by blob member…
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowWorkflowProviderWebHooksByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/workflow/workflowProviderWebHooks:
     get:
       tags:
@@ -224,7 +256,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowProviderWebHookResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiWorkflowProviderWebHookResource'
+      summary: Get services api workflow workflow provider web hooks
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowWorkflowProviderWebHooks
+      x-operation-id-source: derived
     post:
       tags:
       - WorkflowProviderWebHook
@@ -240,19 +276,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api workflow workflow provider web hooks
+      x-summary-source: derived
+      operationId: postServicesApiWorkflowWorkflowProviderWebHooks
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceId:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResult_ApiWorkflowProviderWebHookResource:
       type: object
       properties:
         errors:
@@ -260,10 +313,17 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook'
       additionalProperties: false
-    ApiResourceResultEntity[ApiWorkflowProviderWebHookResource]:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiWorkflowProviderWebHookResource:
       type: object
       properties:
         errors:
@@ -277,41 +337,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ApiWorkflowProviderWebHookResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook'
-      additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook:
       type: object
       properties:
@@ -319,29 +344,34 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         workflowProviderWebHookId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         workflowProviderId:
           type: integer
           format: int32
@@ -349,8 +379,9 @@ components:
           type: string
           format: uuid
         triggerObjectName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         triggerEventType:
           type: integer
           format: int32
@@ -358,14 +389,32 @@ components:
           type: integer
           format: int32
         triggerEventFilter:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         triggerEventTypeDescriptions:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           readOnly: true
+      additionalProperties: false
+    ApiResourceChanges_ApiWorkflowProviderWebHookResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     ApiResource:
       type: object
@@ -379,23 +428,27 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
       additionalProperties: false
-    ApiResourceResultCollection[ApiWorkflowProviderWebHookResource]:
+    ApiResourceResultCollection_ApiWorkflowProviderWebHookResource:
       type: object
       properties:
         errors:
@@ -403,47 +456,57 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ApiWorkflowProviderWebHookResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderWebHook'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false

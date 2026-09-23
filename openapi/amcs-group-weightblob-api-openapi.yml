@@ -1,52 +1,77 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup WeightBlob API
-  version: core
+  description: '# Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The Scale REST API endpoints are technically described in this document.'
+  title: Scale REST Weight Blob API
+  version: '9.1'
+servers:
+- url: http://{env}-svc-core.amcsplatform.com/scale/api/
 tags:
 - name: WeightBlob
 paths:
   /integrator/weightBlobs:
     post:
-      consumes:
-      - application/json
-      description: "| Property\t\t\t\t\t\t| Description                               | Required\t|\r\n|-------------------------------|-------------------------------------------|-----------|\r\n| WeightId\t\t\t\t\t\t| The weight Id (Guid).\t\t\t\t\t\t|   Yes\t\t|\r\n| BlobURL\t\t\t\t\t\t| The blob url of the picture.\t\t\t\t|   Yes\t\t|\r\n\r\n\r\n## Extra validations\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Both WeightId and BlobURL property must have a value. |"
+      description: '| Property | Description | Required |
+
+        |-------------------------------|-------------------------------------------|-----------|
+
+        | WeightId | The weight Id (Guid). | Yes |
+
+        | BlobURL | The blob url of the picture. | Yes |
+
+
+        ## Extra validations
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | Both WeightId and BlobURL property must have a value. |'
       operationId: WeightBlob_Create
-      parameters:
-      - in: body
-        required: true
-        schema:
-          $ref: '#/definitions/ApiResourceId'
-      produces:
-      - application/json
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ApiResourceId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
       summary: Create or update
       tags:
       - WeightBlob
-definitions:
-  ApiResourceId:
-    type: object
-    properties:
-      resource:
-        format: int32
-        type: integer
-      errors:
-        $ref: '#/definitions/ApiResourceErrors'
-      status:
-        $ref: '#/definitions/ApiResourceStatus'
-  ApiResourceStatus:
-    type: object
-    properties:
-      id:
-        format: int32
-        type: integer
-      isSuccess:
-        type: boolean
-  ApiResourceErrors:
-    type: object
-    properties:
-      errors:
-        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId'
+        required: true
+components:
+  schemas:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          format: int32
+          type: integer
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string

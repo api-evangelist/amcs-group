@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup SharedContainer API
-  version: core
+  title: AMCS Platform REST Shared Container API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: SharedContainer
 paths:
@@ -10,7 +22,39 @@ paths:
       tags:
       - SharedContainer
       summary: Find with Filters
-      description: "| Property| Description|\r\n| ----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|\r\n| MunicipalityGuids| The GUID associated to the local authority. Filterable|\r\n| SharedContainerGuid| The GUID associated to the shared container.| \r\n| ClusterAccountId| The id associated to the shared container.|\r\n| SharedContainer| The NAME associated to the shared container.| \r\n| Containers[0].ContainerGuid| The GUID of the container associated to the shared container.|\r\n| Container[0].Tag| The Tag of the container associated to the shared container.| \r\n| Container[0].SerialNo| The SerialNo of the container associated to the shared container.| \r\n| Container[0].AccessPassRequired| The AccessPassRequired of the container associated to the shared container.| \r\n| MasterAccessPasses[0].AccessPassTagId| The AccessPassTagId of the local authority associated to the shared container.| \r\n| MasterAccessPasses[0].MasterAccessPassGuid| The GUID of the access pass associated to the shared container.| \r\n| Accounts[0].ClusterAccountId| The id associated to the shared container.| \r\n| Accounts[0].CustomerId| The id of the customer associated to the shared container.|\r\n| Accounts[0].CustomerGuid| The GUID of municipal account associated to the shared container.| \r\n| Accounts[0].MunicipalAccountAccessPasses[0].MunicipalAccessPassGuid| The GUID of the access pass of municipal account associated to the shared container.|\r\n| Accounts[0].MunicipalAccountAccessPasses[0].AccessPassTagId| The AccessPassTagId of the access pass of municipal account associated to the shared container.|"
+      description: '| Property| Description|
+
+        | ----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+
+        | MunicipalityGuids| The GUID associated to the local authority. Filterable|
+
+        | SharedContainerGuid| The GUID associated to the shared container.|
+
+        | ClusterAccountId| The id associated to the shared container.|
+
+        | SharedContainer| The NAME associated to the shared container.|
+
+        | Containers[0].ContainerGuid| The GUID of the container associated to the shared container.|
+
+        | Container[0].Tag| The Tag of the container associated to the shared container.|
+
+        | Container[0].SerialNo| The SerialNo of the container associated to the shared container.|
+
+        | Container[0].AccessPassRequired| The AccessPassRequired of the container associated to the shared container.|
+
+        | MasterAccessPasses[0].AccessPassTagId| The AccessPassTagId of the local authority associated to the shared container.|
+
+        | MasterAccessPasses[0].MasterAccessPassGuid| The GUID of the access pass associated to the shared container.|
+
+        | Accounts[0].ClusterAccountId| The id associated to the shared container.|
+
+        | Accounts[0].CustomerId| The id of the customer associated to the shared container.|
+
+        | Accounts[0].CustomerGuid| The GUID of municipal account associated to the shared container.|
+
+        | Accounts[0].MunicipalAccountAccessPasses[0].MunicipalAccessPassGuid| The GUID of the access pass of municipal account associated to the shared container.|
+
+        | Accounts[0].MunicipalAccountAccessPasses[0].AccessPassTagId| The AccessPassTagId of the access pass of municipal account associated to the shared container.|'
       operationId: SharedContainer_GetCollection
       parameters:
       - name: filter
@@ -41,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSharedContainerResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSharedContainerResource'
 components:
   schemas:
     ApiIntegratorAccessClusterMunicipalAccessPassResource:
@@ -53,16 +97,28 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         AccessPassTagId:
           type: string
-    ApiIntegratorAccessClusterMasterAccessPassResource:
+    ApiIntegratorAccessClusterContainerResource:
       type: object
       properties:
-        MasterAccessPassGuid:
+        ContainerGuid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        AccessPassTagId:
+        Tag:
           type: string
-    ApiResourceResultCollection[ApiIntegratorSharedContainerResource]:
+        SerialNo:
+          type: string
+        AccessPassRequired:
+          type: boolean
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorSharedContainerResource:
       type: object
       properties:
         resource:
@@ -107,11 +163,26 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccessClusterMasterAccessPassResource:
+      type: object
+      properties:
+        MasterAccessPassGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessPassTagId:
+          type: string
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorAccessClusterMunicipalAccountResource:
       type: object
       properties:
@@ -129,30 +200,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiIntegratorAccessClusterMunicipalAccessPassResource'
-    ApiIntegratorAccessClusterContainerResource:
-      type: object
-      properties:
-        ContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Tag:
-          type: string
-        SerialNo:
-          type: string
-        AccessPassRequired:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

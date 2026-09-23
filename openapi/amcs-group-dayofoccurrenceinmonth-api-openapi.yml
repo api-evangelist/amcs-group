@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DayOfOccurrenceInMonth API
-  version: core
+  title: AMCS Platform REST Day Of Occurrence In Month API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: DayOfOccurrenceInMonth
 paths:
@@ -10,7 +22,13 @@ paths:
       tags:
       - DayOfOccurrenceInMonth
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the day of occurrence in month        |\r\n| Description               | The description of the day of occurrence in month       |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the day of occurrence in month |
+
+        | Description | The description of the day of occurrence in month |'
       operationId: DayOfOccurrenceInMonth_Get
       parameters:
       - name: guid
@@ -29,13 +47,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDayOfOccurrenceInMonthResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorDayOfOccurrenceInMonthResource'
   /lists/dayOfOccurrenceInMonths:
     get:
       tags:
       - DayOfOccurrenceInMonth
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the day of occurrence in month        |\r\n| Description               | The description of the day of occurrence in month       |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the day of occurrence in month |
+
+        | Description | The description of the day of occurrence in month |'
       operationId: DayOfOccurrenceInMonth_GetCollection
       parameters:
       - name: filter
@@ -66,34 +90,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDayOfOccurrenceInMonthResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDayOfOccurrenceInMonthResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorDayOfOccurrenceInMonthResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorDayOfOccurrenceInMonthResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultCollection[ApiIntegratorDayOfOccurrenceInMonthResource]:
+    ApiResourceResultCollection_ApiIntegratorDayOfOccurrenceInMonthResource:
       type: object
       properties:
         resource:
@@ -106,6 +106,36 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorDayOfOccurrenceInMonthResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorDayOfOccurrenceInMonthResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorDayOfOccurrenceInMonthResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -123,6 +153,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -140,20 +181,3 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorDayOfOccurrenceInMonthResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

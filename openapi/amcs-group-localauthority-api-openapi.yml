@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup LocalAuthority API
-  version: core
+  title: AMCS Platform REST Local Authority API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: LocalAuthority
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - LocalAuthority
       summary: Find with GUID
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the local authority   |\r\n| Description               | The description of the local authority   |\r\n| IsDeleted                 | Whether the local authority is deleted                   |\r\n   "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the local authority |
+
+        | Description | The description of the local authority |
+
+        | IsDeleted | Whether the local authority is deleted |'
       operationId: LocalAuthority_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorLocalAuthorityResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorLocalAuthorityResource'
   /lists/localAuthorities:
     get:
       tags:
       - LocalAuthority
       summary: Find with Filters
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the local authority   |\r\n| Description               | The description of the local authority   |\r\n| IsDeleted                 | Whether the local authority is deleted                   |\r\n   "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the local authority |
+
+        | Description | The description of the local authority |
+
+        | IsDeleted | Whether the local authority is deleted |'
       operationId: LocalAuthority_GetCollection
       parameters:
       - name: filter
@@ -66,32 +94,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorLocalAuthorityResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorLocalAuthorityResource'
 components:
   schemas:
-    ApiResourceResultEntityLinks:
+    ApiIntegratorLocalAuthorityResource:
       type: object
       properties:
-        self:
+        Description:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
+        IsDeleted:
+          type: boolean
+        GUID:
           type: string
-    ApiResourceResultCollection[ApiIntegratorLocalAuthorityResource]:
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorLocalAuthorityResource:
       type: object
       properties:
         resource:
@@ -104,12 +121,27 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntity_ApiIntegratorLocalAuthorityResource:
       type: object
       properties:
-        count:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLocalAuthorityResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -127,35 +159,31 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity[ApiIntegratorLocalAuthorityResource]:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorLocalAuthorityResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorLocalAuthorityResource:
+          type: string
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

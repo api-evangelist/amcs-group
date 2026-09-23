@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup InvoiceCycle API
-  version: core
+  title: AMCS Platform REST Invoice Cycle API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: InvoiceCycle
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - InvoiceCycle
       summary: Find with GUID
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the invoice cycle|\r\n| Description               | The description of the invoice cycle|\r\n| IsDeleted                 | Whether the invoice cycle is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the invoice cycle|
+
+        | Description | The description of the invoice cycle|
+
+        | IsDeleted | Whether the invoice cycle is deleted |'
       operationId: InvoiceCycle_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorInvoiceCycleResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorInvoiceCycleResource'
   /lists/invoiceCycles:
     get:
       tags:
       - InvoiceCycle
       summary: Find with Filters
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the invoice cycle|\r\n| Description               | The description of the invoice cycle|\r\n| IsDeleted                 | Whether the invoice cycle is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the invoice cycle|
+
+        | Description | The description of the invoice cycle|
+
+        | IsDeleted | Whether the invoice cycle is deleted |'
       operationId: InvoiceCycle_GetCollection
       parameters:
       - name: filter
@@ -66,15 +94,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorInvoiceCycleResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorInvoiceCycleResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiIntegratorInvoiceCycleResource:
       type: object
       properties:
-        errors:
+        Description:
           type: string
-    ApiResourceResultCollection[ApiIntegratorInvoiceCycleResource]:
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorInvoiceCycleResource:
       type: object
       properties:
         resource:
@@ -95,23 +129,19 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntity_ApiIntegratorInvoiceCycleResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorInvoiceCycleResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceCycleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -129,6 +159,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -146,16 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorInvoiceCycleResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceCycleResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

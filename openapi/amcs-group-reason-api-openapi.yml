@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Reason API
-  version: core
+  title: AMCS Platform REST Reason API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Reason
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - Reason
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the reason                               |\r\n| Description               | The description of the reason                   |\r\n| FullDescription           | The full description of the reason                                   |\r\n| AnalysisCode              | The analysis code of the reason                       |\r\n| ReasonCategoryListItem    | The GUID and reason category of the reason (various values)              |\r\n| IsDeleted                 | Whether the reason is deleted    |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the reason |
+
+        | Description | The description of the reason |
+
+        | FullDescription | The full description of the reason |
+
+        | AnalysisCode | The analysis code of the reason |
+
+        | ReasonCategoryListItem | The GUID and reason category of the reason (various values) |
+
+        | IsDeleted | Whether the reason is deleted |'
       operationId: Reason_Get
       parameters:
       - name: guid
@@ -29,13 +55,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorReasonResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorReasonResource'
   /lists/reasons:
     get:
       tags:
       - Reason
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the reason                               |\r\n| Description               | The description of the reason                   |\r\n| FullDescription           | The full description of the reason                                   |\r\n| AnalysisCode              | The analysis code of the reason                       |\r\n| ReasonCategoryListItem    | The GUID and reason category of the reason (various values)              |\r\n| IsDeleted                 | Whether the reason is deleted    |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the reason |
+
+        | Description | The description of the reason |
+
+        | FullDescription | The full description of the reason |
+
+        | AnalysisCode | The analysis code of the reason |
+
+        | ReasonCategoryListItem | The GUID and reason category of the reason (various values) |
+
+        | IsDeleted | Whether the reason is deleted |'
       operationId: Reason_GetCollection
       parameters:
       - name: filter
@@ -66,9 +106,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorReasonResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorReasonResource'
 components:
   schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorReasonResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorReasonResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorReasonResource:
       type: object
       properties:
@@ -86,39 +156,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity[ApiIntegratorReasonResource]:
+    ApiResourceResultCollection_ApiIntegratorReasonResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorReasonResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorReasonResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -136,6 +186,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -153,24 +214,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection[ApiIntegratorReasonResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorReasonResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

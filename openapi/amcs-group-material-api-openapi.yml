@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Material API
-  version: core
+  title: AMCS Platform REST Material API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Material
 paths:
@@ -10,7 +22,27 @@ paths:
       tags:
       - Material
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the material                               |\r\n| Description               | The description of the material                       |\r\n| Color| The color of the material           |\r\n| AnalysisCode              | The analysis code of the material   |\r\n| ShortName                 | The short name of the material   |\r\n| MaterialStateListItem     | The The GUID and material state of the material (various values)         |\r\n| MaterialClassListItem     | The The GUID and material class of the material (various values)         |\r\n| EWCCodeListItem| The GUID and EWC Code of the material (various values)   |\r\n| IsDeleted                 | Whether the material is deleted     |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the material |
+
+        | Description | The description of the material |
+
+        | Color| The color of the material |
+
+        | AnalysisCode | The analysis code of the material |
+
+        | ShortName | The short name of the material |
+
+        | MaterialStateListItem | The The GUID and material state of the material (various values) |
+
+        | MaterialClassListItem | The The GUID and material class of the material (various values) |
+
+        | EWCCodeListItem| The GUID and EWC Code of the material (various values) |
+
+        | IsDeleted | Whether the material is deleted |'
       operationId: Material_Get
       parameters:
       - name: guid
@@ -29,13 +61,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorMaterialResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorMaterialResource'
   /lists/materials:
     get:
       tags:
       - Material
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the material                               |\r\n| Description               | The description of the material                       |\r\n| Color| The color of the material           |\r\n| AnalysisCode              | The analysis code of the material   |\r\n| ShortName                 | The short name of the material   |\r\n| MaterialStateListItem     | The The GUID and material state of the material (various values)         |\r\n| MaterialClassListItem     | The The GUID and material class of the material (various values)         |\r\n| EWCCodeListItem| The GUID and EWC Code of the material (various values)   |\r\n| IsDeleted                 | Whether the material is deleted     |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the material |
+
+        | Description | The description of the material |
+
+        | Color| The color of the material |
+
+        | AnalysisCode | The analysis code of the material |
+
+        | ShortName | The short name of the material |
+
+        | MaterialStateListItem | The The GUID and material state of the material (various values) |
+
+        | MaterialClassListItem | The The GUID and material class of the material (various values) |
+
+        | EWCCodeListItem| The GUID and EWC Code of the material (various values) |
+
+        | IsDeleted | Whether the material is deleted |'
       operationId: Material_GetCollection
       parameters:
       - name: filter
@@ -66,7 +118,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMaterialResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMaterialResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,7 +130,20 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorMaterialResource]:
+    ApiResourceResultEntity_ApiIntegratorMaterialResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorMaterialResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorMaterialResource:
       type: object
       properties:
         resource:
@@ -91,17 +156,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorMaterialResource:
       type: object
       properties:
@@ -142,6 +204,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -159,24 +232,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorMaterialResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorMaterialResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

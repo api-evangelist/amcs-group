@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AccountingPeriodInventoryBatch API
-  version: core
+  title: AMCS Platform REST Accounting Period Inventory Batch API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: AccountingPeriodInventoryBatch
 paths:
@@ -63,6 +75,32 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountingPeriodInventoryBatchResource:
+      type: object
+      properties:
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodInventories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceId:
       type: object
       properties:
@@ -141,29 +179,3 @@ components:
         LastChangeReasonId:
           type: integer
           format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorAccountingPeriodInventoryBatchResource:
-      type: object
-      properties:
-        AccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        AccountingPeriodInventories:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

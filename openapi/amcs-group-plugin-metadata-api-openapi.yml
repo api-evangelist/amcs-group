@@ -1,0 +1,35 @@
+openapi: 3.2.0
+info:
+  title: Core Plugin Metadata API
+  version: core
+tags:
+- name: Plugin Metadata
+paths:
+  /plugins/metadata/{type}.xml:
+    get:
+      tags:
+      - Plugin Metadata
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+      summary: Get plugins metadata {type} xml
+      x-summary-source: derived
+      operationId: getPluginsMetadata{type}Xml
+      x-operation-id-source: derived
+  /plugins/metadata/plugins.json:
+    get:
+      tags:
+      - Plugin Metadata
+      responses:
+        '200':
+          description: Success
+      summary: Get plugins metadata plugins json
+      x-summary-source: derived
+      operationId: getPluginsMetadataPluginsJson
+      x-operation-id-source: derived

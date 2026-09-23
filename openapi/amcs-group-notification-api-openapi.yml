@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Notification API
-  version: core
+  title: AMCS Platform REST Notification API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Notification
 paths:
@@ -10,7 +22,33 @@ paths:
       tags:
       - Notification
       summary: Retrieve changes
-      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| ThirdPartyKey| The third party key of the notification.|\r\n| GeneratedTimestamp| The generated date of the notification.|\r\n| SentTimeStamp| The send date of the notification.|\r\n| ResponseDate| The response date of the notification.|\r\n| ResponseString| The response string of the notification.|\r\n| RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |\r\n| RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |\r\n| RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |\r\n| Subject| The subject of the notification.|\r\n| DestinationAddress| The destination address of the notification. |\r\n| Message| The message of the notification.|\r\n| IsSent| Is this notification sent?|\r\n"
+      description: '| Property | Description |
+
+        | -------------- | ------------------------------------------------------------ |
+
+        | ThirdPartyKey| The third party key of the notification.|
+
+        | GeneratedTimestamp| The generated date of the notification.|
+
+        | SentTimeStamp| The send date of the notification.|
+
+        | ResponseDate| The response date of the notification.|
+
+        | ResponseString| The response string of the notification.|
+
+        | RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |
+
+        | RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |
+
+        | RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |
+
+        | Subject| The subject of the notification.|
+
+        | DestinationAddress| The destination address of the notification. |
+
+        | Message| The message of the notification.|
+
+        | IsSent| Is this notification sent?|'
       operationId: Notification_GetChanges
       parameters:
       - name: since
@@ -27,13 +65,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorNotificationResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorNotificationResource'
   /comms/notifications/{guid}:
     get:
       tags:
       - Notification
       summary: Find with GUID
-      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| ThirdPartyKey| The third party key of the notification.|\r\n| GeneratedTimestamp| The generated date of the notification.|\r\n| SentTimeStamp| The send date of the notification.|\r\n| ResponseDate| The response date of the notification.|\r\n| ResponseString| The response string of the notification.|\r\n| RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |\r\n| RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |\r\n| RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |\r\n| Subject| The subject of the notification.|\r\n| DestinationAddress| The destination address of the notification. |\r\n| Message| The message of the notification.|\r\n| IsSent| Is this notification sent?|\r\n"
+      description: '| Property | Description |
+
+        | -------------- | ------------------------------------------------------------ |
+
+        | ThirdPartyKey| The third party key of the notification.|
+
+        | GeneratedTimestamp| The generated date of the notification.|
+
+        | SentTimeStamp| The send date of the notification.|
+
+        | ResponseDate| The response date of the notification.|
+
+        | ResponseString| The response string of the notification.|
+
+        | RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |
+
+        | RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |
+
+        | RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |
+
+        | Subject| The subject of the notification.|
+
+        | DestinationAddress| The destination address of the notification. |
+
+        | Message| The message of the notification.|
+
+        | IsSent| Is this notification sent?|'
       operationId: Notification_Get
       parameters:
       - name: guid
@@ -52,13 +116,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorNotificationResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorNotificationResource'
   /comms/notifications:
     get:
       tags:
       - Notification
       summary: Find with Filters
-      description: "| Property       | Description                                                  |\r\n| -------------- | ------------------------------------------------------------ |\r\n| ThirdPartyKey| The third party key of the notification.|\r\n| GeneratedTimestamp| The generated date of the notification.|\r\n| SentTimeStamp| The send date of the notification.|\r\n| ResponseDate| The response date of the notification.|\r\n| ResponseString| The response string of the notification.|\r\n| RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |\r\n| RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |\r\n| RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |\r\n| Subject| The subject of the notification.|\r\n| DestinationAddress| The destination address of the notification. |\r\n| Message| The message of the notification.|\r\n| IsSent| Is this notification sent?|\r\n"
+      description: '| Property | Description |
+
+        | -------------- | ------------------------------------------------------------ |
+
+        | ThirdPartyKey| The third party key of the notification.|
+
+        | GeneratedTimestamp| The generated date of the notification.|
+
+        | SentTimeStamp| The send date of the notification.|
+
+        | ResponseDate| The response date of the notification.|
+
+        | ResponseString| The response string of the notification.|
+
+        | RelatedApplicationNotificationMessageTransportProviderGuid| The GUID of the notification message transport provider associated to the notification. |
+
+        | RelatedApplicationNotificationMessageTransportGuid| The GUID of the notification message transport associated to the notification. |
+
+        | RelatedApplicationNotificationRunItemGuid| The GUID of the notification run item associated to the notification. |
+
+        | Subject| The subject of the notification.|
+
+        | DestinationAddress| The destination address of the notification. |
+
+        | Message| The message of the notification.|
+
+        | IsSent| Is this notification sent?|'
       operationId: Notification_GetCollection
       parameters:
       - name: filter
@@ -89,66 +179,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorNotificationResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorNotificationResource'
 components:
   schemas:
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorNotificationResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorNotificationResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorNotificationResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorNotificationResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceChanges[ApiIntegratorNotificationResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorNotificationResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorNotificationResource:
       type: object
       properties:
@@ -192,6 +225,47 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorNotificationResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorNotificationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorNotificationResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorNotificationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -209,6 +283,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceChanges_ApiIntegratorNotificationResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorNotificationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -226,11 +324,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

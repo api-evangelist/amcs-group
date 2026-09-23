@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup InvoiceFrequency API
-  version: core
+  title: AMCS Platform REST Invoice Frequency API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: InvoiceFrequency
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - InvoiceFrequency
       summary: Find with GUID
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the invoice frequency                              |\r\n| Description               | The description of the invoice frequency                                  |\r\n| IsDeleted                 | Whether the invoice frequency is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the invoice frequency |
+
+        | Description | The description of the invoice frequency |
+
+        | IsDeleted | Whether the invoice frequency is deleted |'
       operationId: InvoiceFrequency_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorInvoiceFrequencyResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorInvoiceFrequencyResource'
   /lists/invoiceFrequencies:
     get:
       tags:
       - InvoiceFrequency
       summary: Find with Filters
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the invoice frequency                              |\r\n| Description               | The description of the invoice frequency                                  |\r\n| IsDeleted                 | Whether the invoice frequency is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the invoice frequency |
+
+        | Description | The description of the invoice frequency |
+
+        | IsDeleted | Whether the invoice frequency is deleted |'
       operationId: InvoiceFrequency_GetCollection
       parameters:
       - name: filter
@@ -66,18 +94,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorInvoiceFrequencyResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorInvoiceFrequencyResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorInvoiceFrequencyResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorInvoiceFrequencyResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceFrequencyResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceFrequencyResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -93,17 +129,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -121,19 +146,30 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection[ApiIntegratorInvoiceFrequencyResource]:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorInvoiceFrequencyResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorInvoiceFrequencyResource'
+          $ref: '#/components/schemas/ApiIntegratorInvoiceFrequencyResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -151,11 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

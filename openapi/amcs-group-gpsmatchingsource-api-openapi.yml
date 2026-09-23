@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup GpsMatchingSource API
-  version: core
+  title: AMCS Platform REST Gps Matching Source API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: GpsMatchingSource
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - GpsMatchingSource
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the gpsmatchingsource                             |\r\n| Description               | The description of the gpsmatchingsource                                 |\r\n| IsDeleted                 | Whether the gpsmatchingsource is deleted          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the gpsmatchingsource |
+
+        | Description | The description of the gpsmatchingsource |
+
+        | IsDeleted | Whether the gpsmatchingsource is deleted |'
       operationId: GpsMatchingSource_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorGpsMatchingSourceResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorGpsMatchingSourceResource'
   /lists/gpsMatchingSources:
     get:
       tags:
       - GpsMatchingSource
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the gpsmatchingsource                             |\r\n| Description               | The description of the gpsmatchingsource                                 |\r\n| IsDeleted                 | Whether the gpsmatchingsource is deleted          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the gpsmatchingsource |
+
+        | Description | The description of the gpsmatchingsource |
+
+        | IsDeleted | Whether the gpsmatchingsource is deleted |'
       operationId: GpsMatchingSource_GetCollection
       parameters:
       - name: filter
@@ -66,26 +94,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorGpsMatchingSourceResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorGpsMatchingSourceResource'
 components:
   schemas:
-    ApiIntegratorGpsMatchingSourceResource:
+    ApiResourceStatus:
       type: object
       properties:
-        Description:
-          type: string
-        IsDeleted:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
           type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorGpsMatchingSourceResource]:
+    ApiResourceResultEntity_ApiIntegratorGpsMatchingSourceResource:
       type: object
       properties:
         resource:
@@ -98,12 +118,30 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiIntegratorGpsMatchingSourceResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorGpsMatchingSourceResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGpsMatchingSourceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -121,6 +159,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -138,24 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection[ApiIntegratorGpsMatchingSourceResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorGpsMatchingSourceResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DefaultAction API
-  version: core
+  title: AMCS Platform REST Default Action API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: DefaultAction
 paths:
@@ -10,7 +22,37 @@ paths:
       tags:
       - DefaultAction
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated with the default action.|\r\n| ActionListItem| The GUID and description of the action associated with the default action.|\r\n| ServiceListItem| The GUID and description of the service associated with the default action.|\r\n| PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|\r\n| VATListItem| The GUID and description of the VAT associated with the default action.|\r\n| MaterialClassListItem| The GUID and description of the material class associated with the default action.|\r\n| TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|\r\n| UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|\r\n| AnalysisCode| The analysis code associated with the default action associated with the default action.|\r\n| SalesCode| The sales code associated with the default action.|\r\n| CostCode| The cost code associated with the default action.|\r\n| PurchaseCode| The purchase code associated with the default action.|\r\n| HandlingTime| The handling time (in seconds) associated with the default action.|\r\n| IsDeleted                 | Whether the default action is deleted                        |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated with the default action.|
+
+        | ActionListItem| The GUID and description of the action associated with the default action.|
+
+        | ServiceListItem| The GUID and description of the service associated with the default action.|
+
+        | PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|
+
+        | VATListItem| The GUID and description of the VAT associated with the default action.|
+
+        | MaterialClassListItem| The GUID and description of the material class associated with the default action.|
+
+        | TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|
+
+        | UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|
+
+        | AnalysisCode| The analysis code associated with the default action associated with the default action.|
+
+        | SalesCode| The sales code associated with the default action.|
+
+        | CostCode| The cost code associated with the default action.|
+
+        | PurchaseCode| The purchase code associated with the default action.|
+
+        | HandlingTime| The handling time (in seconds) associated with the default action.|
+
+        | IsDeleted | Whether the default action is deleted |'
       operationId: DefaultAction_Get
       parameters:
       - name: guid
@@ -29,13 +71,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDefaultActionResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorDefaultActionResource'
   /lists/defaultActions:
     get:
       tags:
       - DefaultAction
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated with the default action.|\r\n| ActionListItem| The GUID and description of the action associated with the default action.|\r\n| ServiceListItem| The GUID and description of the service associated with the default action.|\r\n| PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|\r\n| VATListItem| The GUID and description of the VAT associated with the default action.|\r\n| MaterialClassListItem| The GUID and description of the material class associated with the default action.|\r\n| TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|\r\n| UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|\r\n| AnalysisCode| The analysis code associated with the default action associated with the default action.|\r\n| SalesCode| The sales code associated with the default action.|\r\n| CostCode| The cost code associated with the default action.|\r\n| PurchaseCode| The purchase code associated with the default action.|\r\n| HandlingTime| The handling time (in seconds) associated with the default action.|\r\n| IsDeleted                 | Whether the default action is deleted                        |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated with the default action.|
+
+        | ActionListItem| The GUID and description of the action associated with the default action.|
+
+        | ServiceListItem| The GUID and description of the service associated with the default action.|
+
+        | PricingBasisListItem| The GUID and description of the pricing basis associated with the default action.|
+
+        | VATListItem| The GUID and description of the VAT associated with the default action.|
+
+        | MaterialClassListItem| The GUID and description of the material class associated with the default action.|
+
+        | TaxTemplateCollectionListItem | The GUID and description of the tax template collection associated with the default action.|
+
+        | UnitOfMeasureListItem| The GUID and description of the unit of measure associated with the default action.|
+
+        | AnalysisCode| The analysis code associated with the default action associated with the default action.|
+
+        | SalesCode| The sales code associated with the default action.|
+
+        | CostCode| The cost code associated with the default action.|
+
+        | PurchaseCode| The purchase code associated with the default action.|
+
+        | HandlingTime| The handling time (in seconds) associated with the default action.|
+
+        | IsDeleted | Whether the default action is deleted |'
       operationId: DefaultAction_GetCollection
       parameters:
       - name: filter
@@ -66,10 +138,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDefaultActionResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDefaultActionResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorDefaultActionResource]:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorDefaultActionResource:
       type: object
       properties:
         resource:
@@ -82,7 +163,15 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorDefaultActionResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorDefaultActionResource:
       type: object
       properties:
         resource:
@@ -95,6 +184,51 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorDefaultActionResource:
       type: object
       properties:
@@ -129,65 +263,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

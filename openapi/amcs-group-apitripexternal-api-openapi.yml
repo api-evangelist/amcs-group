@@ -1,7 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ApiTripExternal API
-  version: core
+  description: '# Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The Transport Live View REST API endpoints are technically described in this document.'
+  title: API Trip External API
+  version: external
 tags:
 - name: ApiTripExternal
 paths:
@@ -21,13 +28,13 @@ paths:
 
         ## Query Parameters
 
-        | Parameter | Type   | Required | Description                                                                 |
+        | Parameter | Type | Required | Description |
 
         |-----------|--------|----------|-----------------------------------------------------------------------------|
 
-        | since     | string | No       | Base64-encoded row version (from `@@DBTS`). Only returns trips changed after this version. **Must be URL-encoded.** |
+        | since | string | No | Base64-encoded row version (from `@@DBTS`). Only returns trips changed after this version. **Must be URL-encoded.** |
 
-        | cursor    | string | No       | Pagination cursor for retrieving next page of results (not used with row version tracking). |
+        | cursor | string | No | Pagination cursor for retrieving next page of results (not used with row version tracking). |
 
 
         ---
@@ -46,13 +53,13 @@ paths:
 
         ### Main Response Object
 
-        | Property | Type                          | Description                                    |
+        | Property | Type | Description |
 
         |----------|-------------------------------|------------------------------------------------|
 
-        | Resource | List\<ApiTripExternalDto\>    | List of completed trips with summaries.        |
+        | Resource | List\ | List of completed trips with summaries. |
 
-        | Extra    | object                        | Additional pagination information (if needed). |
+        | Extra | object | Additional pagination information (if needed). |
 
 
         ---
@@ -60,23 +67,23 @@ paths:
 
         ### ApiTripExternalDto Object
 
-        | Property     | Type              | Description                                           |
+        | Property | Type | Description |
 
         |--------------|-------------------|-------------------------------------------------------|
 
-        | VehicleId    | Guid?             | Unique identifier for the vehicle (Asset GUID).      |
+        | VehicleId | Guid? | Unique identifier for the vehicle (Asset GUID). |
 
-        | VehicleName  | string            | Name of the vehicle.                                 |
+        | VehicleName | string | Name of the vehicle. |
 
-        | TripId       | int               | Unique identifier for the trip.                      |
+        | TripId | int | Unique identifier for the trip. |
 
-        | StartTime    | DateTimeOffset    | Trip start timestamp.                                |
+        | StartTime | DateTimeOffset | Trip start timestamp. |
 
-        | EndTime      | DateTimeOffset?   | Trip end timestamp.                                  |
+        | EndTime | DateTimeOffset? | Trip end timestamp. |
 
-        | Status       | int               | Trip status (0=Started, 1=Completed, 2=Invalid).     |
+        | Status | int | Trip status (0=Started, 1=Completed, 2=Invalid). |
 
-        | TripSummary  | ApiTripSummary    | Calculated trip summary with metrics.                |
+        | TripSummary | ApiTripSummary | Calculated trip summary with metrics. |
 
 
         ---
@@ -84,25 +91,25 @@ paths:
 
         ### ApiTripSummary Object
 
-        | Property                         | Type    | Description                                                  |
+        | Property | Type | Description |
 
         |----------------------------------|---------|--------------------------------------------------------------|
 
-        | TripId                           | int     | Trip identifier.                                            |
+        | TripId | int | Trip identifier. |
 
-        | TotalTripMileage                 | double | Total mileage covered during the trip. Unit of Measure - KM                 |
+        | TotalTripMileage | double | Total mileage covered during the trip. Unit of Measure - KM |
 
-        | TotalPloughEnabledMileage        | double | Mileage covered while plough was enabled. Unit of Measure - KM                |
+        | TotalPloughEnabledMileage | double | Mileage covered while plough was enabled. Unit of Measure - KM |
 
-        | TotalSpreaderEnabledMileage      | double | Mileage covered while spreader was enabled. Unit of Measure - KM               |
+        | TotalSpreaderEnabledMileage | double | Mileage covered while spreader was enabled. Unit of Measure - KM |
 
-        | SpreaderWidth                    | double | Spreader width setting. Unit of Measure - Meters                   |
+        | SpreaderWidth | double | Spreader width setting. Unit of Measure - Meters |
 
-        | TotalSolidMaterialDelivered      | double | Total solid material delivered during the trip. Unit of Measure - KG     |
+        | TotalSolidMaterialDelivered | double | Total solid material delivered during the trip. Unit of Measure - KG |
 
-        | TotalPrewetMaterialDelivered    | double | Total prewet material delivered during the trip. Unit of Measure - Liters    |
+        | TotalPrewetMaterialDelivered | double | Total prewet material delivered during the trip. Unit of Measure - Liters |
 
-        | TotalTripDuration                | double | Total trip duration in minutes. Unit of Measure - Minutes      |
+        | TotalTripDuration | double | Total trip duration in minutes. Unit of Measure - Minutes |
 
 
         ---'
@@ -132,40 +139,10 @@ paths:
           description: Unauthorized - authentication required.
         '500':
           description: Internal server error.
+      operationId: getIntegratorTripsChanges
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiTripExternalDto:
-      type: object
-      properties:
-        VehicleId:
-          type: string
-          format: uuid
-          nullable: true
-          description: Unique identifier for the vehicle (Asset GUID).
-        VehicleName:
-          type: string
-          nullable: true
-          description: Name of the vehicle.
-        TripId:
-          type: integer
-          format: int32
-          description: Unique identifier for the trip.
-        StartTime:
-          type: string
-          format: date-time
-          description: Trip start timestamp.
-        EndTime:
-          type: string
-          format: date-time
-          nullable: true
-          description: Trip end timestamp.
-        Status:
-          type: integer
-          format: int32
-          description: Trip status (0=Started, 1=Completed, 2=Invalid).
-        TripSummary:
-          $ref: '#/components/schemas/ApiTripSummary'
-          description: Calculated trip summary with metrics.
     ApiTripSummary:
       type: object
       properties:
@@ -201,6 +178,41 @@ components:
           type: number
           format: double
           description: Total trip duration in minutes. Unit of Measure - Minutes
+    ApiTripExternalDto:
+      type: object
+      properties:
+        VehicleId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Unique identifier for the vehicle (Asset GUID).
+        VehicleName:
+          type:
+          - string
+          - 'null'
+          description: Name of the vehicle.
+        TripId:
+          type: integer
+          format: int32
+          description: Unique identifier for the trip.
+        StartTime:
+          type: string
+          format: date-time
+          description: Trip start timestamp.
+        EndTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Trip end timestamp.
+        Status:
+          type: integer
+          format: int32
+          description: Trip status (0=Started, 1=Completed, 2=Invalid).
+        TripSummary:
+          $ref: '#/components/schemas/ApiTripSummary'
+          description: Calculated trip summary with metrics.
     TripChangesResponse:
       type: object
       properties:
@@ -209,5 +221,6 @@ components:
           items:
             $ref: '#/components/schemas/ApiTripExternalDto'
         Extra:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'

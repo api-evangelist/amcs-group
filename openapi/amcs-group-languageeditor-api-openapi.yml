@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup LanguageEditor API
+  title: Core Language Editor API
   version: core
 tags:
 - name: LanguageEditor
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiLanguageResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiLanguageResource'
+      summary: Get services api glossary language editors changes
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageEditorsChanges
+      x-operation-id-source: derived
   /services/api/glossary/languageEditors/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiLanguageResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiLanguageResource'
+      summary: Get services api glossary language editors template
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageEditorsTemplate
+      x-operation-id-source: derived
   /services/api/glossary/languageEditors/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiLanguageResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiLanguageResource'
+      summary: Get services api glossary language editors by id
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageEditorsById
+      x-operation-id-source: derived
     put:
       tags:
       - LanguageEditor
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api glossary language editors by id
+      x-summary-source: derived
+      operationId: putServicesApiGlossaryLanguageEditorsById
+      x-operation-id-source: derived
     delete:
       tags:
       - LanguageEditor
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api glossary language editors by id
+      x-summary-source: derived
+      operationId: deleteServicesApiGlossaryLanguageEditorsById
+      x-operation-id-source: derived
   /services/api/glossary/languageEditors/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api glossary language editors by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageEditorsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/glossary/languageEditors:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiLanguageResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiLanguageResource'
+      summary: Get services api glossary language editors
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageEditors
+      x-operation-id-source: derived
     post:
       tags:
       - LanguageEditor
@@ -204,37 +232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api glossary language editors
+      x-summary-source: derived
+      operationId: postServicesApiGlossaryLanguageEditors
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-          nullable: true
-        cursor:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ApiLanguageResource]:
+    ApiResourceResult_ApiLanguageResource:
       type: object
       properties:
         errors:
@@ -244,7 +248,30 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
       additionalProperties: false
-    ApiResourceChanges[ApiLanguageResource]:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceChanges_ApiLanguageResource:
       type: object
       properties:
         errors:
@@ -252,10 +279,11 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
@@ -266,37 +294,52 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         languageId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         language:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         languageCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceResultCollection[ApiLanguageResource]:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiLanguageResource:
       type: object
       properties:
         errors:
@@ -304,14 +347,15 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceResultEntity[ApiLanguageResource]:
+    ApiResourceResultEntity_ApiLanguageResource:
       type: object
       properties:
         errors:
@@ -325,14 +369,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
     ApiResource:
       type: object
       properties:
@@ -345,51 +381,69 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

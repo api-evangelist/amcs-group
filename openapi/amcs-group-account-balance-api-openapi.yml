@@ -1,0 +1,203 @@
+openapi: 3.2.0
+info:
+  title: AMCS Platform REST Account Balance API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+tags:
+- name: Account Balance
+paths:
+  /accounting/accountBalances/{guid}:
+    get:
+      tags:
+      - Account Balance
+      summary: Find with GUID
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | APInvoice | The accounts payable invoice associated with the account balance. |
+
+        | CreditLimit | The maximum credit limit for the account. |
+
+        | GUID | The GUID associated to the account balance. |
+
+        | InvoiceableWork | The amount of work that can be invoiced. |
+
+        | POInvoice | The purchase order invoice associated with the account balance. |
+
+        | RelatedCustomerGuid | The GUID associated to the customer. |
+
+        | RelatedCustomerSiteGuid | The GUID associated to the customer site. |
+
+        | RemainingCredit| The remaining credit available for the account. |
+
+        | OutstandingAmount| The total outstanding amount for the account. |
+
+        | UnallocatedAmount| The amount that has not been allocated to any specific purpose. |
+
+        | UnconfirmedBalance | The balance that has not been confirmed.|'
+      operationId: AccountBalance_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorAccountBalance'
+  /accounting/accountBalances:
+    get:
+      tags:
+      - Account Balance
+      summary: Find with Filters
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | APInvoice | The accounts payable invoice associated with the account balance. |
+
+        | CreditLimit | The maximum credit limit for the account. |
+
+        | GUID | The GUID associated to the account balance. |
+
+        | InvoiceableWork | The amount of work that can be invoiced. |
+
+        | POInvoice | The purchase order invoice associated with the account balance. |
+
+        | RelatedCustomerGuid | The GUID associated to the customer. |
+
+        | RelatedCustomerSiteGuid | The GUID associated to the customer site. |
+
+        | RemainingCredit| The remaining credit available for the account. |
+
+        | OutstandingAmount| The total outstanding amount for the account. |
+
+        | UnallocatedAmount| The amount that has not been allocated to any specific purpose. |
+
+        | UnconfirmedBalance | The balance that has not been confirmed.|'
+      operationId: AccountBalance_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorAccountBalance'
+components:
+  schemas:
+    ApiIntegratorAccountBalance:
+      type: object
+      properties:
+        InvoiceableWork:
+          type: number
+          format: double
+        OutstandingAmount:
+          type: number
+          format: double
+        UnallocatedAmount:
+          type: number
+          format: double
+        UnconfirmedBalance:
+          type: number
+          format: double
+        APInvoice:
+          type: number
+          format: double
+        POInvoice:
+          type: number
+          format: double
+        CreditLimit:
+          type: number
+          format: double
+        RemainingCredit:
+          type: number
+          format: double
+        RelatedCustomerGUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerSiteGUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorAccountBalance:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountBalance'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorAccountBalance:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccountBalance'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

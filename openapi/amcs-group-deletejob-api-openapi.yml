@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DeleteJob API
-  version: core
+  title: AMCS Platform REST Delete Job API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: DeleteJob
 paths:
@@ -10,7 +22,35 @@ paths:
       tags:
       - DeleteJob
       summary: Create or update
-      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| JobGuid                               | The JobGuid associated to the about to be deleted job.| Yes |\r\n| DeleteReasonGuid                  | Delete Reason GUID IDthat match to the job                       | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| JobGuid is null | JobGuid is required. |\r\n| DeleteReasonGuid is null | DeleteReasonGuid is required. |\r\n| DeleteReasonGuid does not apply to the job | The supplied Delete Reason does not apply to the job type of the job being deleted. |\r\n| DeleteReasonGuid cannot be found | This Delete Reason cannot be found. |\r\n| Job GUID cannot be found | This job cannot be found. |\r\n| Job is already allocated | The job must be unallocated before it can be deleted. |\r\n| Job GUID is not a scheduled job | This job type cannot be deleted. |\r\n"
+      description: '| Property | Description | Required |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+
+        | JobGuid | The JobGuid associated to the about to be deleted job.| Yes |
+
+        | DeleteReasonGuid | Delete Reason GUID IDthat match to the job | Yes |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | JobGuid is null | JobGuid is required. |
+
+        | DeleteReasonGuid is null | DeleteReasonGuid is required. |
+
+        | DeleteReasonGuid does not apply to the job | The supplied Delete Reason does not apply to the job type of the job being deleted. |
+
+        | DeleteReasonGuid cannot be found | This Delete Reason cannot be found. |
+
+        | Job GUID cannot be found | This job cannot be found. |
+
+        | Job is already allocated | The job must be unallocated before it can be deleted. |
+
+        | Job GUID is not a scheduled job | This job type cannot be deleted. |'
       operationId: DeleteJob_Create
       requestBody:
         content:
@@ -28,21 +68,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorDeleteJobResource:
-      type: object
-      properties:
-        JobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        DeleteReasonGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceErrors:
       type: object
       properties:
@@ -66,3 +91,18 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiIntegratorDeleteJobResource:
+      type: object
+      properties:
+        JobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DeleteReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

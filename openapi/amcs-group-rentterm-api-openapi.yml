@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup RentTerm API
-  version: core
+  title: AMCS Platform REST Rent Term API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: RentTerm
 paths:
@@ -10,7 +22,13 @@ paths:
       tags:
       - RentTerm
       summary: Find with GUID
-      description: "| Property                  | Description                                                      |\r\n| ------------------------- | ---------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the rent term.                            |\r\n| Description| The description of the rent term.        |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ---------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the rent term. |
+
+        | Description| The description of the rent term. |'
       operationId: RentTerm_Get
       parameters:
       - name: guid
@@ -29,13 +47,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRentTermResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorRentTermResource'
   /lists/rentTerms:
     get:
       tags:
       - RentTerm
       summary: Find with Filters
-      description: "| Property                  | Description                                                      |\r\n| ------------------------- | ---------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the rent term.                            |\r\n| Description| The description of the rent term.        |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ---------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the rent term. |
+
+        | Description| The description of the rent term. |'
       operationId: RentTerm_GetCollection
       parameters:
       - name: filter
@@ -66,23 +90,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRentTermResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRentTermResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorRentTermResource]:
+    ApiIntegratorRentTermResource:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRentTermResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorRentTermResource]:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorRentTermResource:
       type: object
       properties:
         resource:
@@ -95,26 +115,27 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiIntegratorRentTermResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorRentTermResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRentTermResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -132,6 +153,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -149,11 +181,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

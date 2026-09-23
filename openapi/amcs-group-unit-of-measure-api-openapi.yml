@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  title: AMCS Platform REST Unit Of Measure API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+tags:
+- name: Unit of Measure
+paths:
+  /lists/unitOfMeasures/{guid}:
+    get:
+      tags:
+      - Unit of Measure
+      summary: Find with GUID
+      description: '| Property| Description|
+
+        | ------------------------------| ------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the unit of measure|
+
+        | Description| The description of the unit of measure|
+
+        | Code| The unit of measure code|
+
+        | PricingBasisListItem| The GUID and description of the pricing basis (various values).|
+
+        | ShortName| The unit of measure short name|
+
+        | IsDeleted| Whether the unit of measure is deleted|
+
+        | IsBaseUnitOfMeasurement| Defines whether unit of measure is Base Unit Of Measurement|
+
+        | IsReportingUnitOfMeasurement | Defines whether unit of measure is reporting Unit Of Measurement|
+
+        | IsDefault| Defines whether unit of measure is for pricing basis|
+
+        | ConversionFactor | The conversion factor of the unit of measure|'
+      operationId: UnitOfMeasure_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorUnitOfMeasurementResource'
+  /lists/unitOfMeasures:
+    get:
+      tags:
+      - Unit of Measure
+      summary: Find with Filters
+      description: '| Property| Description|
+
+        | ------------------------------| ------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the unit of measure|
+
+        | Description| The description of the unit of measure|
+
+        | Code| The unit of measure code|
+
+        | PricingBasisListItem| The GUID and description of the pricing basis (various values).|
+
+        | ShortName| The unit of measure short name|
+
+        | IsDeleted| Whether the unit of measure is deleted|
+
+        | IsBaseUnitOfMeasurement| Defines whether unit of measure is Base Unit Of Measurement|
+
+        | IsReportingUnitOfMeasurement | Defines whether unit of measure is reporting Unit Of Measurement|
+
+        | IsDefault| Defines whether unit of measure is for pricing basis|
+
+        | ConversionFactor | The conversion factor of the unit of measure|'
+      operationId: UnitOfMeasure_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorUnitOfMeasurementResource'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorUnitOfMeasurementResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorUnitOfMeasurementResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorUnitOfMeasurementResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Code:
+          type: string
+        PricingBasisListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ShortName:
+          type: string
+        IsBaseUnitOfMeasurement:
+          type: boolean
+        IsReportingUnitOfMeasurement:
+          type: boolean
+        IsDefault:
+          type: boolean
+        ConversionFactor:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorUnitOfMeasurementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorUnitOfMeasurementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

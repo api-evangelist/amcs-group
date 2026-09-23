@@ -1,16 +1,34 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ContactType API
-  version: core
+  title: AMCS Platform REST Contact Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
-- name: ContactType
+- name: Contact Type
 paths:
   /lists/contactTypes/{guid}:
     get:
       tags:
-      - ContactType
+      - Contact Type
       summary: Find with GUID
-      description: "| Property| Description|\r\n| --------------------------------- |---------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the contact type.|\r\n| Description| The description associated to the contact type.|\r\n"
+      description: '| Property| Description|
+
+        | --------------------------------- |---------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the contact type.|
+
+        | Description| The description associated to the contact type.|'
       operationId: ContactType_Get
       parameters:
       - name: guid
@@ -29,13 +47,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContactTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorContactTypeResource'
   /lists/contactTypes:
     get:
       tags:
-      - ContactType
+      - Contact Type
       summary: Find with Filters
-      description: "| Property| Description|\r\n| --------------------------------- |---------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the contact type.|\r\n| Description| The description associated to the contact type.|\r\n"
+      description: '| Property| Description|
+
+        | --------------------------------- |---------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the contact type.|
+
+        | Description| The description associated to the contact type.|'
       operationId: ContactType_GetCollection
       parameters:
       - name: filter
@@ -66,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContactTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContactTypeResource'
 components:
   schemas:
     ApiIntegratorContactTypeResource:
@@ -78,18 +102,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultCollection[ApiIntegratorContactTypeResource]:
+    ApiResourceResultCollection_ApiIntegratorContactTypeResource:
       type: object
       properties:
         resource:
@@ -102,6 +115,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -119,6 +140,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -136,7 +168,7 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorContactTypeResource]:
+    ApiResourceResultEntity_ApiIntegratorContactTypeResource:
       type: object
       properties:
         resource:
@@ -149,11 +181,3 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

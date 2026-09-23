@@ -1,0 +1,622 @@
+openapi: 3.2.0
+info:
+  title: AMCS Platform REST Credit Note API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+tags:
+- name: Credit Note
+paths:
+  /accounting/creditNotes/changes:
+    get:
+      tags:
+      - Credit Note
+      summary: Retrieve changes
+      description: '| Property | Description |
+
+        | -------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the credit note.'
+      operationId: CreditNote_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorCreditNoteResource'
+  /accounting/creditNotes/{guid}:
+    get:
+      tags:
+      - Credit Note
+      summary: Find with GUID
+      description: '| Property | Description |
+
+        | -------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the credit note.'
+      operationId: CreditNote_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCreditNoteResource'
+  /accounting/creditNotes:
+    get:
+      tags:
+      - Credit Note
+      summary: Find with Filters
+      description: '| Property | Description |
+
+        | -------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the credit note.'
+      operationId: CreditNote_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCreditNoteResource'
+    post:
+      tags:
+      - Credit Note
+      summary: Create or update
+      description: '| Property| Description| Required |
+
+        | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------- |--------- |
+
+        | GUID| The GUID associated to the credit note.| No |
+
+        | RelatedCustomerGuid| The GUID associated to the customer of this credit note.| Yes |
+
+        | CreditNoteNumber| The credit note number.| No |
+
+        | Reference| An alternative name used for the credit note.| No |
+
+        | ExternalReference| The external reference associated to the credit note.| No |
+
+        | IsCreditJournal| If true this credit note is a credit journal.| No |
+
+        | IsTaxAdjustment| If true this credit note is a tax adjustment.| No |
+
+        | IsApproved| If true this credit note is approved.| No |
+
+        | Notes| The notes associated to the credit note.| No |
+
+        | IsForClosingCustomer| If true this credit note is for closing a customer.| No |
+
+        | WriteOffReasonListItem| The GUID and writeoff reason of the credit note.| No |
+
+        | AccountingPeriodListItem| The GUID and accounting period of the credit note.| Yes |
+
+        | ReasonListItem| The GUID and reason of the credit note.| Yes |
+
+        | DepartmentListItem| The GUID and department of the credit note.| Yes |
+
+        | OutletListItem| The GUID and outlet of the credit note.| Yes |
+
+        | ReceivedDate| The received date of the credit note.| Yes |
+
+        | InputDate| The input date of the credit note.| No |
+
+        | ExportedDate| The exported date of the credit note.| No |
+
+        | Amount| The object where the amount is specified.| Yes |
+
+        | Amount.ExchangeRate| The object where the exchange rate of the amount is specified.| No |
+
+        | Amount.ExchangeRate.Rate| The exchange rate of the amount.| No |
+
+        | Amount.ExchangeRate.ExchangeDate| The exchange date in ISO format of the exchange rate.| No |
+
+        | Amount.ExchangeRate.BaseCurrencyListItem| The GUID and base currency of the exchange rate.| No |
+
+        | Amount.ExchangeRate.ExchangeCurrencyListItem| The GUID and exchange currency of the exchange rate.| No |
+
+        | Amount.Amount| The amount of the credit note.| Yes |
+
+        | Amount.BaseAmount| The base amount of the credit note.| Yes |
+
+        | RelatedLocationInvoiceGuid| Used to filter the related invoice location guid associated to the invoice of the credit note.| Yes |
+
+        | PrintAddress| The object where the print address is specified.| No |
+
+        | PrintAddress.HouseNumber| The house number of the print address.| No |
+
+        | PrintAddress.Address1| The 5 address lines of the print address.| No |
+
+        | PrintAddress.Address2| The 5 address lines of the print address.| No |
+
+        | PrintAddress.Address3| The 5 address lines of the print address.| No |
+
+        | PrintAddress.Address4| The 5 address lines of the print address.| No |
+
+        | PrintAddress.Address5| The 5 address lines of the print address.| No |
+
+        | PrintAddress.Postcode| The postcode of the print address.| No |
+
+        | Details[0]| A list of objects containing credit note details.| Yes |
+
+        | Details[0].SiteName| The site name of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress| The object where the site address of the credit note detail is specified.| Yes |
+
+        | Details[0].SiteAddress.HouseNumber| The house number of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Address1| The 5 address lines of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Address2| The 5 address lines of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Address3| The 5 address lines of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Address4| The 5 address lines of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Address5| The 5 address lines of the site address of the credit note detail.| Yes |
+
+        | Details[0].SiteAddress.Postcode| The postcode of the site address of the credit note detail.| Yes |
+
+        | Details[0].Reference| An alternative name used for the credit note detail.| No |
+
+        | Details[0].ServiceListItem| The GUID and service of the credit note detail.| Yes |
+
+        | Details[0].ActionListItem| The GUID and action of the…'
+      operationId: CreditNote_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorCreditNoteAmountExchangeRateResource:
+      type: object
+      properties:
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExchangeCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorCreditNoteAddressResource:
+      type: object
+      properties:
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiIntegratorCreditNoteAmountResource:
+      type: object
+      properties:
+        ExchangeRate:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountExchangeRateResource'
+        Amount:
+          type: number
+          format: double
+        BaseAmount:
+          type: number
+          format: double
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CreditNoteNumber:
+          type: string
+        Reference:
+          type: string
+        ExternalReference:
+          type: string
+        IsCreditJournal:
+          type: boolean
+        IsTaxAdjustment:
+          type: boolean
+        IsApproved:
+          type: boolean
+        Notes:
+          type: string
+        IsForClosingCustomer:
+          type: boolean
+        WriteOffReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountResource'
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        VATListItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteVatBreakdownResource'
+        RelatedLocationInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceDetailGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDeallocatedByGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCreditNoteAllocationGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PrintAddress:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteDetailResource'
+        Allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteInvoiceResource'
+        Deallocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteDeallocationResource'
+        ReceivedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        InputDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ExportedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedBlobHashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteOutputResource'
+        UnallocatedAmount:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorCreditNoteOutputResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCreditNoteDeallocationResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        DateDeallocated:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        RelatedUserDeallocatedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCreditNoteAllocationGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AllocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DeallocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorCreditNoteDetailResource:
+      type: object
+      properties:
+        SiteName:
+          type: string
+        SiteAddress:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
+        Reference:
+          type: string
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        NetWeight:
+          type: number
+          format: double
+        Amount:
+          type: number
+          format: double
+        AmountIncVAT:
+          type: number
+          format: double
+        RelatedInvoiceDetailGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Notes:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCreditNoteVatBreakdownResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCreditNoteInvoiceResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32

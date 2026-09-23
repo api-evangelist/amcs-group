@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup RecyclingCentreServiceStatus API
-  version: core
+  title: AMCS Platform REST Recycling Centre Service Status API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: RecyclingCentreServiceStatus
 paths:
@@ -40,21 +52,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRecyclingCentreServiceStatusResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRecyclingCentreServiceStatusResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultCollection[ApiIntegratorRecyclingCentreServiceStatusResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorRecyclingCentreServiceStatusResource:
       type: object
       properties:
         resource:
@@ -67,6 +76,11 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiIntegratorRecyclingCentreServiceStatusResource:
       type: object
       properties:
@@ -80,11 +94,9 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean

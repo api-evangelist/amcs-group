@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CustomerState API
-  version: core
+  title: AMCS Platform REST Customer State API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: CustomerState
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - CustomerState
       summary: Find with GUID
-      description: "| Property                  | Description                                                            |\r\n| ------------------------- | ---------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the customer state                              |\r\n| Description               | The description of the customer state                                  |\r\n| IsDeleted                 | Whether the customer state is deleted        |"
+      description: '| Property | Description |
+
+        | ------------------------- | ---------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the customer state |
+
+        | Description | The description of the customer state |
+
+        | IsDeleted | Whether the customer state is deleted |'
       operationId: CustomerState_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCustomerStateResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCustomerStateResource'
   /lists/customerStates:
     get:
       tags:
       - CustomerState
       summary: Find with Filters
-      description: "| Property                  | Description                                                            |\r\n| ------------------------- | ---------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the customer state                              |\r\n| Description               | The description of the customer state                                  |\r\n| IsDeleted                 | Whether the customer state is deleted        |"
+      description: '| Property | Description |
+
+        | ------------------------- | ---------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the customer state |
+
+        | Description | The description of the customer state |
+
+        | IsDeleted | Whether the customer state is deleted |'
       operationId: CustomerState_GetCollection
       parameters:
       - name: filter
@@ -66,27 +94,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCustomerStateResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCustomerStateResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorCustomerStateResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCustomerStateResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorCustomerStateResource:
       type: object
       properties:
@@ -98,12 +116,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -121,19 +133,30 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection[ApiIntegratorCustomerStateResource]:
+    ApiResourceResultEntity_ApiIntegratorCustomerStateResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerStateResource'
+          $ref: '#/components/schemas/ApiIntegratorCustomerStateResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -151,11 +174,16 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiResourceResultCollection_ApiIntegratorCustomerStateResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerStateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

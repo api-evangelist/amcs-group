@@ -1,7 +1,16 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup VehicleCarrierWork API
-  version: core
+  description: '# Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The Scale REST API endpoints are technically described in this document.'
+  title: Scale REST Vehicle Carrier Work API
+  version: '9.1'
+servers:
+- url: http://{env}-svc-core.amcsplatform.com/scale/api/
 tags:
 - name: VehicleCarrierWork
 paths:
@@ -10,279 +19,363 @@ paths:
       tags:
       - VehicleCarrierWork
       summary: Find with Filters
-      description: "| Property\t\t\t\t\t\t\t\t\t\t\t\t\t\t| Description                                                                       |\r\n| --------------------------------------------------------------| ----------------------------------------------------------------------------------|\r\n| SubscriberGUID\t\t\t\t\t\t\t\t\t\t\t\t| The subscriber guid filterable and required.\t\t\t\t\t\t\t\t\t\t|\r\n| VehicleGUID\t\t\t\t\t\t\t\t\t\t\t\t\t| The vechicle guid filterable and required.\t\t\t\t\t\t\t\t\t\t|\r\n| CarrierGUID\t\t\t\t\t\t\t\t\t\t\t\t\t| The suppliersite guid  filterable and optional.\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[]\t\t\t\t\t\t\t\t\t\t\t\t| The weighing data is on stage status.\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[].WeighingGUID\t\t\t\t\t\t\t\t\t| The guid associated to the weighing.\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[].TicketNo\t\t\t\t\t\t\t\t\t\t| The ticketno associated to the weighing.\t\t\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[].GrossWeight\t\t\t\t\t\t\t\t\t| The grossweight associated to the weighing.\t\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[].TareWeight\t\t\t\t\t\t\t\t\t| The tareweight associated to the weighing.\t\t\t\t\t\t\t\t\t\t|\r\n| StageWeighing[].IsInboundWeighing\t\t\t\t\t\t\t\t| The isinboundweighing indicator of weighing base on weighing type\t\t\t\t\t|\r\n| CurrentLinkedJobs[]\t\t\t\t\t\t\t\t\t\t\t| The current linked jobs does not associated any weighning.\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].JobGUID\t\t\t\t\t\t\t\t\t| The job guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].TicketNo\t\t\t\t\t\t\t\t\t| The ticketno weighing associated to the job.\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].DefaultMaterial\t\t\t\t\t\t\t| The defaultmaterial material assocaited to the job.\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].MaterialShortCode\t\t\t\t\t\t\t| The materialshortcode\tmaterial assocaited to the job.\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].MaterialAnalysisCode \t\t\t\t\t\t| The materialanalysiscode material assocaited to the job.\t\t\t\t\t\t\t|\r\n| CurrentLinkedJobs[].MaterialEWCCode \t\t\t\t\t\t\t| The materialewccode material assocaited to the job.\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[]\t\t\t\t\t\t\t\t\t\t\t| The current linked routes that are not completed.\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].RouteGUID\t\t\t\t\t\t\t\t| The route guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].RouteNo\t\t\t\t\t\t\t\t\t| The route number.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].DefaultMaterial\t\t\t\t\t\t\t| The default material associated to the route.\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].MaterialShortCode\t\t\t\t\t\t| The material short code.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].MaterialEWCCode\t\t\t\t\t\t\t| The material ew code.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[]\t\t\t\t\t\t| The materials that are linked to the route.\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[].MaterialGUID\t\t\t| The linked material guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[].Material\t\t\t\t| The linked material description.\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[].MaterialShortCode\t\t| The linked material short code.\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[].MaterialAnalysisCode\t| The linked material analysis code.\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedRoutes[].LinkedMaterials[].MaterialEWCCode\t\t| The linked material ew code.\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| LinkedToMoreThanOneCustomers\t\t\t\t\t\t\t\t\t| The flag that tells a vehicle is linked one or more customers.\t\t\t\t\t|\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].CustomerGUID\t\t\t\t\t\t\t| The customer guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].CustomerSiteGUID\t\t\t\t\t\t| The customersite guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].Customer\t\t\t\t\t\t\t\t| The customer name.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].LinkedToMoreThanOneOrder\t\t\t\t| The flag that tells whether a customer has one or more orders.\t\t\t\t\t|\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].LinkedOrders[].OrderNo\t\t\t\t| The order number.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].LinkedOrders[].OrderGUID\t\t\t\t| The order guid.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].LinkedOrders[].AreaOfOrigin\t\t\t| The area of origin description.\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n| CurrentLinkedCustomers[].LinkedOrders[].ShortCode\t\t\t\t| The area of origin short code.\t\t\t\t\t\t\t\t\t\t\t\t\t|\r\n"
+      description: '| Property | Description |
+
+        | --------------------------------------------------------------| ----------------------------------------------------------------------------------|
+
+        | SubscriberGUID | The subscriber guid filterable and required. |
+
+        | VehicleGUID | The vechicle guid filterable and required. |
+
+        | CarrierGUID | The suppliersite guid filterable and optional. |
+
+        | StageWeighing[] | The weighing data is on stage status. |
+
+        | StageWeighing[].WeighingGUID | The guid associated to the weighing. |
+
+        | StageWeighing[].TicketNo | The ticketno associated to the weighing. |
+
+        | StageWeighing[].GrossWeight | The grossweight associated to the weighing. |
+
+        | StageWeighing[].TareWeight | The tareweight associated to the weighing. |
+
+        | StageWeighing[].IsInboundWeighing | The isinboundweighing indicator of weighing base on weighing type |
+
+        | CurrentLinkedJobs[] | The current linked jobs does not associated any weighning. |
+
+        | CurrentLinkedJobs[].JobGUID | The job guid. |
+
+        | CurrentLinkedJobs[].TicketNo | The ticketno weighing associated to the job. |
+
+        | CurrentLinkedJobs[].DefaultMaterial | The defaultmaterial material assocaited to the job. |
+
+        | CurrentLinkedJobs[].MaterialShortCode | The materialshortcode material assocaited to the job. |
+
+        | CurrentLinkedJobs[].MaterialAnalysisCode | The materialanalysiscode material assocaited to the job. |
+
+        | CurrentLinkedJobs[].MaterialEWCCode | The materialewccode material assocaited to the job. |
+
+        | CurrentLinkedRoutes[] | The current linked routes that are not completed. |
+
+        | CurrentLinkedRoutes[].RouteGUID | The route guid. |
+
+        | CurrentLinkedRoutes[].RouteNo | The route number. |
+
+        | CurrentLinkedRoutes[].DefaultMaterial | The default material associated to the route. |
+
+        | CurrentLinkedRoutes[].MaterialShortCode | The material short code. |
+
+        | CurrentLinkedRoutes[].MaterialEWCCode | The material ew code. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[] | The materials that are linked to the route. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[].MaterialGUID | The linked material guid. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[].Material | The linked material description. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[].MaterialShortCode | The linked material short code. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[].MaterialAnalysisCode | The linked material analysis code. |
+
+        | CurrentLinkedRoutes[].LinkedMaterials[].MaterialEWCCode | The linked material ew code. |
+
+        | LinkedToMoreThanOneCustomers | The flag that tells a vehicle is linked one or more customers. | |
+
+        | CurrentLinkedCustomers[].CustomerGUID | The customer guid. |
+
+        | CurrentLinkedCustomers[].CustomerSiteGUID | The customersite guid. |
+
+        | CurrentLinkedCustomers[].Customer | The customer name. |
+
+        | CurrentLinkedCustomers[].LinkedToMoreThanOneOrder | The flag that tells whether a customer has one or more orders. | |
+
+        | CurrentLinkedCustomers[].LinkedOrders[].OrderNo | The order number. |
+
+        | CurrentLinkedCustomers[].LinkedOrders[].OrderGUID | The order guid. |
+
+        | CurrentLinkedCustomers[].LinkedOrders[].AreaOfOrigin | The area of origin description. |
+
+        | CurrentLinkedCustomers[].LinkedOrders[].ShortCode | The area of origin short code. |'
       operationId: VehicleCarrierWork_GetCollection
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: filter
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: search
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: order
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: max
         in: query
         required: false
-        type: integer
-        format: int32
+        schema:
+          type: integer
+          format: int32
       - name: page
         in: query
         required: false
-        type: integer
-        format: int32
+        schema:
+          type: integer
+          format: int32
       - name: includeCount
         in: query
         required: false
-        type: boolean
+        schema:
+          type: boolean
       - name: includeDeleted
         in: query
         required: false
-        type: boolean
+        schema:
+          type: boolean
       - name: links
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: udf
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ApiResourceResultCollection[ApiVehicleCarrierWorkResource]'
-definitions:
-  ApiVehicleCarrierWorkCurrentLinkedJobsResource:
-    type: object
-    properties:
-      JobGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      TicketNo:
-        type: string
-      DefaultMaterial:
-        type: string
-      MaterialShortCode:
-        type: string
-      MaterialAnalysisCode:
-        type: string
-      MaterialEWCCode:
-        type: string
-  ApiVehicleCarrierWorkCurrentLinkedCustomersResource:
-    type: object
-    properties:
-      CustomerGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      CustomerSiteGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      Customer:
-        type: string
-      CustomerSite:
-        type: string
-      LinkedToMoreThanOneOrder:
-        type: boolean
-      LinkedOrders:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource'
-      GUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      LastChangeReasonId:
-        format: int32
-        type: integer
-  ApiVehicleCarrierWorkStageWeighingResource:
-    type: object
-    properties:
-      WeighingGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      TicketNo:
-        type: string
-      WeighingDate:
-        format: dateTime
-        type: string
-        example: '2000-01-01 00:00:00.000'
-      IsInboundWeighing:
-        type: boolean
-      GrossWeight:
-        format: double
-        type: number
-      TareWeight:
-        format: double
-        type: number
-  ApiResourceErrors:
-    type: object
-    properties:
-      errors:
-        type: string
-  ApiResourceResultCollection[ApiVehicleCarrierWorkResource]:
-    type: object
-    properties:
-      resource:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkResource'
-      extra:
-        $ref: '#/definitions/ApiResourceResultCollectionExtra'
-      errors:
-        $ref: '#/definitions/ApiResourceErrors'
-      status:
-        $ref: '#/definitions/ApiResourceStatus'
-  ApiVehicleCarrierWorkCurrentLinkedMaterialsResource:
-    type: object
-    properties:
-      MaterialGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      Material:
-        type: string
-      MaterialShortCode:
-        type: string
-      MaterialAnalysisCode:
-        type: string
-      MaterialEWCCode:
-        type: string
-  ApiResourceStatus:
-    type: object
-    properties:
-      id:
-        format: int32
-        type: integer
-      isSuccess:
-        type: boolean
-  ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource:
-    type: object
-    properties:
-      MaterialGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      Material:
-        type: string
-      ShortCode:
-        type: string
-      MaterialAnalysisCode:
-        type: string
-      MaterialEWCCode:
-        type: string
-      GUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      LastChangeReasonId:
-        format: int32
-        type: integer
-  ApiResourceResultCollectionExtra:
-    type: object
-    properties:
-      count:
-        format: int32
-        type: integer
-  ApiVehicleCarrierWorkCurrentLinkedRoutesResource:
-    type: object
-    properties:
-      RouteGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      RouteNo:
-        format: int32
-        type: integer
-      DefaultMaterial:
-        type: string
-      MaterialShortCode:
-        type: string
-      MaterialEWCCode:
-        type: string
-      LinkedMaterials:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkCurrentLinkedMaterialsResource'
-      GUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      LastChangeReasonId:
-        format: int32
-        type: integer
-  ApiVehicleCarrierWorkResource:
-    type: object
-    properties:
-      VehicleGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      CarrierGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      SubscriberGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      StageWeighing:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkStageWeighingResource'
-      CurrentLinkedRoutes:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkCurrentLinkedRoutesResource'
-      CurrentLinkedJobs:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkCurrentLinkedJobsResource'
-      LinkedToMoreThanOneCustomers:
-        type: boolean
-      CurrentLinkedCustomers:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkCurrentLinkedCustomersResource'
-  ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource:
-    type: object
-    properties:
-      OrderNo:
-        type: string
-      OrderGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      AreaOfOriginGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      AreaOfOrigin:
-        type: string
-      ShortCode:
-        type: string
-      InboundOrder:
-        type: boolean
-      LinkedMaterials:
-        type: array
-        items:
-          $ref: '#/definitions/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource'
-      GUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      LastChangeReasonId:
-        format: int32
-        type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiVehicleCarrierWorkResource'
+components:
+  schemas:
+    ApiResourceResultCollection_ApiVehicleCarrierWorkResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiVehicleCarrierWorkStageWeighingResource:
+      type: object
+      properties:
+        WeighingGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        WeighingDate:
+          format: dateTime
+          type: string
+          example: '2000-01-01 00:00:00.000'
+        IsInboundWeighing:
+          type: boolean
+        GrossWeight:
+          format: double
+          type: number
+        TareWeight:
+          format: double
+          type: number
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
+    ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource:
+      type: object
+      properties:
+        MaterialGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Material:
+          type: string
+        ShortCode:
+          type: string
+        MaterialAnalysisCode:
+          type: string
+        MaterialEWCCode:
+          type: string
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          format: int32
+          type: integer
+    ApiVehicleCarrierWorkResource:
+      type: object
+      properties:
+        VehicleGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        CarrierGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        SubscriberGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        StageWeighing:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkStageWeighingResource'
+        CurrentLinkedRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkCurrentLinkedRoutesResource'
+        CurrentLinkedJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkCurrentLinkedJobsResource'
+        LinkedToMoreThanOneCustomers:
+          type: boolean
+        CurrentLinkedCustomers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkCurrentLinkedCustomersResource'
+    ApiVehicleCarrierWorkCurrentLinkedCustomersResource:
+      type: object
+      properties:
+        CustomerGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        CustomerSiteGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Customer:
+          type: string
+        CustomerSite:
+          type: string
+        LinkedToMoreThanOneOrder:
+          type: boolean
+        LinkedOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource'
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          format: int32
+          type: integer
+    ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource:
+      type: object
+      properties:
+        OrderNo:
+          type: string
+        OrderGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOriginGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
+          type: string
+        ShortCode:
+          type: string
+        InboundOrder:
+          type: boolean
+        LinkedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource'
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          format: int32
+          type: integer
+    ApiVehicleCarrierWorkCurrentLinkedRoutesResource:
+      type: object
+      properties:
+        RouteGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        RouteNo:
+          format: int32
+          type: integer
+        DefaultMaterial:
+          type: string
+        MaterialShortCode:
+          type: string
+        MaterialEWCCode:
+          type: string
+        LinkedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkCurrentLinkedMaterialsResource'
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          format: int32
+          type: integer
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiVehicleCarrierWorkCurrentLinkedMaterialsResource:
+      type: object
+      properties:
+        MaterialGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Material:
+          type: string
+        MaterialShortCode:
+          type: string
+        MaterialAnalysisCode:
+          type: string
+        MaterialEWCCode:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          format: int32
+          type: integer
+    ApiVehicleCarrierWorkCurrentLinkedJobsResource:
+      type: object
+      properties:
+        JobGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        DefaultMaterial:
+          type: string
+        MaterialShortCode:
+          type: string
+        MaterialAnalysisCode:
+          type: string
+        MaterialEWCCode:
+          type: string

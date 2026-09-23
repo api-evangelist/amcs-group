@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup JobCancel API
+  title: Core Job Cancel API
   version: core
 tags:
 - name: JobCancel
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiJobCancelResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiJobCancelResource'
+      summary: Get jobsystem job cancels changes
+      x-summary-source: derived
+      operationId: getJobsystemJobCancelsChanges
+      x-operation-id-source: derived
   /jobsystem/jobCancels/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiJobCancelResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiJobCancelResource'
+      summary: Get jobsystem job cancels template
+      x-summary-source: derived
+      operationId: getJobsystemJobCancelsTemplate
+      x-operation-id-source: derived
   /jobsystem/jobCancels/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiJobCancelResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobCancelResource'
+      summary: Get jobsystem job cancels by id
+      x-summary-source: derived
+      operationId: getJobsystemJobCancelsById
+      x-operation-id-source: derived
     put:
       tags:
       - JobCancel
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace jobsystem job cancels by id
+      x-summary-source: derived
+      operationId: putJobsystemJobCancelsById
+      x-operation-id-source: derived
     delete:
       tags:
       - JobCancel
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete jobsystem job cancels by id
+      x-summary-source: derived
+      operationId: deleteJobsystemJobCancelsById
+      x-operation-id-source: derived
   /jobsystem/jobCancels/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get jobsystem job cancels by id blob by blob member name
+      x-summary-source: derived
+      operationId: getJobsystemJobCancelsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /jobsystem/jobCancels:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiJobCancelResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiJobCancelResource'
+      summary: Get jobsystem job cancels
+      x-summary-source: derived
+      operationId: getJobsystemJobCancels
+      x-operation-id-source: derived
     post:
       tags:
       - JobCancel
@@ -204,19 +232,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create jobsystem job cancels
+      x-summary-source: derived
+      operationId: postJobsystemJobCancels
+      x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceChanges_ApiJobCancelResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceChanges[ApiJobCancelResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResult_ApiJobCancelResource:
       type: object
       properties:
         errors:
@@ -224,49 +285,7 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        associations:
-          type: array
-          items:
-            type: string
-          nullable: true
-        expand:
-          type: array
-          items:
-            type: string
-          nullable: true
-        operations:
-          type: array
-          items:
-            type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ApiJobCancelResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -279,14 +298,7 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntity[ApiJobCancelResource]:
+    ApiResourceResultEntity_ApiJobCancelResource:
       type: object
       properties:
         errors:
@@ -300,13 +312,39 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    AMCS.Core.Entity.Api.JobSystem.ApiJobCancel:
       type: object
       properties:
-        count:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
           type: integer
           format: int32
-          nullable: true
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        jobId:
+          type: string
+          format: uuid
       additionalProperties: false
     ApiResource:
       type: object
@@ -320,23 +358,70 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
       additionalProperties: false
-    ApiResourceResult[ApiJobCancelResource]:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResourceResultCollection_ApiJobCancelResource:
       type: object
       properties:
         errors:
@@ -344,45 +429,11 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
-      additionalProperties: false
-    AMCS.Core.Entity.Api.JobSystem.ApiJobCancel:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        jobId:
-          type: string
-          format: uuid
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobCancel'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false

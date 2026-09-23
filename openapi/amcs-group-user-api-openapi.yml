@@ -1,7 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup User API
-  version: core
+  title: Amcs Group User API
+  version: '1.0'
+  description: 'Operations tagged User across 2 of this provider''s published API definitions: amcs-group-core-openapi-original.json, amcs-group-erp-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: User
 paths:
@@ -12,12 +15,40 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get services api user
+      x-summary-source: derived
+      operationId: getServicesApiUser
+      x-operation-id-source: derived
   /directory/users/{guid}:
     get:
       tags:
       - User
       summary: Find with GUID
-      description: "| Property | Description                                                  |\r\n| -------- | ------------------------------------------------------------ |\r\n| GUID     | The GUID associated to the user.                             |\r\n| UserName | The username assigned to the user (usually what they use to log-in). |\r\n| Forename | The user's first name.                                       |\r\n| Surname  | The user's last name.                                        |\r\n| Code     | The users code.  |\r\n| Email   | The user's email.                                            |\r\n| MobileTelNo     | The MobileTelNo associated to the user.               |\r\n| IsOwnerDriver | Whether the user is Owner Driver.  |\r\n| AccessRightEnumFilter | Used to filter users by access right.  |\r\n| CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |\r\n| StaffTypeListItem | The GUID and Description of the staff type associated to the user. |"
+      description: '| Property | Description |
+
+        | -------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the user. |
+
+        | UserName | The username assigned to the user (usually what they use to log-in). |
+
+        | Forename | The user''s first name. |
+
+        | Surname | The user''s last name. |
+
+        | Code | The users code. |
+
+        | Email | The user''s email. |
+
+        | MobileTelNo | The MobileTelNo associated to the user. |
+
+        | IsOwnerDriver | Whether the user is Owner Driver. |
+
+        | AccessRightEnumFilter | Used to filter users by access right. |
+
+        | CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |
+
+        | StaffTypeListItem | The GUID and Description of the staff type associated to the user. |'
       operationId: User_Get
       parameters:
       - name: guid
@@ -36,13 +67,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorUserResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorUserResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
   /directory/users:
     get:
       tags:
       - User
       summary: Find with Filters
-      description: "| Property | Description                                                  |\r\n| -------- | ------------------------------------------------------------ |\r\n| GUID     | The GUID associated to the user.                             |\r\n| UserName | The username assigned to the user (usually what they use to log-in). |\r\n| Forename | The user's first name.                                       |\r\n| Surname  | The user's last name.                                        |\r\n| Code     | The users code.  |\r\n| Email   | The user's email.                                            |\r\n| MobileTelNo     | The MobileTelNo associated to the user.               |\r\n| IsOwnerDriver | Whether the user is Owner Driver.  |\r\n| AccessRightEnumFilter | Used to filter users by access right.  |\r\n| CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |\r\n| StaffTypeListItem | The GUID and Description of the staff type associated to the user. |"
+      description: '| Property | Description |
+
+        | -------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the user. |
+
+        | UserName | The username assigned to the user (usually what they use to log-in). |
+
+        | Forename | The user''s first name. |
+
+        | Surname | The user''s last name. |
+
+        | Code | The users code. |
+
+        | Email | The user''s email. |
+
+        | MobileTelNo | The MobileTelNo associated to the user. |
+
+        | IsOwnerDriver | Whether the user is Owner Driver. |
+
+        | AccessRightEnumFilter | Used to filter users by access right. |
+
+        | CompanyOutletListItem | The GUID and Description of the company outlet associated to the user. |
+
+        | StaffTypeListItem | The GUID and Description of the staff type associated to the user. |'
       operationId: User_GetCollection
       parameters:
       - name: filter
@@ -73,7 +130,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorUserResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorUserResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -85,7 +144,28 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorUserResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorUserResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorUserResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorUserResource:
       type: object
       properties:
         resource:
@@ -98,25 +178,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorUserResource:
       type: object
       properties:
@@ -162,6 +223,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -179,16 +251,6 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorUserResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorUserResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+x-refined-from:
+- amcs-group-core-openapi-original.json
+- amcs-group-erp-openapi-original.json

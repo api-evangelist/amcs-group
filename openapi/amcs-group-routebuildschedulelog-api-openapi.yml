@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup RouteBuildScheduleLog API
-  version: core
+  title: AMCS Platform REST Route Build Schedule Log API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: RouteBuildScheduleLog
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - RouteBuildScheduleLog
       summary: Retrieve changes
-      description: "| Property| Description|\r\n| ----------------------------------| ------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the routebuildschedulelog.|\r\n| BuildStart| The Build Start  date associated to the routebuildschedulelogs. |\r\n| BuildEnd| The Build End  date associated to the routebuildschedulelogs. |\r\n| IsSuccess| Whether the routebuildschedulelogs is success. |\r\n| RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|\r\n| IsDeleted| Whether the routebuildschedulelogs is deleted.|\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------------| ------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the routebuildschedulelog.|
+
+        | BuildStart| The Build Start date associated to the routebuildschedulelogs. |
+
+        | BuildEnd| The Build End date associated to the routebuildschedulelogs. |
+
+        | IsSuccess| Whether the routebuildschedulelogs is success. |
+
+        | RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|
+
+        | IsDeleted| Whether the routebuildschedulelogs is deleted.|'
       operationId: RouteBuildScheduleLog_GetChanges
       parameters:
       - name: since
@@ -27,13 +53,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorRouteBuildScheduleLogResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorRouteBuildScheduleLogResource'
   /transport/routeBuildScheduleLogs/{guid}:
     get:
       tags:
       - RouteBuildScheduleLog
       summary: Find with GUID
-      description: "| Property| Description|\r\n| ----------------------------------| ------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the routebuildschedulelog.|\r\n| BuildStart| The Build Start  date associated to the routebuildschedulelogs. |\r\n| BuildEnd| The Build End  date associated to the routebuildschedulelogs. |\r\n| IsSuccess| Whether the routebuildschedulelogs is success. |\r\n| RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|\r\n| IsDeleted| Whether the routebuildschedulelogs is deleted.|\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------------| ------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the routebuildschedulelog.|
+
+        | BuildStart| The Build Start date associated to the routebuildschedulelogs. |
+
+        | BuildEnd| The Build End date associated to the routebuildschedulelogs. |
+
+        | IsSuccess| Whether the routebuildschedulelogs is success. |
+
+        | RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|
+
+        | IsDeleted| Whether the routebuildschedulelogs is deleted.|'
       operationId: RouteBuildScheduleLog_Get
       parameters:
       - name: guid
@@ -52,13 +92,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRouteBuildScheduleLogResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorRouteBuildScheduleLogResource'
   /transport/routeBuildScheduleLogs:
     get:
       tags:
       - RouteBuildScheduleLog
       summary: Find with Filters
-      description: "| Property| Description|\r\n| ----------------------------------| ------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the routebuildschedulelog.|\r\n| BuildStart| The Build Start  date associated to the routebuildschedulelogs. |\r\n| BuildEnd| The Build End  date associated to the routebuildschedulelogs. |\r\n| IsSuccess| Whether the routebuildschedulelogs is success. |\r\n| RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|\r\n| IsDeleted| Whether the routebuildschedulelogs is deleted.|\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------------| ------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the routebuildschedulelog.|
+
+        | BuildStart| The Build Start date associated to the routebuildschedulelogs. |
+
+        | BuildEnd| The Build End date associated to the routebuildschedulelogs. |
+
+        | IsSuccess| Whether the routebuildschedulelogs is success. |
+
+        | RouteTemplateGuid| The GUID of the Route Template associated to the routebuildschedulelog. Filterable|
+
+        | IsDeleted| Whether the routebuildschedulelogs is deleted.|'
       operationId: RouteBuildScheduleLog_GetCollection
       parameters:
       - name: filter
@@ -89,7 +143,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRouteBuildScheduleLogResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRouteBuildScheduleLogResource'
 components:
   schemas:
     ApiResourceResultUpdatesExtra:
@@ -98,24 +152,6 @@ components:
         until:
           type: string
         cursor:
-          type: string
-    ApiResourceChanges[ApiIntegratorRouteBuildScheduleLogResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteBuildScheduleLogResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
           type: string
     ApiIntegratorRouteBuildScheduleLogResource:
       type: object
@@ -140,13 +176,15 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultCollection[ApiIntegratorRouteBuildScheduleLogResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorRouteBuildScheduleLogResource:
       type: object
       properties:
         resource:
@@ -155,6 +193,19 @@ components:
             $ref: '#/components/schemas/ApiIntegratorRouteBuildScheduleLogResource'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges_ApiIntegratorRouteBuildScheduleLogResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteBuildScheduleLogResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -176,7 +227,18 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity[ApiIntegratorRouteBuildScheduleLogResource]:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorRouteBuildScheduleLogResource:
       type: object
       properties:
         resource:
@@ -206,11 +268,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

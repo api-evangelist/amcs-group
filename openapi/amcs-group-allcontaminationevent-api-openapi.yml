@@ -1,7 +1,25 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AllContaminationEvent API
-  version: core
+  description: '**Download Trux JSON**
+
+
+    ---
+
+
+    # Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The VisionAI REST API endpoints are technically described in this document.'
+  title: External All Contamination Event API
+  version: external
+servers:
+- url: https://o1-dev-svc-core.amcsplatform.com/
+  description: AMCS VisionAI Developer Environment
+security:
+- cookieAuth: []
 tags:
 - name: AllContaminationEvent
 paths:
@@ -10,7 +28,92 @@ paths:
       tags:
       - AllContaminationEvent
       summary: Request list of All Contamination Event changes
-      description: "# Request list of All Contamination Event changes\r\n\r\nRetrieve changes in the list of Contamination Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false\r\n\r\n## Input\r\n\r\n| Parameter               | Description                |\r\n| ----------------------- | -------------------------- |\r\n| since                   | Bookmark from extra.until  |\r\n| cursor                  | Bookmark from extra.cursor |\r\n| links                   | N/A                        |\r\n\r\n## Output\r\n\r\n| Property\t\t\t\t\t\t| Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |\r\n| GUID\t\t\t\t\t\t\t\t| GUID     | ID of the Contamination Event.\t\t\t\t\t\t\t\t\t\t\t\t\t                          \t|\r\n| TenantId\t\t\t\t\t\t| GUID     | ID of the Tenant associated with the Contamination Event\t\t                        |\r\n| CustomerName\t\t\t\t\t|string| Name of the customer of the Contamination Event|\r\n| CompanyOutletId\t\t\t| GUID     | ID of the Company Outlet associated with the Contamination Event                  \t|\r\n| OutletName\t\t\t| string     | Name of the Company Outlet associated with the Contamination Event                  \t|\r\n| CustomerSiteId\t\t\t| GUID     | ID of the Customer Site associated with the Contamination Event                     |\r\n| SiteName\t\t\t| string     | Name of the Site associated with the Contamination Event                     |\r\n| CustomerType\t\t\t| string     | Type of customer associated with the Contamination Event                     |\r\n| CustomerAddress\t\t\t| string     | Address of customer associated with the Contamination Event                     |\r\n| VehicleId\t\t\t\t\t\t| GUID     | ID of the Vehicle associated with the Contamination Event\t\t\t\t                  \t|\r\n| Latitude\t   \t\t\t  | double   | Location of the Contamination Event                                                |\r\n| Longitude\t\t\t\t\t\t| double   | Location of the Contamination Event                                                |\r\n| Timestamp\t\t\t\t\t\t| DateTime | Timestamp of the Contamination Event\t                                              |\r\n| ContaminationScore \t| int      | Degree of Contamination found                                                      |\r\n| GrossWeight\t\t\t|double|Gross weight of the Contamination Event\t|\r\n| TareWeight\t\t\t\t|double| Tare weight of the Contamination Event |\r\n| NetWeight\t\t\t\t|double| Net weight of the Contamination Event|\r\n| Seq\t\t\t\t\t|int|Sequence of the Contamination Event |\r\n| RFID\t\t\t| GUID | RFID of the Contamination Event |\r\n| WeighErrorCode\t\t| int | Weight error code of the Contamination Event |\r\n| Lifter\t\t\t\t|int|Lifter of the Contamination Event\t|\r\n| ContainerId\t\t\t|string|Conntainer Id of the Contamination Event |\r\n| WasteType\t\t\t\t|string|Waste type of the Contamination Event |\r\n| QRCodeRawText\t\t\t|string| Raw QR code value of the COntamination Event |\r\n| TotalSurfaceAreaVolume\t\t\t|double| The total surface area of the Contamination Event |\r\n| Materials\t\t\t|string| The materials detected of the Contamination Event |\r\n| ExternalEventId\t\t\t|string| The external event Id of the Contamination Event |\r\n| ImageSas\t\t\t|string| The image SAS url of the Contamination Event expires within 24 hours|\r\n| extra.until         | string   | Bookmark to put in as \"since\" later - appears when there are no more pages for now |\r\n| link.next           | URI      | Link to follow to get next page with changes                                       |"
+      description: '# Request list of All Contamination Event changes
+
+
+        Retrieve changes in the list of Contamination Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false
+
+
+        ## Input
+
+
+        | Parameter | Description |
+
+        | ----------------------- | -------------------------- |
+
+        | since | Bookmark from extra.until |
+
+        | cursor | Bookmark from extra.cursor |
+
+        | links | N/A |
+
+
+        ## Output
+
+
+        | Property | Type | Description |
+
+        | ------------------- | -------- | ---------------------------------------------------------------------------------- |
+
+        | GUID | GUID | ID of the Contamination Event. |
+
+        | TenantId | GUID | ID of the Tenant associated with the Contamination Event |
+
+        | CustomerName |string| Name of the customer of the Contamination Event|
+
+        | CompanyOutletId | GUID | ID of the Company Outlet associated with the Contamination Event |
+
+        | OutletName | string | Name of the Company Outlet associated with the Contamination Event |
+
+        | CustomerSiteId | GUID | ID of the Customer Site associated with the Contamination Event |
+
+        | SiteName | string | Name of the Site associated with the Contamination Event |
+
+        | CustomerType | string | Type of customer associated with the Contamination Event |
+
+        | CustomerAddress | string | Address of customer associated with the Contamination Event |
+
+        | VehicleId | GUID | ID of the Vehicle associated with the Contamination Event |
+
+        | Latitude | double | Location of the Contamination Event |
+
+        | Longitude | double | Location of the Contamination Event |
+
+        | Timestamp | DateTime | Timestamp of the Contamination Event |
+
+        | ContaminationScore | int | Degree of Contamination found |
+
+        | GrossWeight |double|Gross weight of the Contamination Event |
+
+        | TareWeight |double| Tare weight of the Contamination Event |
+
+        | NetWeight |double| Net weight of the Contamination Event|
+
+        | Seq |int|Sequence of the Contamination Event |
+
+        | RFID | GUID | RFID of the Contamination Event |
+
+        | WeighErrorCode | int | Weight error code of the Contamination Event |
+
+        | Lifter |int|Lifter of the Contamination Event |
+
+        | ContainerId |string|Conntainer Id of the Contamination Event |
+
+        | WasteType |string|Waste type of the Contamination Event |
+
+        | QRCodeRawText |string| Raw QR code value of the COntamination Event |
+
+        | TotalSurfaceAreaVolume |double| The total surface area of the Contamination Event |
+
+        | Materials |string| The materials detected of the Contamination Event |
+
+        | ExternalEventId |string| The external event Id of the Contamination Event |
+
+        | ImageSas |string| The image SAS url of the Contamination Event expires within 24 hours|
+
+        | extra.until | string | Bookmark to put in as "since" later - appears when there are no more pages for now |
+
+        | link.next | URI | Link to follow to get next page with changes |'
       parameters:
       - name: since
         in: query
@@ -30,36 +133,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiAllContaminationEventExternalResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiAllContaminationEventExternalResource'
+      operationId: getVisionaiApiIntegratorAllContaminationEventsChanges
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceChanges[ApiAllContaminationEventExternalResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         since:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
       type: object
@@ -67,12 +160,16 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-          nullable: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem:
       type: object
@@ -81,133 +178,177 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         tenantId:
           type: string
           format: uuid
         customerName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         companyOutletId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         outletName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         customerSiteId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         siteName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         customerType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         customerAddress:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         vehicleId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         vehicleReg:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         latitude:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         longitude:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         timestamp:
           type: string
           format: dateTime
           example: '2000-01-01 00:00:00.000'
         contaminationScore:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         grossWeight:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         tareWeight:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         netWeight:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         seq:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         rfid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         weighErrorCode:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         lifter:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         containerId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         wasteType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         qrCodeRawText:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         totalSurfaceAreaVolume:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         materials:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         externalEventId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         imageSas:
-          type: string
+          type:
+          - string
+          - 'null'
           format: byte
-          nullable: true
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceChanges_ApiAllContaminationEventExternalResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false

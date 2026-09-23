@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup UserPreference API
+  title: Core User Preference API
   version: core
 tags:
 - name: UserPreference
@@ -17,6 +17,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get services api user preference
+      x-summary-source: derived
+      operationId: getServicesApiUserPreference
+      x-operation-id-source: derived
     post:
       tags:
       - UserPreference
@@ -34,6 +38,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create services api user preference
+      x-summary-source: derived
+      operationId: postServicesApiUserPreference
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.Core.Entity.Api.User.UserPreference:
@@ -43,40 +51,49 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userPreferenceId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         userIdentity:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         tenantId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         key:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         value:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

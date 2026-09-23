@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ContainerCategory API
-  version: core
+  title: AMCS Platform REST Container Category API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: ContainerCategory
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - ContainerCategory
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the container category                            |\r\n| Description               | The description of the container category                                |\r\n| AnalysisCode              | The analysis code of the container category                              |\r\n| IsDeleted                 | Whether the container category is deleted                |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the container category |
+
+        | Description | The description of the container category |
+
+        | AnalysisCode | The analysis code of the container category |
+
+        | IsDeleted | Whether the container category is deleted |'
       operationId: ContainerCategory_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContainerCategoryResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorContainerCategoryResource'
   /lists/containerCategories:
     get:
       tags:
       - ContainerCategory
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the container category                            |\r\n| Description               | The description of the container category                                |\r\n| AnalysisCode              | The analysis code of the container category                              |\r\n| IsDeleted                 | Whether the container category is deleted                |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the container category |
+
+        | Description | The description of the container category |
+
+        | AnalysisCode | The analysis code of the container category |
+
+        | IsDeleted | Whether the container category is deleted |'
       operationId: ContainerCategory_GetCollection
       parameters:
       - name: filter
@@ -66,22 +98,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContainerCategoryResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContainerCategoryResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorContainerCategoryResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorContainerCategoryResource:
       type: object
       properties:
@@ -95,26 +114,23 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntity[ApiIntegratorContainerCategoryResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorContainerCategoryResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -136,6 +152,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultEntity_ApiIntegratorContainerCategoryResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -153,11 +193,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

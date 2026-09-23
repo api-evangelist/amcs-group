@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DefinitionBrowser API
+  title: Core Definition Browser API
   version: core
 tags:
 - name: DefinitionBrowser
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiWorkflowDefinitionBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiWorkflowDefinitionBrowserResource'
+      summary: Get services api workflow definition browsers changes
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionBrowsersChanges
+      x-operation-id-source: derived
   /services/api/workflow/definitionBrowsers/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiWorkflowDefinitionBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiWorkflowDefinitionBrowserResource'
+      summary: Get services api workflow definition browsers template
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionBrowsersTemplate
+      x-operation-id-source: derived
   /services/api/workflow/definitionBrowsers/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiWorkflowDefinitionBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiWorkflowDefinitionBrowserResource'
+      summary: Get services api workflow definition browsers by id
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionBrowsersById
+      x-operation-id-source: derived
     put:
       tags:
       - DefinitionBrowser
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api workflow definition browsers by id
+      x-summary-source: derived
+      operationId: putServicesApiWorkflowDefinitionBrowsersById
+      x-operation-id-source: derived
     delete:
       tags:
       - DefinitionBrowser
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api workflow definition browsers by id
+      x-summary-source: derived
+      operationId: deleteServicesApiWorkflowDefinitionBrowsersById
+      x-operation-id-source: derived
   /services/api/workflow/definitionBrowsers/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api workflow definition browsers by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionBrowsersByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/workflow/definitionBrowsers:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowDefinitionBrowserResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiWorkflowDefinitionBrowserResource'
+      summary: Get services api workflow definition browsers
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionBrowsers
+      x-operation-id-source: derived
     post:
       tags:
       - DefinitionBrowser
@@ -204,9 +232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api workflow definition browsers
+      x-summary-source: derived
+      operationId: postServicesApiWorkflowDefinitionBrowsers
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceChanges[ApiWorkflowDefinitionBrowserResource]:
+    ApiResourceResult_ApiWorkflowDefinitionBrowserResource:
       type: object
       properties:
         errors:
@@ -214,22 +246,110 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
       additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollection_ApiWorkflowDefinitionBrowserResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        workflowDefinitionId:
           type: string
-          nullable: true
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        providerId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        providerName:
+          type:
+          - string
+          - 'null'
+        providerDescription:
+          type:
+          - string
+          - 'null'
+        scheduleJobId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        designerUrl:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -242,67 +362,7 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        workflowDefinitionId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        providerId:
-          type: integer
-          format: int32
-          nullable: true
-        providerName:
-          type: string
-          nullable: true
-        providerDescription:
-          type: string
-          nullable: true
-        scheduleJobId:
-          type: integer
-          format: int32
-          nullable: true
-        designerUrl:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntity[ApiWorkflowDefinitionBrowserResource]:
+    ApiResourceResultEntity_ApiWorkflowDefinitionBrowserResource:
       type: object
       properties:
         errors:
@@ -316,28 +376,31 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ApiWorkflowDefinitionBrowserResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false
     ApiResource:
       type: object
@@ -347,7 +410,48 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
-    ApiResourceResult[ApiWorkflowDefinitionBrowserResource]:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceChanges_ApiWorkflowDefinitionBrowserResource:
       type: object
       properties:
         errors:
@@ -355,57 +459,11 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
-            type: string
-          nullable: true
-        expand:
-          type: array
-          items:
-            type: string
-          nullable: true
-        operations:
-          type: array
-          items:
-            type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup MunicipalAccountState API
-  version: core
+  title: AMCS Platform REST Municipal Account State API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: MunicipalAccountState
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - MunicipalAccountState
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the municipal account state       |\r\n| Description               | The description of the municipal account building type   |\r\n| IsDeleted                 | Whether the municipal account building type is deleted               |\r\n   "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the municipal account state |
+
+        | Description | The description of the municipal account building type |
+
+        | IsDeleted | Whether the municipal account building type is deleted |'
       operationId: MunicipalAccountState_GetCollection
       parameters:
       - name: filter
@@ -41,9 +61,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMunicipalAccountStateResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalAccountStateResource'
 components:
   schemas:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorMunicipalAccountStateResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountStateResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorMunicipalAccountStateResource:
       type: object
       properties:
@@ -66,24 +107,3 @@ components:
         count:
           type: integer
           format: int32
-    ApiResourceResultCollection[ApiIntegratorMunicipalAccountStateResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountStateResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

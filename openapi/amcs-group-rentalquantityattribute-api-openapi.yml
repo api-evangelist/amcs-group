@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup RentalQuantityAttribute API
-  version: core
+  title: AMCS Platform REST Rental Quantity Attribute API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: RentalQuantityAttribute
 paths:
@@ -10,7 +22,13 @@ paths:
       tags:
       - RentalQuantityAttribute
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the rental quantity attribute                     |\r\n| Description               | The description of the rental quantity attribute                         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the rental quantity attribute |
+
+        | Description | The description of the rental quantity attribute |'
       operationId: RentalQuantityAttribute_Get
       parameters:
       - name: guid
@@ -29,13 +47,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRentalQuantityAttributeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorRentalQuantityAttributeResource'
   /lists/rentalQuantityAttributes:
     get:
       tags:
       - RentalQuantityAttribute
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the rental quantity attribute                     |\r\n| Description               | The description of the rental quantity attribute                         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the rental quantity attribute |
+
+        | Description | The description of the rental quantity attribute |'
       operationId: RentalQuantityAttribute_GetCollection
       parameters:
       - name: filter
@@ -66,15 +90,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRentalQuantityAttributeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRentalQuantityAttributeResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorRentalQuantityAttributeResource]:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorRentalQuantityAttributeResource:
       type: object
       properties:
         resource:
@@ -87,25 +114,23 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorRentalQuantityAttributeResource]:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorRentalQuantityAttributeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorRentalQuantityAttributeResource:
       type: object
       properties:
@@ -132,28 +157,27 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
+        errors:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceStatus:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntity_ApiIntegratorRentalQuantityAttributeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRentalQuantityAttributeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

@@ -1,16 +1,36 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CustomerGroup API
-  version: core
+  title: AMCS Platform REST Customer Group API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
-- name: CustomerGroup
+- name: Customer Group
 paths:
   /lists/customerGroups/{guid}:
     get:
       tags:
-      - CustomerGroup
+      - Customer Group
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer group                                |\r\n| Description               | The description of the customer group                                    |\r\n| IsDeleted                 | Whether the customer group is deleted            |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the customer group |
+
+        | Description | The description of the customer group |
+
+        | IsDeleted | Whether the customer group is deleted |'
       operationId: CustomerGroup_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCustomerGroupResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCustomerGroupResource'
   /lists/customerGroups:
     get:
       tags:
-      - CustomerGroup
+      - Customer Group
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the customer group                                |\r\n| Description               | The description of the customer group                                    |\r\n| IsDeleted                 | Whether the customer group is deleted            |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the customer group |
+
+        | Description | The description of the customer group |
+
+        | IsDeleted | Whether the customer group is deleted |'
       operationId: CustomerGroup_GetCollection
       parameters:
       - name: filter
@@ -66,9 +94,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCustomerGroupResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCustomerGroupResource'
 components:
   schemas:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorCustomerGroupResource:
       type: object
       properties:
@@ -80,18 +116,20 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceResultEntity_ApiIntegratorCustomerGroupResource:
       type: object
       properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCustomerGroupResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultCollection[ApiIntegratorCustomerGroupResource]:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorCustomerGroupResource:
       type: object
       properties:
         resource:
@@ -121,19 +159,17 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity[ApiIntegratorCustomerGroupResource]:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCustomerGroupResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -151,11 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

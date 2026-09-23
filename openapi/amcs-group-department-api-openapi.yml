@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Department API
-  version: core
+  title: AMCS Platform REST Department API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Department
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - Department
       summary: Find with GUID
-      description: "| Property                  | Description                                                         |\r\n| ------------------------- | ------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the department                               |\r\n| Description               | The description of the department                                   |\r\n| IsDeleted                 | Whether the department is deleted         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the department |
+
+        | Description | The description of the department |
+
+        | IsDeleted | Whether the department is deleted |'
       operationId: Department_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDepartmentResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorDepartmentResource'
   /lists/departments:
     get:
       tags:
       - Department
       summary: Find with Filters
-      description: "| Property                  | Description                                                         |\r\n| ------------------------- | ------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the department                               |\r\n| Description               | The description of the department                                   |\r\n| IsDeleted                 | Whether the department is deleted         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the department |
+
+        | Description | The description of the department |
+
+        | IsDeleted | Whether the department is deleted |'
       operationId: Department_GetCollection
       parameters:
       - name: filter
@@ -66,45 +94,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDepartmentResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDepartmentResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiIntegratorDepartmentResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorDepartmentResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorDepartmentResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntity[ApiIntegratorDepartmentResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorDepartmentResource:
       type: object
       properties:
         resource:
@@ -117,23 +118,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -151,11 +135,55 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiIntegratorDepartmentResource:
       type: object
       properties:
-        id:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultCollection_ApiIntegratorDepartmentResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDepartmentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

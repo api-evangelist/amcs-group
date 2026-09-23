@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup BulkyWasteJobOrderDetail API
-  version: core
+  title: AMCS Platform REST Bulky Waste Job Order Detail API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: BulkyWasteJobOrderDetail
 paths:
@@ -28,109 +40,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorBulkyWasteJobOrderDetailResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorBulkyWasteJobOrderDetailResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorBulkyWasteJobOrderDetailResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobOrderDetailResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorBulkyWasteJobChargeAndCostResource:
-      type: object
-      properties:
-        PriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsSelected:
-          type: boolean
-        Type:
-          type: string
-        Service:
-          type: string
-        ContainerType:
-          type: string
-        Action:
-          type: string
-        Material:
-          type: string
-        PricingBasis:
-          type: string
-        Rate:
-          type: number
-          format: double
-    ApiIntegratorBulkyWasteProcessingPriceResource:
-      type: object
-      properties:
-        PriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerType:
-          type: string
-        MaterialClass:
-          type: string
-        MaterialProfile:
-          type: string
-        PricingBasis:
-          type: string
-        NetPrice:
-          type: number
-          format: double
-        GrossPrice:
-          type: number
-          format: double
-        BreakdownQuantity:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        isSuccess:
+          type: boolean
     ApiIntegratorBulkyWasteJobOrderDetailResource:
       type: object
       properties:
@@ -172,11 +92,103 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiResourceResultEntity_ApiIntegratorBulkyWasteJobOrderDetailResource:
       type: object
       properties:
-        id:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobOrderDetailResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorBulkyWasteJobChargeAndCostResource:
+      type: object
+      properties:
+        PriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsSelected:
+          type: boolean
+        Type:
+          type: string
+        Service:
+          type: string
+        ContainerType:
+          type: string
+        Action:
+          type: string
+        Material:
+          type: string
+        PricingBasis:
+          type: string
+        Rate:
+          type: number
+          format: double
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorBulkyWasteProcessingPriceResource:
+      type: object
+      properties:
+        PriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerType:
+          type: string
+        MaterialClass:
+          type: string
+        MaterialProfile:
+          type: string
+        PricingBasis:
+          type: string
+        NetPrice:
+          type: number
+          format: double
+        GrossPrice:
+          type: number
+          format: double
+        BreakdownQuantity:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean

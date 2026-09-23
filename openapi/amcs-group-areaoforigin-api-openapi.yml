@@ -1,7 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AreaOfOrigin API
-  version: core
+  title: Amcs Group Area Of Origin API
+  version: '1.0'
+  description: 'Operations tagged AreaOfOrigin across 2 of this provider''s published API definitions: amcs-group-erp-openapi-original.json, amcs-group-scale-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+- url: http://{env}-svc-core.amcsplatform.com/scale/api/
 tags:
 - name: AreaOfOrigin
 paths:
@@ -10,7 +14,17 @@ paths:
       tags:
       - AreaOfOrigin
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the area of origin. |\r\n| Description               | The description of the area of origin.|\r\n| CompanyOutletListItem     | The GUID and description of the company outlet this area of origin is associated to.|\r\n| IsDeleted                 | Whether the area of origin is deleted.                       |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the area of origin. |
+
+        | Description | The description of the area of origin.|
+
+        | CompanyOutletListItem | The GUID and description of the company outlet this area of origin is associated to.|
+
+        | IsDeleted | Whether the area of origin is deleted. |'
       operationId: AreaOfOrigin_Get
       parameters:
       - name: guid
@@ -29,13 +43,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorAreaOfOriginResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorAreaOfOriginResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
   /lists/areaOfOrigins:
     get:
       tags:
       - AreaOfOrigin
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the area of origin. |\r\n| Description               | The description of the area of origin.|\r\n| CompanyOutletListItem     | The GUID and description of the company outlet this area of origin is associated to.|\r\n| IsDeleted                 | Whether the area of origin is deleted.                       |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the area of origin. |
+
+        | Description | The description of the area of origin.|
+
+        | CompanyOutletListItem | The GUID and description of the company outlet this area of origin is associated to.|
+
+        | IsDeleted | Whether the area of origin is deleted. |'
       operationId: AreaOfOrigin_GetCollection
       parameters:
       - name: filter
@@ -66,45 +92,62 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorAreaOfOriginResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
   /integrator/areaOfOrigins/{id}:
     get:
       tags:
       - AreaOfOrigin
       summary: Find with GUID
-      description: "\r\n\r\n\r\n| Property                                              | Description                                                    |\r\n| ----------------------------------------------------- | -------------------------------------------------------------- |\r\n| SubscriberGUID                                        | The guid of the Subscriber                                     |\r\n| AreaOfOrigin[].AreaOfOriginGUID                       | The guid of the AreaOfOrigin                                   |\r\n| AreaOfOrigin[].AreaOfOrigin\t                        | The description of the AreaOfOrigin                            |\r\n| AreaOfOrigin[].AreaOfOriginShortCode\t                | The shortcode of the AreaOfOrigin\t\t\t\t\t\t\t\t |"
+      description: '| Property | Description |
+
+        | ----------------------------------------------------- | -------------------------------------------------------------- |
+
+        | SubscriberGUID | The guid of the Subscriber |
+
+        | AreaOfOrigin[].AreaOfOriginGUID | The guid of the AreaOfOrigin |
+
+        | AreaOfOrigin[].AreaOfOrigin | The description of the AreaOfOrigin |
+
+        | AreaOfOrigin[].AreaOfOriginShortCode | The shortcode of the AreaOfOrigin |'
       operationId: AreaOfOrigin_Get
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: id
         in: path
         required: true
-        type: string
-        format: uuid
+        schema:
+          type: string
+          format: uuid
       - name: links
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: include
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: expand
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       - name: udf
         in: query
         required: false
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ApiResourceResultEntity[ApiSubscriberAreaOfOriginResource]'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource'
+    servers:
+    - url: http://{env}-svc-core.amcsplatform.com/scale/api/
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -116,6 +159,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorAreaOfOriginResource:
       type: object
       properties:
@@ -129,26 +185,23 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntity[ApiIntegratorAreaOfOriginResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -170,6 +223,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -187,107 +251,41 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection[ApiIntegratorAreaOfOriginResource]:
+    ApiSubscriberAreaOfOriginResource:
+      type: object
+      properties:
+        SubscriberGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriberAreaOfOriginResource'
+    ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+          $ref: '#/components/schemas/ApiSubscriberAreaOfOriginResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    SubscriberAreaOfOriginResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-definitions:
-  ApiSubscriberAreaOfOriginResource:
-    type: object
-    properties:
-      SubscriberGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      AreaOfOrigin:
-        type: array
-        items:
-          $ref: '#/definitions/SubscriberAreaOfOriginResource'
-  SubscriberAreaOfOriginResource:
-    type: object
-    properties:
-      AreaOfOriginGUID:
-        format: uuid
-        type: string
-        example: 00000000-0000-0000-0000-000000000000
-      AreaOfOrigin:
-        type: string
-      AreaOfOriginShortCode:
-        type: string
-  ApiResourceErrors:
-    type: object
-    properties:
-      errors:
-        type: string
-  ApiResourceResultEntity[ApiSubscriberAreaOfOriginResource]:
-    type: object
-    properties:
-      resource:
-        $ref: '#/definitions/ApiSubscriberAreaOfOriginResource'
-      links:
-        $ref: '#/definitions/ApiResourceResultEntityLinks'
-      extra:
-        $ref: '#/definitions/ApiResourceResultEntityExtra'
-      errors:
-        $ref: '#/definitions/ApiResourceErrors'
-      status:
-        $ref: '#/definitions/ApiResourceStatus'
-  ApiResourceStatus:
-    type: object
-    properties:
-      id:
-        format: int32
-        type: integer
-      isSuccess:
-        type: boolean
-  ApiResourceResultEntityExtra:
-    type: object
-    properties:
-      expand:
-        type: object
-        additionalProperties:
-          type: object
-          additionalProperties:
-            type: object
-      include:
-        type: object
-        additionalProperties:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-  ApiResourceResultEntityLinks:
-    type: object
-    properties:
-      self:
-        type: string
-      associations:
-        type: array
-        items:
+        AreaOfOriginGUID:
+          format: uuid
           type: string
-      expand:
-        type: array
-        items:
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
           type: string
-      operations:
-        type: array
-        items:
+        AreaOfOriginShortCode:
           type: string
+x-refined-from:
+- amcs-group-erp-openapi-original.json
+- amcs-group-scale-openapi-original.json

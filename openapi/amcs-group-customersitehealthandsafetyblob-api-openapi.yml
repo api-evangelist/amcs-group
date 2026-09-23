@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CustomerSiteHealthAndSafetyBlob API
-  version: core
+  title: AMCS Platform REST Customer Site Health And Safety Blob API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: CustomerSiteHealthAndSafetyBlob
 paths:
@@ -10,7 +22,66 @@ paths:
       tags:
       - CustomerSiteHealthAndSafetyBlob
       summary: Create or update
-      description: "| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| Guid| The GUID associated to the Customer Site Health and Safety blob| No  |\r\n| MediaContentBase64| The Image/PDF converted to base 64| Yes |\r\n| DocumentName| The Document Name| Yes |\r\n| DocumentReference| The Document Reference| Yes |\r\n| DocumentDescription| The Document Description| No |\r\n| RelatedCustomerSiteGuid| The Related Customer Site Guid| Yes |\r\n| HealthAndSafetyDocumentTypeListItem | The GUID and description of the health and safety document type| Yes |\r\n| ValidFrom| The valid from date| Yes |\r\n| ValidUntil| The valid until date| No |\r\n| IsHighRisk| Whether the document contains high risk items| No |\r\n| IsSentToVehicle| Whether the document is sent to vehicle| No |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| DocumentName is Null or not provided | The mandatory property DocumentName has a null value. The request could not be processed. Supply a value for the DocumentName property of the submitted resource.  |\r\n| DocumentName has less than 5 characters  or more than 100 characters | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should be at least 1 character and at most 100 characters, excluding the extension |\r\n| DocumentName does not have any of pdf/png/jpg/gif extension | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should have any of pdf/png/jpg/gif extension |\r\n| DocumentReference is Null or not provided | The mandatory property DocumentReference has a null value. The request could not be processed. Supply a value for the DocumentReference property of the submitted resource.  |\r\n| RelatedCustomerSiteGuid is Null or not provided | The mandatory property RelatedCustomerSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedCustomerSiteGuid property of the submitted resource.  |\r\n| Invalid RelatedCustomerSiteGuid | Failed to retrieve Customer Site with RelatedCustomerSiteGuid of {Guid} |\r\n| HealthAndSafetyDocumentTypeListItem.Guid is Null or not provided | The mandatory property HealthAndSafetyDocumentTypeListItem.Guid has a null value. The request could not be processed. Supply a value for the HealthAndSafetyDocumentTypeListItem.Guid property of the submitted resource. \r\n| Invalid HealthAndSafetyDocumentTypeListItem.Guid | Failed to retrieve HealthAndSafetyDocumentType with HealthAndSafetyDocumentTypeListItem.Guid of {Guid} |\r\n| MediaContentBase64 is Null or not provided | The mandatory property MediaContentBase64 has a null value. The request could not be processed. Supply a value for the MediaContentBase64 property of the submitted resource.  |\r\n| MediaContentBase64 is not a valid base64 string | Failed to save/update CustomerSiteHealthAndSafetyForm because ImageContentHash has Invalid length for a Base-64 char array or string |\r\n\r\n##  Information\r\n| Information |\r\n| ----------- |\r\n| Currently we are only validating for a valid base64 string, we are not validating the string against the file extension |"
+      description: '| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+
+        | Guid| The GUID associated to the Customer Site Health and Safety blob| No |
+
+        | MediaContentBase64| The Image/PDF converted to base 64| Yes |
+
+        | DocumentName| The Document Name| Yes |
+
+        | DocumentReference| The Document Reference| Yes |
+
+        | DocumentDescription| The Document Description| No |
+
+        | RelatedCustomerSiteGuid| The Related Customer Site Guid| Yes |
+
+        | HealthAndSafetyDocumentTypeListItem | The GUID and description of the health and safety document type| Yes |
+
+        | ValidFrom| The valid from date| Yes |
+
+        | ValidUntil| The valid until date| No |
+
+        | IsHighRisk| Whether the document contains high risk items| No |
+
+        | IsSentToVehicle| Whether the document is sent to vehicle| No |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | DocumentName is Null or not provided | The mandatory property DocumentName has a null value. The request could not be processed. Supply a value for the DocumentName property of the submitted resource. |
+
+        | DocumentName has less than 5 characters or more than 100 characters | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should be at least 1 character and at most 100 characters, excluding the extension |
+
+        | DocumentName does not have any of pdf/png/jpg/gif extension | CustomerSiteHealthAndSafetyForm has the property DocumentName with value of {DocumentName} that is not supported. DocumentName should have any of pdf/png/jpg/gif extension |
+
+        | DocumentReference is Null or not provided | The mandatory property DocumentReference has a null value. The request could not be processed. Supply a value for the DocumentReference property of the submitted resource. |
+
+        | RelatedCustomerSiteGuid is Null or not provided | The mandatory property RelatedCustomerSiteGuid has a null value. The request could not be processed. Supply a value for the RelatedCustomerSiteGuid property of the submitted resource. |
+
+        | Invalid RelatedCustomerSiteGuid | Failed to retrieve Customer Site with RelatedCustomerSiteGuid of {Guid} |
+
+        | HealthAndSafetyDocumentTypeListItem.Guid is Null or not provided | The mandatory property HealthAndSafetyDocumentTypeListItem.Guid has a null value. The request could not be processed. Supply a value for the HealthAndSafetyDocumentTypeListItem.Guid property of the submitted resource.
+
+        | Invalid HealthAndSafetyDocumentTypeListItem.Guid | Failed to retrieve HealthAndSafetyDocumentType with HealthAndSafetyDocumentTypeListItem.Guid of {Guid} |
+
+        | MediaContentBase64 is Null or not provided | The mandatory property MediaContentBase64 has a null value. The request could not be processed. Supply a value for the MediaContentBase64 property of the submitted resource. |
+
+        | MediaContentBase64 is not a valid base64 string | Failed to save/update CustomerSiteHealthAndSafetyForm because ImageContentHash has Invalid length for a Base-64 char array or string |
+
+
+        ## Information
+
+        | Information |
+
+        | ----------- |
+
+        | Currently we are only validating for a valid base64 string, we are not validating the string against the file extension |'
       operationId: CustomerSiteHealthAndSafetyBlob_Create
       requestBody:
         content:
@@ -37,21 +108,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorHealthAndSafetyBlobHashesResource:
       type: object
       properties:
@@ -89,3 +145,18 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

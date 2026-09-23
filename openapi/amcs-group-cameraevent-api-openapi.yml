@@ -1,7 +1,25 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CameraEvent API
-  version: core
+  description: '**Download Trux JSON**
+
+
+    ---
+
+
+    # Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The VisionAI REST API endpoints are technically described in this document.'
+  title: External Camera Event API
+  version: external
+servers:
+- url: https://o1-dev-svc-core.amcsplatform.com/
+  description: AMCS VisionAI Developer Environment
+security:
+- cookieAuth: []
 tags:
 - name: CameraEvent
 paths:
@@ -9,8 +27,70 @@ paths:
     post:
       tags:
       - CameraEvent
-      summary: Create a contamination/overfilled from  camera
-      description: "# Create a contamination/overfilled from camera\r\n\r\n| Parameter   | Type   | Description                      |\r\n|-------------|--------|----------------------------------|\r\n| Asset\t\t  | string | Vehicle Identified Registration or Asset Id|\r\n| Timestamp   | DateTime | Local time or UTC time of the event|\r\n| Lat         | double   | Latitude       |\r\n| Lon         | double   | Longitude       |\r\n| EventType   | string   | Contamination or Overfilled event       |\r\n| EventId     | string   | Unique Id for each event       |\r\n| WasteType   | string   | The waste stream the truck is collecting       |\r\n| MediaLink   | string   | URL to access the media file associate with each event    |\r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n    \"Asset\": \"M879 EUS\",\r\n    \"Timestamp\": \"2025-04-23 11:00:00\",\r\n    \"Lon\":-121.56767,\r\n    \"Lat\":39.49120,\r\n    \"EventType\": \"Contamination\",\r\n    \"EventId\": \"12345\",\r\n    \"WasteType\": \"General Waste\",\r\n    \"MediaLink\" :\"https://tem-production.s3.amazonaws.com/final_files/2025_03_14/82416/AWTI_VIN_2025_03_14_14_19_19_14019_c2_1ffdc5a0-0c80-4f15-b8be-9a16f690b2d0.mp4\"\r\n}\r\n```\r\n\r\n## Sample API Response\r\n```\r\n{\r\n    \"resource\" : 1\r\n}\r\n```"
+      summary: Create a contamination/overfilled from camera
+      description: '# Create a contamination/overfilled from camera
+
+
+        | Parameter | Type | Description |
+
+        |-------------|--------|----------------------------------|
+
+        | Asset | string | Vehicle Identified Registration or Asset Id|
+
+        | Timestamp | DateTime | Local time or UTC time of the event|
+
+        | Lat | double | Latitude |
+
+        | Lon | double | Longitude |
+
+        | EventType | string | Contamination or Overfilled event |
+
+        | EventId | string | Unique Id for each event |
+
+        | WasteType | string | The waste stream the truck is collecting |
+
+        | MediaLink | string | URL to access the media file associate with each event |
+
+
+        ## Sample API Requests
+
+
+        ```
+
+        {
+
+        "Asset": "M879 EUS",
+
+        "Timestamp": "2025-04-23 11:00:00",
+
+        "Lon":-121.56767,
+
+        "Lat":39.49120,
+
+        "EventType": "Contamination",
+
+        "EventId": "12345",
+
+        "WasteType": "General Waste",
+
+        "MediaLink" :"https://tem-production.s3.amazonaws.com/final_files/2025_03_14/82416/AWTI_VIN_2025_03_14_14_19_19_14019_c2_1ffdc5a0-0c80-4f15-b8be-9a16f690b2d0.mp4"
+
+        }
+
+        ```
+
+
+        ## Sample API Response
+
+        ```
+
+        {
+
+        "resource" : 1
+
+        }
+
+        ```'
       requestBody:
         content:
           application/json:
@@ -41,63 +121,10 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+      operationId: postVisionaiApiIntegratorCameraEvents
+      x-operation-id-source: derived
 components:
   responses:
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
     BadGateway:
       description: Bad Gateway - The upstream server returned an invalid response.
       content:
@@ -108,17 +135,6 @@ components:
               error:
                 type: string
                 example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
             additionalProperties: false
     ServiceUnavailable:
       description: Service Unavailable - The server is currently unavailable.
@@ -131,24 +147,73 @@ components:
                 type: string
                 example: Service is currently unavailable. Please try again later.
             additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
   schemas:
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: guid
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.CameraEvent.ApiCameraEvent:
       type: object
       properties:
@@ -156,28 +221,33 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         asset:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         timestamp:
           type: string
           format: dateTime
@@ -189,25 +259,48 @@ components:
           type: number
           format: double
         eventType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         eventId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         wasteType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         mediaLink:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceStatus:
       type: object
       properties:
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         isSuccess:
           type: boolean
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: guid
       additionalProperties: false

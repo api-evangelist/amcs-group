@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Contract API
-  version: core
+  title: AMCS Platform REST Contract API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Contract
 paths:
@@ -10,7 +22,35 @@ paths:
       tags:
       - Contract
       summary: Find with GUID
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the contract. |
+
+        | StartDate | The start date of the contract in ISO format (YYYY-MM-DD). |
+
+        | CreditLimit | The maximum credit limit stipulated on this contract. |
+
+        | BalanceMigrated | The balance which has been migrated from another system - RM to confirm. |
+
+        | InvoiceCycleListItem | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |
+
+        | VATExemptNumber | If the contract is exempt from VAT, this is the associated confirmation number. |
+
+        | VATExemptionExpiryDate | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |
+
+        | VATRegistrationNumber | If the contract is registered with VAT, this is the relevant number. |
+
+        | DepartmentListItem | The GUID and name of the department this contract is associated to. |
+
+        | ContractStatusListItem | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |
+
+        | PaymentTermListItem | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |
+
+        | PaymentTypeListItem | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |
+
+        | InvoiceFrequencyTermListItem | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |'
       operationId: Contract_Get
       parameters:
       - name: guid
@@ -29,12 +69,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContractResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorContractResource'
     put:
       tags:
       - Contract
       summary: Partial update
-      description: "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Yes |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. | No |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. | No |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| None | |"
+      description: '| Property | Description | Required |
+
+        | ------------------------- | ------------------------------------------------------------ | -------- |
+
+        | GUID | The GUID associated to the contract. | No |
+
+        | StartDate | The start date of the contract in ISO format (YYYY-MM-DD). | No |
+
+        | CreditLimit | The maximum credit limit stipulated on this contract. | Yes |
+
+        | BalanceMigrated | The balance which has been migrated from another system - RM to confirm. | No |
+
+        | InvoiceCycleListItem | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |
+
+        | VATExemptNumber | If the contract is exempt from VAT, this is the associated confirmation number. | No |
+
+        | VATExemptionExpiryDate | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |
+
+        | VATRegistrationNumber | If the contract is registered with VAT, this is the relevant number. | No |
+
+        | DepartmentListItem | The GUID and name of the department this contract is associated to. | No |
+
+        | ContractStatusListItem | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |
+
+        | PaymentTermListItem | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |
+
+        | PaymentTypeListItem | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |
+
+        | InvoiceFrequencyTermListItem | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | None | |'
       operationId: Contract_Update
       parameters:
       - name: guid
@@ -62,7 +140,35 @@ paths:
       tags:
       - Contract
       summary: Find with Filters
-      description: "| Property                  | Description                                                  |\r\n| ------------------------- | ------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the contract.                         |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the contract. |
+
+        | StartDate | The start date of the contract in ISO format (YYYY-MM-DD). |
+
+        | CreditLimit | The maximum credit limit stipulated on this contract. |
+
+        | BalanceMigrated | The balance which has been migrated from another system - RM to confirm. |
+
+        | InvoiceCycleListItem | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) |
+
+        | VATExemptNumber | If the contract is exempt from VAT, this is the associated confirmation number. |
+
+        | VATExemptionExpiryDate | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). |
+
+        | VATRegistrationNumber | If the contract is registered with VAT, this is the relevant number. |
+
+        | DepartmentListItem | The GUID and name of the department this contract is associated to. |
+
+        | ContractStatusListItem | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). |
+
+        | PaymentTermListItem | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). |
+
+        | PaymentTypeListItem | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). |
+
+        | InvoiceFrequencyTermListItem | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) |'
       operationId: Contract_GetCollection
       parameters:
       - name: filter
@@ -93,12 +199,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContractResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContractResource'
     post:
       tags:
       - Contract
       summary: Create or update
-      description: "| Property                  | Description                                                  | Required |\r\n| ------------------------- | ------------------------------------------------------------ | -------- |\r\n| GUID                      | The GUID associated to the contract.                         | No |\r\n| StartDate                 | The start date of the contract in ISO format (YYYY-MM-DD). | No |\r\n| CreditLimit               | The maximum credit limit stipulated on this contract.        | Yes |\r\n| BalanceMigrated           | The balance which has been migrated from another system - RM to confirm. | No |\r\n| InvoiceCycleListItem      | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |\r\n| VATExemptNumber           | If the contract is exempt from VAT, this is the associated confirmation number. | No |\r\n| VATExemptionExpiryDate    | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |\r\n| VATRegistrationNumber     | If the contract is registered with VAT, this is the relevant number. | No |\r\n| DepartmentListItem            | The GUID and name of the department this contract is associated to. | No |\r\n| ContractStatusListItem        | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |\r\n| PaymentTermListItem           | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |\r\n| PaymentTypeListItem           | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |\r\n| InvoiceFrequencyTermListItem  | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| None | |"
+      description: '| Property | Description | Required |
+
+        | ------------------------- | ------------------------------------------------------------ | -------- |
+
+        | GUID | The GUID associated to the contract. | No |
+
+        | StartDate | The start date of the contract in ISO format (YYYY-MM-DD). | No |
+
+        | CreditLimit | The maximum credit limit stipulated on this contract. | Yes |
+
+        | BalanceMigrated | The balance which has been migrated from another system - RM to confirm. | No |
+
+        | InvoiceCycleListItem | The GUID and description of the invoice cycle this contract will be invoiced under (there may be cycles done monthly, daily, weekly, etc.) | Yes |
+
+        | VATExemptNumber | If the contract is exempt from VAT, this is the associated confirmation number. | No |
+
+        | VATExemptionExpiryDate | If the contract is exempt from VAT this is date this status is no longer valid in ISO format (YYYY-MM-DD). | No |
+
+        | VATRegistrationNumber | If the contract is registered with VAT, this is the relevant number. | No |
+
+        | DepartmentListItem | The GUID and name of the department this contract is associated to. | No |
+
+        | ContractStatusListItem | The GUID and status of the contract (eg. Approved, Pending, Un-Approved). | No |
+
+        | PaymentTermListItem | The GUID and description of the payment terms invoices under the contract are to the paid to (eg. Immediately, 30 Days Net, etc.). | Yes |
+
+        | PaymentTypeListItem | The GUID and description of how payments for invoices under the contract will be paid (eg. Cash, Credit Card, etc.). | Yes |
+
+        | InvoiceFrequencyTermListItem | The GUID and description of the invoice frequency this contract will be invoiced under (frequency can be monthly, daily, weekly, etc.) | Yes |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | None | |'
       operationId: Contract_Create
       requestBody:
         content:
@@ -125,16 +269,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorContractResource:
       type: object
       properties:
@@ -174,25 +316,17 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorContractResource]:
+    ApiResourceId:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorContractResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          type: string
+          format: uuid
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorContractResource]:
+    ApiResourceResultCollection_ApiIntegratorContractResource:
       type: object
       properties:
         resource:
@@ -205,12 +339,19 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntity_ApiIntegratorContractResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContractResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -228,6 +369,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -245,11 +397,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ContainerType API
-  version: core
+  title: AMCS Platform REST Container Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: ContainerType
 paths:
@@ -10,7 +22,35 @@ paths:
       tags:
       - ContainerType
       summary: Find with GUID
-      description: "| Property                      | Description                                                                                |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------ |\r\n| GUID                          | The GUID associated to the container type                                                  |\r\n| Description                   | The description of the container type                                                      |\r\n| ExternalDescription           | The external description of the container type                                             |\r\n| AnalysisCode                  | The analysis code of the container type                                                    |\r\n| ShortName                     | The short name of the container type. Filterable.                                          |\r\n| ContainerCategoryListItem     | The GUID and container category of the container type (various values)                     |\r\n| TrackingUnitOfMeasureListItem | The GUID and Description of the tracking unit of measure                                   |\r\n| ItemCode                      | The item code of the container type                                                        |\r\n| Size                          | The size of the container type                                                             |\r\n| TareWeight                    | The tare weight of the container type                                                      |\r\n| HandlingTime                  | The handling time (in seconds) of the container type                                       |\r\n| IsDeleted                     | Whether the container type is deleted                                                      |\r\n| ServiceListItems              | A list of GUID, description and IsDeleted of the service associated to the container type. |\r\n"
+      description: '| Property | Description |
+
+        | ----------------------------- | ------------------------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the container type |
+
+        | Description | The description of the container type |
+
+        | ExternalDescription | The external description of the container type |
+
+        | AnalysisCode | The analysis code of the container type |
+
+        | ShortName | The short name of the container type. Filterable. |
+
+        | ContainerCategoryListItem | The GUID and container category of the container type (various values) |
+
+        | TrackingUnitOfMeasureListItem | The GUID and Description of the tracking unit of measure |
+
+        | ItemCode | The item code of the container type |
+
+        | Size | The size of the container type |
+
+        | TareWeight | The tare weight of the container type |
+
+        | HandlingTime | The handling time (in seconds) of the container type |
+
+        | IsDeleted | Whether the container type is deleted |
+
+        | ServiceListItems | A list of GUID, description and IsDeleted of the service associated to the container type. |'
       operationId: ContainerType_Get
       parameters:
       - name: guid
@@ -29,13 +69,41 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorContainerTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorContainerTypeResource'
   /lists/containerTypes:
     get:
       tags:
       - ContainerType
       summary: Find with Filters
-      description: "| Property                      | Description                                                                                |\r\n| ----------------------------- | ------------------------------------------------------------------------------------------ |\r\n| GUID                          | The GUID associated to the container type                                                  |\r\n| Description                   | The description of the container type                                                      |\r\n| ExternalDescription           | The external description of the container type                                             |\r\n| AnalysisCode                  | The analysis code of the container type                                                    |\r\n| ShortName                     | The short name of the container type. Filterable.                                          |\r\n| ContainerCategoryListItem     | The GUID and container category of the container type (various values)                     |\r\n| TrackingUnitOfMeasureListItem | The GUID and Description of the tracking unit of measure                                   |\r\n| ItemCode                      | The item code of the container type                                                        |\r\n| Size                          | The size of the container type                                                             |\r\n| TareWeight                    | The tare weight of the container type                                                      |\r\n| HandlingTime                  | The handling time (in seconds) of the container type                                       |\r\n| IsDeleted                     | Whether the container type is deleted                                                      |\r\n| ServiceListItems              | A list of GUID, description and IsDeleted of the service associated to the container type. |\r\n"
+      description: '| Property | Description |
+
+        | ----------------------------- | ------------------------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the container type |
+
+        | Description | The description of the container type |
+
+        | ExternalDescription | The external description of the container type |
+
+        | AnalysisCode | The analysis code of the container type |
+
+        | ShortName | The short name of the container type. Filterable. |
+
+        | ContainerCategoryListItem | The GUID and container category of the container type (various values) |
+
+        | TrackingUnitOfMeasureListItem | The GUID and Description of the tracking unit of measure |
+
+        | ItemCode | The item code of the container type |
+
+        | Size | The size of the container type |
+
+        | TareWeight | The tare weight of the container type |
+
+        | HandlingTime | The handling time (in seconds) of the container type |
+
+        | IsDeleted | Whether the container type is deleted |
+
+        | ServiceListItems | A list of GUID, description and IsDeleted of the service associated to the container type. |'
       operationId: ContainerType_GetCollection
       parameters:
       - name: filter
@@ -66,7 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorContainerTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContainerTypeResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,7 +146,28 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorContainerTypeResource]:
+    ApiResourceResultEntity_ApiIntegratorContainerTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContainerTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorContainerTypeResource:
       type: object
       properties:
         resource:
@@ -131,17 +220,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -159,6 +237,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -187,24 +276,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntity[ApiIntegratorContainerTypeResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorContainerTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

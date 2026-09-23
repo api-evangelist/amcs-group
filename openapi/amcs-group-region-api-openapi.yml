@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Region API
-  version: core
+  title: AMCS Platform REST Region API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Region
 paths:
@@ -10,7 +22,23 @@ paths:
       tags:
       - Region
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the region                               |\r\n| Description               | The description of the region                   |\r\n| Abbreviation| The abbreviation of the region                                       |\r\n| StateListItem             | The GUID and description of the state                       |\r\n| CompanyOutletListItem     | The GUID and description of the Company Outlet           |\r\n| IsNonSpecific             | Whether the region is non specific      |\r\n| IsDeleted                 | Whether the region is deleted    |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the region |
+
+        | Description | The description of the region |
+
+        | Abbreviation| The abbreviation of the region |
+
+        | StateListItem | The GUID and description of the state |
+
+        | CompanyOutletListItem | The GUID and description of the Company Outlet |
+
+        | IsNonSpecific | Whether the region is non specific |
+
+        | IsDeleted | Whether the region is deleted |'
       operationId: Region_Get
       parameters:
       - name: guid
@@ -29,13 +57,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorRegionResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorRegionResource'
   /lists/regions:
     get:
       tags:
       - Region
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the region                               |\r\n| Description               | The description of the region                   |\r\n| Abbreviation| The abbreviation of the region                                       |\r\n| StateListItem             | The GUID and description of the state                       |\r\n| CompanyOutletListItem     | The GUID and description of the Company Outlet           |\r\n| IsNonSpecific             | Whether the region is non specific      |\r\n| IsDeleted                 | Whether the region is deleted    |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the region |
+
+        | Description | The description of the region |
+
+        | Abbreviation| The abbreviation of the region |
+
+        | StateListItem | The GUID and description of the state |
+
+        | CompanyOutletListItem | The GUID and description of the Company Outlet |
+
+        | IsNonSpecific | Whether the region is non specific |
+
+        | IsDeleted | Whether the region is deleted |'
       operationId: Region_GetCollection
       parameters:
       - name: filter
@@ -66,7 +110,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorRegionResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRegionResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,7 +122,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorRegionResource]:
+    ApiResourceResultCollection_ApiIntegratorRegionResource:
       type: object
       properties:
         resource:
@@ -91,11 +135,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorRegionResource:
       type: object
       properties:
@@ -115,7 +154,15 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity[ApiIntegratorRegionResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorRegionResource:
       type: object
       properties:
         resource:
@@ -128,12 +175,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -151,6 +192,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -168,11 +220,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

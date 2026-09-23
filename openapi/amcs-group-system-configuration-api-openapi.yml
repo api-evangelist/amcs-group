@@ -1,0 +1,237 @@
+openapi: 3.2.0
+info:
+  title: Amcs Group System Configuration API
+  version: '1.0'
+  description: 'Operations tagged SystemConfiguration across 2 of this provider''s published API definitions: amcs-group-core-openapi-original.json, amcs-group-erp-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+tags:
+- name: System Configuration
+paths:
+  /systemConfiguration:
+    get:
+      tags:
+      - System Configuration
+      responses:
+        '200':
+          description: Success
+      summary: Get system configuration
+      x-summary-source: derived
+      operationId: getSystemConfiguration
+      x-operation-id-source: derived
+    post:
+      tags:
+      - System Configuration
+      responses:
+        '200':
+          description: Success
+      summary: Create system configuration
+      x-summary-source: derived
+      operationId: postSystemConfiguration
+      x-operation-id-source: derived
+  /systemConfiguration/schema:
+    get:
+      tags:
+      - System Configuration
+      responses:
+        '200':
+          description: Success
+      summary: Get system configuration schema
+      x-summary-source: derived
+      operationId: getSystemConfigurationSchema
+      x-operation-id-source: derived
+  /lists/systemConfigurations/{guid}:
+    get:
+      tags:
+      - System Configuration
+      summary: Find with GUID
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the system configuration. |
+
+        | Name| The Name of the system configuration. |
+
+        | HelpDescription | The Description of the system configuration. |
+
+        | IsInternal | Whether the system configuration is Internal. |
+
+        | Value| The Value of the system configuration. |
+
+        | IsDeleted | Is the system configuration deleted. |'
+      operationId: SystemConfiguration_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorSystemConfigurationResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /lists/systemConfigurations:
+    get:
+      tags:
+      - System Configuration
+      summary: Find with Filters
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the system configuration. |
+
+        | Name| The Name of the system configuration. |
+
+        | HelpDescription | The Description of the system configuration. |
+
+        | IsInternal | Whether the system configuration is Internal. |
+
+        | Value| The Value of the system configuration. |
+
+        | IsDeleted | Is the system configuration deleted. |'
+      operationId: SystemConfiguration_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSystemConfigurationResource'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+components:
+  schemas:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorSystemConfigurationResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorSystemConfigurationResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSystemConfigurationResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+        HelpDescription:
+          type: string
+        IsInternal:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+x-refined-from:
+- amcs-group-core-openapi-original.json
+- amcs-group-erp-openapi-original.json

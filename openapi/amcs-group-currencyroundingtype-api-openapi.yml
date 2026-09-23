@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CurrencyRoundingType API
-  version: core
+  title: AMCS Platform REST Currency Rounding Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: CurrencyRoundingType
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - CurrencyRoundingType
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rounding type   |\r\n| Description               | The description of the currency rounding type   |\r\n| IsDeleted                 | Whether the currency rounding type is deleted           |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the currency rounding type |
+
+        | Description | The description of the currency rounding type |
+
+        | IsDeleted | Whether the currency rounding type is deleted |'
       operationId: CurrencyRoundingType_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCurrencyRoundingTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCurrencyRoundingTypeResource'
   /lists/currencyRoundingTypes:
     get:
       tags:
       - CurrencyRoundingType
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the currency rounding type   |\r\n| Description               | The description of the currency rounding type   |\r\n| IsDeleted                 | Whether the currency rounding type is deleted           |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the currency rounding type |
+
+        | Description | The description of the currency rounding type |
+
+        | IsDeleted | Whether the currency rounding type is deleted |'
       operationId: CurrencyRoundingType_GetCollection
       parameters:
       - name: filter
@@ -66,21 +94,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCurrencyRoundingTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCurrencyRoundingTypeResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiIntegratorCurrencyRoundingTypeResource:
       type: object
       properties:
-        errors:
+        Description:
           type: string
-    ApiResourceResultCollectionExtra:
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultCollection[ApiIntegratorCurrencyRoundingTypeResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorCurrencyRoundingTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCurrencyRoundingTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorCurrencyRoundingTypeResource:
       type: object
       properties:
         resource:
@@ -110,19 +159,17 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity[ApiIntegratorCurrencyRoundingTypeResource]:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCurrencyRoundingTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -140,22 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorCurrencyRoundingTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

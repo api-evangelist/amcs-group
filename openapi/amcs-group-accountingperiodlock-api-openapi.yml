@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AccountingPeriodLock API
-  version: core
+  title: AMCS Platform REST Accounting Period Lock API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: AccountingPeriodLock
 paths:
@@ -10,7 +22,23 @@ paths:
       tags:
       - AccountingPeriodLock
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period lock.                       |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.               |\r\n| Description               | The Description associated to the accounting period lock.                |\r\n| CompanyId                 | The Company associated to the accounting period lock.   |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.              |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                |\r\n| LockStatus            | Whether the Accounting Period is open or locked.   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the accounting period lock. |
+
+        | SourceModule | The SourceModule associated to the accounting period lock. |
+
+        | Description | The Description associated to the accounting period lock. |
+
+        | CompanyId | The Company associated to the accounting period lock. |
+
+        | CompanyOutletId | The CompanyOutlet associated to the accounting period lock. |
+
+        | SysUserName | The SysUserName associated to the accounting period lock. |
+
+        | LockStatus | Whether the Accounting Period is open or locked. |'
       operationId: AccountingPeriodLock_Get
       parameters:
       - name: guid
@@ -29,12 +57,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorAccountingPeriodLockResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorAccountingPeriodLockResource'
     put:
       tags:
       - AccountingPeriodLock
       summary: Partial update
-      description: "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the accounting period lock. |  No    |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.                 |  No    |\r\n| Description               | The Description associated to the accounting period lock.                  |  Yes   |\r\n| CompanyId                 | The Company associated to the accounting period lock.     |  No    |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.                |  No    |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                  |  No    |\r\n| LockStatus            | Whether the Accounting Period is open or locked.     |  Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |\r\n| LockStatus not found for the AccountingPeriodLock  | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |\r\n| Company and Company outlet not found for the AccountingPeriodLock  | Either CompanyListItem or CompanyOutletListItem properties must be set. |\r\n"
+      description: '| Property | Description | Required |
+
+        | ------------------------- | -------------------------------------------------------------------------- | -------- |
+
+        | GUID | The GUID associated to the accounting period lock. | No |
+
+        | SourceModule | The SourceModule associated to the accounting period lock. | No |
+
+        | Description | The Description associated to the accounting period lock. | Yes |
+
+        | CompanyId | The Company associated to the accounting period lock. | No |
+
+        | CompanyOutletId | The CompanyOutlet associated to the accounting period lock. | No |
+
+        | SysUserName | The SysUserName associated to the accounting period lock. | No |
+
+        | LockStatus | Whether the Accounting Period is open or locked. | Yes |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |
+
+        | LockStatus not found for the AccountingPeriodLock | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |
+
+        | Company and Company outlet not found for the AccountingPeriodLock | Either CompanyListItem or CompanyOutletListItem properties must be set. |'
       operationId: AccountingPeriodLock_Update
       parameters:
       - name: guid
@@ -62,7 +120,23 @@ paths:
       tags:
       - AccountingPeriodLock
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period lock.                       |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.               |\r\n| Description               | The Description associated to the accounting period lock.                |\r\n| CompanyId                 | The Company associated to the accounting period lock.   |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.              |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                |\r\n| LockStatus            | Whether the Accounting Period is open or locked.   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the accounting period lock. |
+
+        | SourceModule | The SourceModule associated to the accounting period lock. |
+
+        | Description | The Description associated to the accounting period lock. |
+
+        | CompanyId | The Company associated to the accounting period lock. |
+
+        | CompanyOutletId | The CompanyOutlet associated to the accounting period lock. |
+
+        | SysUserName | The SysUserName associated to the accounting period lock. |
+
+        | LockStatus | Whether the Accounting Period is open or locked. |'
       operationId: AccountingPeriodLock_GetCollection
       parameters:
       - name: filter
@@ -93,12 +167,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorAccountingPeriodLockResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorAccountingPeriodLockResource'
     post:
       tags:
       - AccountingPeriodLock
       summary: Create or update
-      description: "| Property                  | Description                                                                | Required |\r\n| ------------------------- | -------------------------------------------------------------------------- | -------- |\r\n| GUID                      | The GUID associated to the accounting period lock. |  No    |\r\n| SourceModule              | The SourceModule associated to the accounting period lock.                 |  No    |\r\n| Description               | The Description associated to the accounting period lock.                  |  Yes   |\r\n| CompanyId                 | The Company associated to the accounting period lock.     |  No    |\r\n| CompanyOutletId           | The CompanyOutlet associated to the accounting period lock.                |  No    |\r\n| SysUserName            | The SysUserName associated to the accounting period lock.                  |  No    |\r\n| LockStatus            | Whether the Accounting Period is open or locked.     |  Yes   |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |\r\n| LockStatus not found for the AccountingPeriodLock  | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |\r\n| Company and Company outlet not found for the AccountingPeriodLock  | Either CompanyListItem or CompanyOutletListItem properties must be set. |\r\n"
+      description: '| Property | Description | Required |
+
+        | ------------------------- | -------------------------------------------------------------------------- | -------- |
+
+        | GUID | The GUID associated to the accounting period lock. | No |
+
+        | SourceModule | The SourceModule associated to the accounting period lock. | No |
+
+        | Description | The Description associated to the accounting period lock. | Yes |
+
+        | CompanyId | The Company associated to the accounting period lock. | No |
+
+        | CompanyOutletId | The CompanyOutlet associated to the accounting period lock. | No |
+
+        | SysUserName | The SysUserName associated to the accounting period lock. | No |
+
+        | LockStatus | Whether the Accounting Period is open or locked. | Yes |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | Description not found for the AccountingPeriodLock | The mandatory property Description has a null value. The request could not be processed. Supply a value for the Description property of the submitted resource. |
+
+        | LockStatus not found for the AccountingPeriodLock | The mandatory property LockStatus has a null value. The request could not be processed. Supply a value for the LockStatus property of the submitted resource. |
+
+        | Company and Company outlet not found for the AccountingPeriodLock | Either CompanyListItem or CompanyOutletListItem properties must be set. |'
       operationId: AccountingPeriodLock_Create
       requestBody:
         content:
@@ -125,95 +229,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorAccountingPeriodLockResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorAccountingPeriodLockResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultCollection[ApiIntegratorAccountingPeriodLockResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodLockResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiIntegratorAccountingPeriodLockResource:
       type: object
       properties:
@@ -235,3 +250,92 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorAccountingPeriodLockResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodLockResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorAccountingPeriodLockResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccountingPeriodLockResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

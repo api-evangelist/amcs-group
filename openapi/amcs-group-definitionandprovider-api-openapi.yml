@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DefinitionAndProvider API
+  title: Core Definition And Provider API
   version: core
 tags:
 - name: DefinitionAndProvider
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiWorkflowDefinitionAndProviderResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiWorkflowDefinitionAndProviderResource'
+      summary: Get services api workflow definition and providers changes
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionAndProvidersChanges
+      x-operation-id-source: derived
   /services/api/workflow/definitionAndProviders/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiWorkflowDefinitionAndProviderResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiWorkflowDefinitionAndProviderResource'
+      summary: Get services api workflow definition and providers template
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionAndProvidersTemplate
+      x-operation-id-source: derived
   /services/api/workflow/definitionAndProviders/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiWorkflowDefinitionAndProviderResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiWorkflowDefinitionAndProviderResource'
+      summary: Get services api workflow definition and providers by id
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionAndProvidersById
+      x-operation-id-source: derived
     put:
       tags:
       - DefinitionAndProvider
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api workflow definition and providers by id
+      x-summary-source: derived
+      operationId: putServicesApiWorkflowDefinitionAndProvidersById
+      x-operation-id-source: derived
     delete:
       tags:
       - DefinitionAndProvider
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api workflow definition and providers by id
+      x-summary-source: derived
+      operationId: deleteServicesApiWorkflowDefinitionAndProvidersById
+      x-operation-id-source: derived
   /services/api/workflow/definitionAndProviders/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api workflow definition and providers by id blob by blob member…
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionAndProvidersByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/workflow/definitionAndProviders:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowDefinitionAndProviderResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiWorkflowDefinitionAndProviderResource'
+      summary: Get services api workflow definition and providers
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowDefinitionAndProviders
+      x-operation-id-source: derived
     post:
       tags:
       - DefinitionAndProvider
@@ -204,19 +232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api workflow definition and providers
+      x-summary-source: derived
+      operationId: postServicesApiWorkflowDefinitionAndProviders
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-          nullable: true
-        cursor:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ApiWorkflowDefinitionAndProviderResource]:
+    ApiResourceChanges_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
@@ -224,12 +246,36 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
-          nullable: true
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider:
       type: object
@@ -238,68 +284,49 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         workflowDefinitions:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-          nullable: true
         workflowProviders:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser'
-          nullable: true
       additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        associations:
-          type: array
-          items:
-            type: string
-          nullable: true
-        expand:
-          type: array
-          items:
-            type: string
-          nullable: true
-        operations:
-          type: array
-          items:
-            type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser:
       type: object
@@ -308,60 +335,64 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         workflowDefinitionId:
           type: string
           format: uuid
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         providerId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         providerName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         providerDescription:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         scheduleJobId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         designerUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntity[ApiWorkflowDefinitionAndProviderResource]:
+    ApiResourceResultEntity_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
@@ -375,14 +406,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
     ApiResource:
       type: object
       properties:
@@ -391,27 +414,7 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ApiWorkflowDefinitionAndProviderResource]:
+    ApiResourceResult_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
@@ -421,44 +424,7 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
       additionalProperties: false
-    AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        workflowProviderId:
-          type: integer
-          format: int32
-          nullable: true
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ApiWorkflowDefinitionAndProviderResource]:
+    ApiResourceResultCollection_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
@@ -466,20 +432,125 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
-          nullable: true
         extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        id:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
           type: integer
           format: int32
-          nullable: true
-        isSuccess:
+      additionalProperties: false
+    AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser:
+      type: object
+      properties:
+        isValid:
           type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        workflowProviderId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false

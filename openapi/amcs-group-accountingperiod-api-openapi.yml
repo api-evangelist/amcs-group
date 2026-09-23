@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AccountingPeriod API
-  version: core
+  title: AMCS Platform REST Accounting Period API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: AccountingPeriod
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - AccountingPeriod
       summary: Retrieve changes
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period                             |\r\n| Description               | The description of the accounting period                                 |\r\n| Code                      | The code of the accounting period                                        |\r\n| IsClosed| Whether the accounting period is closed   |\r\n| StartDate                 | The Start Date associated to the accounting period                       |\r\n| EndDate                   | The End Date associated to the accounting period                         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the accounting period |
+
+        | Description | The description of the accounting period |
+
+        | Code | The code of the accounting period |
+
+        | IsClosed| Whether the accounting period is closed |
+
+        | StartDate | The Start Date associated to the accounting period |
+
+        | EndDate | The End Date associated to the accounting period |'
       operationId: AccountingPeriod_GetChanges
       parameters:
       - name: since
@@ -27,13 +53,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorAccountingPeriodResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorAccountingPeriodResource'
   /lists/accountingPeriods/{guid}:
     get:
       tags:
       - AccountingPeriod
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period                             |\r\n| Description               | The description of the accounting period                                 |\r\n| Code                      | The code of the accounting period                                        |\r\n| IsClosed| Whether the accounting period is closed   |\r\n| StartDate                 | The Start Date associated to the accounting period                       |\r\n| EndDate                   | The End Date associated to the accounting period                         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the accounting period |
+
+        | Description | The description of the accounting period |
+
+        | Code | The code of the accounting period |
+
+        | IsClosed| Whether the accounting period is closed |
+
+        | StartDate | The Start Date associated to the accounting period |
+
+        | EndDate | The End Date associated to the accounting period |'
       operationId: AccountingPeriod_Get
       parameters:
       - name: guid
@@ -52,13 +92,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorAccountingPeriodResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorAccountingPeriodResource'
   /lists/accountingPeriods:
     get:
       tags:
       - AccountingPeriod
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the accounting period                             |\r\n| Description               | The description of the accounting period                                 |\r\n| Code                      | The code of the accounting period                                        |\r\n| IsClosed| Whether the accounting period is closed   |\r\n| StartDate                 | The Start Date associated to the accounting period                       |\r\n| EndDate                   | The End Date associated to the accounting period                         |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the accounting period |
+
+        | Description | The description of the accounting period |
+
+        | Code | The code of the accounting period |
+
+        | IsClosed| Whether the accounting period is closed |
+
+        | StartDate | The Start Date associated to the accounting period |
+
+        | EndDate | The End Date associated to the accounting period |'
       operationId: AccountingPeriod_GetCollection
       parameters:
       - name: filter
@@ -89,22 +143,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorAccountingPeriodResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorAccountingPeriodResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorAccountingPeriodResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -112,25 +153,7 @@ components:
           type: string
         cursor:
           type: string
-    ApiResourceResultEntity[ApiIntegratorAccountingPeriodResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorAccountingPeriodResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges[ApiIntegratorAccountingPeriodResource]:
+    ApiResourceChanges_ApiIntegratorAccountingPeriodResource:
       type: object
       properties:
         resource:
@@ -143,12 +166,44 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorAccountingPeriodResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiIntegratorAccountingPeriodResource:
       type: object
       properties:
@@ -170,23 +225,30 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
+    ApiResourceErrors:
       type: object
       properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorAccountingPeriodResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccountingPeriodResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -204,11 +266,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

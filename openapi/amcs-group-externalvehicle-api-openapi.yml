@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ExternalVehicle API
-  version: core
+  title: AMCS Platform REST External Vehicle API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: ExternalVehicle
 paths:
@@ -10,7 +22,33 @@ paths:
       tags:
       - ExternalVehicle
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the external vehicle. |
+
+        | Registration| The registration associated to the external vehicle. Filterable.|
+
+        | Description| The description associated to the external vehicle.|
+
+        | VolumeCapacity | The volume capacity associated to the external vehicle.|
+
+        | MaxGrossWeight | The max gross weight associated to the external vehicle.|
+
+        | RFID | The RFID associated to the external vehicle. Filterable.|
+
+        | RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|
+
+        | VehicleTypeListItem| The GUID and description associated to the vehicle type.|
+
+        | CompanyOutletListItem| The GUID and description associated to the company outlet.|
+
+        | UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|
+
+        | IsSystemUse| Whether the external vehicle is for system use.|
+
+        | IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|'
       operationId: ExternalVehicle_Get
       parameters:
       - name: guid
@@ -29,12 +67,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorExternalVehicleResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorExternalVehicleResource'
     put:
       tags:
       - ExternalVehicle
       summary: Partial update
-      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |"
+      description: '| Property | Description | Required |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+
+        | GUID| The GUID associated to the external vehicle. | No |
+
+        | Registration| The registration associated to the external vehicle.| Yes |
+
+        | Description| The description associated to the external vehicle.| No |
+
+        | VolumeCapacity | The volume capacity associated to the external vehicle.| No |
+
+        | MaxGrossWeight | The max gross weight associated to the external vehicle.| No |
+
+        | RFID | The RFID associated to the external vehicle.| No |
+
+        | RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. | Yes |
+
+        | VehicleTypeListItem| The GUID and description associated to the vehicle type.| No |
+
+        | CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes |
+
+        | UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No |
+
+        | IsSystemUse| Whether the external vehicle is for system use.| No |
+
+        | IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No |'
       operationId: ExternalVehicle_Update
       parameters:
       - name: guid
@@ -62,7 +126,33 @@ paths:
       tags:
       - ExternalVehicle
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the external vehicle.    |\r\n| Registration| The registration associated to the external vehicle. Filterable.|\r\n| Description| The description associated to the external vehicle.|\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.|\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.|\r\n| RFID | The RFID associated to the external vehicle. Filterable.|\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.|\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.|\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|\r\n| IsSystemUse| Whether the external vehicle is for system use.|\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the external vehicle. |
+
+        | Registration| The registration associated to the external vehicle. Filterable.|
+
+        | Description| The description associated to the external vehicle.|
+
+        | VolumeCapacity | The volume capacity associated to the external vehicle.|
+
+        | MaxGrossWeight | The max gross weight associated to the external vehicle.|
+
+        | RFID | The RFID associated to the external vehicle. Filterable.|
+
+        | RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. Filterable.|
+
+        | VehicleTypeListItem| The GUID and description associated to the vehicle type.|
+
+        | CompanyOutletListItem| The GUID and description associated to the company outlet.|
+
+        | UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.|
+
+        | IsSystemUse| Whether the external vehicle is for system use.|
+
+        | IsWeighOutRequired| Whether the weigh out is required for the external vehicle.|'
       operationId: ExternalVehicle_GetCollection
       parameters:
       - name: filter
@@ -93,12 +183,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorExternalVehicleResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorExternalVehicleResource'
     post:
       tags:
       - ExternalVehicle
       summary: Create or update
-      description: "| Property                              | Description                                                                   | Required |\r\n| ------------------------------------- | ----------------------------------------------------------------------------- | -------- |\r\n| GUID| The GUID associated to the external vehicle.    | No       |\r\n| Registration| The registration associated to the external vehicle.| Yes      |\r\n| Description| The description associated to the external vehicle.| No       |\r\n| VolumeCapacity | The volume capacity associated to the external vehicle.| No       |\r\n| MaxGrossWeight | The max gross weight associated to the external vehicle.| No       |\r\n| RFID | The RFID associated to the external vehicle.| No       |\r\n| RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle.  | Yes      |\r\n| VehicleTypeListItem| The GUID and description associated to the vehicle type.| No       |\r\n| CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes      |\r\n| UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No       |\r\n| IsSystemUse| Whether the external vehicle is for system use.| No       |\r\n| IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No       |"
+      description: '| Property | Description | Required |
+
+        | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+
+        | GUID| The GUID associated to the external vehicle. | No |
+
+        | Registration| The registration associated to the external vehicle.| Yes |
+
+        | Description| The description associated to the external vehicle.| No |
+
+        | VolumeCapacity | The volume capacity associated to the external vehicle.| No |
+
+        | MaxGrossWeight | The max gross weight associated to the external vehicle.| No |
+
+        | RFID | The RFID associated to the external vehicle.| No |
+
+        | RelatedTransportSupplierSiteGuid| The related transport supplier site GUID associated to the external vehicle. | Yes |
+
+        | VehicleTypeListItem| The GUID and description associated to the vehicle type.| No |
+
+        | CompanyOutletListItem| The GUID and description associated to the company outlet.| Yes |
+
+        | UnitOfMeasurementListItem| The GUID and description associated to the unit of measurement.| No |
+
+        | IsSystemUse| Whether the external vehicle is for system use.| No |
+
+        | IsWeighOutRequired| Whether the weigh out is required for the external vehicle.| No |'
       operationId: ExternalVehicle_Create
       requestBody:
         content:
@@ -125,17 +241,33 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorExternalVehicleResource:
       type: object
       properties:
         resource:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorExternalVehicleResource]:
+    ApiResourceResultCollection_ApiIntegratorExternalVehicleResource:
       type: object
       properties:
         resource:
@@ -148,17 +280,56 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        errors:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
           type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorExternalVehicleResource:
       type: object
       properties:
@@ -192,58 +363,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultEntity[ApiIntegratorExternalVehicleResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorExternalVehicleResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

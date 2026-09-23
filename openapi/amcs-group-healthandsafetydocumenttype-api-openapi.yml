@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup HealthAndSafetyDocumentType API
-  version: core
+  title: AMCS Platform REST Health And Safety Document Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: HealthAndSafetyDocumentType
 paths:
@@ -10,7 +22,13 @@ paths:
       tags:
       - HealthAndSafetyDocumentType
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the health and safety document type.            |\r\n| Description               | The description of the health and safety document type.    |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the health and safety document type. |
+
+        | Description | The description of the health and safety document type. |'
       operationId: HealthAndSafetyDocumentType_Get
       parameters:
       - name: guid
@@ -29,13 +47,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorHealthAndSafetyDocumentTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorHealthAndSafetyDocumentTypeResource'
   /lists/healthAndSafetyDocumentTypes:
     get:
       tags:
       - HealthAndSafetyDocumentType
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the health and safety document type.            |\r\n| Description               | The description of the health and safety document type.    |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the health and safety document type. |
+
+        | Description | The description of the health and safety document type. |'
       operationId: HealthAndSafetyDocumentType_GetCollection
       parameters:
       - name: filter
@@ -66,15 +90,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorHealthAndSafetyDocumentTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorHealthAndSafetyDocumentTypeResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiIntegratorHealthAndSafetyDocumentTypeResource:
       type: object
       properties:
-        errors:
+        Description:
           type: string
-    ApiResourceResultCollection[ApiIntegratorHealthAndSafetyDocumentTypeResource]:
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorHealthAndSafetyDocumentTypeResource:
       type: object
       properties:
         resource:
@@ -87,13 +123,7 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity[ApiIntegratorHealthAndSafetyDocumentTypeResource]:
+    ApiResourceResultEntity_ApiIntegratorHealthAndSafetyDocumentTypeResource:
       type: object
       properties:
         resource:
@@ -123,15 +153,17 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorHealthAndSafetyDocumentTypeResource:
+    ApiResourceErrors:
       type: object
       properties:
-        Description:
+        errors:
           type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -149,11 +181,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

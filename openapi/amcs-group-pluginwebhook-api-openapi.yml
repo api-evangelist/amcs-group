@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup PluginWebHook API
+  title: Core Plugin Web Hook API
   version: core
 tags:
 - name: PluginWebHook
@@ -26,6 +26,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create plugin web hooks
+      x-summary-source: derived
+      operationId: postPluginWebHooks
+      x-operation-id-source: derived
     delete:
       tags:
       - PluginWebHook
@@ -37,6 +41,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Delete plugin web hooks
+      x-summary-source: derived
+      operationId: deletePluginWebHooks
+      x-operation-id-source: derived
   /plugins/web-hook:
     post:
       tags:
@@ -58,6 +66,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create plugins web hook
+      x-summary-source: derived
+      operationId: postPluginsWebHook
+      x-operation-id-source: derived
     delete:
       tags:
       - PluginWebHook
@@ -73,6 +85,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Delete plugins web hook
+      x-summary-source: derived
+      operationId: deletePluginsWebHook
+      x-operation-id-source: derived
   /plugins/web-hook/ui:
     get:
       tags:
@@ -80,24 +96,19 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get plugins web hook ui
+      x-summary-source: derived
+      operationId: getPluginsWebHookUi
+      x-operation-id-source: derived
 components:
   schemas:
-    AMCS.PluginData.Data.WebHook.BasicCredentials:
-      type: object
-      properties:
-        username:
-          type: string
-          nullable: true
-        password:
-          type: string
-          nullable: true
-      additionalProperties: false
     AMCS.PluginData.Data.WebHook.PluginWebHook:
       type: object
       properties:
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         trigger:
           enum:
           - None
@@ -111,8 +122,9 @@ components:
           - PreDelete
           type: string
         triggerFromString:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         format:
           enum:
           - Simple
@@ -120,19 +132,35 @@ components:
           - Coalesce
           type: string
         httpMethod:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         basicCredentials:
           $ref: '#/components/schemas/AMCS.PluginData.Data.WebHook.BasicCredentials'
         url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         filter:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         headers:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
+      additionalProperties: false
+    AMCS.PluginData.Data.WebHook.BasicCredentials:
+      type: object
+      properties:
+        username:
+          type:
+          - string
+          - 'null'
+        password:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

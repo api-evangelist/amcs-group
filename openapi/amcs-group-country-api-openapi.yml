@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Country API
-  version: core
+  title: AMCS Platform REST Country API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Country
 paths:
@@ -10,7 +22,25 @@ paths:
       tags:
       - Country
       summary: Find with GUID
-      description: "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the country |\r\n| Description            | The description of the country |\r\n| Abbreviation            | The abbreviation of the country |\r\n| ISO3166Numeric        | The 3166 numeric iso of the country |\r\n| ISOThreeChar            | The three character iso of the country                             |\r\n| ISOTwoChar            | The two character iso of the country |\r\n| IsDefault| Whether the country is default |\r\n| IsDeleted| Whether the country is deleted|"
+      description: '| Property | Description |
+
+        | ------------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the country |
+
+        | Description | The description of the country |
+
+        | Abbreviation | The abbreviation of the country |
+
+        | ISO3166Numeric | The 3166 numeric iso of the country |
+
+        | ISOThreeChar | The three character iso of the country |
+
+        | ISOTwoChar | The two character iso of the country |
+
+        | IsDefault| Whether the country is default |
+
+        | IsDeleted| Whether the country is deleted|'
       operationId: Country_Get
       parameters:
       - name: guid
@@ -29,13 +59,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCountryResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCountryResource'
   /lists/countries:
     get:
       tags:
       - Country
       summary: Find with Filters
-      description: "| Property                  | Description                                                           |\r\n| ------------------------- | --------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the country |\r\n| Description            | The description of the country |\r\n| Abbreviation            | The abbreviation of the country |\r\n| ISO3166Numeric        | The 3166 numeric iso of the country |\r\n| ISOThreeChar            | The three character iso of the country                             |\r\n| ISOTwoChar            | The two character iso of the country |\r\n| IsDefault| Whether the country is default |\r\n| IsDeleted| Whether the country is deleted|"
+      description: '| Property | Description |
+
+        | ------------------------- | --------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the country |
+
+        | Description | The description of the country |
+
+        | Abbreviation | The abbreviation of the country |
+
+        | ISO3166Numeric | The 3166 numeric iso of the country |
+
+        | ISOThreeChar | The three character iso of the country |
+
+        | ISOTwoChar | The two character iso of the country |
+
+        | IsDefault| Whether the country is default |
+
+        | IsDeleted| Whether the country is deleted|'
       operationId: Country_GetCollection
       parameters:
       - name: filter
@@ -66,10 +114,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCountryResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCountryResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorCountryResource]:
+    ApiResourceResultCollection_ApiIntegratorCountryResource:
       type: object
       properties:
         resource:
@@ -82,64 +130,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorCountryResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCountryResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        isSuccess:
+          type: boolean
     ApiIntegratorCountryResource:
       type: object
       properties:
@@ -161,11 +159,61 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        id:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity_ApiIntegratorCountryResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCountryResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

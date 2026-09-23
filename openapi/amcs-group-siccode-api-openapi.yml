@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup SicCode API
-  version: core
+  title: AMCS Platform REST Sic Code API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: SicCode
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - SicCode
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the sic code                                      |\r\n| Description2007           | The 2007 description of the sic code                                     |\r\n| Code2007                  | The 2007 sic code                                                        |    \r\n| Description2003           | The 2003 description of the sic code                                     |\r\n| Code2003                  | The 2003 sic code                                                        |\r\n| IsDeleted                 | Whether the sic code is deleted     |\r\n    "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the sic code |
+
+        | Description2007 | The 2007 description of the sic code |
+
+        | Code2007 | The 2007 sic code |
+
+        | Description2003 | The 2003 description of the sic code |
+
+        | Code2003 | The 2003 sic code |
+
+        | IsDeleted | Whether the sic code is deleted |'
       operationId: SicCode_Get
       parameters:
       - name: guid
@@ -29,13 +55,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSicCodeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorSicCodeResource'
   /lists/sicCodes:
     get:
       tags:
       - SicCode
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the sic code                                      |\r\n| Description2007           | The 2007 description of the sic code                                     |\r\n| Code2007                  | The 2007 sic code                                                        |    \r\n| Description2003           | The 2003 description of the sic code                                     |\r\n| Code2003                  | The 2003 sic code                                                        |\r\n| IsDeleted                 | Whether the sic code is deleted     |\r\n    "
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the sic code |
+
+        | Description2007 | The 2007 description of the sic code |
+
+        | Code2007 | The 2007 sic code |
+
+        | Description2003 | The 2003 description of the sic code |
+
+        | Code2003 | The 2003 sic code |
+
+        | IsDeleted | Whether the sic code is deleted |'
       operationId: SicCode_GetCollection
       parameters:
       - name: filter
@@ -66,14 +106,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSicCodeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSicCodeResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorSicCodeResource:
       type: object
       properties:
@@ -91,26 +134,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorSicCodeResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSicCodeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity[ApiIntegratorSicCodeResource]:
+    ApiResourceResultEntity_ApiIntegratorSicCodeResource:
       type: object
       properties:
         resource:
@@ -140,6 +164,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -157,11 +192,16 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiResourceResultCollection_ApiIntegratorSicCodeResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSicCodeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

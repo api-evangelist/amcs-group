@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Service API
-  version: core
+  title: AMCS Platform REST Service API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Service
 paths:
@@ -10,7 +22,115 @@ paths:
       tags:
       - Service
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the service                               |\r\n| Description               | The description of the service                   |\r\n| ExternalDescription       | The external description of the service                                  |\r\n| ShortName                 | The short name description of the service                                |\r\n| AnalysisCode              | The analysis code of the service                       |\r\n| IsDeleted                 | Whether the service is deleted  |\r\n| AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |\r\n| AllowBulkMovements        | Is bulk movements allowable for this service?|\r\n| AllowDriverResequence     | Is driver resequence allowable for this service?|\r\n| AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|\r\n| AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|\r\n| AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|\r\n| AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|\r\n| AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|\r\n| CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |\r\n| CreditAccountRequired| Is credit account required for this service?|\r\n| DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|\r\n| EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|\r\n| ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|\r\n| AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|\r\n| FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|\r\n| IsAccountsPayable| Is accounts payable for this service?|\r\n| IsBookable| Is this service bookable?|\r\n| IsBrokerageOnly| Is this service brokerage only?|\r\n| IsCollection| Is this service collection?|\r\n| IsDirectMovement| Is this service direct movement?|\r\n| IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|\r\n| IsExport| Is this service export?|\r\n| IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|\r\n| IsManagement| Is this service management?|\r\n| IsManifest| Is this service manifest?|\r\n| IsMaterialOut| Is material out for this service?|\r\n| IsQuantityBased| Is this service quantity based?|\r\n| IsRouteWeighing| Is this service route weighing?|\r\n| IsScheduled| Is this service scheduled?|\r\n| IsScheduledBag| Is scheduled bag for this service?|\r\n| IsStandingOrder| Is standing order for this service?|\r\n| IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|\r\n| IsTipper| Is this service tripper?|\r\n| IsTransferOut| Is this service transfer out?|\r\n| IsUnScheduledMaterial| Is this service unscheduled material?|\r\n| IsWeighingSignatureRequired | Is weighing signature required for this service?|\r\n| IsWorkOrder| Is work order for this service?|\r\n| OneInvoicePerJobDefault| The one invoice per job default of the service|\r\n| RecordSummaryQuantity| The record summary quantity of the service|\r\n| RequiresPeriodicDoC| The requires periodic DoC of the service|\r\n| ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|\r\n| ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|\r\n| WarnOnOutOfCycle| The warn on out of cycle of the service|\r\n| JobStatusTrackingLevel| The job status tracking level of teh service|\r\n| PremiumHireDayThreshold| The premium hire day threshold of the service|\r\n| BusinessTypeListItem| The GUID and description of the business type of the service|\r\n| ServiceCategoryListItem| The GUID and description of the service category of the service|\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the service |
+
+        | Description | The description of the service |
+
+        | ExternalDescription | The external description of the service |
+
+        | ShortName | The short name description of the service |
+
+        | AnalysisCode | The analysis code of the service |
+
+        | IsDeleted | Whether the service is deleted |
+
+        | AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |
+
+        | AllowBulkMovements | Is bulk movements allowable for this service?|
+
+        | AllowDriverResequence | Is driver resequence allowable for this service?|
+
+        | AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|
+
+        | AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|
+
+        | AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|
+
+        | AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|
+
+        | AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|
+
+        | CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |
+
+        | CreditAccountRequired| Is credit account required for this service?|
+
+        | DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|
+
+        | EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|
+
+        | ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|
+
+        | AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|
+
+        | FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|
+
+        | IsAccountsPayable| Is accounts payable for this service?|
+
+        | IsBookable| Is this service bookable?|
+
+        | IsBrokerageOnly| Is this service brokerage only?|
+
+        | IsCollection| Is this service collection?|
+
+        | IsDirectMovement| Is this service direct movement?|
+
+        | IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|
+
+        | IsExport| Is this service export?|
+
+        | IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|
+
+        | IsManagement| Is this service management?|
+
+        | IsManifest| Is this service manifest?|
+
+        | IsMaterialOut| Is material out for this service?|
+
+        | IsQuantityBased| Is this service quantity based?|
+
+        | IsRouteWeighing| Is this service route weighing?|
+
+        | IsScheduled| Is this service scheduled?|
+
+        | IsScheduledBag| Is scheduled bag for this service?|
+
+        | IsStandingOrder| Is standing order for this service?|
+
+        | IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|
+
+        | IsTipper| Is this service tripper?|
+
+        | IsTransferOut| Is this service transfer out?|
+
+        | IsUnScheduledMaterial| Is this service unscheduled material?|
+
+        | IsWeighingSignatureRequired | Is weighing signature required for this service?|
+
+        | IsWorkOrder| Is work order for this service?|
+
+        | OneInvoicePerJobDefault| The one invoice per job default of the service|
+
+        | RecordSummaryQuantity| The record summary quantity of the service|
+
+        | RequiresPeriodicDoC| The requires periodic DoC of the service|
+
+        | ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|
+
+        | ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|
+
+        | WarnOnOutOfCycle| The warn on out of cycle of the service|
+
+        | JobStatusTrackingLevel| The job status tracking level of teh service|
+
+        | PremiumHireDayThreshold| The premium hire day threshold of the service|
+
+        | BusinessTypeListItem| The GUID and description of the business type of the service|
+
+        | ServiceCategoryListItem| The GUID and description of the service category of the service|'
       operationId: Service_Get
       parameters:
       - name: guid
@@ -29,13 +149,121 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorServiceResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorServiceResource'
   /lists/services:
     get:
       tags:
       - Service
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the service                               |\r\n| Description               | The description of the service                   |\r\n| ExternalDescription       | The external description of the service                                  |\r\n| ShortName                 | The short name description of the service                                |\r\n| AnalysisCode              | The analysis code of the service                       |\r\n| IsDeleted                 | Whether the service is deleted  |\r\n| AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |\r\n| AllowBulkMovements        | Is bulk movements allowable for this service?|\r\n| AllowDriverResequence     | Is driver resequence allowable for this service?|\r\n| AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|\r\n| AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|\r\n| AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|\r\n| AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|\r\n| AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|\r\n| CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |\r\n| CreditAccountRequired| Is credit account required for this service?|\r\n| DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|\r\n| EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|\r\n| ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|\r\n| AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|\r\n| FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|\r\n| IsAccountsPayable| Is accounts payable for this service?|\r\n| IsBookable| Is this service bookable?|\r\n| IsBrokerageOnly| Is this service brokerage only?|\r\n| IsCollection| Is this service collection?|\r\n| IsDirectMovement| Is this service direct movement?|\r\n| IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|\r\n| IsExport| Is this service export?|\r\n| IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|\r\n| IsManagement| Is this service management?|\r\n| IsManifest| Is this service manifest?|\r\n| IsMaterialOut| Is material out for this service?|\r\n| IsQuantityBased| Is this service quantity based?|\r\n| IsRouteWeighing| Is this service route weighing?|\r\n| IsScheduled| Is this service scheduled?|\r\n| IsScheduledBag| Is scheduled bag for this service?|\r\n| IsStandingOrder| Is standing order for this service?|\r\n| IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|\r\n| IsTipper| Is this service tripper?|\r\n| IsTransferOut| Is this service transfer out?|\r\n| IsUnScheduledMaterial| Is this service unscheduled material?|\r\n| IsWeighingSignatureRequired | Is weighing signature required for this service?|\r\n| IsWorkOrder| Is work order for this service?|\r\n| OneInvoicePerJobDefault| The one invoice per job default of the service|\r\n| RecordSummaryQuantity| The record summary quantity of the service|\r\n| RequiresPeriodicDoC| The requires periodic DoC of the service|\r\n| ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|\r\n| ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|\r\n| WarnOnOutOfCycle| The warn on out of cycle of the service|\r\n| JobStatusTrackingLevel| The job status tracking level of teh service|\r\n| PremiumHireDayThreshold| The premium hire day threshold of the service|\r\n| BusinessTypeListItem| The GUID and description of the business type of the service|\r\n| ServiceCategoryListItem| The GUID and description of the service category of the service|\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the service |
+
+        | Description | The description of the service |
+
+        | ExternalDescription | The external description of the service |
+
+        | ShortName | The short name description of the service |
+
+        | AnalysisCode | The analysis code of the service |
+
+        | IsDeleted | Whether the service is deleted |
+
+        | AllowBarcodeScanningOnQuantityBasedBreakdown | Is barcode scanning on quantity based breakdown are allowable for this service? |
+
+        | AllowBulkMovements | Is bulk movements allowable for this service?|
+
+        | AllowDriverResequence | Is driver resequence allowable for this service?|
+
+        | AllowManualBarcodeEntry| Is manual barcode entry allowable for this service?|
+
+        | AllowQuantityBasedBreakdown | Is quantity based breakdown allowable for this service?|
+
+        | AllowRecordBreakdownNotCollected | Is record breakdown not collected allowable for this service?|
+
+        | AllowWasteTransferFormatSignatures | Is waste transfer format signatures allowable for this service?|
+
+        | AllowZeroWeightsOnMobile| Is zero weight on mobile allowable for this service?|
+
+        | CaptureFillLevelOnQuantityBasedBreakdown | The capture fill level on quantity based breakdown of this service |
+
+        | CreditAccountRequired| Is credit account required for this service?|
+
+        | DynamicOptimisationEnabled | Is dynamic optimisation enabled for this service?|
+
+        | EnableChargeExcessWeightPerBin | Is charge excess weight per bin enabled for this service?|
+
+        | ExcludeAssetTracking| Is asset tracking excluded for this service?- Deprecated|
+
+        | AssetTrackingUsingSerialOrTag| Is asset tracking using serial number or tag for this service|
+
+        | FilterOrderActionsbyMaterialProfile | The Filter order actions by material profile of the service|
+
+        | IsAccountsPayable| Is accounts payable for this service?|
+
+        | IsBookable| Is this service bookable?|
+
+        | IsBrokerageOnly| Is this service brokerage only?|
+
+        | IsCollection| Is this service collection?|
+
+        | IsDirectMovement| Is this service direct movement?|
+
+        | IsDisposalMaterialChangeEnabled | Is disposal material change enabled for this service?|
+
+        | IsExport| Is this service export?|
+
+        | IsIncludedWhereDOCRequired | Is included where DOC Required for this service?|
+
+        | IsManagement| Is this service management?|
+
+        | IsManifest| Is this service manifest?|
+
+        | IsMaterialOut| Is material out for this service?|
+
+        | IsQuantityBased| Is this service quantity based?|
+
+        | IsRouteWeighing| Is this service route weighing?|
+
+        | IsScheduled| Is this service scheduled?|
+
+        | IsScheduledBag| Is scheduled bag for this service?|
+
+        | IsStandingOrder| Is standing order for this service?|
+
+        | IsSupplierConfirmationRequired | Is supplier confirmation required for this service?|
+
+        | IsTipper| Is this service tripper?|
+
+        | IsTransferOut| Is this service transfer out?|
+
+        | IsUnScheduledMaterial| Is this service unscheduled material?|
+
+        | IsWeighingSignatureRequired | Is weighing signature required for this service?|
+
+        | IsWorkOrder| Is work order for this service?|
+
+        | OneInvoicePerJobDefault| The one invoice per job default of the service|
+
+        | RecordSummaryQuantity| The record summary quantity of the service|
+
+        | RequiresPeriodicDoC| The requires periodic DoC of the service|
+
+        | ShowJobPaymentDetailsOnMobile | The show job payment details on mobile of the service|
+
+        | ShowOrderDefaultsOnBaleCollection | The show order default on bale collection|
+
+        | WarnOnOutOfCycle| The warn on out of cycle of the service|
+
+        | JobStatusTrackingLevel| The job status tracking level of teh service|
+
+        | PremiumHireDayThreshold| The premium hire day threshold of the service|
+
+        | BusinessTypeListItem| The GUID and description of the business type of the service|
+
+        | ServiceCategoryListItem| The GUID and description of the service category of the service|'
       operationId: Service_GetCollection
       parameters:
       - name: filter
@@ -66,7 +294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorServiceResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorServiceResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,29 +306,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorServiceResource]:
+    ApiResourceResultEntity_ApiIntegratorServiceResource:
       type: object
       properties:
         resource:
@@ -113,29 +319,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
+        isSuccess:
+          type: boolean
     ApiIntegratorServiceResource:
       type: object
       properties:
@@ -249,7 +440,24 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorServiceResource]:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorServiceResource:
       type: object
       properties:
         resource:
@@ -262,11 +470,31 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

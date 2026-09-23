@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup SupplierPayment API
-  version: core
+  title: AMCS Platform REST Supplier Payment API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: SupplierPayment
 paths:
@@ -10,7 +22,57 @@ paths:
       tags:
       - SupplierPayment
       summary: Retrieve changes
-      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the supplier payment.|\r\n| Amount| Amount of the supplier payment.|\r\n| DateInput| The input date associated to the supplier payment.|\r\n| DateReceived| The received date associated to the supplier payment.|\r\n| IsBad| Whether the supplier payment is bad.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|\r\n| RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|\r\n| AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|\r\n| APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|\r\n| DateBad| The bad date associated to the supplier payment.|\r\n| DateBadExported| The exported bad date associated to the supplier payment.|\r\n| DateCleared| The cleared date associated to the supplier payment.|\r\n| DateExported| The exported date associated to the supplier payment.|\r\n| DateProcessed| The processed date associated to the supplier payment.|\r\n| Notes| The notes associated to the supplier payment.|\r\n| PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|\r\n| PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|\r\n| Reference| The referenceassociated to the supplier payment.|\r\n| Allocations[0]| List of supplier payment allocation made for the supplier payment.| \r\n| Allocations[0].Amount| Amount of the supplier payment allocation.| \r\n| Allocations[0].DateInput| The input date associated to the supplier payment allocation.| \r\n| Allocations[0].RelatedSupplierBillGuid            | The GUID associated to the supplier bill of the supplier payment.| \r\n| RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|\r\n| IsDeleted| Supplier Payment is being deleted?|\r\n"
+      description: '| Property| Description|
+
+        | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the supplier payment.|
+
+        | Amount| Amount of the supplier payment.|
+
+        | DateInput| The input date associated to the supplier payment.|
+
+        | DateReceived| The received date associated to the supplier payment.|
+
+        | IsBad| Whether the supplier payment is bad.|
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|
+
+        | RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|
+
+        | AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|
+
+        | APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|
+
+        | DateBad| The bad date associated to the supplier payment.|
+
+        | DateBadExported| The exported bad date associated to the supplier payment.|
+
+        | DateCleared| The cleared date associated to the supplier payment.|
+
+        | DateExported| The exported date associated to the supplier payment.|
+
+        | DateProcessed| The processed date associated to the supplier payment.|
+
+        | Notes| The notes associated to the supplier payment.|
+
+        | PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|
+
+        | PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|
+
+        | Reference| The referenceassociated to the supplier payment.|
+
+        | Allocations[0]| List of supplier payment allocation made for the supplier payment.|
+
+        | Allocations[0].Amount| Amount of the supplier payment allocation.|
+
+        | Allocations[0].DateInput| The input date associated to the supplier payment allocation.|
+
+        | Allocations[0].RelatedSupplierBillGuid | The GUID associated to the supplier bill of the supplier payment.|
+
+        | RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|
+
+        | IsDeleted| Supplier Payment is being deleted?|'
       operationId: SupplierPayment_GetChanges
       parameters:
       - name: since
@@ -27,13 +89,63 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorSupplierPaymentResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorSupplierPaymentResource'
   /accounting/supplierPayments/{guid}:
     get:
       tags:
       - SupplierPayment
       summary: Find with GUID
-      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the supplier payment.|\r\n| Amount| Amount of the supplier payment.|\r\n| DateInput| The input date associated to the supplier payment.|\r\n| DateReceived| The received date associated to the supplier payment.|\r\n| IsBad| Whether the supplier payment is bad.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|\r\n| RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|\r\n| AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|\r\n| APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|\r\n| DateBad| The bad date associated to the supplier payment.|\r\n| DateBadExported| The exported bad date associated to the supplier payment.|\r\n| DateCleared| The cleared date associated to the supplier payment.|\r\n| DateExported| The exported date associated to the supplier payment.|\r\n| DateProcessed| The processed date associated to the supplier payment.|\r\n| Notes| The notes associated to the supplier payment.|\r\n| PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|\r\n| PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|\r\n| Reference| The referenceassociated to the supplier payment.|\r\n| Allocations[0]| List of supplier payment allocation made for the supplier payment.| \r\n| Allocations[0].Amount| Amount of the supplier payment allocation.| \r\n| Allocations[0].DateInput| The input date associated to the supplier payment allocation.| \r\n| Allocations[0].RelatedSupplierBillGuid            | The GUID associated to the supplier bill of the supplier payment.| \r\n| RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|\r\n| IsDeleted| Supplier Payment is being deleted?|\r\n"
+      description: '| Property| Description|
+
+        | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the supplier payment.|
+
+        | Amount| Amount of the supplier payment.|
+
+        | DateInput| The input date associated to the supplier payment.|
+
+        | DateReceived| The received date associated to the supplier payment.|
+
+        | IsBad| Whether the supplier payment is bad.|
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|
+
+        | RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|
+
+        | AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|
+
+        | APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|
+
+        | DateBad| The bad date associated to the supplier payment.|
+
+        | DateBadExported| The exported bad date associated to the supplier payment.|
+
+        | DateCleared| The cleared date associated to the supplier payment.|
+
+        | DateExported| The exported date associated to the supplier payment.|
+
+        | DateProcessed| The processed date associated to the supplier payment.|
+
+        | Notes| The notes associated to the supplier payment.|
+
+        | PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|
+
+        | PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|
+
+        | Reference| The referenceassociated to the supplier payment.|
+
+        | Allocations[0]| List of supplier payment allocation made for the supplier payment.|
+
+        | Allocations[0].Amount| Amount of the supplier payment allocation.|
+
+        | Allocations[0].DateInput| The input date associated to the supplier payment allocation.|
+
+        | Allocations[0].RelatedSupplierBillGuid | The GUID associated to the supplier bill of the supplier payment.|
+
+        | RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|
+
+        | IsDeleted| Supplier Payment is being deleted?|'
       operationId: SupplierPayment_Get
       parameters:
       - name: guid
@@ -52,12 +164,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSupplierPaymentResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorSupplierPaymentResource'
     put:
       tags:
       - SupplierPayment
       summary: Partial update
-      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------| -------- |\r\n| GUID| The GUID associated to the supplier payment.| No    |\r\n| Amount| Amount of the supplier payment.| Yes   |\r\n| DateInput| The input date associated to the supplier payment.| Yes   |\r\n| DateReceived| The received date associated to the supplier payment.| Yes   |\r\n| IsBad| Whether the supplier payment is bad.| Yes   |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.| Yes   |\r\n| RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.| Yes   |\r\n| AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.| No    |\r\n| APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.| No    |\r\n| DateBad| The bad date associated to the supplier payment.| No    |\r\n| DateBadExported| The exported bad date associated to the supplier payment.| No    |\r\n| DateCleared| The cleared date associated to the supplier payment.| No    |\r\n| DateExported| The exported date associated to the supplier payment.| No    |\r\n| DateProcessed| The processed date associated to the supplier payment.| No    |\r\n| Notes| The notes associated to the supplier payment.| No    |\r\n| PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.| No    |\r\n| PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.| No    |\r\n| Reference| The referenceassociated to the supplier payment.| No    |\r\n| Allocations[0]| List of supplier payment allocation made for the supplier payment.| No    | \r\n| Allocations[0].Amount| Amount of the supplier payment allocation.| Yes   | \r\n| Allocations[0].DateInput| The input date associated to the supplier payment allocation.| Yes   | \r\n| Allocations[0].RelatedSupplierBillGuid            | The GUID associated to the supplier bill of the supplier payment.| Yes   | \r\n| RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.| No    |\r\n| IsDeleted| Supplier Payment is being deleted?| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedSupplierGuid provided is Deleted. | The provided RelatedSupplierGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PaymentTypeListItem.Guid provided is Deleted. | The provided PaymentTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If AccountingPeriodListItem.Guid provided is Deleted. | The provided AccountingPeriodListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If APPaymentStatusListItem.Guid provided is Deleted. | The provided APPaymentStatusListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PayableCycleListItem.Guid provided is Deleted. | The provided PayableCycleListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PaymentPointListItem.Guid provided is Deleted. | The provided PaymentPointListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedSupplierBillGuid provided is Deleted. | The provided RelatedSupplierBillGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If we attempt to delete a supplier payment | IsDeleted is TRUE. Could not process the request. SupplierPayment can not be deleted via the REST API. |\r\n| If we attempt to delete a supplier payment allocation | IsDeleted is TRUE. Could not process the request. Allocation can not be deleted via the REST API. |\r\n| If we provide supplier payment allocation with Guid of another supplier payment allocation | Failed to save. Allocations with Guid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx does not belong to SupplierPayment |\r\n| If we provide same RelatedSupplierBillGuid more than one time in allocations array | Failed to save. Allocations already exists with RelatedSupplierBillGuid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. |\r\n| If we provide RelatedSupplierBillGuid already exist in SupplierBillSupplierPayment(allocations) | Failed to save. SupplierBillSupplierPayment already exists with RelatedSupplierBillGuid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. |"
+      description: '| Property| Description| Required |
+
+        | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------| -------- |
+
+        | GUID| The GUID associated to the supplier payment.| No |
+
+        | Amount| Amount of the supplier payment.| Yes |
+
+        | DateInput| The input date associated to the supplier payment.| Yes |
+
+        | DateReceived| The received date associated to the supplier payment.| Yes |
+
+        | IsBad| Whether the supplier payment is bad.| Yes |
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.| Yes |
+
+        | RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment.'
       operationId: SupplierPayment_Update
       parameters:
       - name: guid
@@ -85,7 +213,57 @@ paths:
       tags:
       - SupplierPayment
       summary: Find with Filters
-      description: "| Property| Description|\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|\r\n| GUID| The GUID associated to the supplier payment.|\r\n| Amount| Amount of the supplier payment.|\r\n| DateInput| The input date associated to the supplier payment.|\r\n| DateReceived| The received date associated to the supplier payment.|\r\n| IsBad| Whether the supplier payment is bad.|\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|\r\n| RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|\r\n| AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|\r\n| APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|\r\n| DateBad| The bad date associated to the supplier payment.|\r\n| DateBadExported| The exported bad date associated to the supplier payment.|\r\n| DateCleared| The cleared date associated to the supplier payment.|\r\n| DateExported| The exported date associated to the supplier payment.|\r\n| DateProcessed| The processed date associated to the supplier payment.|\r\n| Notes| The notes associated to the supplier payment.|\r\n| PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|\r\n| PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|\r\n| Reference| The referenceassociated to the supplier payment.|\r\n| Allocations[0]| List of supplier payment allocation made for the supplier payment.| \r\n| Allocations[0].Amount| Amount of the supplier payment allocation.| \r\n| Allocations[0].DateInput| The input date associated to the supplier payment allocation.| \r\n| Allocations[0].RelatedSupplierBillGuid            | The GUID associated to the supplier bill of the supplier payment.| \r\n| RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|\r\n| IsDeleted| Supplier Payment is being deleted?|\r\n"
+      description: '| Property| Description|
+
+        | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------|
+
+        | GUID| The GUID associated to the supplier payment.|
+
+        | Amount| Amount of the supplier payment.|
+
+        | DateInput| The input date associated to the supplier payment.|
+
+        | DateReceived| The received date associated to the supplier payment.|
+
+        | IsBad| Whether the supplier payment is bad.|
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.|
+
+        | RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.|
+
+        | AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.|
+
+        | APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.|
+
+        | DateBad| The bad date associated to the supplier payment.|
+
+        | DateBadExported| The exported bad date associated to the supplier payment.|
+
+        | DateCleared| The cleared date associated to the supplier payment.|
+
+        | DateExported| The exported date associated to the supplier payment.|
+
+        | DateProcessed| The processed date associated to the supplier payment.|
+
+        | Notes| The notes associated to the supplier payment.|
+
+        | PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.|
+
+        | PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.|
+
+        | Reference| The referenceassociated to the supplier payment.|
+
+        | Allocations[0]| List of supplier payment allocation made for the supplier payment.|
+
+        | Allocations[0].Amount| Amount of the supplier payment allocation.|
+
+        | Allocations[0].DateInput| The input date associated to the supplier payment allocation.|
+
+        | Allocations[0].RelatedSupplierBillGuid | The GUID associated to the supplier bill of the supplier payment.|
+
+        | RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.|
+
+        | IsDeleted| Supplier Payment is being deleted?|'
       operationId: SupplierPayment_GetCollection
       parameters:
       - name: filter
@@ -116,12 +294,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSupplierPaymentResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSupplierPaymentResource'
     post:
       tags:
       - SupplierPayment
       summary: Create or update
-      description: "| Property| Description| Required |\r\n| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------| -------- |\r\n| GUID| The GUID associated to the supplier payment.| No    |\r\n| Amount| Amount of the supplier payment.| Yes   |\r\n| DateInput| The input date associated to the supplier payment.| Yes   |\r\n| DateReceived| The received date associated to the supplier payment.| Yes   |\r\n| IsBad| Whether the supplier payment is bad.| Yes   |\r\n| PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.| Yes   |\r\n| RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment. Filterable.| Yes   |\r\n| AccountingPeriodListItem| The GUID and description of the accounting period associated to the supplier payment.| No    |\r\n| APPaymentStatusListItem| The GUID and description of the AP payment status associated to the supplier payment.| No    |\r\n| DateBad| The bad date associated to the supplier payment.| No    |\r\n| DateBadExported| The exported bad date associated to the supplier payment.| No    |\r\n| DateCleared| The cleared date associated to the supplier payment.| No    |\r\n| DateExported| The exported date associated to the supplier payment.| No    |\r\n| DateProcessed| The processed date associated to the supplier payment.| No    |\r\n| Notes| The notes associated to the supplier payment.| No    |\r\n| PayableCycleListItem| The GUID and description of the payable cycle associated to the supplier payment.| No    |\r\n| PaymentPointListItem| The GUID and description of the payment point associated to the supplier payment.| No    |\r\n| Reference| The referenceassociated to the supplier payment.| No    |\r\n| Allocations[0]| List of supplier payment allocation made for the supplier payment.| No    | \r\n| Allocations[0].Amount| Amount of the supplier payment allocation.| Yes   | \r\n| Allocations[0].DateInput| The input date associated to the supplier payment allocation.| Yes   | \r\n| Allocations[0].RelatedSupplierBillGuid            | The GUID associated to the supplier bill of the supplier payment.| Yes   | \r\n| RelatedSupplierBillGuidFilter| The filter used to filter the related supplier bill guid associated to the Allocation. Filterable.| No    |\r\n| IsDeleted| Supplier Payment is being deleted?| No    |\r\n\r\n**Extra validations**\r\n\r\n| Condition | Error message |\r\n| --------- | ------------- |\r\n| If RelatedSupplierGuid provided is Deleted. | The provided RelatedSupplierGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PaymentTypeListItem.Guid provided is Deleted. | The provided PaymentTypeListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If AccountingPeriodListItem.Guid provided is Deleted. | The provided AccountingPeriodListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If APPaymentStatusListItem.Guid provided is Deleted. | The provided APPaymentStatusListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PayableCycleListItem.Guid provided is Deleted. | The provided PayableCycleListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If PaymentPointListItem.Guid provided is Deleted. | The provided PaymentPointListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If RelatedSupplierBillGuid provided is Deleted. | The provided RelatedSupplierBillGuid is deleted. Could not update the resource. Please check the relevant list end point for the available options. |\r\n| If we attempt to delete a supplier payment | IsDeleted is TRUE. Could not process the request. SupplierPayment can not be deleted via the REST API. |\r\n| If we attempt to delete a supplier payment allocation | IsDeleted is TRUE. Could not process the request. Allocation can not be deleted via the REST API. |\r\n| If we provide supplier payment allocation with Guid | One of the Allocations in the request is an update. The request could not be processed. Ensure that none of the Allocations has a guid. |\r\n| If we provide same RelatedSupplierBillGuid more than one time in allocations array | Failed to save. Allocations already exists with RelatedSupplierBillGuid of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. |"
+      description: '| Property| Description| Required |
+
+        | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------| -------- |
+
+        | GUID| The GUID associated to the supplier payment.| No |
+
+        | Amount| Amount of the supplier payment.| Yes |
+
+        | DateInput| The input date associated to the supplier payment.| Yes |
+
+        | DateReceived| The received date associated to the supplier payment.| Yes |
+
+        | IsBad| Whether the supplier payment is bad.| Yes |
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the supplier payment.| Yes |
+
+        | RelatedSupplierGuid| The GUID associated to the supplier of the supplier payment.'
       operationId: SupplierPayment_Create
       requestBody:
         content:
@@ -139,6 +333,15 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorAllocationResource:
       type: object
       properties:
@@ -159,15 +362,6 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         IsDeleted:
           type: boolean
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -175,6 +369,75 @@ components:
           type: string
         cursor:
           type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorSupplierPaymentResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorSupplierPaymentResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges_ApiIntegratorSupplierPaymentResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceId:
       type: object
       properties:
@@ -185,11 +448,29 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        errors:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorSupplierPaymentResource:
       type: object
       properties:
@@ -258,90 +539,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntity[ApiIntegratorSupplierPaymentResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceChanges[ApiIntegratorSupplierPaymentResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorSupplierPaymentResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSupplierPaymentResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

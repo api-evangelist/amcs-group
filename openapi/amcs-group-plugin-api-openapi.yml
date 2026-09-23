@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Plugin API
+  title: Core Plugin API
   version: core
 tags:
 - name: Plugin
@@ -26,6 +26,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Replace services api plugins update
+      x-summary-source: derived
+      operationId: putServicesApiPluginsUpdate
+      x-operation-id-source: derived
   /plugins/update:
     put:
       tags:
@@ -47,6 +51,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Replace plugins update
+      x-summary-source: derived
+      operationId: putPluginsUpdate
+      x-operation-id-source: derived
   /services/api/plugins/run-ui-component:
     post:
       tags:
@@ -65,6 +73,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create services api plugins run ui component
+      x-summary-source: derived
+      operationId: postServicesApiPluginsRunUiComponent
+      x-operation-id-source: derived
   /plugins/run-ui-component:
     post:
       tags:
@@ -83,6 +95,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create plugins run ui component
+      x-summary-source: derived
+      operationId: postPluginsRunUiComponent
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.PluginData.Data.IPluginAction:
@@ -92,18 +108,22 @@ components:
       type: object
       properties:
         callbackUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         parameters: {}
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userContext:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         allowedActions:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
       additionalProperties: false

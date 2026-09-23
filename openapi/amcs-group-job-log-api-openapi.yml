@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup JobLog API
+  title: Core Job Log API
   version: core
 tags:
-- name: JobLog
+- name: Job Log
 paths:
   /jobsystem/jobLogs/changes:
     get:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: since
         in: query
@@ -28,22 +28,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiJobLogResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiJobLogResource'
+      summary: Get jobsystem job logs changes
+      x-summary-source: derived
+      operationId: getJobsystemJobLogsChanges
+      x-operation-id-source: derived
   /jobsystem/jobLogs/template:
     get:
       tags:
-      - JobLog
+      - Job Log
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiJobLogResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiJobLogResource'
+      summary: Get jobsystem job logs template
+      x-summary-source: derived
+      operationId: getJobsystemJobLogsTemplate
+      x-operation-id-source: derived
   /jobsystem/jobLogs/{id}:
     get:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: id
         in: path
@@ -72,10 +80,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiJobLogResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobLogResource'
+      summary: Get jobsystem job logs by id
+      x-summary-source: derived
+      operationId: getJobsystemJobLogsById
+      x-operation-id-source: derived
     put:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: id
         in: path
@@ -94,9 +106,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace jobsystem job logs by id
+      x-summary-source: derived
+      operationId: putJobsystemJobLogsById
+      x-operation-id-source: derived
     delete:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: id
         in: path
@@ -110,10 +126,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete jobsystem job logs by id
+      x-summary-source: derived
+      operationId: deleteJobsystemJobLogsById
+      x-operation-id-source: derived
   /jobsystem/jobLogs/{id}/blob/{blobMemberName}:
     get:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: id
         in: path
@@ -141,10 +161,14 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get jobsystem job logs by id blob by blob member name
+      x-summary-source: derived
+      operationId: getJobsystemJobLogsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /jobsystem/jobLogs:
     get:
       tags:
-      - JobLog
+      - Job Log
       parameters:
       - name: filter
         in: query
@@ -188,10 +212,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiJobLogResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiJobLogResource'
+      summary: Get jobsystem job logs
+      x-summary-source: derived
+      operationId: getJobsystemJobLogs
+      x-operation-id-source: derived
     post:
       tags:
-      - JobLog
+      - Job Log
       requestBody:
         content:
           application/json:
@@ -204,19 +232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create jobsystem job logs
+      x-summary-source: derived
+      operationId: postJobsystemJobLogs
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-          nullable: true
-        cursor:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceId:
+    ApiResourceChanges_ApiJobLogResource:
       type: object
       properties:
         errors:
@@ -224,17 +246,38 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: integer
-          format: int32
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobLog'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        errors:
-          type: string
-          nullable: true
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceResult[ApiJobLogResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResult_ApiJobLogResource:
       type: object
       properties:
         errors:
@@ -244,7 +287,15 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobLog'
       additionalProperties: false
-    ApiResourceChanges[ApiJobLogResource]:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiJobLogResource:
       type: object
       properties:
         errors:
@@ -252,37 +303,47 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobLog'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ApiJobLogResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobLog'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceResultEntity[ApiJobLogResource]:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiJobLogResource:
       type: object
       properties:
         errors:
@@ -296,6 +357,17 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiJobLog:
       type: object
       properties:
@@ -303,33 +375,39 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         jobLogId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         jobId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         created:
           type: string
           format: dateTimeOffset
@@ -338,63 +416,38 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

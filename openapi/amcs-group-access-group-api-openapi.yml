@@ -1,17 +1,37 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup SiteType API
-  version: core
+  title: AMCS Platform REST Access Group API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
-- name: SiteType
+- name: Access Group
 paths:
-  /lists/siteTypes/{guid}:
+  /lists/accessGroups/{guid}:
     get:
       tags:
-      - SiteType
+      - Access Group
       summary: Find with GUID
-      description: "| Property                  | Description                                                       |\r\n| ------------------------- | ----------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the site type                              |\r\n| Description               | The description of the site type                                  |\r\n| IsDeleted                 | Whether the site type is deleted  |"
-      operationId: SiteType_Get
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the access group |
+
+        | Description | The description of the access group |
+
+        | IsDeleted | Whether the access group is deleted |'
+      operationId: AccessGroup_Get
       parameters:
       - name: guid
         in: path
@@ -29,14 +49,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorSiteTypeResource]'
-  /lists/siteTypes:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorAccessGroupResource'
+  /lists/accessGroups:
     get:
       tags:
-      - SiteType
+      - Access Group
       summary: Find with Filters
-      description: "| Property                  | Description                                                       |\r\n| ------------------------- | ----------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the site type                              |\r\n| Description               | The description of the site type                                  |\r\n| IsDeleted                 | Whether the site type is deleted  |"
-      operationId: SiteType_GetCollection
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the access group |
+
+        | Description | The description of the access group |
+
+        | IsDeleted | Whether the access group is deleted |'
+      operationId: AccessGroup_GetCollection
       parameters:
       - name: filter
         in: query
@@ -66,14 +94,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorSiteTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorAccessGroupResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorSiteTypeResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorAccessGroupResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorSiteTypeResource'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessGroupResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorAccessGroupResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccessGroupResource'
         links:
           $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
@@ -82,7 +131,7 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSiteTypeResource:
+    ApiIntegratorAccessGroupResource:
       type: object
       properties:
         Description:
@@ -93,17 +142,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -121,19 +159,17 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection[ApiIntegratorSiteTypeResource]:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSiteTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -151,11 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

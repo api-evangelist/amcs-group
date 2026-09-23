@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup AuthToken API
+  title: Core Auth Token API
   version: core
 tags:
-- name: AuthToken
+- name: Auth - Token
 paths:
   /authTokens:
     get:
       tags:
-      - AuthToken
+      - Auth - Token
       parameters:
       - name: userName
         in: query
@@ -21,9 +21,13 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get auth tokens
+      x-summary-source: derived
+      operationId: getAuthTokens
+      x-operation-id-source: derived
     post:
       tags:
-      - AuthToken
+      - Auth - Token
       requestBody:
         content:
           application/json:
@@ -38,16 +42,24 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create auth tokens
+      x-summary-source: derived
+      operationId: postAuthTokens
+      x-operation-id-source: derived
     delete:
       tags:
-      - AuthToken
+      - Auth - Token
       responses:
         '200':
           description: Success
+      summary: Delete auth tokens
+      x-summary-source: derived
+      operationId: deleteAuthTokens
+      x-operation-id-source: derived
   /authTokens/checkPluginAccess:
     post:
       tags:
-      - AuthToken
+      - Auth - Token
       parameters:
       - name: sysUserGuid
         in: query
@@ -62,10 +74,14 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create auth tokens check plugin access
+      x-summary-source: derived
+      operationId: postAuthTokensCheckPluginAccess
+      x-operation-id-source: derived
   /authTokens/verifyIdentity:
     post:
       tags:
-      - AuthToken
+      - Auth - Token
       requestBody:
         content:
           application/json:
@@ -80,31 +96,41 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create auth tokens verify identity
+      x-summary-source: derived
+      operationId: postAuthTokensVerifyIdentity
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.ApiService.Controllers.UserCredentials:
       type: object
       properties:
         username:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         password:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         temporaryToken:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         privateKey:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.ApiService.Controllers.VerifyIdentityCredentials:
       type: object
       properties:
         username:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         password:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

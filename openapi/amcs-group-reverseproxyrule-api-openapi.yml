@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ReverseProxyRule API
+  title: Core Reverse Proxy Rule API
   version: core
 tags:
 - name: ReverseProxyRule
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ReverseProxyRuleResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ReverseProxyRuleResource'
+      summary: Get services api reverse proxy rules changes
+      x-summary-source: derived
+      operationId: getServicesApiReverseProxyRulesChanges
+      x-operation-id-source: derived
   /services/api/reverseProxyRules/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ReverseProxyRuleResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ReverseProxyRuleResource'
+      summary: Get services api reverse proxy rules template
+      x-summary-source: derived
+      operationId: getServicesApiReverseProxyRulesTemplate
+      x-operation-id-source: derived
   /services/api/reverseProxyRules/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ReverseProxyRuleResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ReverseProxyRuleResource'
+      summary: Get services api reverse proxy rules by id
+      x-summary-source: derived
+      operationId: getServicesApiReverseProxyRulesById
+      x-operation-id-source: derived
     put:
       tags:
       - ReverseProxyRule
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api reverse proxy rules by id
+      x-summary-source: derived
+      operationId: putServicesApiReverseProxyRulesById
+      x-operation-id-source: derived
     delete:
       tags:
       - ReverseProxyRule
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api reverse proxy rules by id
+      x-summary-source: derived
+      operationId: deleteServicesApiReverseProxyRulesById
+      x-operation-id-source: derived
   /services/api/reverseProxyRules/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api reverse proxy rules by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiReverseProxyRulesByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/reverseProxyRules:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ReverseProxyRuleResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ReverseProxyRuleResource'
+      summary: Get services api reverse proxy rules
+      x-summary-source: derived
+      operationId: getServicesApiReverseProxyRules
+      x-operation-id-source: derived
     post:
       tags:
       - ReverseProxyRule
@@ -204,17 +232,130 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api reverse proxy rules
+      x-summary-source: derived
+      operationId: postServicesApiReverseProxyRules
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceChanges_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultEntity_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceResultCollection_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceResult_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -234,173 +375,89 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reverseProxyRuleId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         systemCategory:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         prefix:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         target:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         containerNavigationPrefix:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         isIgnoreProxy:
           type: boolean
-      additionalProperties: false
-    ApiResourceResultEntity[ReverseProxyRuleResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ReverseProxyRuleResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
       additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ReverseProxyRuleResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ReverseProxyRuleResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

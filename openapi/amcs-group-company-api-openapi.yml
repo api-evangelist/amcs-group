@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Company API
-  version: core
+  title: AMCS Platform REST Company API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Company
 paths:
@@ -10,7 +22,19 @@ paths:
       tags:
       - Company
       summary: Retrieve changes
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the company                               |\r\n| Description               | The description of the company                       |\r\n| AnalysisCode              | The analysis code of the company               |\r\n| CurrencyListItem          | The GUID and currency of the company (various values)                    |\r\n| IsDeleted                 | Whether the company is deleted                              |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the company |
+
+        | Description | The description of the company |
+
+        | AnalysisCode | The analysis code of the company |
+
+        | CurrencyListItem | The GUID and currency of the company (various values) |
+
+        | IsDeleted | Whether the company is deleted |'
       operationId: Company_GetChanges
       parameters:
       - name: since
@@ -27,13 +51,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCompanyResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorCompanyResource'
   /lists/companies/{guid}:
     get:
       tags:
       - Company
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the company                               |\r\n| Description               | The description of the company                       |\r\n| AnalysisCode              | The analysis code of the company               |\r\n| CurrencyListItem          | The GUID and currency of the company (various values)                    |\r\n| IsDeleted                 | Whether the company is deleted                              |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the company |
+
+        | Description | The description of the company |
+
+        | AnalysisCode | The analysis code of the company |
+
+        | CurrencyListItem | The GUID and currency of the company (various values) |
+
+        | IsDeleted | Whether the company is deleted |'
       operationId: Company_Get
       parameters:
       - name: guid
@@ -52,13 +88,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCompanyResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCompanyResource'
   /lists/companies:
     get:
       tags:
       - Company
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the company                               |\r\n| Description               | The description of the company                       |\r\n| AnalysisCode              | The analysis code of the company               |\r\n| CurrencyListItem          | The GUID and currency of the company (various values)                    |\r\n| IsDeleted                 | Whether the company is deleted                              |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the company |
+
+        | Description | The description of the company |
+
+        | AnalysisCode | The analysis code of the company |
+
+        | CurrencyListItem | The GUID and currency of the company (various values) |
+
+        | IsDeleted | Whether the company is deleted |'
       operationId: Company_GetCollection
       parameters:
       - name: filter
@@ -89,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCompanyResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCompanyResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -101,6 +149,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorCompanyResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCompanyResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -108,12 +169,32 @@ components:
           type: string
         cursor:
           type: string
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
-    ApiResourceResultCollection[ApiIntegratorCompanyResource]:
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection_ApiIntegratorCompanyResource:
       type: object
       properties:
         resource:
@@ -126,28 +207,7 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorCompanyResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        AnalysisCode:
-          type: string
-        CurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceChanges[ApiIntegratorCompanyResource]:
+    ApiResourceChanges_ApiIntegratorCompanyResource:
       type: object
       properties:
         resource:
@@ -177,41 +237,29 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultEntity[ApiIntegratorCompanyResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCompanyResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+          type: string
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
+    ApiIntegratorCompanyResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
           type: boolean
+        AnalysisCode:
+          type: string
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

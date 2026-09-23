@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ReminderLetterPolicy API
-  version: core
+  title: AMCS Platform REST Reminder Letter Policy API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: ReminderLetterPolicy
 paths:
@@ -10,7 +22,31 @@ paths:
       tags:
       - ReminderLetterPolicy
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the reminder letter policy                         |\r\n| Description| The description of the reminder letter policy                             |\r\n| IsDeleted| Whether the reminder letter policy is deleted |\r\n| CustomerCategoryListItem| The GUID and description of the customer category                         |\r\n| GracePeriod| The grace period of the reminder letter policy                            |\r\n| PaymentTypeListItem| The GUID and description of the payment type                              |\r\n| PrintThirdReminderLetterLocally   | The PrintThirdReminderLetterLocally of the reminder letter policy         |\r\n| SecondReminderLetterInterval      | The SecondReminderLetterInterval of the reminder letter policy            |                           \r\n| ThirdReminderLetterInterval       | The ThirdReminderLetterInterval of the reminder letter policy             |\r\n| MinimumOverdueAmount| The MinimumOverdueAmount of the reminder letter policy                    |\r\n| ShortCode| The short code of the reminder letter policy|"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the reminder letter policy |
+
+        | Description| The description of the reminder letter policy |
+
+        | IsDeleted| Whether the reminder letter policy is deleted |
+
+        | CustomerCategoryListItem| The GUID and description of the customer category |
+
+        | GracePeriod| The grace period of the reminder letter policy |
+
+        | PaymentTypeListItem| The GUID and description of the payment type |
+
+        | PrintThirdReminderLetterLocally | The PrintThirdReminderLetterLocally of the reminder letter policy |
+
+        | SecondReminderLetterInterval | The SecondReminderLetterInterval of the reminder letter policy |
+
+        | ThirdReminderLetterInterval | The ThirdReminderLetterInterval of the reminder letter policy |
+
+        | MinimumOverdueAmount| The MinimumOverdueAmount of the reminder letter policy |
+
+        | ShortCode| The short code of the reminder letter policy|'
       operationId: ReminderLetterPolicy_Get
       parameters:
       - name: guid
@@ -29,13 +65,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorReminderLetterPolicyResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorReminderLetterPolicyResource'
   /lists/reminderLetterPolicies:
     get:
       tags:
       - ReminderLetterPolicy
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the reminder letter policy                         |\r\n| Description| The description of the reminder letter policy                             |\r\n| IsDeleted| Whether the reminder letter policy is deleted |\r\n| CustomerCategoryListItem| The GUID and description of the customer category                         |\r\n| GracePeriod| The grace period of the reminder letter policy                            |\r\n| PaymentTypeListItem| The GUID and description of the payment type                              |\r\n| PrintThirdReminderLetterLocally   | The PrintThirdReminderLetterLocally of the reminder letter policy         |\r\n| SecondReminderLetterInterval      | The SecondReminderLetterInterval of the reminder letter policy            |                           \r\n| ThirdReminderLetterInterval       | The ThirdReminderLetterInterval of the reminder letter policy             |\r\n| MinimumOverdueAmount| The MinimumOverdueAmount of the reminder letter policy                    |\r\n| ShortCode| The short code of the reminder letter policy|"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the reminder letter policy |
+
+        | Description| The description of the reminder letter policy |
+
+        | IsDeleted| Whether the reminder letter policy is deleted |
+
+        | CustomerCategoryListItem| The GUID and description of the customer category |
+
+        | GracePeriod| The grace period of the reminder letter policy |
+
+        | PaymentTypeListItem| The GUID and description of the payment type |
+
+        | PrintThirdReminderLetterLocally | The PrintThirdReminderLetterLocally of the reminder letter policy |
+
+        | SecondReminderLetterInterval | The SecondReminderLetterInterval of the reminder letter policy |
+
+        | ThirdReminderLetterInterval | The ThirdReminderLetterInterval of the reminder letter policy |
+
+        | MinimumOverdueAmount| The MinimumOverdueAmount of the reminder letter policy |
+
+        | ShortCode| The short code of the reminder letter policy|'
       operationId: ReminderLetterPolicy_GetCollection
       parameters:
       - name: filter
@@ -66,7 +126,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorReminderLetterPolicyResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorReminderLetterPolicyResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,19 +138,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection[ApiIntegratorReminderLetterPolicyResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorReminderLetterPolicyResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorReminderLetterPolicyResource:
       type: object
       properties:
@@ -122,30 +169,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultEntity[ApiIntegratorReminderLetterPolicyResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorReminderLetterPolicyResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -163,6 +194,43 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultEntity_ApiIntegratorReminderLetterPolicyResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorReminderLetterPolicyResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorReminderLetterPolicyResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorReminderLetterPolicyResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -180,11 +248,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

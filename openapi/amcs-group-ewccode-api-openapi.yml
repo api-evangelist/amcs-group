@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup EwcCode API
-  version: core
+  title: AMCS Platform REST Ewc Code API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: EwcCode
 paths:
@@ -10,7 +22,19 @@ paths:
       tags:
       - EwcCode
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the EWC Code|\r\n| Code| The Code of the EWC Code|\r\n| Description| The Description of the EWC Code|\r\n| BriefDescription| The Brief Description of the EWC Code|\r\n| IsHazardous| Whether the EWC Code is Hazardous|\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the EWC Code|
+
+        | Code| The Code of the EWC Code|
+
+        | Description| The Description of the EWC Code|
+
+        | BriefDescription| The Brief Description of the EWC Code|
+
+        | IsHazardous| Whether the EWC Code is Hazardous|'
       operationId: EwcCode_Get
       parameters:
       - name: guid
@@ -29,13 +53,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorEwcCodeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorEwcCodeResource'
   /lists/ewcCodes:
     get:
       tags:
       - EwcCode
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the EWC Code|\r\n| Code| The Code of the EWC Code|\r\n| Description| The Description of the EWC Code|\r\n| BriefDescription| The Brief Description of the EWC Code|\r\n| IsHazardous| Whether the EWC Code is Hazardous|\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the EWC Code|
+
+        | Code| The Code of the EWC Code|
+
+        | Description| The Description of the EWC Code|
+
+        | BriefDescription| The Brief Description of the EWC Code|
+
+        | IsHazardous| Whether the EWC Code is Hazardous|'
       operationId: EwcCode_GetCollection
       parameters:
       - name: filter
@@ -66,80 +102,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorEwcCodeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorEwcCodeResource'
 components:
   schemas:
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorEwcCodeResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorEwcCodeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorEwcCodeResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorEwcCodeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiIntegratorEwcCodeResource:
       type: object
       properties:
@@ -163,3 +128,74 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceResultEntity_ApiIntegratorEwcCodeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorEwcCodeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorEwcCodeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorEwcCodeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

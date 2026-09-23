@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Lodgement API
-  version: core
+  title: AMCS Platform REST Lodgement API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Lodgement
 paths:
@@ -10,7 +22,19 @@ paths:
       tags:
       - Lodgement
       summary: Retrieve changes
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the lodgement.|
+
+        | IsDeleted| Whether the lodgement is deleted.|
+
+        | DateLodged| The date lodged associated to the lodgement.|
+
+        | Reference| The Reference associated to the lodgement.|
+
+        | LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement. |'
       operationId: Lodgement_GetChanges
       parameters:
       - name: since
@@ -27,13 +51,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorLodgementResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorLodgementResource'
   /accounting/lodgements/{guid}:
     get:
       tags:
       - Lodgement
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the lodgement.|
+
+        | IsDeleted| Whether the lodgement is deleted.|
+
+        | DateLodged| The date lodged associated to the lodgement.|
+
+        | Reference| The Reference associated to the lodgement.|
+
+        | LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement. |'
       operationId: Lodgement_Get
       parameters:
       - name: guid
@@ -52,13 +88,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorLodgementResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorLodgementResource'
   /accounting/lodgements:
     get:
       tags:
       - Lodgement
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the lodgement.|\r\n| IsDeleted| Whether the lodgement is deleted.|\r\n| DateLodged| The date lodged associated to the lodgement.|\r\n| Reference| The Reference associated to the lodgement.|\r\n| LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement.   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the lodgement.|
+
+        | IsDeleted| Whether the lodgement is deleted.|
+
+        | DateLodged| The date lodged associated to the lodgement.|
+
+        | Reference| The Reference associated to the lodgement.|
+
+        | LodgementTypeListItem| The GUID and Description of the lodgement type associated to the lodgement. |'
       operationId: Lodgement_GetCollection
       parameters:
       - name: filter
@@ -89,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorLodgementResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorLodgementResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -108,44 +156,15 @@ components:
           type: string
         cursor:
           type: string
-    ApiResourceResultEntity[ApiIntegratorLodgementResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorLodgementResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges[ApiIntegratorLodgementResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorLodgementResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultCollection[ApiIntegratorLodgementResource]:
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorLodgementResource:
       type: object
       properties:
         resource:
@@ -154,6 +173,19 @@ components:
             $ref: '#/components/schemas/ApiIntegratorLodgementResource'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges_ApiIntegratorLodgementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLodgementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -192,6 +224,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorLodgementResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLodgementResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -209,11 +265,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

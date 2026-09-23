@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DayOfWeek API
-  version: core
+  title: AMCS Platform REST Day Of Week API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: DayOfWeek
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - DayOfWeek
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the day of week        |\r\n| DayOfWeek                | The name of the day of week    |\r\n| Descriminator| The numerical value of the day of week   |\r\n| DatePartValue| The datepart value of the day of week   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the day of week |
+
+        | DayOfWeek | The name of the day of week |
+
+        | Descriminator| The numerical value of the day of week |
+
+        | DatePartValue| The datepart value of the day of week |'
       operationId: DayOfWeek_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDayOfWeekResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorDayOfWeekResource'
   /lists/dayOfWeeks:
     get:
       tags:
       - DayOfWeek
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the day of week        |\r\n| DayOfWeek                | The name of the day of week    |\r\n| Descriminator| The numerical value of the day of week   |\r\n| DatePartValue| The datepart value of the day of week   |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the day of week |
+
+        | DayOfWeek | The name of the day of week |
+
+        | Descriminator| The numerical value of the day of week |
+
+        | DatePartValue| The datepart value of the day of week |'
       operationId: DayOfWeek_GetCollection
       parameters:
       - name: filter
@@ -66,27 +98,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDayOfWeekResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDayOfWeekResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorDayOfWeekResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorDayOfWeekResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorDayOfWeekResource:
       type: object
       properties:
@@ -102,42 +116,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultCollection[ApiIntegratorDayOfWeekResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorDayOfWeekResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -155,11 +141,57 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiResourceResultEntity_ApiIntegratorDayOfWeekResource:
       type: object
       properties:
-        id:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorDayOfWeekResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultCollection_ApiIntegratorDayOfWeekResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDayOfWeekResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

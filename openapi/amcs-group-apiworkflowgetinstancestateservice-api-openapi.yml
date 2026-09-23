@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ApiWorkflowGetInstanceStateService API
+  title: Core API Workflow Get Instance State Service API
   version: core
 tags:
 - name: ApiWorkflowGetInstanceStateService
@@ -27,18 +27,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AMCS.ApiService.Workflow.ApiWorkflowGetInstanceStateResponse'
+      summary: Create services api workflow instances by id op get
+      x-summary-source: derived
+      operationId: postServicesApiWorkflowInstancesByIdOpGet
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.ApiService.Workflow.ApiWorkflowGetInstanceStateResponse:
       type: object
       properties:
         key:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         value:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         dataType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

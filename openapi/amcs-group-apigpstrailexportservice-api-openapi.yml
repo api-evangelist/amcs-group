@@ -1,7 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ApiGpsTrailExportService API
-  version: core
+  description: '# Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The Transport Live View REST API endpoints are technically described in this document.'
+  title: External API Gps Trail Export Service API
+  version: external
 tags:
 - name: ApiGpsTrailExportService
 paths:
@@ -10,7 +17,53 @@ paths:
       tags:
       - ApiGpsTrailExportService
       summary: Get list of Vehicle Gps Trails
-      description: "# Get list of Vehicle Gps Trail\r\n\r\n## Input\r\n| Parameter\t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t          |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |         \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| DateFrom \t\t\t  | DateTime | Timestamp when the start date of the gps trail to be extracted                     |\r\n| DateTo              | DateTime | Timestamp when the end date of the gps trail to be extracted                       |\r\n\t\t\t\t                                              \r\n\r\n## Sample API Requests\r\n\r\n```\r\n{\r\n  \"AssetName\": \"M879 EUS\",\r\n  \"DateFrom\": \"2024-06-28\",\r\n  \"DateTo\": \"\"2024-06-30\"\r\n}\r\n```\r\n\r\n## Output\r\n| Property \t\t\t  | Type     | Description\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t              |\r\n| ------------------- | -------- | ---------------------------------------------------------------------------------- |                   \r\n| AssetName\t\t\t  | string   | Vehicle Registration Plate No                                                      |\r\n| Timestamp \t\t  | DateTime | Timestamp of the asset                                                      |\r\n| Lat\t\t\t\t  | DateTime | Latitude where the asset at that point                       |\r\n| Lon \t\t\t\t  | DateTime | Longitude where the asset at that point                    |\r\n\r\n"
+      description: '# Get list of Vehicle Gps Trail
+
+
+        ## Input
+
+        | Parameter | Type | Description |
+
+        | ------------------- | -------- | ---------------------------------------------------------------------------------- |
+
+        | AssetName | string | Vehicle Registration Plate No |
+
+        | DateFrom | DateTime | Timestamp when the start date of the gps trail to be extracted |
+
+        | DateTo | DateTime | Timestamp when the end date of the gps trail to be extracted |
+
+
+        ## Sample API Requests
+
+
+        ```
+
+        {
+
+        "AssetName": "M879 EUS",
+
+        "DateFrom": "2024-06-28",
+
+        "DateTo": ""2024-06-30"
+
+        }
+
+        ```
+
+
+        ## Output
+
+        | Property | Type | Description |
+
+        | ------------------- | -------- | ---------------------------------------------------------------------------------- |
+
+        | AssetName | string | Vehicle Registration Plate No |
+
+        | Timestamp | DateTime | Timestamp of the asset |
+
+        | Lat | DateTime | Latitude where the asset at that point |
+
+        | Lon | DateTime | Longitude where the asset at that point |'
       requestBody:
         content:
           application/json:
@@ -23,8 +76,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse'
+      operationId: postIntegratorGpsTrail
+      x-operation-id-source: derived
 components:
   schemas:
+    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
+      type: object
+      properties:
+        assetName:
+          type:
+          - string
+          - 'null'
+        gpsTrail:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
+      additionalProperties: false
     AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint:
       type: object
       properties:
@@ -38,16 +107,4 @@ components:
         lon:
           type: number
           format: double
-      additionalProperties: false
-    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
-      type: object
-      properties:
-        assetName:
-          type: string
-          nullable: true
-        gpsTrail:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
-          nullable: true
       additionalProperties: false

@@ -1,16 +1,38 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup PaymentTerm API
-  version: core
+  title: AMCS Platform REST Payment Term API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
-- name: PaymentTerm
+- name: Payment Term
 paths:
   /lists/paymentTerms/{guid}:
     get:
       tags:
-      - PaymentTerm
+      - Payment Term
       summary: Find with GUID
-      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the payment term                              |\r\n| Description               | The description of the payment term                                  |\r\n| ShortCode| The Short code of the payment term   |\r\n| IsDeleted                 | Whether the payment term is deleted    |  "
+      description: '| Property | Description |
+
+        | ------------------------- | -------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the payment term |
+
+        | Description | The description of the payment term |
+
+        | ShortCode| The Short code of the payment term |
+
+        | IsDeleted | Whether the payment term is deleted |'
       operationId: PaymentTerm_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorPaymentTermResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorPaymentTermResource'
   /lists/paymentTerms:
     get:
       tags:
-      - PaymentTerm
+      - Payment Term
       summary: Find with Filters
-      description: "| Property                  | Description                                                          |\r\n| ------------------------- | -------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the payment term                              |\r\n| Description               | The description of the payment term                                  |\r\n| ShortCode| The Short code of the payment term   |\r\n| IsDeleted                 | Whether the payment term is deleted    |  "
+      description: '| Property | Description |
+
+        | ------------------------- | -------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the payment term |
+
+        | Description | The description of the payment term |
+
+        | ShortCode| The Short code of the payment term |
+
+        | IsDeleted | Whether the payment term is deleted |'
       operationId: PaymentTerm_GetCollection
       parameters:
       - name: filter
@@ -66,22 +98,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorPaymentTermResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorPaymentTermResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorPaymentTermResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorPaymentTermResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorPaymentTermResource:
       type: object
       properties:
@@ -95,12 +114,15 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorPaymentTermResource]:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorPaymentTermResource:
       type: object
       properties:
         resource:
@@ -113,29 +135,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -153,11 +152,44 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        id:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntity_ApiIntegratorPaymentTermResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPaymentTermResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

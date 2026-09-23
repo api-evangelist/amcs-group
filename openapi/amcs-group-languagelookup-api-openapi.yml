@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup LanguageLookup API
+  title: Core Language Lookup API
   version: core
 tags:
 - name: LanguageLookup
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiLanguageLookupResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiLanguageLookupResource'
+      summary: Get services api glossary language lookups changes
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageLookupsChanges
+      x-operation-id-source: derived
   /services/api/glossary/languageLookups/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiLanguageLookupResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiLanguageLookupResource'
+      summary: Get services api glossary language lookups template
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageLookupsTemplate
+      x-operation-id-source: derived
   /services/api/glossary/languageLookups/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiLanguageLookupResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiLanguageLookupResource'
+      summary: Get services api glossary language lookups by id
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageLookupsById
+      x-operation-id-source: derived
     put:
       tags:
       - LanguageLookup
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api glossary language lookups by id
+      x-summary-source: derived
+      operationId: putServicesApiGlossaryLanguageLookupsById
+      x-operation-id-source: derived
     delete:
       tags:
       - LanguageLookup
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api glossary language lookups by id
+      x-summary-source: derived
+      operationId: deleteServicesApiGlossaryLanguageLookupsById
+      x-operation-id-source: derived
   /services/api/glossary/languageLookups/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api glossary language lookups by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageLookupsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/glossary/languageLookups:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiLanguageLookupResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiLanguageLookupResource'
+      summary: Get services api glossary language lookups
+      x-summary-source: derived
+      operationId: getServicesApiGlossaryLanguageLookups
+      x-operation-id-source: derived
     post:
       tags:
       - LanguageLookup
@@ -204,17 +232,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api glossary language lookups
+      x-summary-source: derived
+      operationId: postServicesApiGlossaryLanguageLookups
+      x-operation-id-source: derived
 components:
   schemas:
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        languageId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiLanguageLookupResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -227,7 +328,7 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResourceResult[ApiLanguageLookupResource]:
+    ApiResourceChanges_ApiLanguageLookupResource:
       type: object
       properties:
         errors:
@@ -235,46 +336,47 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup'
-      additionalProperties: false
-    ApiResourceResultCollection[ApiLanguageLookupResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ApiLanguageLookupResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceResultEntity[ApiLanguageLookupResource]:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiLanguageLookupResource:
       type: object
       properties:
         errors:
@@ -288,105 +390,56 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup:
+    ApiResourceErrors:
       type: object
       properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        languageId:
-          type: integer
-          format: int32
-          nullable: true
-        language:
-          type: string
-          nullable: true
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
       additionalProperties: false
-    ApiResource:
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResourceResult_ApiLanguageLookupResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        associations:
-          type: array
-          items:
-            type: string
-          nullable: true
-        expand:
-          type: array
-          items:
-            type: string
-          nullable: true
-        operations:
-          type: array
-          items:
-            type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguageLookup'
       additionalProperties: false

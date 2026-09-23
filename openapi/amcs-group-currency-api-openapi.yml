@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Currency API
-  version: core
+  title: AMCS Platform REST Currency API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Currency
 paths:
@@ -10,7 +22,21 @@ paths:
       tags:
       - Currency
       summary: Retrieve changes
-      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      description: '| Property| Description |
+
+        | --------------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the currency |
+
+        | Description| The description of the currency |
+
+        | Symbol| The symbol of the currency |
+
+        | IntegrationCode| The integration code of the currency |
+
+        | IsDeleted| Whether the currency is deleted |
+
+        | CurrencyRoundingTypeListItem | The GUID and description of the CurrencyRoundingType |'
       operationId: Currency_GetChanges
       parameters:
       - name: since
@@ -27,13 +53,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorCurrencyResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorCurrencyResource'
   /lists/currencies/{guid}:
     get:
       tags:
       - Currency
       summary: Find with GUID
-      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      description: '| Property| Description |
+
+        | --------------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the currency |
+
+        | Description| The description of the currency |
+
+        | Symbol| The symbol of the currency |
+
+        | IntegrationCode| The integration code of the currency |
+
+        | IsDeleted| Whether the currency is deleted |
+
+        | CurrencyRoundingTypeListItem | The GUID and description of the CurrencyRoundingType |'
       operationId: Currency_Get
       parameters:
       - name: guid
@@ -52,13 +92,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCurrencyResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCurrencyResource'
   /lists/currencies:
     get:
       tags:
       - Currency
       summary: Find with Filters
-      description: "| Property| Description                                                              |\r\n| --------------------------------- | ------------------------------------------------------------------------ |\r\n| GUID| The GUID associated to the currency   |\r\n| Description| The description of the currency   |\r\n| Symbol| The symbol of the currency   |\r\n| IntegrationCode| The integration code of the currency                               |\r\n| IsDeleted| Whether the currency is deleted                |\r\n| CurrencyRoundingTypeListItem    | The GUID and description of the CurrencyRoundingType   |\r\n"
+      description: '| Property| Description |
+
+        | --------------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID| The GUID associated to the currency |
+
+        | Description| The description of the currency |
+
+        | Symbol| The symbol of the currency |
+
+        | IntegrationCode| The integration code of the currency |
+
+        | IsDeleted| Whether the currency is deleted |
+
+        | CurrencyRoundingTypeListItem | The GUID and description of the CurrencyRoundingType |'
       operationId: Currency_GetCollection
       parameters:
       - name: filter
@@ -89,7 +143,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCurrencyResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCurrencyResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -101,14 +155,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorCurrencyResource]:
+    ApiResourceResultCollection_ApiIntegratorCurrencyResource:
       type: object
       properties:
         resource:
@@ -121,7 +168,22 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceChanges[ApiIntegratorCurrencyResource]:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceChanges_ApiIntegratorCurrencyResource:
       type: object
       properties:
         resource:
@@ -134,34 +196,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCurrencyResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Symbol:
-          type: string
-        IntegrationCode:
-          type: string
-        CurrencyRoundingTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -179,6 +213,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -196,7 +241,24 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity[ApiIntegratorCurrencyResource]:
+    ApiIntegratorCurrencyResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Symbol:
+          type: string
+        IntegrationCode:
+          type: string
+        CurrencyRoundingTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorCurrencyResource:
       type: object
       properties:
         resource:
@@ -209,11 +271,3 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

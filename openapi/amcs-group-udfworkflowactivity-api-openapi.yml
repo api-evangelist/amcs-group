@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup UdfWorkflowActivity API
+  title: Core Udf Workflow Activity API
   version: core
 tags:
 - name: UdfWorkflowActivity
@@ -28,6 +28,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create plugin activities read udf
+      x-summary-source: derived
+      operationId: postPluginActivitiesReadUdf
+      x-operation-id-source: derived
   /plugin/activities/writeUdf:
     post:
       tags:
@@ -51,33 +55,40 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Create plugin activities write udf
+      x-summary-source: derived
+      operationId: postPluginActivitiesWriteUdf
+      x-operation-id-source: derived
 components:
   schemas:
-    AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest:
-      type: object
-      properties:
-        objectName:
-          type: string
-          nullable: true
-        id:
-          type: string
-          format: uuid
-        fieldName:
-          type: string
-          nullable: true
-      additionalProperties: false
     AMCS.ApiService.Controllers.Plugin.RequestObjects.WriteUdfRequest:
       type: object
       properties:
         objectName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         id:
           type: string
           format: uuid
         fieldName:
+          type:
+          - string
+          - 'null'
+        value: {}
+      additionalProperties: false
+    AMCS.ApiService.Controllers.Plugin.RequestObjects.ReadUdfRequest:
+      type: object
+      properties:
+        objectName:
+          type:
+          - string
+          - 'null'
+        id:
           type: string
-          nullable: true
-        value:
-          nullable: true
+          format: uuid
+        fieldName:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup WriteOffReason API
-  version: core
+  title: AMCS Platform REST Write Off Reason API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: WriteOffReason
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - WriteOffReason
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the write off reason                              |\r\n| Description               | The description of the write off reason                                  |\r\n| AnalysisCode              | The analysis code of the write off reason                                |\r\n| IsDeleted                 | Whether the write off reason is deleted   |\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the write off reason |
+
+        | Description | The description of the write off reason |
+
+        | AnalysisCode | The analysis code of the write off reason |
+
+        | IsDeleted | Whether the write off reason is deleted |'
       operationId: WriteOffReason_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorWriteOffReasonResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorWriteOffReasonResource'
   /lists/writeOffReasons:
     get:
       tags:
       - WriteOffReason
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the write off reason                              |\r\n| Description               | The description of the write off reason                                  |\r\n| AnalysisCode              | The analysis code of the write off reason                                |\r\n| IsDeleted                 | Whether the write off reason is deleted   |\r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the write off reason |
+
+        | Description | The description of the write off reason |
+
+        | AnalysisCode | The analysis code of the write off reason |
+
+        | IsDeleted | Whether the write off reason is deleted |'
       operationId: WriteOffReason_GetCollection
       parameters:
       - name: filter
@@ -66,10 +98,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorWriteOffReasonResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorWriteOffReasonResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorWriteOffReasonResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorWriteOffReasonResource:
       type: object
       properties:
         resource:
@@ -82,30 +122,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorWriteOffReasonResource]:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorWriteOffReasonResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorWriteOffReasonResource:
       type: object
       properties:
@@ -119,6 +135,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorWriteOffReasonResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWriteOffReasonResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -136,6 +165,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -153,11 +193,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

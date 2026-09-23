@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: AMCS Platform REST Master Account API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+tags:
+- name: Master Account
+paths:
+  /accounting/masterAccounts/changes:
+    get:
+      tags:
+      - Master Account
+      summary: Retrieve changes
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the master account. |
+
+        | Name | The master account''s name. |
+
+        | ARAccountCode | The account code used for accounts receivable. |
+
+        | APAccountCode | The account code used for accounts payable. |
+
+        | CurrencyListItem | The GUID and currency of the master account (various values). |'
+      operationId: MasterAccount_GetChanges
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorMasterAccountResource'
+  /accounting/masterAccounts/{guid}:
+    get:
+      tags:
+      - Master Account
+      summary: Find with GUID
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the master account. |
+
+        | Name | The master account''s name. |
+
+        | ARAccountCode | The account code used for accounts receivable. |
+
+        | APAccountCode | The account code used for accounts payable. |
+
+        | CurrencyListItem | The GUID and currency of the master account (various values). |'
+      operationId: MasterAccount_Get
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorMasterAccountResource'
+    put:
+      tags:
+      - Master Account
+      summary: Partial update
+      description: '| Property | Description | Required |
+
+        | ------------------------- | ------------------------------------------------------------------------ | -------- |
+
+        | GUID | The GUID associated to the master account. | No |
+
+        | Name | The master account''s name. | Yes |
+
+        | ARAccountCode | The account code used for accounts receivable. | Yes |
+
+        | APAccountCode | The account code used for accounts payable. | No |
+
+        | CurrencyListItem | The GUID and currency of the master account (various values). | No |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |
+
+        |If the provided CurrencyListItem.Guid belongs to a deleted currency | The provided CurrencyListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |'
+      operationId: MasterAccount_Update
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorMasterAccountResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+  /accounting/masterAccounts:
+    get:
+      tags:
+      - Master Account
+      summary: Find with Filters
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the master account. |
+
+        | Name | The master account''s name. |
+
+        | ARAccountCode | The account code used for accounts receivable. |
+
+        | APAccountCode | The account code used for accounts payable. |
+
+        | CurrencyListItem | The GUID and currency of the master account (various values). |'
+      operationId: MasterAccount_GetCollection
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: includeCount
+        in: query
+        schema:
+          type: boolean
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMasterAccountResource'
+    post:
+      tags:
+      - Master Account
+      summary: Create or update
+      description: '| Property | Description | Required |
+
+        | ------------------------- | ------------------------------------------------------------------------ | -------- |
+
+        | GUID | The GUID associated to the master account. | No |
+
+        | Name | The master account''s name. | Yes |
+
+        | ARAccountCode | The account code used for accounts receivable. | Yes |
+
+        | APAccountCode | The account code used for accounts payable. | No |
+
+        | CurrencyListItem | The GUID and currency of the master account (various values). | No |
+
+
+        **Extra validations**
+
+
+        | Condition | Error message |
+
+        | --------- | ------------- |
+
+        | ARAccountCode is not unique | Failed to save. Entity already exists with arAccountCode of {value of ARAccountCode} |
+
+        |If the provided CurrencyListItem.Guid belongs to a deleted currency | The provided CurrencyListItem is deleted. Could not update the resource. Please check the relevant list end point for the available options. |'
+      operationId: MasterAccount_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiIntegratorMasterAccountResource'
+        required: true
+        x-bodyName: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+components:
+  schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorMasterAccountResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorMasterAccountResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorMasterAccountResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMasterAccountResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorMasterAccountResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        ARAccountCode:
+          type: string
+        APAccountCode:
+          type: string
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorMasterAccountResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMasterAccountResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

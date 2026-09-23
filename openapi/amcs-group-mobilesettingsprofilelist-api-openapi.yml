@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup MobileSettingsProfileList API
-  version: core
+  title: AMCS Platform REST Mobile Settings Profile List API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: MobileSettingsProfileList
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - MobileSettingsProfileList
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the mobile settings profile.|\r\n| Description               | The description of the mobile settings profile.|\r\n| IsDeleted                 | Whether the mobile settings profile is deleted.          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the mobile settings profile.|
+
+        | Description | The description of the mobile settings profile.|
+
+        | IsDeleted | Whether the mobile settings profile is deleted. |'
       operationId: MobileSettingsProfileList_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorMobileSettingsProfileListResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorMobileSettingsProfileListResource'
   /lists/mobileSettingsProfileLists:
     get:
       tags:
       - MobileSettingsProfileList
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the mobile settings profile.|\r\n| Description               | The description of the mobile settings profile.|\r\n| IsDeleted                 | Whether the mobile settings profile is deleted.          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the mobile settings profile.|
+
+        | Description | The description of the mobile settings profile.|
+
+        | IsDeleted | Whether the mobile settings profile is deleted. |'
       operationId: MobileSettingsProfileList_GetCollection
       parameters:
       - name: filter
@@ -66,50 +94,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMobileSettingsProfileListResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMobileSettingsProfileListResource'
 components:
   schemas:
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection[ApiIntegratorMobileSettingsProfileListResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMobileSettingsProfileListResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiIntegratorMobileSettingsProfileListResource:
       type: object
       properties:
@@ -121,24 +108,7 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultEntity[ApiIntegratorMobileSettingsProfileListResource]:
+    ApiResourceResultEntity_ApiIntegratorMobileSettingsProfileListResource:
       type: object
       properties:
         resource:
@@ -159,3 +129,61 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection_ApiIntegratorMobileSettingsProfileListResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMobileSettingsProfileListResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

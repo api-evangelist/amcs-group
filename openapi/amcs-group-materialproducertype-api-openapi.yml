@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup MaterialProducerType API
-  version: core
+  title: AMCS Platform REST Material Producer Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: MaterialProducerType
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - MaterialProducerType
       summary: Find with GUID
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the material producer type|\r\n| Description               | The description of the material producer type|\r\n| IsDeleted                 | Whether the material producer type is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the material producer type|
+
+        | Description | The description of the material producer type|
+
+        | IsDeleted | Whether the material producer type is deleted |'
       operationId: MaterialProducerType_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorMaterialProducerTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorMaterialProducerTypeResource'
   /lists/materialProducerTypes:
     get:
       tags:
       - MaterialProducerType
       summary: Find with Filters
-      description: "| Property                  | Description|\r\n| ------------------------- | ------------------------------------------------------------------------- |\r\n| GUID                      | The GUID associated to the material producer type|\r\n| Description               | The description of the material producer type|\r\n| IsDeleted                 | Whether the material producer type is deleted       |"
+      description: '| Property | Description|
+
+        | ------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID | The GUID associated to the material producer type|
+
+        | Description | The description of the material producer type|
+
+        | IsDeleted | Whether the material producer type is deleted |'
       operationId: MaterialProducerType_GetCollection
       parameters:
       - name: filter
@@ -66,10 +94,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMaterialProducerTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMaterialProducerTypeResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorMaterialProducerTypeResource]:
+    ApiResourceResultCollection_ApiIntegratorMaterialProducerTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMaterialProducerTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorMaterialProducerTypeResource:
       type: object
       properties:
         resource:
@@ -82,28 +131,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorMaterialProducerTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -121,6 +148,28 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiIntegratorMaterialProducerTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -138,24 +187,3 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollection[ApiIntegratorMaterialProducerTypeResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMaterialProducerTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

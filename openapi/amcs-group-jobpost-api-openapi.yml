@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup JobPost API
+  title: Core Job Post API
   version: core
 tags:
 - name: JobPost
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiJobPostResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiJobPostResource'
+      summary: Get jobsystem job posts changes
+      x-summary-source: derived
+      operationId: getJobsystemJobPostsChanges
+      x-operation-id-source: derived
   /jobsystem/jobPosts/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiJobPostResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiJobPostResource'
+      summary: Get jobsystem job posts template
+      x-summary-source: derived
+      operationId: getJobsystemJobPostsTemplate
+      x-operation-id-source: derived
   /jobsystem/jobPosts/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiJobPostResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobPostResource'
+      summary: Get jobsystem job posts by id
+      x-summary-source: derived
+      operationId: getJobsystemJobPostsById
+      x-operation-id-source: derived
     put:
       tags:
       - JobPost
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace jobsystem job posts by id
+      x-summary-source: derived
+      operationId: putJobsystemJobPostsById
+      x-operation-id-source: derived
     delete:
       tags:
       - JobPost
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete jobsystem job posts by id
+      x-summary-source: derived
+      operationId: deleteJobsystemJobPostsById
+      x-operation-id-source: derived
   /jobsystem/jobPosts/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get jobsystem job posts by id blob by blob member name
+      x-summary-source: derived
+      operationId: getJobsystemJobPostsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /jobsystem/jobPosts:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiJobPostResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiJobPostResource'
+      summary: Get jobsystem job posts
+      x-summary-source: derived
+      operationId: getJobsystemJobPosts
+      x-operation-id-source: derived
     post:
       tags:
       - JobPost
@@ -204,17 +232,122 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create jobsystem job posts
+      x-summary-source: derived
+      operationId: postJobsystemJobPosts
+      x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceChanges_ApiJobPostResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    AMCS.Core.Entity.Api.JobSystem.ApiJobPost:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        friendlyName:
+          type:
+          - string
+          - 'null'
+        handler:
+          type:
+          - string
+          - 'null'
+        queue:
+          type:
+          - string
+          - 'null'
+        parameters:
+          type:
+          - string
+          - 'null'
+        deadline:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        persistenceMode:
+          type: integer
+          format: int32
+        duplicateMode:
+          type: integer
+          format: int32
+      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultEntity_ApiJobPostResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -227,101 +360,7 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResourceResultCollection[ApiJobPostResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ApiJobPostResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    AMCS.Core.Entity.Api.JobSystem.ApiJobPost:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        friendlyName:
-          type: string
-          nullable: true
-        handler:
-          type: string
-          nullable: true
-        queue:
-          type: string
-          nullable: true
-        parameters:
-          type: string
-          nullable: true
-        deadline:
-          type: integer
-          format: int32
-          nullable: true
-        persistenceMode:
-          type: integer
-          format: int32
-        duplicateMode:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ApiJobPostResource]:
+    ApiResourceResult_ApiJobPostResource:
       type: object
       properties:
         errors:
@@ -343,45 +382,35 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
       additionalProperties: false
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
-          type: string
-          nullable: true
-        associations:
-          type: array
-          items:
-            type: string
-          nullable: true
-        expand:
-          type: array
-          items:
-            type: string
-          nullable: true
-        operations:
-          type: array
-          items:
-            type: string
-          nullable: true
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceResultEntity[ApiJobPostResource]:
+    ApiResourceResultCollection_ApiJobPostResource:
       type: object
       properties:
         errors:
@@ -389,19 +418,46 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
-          type: integer
+        count:
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false

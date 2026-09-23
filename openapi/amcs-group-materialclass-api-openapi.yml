@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup MaterialClass API
-  version: core
+  title: AMCS Platform REST Material Class API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: MaterialClass
 paths:
@@ -10,7 +22,19 @@ paths:
       tags:
       - MaterialClass
       summary: Retrieve changes
-      description: "| Property| Description|\r\n| ----------------------------- | ------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the material class|\r\n| Description| The description of the material class|\r\n| AnalysisCode| The analysis code of the material class|\r\n| MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|\r\n| IsDeleted| Whether the material class is deleted       |\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the material class|
+
+        | Description| The description of the material class|
+
+        | AnalysisCode| The analysis code of the material class|
+
+        | MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|
+
+        | IsDeleted| Whether the material class is deleted |'
       operationId: MaterialClass_GetChanges
       parameters:
       - name: since
@@ -27,13 +51,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiIntegratorMaterialClassResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiIntegratorMaterialClassResource'
   /lists/materialClasses/{guid}:
     get:
       tags:
       - MaterialClass
       summary: Find with GUID
-      description: "| Property| Description|\r\n| ----------------------------- | ------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the material class|\r\n| Description| The description of the material class|\r\n| AnalysisCode| The analysis code of the material class|\r\n| MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|\r\n| IsDeleted| Whether the material class is deleted       |\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the material class|
+
+        | Description| The description of the material class|
+
+        | AnalysisCode| The analysis code of the material class|
+
+        | MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|
+
+        | IsDeleted| Whether the material class is deleted |'
       operationId: MaterialClass_Get
       parameters:
       - name: guid
@@ -52,13 +88,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorMaterialClassResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorMaterialClassResource'
   /lists/materialClasses:
     get:
       tags:
       - MaterialClass
       summary: Find with Filters
-      description: "| Property| Description|\r\n| ----------------------------- | ------------------------------------------------------------------------- |\r\n| GUID| The GUID associated to the material class|\r\n| Description| The description of the material class|\r\n| AnalysisCode| The analysis code of the material class|\r\n| MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|\r\n| IsDeleted| Whether the material class is deleted       |\r\n"
+      description: '| Property| Description|
+
+        | ----------------------------- | ------------------------------------------------------------------------- |
+
+        | GUID| The GUID associated to the material class|
+
+        | Description| The description of the material class|
+
+        | AnalysisCode| The analysis code of the material class|
+
+        | MaterialClassGroupListItem| The GUID and material class group of the material class (various values)|
+
+        | IsDeleted| Whether the material class is deleted |'
       operationId: MaterialClass_GetCollection
       parameters:
       - name: filter
@@ -89,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorMaterialClassResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMaterialClassResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -108,20 +156,30 @@ components:
           type: string
         cursor:
           type: string
-    ApiResourceResultEntity[ApiIntegratorMaterialClassResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorMaterialClassResource]:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorMaterialClassResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        AnalysisCode:
+          type: string
+        MaterialClassGroupListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorMaterialClassResource:
       type: object
       properties:
         resource:
@@ -134,12 +192,7 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges[ApiIntegratorMaterialClassResource]:
+    ApiResourceChanges_ApiIntegratorMaterialClassResource:
       type: object
       properties:
         resource:
@@ -152,12 +205,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -175,6 +222,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorMaterialClassResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -192,26 +263,3 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorMaterialClassResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        AnalysisCode:
-          type: string
-        MaterialClassGroupListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

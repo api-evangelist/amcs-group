@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup VehicleType API
-  version: core
+  title: AMCS Platform REST Vehicle Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: VehicleType
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - VehicleType
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle type.   |\r\n| Description               | The description of the vehicle type.                                     |\r\n| Code| The code associated to the vehicle type.                                 |\r\n| CollectionType            | The collectionType associated to the vehicle type.                       |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the vehicle type. |
+
+        | Description | The description of the vehicle type. |
+
+        | Code| The code associated to the vehicle type. |
+
+        | CollectionType | The collectionType associated to the vehicle type. |'
       operationId: VehicleType_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorVehicleTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorVehicleTypeResource'
   /lists/vehicleTypes:
     get:
       tags:
       - VehicleType
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the vehicle type.   |\r\n| Description               | The description of the vehicle type.                                     |\r\n| Code| The code associated to the vehicle type.                                 |\r\n| CollectionType            | The collectionType associated to the vehicle type.                       |\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the vehicle type. |
+
+        | Description | The description of the vehicle type. |
+
+        | Code| The code associated to the vehicle type. |
+
+        | CollectionType | The collectionType associated to the vehicle type. |'
       operationId: VehicleType_GetCollection
       parameters:
       - name: filter
@@ -66,10 +98,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorVehicleTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorVehicleTypeResource'
 components:
   schemas:
-    ApiResourceResultEntity[ApiIntegratorVehicleTypeResource]:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorVehicleTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Code:
+          type: string
+        CollectionType:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorVehicleTypeResource:
       type: object
       properties:
         resource:
@@ -82,30 +137,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorVehicleTypeResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -123,6 +154,30 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorVehicleTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -140,26 +195,3 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorVehicleTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Code:
-          type: string
-        CollectionType:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

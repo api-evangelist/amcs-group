@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup ScheduledJob API
+  title: Core Scheduled Job API
   version: core
 tags:
-- name: ScheduledJob
+- name: Scheduled Job
 paths:
   /jobsystem/scheduledJobs/changes:
     get:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: since
         in: query
@@ -28,22 +28,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiScheduledJobResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiScheduledJobResource'
+      summary: Get jobsystem scheduled jobs changes
+      x-summary-source: derived
+      operationId: getJobsystemScheduledJobsChanges
+      x-operation-id-source: derived
   /jobsystem/scheduledJobs/template:
     get:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiScheduledJobResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiScheduledJobResource'
+      summary: Get jobsystem scheduled jobs template
+      x-summary-source: derived
+      operationId: getJobsystemScheduledJobsTemplate
+      x-operation-id-source: derived
   /jobsystem/scheduledJobs/{id}:
     get:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: id
         in: path
@@ -72,10 +80,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiScheduledJobResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiScheduledJobResource'
+      summary: Get jobsystem scheduled jobs by id
+      x-summary-source: derived
+      operationId: getJobsystemScheduledJobsById
+      x-operation-id-source: derived
     put:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: id
         in: path
@@ -94,9 +106,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace jobsystem scheduled jobs by id
+      x-summary-source: derived
+      operationId: putJobsystemScheduledJobsById
+      x-operation-id-source: derived
     delete:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: id
         in: path
@@ -110,10 +126,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete jobsystem scheduled jobs by id
+      x-summary-source: derived
+      operationId: deleteJobsystemScheduledJobsById
+      x-operation-id-source: derived
   /jobsystem/scheduledJobs/{id}/blob/{blobMemberName}:
     get:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: id
         in: path
@@ -141,10 +161,14 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get jobsystem scheduled jobs by id blob by blob member name
+      x-summary-source: derived
+      operationId: getJobsystemScheduledJobsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /jobsystem/scheduledJobs:
     get:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       parameters:
       - name: filter
         in: query
@@ -188,10 +212,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiScheduledJobResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiScheduledJobResource'
+      summary: Get jobsystem scheduled jobs
+      x-summary-source: derived
+      operationId: getJobsystemScheduledJobs
+      x-operation-id-source: derived
     post:
       tags:
-      - ScheduledJob
+      - Scheduled Job
       requestBody:
         content:
           application/json:
@@ -204,79 +232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create jobsystem scheduled jobs
+      x-summary-source: derived
+      operationId: postJobsystemScheduledJobs
+      x-operation-id-source: derived
 components:
   schemas:
-    AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        scheduledJobId:
-          type: integer
-          format: int32
-          nullable: true
-        trigger:
-          type: string
-          nullable: true
-        friendlyName:
-          type: string
-          nullable: true
-        handler:
-          type: string
-          nullable: true
-        parameters:
-          type: string
-          nullable: true
-        queue:
-          type: string
-          nullable: true
-        deadline:
-          type: integer
-          format: int32
-          nullable: true
-        persistenceMode:
-          type: integer
-          format: int32
-          nullable: true
-        duplicateMode:
-          type: integer
-          format: int32
-        ownerTag:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-          nullable: true
-        cursor:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResult[ApiScheduledJobResource]:
+    ApiResourceResult_ApiScheduledJobResource:
       type: object
       properties:
         errors:
@@ -286,7 +248,7 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
       additionalProperties: false
-    ApiResourceId:
+    ApiResourceResultCollection_ApiScheduledJobResource:
       type: object
       properties:
         errors:
@@ -294,83 +256,38 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceChanges[ApiScheduledJobResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollection[ApiScheduledJobResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        count:
-          type: integer
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
+        isSuccess:
+          type: boolean
       additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: {}
-            nullable: true
-          nullable: true
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties: {}
-            nullable: true
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultEntity[ApiScheduledJobResource]:
+    ApiResourceResultEntity_ApiScheduledJobResource:
       type: object
       properties:
         errors:
@@ -384,35 +301,178 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceChanges_ApiScheduledJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
       additionalProperties: false
-    ApiResourceStatus:
+    AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob:
       type: object
       properties:
+        isValid:
+          type: boolean
+          readOnly: true
         id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
           type: integer
           format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        scheduledJobId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        trigger:
+          type:
+          - string
+          - 'null'
+        friendlyName:
+          type:
+          - string
+          - 'null'
+        handler:
+          type:
+          - string
+          - 'null'
+        parameters:
+          type:
+          - string
+          - 'null'
+        queue:
+          type:
+          - string
+          - 'null'
+        deadline:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        persistenceMode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        duplicateMode:
+          type: integer
+          format: int32
+        ownerTag:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

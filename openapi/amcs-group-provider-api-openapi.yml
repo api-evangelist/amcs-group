@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Provider API
+  title: Core Provider API
   version: core
 tags:
 - name: Provider
@@ -52,7 +52,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowProviderResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiWorkflowProviderResource'
+      summary: Get services api workflow providers
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowProviders
+      x-operation-id-source: derived
 components:
   schemas:
     AMCS.Data.Entity.Workflow.ApiWorkflowProvider:
@@ -62,61 +66,67 @@ components:
           type: boolean
           readOnly: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           readOnly: true
         id32:
           type: integer
           format: int32
           readOnly: true
         guid:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         lastChangeReasonId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         tempIdentifier:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         workflowProviderId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         systemCategory:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         endpoint:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         apiVersion:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
+        id:
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
+        isSuccess:
+          type: boolean
       additionalProperties: false
-    ApiResourceResultCollection[ApiWorkflowProviderResource]:
+    ApiResourceResultCollection_ApiWorkflowProviderResource:
       type: object
       properties:
         errors:
@@ -124,20 +134,28 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowProvider'
-          nullable: true
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
-          type: integer
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

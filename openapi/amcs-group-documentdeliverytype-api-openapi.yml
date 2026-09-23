@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup DocumentDeliveryType API
-  version: core
+  title: AMCS Platform REST Document Delivery Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: DocumentDeliveryType
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - DocumentDeliveryType
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the documentdeliverytype                          |\r\n| Description               | The description of the documentdeliverytype                              |\r\n| IsActive                  | Whether the documentdeliverytype is active          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the documentdeliverytype |
+
+        | Description | The description of the documentdeliverytype |
+
+        | IsActive | Whether the documentdeliverytype is active |'
       operationId: DocumentDeliveryType_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorDocumentDeliveryTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorDocumentDeliveryTypeResource'
   /lists/documentDeliveryTypes:
     get:
       tags:
       - DocumentDeliveryType
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the documentdeliverytype                          |\r\n| Description               | The description of the documentdeliverytype                              |\r\n| IsActive                  | Whether the documentdeliverytype is active          |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the documentdeliverytype |
+
+        | Description | The description of the documentdeliverytype |
+
+        | IsActive | Whether the documentdeliverytype is active |'
       operationId: DocumentDeliveryType_GetCollection
       parameters:
       - name: filter
@@ -66,10 +94,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorDocumentDeliveryTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDocumentDeliveryTypeResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorDocumentDeliveryTypeResource]:
+    ApiIntegratorDocumentDeliveryTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsActive:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorDocumentDeliveryTypeResource:
       type: object
       properties:
         resource:
@@ -82,47 +121,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity[ApiIntegratorDocumentDeliveryTypeResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+        id:
           type: integer
           format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -140,22 +146,44 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorDocumentDeliveryTypeResource:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        Description:
-          type: string
-        IsActive:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
       type: object
       properties:
-        id:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultEntity_ApiIntegratorDocumentDeliveryTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup Instance API
+  title: Core Instance API
   version: core
 tags:
 - name: Instance
@@ -28,7 +28,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges[ApiWorkflowInstanceResource]'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiWorkflowInstanceResource'
+      summary: Get services api workflow instances changes
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowInstancesChanges
+      x-operation-id-source: derived
   /services/api/workflow/instances/template:
     get:
       tags:
@@ -39,7 +43,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResult[ApiWorkflowInstanceResource]'
+                $ref: '#/components/schemas/ApiResourceResult_ApiWorkflowInstanceResource'
+      summary: Get services api workflow instances template
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowInstancesTemplate
+      x-operation-id-source: derived
   /services/api/workflow/instances/{id}:
     get:
       tags:
@@ -72,7 +80,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiWorkflowInstanceResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiWorkflowInstanceResource'
+      summary: Get services api workflow instances by id
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowInstancesById
+      x-operation-id-source: derived
     put:
       tags:
       - Instance
@@ -94,6 +106,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Replace services api workflow instances by id
+      x-summary-source: derived
+      operationId: putServicesApiWorkflowInstancesById
+      x-operation-id-source: derived
     delete:
       tags:
       - Instance
@@ -110,6 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResource'
+      summary: Delete services api workflow instances by id
+      x-summary-source: derived
+      operationId: deleteServicesApiWorkflowInstancesById
+      x-operation-id-source: derived
   /services/api/workflow/instances/{id}/blob/{blobMemberName}:
     get:
       tags:
@@ -141,6 +161,10 @@ paths:
               schema:
                 type: string
                 format: binary
+      summary: Get services api workflow instances by id blob by blob member name
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowInstancesByIdBlobByBlobMemberName
+      x-operation-id-source: derived
   /services/api/workflow/instances:
     get:
       tags:
@@ -188,7 +212,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiWorkflowInstanceResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiWorkflowInstanceResource'
+      summary: Get services api workflow instances
+      x-summary-source: derived
+      operationId: getServicesApiWorkflowInstances
+      x-operation-id-source: derived
     post:
       tags:
       - Instance
@@ -204,27 +232,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceId'
+      summary: Create services api workflow instances
+      x-summary-source: derived
+      operationId: postServicesApiWorkflowInstances
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResult[ApiWorkflowInstanceResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowInstance'
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
         until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    AMCS.Data.Entity.Workflow.ApiWorkflowInstance:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        providerName:
+          type:
+          - string
+          - 'null'
+        tenantId:
+          type:
+          - string
+          - 'null'
+        workflowInstanceId:
           type: string
-          nullable: true
+          format: uuid
+        workflowDefinitionId:
+          type: string
+          format: uuid
+        definitionName:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        started:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        userContext:
+          type:
+          - string
+          - 'null'
+        statusId:
+          type: integer
+          format: int32
+        status:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceId:
       type: object
@@ -237,7 +340,17 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResourceResultEntity[ApiWorkflowInstanceResource]:
+    ApiResourceResult_ApiWorkflowInstanceResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowInstance'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiWorkflowInstanceResource:
       type: object
       properties:
         errors:
@@ -251,94 +364,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceChanges[ApiWorkflowInstanceResource]:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowInstance'
-          nullable: true
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    AMCS.Data.Entity.Workflow.ApiWorkflowInstance:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type: integer
-          format: int32
-          nullable: true
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type: string
-          format: uuid
-          nullable: true
-        lastChangeReasonId:
-          type: integer
-          format: int32
-          nullable: true
-        tempIdentifier:
-          type: string
-          nullable: true
-        providerName:
-          type: string
-          nullable: true
-        tenantId:
-          type: string
-          nullable: true
-        workflowInstanceId:
-          type: string
-          format: uuid
-        workflowDefinitionId:
-          type: string
-          format: uuid
-        definitionName:
-          type: string
-          nullable: true
-        state:
-          type: string
-          nullable: true
-        started:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        userContext:
-          type: string
-          nullable: true
-        statusId:
-          type: integer
-          format: int32
-        status:
-          type: string
-          nullable: true
-      additionalProperties: false
     ApiResource:
       type: object
       properties:
@@ -351,23 +376,27 @@ components:
       type: object
       properties:
         expand:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: object
+            type:
+            - object
+            - 'null'
             additionalProperties: {}
-            nullable: true
-          nullable: true
         include:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
+            type:
+            - array
+            - 'null'
             items:
               type: object
               additionalProperties: {}
-            nullable: true
-          nullable: true
       additionalProperties: false
-    ApiResourceResultCollection[ApiWorkflowInstanceResource]:
+    ApiResourceChanges_ApiWorkflowInstanceResource:
       type: object
       properties:
         errors:
@@ -375,42 +404,70 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowInstance'
-          nullable: true
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiWorkflowInstanceResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Workflow.ApiWorkflowInstance'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
         self:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         associations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         expand:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         operations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        isSuccess:
-          type: boolean
       additionalProperties: false

@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup CommunicationClassification API
-  version: core
+  title: AMCS Platform REST Communication Classification API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: CommunicationClassification
 paths:
@@ -10,7 +22,15 @@ paths:
       tags:
       - CommunicationClassification
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the communication classification   |\r\n| Description               | The description of the communication classification   |\r\n| IsDeleted                 | Whether the communication classification is deleted                   |\r\n   \r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the communication classification |
+
+        | Description | The description of the communication classification |
+
+        | IsDeleted | Whether the communication classification is deleted |'
       operationId: CommunicationClassification_Get
       parameters:
       - name: guid
@@ -29,13 +49,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorCommunicationClassificationResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorCommunicationClassificationResource'
   /lists/communicationClassifications:
     get:
       tags:
       - CommunicationClassification
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the communication classification   |\r\n| Description               | The description of the communication classification   |\r\n| IsDeleted                 | Whether the communication classification is deleted                   |\r\n   \r\n\r\n"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the communication classification |
+
+        | Description | The description of the communication classification |
+
+        | IsDeleted | Whether the communication classification is deleted |'
       operationId: CommunicationClassification_GetCollection
       parameters:
       - name: filter
@@ -66,10 +94,63 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorCommunicationClassificationResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCommunicationClassificationResource'
 components:
   schemas:
-    ApiResourceResultCollection[ApiIntegratorCommunicationClassificationResource]:
+    ApiIntegratorCommunicationClassificationResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorCommunicationClassificationResource:
       type: object
       properties:
         resource:
@@ -93,7 +174,7 @@ components:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntity[ApiIntegratorCommunicationClassificationResource]:
+    ApiResourceResultEntity_ApiIntegratorCommunicationClassificationResource:
       type: object
       properties:
         resource:
@@ -106,56 +187,3 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCommunicationClassificationResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean

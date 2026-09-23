@@ -1,7 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Core AccessGroup LatePaymentFeeType API
-  version: core
+  title: AMCS Platform REST Late Payment Fee Type API
+  description: '![latest End points](/amcsrestapi/diagram/endpointslatest.svg)
+
+
+    # Overview
+
+
+    ## Who Should Read this Document
+
+
+    This document contains a technical description of the AMCS Platform REST API.'
+  version: latest
+servers:
+- url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: LatePaymentFeeType
 paths:
@@ -10,7 +22,17 @@ paths:
       tags:
       - LatePaymentFeeType
       summary: Find with GUID
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the latepaymentfeetype                            |\r\n| Description               | The description of the latepaymentfeetype                                |\r\n| IsDeleted                 | Whether the latepaymentfeetype is deleted          |\r\n| LatePaymentFeeListItem| The GUID and description of the latePaymentFee       |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the latepaymentfeetype |
+
+        | Description | The description of the latepaymentfeetype |
+
+        | IsDeleted | Whether the latepaymentfeetype is deleted |
+
+        | LatePaymentFeeListItem| The GUID and description of the latePaymentFee |'
       operationId: LatePaymentFeeType_Get
       parameters:
       - name: guid
@@ -29,13 +51,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity[ApiIntegratorLatePaymentFeeTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorLatePaymentFeeTypeResource'
   /lists/latePaymentFeeTypes:
     get:
       tags:
       - LatePaymentFeeType
       summary: Find with Filters
-      description: "| Property                  | Description                                                              |\r\n| ------------------------- | ------------------------------------------------------------------------ |\r\n| GUID                      | The GUID associated to the latepaymentfeetype                            |\r\n| Description               | The description of the latepaymentfeetype                                |\r\n| IsDeleted                 | Whether the latepaymentfeetype is deleted          |\r\n| LatePaymentFeeListItem| The GUID and description of the latePaymentFee       |"
+      description: '| Property | Description |
+
+        | ------------------------- | ------------------------------------------------------------------------ |
+
+        | GUID | The GUID associated to the latepaymentfeetype |
+
+        | Description | The description of the latepaymentfeetype |
+
+        | IsDeleted | Whether the latepaymentfeetype is deleted |
+
+        | LatePaymentFeeListItem| The GUID and description of the latePaymentFee |'
       operationId: LatePaymentFeeType_GetCollection
       parameters:
       - name: filter
@@ -66,7 +98,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection[ApiIntegratorLatePaymentFeeTypeResource]'
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorLatePaymentFeeTypeResource'
 components:
   schemas:
     ApiIntegratorListItemResource:
@@ -78,32 +110,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity[ApiIntegratorLatePaymentFeeTypeResource]:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection[ApiIntegratorLatePaymentFeeTypeResource]:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorLatePaymentFeeTypeResource:
       type: object
       properties:
@@ -117,34 +131,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -162,11 +148,57 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
+    ApiResourceResultEntity_ApiIntegratorLatePaymentFeeTypeResource:
       type: object
       properties:
-        id:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultCollection_ApiIntegratorLatePaymentFeeTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
