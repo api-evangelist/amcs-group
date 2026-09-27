@@ -811,234 +811,53 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AMCSPayErrorResponse:
+    AMCSPayRefundResponse:
       type: object
       properties:
-        message:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The exception message.
-        type:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The type of exception thrown.
-        stackTrace:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The stack trace of the error encountered.
-    AMCSPayDeleteProfileRequest:
-      required:
-      - requestType
-      - paymentType
-      - transactionOrigin
-      - callerIdentifier
-      - requestId
-      - referenceId
-      - providerType
-      type: object
-      properties:
-        requestType:
-          enum:
-          - OneOffPayment
-          - Tokenization
-          - VaultOrAutoPayment
-          - Refund
-          - DeleteToken
-          type: string
-          description: The request type for this endpoint is "DeleteToken".
-        paymentType:
-          enum:
-          - CARD
-          - ACH
-          - GOOGLEPAY
-          - APPLEPAY
-          type: string
-          description: The supported payment type for this endpoint is "CARD".
-        transactionOrigin:
-          enum:
-          - MOTO
-          - ECOM
-          type: string
-        callerIdentifier:
-          minLength: 1
-          type: string
-          example: Elemos
-          description: The identification associated to the calling application.
-        requestId:
-          type: string
-          format: uuid
-          example: 3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9
-          description: The Caller supplied GUID associated to the payment request.
-        requestTimestamp:
-          type:
-          - string
-          - 'null'
-          format: dateTime
-          readOnly: true
-          example: '2023-06-08T21:29:51.915166+08:00'
-          description: The request time stamp when this endpoint was called.
-        providerType:
-          enum:
-          - Test
-          - Realex
-          - Heartland
-          - MerchantPartners
-          - ACICards
-          - ACIElectronic
-          - AptPay
-          - PaymentExpress
-          - EftCanada
-          - TerminalPay
-          type: string
-          example: ACICards
-          description: The payment providers integrated to AMCS Pay. This endpoint only supports "ACICards".
-        referenceId:
-          type:
-          - string
-          - 'null'
-          example: 8ac7a49f8898f2af018899c2fb6d22b0
-          description: The reference number associated to the payment provider upon Card Tokenization.
-      additionalProperties: false
-    AMCSPayVaultResponse:
-      type: object
-      properties:
-        callerTransactionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 16a56160-557b-4457-8f0f-b038006d0a8d
-          description: The AMCS generated Request GUID associated to the hosted payments page.
         amcsPayReferenceId:
           type: string
           format: uuid
-          example: f8026905-9ec9-4bbb-aa42-b038006d0d3b
-          description: The AMCS generated Response GUID associated to the Payment request.
+          example: 00000000-0000-0000-0000-000000000000
         providerReference:
           type:
           - string
           - 'null'
           example: 8ac7a4a28749242d01874c7e648327b7
-          description: The reference number associated to the payment provider response.
         providerResponseCode:
-          type:
-          - string
-          - 'null'
+          type: string
           example: Success
-          description: The status code associated to the payment response.
         providerAuthCode:
           type:
           - string
           - 'null'
           example: ''
-          description: The authorization code associated to the payment provider.
         transactionAmount:
           type: object
           $ref: '#/components/schemas/AMCSPayAmount'
-          description: The amount associated to the payment request.
         responseTimeStamp:
           type: string
           format: datetime
           example: '2022-07-27 18:54:18.6767965 +08:00'
-          description: The time stamp associated to the response payload.
         notes:
           type:
           - string
           - 'null'
-          example: "        ACI Auto Pay Transaction Id 8ac7a4a2892d433501892f117c3a3173\n\n        Transaction Date 2023-07-07 06:37:02+0000\n\n        Result code 000.100.110\n\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\n\n        Payment Type DB\n\n    "
-          description: More information associated to the payment.
+          example: ''
         transactionStatus:
           type: string
           enum:
           - Success
           - Failure
           example: Success
-          description: The Transaction Status associated to the refund response.
         result:
           $ref: '#/components/schemas/AMCSPayResult'
           description: AMCS Pay standardised result code and message returned by the payment provider.
-      additionalProperties: false
-    AMCSPayCreateCustomerRequest:
-      required:
-      - customerInfo
-      - isCreatePaymentAccount
-      - providerType
-      type: object
-      properties:
-        providerType:
-          enum:
-          - Stripe
-          type: string
-          example: Stripe
-          description: The payment provider to be used. For example, <b>"Stripe"</b> indicates that Stripe will handle the customer account creation.
         customerInfo:
-          $ref: '#/components/schemas/AMCSPayCreateCustomerDetail'
-        isCreatePaymentAccount:
-          type: boolean
-          example: true
-          description: Flag to indicate if a payment account should be created immediately for the new customer. <b>true</b> to create, otherwise <b>false</b>.
-        paymentAccount:
-          $ref: '#/components/schemas/AMCSPayPaymentAccount'
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayCustomerInfo'
       additionalProperties: false
-    TermsAndConditions:
-      type: object
-      required:
-      - TermsAndConditionsContent
-      - TermsAndConditionsId
-      - TermsAndConditionsContentId
-      description: The terms and conditions.
-      properties:
-        termsAndConditionsId:
-          type:
-          - integer
-          - 'null'
-          example: 1
-          description: The conditions Id associated to the terms and conditions.
-        termsAndConditionsContentId:
-          type:
-          - integer
-          - 'null'
-          example: 1
-          description: The terms and conditions ContentId associated to the terms and conditions content.
-        termsAndConditionsUrl:
-          type:
-          - string
-          - 'null'
-          example: https://na1-pay-dev.amcsplatform.com/TermsAndConditionsView/TermsAndConditions/54090c88-6451-485f-8e35-8037b9ae5ea0?termsAndConditionsContentId=3af76595-bf9d-4505-bef9-6e603dfc7ea8
-          description: The terms and conditions associated to the service fee.
-    AMCSPayInfoResponse:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          example: info message
-    AMCSPayInitiatePaymentResponse:
-      type: object
-      properties:
-        hppUrl:
-          format: url
-          type: string
-          example: https://localhost/paybylink?key=092159d8-9e57-41a5-af6c-745bd45ff2f7
-        callerTransactionId:
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-        transactionStatus:
-          type: string
-          enum:
-          - Initiated
-          example: Initiated
     AMCSPayPollPaymentResponse:
       type: object
       properties:
@@ -1149,186 +968,63 @@ components:
           $ref: '#/components/schemas/AMCSPayResult'
           description: AMCS Pay standardised result code and message returned by the payment provider.
       additionalProperties: false
-    AMCSPayTerminalAbortRequest:
-      type: object
+    AMCSPayCreateCustomerRequest:
       required:
-      - requestId
+      - customerInfo
+      - isCreatePaymentAccount
       - providerType
-      - callerIdentifier
-      - terminalId
-      - requestType
-      properties:
-        requestType:
-          type: string
-          enum:
-          - Abort
-        providerType:
-          type: string
-          enum:
-          - TerminalPay
-          - ElavonTerminalPay
-          example: TerminalPay
-        callerIdentifier:
-          type: string
-          example: client-name
-        requestId:
-          type: string
-          format: uuid
-          example: 0d920c06-b568-442b-94cc-afe60176708f
-        terminalId:
-          type: string
-          example: 450-829-523
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          example: amcspayuser@email.com
-        reason:
-          type:
-          - string
-          - 'null'
-          example: Cancelled By POS
-      additionalProperties: false
-    AMCSPayTerminalRequest:
       type: object
-      required:
-      - requestId
-      - providerType
-      - callerIdentifier
-      - terminalId
-      - transactionAmount
-      - cardEntryMode
-      - requestType
       properties:
-        requestType:
-          type: string
-          enum:
-          - OneOffPayment
         providerType:
-          type: string
           enum:
-          - TerminalPay
-          - ElavonTerminalPay
-          example: TerminalPay
-        callerIdentifier:
+          - Stripe
           type: string
-          example: client-name
-        requestId:
-          type: string
-          format: uuid
-          example: 0d920c06-b568-442b-94cc-afe60176708f
-        terminalId:
-          type: string
-          example: 450-829-523
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-        cardEntryMode:
-          type: string
-          enum:
-          - Rfid
-          - Keyed
-          - Manual
-          - File
-          - Scanned
-          - MagStripe
-          - Icc
-          - SynchronousIcc
-          - Tapped
-          - Contactless
-          - Mobile
-          example: Keyed
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          example: amcspayuser@email.com
+          example: Stripe
+          description: The payment provider to be used. For example, <b>"Stripe"</b> indicates that Stripe will handle the customer account creation.
+        customerInfo:
+          $ref: '#/components/schemas/AMCSPayCreateCustomerDetail'
+        isCreatePaymentAccount:
+          type: boolean
+          example: true
+          description: Flag to indicate if a payment account should be created immediately for the new customer. <b>true</b> to create, otherwise <b>false</b>.
+        paymentAccount:
+          $ref: '#/components/schemas/AMCSPayPaymentAccount'
       additionalProperties: false
-    AMCSPayCreatePaymentAccountResponse:
+    AMCSPayAddress:
       type: object
-      description: Details of the customer account and payment account created if <b>isCreatePaymentAccount</b> is set to <b>true</b> in the request.
       properties:
-        accountHolderName:
-          type:
-          - string
-          - 'null'
-          example: Waste Management Ltd
-          description: The name of the account holder for the payment account.
-        bankName:
-          type:
-          - string
-          - 'null'
-          example: HSBC
-          description: The name of the bank where the payment account is held.
-        bankCode:
-          type:
-          - string
-          - 'null'
-          example: 341-000
-          description: The bank code for the payment account.
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          example: IE531653294928618999391
-          description: The account number for the payment account.
-        swiftCode:
-          type:
-          - string
-          - 'null'
-          example: HSBCAUTTXXX
-          description: The SWIFT code for the payment account.
-        currency:
-          enum:
-          - AUD
-          - EUR
+        addressType:
           type: string
-          example: AUD
-          description: The three-letter ISO currency code associated with the payment account. For example, <b>"AUD"</b> indicates that the account will operate in Australian Dollars.
-        paymentType:
           enum:
-          - CREDIT_TRANSFER
+          - Billing
+          - Shipping
+          example: Billing
+        streetAddress1:
           type: string
-          example: CREDIT_TRANSFER
-          description: The type of payment account created. For example, <b>"CREDIT_TRANSFER"</b> indicates that a credit transfer account has been created.
+          example: 27, Longwood Avenue
+        streetAddress2:
+          type: string
+          example: South Circular
+        streetAddress3:
+          type:
+          - string
+          - 'null'
+          example: Road Dublin-08
+        city:
+          type: string
+          example: Dublin
+        state:
+          type: string
+          example: Munster
+        postCode:
+          type: string
+          example: '12345'
         country:
-          enum:
-          - AU
-          - DE
-          - FR
-          - IE
-          - NL
           type: string
-          example: AU
-          description: The two-letter ISO country code representing the country where the payment account is held. For example, <b>"AU"</b> indicates Australia.
-      additionalProperties: false
-    AMCSPayServiceFeePaymentDetails:
-      type: object
-      description: The service fee details associated to the transaction.
-      properties:
-        principalAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 10
-          description: The base amount associated to the payment request.
-        serviceFeeAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 0.2
-          description: The service fee amount associated to the payment request.
-        total:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 10.2
-          description: The total amount associated to the payment request.
-        termsAndConditions:
-          $ref: '#/components/schemas/TermsAndConditions'
+          example: Ireland
+        iSO3166Numeric:
+          type: string
+          example: '372'
     AMCSPayContact:
       type: object
       properties:
@@ -1341,216 +1037,6 @@ components:
         contactValue:
           type: string
           example: 089748588788
-    AMCSPayVaultRequest:
-      required:
-      - requestType
-      - paymentType
-      - transactionOrigin
-      - callerIdentifier
-      - requestId
-      - providerType
-      - tokenReference
-      type: object
-      properties:
-        requestType:
-          type: string
-          enum:
-          - VaultOrAutoPayment
-          example: VaultOrAutoPayment
-          description: Request Type is "VaultOrAutoPayment".
-        paymentType:
-          type: string
-          enum:
-          - CARD
-          - ACH
-          - EFT
-          example: CARD
-          description: Payment Type can be any of "CARD", "ACH", "EFT".
-        transactionOrigin:
-          type: string
-          enum:
-          - MOTO
-          - ECOM
-          example: MOTO
-          description: Transaction Origin can be any of "MOTO", "ECOM".
-        callerIdentifier:
-          type: string
-          example: Elemos
-          description: The identification associated to the calling application.
-        requestId:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-          description: The Caller supplied GUID associated to the Payment request.
-        providerType:
-          type: string
-          enum:
-          - ACICards
-          - ACIElectronic
-          - Heartland
-          - MerchantPartners
-          - PaymentExpress
-          - Realex
-          - EftCanada
-          example: ACICards
-          description: Provide Type can be any of "ACICards", "ACIElectronic", "Heartland", "MerchantPartners", "Payment Express", "Realex", "EftCanada".
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-          description: The amount subjected for vault.
-        customerInfo:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSPayVaultCustomerInfo'
-          description: The Details associated to the customer mandate for risk assessment (Conditionally required for making payments using ACI Cards).
-        tokenReference:
-          type: string
-          example: 58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7
-          description: The Token Reference sent by the provider associated to the original payment.
-        historyReference:
-          type:
-          - string
-          - 'null'
-          example: '123456789012345'
-          description: The history reference data sent by the provider associated to the original payment (Conditionally required).
-        maskedProfileNumber:
-          type:
-          - string
-          - 'null'
-          example: 5454XXXXXXXX5454
-          description: The Masked Profile/Card Number sent by the provider associated to the original payment (Conditionally required).
-    AMCSPayTerminalResponse:
-      type: object
-      properties:
-        transactionStatus:
-          type: string
-          enum:
-          - Success
-          - Failure
-          example: Success
-        amcsPayReferenceId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
-        providerReference:
-          type:
-          - string
-          - 'null'
-          example: '710718500049'
-        providerResponseCode:
-          type:
-          - string
-          - 'null'
-          example: Success
-        providerAuthCode:
-          type:
-          - string
-          - 'null'
-          example: DEMO684
-        tokenValue:
-          type:
-          - string
-          - 'null'
-          example: iLGOd76VSiaAQBcZswQf
-        responseTimeStamp:
-          type:
-          - string
-          - 'null'
-          format: datetime
-          example: '2022-07-27 18:54:18.6767965 +08:00'
-        notes:
-          type:
-          - string
-          - 'null'
-        callerTransactionId:
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-        maskedProfileNumber:
-          type:
-          - string
-          - 'null'
-          example: XXXXX
-        profileExpiryDate:
-          type:
-          - string
-          - 'null'
-          format: datetime
-          example: MM/YY
-        profileHolder:
-          type:
-          - string
-          - 'null'
-          example: Roofus Summers
-        errorCondition:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ABORTED
-          - BUSY
-          - CANCEL
-          - DEVICEOUT
-          - INSERTEDCARD
-          - INPROGRESS
-          - LOGGEDOUT
-          - MESSAGEFORMAT
-          - NOTALLOWED
-          - NOTFOUND
-          - PAYMENTRESTRICTION
-          - REFUSAL
-          - UNAVAILABLEDEVICE
-          - UNAVAILABLESERVICE
-          - INVALIDCARD
-          - UNREACHABLEHOST
-          - WRONGPIN
-          example: CANCEL
-        result:
-          $ref: '#/components/schemas/AMCSPayResult'
-          description: AMCS Pay standardised result code and message returned by the payment provider.
-    AMCSPayEftBankInfo:
-      type: object
-      properties:
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: EFT Account Number
-        transitNumber:
-          type:
-          - string
-          - 'null'
-          description: EFT Transit Number
-        institutionNumber:
-          type:
-          - string
-          - 'null'
-          description: EFT Institution Number
-      additionalProperties: false
-    AMCSPayAmount:
-      type: object
-      required:
-      - principalAmount
-      - currency
-      description: The amount associated to the payment.
-      properties:
-        principalAmount:
-          type:
-          - number
-          - 'null'
-          format: decimal
-          example: 40.1
-          description: The base amount associated to the payment request (This field is optional for Tokenization).
-        currency:
-          type: string
-          example: EUR
-          description: The currency associated to the payment request.
     AMCSPayResult:
       type:
       - object
@@ -1569,359 +1055,6 @@ components:
           - 'null'
           description: Human-readable description of the payment outcome.
           example: Transaction succeeded
-    AMCSPayCustomerInfo:
-      type: object
-      properties:
-        customerName:
-          type:
-          - string
-          - 'null'
-          example: ''
-        customerId:
-          type: string
-          example: ACC1007
-        customerIP:
-          type:
-          - string
-          - 'null'
-          example: 000.000.0.000
-        customerStatus:
-          type: string
-          enum:
-          - NEW
-          - EXISTING
-          example: NEW
-        websiteUrl:
-          type:
-          - string
-          - 'null'
-          example: ''
-      additionalProperties: false
-    AMCS.Pay.Entity.Api.Payments.ExternalTransaction.ApiErrorResponse:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          description: The exception message.
-          example: Payment Provider APG is not supported.
-        type:
-          type:
-          - string
-          - 'null'
-          description: The exception type.
-          example: System.Exception
-        stackTrace:
-          type:
-          - string
-          - 'null'
-          description: The stack trace of the exception.
-          example: '   at AMCS.Pay.Api.Controllers.PaymentsController.CreateCustomer(CreateCustomerRequest request) in /src/swaggerpay/AMCS.Pay.Api/Controllers/PaymentsController.cs:line 123'
-      additionalProperties: false
-    AMCSPayCreateCustomerResponse:
-      type: object
-      properties:
-        providerCustomerAccount:
-          type:
-          - string
-          - 'null'
-          example: cus_N6mXoX2aG2e4eH
-          description: The unique identifier for the customer account created by the payment provider. For example, <b>"cus_N6mXoX2aG2e4eH"</b> is a Stripe customer ID.
-        paymentAccount:
-          $ref: '#/components/schemas/AMCSPayCreatePaymentAccountResponse'
-      additionalProperties: false
-    AMCSPayRefundResponse:
-      type: object
-      properties:
-        amcsPayReferenceId:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        providerReference:
-          type:
-          - string
-          - 'null'
-          example: 8ac7a4a28749242d01874c7e648327b7
-        providerResponseCode:
-          type: string
-          example: Success
-        providerAuthCode:
-          type:
-          - string
-          - 'null'
-          example: ''
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-        responseTimeStamp:
-          type: string
-          format: datetime
-          example: '2022-07-27 18:54:18.6767965 +08:00'
-        notes:
-          type:
-          - string
-          - 'null'
-          example: ''
-        transactionStatus:
-          type: string
-          enum:
-          - Success
-          - Failure
-          example: Success
-        result:
-          $ref: '#/components/schemas/AMCSPayResult'
-          description: AMCS Pay standardised result code and message returned by the payment provider.
-        customerInfo:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSPayCustomerInfo'
-      additionalProperties: false
-    AMCSPayImmediatePaymentRequest:
-      type: object
-      required:
-      - requestType
-      - paymentType
-      - providerType
-      - transactionAmount
-      - callerIdentifier
-      - requestId
-      - customerInfo
-      - bankInfo
-      properties:
-        requestType:
-          type: string
-          enum:
-          - OneOffPayment
-          - Tokenization
-        paymentType:
-          type: string
-          enum:
-          - ACH
-          - EFT
-        callerIdentifier:
-          type: string
-        requestId:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        providerType:
-          type: string
-          enum:
-          - EftCanada
-        configurationId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 928a3c6c-b80d-493d-a6aa-0fb8d2579860
-        transactionAmount:
-          type: object
-          $ref: '#/components/schemas/AMCSPayAmount'
-        addresses:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayAddress'
-        contacts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayContact'
-        customerInfo:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSPayCustomerInfo'
-        bankInfo:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSPayBankInfo'
-    AMCSPayGetServiceFeeResponse:
-      type: object
-      properties:
-        serviceFee:
-          type: number
-          format: double
-          example: '0.2'
-          description: The service fee associated to the response.
-        percentage:
-          type: number
-          format: double
-          example: '2'
-          description: The percentage associated to the response.
-        principalAmount:
-          type: number
-          format: double
-          example: '10'
-          description: The base amount associated to the payment request (This field is optional for Tokenization).
-        total:
-          type: number
-          format: double
-          example: '10.2'
-          description: The total associated to the response.
-        termsAndConditions:
-          type: object
-          $ref: '#/components/schemas/TermsAndConditions'
-          description: The terms and conditions associated to the response.
-    AMCSPayAchBankInfo:
-      type: object
-      properties:
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: ACH Account Number
-        accountType:
-          type:
-          - string
-          - 'null'
-          enum:
-          - PersonalSavings
-          - BusinessSavings
-          - PersonalCheckings
-          - BusinessCheckings
-          description: ACH Account Type
-        routingNumber:
-          type:
-          - string
-          - 'null'
-          description: ACH Routing Number
-      additionalProperties: false
-    AMCSPayCreateCustomerDetail:
-      required:
-      - customerId
-      - customerName
-      type: object
-      description: Contains details about the customer to be created.
-      properties:
-        customerId:
-          type: string
-          example: 8114533e-7968-4b67-a600-832d29a0e1c8
-          description: A unique identifier or external reference for the customer (could be from your system or an external system).
-        customerName:
-          type: string
-          example: Jane Doe
-          description: The full name of the customer being created.
-      additionalProperties: false
-    AMCSPayPaymentAccount:
-      required:
-      - paymentType
-      - currency
-      - country
-      type: object
-      description: Details of the payment account to create if <b>isCreatePaymentAccount</b> is set to <b>true</b>.
-      properties:
-        paymentType:
-          enum:
-          - CREDIT_TRANSFER
-          type: string
-          example: CREDIT_TRANSFER
-          description: The type of payment account to create. For example, <b>"CREDIT_TRANSFER"</b> indicates that a credit transfer account will be created.
-        currency:
-          enum:
-          - AUD
-          - EUR
-          type: string
-          example: AUD
-          description: The currency code for the payment account. For example, <b>"AUD"</b> indicates that the account will operate in Australian Dollars.
-        country:
-          enum:
-          - AU
-          - DE
-          - FR
-          - IE
-          - NL
-          type: string
-          example: AU
-          description: The two-letter ISO country code representing the country where the payment account is held. For example, <b>"AU"</b> indicates Australia.
-      additionalProperties: false
-    AMCSPayRefundRequest:
-      required:
-      - requestType
-      - paymentType
-      - transactionOrigin
-      - callerIdentifier
-      - requestId
-      - providerType
-      - transactionAmount
-      - originalPaymentReference
-      - originalAmount
-      type: object
-      properties:
-        requestType:
-          type: string
-          enum:
-          - Refund
-          example: Refund
-        paymentType:
-          type: string
-          enum:
-          - CARD
-          - ACH
-          - EFT
-          - TERMINAL
-          example: CARD
-        transactionOrigin:
-          type: string
-          enum:
-          - MOTO
-          example: MOTO
-        callerIdentifier:
-          type: string
-          example: Elemos
-        requestId:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        providerType:
-          type: string
-          enum:
-          - ACICards
-          - ACIElectronic
-          - Heartland
-          - MerchantPartners
-          - PaymentExpress
-          - Realex
-          - TerminalPay
-          - EftCanada
-          - ElavonTerminalPay
-          example: ACICards
-        transactionAmount:
-          type: object
-          example: '24.00'
-          $ref: '#/components/schemas/AMCSPayAmount'
-        originalPaymentReference:
-          type: string
-          example: 8ac7a4a28749242d01874c7e648327b7
-        originalAmount:
-          type:
-          - number
-          - 'null'
-          format: decimal
-          example: 40.1
-        tokenValue:
-          type:
-          - string
-          - 'null'
-          example: iLGOd76VSiaAQBcZswQf
-          description: '<span style=''color: rgb(212, 31, 28)''>Required if payment type is elavon terminalPay or verifone terminalPay.</span>'
-        profileExpiryDate:
-          type:
-          - string
-          - 'null'
-          format: datetime
-          example: MM/YY
-          description: '<span style=''color: rgb(212, 31, 28)''>Required if payment type is elavon terminalPay.</span>'
-        customerInfo:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSPayCustomerInfo'
     AMCSPayPollGetAllPaymentResponse:
       type: object
       properties:
@@ -2098,58 +1231,138 @@ components:
           $ref: '#/components/schemas/AMCSPayResult'
           description: AMCS Pay standardised result code and message returned by the payment provider.
       additionalProperties: false
-    AMCSPayDeleteProfileResponse:
+    AMCSPayAmount:
+      type: object
+      required:
+      - principalAmount
+      - currency
+      description: The amount associated to the payment.
+      properties:
+        principalAmount:
+          type:
+          - number
+          - 'null'
+          format: decimal
+          example: 40.1
+          description: The base amount associated to the payment request (This field is optional for Tokenization).
+        currency:
+          type: string
+          example: EUR
+          description: The currency associated to the payment request.
+    AMCSPayVaultResponse:
       type: object
       properties:
-        amcsPayReferenceId:
+        callerTransactionId:
           type:
           - string
           - 'null'
           format: uuid
-          example: f15da253-d85b-4e7d-99eb-b01b00de6dce
-          description: The AMCS Pay generated Response GUID associated to the Payment request.
+          example: 16a56160-557b-4457-8f0f-b038006d0a8d
+          description: The AMCS generated Request GUID associated to the hosted payments page.
+        amcsPayReferenceId:
+          type: string
+          format: uuid
+          example: f8026905-9ec9-4bbb-aa42-b038006d0d3b
+          description: The AMCS generated Response GUID associated to the Payment request.
         providerReference:
           type:
           - string
           - 'null'
-          example: 8ac7a49f8898f2af01889b33033902d1
-          description: The reference number associated to the payment provider.
+          example: 8ac7a4a28749242d01874c7e648327b7
+          description: The reference number associated to the payment provider response.
         providerResponseCode:
           type:
           - string
           - 'null'
           example: Success
-          description: The response code associated to the payment provider.
+          description: The status code associated to the payment response.
         providerAuthCode:
           type:
           - string
           - 'null'
-          example: null
+          example: ''
           description: The authorization code associated to the payment provider.
-        responseTimestamp:
-          type:
-          - string
-          - 'null'
-          format: dateTime
-          example: '2023-06-08T21:29:51.915166+08:00'
-          description: The Timestamp of the payment response payload.
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+          description: The amount associated to the payment request.
+        responseTimeStamp:
+          type: string
+          format: datetime
+          example: '2022-07-27 18:54:18.6767965 +08:00'
+          description: The time stamp associated to the response payload.
         notes:
           type:
           - string
           - 'null'
-          example: "        ACI Vault Transaction Id 8ac7a49f8898f2af01889b33033902d1\n\n        Transaction Date 2023-06-08 13:29:51+0000\n\n        Result code 000.100.110\n\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\n\n        Payment Type \n\n    "
-          description: More information associated to the AMCS Pay transaction.
+          example: "        ACI Auto Pay Transaction Id 8ac7a4a2892d433501892f117c3a3173\n\n        Transaction Date 2023-07-07 06:37:02+0000\n\n        Result code 000.100.110\n\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\n\n        Payment Type DB\n\n    "
+          description: More information associated to the payment.
         transactionStatus:
+          type: string
           enum:
           - Success
           - Failure
-          - Partial
-          type: string
-          description: The Transaction Status associated to the AMCS Pay transaction.
+          example: Success
+          description: The Transaction Status associated to the refund response.
         result:
           $ref: '#/components/schemas/AMCSPayResult'
           description: AMCS Pay standardised result code and message returned by the payment provider.
       additionalProperties: false
+    AMCSPayPaymentAccount:
+      required:
+      - paymentType
+      - currency
+      - country
+      type: object
+      description: Details of the payment account to create if <b>isCreatePaymentAccount</b> is set to <b>true</b>.
+      properties:
+        paymentType:
+          enum:
+          - CREDIT_TRANSFER
+          type: string
+          example: CREDIT_TRANSFER
+          description: The type of payment account to create. For example, <b>"CREDIT_TRANSFER"</b> indicates that a credit transfer account will be created.
+        currency:
+          enum:
+          - AUD
+          - EUR
+          type: string
+          example: AUD
+          description: The currency code for the payment account. For example, <b>"AUD"</b> indicates that the account will operate in Australian Dollars.
+        country:
+          enum:
+          - AU
+          - DE
+          - FR
+          - IE
+          - NL
+          type: string
+          example: AU
+          description: The two-letter ISO country code representing the country where the payment account is held. For example, <b>"AU"</b> indicates Australia.
+      additionalProperties: false
+    AMCSPayGetServiceFeeRequest:
+      type: object
+      required:
+      - paymentType
+      - currency
+      - principalAmount
+      properties:
+        paymentType:
+          type: string
+          enum:
+          - CARD
+          - ACH
+          - EFT
+          description: Payment Type can be any of "CARD", "ACH", "EFT".
+          example: CARD
+        currency:
+          type: string
+          example: USD
+          description: The currency associated to the payment request.
+        principalAmount:
+          type: integer
+          example: 10
+          description: The base amount associated to the payment request (This field is optional for Tokenization).
     AMCSPayRetryTransactionResponse:
       type: object
       properties:
@@ -2209,64 +1422,18 @@ components:
           description: The request type associated to the retried transaction.
         serviceFeeResponse:
           $ref: '#/components/schemas/AMCSPayServiceFeePaymentDetails'
-    AMCSPayAddress:
+    AMCSPayCreateCustomerResponse:
       type: object
       properties:
-        addressType:
-          type: string
-          enum:
-          - Billing
-          - Shipping
-          example: Billing
-        streetAddress1:
-          type: string
-          example: 27, Longwood Avenue
-        streetAddress2:
-          type: string
-          example: South Circular
-        streetAddress3:
+        providerCustomerAccount:
           type:
           - string
           - 'null'
-          example: Road Dublin-08
-        city:
-          type: string
-          example: Dublin
-        state:
-          type: string
-          example: Munster
-        postCode:
-          type: string
-          example: '12345'
-        country:
-          type: string
-          example: Ireland
-        iSO3166Numeric:
-          type: string
-          example: '372'
-    AMCSPayGetServiceFeeRequest:
-      type: object
-      required:
-      - paymentType
-      - currency
-      - principalAmount
-      properties:
-        paymentType:
-          type: string
-          enum:
-          - CARD
-          - ACH
-          - EFT
-          description: Payment Type can be any of "CARD", "ACH", "EFT".
-          example: CARD
-        currency:
-          type: string
-          example: USD
-          description: The currency associated to the payment request.
-        principalAmount:
-          type: integer
-          example: 10
-          description: The base amount associated to the payment request (This field is optional for Tokenization).
+          example: cus_N6mXoX2aG2e4eH
+          description: The unique identifier for the customer account created by the payment provider. For example, <b>"cus_N6mXoX2aG2e4eH"</b> is a Stripe customer ID.
+        paymentAccount:
+          $ref: '#/components/schemas/AMCSPayCreatePaymentAccountResponse'
+      additionalProperties: false
     AMCSPayRetryTransactionRequest:
       required:
       - callerTransactionIdentifier
@@ -2284,6 +1451,386 @@ components:
           - ACICards
           example: ACICards
           description: The payment channel/provider to use for the retry.
+    AMCSPayCreateCustomerDetail:
+      required:
+      - customerId
+      - customerName
+      type: object
+      description: Contains details about the customer to be created.
+      properties:
+        customerId:
+          type: string
+          example: 8114533e-7968-4b67-a600-832d29a0e1c8
+          description: A unique identifier or external reference for the customer (could be from your system or an external system).
+        customerName:
+          type: string
+          example: Jane Doe
+          description: The full name of the customer being created.
+      additionalProperties: false
+    AMCSPayInitiatePaymentResponse:
+      type: object
+      properties:
+        hppUrl:
+          format: url
+          type: string
+          example: https://localhost/paybylink?key=092159d8-9e57-41a5-af6c-745bd45ff2f7
+        callerTransactionId:
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+        transactionStatus:
+          type: string
+          enum:
+          - Initiated
+          example: Initiated
+    TermsAndConditions:
+      type: object
+      required:
+      - TermsAndConditionsContent
+      - TermsAndConditionsId
+      - TermsAndConditionsContentId
+      description: The terms and conditions.
+      properties:
+        termsAndConditionsId:
+          type:
+          - integer
+          - 'null'
+          example: 1
+          description: The conditions Id associated to the terms and conditions.
+        termsAndConditionsContentId:
+          type:
+          - integer
+          - 'null'
+          example: 1
+          description: The terms and conditions ContentId associated to the terms and conditions content.
+        termsAndConditionsUrl:
+          type:
+          - string
+          - 'null'
+          example: https://na1-pay-dev.amcsplatform.com/TermsAndConditionsView/TermsAndConditions/54090c88-6451-485f-8e35-8037b9ae5ea0?termsAndConditionsContentId=3af76595-bf9d-4505-bef9-6e603dfc7ea8
+          description: The terms and conditions associated to the service fee.
+    AMCSPayAchBankInfo:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: ACH Account Number
+        accountType:
+          type:
+          - string
+          - 'null'
+          enum:
+          - PersonalSavings
+          - BusinessSavings
+          - PersonalCheckings
+          - BusinessCheckings
+          description: ACH Account Type
+        routingNumber:
+          type:
+          - string
+          - 'null'
+          description: ACH Routing Number
+      additionalProperties: false
+    AMCSPayCreatePaymentAccountResponse:
+      type: object
+      description: Details of the customer account and payment account created if <b>isCreatePaymentAccount</b> is set to <b>true</b> in the request.
+      properties:
+        accountHolderName:
+          type:
+          - string
+          - 'null'
+          example: Waste Management Ltd
+          description: The name of the account holder for the payment account.
+        bankName:
+          type:
+          - string
+          - 'null'
+          example: HSBC
+          description: The name of the bank where the payment account is held.
+        bankCode:
+          type:
+          - string
+          - 'null'
+          example: 341-000
+          description: The bank code for the payment account.
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          example: IE531653294928618999391
+          description: The account number for the payment account.
+        swiftCode:
+          type:
+          - string
+          - 'null'
+          example: HSBCAUTTXXX
+          description: The SWIFT code for the payment account.
+        currency:
+          enum:
+          - AUD
+          - EUR
+          type: string
+          example: AUD
+          description: The three-letter ISO currency code associated with the payment account. For example, <b>"AUD"</b> indicates that the account will operate in Australian Dollars.
+        paymentType:
+          enum:
+          - CREDIT_TRANSFER
+          type: string
+          example: CREDIT_TRANSFER
+          description: The type of payment account created. For example, <b>"CREDIT_TRANSFER"</b> indicates that a credit transfer account has been created.
+        country:
+          enum:
+          - AU
+          - DE
+          - FR
+          - IE
+          - NL
+          type: string
+          example: AU
+          description: The two-letter ISO country code representing the country where the payment account is held. For example, <b>"AU"</b> indicates Australia.
+      additionalProperties: false
+    AMCSPayTerminalRequest:
+      type: object
+      required:
+      - requestId
+      - providerType
+      - callerIdentifier
+      - terminalId
+      - transactionAmount
+      - cardEntryMode
+      - requestType
+      properties:
+        requestType:
+          type: string
+          enum:
+          - OneOffPayment
+        providerType:
+          type: string
+          enum:
+          - TerminalPay
+          - ElavonTerminalPay
+          example: TerminalPay
+        callerIdentifier:
+          type: string
+          example: client-name
+        requestId:
+          type: string
+          format: uuid
+          example: 0d920c06-b568-442b-94cc-afe60176708f
+        terminalId:
+          type: string
+          example: 450-829-523
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+        cardEntryMode:
+          type: string
+          enum:
+          - Rfid
+          - Keyed
+          - Manual
+          - File
+          - Scanned
+          - MagStripe
+          - Icc
+          - SynchronousIcc
+          - Tapped
+          - Contactless
+          - Mobile
+          example: Keyed
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          example: amcspayuser@email.com
+      additionalProperties: false
+    AMCSPayCustomerInfo:
+      type: object
+      properties:
+        customerName:
+          type:
+          - string
+          - 'null'
+          example: ''
+        customerId:
+          type: string
+          example: ACC1007
+        customerIP:
+          type:
+          - string
+          - 'null'
+          example: 000.000.0.000
+        customerStatus:
+          type: string
+          enum:
+          - NEW
+          - EXISTING
+          example: NEW
+        websiteUrl:
+          type:
+          - string
+          - 'null'
+          example: ''
+      additionalProperties: false
+    AMCSPayTerminalAbortRequest:
+      type: object
+      required:
+      - requestId
+      - providerType
+      - callerIdentifier
+      - terminalId
+      - requestType
+      properties:
+        requestType:
+          type: string
+          enum:
+          - Abort
+        providerType:
+          type: string
+          enum:
+          - TerminalPay
+          - ElavonTerminalPay
+          example: TerminalPay
+        callerIdentifier:
+          type: string
+          example: client-name
+        requestId:
+          type: string
+          format: uuid
+          example: 0d920c06-b568-442b-94cc-afe60176708f
+        terminalId:
+          type: string
+          example: 450-829-523
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          example: amcspayuser@email.com
+        reason:
+          type:
+          - string
+          - 'null'
+          example: Cancelled By POS
+      additionalProperties: false
+    AMCSPayErrorResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The exception message.
+        type:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The type of exception thrown.
+        stackTrace:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The stack trace of the error encountered.
+    AMCSPayBankInfo:
+      type: object
+      properties:
+        eft:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayEftBankInfo'
+        ach:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayAchBankInfo'
+      additionalProperties: false
+    AMCSPayVaultRequest:
+      required:
+      - requestType
+      - paymentType
+      - transactionOrigin
+      - callerIdentifier
+      - requestId
+      - providerType
+      - tokenReference
+      type: object
+      properties:
+        requestType:
+          type: string
+          enum:
+          - VaultOrAutoPayment
+          example: VaultOrAutoPayment
+          description: Request Type is "VaultOrAutoPayment".
+        paymentType:
+          type: string
+          enum:
+          - CARD
+          - ACH
+          - EFT
+          example: CARD
+          description: Payment Type can be any of "CARD", "ACH", "EFT".
+        transactionOrigin:
+          type: string
+          enum:
+          - MOTO
+          - ECOM
+          example: MOTO
+          description: Transaction Origin can be any of "MOTO", "ECOM".
+        callerIdentifier:
+          type: string
+          example: Elemos
+          description: The identification associated to the calling application.
+        requestId:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+          description: The Caller supplied GUID associated to the Payment request.
+        providerType:
+          type: string
+          enum:
+          - ACICards
+          - ACIElectronic
+          - Heartland
+          - MerchantPartners
+          - PaymentExpress
+          - Realex
+          - EftCanada
+          example: ACICards
+          description: Provide Type can be any of "ACICards", "ACIElectronic", "Heartland", "MerchantPartners", "Payment Express", "Realex", "EftCanada".
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+          description: The amount subjected for vault.
+        customerInfo:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayVaultCustomerInfo'
+          description: The Details associated to the customer mandate for risk assessment (Conditionally required for making payments using ACI Cards).
+        tokenReference:
+          type: string
+          example: 58af616d8b112af873be57bb627a7677bdffdc6a306ffdff26c6f6b59d917fe7
+          description: The Token Reference sent by the provider associated to the original payment.
+        historyReference:
+          type:
+          - string
+          - 'null'
+          example: '123456789012345'
+          description: The history reference data sent by the provider associated to the original payment (Conditionally required).
+        maskedProfileNumber:
+          type:
+          - string
+          - 'null'
+          example: 5454XXXXXXXX5454
+          description: The Masked Profile/Card Number sent by the provider associated to the original payment (Conditionally required).
     AMCSPayInitiatePaymentRequest:
       type: object
       required:
@@ -2370,20 +1917,473 @@ components:
           - object
           - 'null'
           $ref: '#/components/schemas/AMCSPayCustomerInfo'
-    AMCSPayBankInfo:
+    AMCSPayGetServiceFeeResponse:
       type: object
       properties:
-        eft:
+        serviceFee:
+          type: number
+          format: double
+          example: '0.2'
+          description: The service fee associated to the response.
+        percentage:
+          type: number
+          format: double
+          example: '2'
+          description: The percentage associated to the response.
+        principalAmount:
+          type: number
+          format: double
+          example: '10'
+          description: The base amount associated to the payment request (This field is optional for Tokenization).
+        total:
+          type: number
+          format: double
+          example: '10.2'
+          description: The total associated to the response.
+        termsAndConditions:
+          type: object
+          $ref: '#/components/schemas/TermsAndConditions'
+          description: The terms and conditions associated to the response.
+    AMCSPayDeleteProfileRequest:
+      required:
+      - requestType
+      - paymentType
+      - transactionOrigin
+      - callerIdentifier
+      - requestId
+      - referenceId
+      - providerType
+      type: object
+      properties:
+        requestType:
+          enum:
+          - OneOffPayment
+          - Tokenization
+          - VaultOrAutoPayment
+          - Refund
+          - DeleteToken
+          type: string
+          description: The request type for this endpoint is "DeleteToken".
+        paymentType:
+          enum:
+          - CARD
+          - ACH
+          - GOOGLEPAY
+          - APPLEPAY
+          type: string
+          description: The supported payment type for this endpoint is "CARD".
+        transactionOrigin:
+          enum:
+          - MOTO
+          - ECOM
+          type: string
+        callerIdentifier:
+          minLength: 1
+          type: string
+          example: Elemos
+          description: The identification associated to the calling application.
+        requestId:
+          type: string
+          format: uuid
+          example: 3e14bdf6-5b17-44aa-bf5b-2f7fb113daf9
+          description: The Caller supplied GUID associated to the payment request.
+        requestTimestamp:
           type:
-          - object
+          - string
           - 'null'
-          $ref: '#/components/schemas/AMCSPayEftBankInfo'
-        ach:
+          format: dateTime
+          readOnly: true
+          example: '2023-06-08T21:29:51.915166+08:00'
+          description: The request time stamp when this endpoint was called.
+        providerType:
+          enum:
+          - Test
+          - Realex
+          - Heartland
+          - MerchantPartners
+          - ACICards
+          - ACIElectronic
+          - AptPay
+          - PaymentExpress
+          - EftCanada
+          - TerminalPay
+          type: string
+          example: ACICards
+          description: The payment providers integrated to AMCS Pay. This endpoint only supports "ACICards".
+        referenceId:
           type:
-          - object
+          - string
           - 'null'
-          $ref: '#/components/schemas/AMCSPayAchBankInfo'
+          example: 8ac7a49f8898f2af018899c2fb6d22b0
+          description: The reference number associated to the payment provider upon Card Tokenization.
       additionalProperties: false
+    AMCSPayRefundRequest:
+      required:
+      - requestType
+      - paymentType
+      - transactionOrigin
+      - callerIdentifier
+      - requestId
+      - providerType
+      - transactionAmount
+      - originalPaymentReference
+      - originalAmount
+      type: object
+      properties:
+        requestType:
+          type: string
+          enum:
+          - Refund
+          example: Refund
+        paymentType:
+          type: string
+          enum:
+          - CARD
+          - ACH
+          - EFT
+          - TERMINAL
+          example: CARD
+        transactionOrigin:
+          type: string
+          enum:
+          - MOTO
+          example: MOTO
+        callerIdentifier:
+          type: string
+          example: Elemos
+        requestId:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        providerType:
+          type: string
+          enum:
+          - ACICards
+          - ACIElectronic
+          - Heartland
+          - MerchantPartners
+          - PaymentExpress
+          - Realex
+          - TerminalPay
+          - EftCanada
+          - ElavonTerminalPay
+          example: ACICards
+        transactionAmount:
+          type: object
+          example: '24.00'
+          $ref: '#/components/schemas/AMCSPayAmount'
+        originalPaymentReference:
+          type: string
+          example: 8ac7a4a28749242d01874c7e648327b7
+        originalAmount:
+          type:
+          - number
+          - 'null'
+          format: decimal
+          example: 40.1
+        tokenValue:
+          type:
+          - string
+          - 'null'
+          example: iLGOd76VSiaAQBcZswQf
+          description: '<span style=''color: rgb(212, 31, 28)''>Required if payment type is elavon terminalPay or verifone terminalPay.</span>'
+        profileExpiryDate:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          example: MM/YY
+          description: '<span style=''color: rgb(212, 31, 28)''>Required if payment type is elavon terminalPay.</span>'
+        customerInfo:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayCustomerInfo'
+    AMCSPayTerminalResponse:
+      type: object
+      properties:
+        transactionStatus:
+          type: string
+          enum:
+          - Success
+          - Failure
+          example: Success
+        amcsPayReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
+        providerReference:
+          type:
+          - string
+          - 'null'
+          example: '710718500049'
+        providerResponseCode:
+          type:
+          - string
+          - 'null'
+          example: Success
+        providerAuthCode:
+          type:
+          - string
+          - 'null'
+          example: DEMO684
+        tokenValue:
+          type:
+          - string
+          - 'null'
+          example: iLGOd76VSiaAQBcZswQf
+        responseTimeStamp:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          example: '2022-07-27 18:54:18.6767965 +08:00'
+        notes:
+          type:
+          - string
+          - 'null'
+        callerTransactionId:
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+        maskedProfileNumber:
+          type:
+          - string
+          - 'null'
+          example: XXXXX
+        profileExpiryDate:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          example: MM/YY
+        profileHolder:
+          type:
+          - string
+          - 'null'
+          example: Roofus Summers
+        errorCondition:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ABORTED
+          - BUSY
+          - CANCEL
+          - DEVICEOUT
+          - INSERTEDCARD
+          - INPROGRESS
+          - LOGGEDOUT
+          - MESSAGEFORMAT
+          - NOTALLOWED
+          - NOTFOUND
+          - PAYMENTRESTRICTION
+          - REFUSAL
+          - UNAVAILABLEDEVICE
+          - UNAVAILABLESERVICE
+          - INVALIDCARD
+          - UNREACHABLEHOST
+          - WRONGPIN
+          example: CANCEL
+        result:
+          $ref: '#/components/schemas/AMCSPayResult'
+          description: AMCS Pay standardised result code and message returned by the payment provider.
+    AMCS.Pay.Entity.Api.Payments.ExternalTransaction.ApiErrorResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          description: The exception message.
+          example: Payment Provider APG is not supported.
+        type:
+          type:
+          - string
+          - 'null'
+          description: The exception type.
+          example: System.Exception
+        stackTrace:
+          type:
+          - string
+          - 'null'
+          description: The stack trace of the exception.
+          example: '   at AMCS.Pay.Api.Controllers.PaymentsController.CreateCustomer(CreateCustomerRequest request) in /src/swaggerpay/AMCS.Pay.Api/Controllers/PaymentsController.cs:line 123'
+      additionalProperties: false
+    AMCSPayInfoResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          example: info message
+    AMCSPayDeleteProfileResponse:
+      type: object
+      properties:
+        amcsPayReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: f15da253-d85b-4e7d-99eb-b01b00de6dce
+          description: The AMCS Pay generated Response GUID associated to the Payment request.
+        providerReference:
+          type:
+          - string
+          - 'null'
+          example: 8ac7a49f8898f2af01889b33033902d1
+          description: The reference number associated to the payment provider.
+        providerResponseCode:
+          type:
+          - string
+          - 'null'
+          example: Success
+          description: The response code associated to the payment provider.
+        providerAuthCode:
+          type:
+          - string
+          - 'null'
+          example: null
+          description: The authorization code associated to the payment provider.
+        responseTimestamp:
+          type:
+          - string
+          - 'null'
+          format: dateTime
+          example: '2023-06-08T21:29:51.915166+08:00'
+          description: The Timestamp of the payment response payload.
+        notes:
+          type:
+          - string
+          - 'null'
+          example: "        ACI Vault Transaction Id 8ac7a49f8898f2af01889b33033902d1\n\n        Transaction Date 2023-06-08 13:29:51+0000\n\n        Result code 000.100.110\n\n        ResultDescription: Request successfully processed in 'Merchant in Integrator Test Mode'\n\n        Payment Type \n\n    "
+          description: More information associated to the AMCS Pay transaction.
+        transactionStatus:
+          enum:
+          - Success
+          - Failure
+          - Partial
+          type: string
+          description: The Transaction Status associated to the AMCS Pay transaction.
+        result:
+          $ref: '#/components/schemas/AMCSPayResult'
+          description: AMCS Pay standardised result code and message returned by the payment provider.
+      additionalProperties: false
+    AMCSPayEftBankInfo:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: EFT Account Number
+        transitNumber:
+          type:
+          - string
+          - 'null'
+          description: EFT Transit Number
+        institutionNumber:
+          type:
+          - string
+          - 'null'
+          description: EFT Institution Number
+      additionalProperties: false
+    AMCSPayImmediatePaymentRequest:
+      type: object
+      required:
+      - requestType
+      - paymentType
+      - providerType
+      - transactionAmount
+      - callerIdentifier
+      - requestId
+      - customerInfo
+      - bankInfo
+      properties:
+        requestType:
+          type: string
+          enum:
+          - OneOffPayment
+          - Tokenization
+        paymentType:
+          type: string
+          enum:
+          - ACH
+          - EFT
+        callerIdentifier:
+          type: string
+        requestId:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        providerType:
+          type: string
+          enum:
+          - EftCanada
+        configurationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 928a3c6c-b80d-493d-a6aa-0fb8d2579860
+        transactionAmount:
+          type: object
+          $ref: '#/components/schemas/AMCSPayAmount'
+        addresses:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayAddress'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayContact'
+        customerInfo:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayCustomerInfo'
+        bankInfo:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSPayBankInfo'
+    AMCSPayServiceFeePaymentDetails:
+      type: object
+      description: The service fee details associated to the transaction.
+      properties:
+        principalAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 10
+          description: The base amount associated to the payment request.
+        serviceFeeAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 0.2
+          description: The service fee amount associated to the payment request.
+        total:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 10.2
+          description: The total amount associated to the payment request.
+        termsAndConditions:
+          $ref: '#/components/schemas/TermsAndConditions'
     AMCSPayVaultCustomerInfo:
       type: object
       required:

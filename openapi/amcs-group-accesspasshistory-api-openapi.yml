@@ -68,6 +68,16 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -76,6 +86,22 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorAccessPassesHistoryResource:
+      type: object
+      properties:
+        AccessPassHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessPassHistoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorAccessPassHistoryResource:
       type: object
       properties:
@@ -113,29 +139,3 @@ components:
         MaterialId:
           type: integer
           format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorAccessPassesHistoryResource:
-      type: object
-      properties:
-        AccessPassHistory:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccessPassHistoryResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000

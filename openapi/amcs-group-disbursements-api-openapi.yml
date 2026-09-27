@@ -200,135 +200,39 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AMCSPayErrorResponse:
+    AMCSAptPayGetTranStatusBasicDataResponse:
       type: object
       properties:
+        status:
+          type: string
+          description: Contains the status of the response
+          example: SETTLED
         message:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The exception message.
-        type:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The type of exception thrown.
-        stackTrace:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The stack trace of the error encountered.
-    AMCSPayCheckAccountRequest:
-      type: object
-      required:
-      - amount
-      - currency
-      properties:
-        amount:
-          type: number
-          example: 10
-          description: Amount to be disbursed.
-        currency:
           type: string
-          example: CAD
-          description: Currency to be used. This is expressed as a three-letter currency code (ie., CAD for Canadian dollars, USD for United States Dollars, etc.)
-        disbursementNumber:
-          type: string
-          example: '5333619503715702'
-          description: '<span style=''color: rgb(212, 31, 28)''>Required if instrumentId is not defined.</span> Card number or account number'
-        instrumentId:
-          type: string
+          description: Contains the detailed description of the response
           example: ''
-          description: '<span style=''color: rgb(212, 31, 28)''>Required if disbursementNumber is not defined.</span> The Instrument ID'
-        program:
-          type: string
-          enum:
-          - B2B
-          - B2C
-          - G2C
-          - PayrollAndPension
-          - RapidMerchantSettlement
-          example: ''
-          description: <b>Optional.</b> Program ID. This is a code to denote the use case for product (B2B, B2C, G2C, PayrollAndPension, RapidMerchantSettlement)
-        expirationDate:
-          type: string
-          example: null
-          description: <b>Optional.</b> The card expiration date
-    AMCSPayDisbursementGetSupplierResponse:
+    AMCSPayErrorContentResponse:
+      type:
+      - string
+      - 'null'
+    AMCSPayDisbursementAddDisbursementResponse:
       type: object
       properties:
         result:
           type: object
           description: Holds the response object depends on the provider.
-          $ref: '#/components/schemas/AMCSAptPayDisbursementGetSupplierDataResponse'
-    AMCSPayDisbursementGetSupplierRequest:
-      type: object
-      required:
-      - provider
-      - data
-      properties:
-        provider:
-          type: string
-          description: 'Provider to use to get supplier for disbursement.
-
-
-            - AptPay'
-          example: AptPay
-        data:
-          type: object
-          description: Holds the request object depends on the provider.
-          $ref: '#/components/schemas/AMCSAptPayGetIdentityRequest'
-    AMCSPayDisbursementAddSupplierRequest:
-      type: object
-      required:
-      - provider
-      - data
-      properties:
-        provider:
-          type: string
-          description: 'Provider to use to add supplier for disbursement.
-
-
-            - AptPay'
-          example: AptPay
-        data:
-          type: object
-          description: Holds the request object depends on the provider.
-          $ref: '#/components/schemas/AMCSAptPayAddIdentityRequest'
-    AMCSPayCheckAccountResponseData:
+          $ref: '#/components/schemas/AMCSAptPayAddDisbursementDataResponse'
+    AMCSAptPayErrorDataResponse:
       type: object
       properties:
-        receiving:
-          type: boolean
-          example: true
-          description: This indicates if the card is eligible to receive funds. This will return a value of either true or false.
-        sending:
-          type: boolean
-          example: false
-          description: This indicates if the card is eligible to send funds. This will return a value of either true or false.
-        network:
+        ErrorKey:
           type: string
-          example: MASTERCARD
-          description: 'The network the transaction takes place over (example: MasterCard)'
-        funds_availability:
+          description: Contains error key
+          example: ''
+        ErrorMessage:
           type: string
-          example: IMMEDIATE
-          description: The duration of time required to send funds to the Payee's account
-        type:
-          type: string
-          example: DEBIT
-          description: Type of card used for disbursement (ie., debit, credit, etc.)
-        country:
-          type: string
-          example: CAN
-          description: The country in which the card was issued
-        currency:
-          type: string
-          example: CAD
-          description: The currency available on the card.
+          description: Contains the detailed error message
+          example: ''
     AMCSAptPayAddDisbursementRequest:
       type: object
       required:
@@ -422,174 +326,100 @@ components:
           example: '[{"financialDocumentId":2496,"companyOutletId":1,"customerId":135,"ticketNumber":"CI1027","transactionDate":"2023-10-11T16:00:00.000Z","financialDocumentStatusId":1,"numberOfTickets":1,"customerName":"Testing supplier","amountDue":37,"currency":"$","maxCashPaymentAmount":null,"maxChequePaymentAmount":null,"tickets":[{"financialDocumentId":2496,"weighingId":75,"ticketNumber":"SWPS1039","transactionDate":"2023-10-11T16:00:00.000Z","materials":"Wood Packaging","taxAmount":6.17,"amountDue":37,"amountPaidByCash":null,"amountPaidByCheque":null,"currency":"$","exceptions":"","defaultImmediatePayablePaymentTypeId":2}]}]'
           description: List of supplier invoice tickets.
       additionalProperties: false
-    AMCSAptPayGetIdentityDataResponse:
-      properties:
-        id:
-          type: integer
-        individual:
-          type: boolean
-        name:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        middleName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        dateOfBirth:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        occupation:
-          type:
-          - string
-          - 'null'
-        street:
-          type:
-          - string
-          - 'null'
-        streetLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        zip:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        province:
-          type:
-          - string
-          - 'null'
-        email:
-          minLength: 1
-          type: string
-        dbaName:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-        typeOfBusiness:
-          type:
-          - string
-          - 'null'
-        dateOfIncorporation:
-          type:
-          - string
-          - 'null'
-        countryOfRegistration:
-          type:
-          - string
-          - 'null'
-        provinceOfRegistration:
-          type:
-          - string
-          - 'null'
-        businessTaxId:
-          type:
-          - string
-          - 'null'
-        clientId:
-          minLength: 1
-          type: string
-        selfVerify:
-          type:
-          - boolean
-          - 'null'
-        nationalIdentityNumber:
-          type:
-          - string
-          - 'null'
-    AMCSAptPayGetTranStatusBasicDataResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Contains the status of the response
-          example: SETTLED
-        message:
-          type: string
-          description: Contains the detailed description of the response
-          example: ''
-    AMCSPayDisbursementAddDisbursementResponse:
+    AMCSPayDisbursementGetSupplierResponse:
       type: object
       properties:
         result:
           type: object
           description: Holds the response object depends on the provider.
-          $ref: '#/components/schemas/AMCSAptPayAddDisbursementDataResponse'
-    AMCSAptPayGetIdentityResponse:
-      type: object
-      properties:
-        Data:
-          type:
-          - object
-          - 'null'
-          $ref: '#/components/schemas/AMCSAptPayGetIdentityDataResponse'
-        Error:
-          type:
-          - array
-          - 'null'
-          description: Contains the error description of the response
-          items:
-            $ref: '#/components/schemas/AMCSAptPayErrorDataResponse'
-        IsSuccess:
-          type: boolean
-          description: Returns true if it doesn't contains error; False if it contains error
-    AMCSAptPayBasicDataResponse:
+          $ref: '#/components/schemas/AMCSAptPayDisbursementGetSupplierDataResponse'
+    AMCSAptPayDisbursementGetSupplierDataResponse:
       type: object
       properties:
         id:
-          type: string
-          description: Generated ID from the API
+          type: number
           example: '183867559356'
+        firstName:
+          type: string
+          example: Steven
+        middleName:
+          type: string
+          example: Oliver
+        lastName:
+          type: string
+          example: Kyamko
+        country:
+          type: string
+          example: CA
+        dateOfBirth:
+          type: string
+          example: '2000-01-01'
+        phone:
+          type: string
+          example: '+639201001111'
+        occupation:
+          type: string
+          example: Janitor
+        individual:
+          type: boolean
+          example: true
+        clientId:
+          type: string
+          example: '12312'
+        name:
+          type: string
+          example: TestStevenK
+        email:
+          type: string
+          example: jametests@gmail.com
         status:
           type: string
-          description: Contains the status of the request
-          example: AML check in progress
-    AMCSPayErrorContentResponse:
-      type:
-      - string
-      - 'null'
-    AMCSPayDisbursementAddDisbursementRequest:
-      type: object
-      required:
-      - provider
-      - data
-      properties:
-        provider:
+          example: ACTIVE
+        amlStatus:
           type: string
-          description: 'Provider to use to add disbursement.
-
-
-            - AptPay'
-          example: AptPay
-        data:
-          type: object
-          description: Holds the request object depends on the provider.
-          $ref: '#/components/schemas/AMCSAptPayAddDisbursementRequest'
+          example: PASSED
+        businessTaxId:
+          type: string
+          example: '12312'
+        street:
+          type: string
+          example: Street 1
+        streetLine2:
+          type: string
+          example: Street 2
+        city:
+          type: string
+          example: Toronto
+        province:
+          type: string
+          example: 'ON'
+        zip:
+          type: string
+          example: L4K 0J7
+        dbaName:
+          type: string
+          example: Steven
+        url:
+          type: string
+          example: sampleurl.com
+        typeOfBusiness:
+          type: string
+          example: Corporation
+        dateOfIncorporation:
+          type: string
+          example: '2000-01-01'
+        countryOfRegistration:
+          type: string
+          example: CA
+        provinceOfRegistration:
+          type: string
+          example: 'ON'
+        selfVerify:
+          type: boolean
+          example: true
+        nationalIdentityNumber:
+          type: string
+          example: ''
     AMCSAptPayAddIdentityRequest:
       type: object
       required:
@@ -798,104 +628,172 @@ components:
           type: number
           description: The identity id of the request
           example: '123'
-    AMCSAptPayDisbursementGetSupplierDataResponse:
+    AMCSAptPayGetIdentityResponse:
       type: object
       properties:
-        id:
-          type: number
-          example: '183867559356'
-        firstName:
+        Data:
+          type:
+          - object
+          - 'null'
+          $ref: '#/components/schemas/AMCSAptPayGetIdentityDataResponse'
+        Error:
+          type:
+          - array
+          - 'null'
+          description: Contains the error description of the response
+          items:
+            $ref: '#/components/schemas/AMCSAptPayErrorDataResponse'
+        IsSuccess:
+          type: boolean
+          description: Returns true if it doesn't contains error; False if it contains error
+    AMCSPayDisbursementAddSupplierRequest:
+      type: object
+      required:
+      - provider
+      - data
+      properties:
+        provider:
           type: string
-          example: Steven
-        middleName:
+          description: 'Provider to use to add supplier for disbursement.
+
+
+            - AptPay'
+          example: AptPay
+        data:
+          type: object
+          description: Holds the request object depends on the provider.
+          $ref: '#/components/schemas/AMCSAptPayAddIdentityRequest'
+    AMCSPayCheckAccountResponseData:
+      type: object
+      properties:
+        receiving:
+          type: boolean
+          example: true
+          description: This indicates if the card is eligible to receive funds. This will return a value of either true or false.
+        sending:
+          type: boolean
+          example: false
+          description: This indicates if the card is eligible to send funds. This will return a value of either true or false.
+        network:
           type: string
-          example: Oliver
-        lastName:
+          example: MASTERCARD
+          description: 'The network the transaction takes place over (example: MasterCard)'
+        funds_availability:
           type: string
-          example: Kyamko
+          example: IMMEDIATE
+          description: The duration of time required to send funds to the Payee's account
+        type:
+          type: string
+          example: DEBIT
+          description: Type of card used for disbursement (ie., debit, credit, etc.)
         country:
           type: string
-          example: CA
-        dateOfBirth:
+          example: CAN
+          description: The country in which the card was issued
+        currency:
           type: string
-          example: '2000-01-01'
-        phone:
-          type: string
-          example: '+639201001111'
-        occupation:
-          type: string
-          example: Janitor
+          example: CAD
+          description: The currency available on the card.
+    AMCSAptPayGetIdentityDataResponse:
+      properties:
+        id:
+          type: integer
         individual:
           type: boolean
-          example: true
-        clientId:
-          type: string
-          example: '12312'
         name:
-          type: string
-          example: TestStevenK
-        email:
-          type: string
-          example: jametests@gmail.com
-        status:
-          type: string
-          example: ACTIVE
-        amlStatus:
-          type: string
-          example: PASSED
-        businessTaxId:
-          type: string
-          example: '12312'
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        middleName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        dateOfBirth:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        occupation:
+          type:
+          - string
+          - 'null'
         street:
-          type: string
-          example: Street 1
+          type:
+          - string
+          - 'null'
         streetLine2:
-          type: string
-          example: Street 2
+          type:
+          - string
+          - 'null'
         city:
-          type: string
-          example: Toronto
-        province:
-          type: string
-          example: 'ON'
+          type:
+          - string
+          - 'null'
         zip:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        province:
+          type:
+          - string
+          - 'null'
+        email:
+          minLength: 1
           type: string
-          example: L4K 0J7
         dbaName:
-          type: string
-          example: Steven
+          type:
+          - string
+          - 'null'
         url:
-          type: string
-          example: sampleurl.com
+          type:
+          - string
+          - 'null'
         typeOfBusiness:
-          type: string
-          example: Corporation
+          type:
+          - string
+          - 'null'
         dateOfIncorporation:
-          type: string
-          example: '2000-01-01'
+          type:
+          - string
+          - 'null'
         countryOfRegistration:
-          type: string
-          example: CA
+          type:
+          - string
+          - 'null'
         provinceOfRegistration:
+          type:
+          - string
+          - 'null'
+        businessTaxId:
+          type:
+          - string
+          - 'null'
+        clientId:
+          minLength: 1
           type: string
-          example: 'ON'
         selfVerify:
-          type: boolean
-          example: true
+          type:
+          - boolean
+          - 'null'
         nationalIdentityNumber:
-          type: string
-          example: ''
-    AMCSAptPayErrorDataResponse:
-      type: object
-      properties:
-        ErrorKey:
-          type: string
-          description: Contains error key
-          example: ''
-        ErrorMessage:
-          type: string
-          description: Contains the detailed error message
-          example: ''
+          type:
+          - string
+          - 'null'
     AMCSPayDisbursementAddSupplierResponse:
       type: object
       properties:
@@ -903,6 +801,122 @@ components:
           type: object
           description: Holds the response object depends on the provider.
           $ref: '#/components/schemas/AMCSAptPayBasicDataResponse'
+    AMCSPayErrorResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The exception message.
+        type:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The type of exception thrown.
+        stackTrace:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The stack trace of the error encountered.
+    AMCSPayDisbursementAddDisbursementRequest:
+      type: object
+      required:
+      - provider
+      - data
+      properties:
+        provider:
+          type: string
+          description: 'Provider to use to add disbursement.
+
+
+            - AptPay'
+          example: AptPay
+        data:
+          type: object
+          description: Holds the request object depends on the provider.
+          $ref: '#/components/schemas/AMCSAptPayAddDisbursementRequest'
+    AMCSPayCheckAccountResponse:
+      type: object
+      properties:
+        Data:
+          type: object
+          $ref: '#/components/schemas/AMCSPayCheckAccountResponseData'
+        Error:
+          type:
+          - array
+          - 'null'
+          description: Contains the error description of the response
+          items:
+            $ref: '#/components/schemas/AMCSAptPayErrorDataResponse'
+        IsSuccess:
+          type: boolean
+          description: Returns true if it doesn't contains error; False if it contains error
+    AMCSPayCheckAccountRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: number
+          example: 10
+          description: Amount to be disbursed.
+        currency:
+          type: string
+          example: CAD
+          description: Currency to be used. This is expressed as a three-letter currency code (ie., CAD for Canadian dollars, USD for United States Dollars, etc.)
+        disbursementNumber:
+          type: string
+          example: '5333619503715702'
+          description: '<span style=''color: rgb(212, 31, 28)''>Required if instrumentId is not defined.</span> Card number or account number'
+        instrumentId:
+          type: string
+          example: ''
+          description: '<span style=''color: rgb(212, 31, 28)''>Required if disbursementNumber is not defined.</span> The Instrument ID'
+        program:
+          type: string
+          enum:
+          - B2B
+          - B2C
+          - G2C
+          - PayrollAndPension
+          - RapidMerchantSettlement
+          example: ''
+          description: <b>Optional.</b> Program ID. This is a code to denote the use case for product (B2B, B2C, G2C, PayrollAndPension, RapidMerchantSettlement)
+        expirationDate:
+          type: string
+          example: null
+          description: <b>Optional.</b> The card expiration date
+    AMCSAptPayGetTranStatusRequest:
+      type: object
+      required:
+      - transactionId
+      properties:
+        transactionId:
+          type: string
+          description: The transaction id of the request
+          example: mi5gkghovd-0119-qgdgtosuxd7ehxbe5h2oiwae
+    AMCSPayDisbursementGetSupplierRequest:
+      type: object
+      required:
+      - provider
+      - data
+      properties:
+        provider:
+          type: string
+          description: 'Provider to use to get supplier for disbursement.
+
+
+            - AptPay'
+          example: AptPay
+        data:
+          type: object
+          description: Holds the request object depends on the provider.
+          $ref: '#/components/schemas/AMCSAptPayGetIdentityRequest'
     AMCSAptPayGetTranStatusResponse:
       type: object
       properties:
@@ -921,6 +935,17 @@ components:
         IsSuccess:
           type: boolean
           description: Returns true if it doesn't contains error; False if it contains error
+    AMCSAptPayBasicDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Generated ID from the API
+          example: '183867559356'
+        status:
+          type: string
+          description: Contains the status of the request
+          example: AML check in progress
     AMCSAptPayAddDisbursementDataResponse:
       type: object
       properties:
@@ -936,31 +961,6 @@ components:
           type: string
           example: '23232131554'
           description: Reference transaction ID
-    AMCSAptPayGetTranStatusRequest:
-      type: object
-      required:
-      - transactionId
-      properties:
-        transactionId:
-          type: string
-          description: The transaction id of the request
-          example: mi5gkghovd-0119-qgdgtosuxd7ehxbe5h2oiwae
-    AMCSPayCheckAccountResponse:
-      type: object
-      properties:
-        Data:
-          type: object
-          $ref: '#/components/schemas/AMCSPayCheckAccountResponseData'
-        Error:
-          type:
-          - array
-          - 'null'
-          description: Contains the error description of the response
-          items:
-            $ref: '#/components/schemas/AMCSAptPayErrorDataResponse'
-        IsSuccess:
-          type: boolean
-          description: Returns true if it doesn't contains error; False if it contains error
   securitySchemes:
     cookieAuth:
       type: apiKey

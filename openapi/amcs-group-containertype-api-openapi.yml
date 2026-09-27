@@ -137,11 +137,13 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContainerTypeResource'
 components:
   schemas:
-    ApiIntegratorListItemResource:
+    ApiIntegratorContainerTypeServiceBreakdownResource:
       type: object
       properties:
         Description:
           type: string
+        IsDeleted:
+          type: boolean
         Guid:
           type: string
           format: uuid
@@ -159,27 +161,12 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollection_ApiIntegratorContainerTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorContainerTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorContainerTypeResource:
       type: object
       properties:
@@ -220,6 +207,40 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -242,37 +263,16 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultCollection_ApiIntegratorContainerTypeResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
+        resource:
           type: array
           items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorContainerTypeServiceBreakdownResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+            $ref: '#/components/schemas/ApiIntegratorContainerTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

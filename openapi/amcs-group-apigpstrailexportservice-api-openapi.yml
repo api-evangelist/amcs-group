@@ -80,20 +80,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
-      type: object
-      properties:
-        assetName:
-          type:
-          - string
-          - 'null'
-        gpsTrail:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
-      additionalProperties: false
     AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint:
       type: object
       properties:
@@ -107,4 +93,18 @@ components:
         lon:
           type: number
           format: double
+      additionalProperties: false
+    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
+      type: object
+      properties:
+        assetName:
+          type:
+          - string
+          - 'null'
+        gpsTrail:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
       additionalProperties: false

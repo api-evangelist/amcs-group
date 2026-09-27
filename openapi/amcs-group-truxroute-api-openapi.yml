@@ -174,8 +174,8 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
+    Forbidden:
+      description: Forbidden - Access denied.
       content:
         application/json:
           schema:
@@ -183,40 +183,7 @@ components:
             properties:
               error:
                 type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
+                example: You do not have permission to access this resource.
             additionalProperties: false
     NotImplemented:
       description: This feature is not implemented.
@@ -229,8 +196,8 @@ components:
                 type: string
                 example: This feature is not implemented.
             additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
       content:
         application/json:
           schema:
@@ -238,7 +205,18 @@ components:
             properties:
               error:
                 type: string
-                example: You do not have permission to access this resource.
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
             additionalProperties: false
     NotFound:
       description: Not Found - The requested resource was not found.
@@ -251,7 +229,39 @@ components:
                 type: string
                 example: The requested resource was not found.
             additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: guid
+      additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxRoute:
       type: object
       properties:
@@ -381,14 +391,4 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: guid
       additionalProperties: false

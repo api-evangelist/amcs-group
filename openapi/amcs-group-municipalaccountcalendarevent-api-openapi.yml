@@ -55,23 +55,25 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource'
 components:
   schemas:
-    ApiIntegratorMunicipalCalendarEventDetailResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        EventType:
-          type: string
-        EventDate:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
+    ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorMunicipalCalendarEventResource:
       type: object
       properties:
@@ -93,27 +95,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventDetailResource'
-    ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorMunicipalCalendarEventDetailResource:
+      type: object
+      properties:
+        EventType:
+          type: string
+        EventDate:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32

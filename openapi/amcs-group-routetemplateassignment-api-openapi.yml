@@ -46,34 +46,16 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorRouteTemplateAssignmentsResource:
+    ApiResourceId:
       type: object
       properties:
-        RouteAssignments:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentItemResource'
-        RouteAssignmentGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentGroupResource'
-        GUID:
+        resource:
           type: string
           format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
         errors:
-          type: string
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorRouteTemplateAssignmentItemResource:
       type: object
       properties:
@@ -100,13 +82,31 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         Description:
           type: string
-    ApiResourceId:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorRouteTemplateAssignmentsResource:
+      type: object
+      properties:
+        RouteAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentItemResource'
+        RouteAssignmentGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteTemplateAssignmentGroupResource'
+        GUID:
           type: string
           format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          example: 00000000-0000-0000-0000-000000000000

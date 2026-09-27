@@ -113,28 +113,29 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRegionResource'
 components:
   schemas:
-    ApiIntegratorListItemResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorRegionResource:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        resource:
+        self:
+          type: string
+        associations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorRegionResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorRegionResource:
       type: object
       properties:
@@ -151,6 +152,15 @@ components:
         IsDeleted:
           type: boolean
         GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -192,31 +202,21 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultCollection_ApiIntegratorRegionResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRegionResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

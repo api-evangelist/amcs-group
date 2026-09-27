@@ -101,6 +101,12 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSiteOrderItemStateResource'
 components:
   schemas:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorSiteOrderItemStateResource:
       type: object
       properties:
@@ -114,15 +120,32 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity_ApiIntegratorSiteOrderItemStateResource:
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultCollection_ApiIntegratorSiteOrderItemStateResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorSiteOrderItemStateResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteOrderItemStateResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -135,15 +158,15 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollection_ApiIntegratorSiteOrderItemStateResource:
+    ApiResourceResultEntity_ApiIntegratorSiteOrderItemStateResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSiteOrderItemStateResource'
+          $ref: '#/components/schemas/ApiIntegratorSiteOrderItemStateResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -170,26 +193,3 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

@@ -101,36 +101,12 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorLatePaymentFeeTypeResource'
 components:
   schemas:
-    ApiIntegratorListItemResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorLatePaymentFeeTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        LatePaymentFeeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -148,19 +124,23 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity_ApiIntegratorLatePaymentFeeTypeResource:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -183,12 +163,6 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultCollection_ApiIntegratorLatePaymentFeeTypeResource:
       type: object
       properties:
@@ -198,6 +172,32 @@ components:
             $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorLatePaymentFeeTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        LatePaymentFeeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorLatePaymentFeeTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLatePaymentFeeTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:

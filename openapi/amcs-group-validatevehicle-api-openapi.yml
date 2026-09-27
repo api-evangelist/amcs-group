@@ -116,6 +116,42 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiValidateVehicleResource'
 components:
   schemas:
+    ApiVehicleSubscriberOutletResource:
+      type: object
+      properties:
+        OutletGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AbbreviatedDescription:
+          type: string
+        IsStoreTareAllowed:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          format: int32
+          type: integer
+    ApiVehicleCarrierResource:
+      type: object
+      properties:
+        SupplierSiteGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        SupplierSite:
+          type: string
+        WasteCarrierLicense:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
     ApiResourceResultCollection_ApiValidateVehicleResource:
       type: object
       properties:
@@ -129,70 +165,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          format: int32
-          type: integer
-        isSuccess:
-          type: boolean
-    ApiValidateVehicleResource:
-      type: object
-      properties:
-        SubscriberGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Registration:
-          type: string
-        RFID:
-          type: string
-        IsDriverRequired:
-          type: boolean
-        DriverNameRegex:
-          type: string
-        Vehicles:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiVehicleResource'
-        GUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    ApiVehicleCarrierResource:
-      type: object
-      properties:
-        SupplierSiteGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        SupplierSite:
-          type: string
-        WasteCarrierLicense:
-          type: string
-    ApiVehicleSubscriberOutletResource:
-      type: object
-      properties:
-        OutletGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        AbbreviatedDescription:
-          type: string
-        IsStoreTareAllowed:
-          type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          format: int32
-          type: integer
     ApiVehicleResource:
       type: object
       properties:
@@ -232,3 +204,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiVehicleCarrierResource'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiValidateVehicleResource:
+      type: object
+      properties:
+        SubscriberGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Registration:
+          type: string
+        RFID:
+          type: string
+        IsDriverRequired:
+          type: boolean
+        DriverNameRegex:
+          type: string
+        Vehicles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleResource'
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000

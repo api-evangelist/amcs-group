@@ -88,15 +88,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSharedContainerResource'
 components:
   schemas:
-    ApiIntegratorAccessClusterMunicipalAccessPassResource:
-      type: object
-      properties:
-        MunicipalAccessPassGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        AccessPassTagId:
-          type: string
     ApiIntegratorAccessClusterContainerResource:
       type: object
       properties:
@@ -110,27 +101,6 @@ components:
           type: string
         AccessPassRequired:
           type: boolean
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollection_ApiIntegratorSharedContainerResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSharedContainerResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorSharedContainerResource:
       type: object
       properties:
@@ -163,10 +133,37 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorAccessClusterMasterAccessPassResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        MasterAccessPassGuid:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorSharedContainerResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSharedContainerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorAccessClusterMunicipalAccessPassResource:
+      type: object
+      properties:
+        MunicipalAccessPassGuid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -177,12 +174,15 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
+    ApiIntegratorAccessClusterMasterAccessPassResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        MasterAccessPassGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccessPassTagId:
+          type: string
     ApiIntegratorAccessClusterMunicipalAccountResource:
       type: object
       properties:

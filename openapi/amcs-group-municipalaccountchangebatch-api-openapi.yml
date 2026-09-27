@@ -106,6 +106,27 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorMunicipalAccountChangeBatchResource:
+      type: object
+      properties:
+        MunicipalAccountChanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountChangeResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -123,11 +144,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorMunicipalAccountChangeResource:
       type: object
       properties:
@@ -197,24 +213,8 @@ components:
         LastChangeReasonId:
           type: integer
           format: int32
-    ApiIntegratorMunicipalAccountChangeBatchResource:
+    ApiResourceErrors:
       type: object
       properties:
-        MunicipalAccountChanges:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountChangeResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string

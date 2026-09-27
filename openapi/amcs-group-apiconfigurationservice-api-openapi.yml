@@ -27,6 +27,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigurationResponse:
+      type: object
+      properties:
+        configurationValues:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigValue'
+      additionalProperties: false
     AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigValue:
       type: object
       properties:
@@ -38,14 +48,4 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigurationResponse:
-      type: object
-      properties:
-        configurationValues:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.ApiService.Configuration.DynamicAppConfig.ApiConfigValue'
       additionalProperties: false

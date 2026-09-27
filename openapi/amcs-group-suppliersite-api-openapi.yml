@@ -489,22 +489,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorListItemResource:
+    ApiResourceResultEntity_ApiIntegratorSupplierSiteResource:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSupplierSiteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorSupplierSiteBankDetailsResource:
       type: object
       properties:
@@ -524,67 +521,6 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         Address:
           $ref: '#/components/schemas/ApiIntegratorSupplierSiteBankDetailsAddressResource'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceChanges_ApiIntegratorSupplierSiteResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSupplierSiteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSupplierSiteSiteTypeResource:
-      type: object
-      properties:
-        SupplierTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiIntegratorSupplierSiteTreatmentResource:
-      type: object
-      properties:
-        TreatmentCode:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        MaterialClass:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Material:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        EWCCode:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDefault:
-          type: boolean
-        Guid:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity_ApiIntegratorSupplierSiteResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorSupplierSiteResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorSupplierSiteBankDetailsAddressResource:
       type: object
       properties:
@@ -602,6 +538,61 @@ components:
           type: string
         Postcode:
           type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorSupplierSiteSiteTypeResource:
+      type: object
+      properties:
+        SupplierTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -619,6 +610,23 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiIntegratorSupplierSiteTreatmentResource:
+      type: object
+      properties:
+        TreatmentCode:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialClass:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Material:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        EWCCode:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDefault:
+          type: boolean
+        Guid:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiIntegratorSupplierSiteResource:
       type: object
       properties:
@@ -632,16 +640,11 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
     ApiIntegratorSupplierSiteResource:
       type: object
       properties:
@@ -699,26 +702,23 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
+        until:
           type: string
-        associations:
+        cursor:
+          type: string
+    ApiResourceChanges_ApiIntegratorSupplierSiteResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ApiIntegratorSupplierSiteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

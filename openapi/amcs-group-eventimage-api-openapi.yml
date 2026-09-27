@@ -85,8 +85,8 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
+    Forbidden:
+      description: Forbidden - Access denied.
       content:
         application/json:
           schema:
@@ -94,7 +94,40 @@ components:
             properties:
               error:
                 type: string
-                example: Temporary issue with the server. Please try again later.
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
             additionalProperties: false
     ServiceUnavailable:
       description: Service Unavailable - The server is currently unavailable.
@@ -118,8 +151,8 @@ components:
                 type: string
                 example: Supplied properties are not valid, please try again with proper request.
             additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
       content:
         application/json:
           schema:
@@ -127,38 +160,5 @@ components:
             properties:
               error:
                 type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
+                example: Temporary issue with the server. Please try again later.
             additionalProperties: false

@@ -62,6 +62,23 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorExternalReferenceTypeResource'
 components:
   schemas:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorExternalReferenceTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsUnique:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -83,25 +100,8 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiIntegratorExternalReferenceTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsUnique:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000

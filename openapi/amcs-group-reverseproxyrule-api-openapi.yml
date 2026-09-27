@@ -238,17 +238,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        until:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type:
           - string
           - 'null'
-        cursor:
+        associations:
           type:
-          - string
+          - array
           - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false
     ApiResourceChanges_ReverseProxyRuleResource:
       type: object
@@ -277,62 +311,6 @@ components:
         isSuccess:
           type: boolean
       additionalProperties: false
-    ApiResourceResultEntity_ReverseProxyRuleResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
-    ApiResourceResultCollection_ReverseProxyRuleResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceResult_ReverseProxyRuleResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -356,17 +334,6 @@ components:
             items:
               type: object
               additionalProperties: {}
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
       additionalProperties: false
     AMCS.Core.Entity.ReverseProxyRuleEntity:
       type: object
@@ -426,38 +393,71 @@ components:
         isIgnoreProxy:
           type: boolean
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResource:
       type: object
       properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
-    ApiResourceResultEntityLinks:
+    ApiResourceResult_ReverseProxyRuleResource:
       type: object
       properties:
-        self:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+      additionalProperties: false
+    ApiResourceResultCollection_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
           type:
           - string
           - 'null'
-        associations:
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-        expand:
+        cursor:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
+      additionalProperties: false
+    ApiResourceResultEntity_ReverseProxyRuleResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.ReverseProxyRuleEntity'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false

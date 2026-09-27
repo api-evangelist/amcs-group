@@ -111,7 +111,7 @@ paths:
         | AreaOfOrigin[].AreaOfOrigin | The description of the AreaOfOrigin |
 
         | AreaOfOrigin[].AreaOfOriginShortCode | The shortcode of the AreaOfOrigin |'
-      operationId: AreaOfOrigin_Get
+      operationId: getIntegratorAreaOfOriginsById
       parameters:
       - name: id
         in: path
@@ -146,19 +146,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource'
+      x-operation-id-source: normalized
+      x-operation-id-original: AreaOfOrigin_Get
     servers:
     - url: http://{env}-svc-core.amcsplatform.com/scale/api/
 components:
   schemas:
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiIntegratorAreaOfOriginResource:
       type: object
       properties:
@@ -185,49 +178,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
@@ -251,17 +201,58 @@ components:
           type: array
           items:
             type: string
-    ApiSubscriberAreaOfOriginResource:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        SubscriberGUID:
-          format: uuid
+        Description:
           type: string
+        Guid:
+          type: string
+          format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        AreaOfOrigin:
+    ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            $ref: '#/components/schemas/SubscriberAreaOfOriginResource'
+            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource:
       type: object
       properties:
@@ -286,6 +277,17 @@ components:
           type: string
         AreaOfOriginShortCode:
           type: string
+    ApiSubscriberAreaOfOriginResource:
+      type: object
+      properties:
+        SubscriberGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriberAreaOfOriginResource'
 x-refined-from:
 - amcs-group-erp-openapi-original.json
 - amcs-group-scale-openapi-original.json

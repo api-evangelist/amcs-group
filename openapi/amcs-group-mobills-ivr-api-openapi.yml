@@ -275,200 +275,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AMCSPayErrorResponse:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The exception message.
-        type:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The type of exception thrown.
-        stackTrace:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The stack trace of the error encountered.
-    AMCSPayAccountDetailIvrResponseCreditBalanceResponse:
-      type: object
-      properties:
-        customerid:
-          format: string
-          type: string
-          example: ACC1001
-        customerName:
-          type: string
-          example: Mark Smith
-        creditBalance:
-          type:
-          - integer
-          - 'null'
-          example: '200.00'
-    AMCSPayAccountDetailIvrRequest:
-      type: object
-      required:
-      - customerARCode
-      - channel
-      - amount
-      properties:
-        customerARCode:
-          type: string
-          example: ACC1007
-        channel:
-          type: string
-          example: MOBILL / IVR
-        amount:
-          type:
-          - integer
-          - 'null'
-          example: 10
-        creditBalance:
-          type:
-          - boolean
-          - 'null'
-          example: true
-      additionalProperties: false
-    AMCSPayInvoiceDetails:
-      type: object
-      properties:
-        invoiceNumber:
-          type: string
-          example: INV001
-        invoiceGUID:
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-        invoiceDate:
-          type: string
-          example: YYYY-MM-DD
-        zipCode:
-          type:
-          - string
-          - 'null'
-          example: '00501'
-        invoiceDueDate:
-          type: string
-          example: YYYY-MM-DD
-        unallocatedAmount:
-          type:
-          - integer
-          - 'null'
-          example: '120.95'
-        invoiceCurrency:
-          type: string
-          example: EUR
-      additionalProperties: false
-    AMCSPayAccountDetailIvrResponse:
-      type: object
-      properties:
-        creditBalanceAsTrue:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceResponse'
-        creditBalanceAsFalse:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse'
-    AMCSPayMobillsIvrRequest:
-      type: object
-      required:
-      - customerARCode
-      - channel
-      - amount
-      properties:
-        customerARCode:
-          type: string
-          example: ACC1007
-        channel:
-          type: string
-          example: MOBILL / IVR
-      additionalProperties: false
-    AMCSPayPostBackIvrRequest:
-      type: object
-      required:
-      - transactionReference
-      - paymentAmount
-      - currency
-      - timestamp
-      - transactionPaymentType
-      - isIVR
-      - code
-      - description
-      - bin
-      - last4Digits
-      - paymentType
-      - holder
-      - expiryMonth
-      - expiryYear
-      - confirmationNumber
-      properties:
-        transactionReference:
-          type: string
-          format: uuid
-          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
-        paymentAmount:
-          type: integer
-          example: 10.2
-        currency:
-          type: string
-          example: EUR
-        timestamp:
-          type: string
-          format: datetime
-          example: 2021-10-21-17:20:30
-        transactionPaymentType:
-          type: string
-          example: Credit Card
-        isIVR:
-          type: boolean
-          example: 'true'
-        code:
-          type: string
-          example: 000.100.112
-        description:
-          type: string
-          example: Request successfully processed in 'Merchant In Connect
-        bin:
-          type: string
-          example: '545454'
-        last4Digits:
-          type: string
-          example: '5454'
-        paymentType:
-          type: string
-          example: DB
-        holder:
-          type: string
-          example: SK_Test
-        expiryMonth:
-          type: string
-          example: '06'
-        expiryYear:
-          type: string
-          example: '2034'
-        confirmationNumber:
-          type: string
-          format: uuid
-          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
-      additionalProperties: false
-    AMCSPayIvrResponse:
-      type: object
-      example: Success
-    AMCSPayErrorContentResponse:
-      type:
-      - string
-      - 'null'
     AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse:
       type: object
       properties:
@@ -517,6 +323,20 @@ components:
           - 'null'
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    AMCSPayMobillsIvrRequest:
+      type: object
+      required:
+      - customerARCode
+      - channel
+      - amount
+      properties:
+        customerARCode:
+          type: string
+          example: ACC1007
+        channel:
+          type: string
+          example: MOBILL / IVR
+      additionalProperties: false
     AMCSPayMobillsIvrResponse:
       type: object
       properties:
@@ -587,6 +407,186 @@ components:
           - string
           - 'null'
           example: 00000000-0000-0000-0000-000000000000
+    AMCSPayAccountDetailIvrRequest:
+      type: object
+      required:
+      - customerARCode
+      - channel
+      - amount
+      properties:
+        customerARCode:
+          type: string
+          example: ACC1007
+        channel:
+          type: string
+          example: MOBILL / IVR
+        amount:
+          type:
+          - integer
+          - 'null'
+          example: 10
+        creditBalance:
+          type:
+          - boolean
+          - 'null'
+          example: true
+      additionalProperties: false
+    AMCSPayErrorContentResponse:
+      type:
+      - string
+      - 'null'
+    AMCSPayErrorResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The exception message.
+        type:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The type of exception thrown.
+        stackTrace:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The stack trace of the error encountered.
+    AMCSPayIvrResponse:
+      type: object
+      example: Success
+    AMCSPayPostBackIvrRequest:
+      type: object
+      required:
+      - transactionReference
+      - paymentAmount
+      - currency
+      - timestamp
+      - transactionPaymentType
+      - isIVR
+      - code
+      - description
+      - bin
+      - last4Digits
+      - paymentType
+      - holder
+      - expiryMonth
+      - expiryYear
+      - confirmationNumber
+      properties:
+        transactionReference:
+          type: string
+          format: uuid
+          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
+        paymentAmount:
+          type: integer
+          example: 10.2
+        currency:
+          type: string
+          example: EUR
+        timestamp:
+          type: string
+          format: datetime
+          example: 2021-10-21-17:20:30
+        transactionPaymentType:
+          type: string
+          example: Credit Card
+        isIVR:
+          type: boolean
+          example: 'true'
+        code:
+          type: string
+          example: 000.100.112
+        description:
+          type: string
+          example: Request successfully processed in 'Merchant In Connect
+        bin:
+          type: string
+          example: '545454'
+        last4Digits:
+          type: string
+          example: '5454'
+        paymentType:
+          type: string
+          example: DB
+        holder:
+          type: string
+          example: SK_Test
+        expiryMonth:
+          type: string
+          example: '06'
+        expiryYear:
+          type: string
+          example: '2034'
+        confirmationNumber:
+          type: string
+          format: uuid
+          example: c4521490-c0dd-40e5-94c6-afe90073aa1b
+      additionalProperties: false
+    AMCSPayAccountDetailIvrResponse:
+      type: object
+      properties:
+        creditBalanceAsTrue:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceResponse'
+        creditBalanceAsFalse:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse'
+    AMCSPayAccountDetailIvrResponseCreditBalanceResponse:
+      type: object
+      properties:
+        customerid:
+          format: string
+          type: string
+          example: ACC1001
+        customerName:
+          type: string
+          example: Mark Smith
+        creditBalance:
+          type:
+          - integer
+          - 'null'
+          example: '200.00'
+    AMCSPayInvoiceDetails:
+      type: object
+      properties:
+        invoiceNumber:
+          type: string
+          example: INV001
+        invoiceGUID:
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        invoiceDate:
+          type: string
+          example: YYYY-MM-DD
+        zipCode:
+          type:
+          - string
+          - 'null'
+          example: '00501'
+        invoiceDueDate:
+          type: string
+          example: YYYY-MM-DD
+        unallocatedAmount:
+          type:
+          - integer
+          - 'null'
+          example: '120.95'
+        invoiceCurrency:
+          type: string
+          example: EUR
+      additionalProperties: false
   securitySchemes:
     cookieAuth:
       type: apiKey

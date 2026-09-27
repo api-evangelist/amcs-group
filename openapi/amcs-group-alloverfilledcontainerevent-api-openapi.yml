@@ -132,6 +132,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
+      additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem:
       type: object
       properties:
@@ -262,33 +268,6 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-        since:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
     ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource:
       type: object
       properties:
@@ -305,16 +284,37 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
     ApiResourceErrors:
       type: object
       properties:
         errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+        since:
           type:
           - string
           - 'null'

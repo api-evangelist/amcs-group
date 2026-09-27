@@ -73,6 +73,38 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobMaterialsResource'
 components:
   schemas:
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiMaterialResource:
+      type: object
+      properties:
+        MaterialGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Material:
+          type: string
+        ShortCode:
+          type: string
+        AnalysisCode:
+          type: string
+        EWCCode:
+          type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -111,43 +143,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiMaterialResource:
-      type: object
-      properties:
-        MaterialGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Material:
-          type: string
-        ShortCode:
-          type: string
-        AnalysisCode:
-          type: string
-        EWCCode:
-          type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiJobMaterialsResource:
       type: object
       properties:
@@ -159,3 +154,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiMaterialResource'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string

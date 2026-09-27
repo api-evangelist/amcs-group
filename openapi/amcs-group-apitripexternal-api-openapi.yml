@@ -178,6 +178,17 @@ components:
           type: number
           format: double
           description: Total trip duration in minutes. Unit of Measure - Minutes
+    TripChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiTripExternalDto'
+        Extra:
+          type:
+          - object
+          - 'null'
     ApiTripExternalDto:
       type: object
       properties:
@@ -213,14 +224,3 @@ components:
         TripSummary:
           $ref: '#/components/schemas/ApiTripSummary'
           description: Calculated trip summary with metrics.
-    TripChangesResponse:
-      type: object
-      properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiTripExternalDto'
-        Extra:
-          type:
-          - object
-          - 'null'

@@ -55,6 +55,17 @@ components:
       properties:
         Next:
           type: string
+    GpsDataPointChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
+        Extra:
+          $ref: '#/components/schemas/GpsDataPointChangesExtra'
+        Links:
+          $ref: '#/components/schemas/GpsDataPointChangesLink'
     GpsDataPointChangeResourceDto:
       type: object
       properties:
@@ -89,14 +100,3 @@ components:
         TenantId:
           type: string
           format: uuid
-    GpsDataPointChangesResponse:
-      type: object
-      properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
-        Extra:
-          $ref: '#/components/schemas/GpsDataPointChangesExtra'
-        Links:
-          $ref: '#/components/schemas/GpsDataPointChangesLink'

@@ -203,41 +203,57 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorListItemResource:
+    ApiResourceResultEntity_ApiIntegratorSiteResource:
       type: object
       properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSiteContactMethodsResource:
+      type: object
+      properties:
+        Email:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorSiteResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorSiteAreaResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
         Description:
           type: string
-        Guid:
+        RelatedLocationGuid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCustomerSiteHealthAndSafetyBlobHashesResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Hash:
-          type: string
-        DocumentName:
-          type: string
-        DocumentReference:
-          type: string
-        HealthAndSafetyDocumentTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ValidFrom:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        ValidUntil:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        IsHighRisk:
-          type: boolean
-        IsSentToVehicle:
+        IsDeleted:
           type: boolean
     ApiIntegratorSiteResource:
       type: object
@@ -371,21 +387,25 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
+    ApiResourceId:
       type: object
       properties:
-        until:
+        resource:
           type: string
-        cursor:
-          type: string
-    ApiResourceStatus:
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorSiteTradingNameResource:
       type: object
       properties:
@@ -399,70 +419,31 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         Description:
           type: string
-    ApiResourceResultCollection_ApiIntegratorSiteResource:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        resource:
+        self:
+          type: string
+        associations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorSiteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges_ApiIntegratorSiteResource:
-      type: object
-      properties:
-        resource:
+            type: string
+        expand:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorSiteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSiteAreaResource:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
       type: object
       properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Description:
-          type: string
-        RelatedLocationGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
           type: boolean
-    ApiResourceResultEntity_ApiIntegratorSiteResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorSiteResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSiteContactMethodsResource:
-      type: object
-      properties:
-        Email:
-          type: string
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -480,23 +461,25 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorDocumentDeliveryMethodsResource:
       type: object
       properties:
         DocumentDeliveryType:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceId:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceChanges_ApiIntegratorSiteResource:
       type: object
       properties:
         resource:
-          type: string
-          format: uuid
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSiteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -526,20 +509,37 @@ components:
             TimeZone: Europe/London
         DayOfWeekListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceResultEntityLinks:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        self:
+        until:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        cursor:
+          type: string
+    ApiIntegratorCustomerSiteHealthAndSafetyBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Hash:
+          type: string
+        DocumentName:
+          type: string
+        DocumentReference:
+          type: string
+        HealthAndSafetyDocumentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ValidFrom:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        ValidUntil:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsHighRisk:
+          type: boolean
+        IsSentToVehicle:
+          type: boolean

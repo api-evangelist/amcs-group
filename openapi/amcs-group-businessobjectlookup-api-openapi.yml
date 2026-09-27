@@ -174,48 +174,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultEntity_ApiUdfBusinessObjectLookupResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
-    ApiResourceResultCollection_ApiUdfBusinessObjectLookupResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup:
       type: object
       properties:
@@ -255,17 +213,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
     ApiResourceResult_ApiUdfBusinessObjectLookupResource:
       type: object
       properties:
@@ -275,38 +222,6 @@ components:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
           $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - object
-            - 'null'
-            additionalProperties: {}
-        include:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - array
-            - 'null'
-            items:
-              type: object
-              additionalProperties: {}
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
@@ -343,6 +258,31 @@ components:
           items:
             type: string
       additionalProperties: false
+    ApiResourceResultEntity_ApiUdfBusinessObjectLookupResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
     ApiResourceChanges_ApiUdfBusinessObjectLookupResource:
       type: object
       properties:
@@ -358,4 +298,64 @@ components:
             $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiUdfBusinessObjectLookupResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfBusinessObjectLookup'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false

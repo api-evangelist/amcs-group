@@ -99,7 +99,7 @@ paths:
         | GUID | The GUID associated to the weighing type |
 
         | Description | The description of the weighing type |'
-      operationId: WeighingType_Get
+      operationId: getIntegratorListsWeighingTypesById
       parameters:
       - name: id
         in: path
@@ -134,6 +134,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceResultEntity_ApiWeighingTypeResource'
+      x-operation-id-source: normalized
+      x-operation-id-original: WeighingType_Get
     servers:
     - url: http://{env}-svc-core.amcsplatform.com/scale/api/
   /integrator/lists/weighingTypes:
@@ -148,7 +150,7 @@ paths:
         | GUID | The GUID associated to the weighing type |
 
         | Description | The description of the weighing type |'
-      operationId: WeighingType_GetCollection
+      operationId: getIntegratorListsWeighingTypes
       parameters:
       - name: filter
         in: query
@@ -204,75 +206,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiWeighingTypeResource'
+      x-operation-id-source: normalized
+      x-operation-id-original: WeighingType_GetCollection
     servers:
     - url: http://{env}-svc-core.amcsplatform.com/scale/api/
 components:
   schemas:
-    ApiResourceResultEntity_ApiIntegratorWeighingTypeResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorWeighingTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorWeighingTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
@@ -296,6 +235,80 @@ components:
           type: array
           items:
             type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorWeighingTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorWeighingTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiWeighingTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiWeighingTypeResource:
       type: object
       properties:
@@ -322,15 +335,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiWeighingTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
 x-refined-from:
 - amcs-group-erp-openapi-original.json
 - amcs-group-scale-openapi-original.json

@@ -125,6 +125,68 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorUnitOfMeasurementResource'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorUnitOfMeasurementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorUnitOfMeasurementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorUnitOfMeasurementResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Code:
+          type: string
+        PricingBasisListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ShortName:
+          type: string
+        IsBaseUnitOfMeasurement:
+          type: boolean
+        IsReportingUnitOfMeasurement:
+          type: boolean
+        IsDefault:
+          type: boolean
+        ConversionFactor:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -155,45 +217,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiIntegratorUnitOfMeasurementResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Code:
-          type: string
-        PricingBasisListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ShortName:
-          type: string
-        IsBaseUnitOfMeasurement:
-          type: boolean
-        IsReportingUnitOfMeasurement:
-          type: boolean
-        IsDefault:
-          type: boolean
-        ConversionFactor:
-          type: number
-          format: double
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorUnitOfMeasurementResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorUnitOfMeasurementResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -216,26 +239,3 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

@@ -561,15 +561,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorLocationGeoLocationResource:
-      type: object
-      properties:
-        Lat:
-          type: number
-          format: double
-        Long:
-          type: number
-          format: double
     ApiIntegratorOrderRouteAssignmentExclusionResource:
       type: object
       properties:
@@ -591,134 +582,12 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         Notes:
           type: string
-    ApiResourceResultCollection_ApiIntegratorOrderResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorOrderResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorOrderRouteAssignmentResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PickupIntervalListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DayOfWeekListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DayOfOccurrenceInMonthListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Position:
+        count:
           type: integer
           format: int32
-        StartDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        EndDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        RequestedBy:
-          type: string
-        Notes:
-          type: string
-        MaxLiftQuantity:
-          type: integer
-          format: int32
-        MinLiftQuantity:
-          type: integer
-          format: int32
-        RequiresQuantity:
-          type: boolean
-        IsGpsAutoMatchingDisabled:
-          type: boolean
-        IsNoPlannedDate:
-          type: boolean
-        IsNoBinOnSiteExcluded:
-          type: boolean
-        RelatedRouteTemplateGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteAreaGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        Exclusions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorOrderRouteAssignmentExclusionResource'
-    ApiIntegratorOrderItemRentalResource:
-      type: object
-      properties:
-        RelatedPriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedPriceModifierGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedCostGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        StartDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        EndDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        IsStartOnStartOfCycle:
-          type: boolean
-        IsEndOnEndOfCycle:
-          type: boolean
-        Quantity:
-          type: integer
-          format: int32
-        Notes:
-          type: string
-        IsArrears:
-          type: boolean
-        RentalQuantityAttributeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsBinOnSiteBasedOnQuantityNow:
-          type: boolean
-        IsDiscount:
-          type: boolean
-        IsDeleted:
-          type: boolean
-        DiscountOverridePrice:
-          type: number
-          format: double
-        DiscountReasonListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -736,131 +605,6 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceChanges_ApiIntegratorOrderResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorOrderResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorOrderRouteCalloutRequestResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        OutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DateRequired:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        Notes:
-          type: string
-        RelatedRouteVisitGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RequestedBy:
-          type: string
-        MaxLiftQuantity:
-          type: integer
-          format: int32
-        IsDeleted:
-          type: boolean
-    ApiIntegratorOrderContainerResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerStateListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Notes:
-          type: string
-        IsDeleted:
-          type: boolean
-        IsContainerAssignedWithoutJob:
-          type: boolean
-        IsFromIncreasedOrder:
-          type: boolean
-        IsContainerRemovedWithoutJob:
-          type: boolean
-        IsFixLocation:
-          type: boolean
-        Geo:
-          $ref: '#/components/schemas/ApiIntegratorSiteOrderItemLocationGeoResource'
-        StartDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        EndDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        DateLinked:
-          type: string
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiIntegratorOrderResource:
       type: object
       properties:
@@ -1030,6 +774,100 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceChanges_ApiIntegratorOrderResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorOrderContainerResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerStateListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        IsDeleted:
+          type: boolean
+        IsContainerAssignedWithoutJob:
+          type: boolean
+        IsFromIncreasedOrder:
+          type: boolean
+        IsContainerRemovedWithoutJob:
+          type: boolean
+        IsFixLocation:
+          type: boolean
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorSiteOrderItemLocationGeoResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        DateLinked:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+    ApiResourceResultCollection_ApiIntegratorOrderResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorSiteOrderItemLocationGeoResource:
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultEntity_ApiIntegratorOrderResource:
       type: object
       properties:
@@ -1043,6 +881,139 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorOrderRouteCalloutRequestResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateRequired:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Notes:
+          type: string
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RequestedBy:
+          type: string
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorOrderRouteAssignmentResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PickupIntervalListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfWeekListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DayOfOccurrenceInMonthListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Position:
+          type: integer
+          format: int32
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RequestedBy:
+          type: string
+        Notes:
+          type: string
+        MaxLiftQuantity:
+          type: integer
+          format: int32
+        MinLiftQuantity:
+          type: integer
+          format: int32
+        RequiresQuantity:
+          type: boolean
+        IsGpsAutoMatchingDisabled:
+          type: boolean
+        IsNoPlannedDate:
+          type: boolean
+        IsNoBinOnSiteExcluded:
+          type: boolean
+        RelatedRouteTemplateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteAreaGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Exclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorOrderRouteAssignmentExclusionResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorLocationGeoLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
     ApiIntegratorOrderStandingJobResource:
       type: object
       properties:
@@ -1090,29 +1061,58 @@ components:
           type: string
         IsDeleted:
           type: boolean
-    ApiResourceErrors:
+    ApiIntegratorOrderItemRentalResource:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
+        RelatedPriceGuid:
           type: string
           format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSiteOrderItemLocationGeoResource:
-      type: object
-      properties:
-        Location:
-          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPriceModifierGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCostGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsStartOnStartOfCycle:
+          type: boolean
+        IsEndOnEndOfCycle:
+          type: boolean
+        Quantity:
           type: integer
           format: int32
+        Notes:
+          type: string
+        IsArrears:
+          type: boolean
+        RentalQuantityAttributeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsBinOnSiteBasedOnQuantityNow:
+          type: boolean
+        IsDiscount:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        DiscountOverridePrice:
+          type: number
+          format: double
+        DiscountReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

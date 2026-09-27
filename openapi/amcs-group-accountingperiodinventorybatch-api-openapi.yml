@@ -66,25 +66,22 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorListItemResource:
       type: object
       properties:
         Description:
           type: string
         Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorAccountingPeriodInventoryBatchResource:
-      type: object
-      properties:
-        AccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        AccountingPeriodInventories:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryResource'
-        GUID:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -101,16 +98,6 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorAccountingPeriodInventoryResource:
       type: object
       properties:
@@ -179,3 +166,16 @@ components:
         LastChangeReasonId:
           type: integer
           format: int32
+    ApiIntegratorAccountingPeriodInventoryBatchResource:
+      type: object
+      properties:
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        AccountingPeriodInventories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountingPeriodInventoryResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
