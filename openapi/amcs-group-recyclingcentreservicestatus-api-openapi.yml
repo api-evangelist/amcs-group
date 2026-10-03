@@ -55,6 +55,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRecyclingCentreServiceStatusResource'
 components:
   schemas:
+    ApiIntegratorRecyclingCentreServiceStatusResource:
+      type: object
+      properties:
+        AccessPassId:
+          type: string
+        FunctionalID:
+          type: string
+        IsOrderActive:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiIntegratorRecyclingCentreServiceStatusResource:
       type: object
       properties:
@@ -74,6 +87,11 @@ components:
         count:
           type: integer
           format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -82,21 +100,3 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorRecyclingCentreServiceStatusResource:
-      type: object
-      properties:
-        AccessPassId:
-          type: string
-        FunctionalID:
-          type: string
-        IsOrderActive:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000

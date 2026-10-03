@@ -97,50 +97,17 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorLodgementTypeResource'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
+    ApiIntegratorLodgementTypeResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
+        Description:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultEntity_ApiIntegratorLodgementTypeResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorLodgementTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
+        IsDeleted:
           type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -158,11 +125,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultCollection_ApiIntegratorLodgementTypeResource:
       type: object
       properties:
@@ -176,14 +138,52 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorLodgementTypeResource:
+    ApiResourceResultEntity_ApiIntegratorLodgementTypeResource:
       type: object
       properties:
-        Description:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorLodgementTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
           type: string
-        IsDeleted:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
           type: boolean
-        GUID:
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

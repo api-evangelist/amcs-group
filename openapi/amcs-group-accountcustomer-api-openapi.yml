@@ -171,6 +171,36 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiIntegratorDocumentDeliveryMethodsResource:
+      type: object
+      properties:
+        DocumentDeliveryType:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorAccountCustomerPaymentProviderSettingsResource:
+      type: object
+      properties:
+        Name:
+          type: string
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Value:
+          type: string
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorAccountCustomerBalanceResource:
       type: object
       properties:
@@ -186,6 +216,19 @@ components:
         LedgerBalance:
           type: number
           format: double
+    ApiResourceResultCollection_ApiIntegratorAccountCustomerResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorAccountCustomerExternalVehicleResource:
       type: object
       properties:
@@ -211,6 +254,295 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerReportBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DocumentDescription:
+          type: string
+        DocumentName:
+          type: string
+        Hash:
+          type: string
+        IsForAllSites:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+        RelatedExcludedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+    ApiIntegratorAccountCustomerCreditCardsResource:
+      type: object
+      properties:
+        Forename:
+          type: string
+        Surname:
+          type: string
+        Postcode:
+          type: string
+        Province:
+          type: string
+        DateCreated:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        MaskedCreditCardNumber:
+          type: string
+        Address1:
+          type: string
+        City:
+          type: string
+        RelatedContactGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Country:
+          type: string
+        CreditCardExpiryDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Currency:
+          type: string
+        ExternalVaultCardReference:
+          type: string
+        ExternalVaultReference:
+          type: string
+        IsACH:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        IsRequestWithImmediateResponse:
+          type: boolean
+        PayerReference:
+          type: string
+        PaymentPointListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentReference:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PaymentTypeId:
+          type: integer
+          format: int32
+    ApiIntegratorAccountCustomerTradingNamesResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        TradingNameTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        IsForAllSites:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultEntity_ApiIntegratorAccountCustomerResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorAccountCustomerBankDetailsAddressResource:
+      type: object
+      properties:
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiIntegratorAccountCustomerContractResource:
+      type: object
+      properties:
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        CreditLimit:
+          type: number
+          format: double
+        BalanceMigrated:
+          type: number
+          format: double
+        VATExemptNumber:
+          type: string
+        VATExemptionExpiryDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        VATRegistrationNumber:
+          type: string
+        ApprovedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsInvoiceCollated:
+          type: boolean
+        RollUpInvoiceBySite:
+          type: boolean
+        RollUpInvoiceByService:
+          type: boolean
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContractStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceFrequencyTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        InvoiceDocumentDeliveryMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryMethodsResource'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAutoArAccountCodeResource:
+      type: object
+      properties:
+        CompanyOutletGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountCustomerBankDetailsResource:
+      type: object
+      properties:
+        BankName:
+          type: string
+        AccountName:
+          type: string
+        AccountNo:
+          type: string
+        SortCode:
+          type: string
+        BIC:
+          type: string
+        IBAN:
+          type: string
+        NationalBankCode:
+          type: string
+        DirectDebitRunConfigListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DirectDebitAccountTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorAccountCustomerBankDetailsAddressResource'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorCustomerStateChangeRequestResource:
+      type: object
+      properties:
+        EffectiveDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerStateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedChangeReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerBlobHashesResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorAccountCustomerResource:
       type: object
       properties:
@@ -354,224 +686,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorAccountCustomerContractResource:
-      type: object
-      properties:
-        StartDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        CreditLimit:
-          type: number
-          format: double
-        BalanceMigrated:
-          type: number
-          format: double
-        VATExemptNumber:
-          type: string
-        VATExemptionExpiryDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        VATRegistrationNumber:
-          type: string
-        ApprovedDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        IsInvoiceCollated:
-          type: boolean
-        RollUpInvoiceBySite:
-          type: boolean
-        RollUpInvoiceByService:
-          type: boolean
-        InvoiceCycleListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DepartmentListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContractStatusListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PaymentTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PaymentTermListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        InvoiceFrequencyTermListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        InvoiceDocumentDeliveryMethods:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorDocumentDeliveryMethodsResource'
-    ApiIntegratorCustomerReportBlobHashesResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        DocumentDescription:
-          type: string
-        DocumentName:
-          type: string
-        Hash:
-          type: string
-        IsForAllSites:
-          type: boolean
-        RelatedSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
-        RelatedExcludedSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
-    ApiIntegratorAccountCustomerBankDetailsResource:
-      type: object
-      properties:
-        BankName:
-          type: string
-        AccountName:
-          type: string
-        AccountNo:
-          type: string
-        SortCode:
-          type: string
-        BIC:
-          type: string
-        IBAN:
-          type: string
-        NationalBankCode:
-          type: string
-        DirectDebitRunConfigListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DirectDebitAccountTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Address:
-          $ref: '#/components/schemas/ApiIntegratorAccountCustomerBankDetailsAddressResource'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiIntegratorAccountCustomerBankDetailsAddressResource:
-      type: object
-      properties:
-        Address1:
-          type: string
-        Address2:
-          type: string
-        Address3:
-          type: string
-        Address4:
-          type: string
-        Address5:
-          type: string
-        Postcode:
-          type: string
-    ApiResourceResultEntity_ApiIntegratorAccountCustomerResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorAccountCustomerBusinessTypeOptionResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        BusinessTypeOptionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceResultCollection_ApiIntegratorAccountCustomerResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccountCustomerResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCustomerReportRelatedSiteResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCustomerStateChangeRequestResource:
-      type: object
-      properties:
-        EffectiveDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        RelatedCustomerStateGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedChangeReasonGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorDocumentDeliveryMethodsResource:
-      type: object
-      properties:
-        DocumentDeliveryType:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiResourceChanges_ApiIntegratorAccountCustomerResource:
       type: object
       properties:
@@ -585,142 +699,28 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorAccountCustomerPaymentProviderSettingsResource:
-      type: object
-      properties:
-        Name:
-          type: string
-        PaymentProviderListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Value:
-          type: string
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiIntegratorAccountCustomerCreditCardsResource:
+    ApiIntegratorCustomerReportRelatedSiteResource:
       type: object
       properties:
-        Forename:
-          type: string
-        Surname:
-          type: string
-        Postcode:
-          type: string
-        Province:
-          type: string
-        DateCreated:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        MaskedCreditCardNumber:
-          type: string
-        Address1:
-          type: string
-        City:
-          type: string
-        RelatedContactGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Country:
-          type: string
-        CreditCardExpiryDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        Currency:
-          type: string
-        ExternalVaultCardReference:
-          type: string
-        ExternalVaultReference:
-          type: string
-        IsACH:
-          type: boolean
-        IsDeleted:
-          type: boolean
-        IsRequestWithImmediateResponse:
-          type: boolean
-        PayerReference:
-          type: string
-        PaymentPointListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PaymentProviderListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PaymentReference:
-          type: string
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        PaymentTypeId:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAccountCustomerBusinessTypeOptionResource:
       type: object
       properties:
-        Description:
-          type: string
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorAutoArAccountCodeResource:
-      type: object
-      properties:
-        CompanyOutletGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorAccountCustomerTradingNamesResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        TradingNameTypeListItem:
+        BusinessTypeOptionListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
-        IsForAllSites:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiIntegratorCustomerBlobHashesResource:
-      type: object
-      properties:
-        Hash:
-          type: string

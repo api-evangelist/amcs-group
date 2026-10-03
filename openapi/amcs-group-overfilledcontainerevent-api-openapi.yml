@@ -151,118 +151,7 @@ paths:
         '504':
           $ref: '#/components/responses/GatewayTimeout'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
   schemas:
-    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternal:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
-      additionalProperties: false
-    ApiResourceChanges_ApiOverfilledContainerEventExternalResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternal'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem:
       type: object
       properties:
@@ -393,25 +282,6 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -428,3 +298,133 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
+      additionalProperties: false
+    ApiResourceChanges_ApiOverfilledContainerEventExternalResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternal'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+  responses:
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false

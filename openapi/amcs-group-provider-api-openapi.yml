@@ -59,6 +59,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     AMCS.Data.Entity.Workflow.ApiWorkflowProvider:
       type: object
       properties:
@@ -131,15 +148,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
     ApiResourceStatus:
       type: object
       properties:
@@ -150,12 +158,4 @@ components:
           format: int32
         isSuccess:
           type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
       additionalProperties: false

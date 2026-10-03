@@ -136,37 +136,6 @@ paths:
     - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -184,6 +153,19 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultCollection_ApiIntegratorSystemConfigurationResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntity_ApiIntegratorSystemConfigurationResource:
       type: object
       properties:
@@ -202,19 +184,12 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollection_ApiIntegratorSystemConfigurationResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSystemConfigurationResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        count:
+          type: integer
+          format: int32
     ApiIntegratorSystemConfigurationResource:
       type: object
       properties:
@@ -232,6 +207,31 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
 x-refined-from:
 - amcs-group-core-openapi-original.json
 - amcs-group-erp-openapi-original.json

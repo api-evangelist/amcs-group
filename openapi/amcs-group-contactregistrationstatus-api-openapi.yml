@@ -93,29 +93,34 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContactRegistrationStatusResource'
 components:
   schemas:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
+        errors:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiIntegratorContactRegistrationStatusResource:
       type: object
       properties:
@@ -125,6 +130,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorContactRegistrationStatusResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContactRegistrationStatusResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntity_ApiIntegratorContactRegistrationStatusResource:
       type: object
       properties:
@@ -146,38 +164,20 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollection_ApiIntegratorContactRegistrationStatusResource:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        resource:
+        self:
+          type: string
+        associations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorContactRegistrationStatusResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
+            type: string
         expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

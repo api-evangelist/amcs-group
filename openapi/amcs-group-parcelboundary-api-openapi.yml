@@ -97,29 +97,58 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorParcelBoundaryResource'
 components:
   schemas:
+    ApiIntegratorParcelBoundaryResource:
+      type: object
+      properties:
+        GeoJSON:
+          type: string
+        ParcelNo:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorParcelBoundaryResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorParcelBoundaryResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
+        errors:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiResourceResultEntity_ApiIntegratorParcelBoundaryResource:
       type: object
       properties:
@@ -141,49 +170,20 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
+        self:
           type: string
-    ApiResourceResultCollection_ApiIntegratorParcelBoundaryResource:
-      type: object
-      properties:
-        resource:
+        associations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorParcelBoundaryResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorParcelBoundaryResource:
-      type: object
-      properties:
-        GeoJSON:
-          type: string
-        ParcelNo:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

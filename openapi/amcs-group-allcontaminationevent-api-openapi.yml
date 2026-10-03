@@ -138,17 +138,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
     ApiResourceChanges_ApiAllContaminationEventExternalResource:
       type: object
       properties:
@@ -165,20 +154,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -191,6 +166,14 @@ components:
           - string
           - 'null'
         since:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
           type:
           - string
           - 'null'
@@ -351,4 +334,21 @@ components:
           - string
           - 'null'
           format: byte
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false

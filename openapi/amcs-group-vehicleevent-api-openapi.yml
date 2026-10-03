@@ -455,15 +455,29 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollection_ApiIntegratorVehicleEventResource:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          type: string
+          format: uuid
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -481,16 +495,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntity_ApiIntegratorVehicleEventResource:
       type: object
       properties:
@@ -504,46 +508,24 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        self:
+        until:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        cursor:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiIntegratorListItemResource:
+    ApiResourceErrors:
       type: object
       properties:
-        Description:
+        errors:
           type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiIntegratorVehicleEventResource:
       type: object
       properties:
@@ -612,28 +594,28 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityExtra:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
+        Description:
           type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorVehicleEventResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorLocationGeoLocationResource:
       type: object
       properties:
@@ -643,10 +625,28 @@ components:
         Long:
           type: number
           format: double
-    ApiResourceResultUpdatesExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        until:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
-        cursor:
-          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

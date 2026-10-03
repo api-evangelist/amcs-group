@@ -279,25 +279,23 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceChanges_ApiIntegratorVehicleEventGeoSummaryResource:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleEventGeoSummaryResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceId:
       type: object
       properties:
@@ -308,23 +306,19 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
+    ApiResourceResultEntity_ApiIntegratorVehicleEventGeoSummaryResource:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVehicleEventGeoSummaryResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -364,31 +358,17 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultCollection_ApiIntegratorVehicleEventGeoSummaryResource:
       type: object
       properties:
@@ -402,20 +382,40 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
-    ApiResourceResultEntity_ApiIntegratorVehicleEventGeoSummaryResource:
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceChanges_ApiIntegratorVehicleEventGeoSummaryResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorVehicleEventGeoSummaryResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventGeoSummaryResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:

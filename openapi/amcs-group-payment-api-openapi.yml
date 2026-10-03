@@ -171,10 +171,25 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorPaymentAllocationResource:
+    ApiIntegratorJobPaymentResource:
+      type: object
+      properties:
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorPaymentDeallocationResource:
       type: object
       properties:
         Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserDeallocatedByGuid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -187,12 +202,56 @@ components:
           example:
             DateTime: '2000-01-01'
             TimeZone: Europe/London
-        AccountingPeriodListItem:
+        DateDeallocated:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AllocationAccountingPeriodListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        RelatedInvoiceGuid:
+        DeallocationAccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorPaymentResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPaymentResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
           type: string
           format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceChanges_ApiIntegratorPaymentResource:
       type: object
       properties:
@@ -206,39 +265,75 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorPaymentTransactionResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        CardType:
+          type: string
+        MaskedCardNumber:
+          type: string
+        DateReceived:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        PaymentTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TransactionStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContactGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        PaymentReference:
+          type: string
+        Reference:
+          type: string
+        PaymentProvider:
+          type: string
+        ResultMessage:
+          type: string
+        Notes:
+          type: string
+        ResponseCode:
+          type: string
+        CurrencyCode:
+          type: string
+        Amount:
+          type: number
+          format: double
+        AmountRefundable:
+          type: number
+          format: double
+        PaymentProviderListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PaymentPointListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -363,97 +458,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultCollection_ApiIntegratorPaymentResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorPaymentResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorPaymentDeallocationResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedInvoiceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedUserDeallocatedByGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Amount:
-          type: number
-          format: double
-        DateInput:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        DateDeallocated:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        AllocationAccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DeallocationAccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorJobPaymentResource:
-      type: object
-      properties:
-        RelatedJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
     ApiResourceResultEntity_ApiIntegratorPaymentResource:
       type: object
       properties:
@@ -467,54 +471,50 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorPaymentTransactionResource:
+    ApiIntegratorPaymentAllocationResource:
       type: object
       properties:
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        CardType:
-          type: string
-        MaskedCardNumber:
-          type: string
-        DateReceived:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        PaymentTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        TransactionStatusListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ReasonListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContactGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        PaymentReference:
-          type: string
-        Reference:
-          type: string
-        PaymentProvider:
-          type: string
-        ResultMessage:
-          type: string
-        Notes:
-          type: string
-        ResponseCode:
-          type: string
-        CurrencyCode:
-          type: string
         Amount:
           type: number
           format: double
-        AmountRefundable:
-          type: number
-          format: double
-        PaymentProviderListItem:
+        DateInput:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccountingPeriodListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PaymentPointListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

@@ -169,6 +169,50 @@ components:
                 type: string
                 example: Temporary issue with the server. Please try again later.
             additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
     Forbidden:
       description: Forbidden - Access denied.
       content:
@@ -202,76 +246,7 @@ components:
                 type: string
                 example: The request timed out. Please try again later.
             additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
   schemas:
-    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -287,6 +262,30 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceChanges_ApiContaminationEventExternalResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem:
       type: object
@@ -445,19 +444,20 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    ApiResourceChanges_ApiContaminationEventExternalResource:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
+        id:
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
       additionalProperties: false

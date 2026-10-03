@@ -387,129 +387,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollection_ApiIntegratorCustomerResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorCustomerReportBlobHashesResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        DocumentDescription:
-          type: string
-        DocumentName:
-          type: string
-        Hash:
-          type: string
-        IsForAllSites:
-          type: boolean
-        RelatedSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
-        RelatedExcludedSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
-    ApiIntegratorAutoArAccountCodeResource:
-      type: object
-      properties:
-        CompanyOutletGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCustomerStateChangeRequestResource:
-      type: object
-      properties:
-        EffectiveDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        RelatedCustomerStateGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedChangeReasonGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCustomerReportRelatedSiteResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -527,23 +404,22 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceChanges_ApiIntegratorCustomerResource:
+    ApiResourceId:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          type: string
+          format: uuid
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        errors:
+        until:
+          type: string
+        cursor:
           type: string
     ApiIntegratorCustomerResource:
       type: object
@@ -606,13 +482,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
     ApiResourceResultEntity_ApiIntegratorCustomerResource:
       type: object
       properties:
@@ -626,8 +495,139 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCustomerReportRelatedSiteResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerStateChangeRequestResource:
+      type: object
+      properties:
+        EffectiveDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedCustomerStateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedChangeReasonGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCustomerReportBlobHashesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DocumentDescription:
+          type: string
+        DocumentName:
+          type: string
+        Hash:
+          type: string
+        IsForAllSites:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+        RelatedExcludedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerReportRelatedSiteResource'
+    ApiIntegratorAutoArAccountCodeResource:
+      type: object
+      properties:
+        CompanyOutletGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorCustomerResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorCustomerBlobHashesResource:
       type: object
       properties:
         Hash:
           type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorCustomerResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCustomerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

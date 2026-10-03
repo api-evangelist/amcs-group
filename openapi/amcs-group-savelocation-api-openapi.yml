@@ -244,32 +244,15 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorSaveLocationResource:
+    ApiIntegratorLocationGeoLocationResource:
       type: object
       properties:
-        Description:
-          type: string
-        Address:
-          $ref: '#/components/schemas/ApiIntegratorLocationAddressResource'
-        TimeZone:
-          type: string
-        LegalName:
-          type: string
-        Directions:
-          type: string
-        Geo:
-          $ref: '#/components/schemas/ApiIntegratorLocationGeoResource'
-        UniqueReference:
-          type: string
-        Acreage:
+        Lat:
           type: number
           format: double
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        Long:
+          type: number
+          format: double
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -279,14 +262,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiIntegratorLocationGeoResource:
       type: object
       properties:
@@ -307,22 +282,14 @@ components:
       properties:
         errors:
           type: string
-    ApiIntegratorLocationGeoLocationResource:
+    ApiResourceStatus:
       type: object
       properties:
-        Lat:
-          type: number
-          format: double
-        Long:
-          type: number
-          format: double
-    ApiIntegratorLocationAddressContactMethodsResource:
-      type: object
-      properties:
-        TelNo:
-          type: string
-        FaxNo:
-          type: string
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorLocationAddressResource:
       type: object
       properties:
@@ -354,3 +321,36 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         RegionCodeListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorSaveLocationResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorLocationAddressResource'
+        TimeZone:
+          type: string
+        LegalName:
+          type: string
+        Directions:
+          type: string
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoResource'
+        UniqueReference:
+          type: string
+        Acreage:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorLocationAddressContactMethodsResource:
+      type: object
+      properties:
+        TelNo:
+          type: string
+        FaxNo:
+          type: string

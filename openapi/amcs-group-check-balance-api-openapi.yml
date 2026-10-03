@@ -84,12 +84,30 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiCheckBalanceResource'
 components:
   schemas:
+    ApiCheckBalanceResource:
+      type: object
+      properties:
+        CreditBalanceCheck:
+          type: boolean
+        SiteOrderGuid:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           format: int32
           type: integer
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultCollection_ApiCheckBalanceResource:
       type: object
       properties:
@@ -111,21 +129,3 @@ components:
           type: integer
         isSuccess:
           type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiCheckBalanceResource:
-      type: object
-      properties:
-        CreditBalanceCheck:
-          type: boolean
-        SiteOrderGuid:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        GUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000

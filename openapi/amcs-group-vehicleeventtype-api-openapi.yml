@@ -97,38 +97,43 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorVehicleEventTypeResource'
 components:
   schemas:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntityLinks:
+    ApiResourceErrors:
       type: object
       properties:
-        self:
+        errors:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultCollection_ApiIntegratorVehicleEventTypeResource:
+    ApiResourceResultEntity_ApiIntegratorVehicleEventTypeResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleEventTypeResource'
+          $ref: '#/components/schemas/ApiIntegratorVehicleEventTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -152,38 +157,33 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity_ApiIntegratorVehicleEventTypeResource:
+    ApiResourceResultCollection_ApiIntegratorVehicleEventTypeResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorVehicleEventTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventTypeResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

@@ -125,6 +125,61 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
     Forbidden:
       description: Forbidden - Access denied.
       content:
@@ -158,61 +213,6 @@ components:
                 type: string
                 example: The request timed out. Please try again later.
             additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
   schemas:
     ApiResourceId:
       type: object
@@ -223,17 +223,6 @@ components:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
           type: guid
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
       additionalProperties: false
     ApiResourceErrors:
       type: object
@@ -303,4 +292,15 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false

@@ -457,69 +457,17 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
+    ApiIntegratorVehicleTrailerResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity_ApiIntegratorVehicleResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorVehicleResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        RelatedTrailerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -537,15 +485,12 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceChanges_ApiIntegratorVehicleResource:
+    ApiResourceId:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          type: string
+          format: uuid
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -563,19 +508,30 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorVehicleContainerTypeResource:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiIntegratorVehicleTrailerResource:
-      type: object
-      properties:
-        Guid:
+        until:
           type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedTrailerGuid:
+        cursor:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -637,15 +593,59 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
+    ApiResourceChanges_ApiIntegratorVehicleResource:
       type: object
       properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
-          type: string
-    ApiResourceResultUpdatesExtra:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorVehicleResource:
       type: object
       properties:
-        until:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVehicleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorVehicleContainerTypeResource:
+      type: object
+      properties:
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
           type: string
-        cursor:
-          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

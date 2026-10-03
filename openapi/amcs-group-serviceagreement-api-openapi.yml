@@ -136,288 +136,12 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorServiceAgreementPriceLatePaymentFeeDefinitionResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        CustomerCategoryListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        LatePaymentFeeTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DefaultActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        RelatedPriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        GraceDays:
-          type: integer
-          format: int32
-        FlatFeeAmount:
-          type: number
-          format: double
-        PercentageFeeDecimalAmount:
-          type: number
-          format: double
-        PercentageFeeAmount:
-          type: number
-          format: double
-        MinimumCharge:
-          type: number
-          format: double
-        MaximumCharge:
-          type: number
-          format: double
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorServiceAgreementRelatedOutletsResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        CompanyOutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsRelatedOutletDeleted:
-          type: boolean
-    ApiIntegratorServiceAgreementPriceAmountResource:
-      type: object
-      properties:
-        Price:
-          type: number
-          format: double
-        Offset:
-          type: number
-          format: double
-        Percentage:
-          type: number
-          format: double
-        FloorPrice:
-          type: number
-          format: double
-        CeilingPrice:
-          type: number
-          format: double
-        MinimumCharge:
-          type: number
-          format: double
-        MaximumCharge:
-          type: number
-          format: double
-        Allowance:
-          type: number
-          format: float
-        VatListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        EffectiveFrom:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        EffectiveTo:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        TaxTemplateCollectionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsRebate:
-          type: boolean
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiIntegratorServiceAgreementOrderCombinationGroupsResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        InvoiceCycleListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsConcessionary:
-          type: boolean
-        IsRequiresPrePay:
-          type: boolean
-        ForceFullPayment:
-          type: boolean
-        RelatedContractTermLengthGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        UseOutletLevelPricing:
-          type: boolean
-        Name:
-          type: string
-        IsOutletLevelPricingUsed:
-          type: boolean
-        AnnualContractCost:
-          type: number
-          format: double
-        AnnualContractValue:
-          type: number
-          format: double
-        BillingUsagePolicyGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsUseReducedRateForAdditionalBin:
-          type: boolean
-        RefundableAdvanceDeposit:
-          type: number
-          format: double
-        StartDateDeferredDays:
-          type: integer
-          format: int32
-        SubscriptionTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
     ApiResourceId:
       type: object
       properties:
         resource:
           type: string
           format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        UnitOfMeasurementListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        MinWeight:
-          type: number
-          format: double
-        MaxWeight:
-          type: number
-          format: double
-        IsDeleted:
-          type: boolean
-    ApiResourceResultEntity_ApiIntegratorServiceAgreementResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorServiceAgreementBillingUsagePolicyResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Thresholds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource'
-        IsDeleted:
-          type: boolean
-        AltWeightSourceForOutsideThreshold:
-          type: integer
-          format: int32
-        AltWeightSourceForZeroWeight:
-          type: integer
-          format: int32
-        ApplyToWeightsOutsideThresholds:
-          type: boolean
-        ApplyToZeroWeights:
-          type: boolean
-        Description:
-          type: string
-        IsUseAccumulatedWeight:
-          type: boolean
-        IsUseActualLifts:
-          type: boolean
-        IsUseExpectedLifts:
-          type: boolean
-        FairUsageMonths:
-          type: integer
-          format: int32
-        LiftsForAverage:
-          type: integer
-          format: int32
-        MonthlyLag:
-          type: integer
-          format: int32
-    ApiIntegratorServiceAgreementRelatedCustomersResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedCustomerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsForAllSites:
-          type: boolean
-        IsRelatedCustomerDeleted:
-          type: boolean
-        RelatedSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedSitesResource'
-    ApiResourceResultCollection_ApiIntegratorServiceAgreementResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -449,11 +173,6 @@ components:
           $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceAmountResource'
         LatePaymentFeeDefinition:
           $ref: '#/components/schemas/ApiIntegratorServiceAgreementPriceLatePaymentFeeDefinitionResource'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorServiceAgreementSaveResource:
       type: object
       properties:
@@ -537,36 +256,55 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceChanges_ApiIntegratorServiceAgreementResource:
+    ApiResourceResultEntity_ApiIntegratorServiceAgreementResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+          $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorServiceAgreementRelatedCustomersResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedCustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsForAllSites:
           type: boolean
+        IsRelatedCustomerDeleted:
+          type: boolean
+        RelatedSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementRelatedSitesResource'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -584,6 +322,281 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MinWeight:
+          type: number
+          format: double
+        MaxWeight:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorServiceAgreementPriceAmountResource:
+      type: object
+      properties:
+        Price:
+          type: number
+          format: double
+        Offset:
+          type: number
+          format: double
+        Percentage:
+          type: number
+          format: double
+        FloorPrice:
+          type: number
+          format: double
+        CeilingPrice:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        Allowance:
+          type: number
+          format: float
+        VatListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        EffectiveFrom:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        EffectiveTo:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TaxTemplateCollectionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsRebate:
+          type: boolean
+    ApiIntegratorServiceAgreementBillingUsagePolicyResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Thresholds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementBillingUsagePolicyWeightThresholdResource'
+        IsDeleted:
+          type: boolean
+        AltWeightSourceForOutsideThreshold:
+          type: integer
+          format: int32
+        AltWeightSourceForZeroWeight:
+          type: integer
+          format: int32
+        ApplyToWeightsOutsideThresholds:
+          type: boolean
+        ApplyToZeroWeights:
+          type: boolean
+        Description:
+          type: string
+        IsUseAccumulatedWeight:
+          type: boolean
+        IsUseActualLifts:
+          type: boolean
+        IsUseExpectedLifts:
+          type: boolean
+        FairUsageMonths:
+          type: integer
+          format: int32
+        LiftsForAverage:
+          type: integer
+          format: int32
+        MonthlyLag:
+          type: integer
+          format: int32
+    ApiIntegratorServiceAgreementPriceLatePaymentFeeDefinitionResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        CustomerCategoryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        LatePaymentFeeTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        GraceDays:
+          type: integer
+          format: int32
+        FlatFeeAmount:
+          type: number
+          format: double
+        PercentageFeeDecimalAmount:
+          type: number
+          format: double
+        PercentageFeeAmount:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorServiceAgreementRelatedSitesResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsRelatedSiteDeleted:
+          type: boolean
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorServiceAgreementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceChanges_ApiIntegratorServiceAgreementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorServiceAgreementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorServiceAgreementOrderCombinationGroupsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        InvoiceCycleListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsConcessionary:
+          type: boolean
+        IsRequiresPrePay:
+          type: boolean
+        ForceFullPayment:
+          type: boolean
+        RelatedContractTermLengthGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        UseOutletLevelPricing:
+          type: boolean
+        Name:
+          type: string
+        IsOutletLevelPricingUsed:
+          type: boolean
+        AnnualContractCost:
+          type: number
+          format: double
+        AnnualContractValue:
+          type: number
+          format: double
+        BillingUsagePolicyGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsUseReducedRateForAdditionalBin:
+          type: boolean
+        RefundableAdvanceDeposit:
+          type: number
+          format: double
+        StartDateDeferredDays:
+          type: integer
+          format: int32
+        SubscriptionTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+    ApiIntegratorServiceAgreementRelatedOutletsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsRelatedOutletDeleted:
+          type: boolean
     ApiIntegratorServiceAgreementResource:
       type: object
       properties:
@@ -667,16 +680,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorServiceAgreementRelatedSitesResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsRelatedSiteDeleted:
-          type: boolean

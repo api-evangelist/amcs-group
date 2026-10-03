@@ -62,12 +62,30 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorExternalReferenceTypeResource'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorExternalReferenceTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorExternalReferenceTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiIntegratorExternalReferenceTypeResource:
       type: object
       properties:
@@ -87,21 +105,3 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollection_ApiIntegratorExternalReferenceTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorExternalReferenceTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string

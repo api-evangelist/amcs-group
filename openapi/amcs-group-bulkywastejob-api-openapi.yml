@@ -39,6 +39,16 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorBulkyWasteJobChargeAndCostResource:
       type: object
       properties:
@@ -63,16 +73,11 @@ components:
         Rate:
           type: number
           format: double
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
     ApiIntegratorBulkyWasteProcessingPriceResource:
       type: object
       properties:
@@ -97,19 +102,6 @@ components:
         BreakdownQuantity:
           type: integer
           format: int32
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorBulkyWasteJobResource:
       type: object
       properties:
@@ -149,3 +141,11 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean

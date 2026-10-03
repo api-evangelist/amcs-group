@@ -235,6 +235,45 @@ paths:
         required: true
 components:
   schemas:
+    ApiSubscriberCompanyOutletResource:
+      type: object
+      properties:
+        SubscriberOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedSubscriberOutletGuid:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiSubscriberResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiSubscriberResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceId:
       type: object
       properties:
@@ -251,36 +290,11 @@ components:
         count:
           format: int32
           type: integer
-    ApiResourceResultEntity_ApiSubscriberResource:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiSubscriberResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -300,37 +314,6 @@ components:
           type: integer
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiSubscriberCompanyOutletResource:
-      type: object
-      properties:
-        SubscriberOutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        RelatedSubscriberOutletGuid:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
     ApiSubscriberResource:
       type: object
       properties:
@@ -357,3 +340,20 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

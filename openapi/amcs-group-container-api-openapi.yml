@@ -403,6 +403,53 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorContainerResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorContainerGeoResource:
       type: object
       properties:
@@ -418,42 +465,52 @@ components:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntity_ApiIntegratorContainerResource:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorContainerResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceId:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        resource:
+        Description:
+          type: string
+        Guid:
           type: string
           format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorContainerManufactureResource:
+      type: object
+      properties:
+        DateOfDelivery:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        DateOfManufacture:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        WarrantyEndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedSupplierSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedAppliedCostGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorContainerResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContainerResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -491,38 +548,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorContainerManufactureResource:
-      type: object
-      properties:
-        DateOfDelivery:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        DateOfManufacture:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        WarrantyEndDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        RelatedSupplierSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedAppliedCostGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -531,23 +556,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultCollection_ApiIntegratorContainerResource:
       type: object
       properties:
@@ -561,28 +569,20 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        errors:
+        self:
           type: string
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceChanges_ApiIntegratorContainerResource:
-      type: object
-      properties:
-        resource:
+        associations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorContainerResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string

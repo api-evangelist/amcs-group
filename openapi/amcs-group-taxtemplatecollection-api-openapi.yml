@@ -101,12 +101,34 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorTaxTemplateCollectionResource'
 components:
   schemas:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultEntity_ApiIntegratorTaxTemplateCollectionResource:
       type: object
       properties:
@@ -145,41 +167,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorTaxTemplateCollectionResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Code:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiIntegratorTaxTemplateCollectionResource:
       type: object
       properties:
@@ -193,3 +180,16 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorTaxTemplateCollectionResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Code:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

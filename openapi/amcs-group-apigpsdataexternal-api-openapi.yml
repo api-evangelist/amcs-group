@@ -50,33 +50,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GpsDataPointChangesLink:
-      type: object
-      properties:
-        Next:
-          type: string
-    GpsDataPointChangesResponse:
-      type: object
-      properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
-        Extra:
-          $ref: '#/components/schemas/GpsDataPointChangesExtra'
-        Links:
-          $ref: '#/components/schemas/GpsDataPointChangesLink'
-    GpsDataPointChangeResourceDto:
-      type: object
-      properties:
-        Resource:
-          $ref: '#/components/schemas/GpsDataPointChangeDto'
     GpsDataPointChangesExtra:
       type: object
       properties:
         Cursor:
           type: string
         Until:
+          type: string
+    GpsDataPointChangeResourceDto:
+      type: object
+      properties:
+        Resource:
+          $ref: '#/components/schemas/GpsDataPointChangeDto'
+    GpsDataPointChangesLink:
+      type: object
+      properties:
+        Next:
           type: string
     GpsDataPointChangeDto:
       type: object
@@ -100,3 +89,14 @@ components:
         TenantId:
           type: string
           format: uuid
+    GpsDataPointChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
+        Extra:
+          $ref: '#/components/schemas/GpsDataPointChangesExtra'
+        Links:
+          $ref: '#/components/schemas/GpsDataPointChangesLink'

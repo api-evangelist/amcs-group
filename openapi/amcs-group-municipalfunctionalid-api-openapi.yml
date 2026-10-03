@@ -55,6 +55,30 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalFunctionalIdResource'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorMunicipalFunctionalIdResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalFunctionalIdResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorMunicipalFunctionalIdResource:
       type: object
       properties:
@@ -86,12 +110,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceStatus:
       type: object
       properties:
@@ -100,21 +118,3 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollection_ApiIntegratorMunicipalFunctionalIdResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalFunctionalIdResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string

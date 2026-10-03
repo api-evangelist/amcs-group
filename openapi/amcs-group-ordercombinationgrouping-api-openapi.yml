@@ -194,12 +194,23 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceId:
       type: object
       properties:
@@ -210,23 +221,63 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        self:
+        until:
           type: string
-        associations:
+        cursor:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntity_ApiIntegratorOrderCombinationGroupingResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceChanges_ApiIntegratorOrderCombinationGroupingResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            type: string
-        expand:
+            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorOrderCombinationGroupingResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorOrderCombinationGroupingResource:
       type: object
       properties:
@@ -260,71 +311,20 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
         expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultEntity_ApiIntegratorOrderCombinationGroupingResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorOrderCombinationGroupingResource:
-      type: object
-      properties:
-        resource:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceChanges_ApiIntegratorOrderCombinationGroupingResource:
-      type: object
-      properties:
-        resource:
+            type: string
+        operations:
           type: array
           items:
-            $ref: '#/components/schemas/ApiIntegratorOrderCombinationGroupingResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+            type: string

@@ -181,17 +181,40 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorRouteAcceptedMaterialsResource:
+    ApiResourceResultEntityExtra:
       type: object
       properties:
-        Guid:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
           type: string
           format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        MaterialClassListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
     ApiResourceResultCollection_ApiIntegratorRouteResource:
       type: object
       properties:
@@ -205,143 +228,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorRouteDriverResource:
-      type: object
-      properties:
-        RelatedUserDriverGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ClockOnTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        ClockOffTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        CrewNumber:
-          type: integer
-          format: int32
-    ApiResourceChanges_ApiIntegratorRouteResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorRouteVehicleCheckResource:
-      type: object
-      properties:
-        StartMileage:
-          type: number
-          format: double
-        EndMileage:
-          type: number
-          format: double
-        Notes:
-          type: string
-        StartSafetyCheck:
-          type: boolean
-        StartDefectTicketNo:
-          type: string
-        RelatedUserStartDefectCheckGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        StartNotes:
-          type: string
-        EndSafetyCheck:
-          type: boolean
-        EndDefectTicketNo:
-          type: string
-        RelatedUserEndDefectCheckGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        EndNotes:
-          type: string
-        StartHubometerDistance:
-          type: number
-          format: double
-        EndHubometerDistance:
-          type: number
-          format: double
-        StartHubometerTime:
-          type: number
-          format: double
-        EndHubometerTime:
-          type: number
-          format: double
-        CrewMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteVehicleCheckCrewMembersResource'
-    ApiIntegratorRouteVehicleCheckCrewMembersResource:
-      type: object
-      properties:
-        RelatedSysUserGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorRouteResource:
       type: object
       properties:
@@ -495,31 +381,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiResourceResultEntity_ApiIntegratorRouteResource:
       type: object
       properties:
@@ -538,10 +399,149 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultUpdatesExtra:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        until:
+        Description:
           type: string
-        cursor:
+        Guid:
           type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorRouteDriverResource:
+      type: object
+      properties:
+        RelatedUserDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ClockOnTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        ClockOffTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        CrewNumber:
+          type: integer
+          format: int32
+    ApiIntegratorRouteAcceptedMaterialsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        MaterialClassListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorRouteVehicleCheckCrewMembersResource:
+      type: object
+      properties:
+        RelatedSysUserGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorRouteResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorRouteVehicleCheckResource:
+      type: object
+      properties:
+        StartMileage:
+          type: number
+          format: double
+        EndMileage:
+          type: number
+          format: double
+        Notes:
+          type: string
+        StartSafetyCheck:
+          type: boolean
+        StartDefectTicketNo:
+          type: string
+        RelatedUserStartDefectCheckGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        StartNotes:
+          type: string
+        EndSafetyCheck:
+          type: boolean
+        EndDefectTicketNo:
+          type: string
+        RelatedUserEndDefectCheckGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        EndNotes:
+          type: string
+        StartHubometerDistance:
+          type: number
+          format: double
+        EndHubometerDistance:
+          type: number
+          format: double
+        StartHubometerTime:
+          type: number
+          format: double
+        EndHubometerTime:
+          type: number
+          format: double
+        CrewMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVehicleCheckCrewMembersResource'

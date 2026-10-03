@@ -234,15 +234,40 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiIntegratorCreditNoteVatBreakdownResource:
+    ApiIntegratorCreditNoteAmountResource:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
+        ExchangeRate:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountExchangeRateResource'
+        Amount:
+          type: number
+          format: double
+        BaseAmount:
+          type: number
+          format: double
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
           type: string
           format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorCreditNoteDeallocationResource:
       type: object
       properties:
@@ -279,12 +304,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -302,19 +321,141 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity_ApiIntegratorCreditNoteResource:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceChanges_ApiIntegratorCreditNoteResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorCreditNoteInvoiceResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsDeleted:
+          type: boolean
+        RelatedInvoiceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCreditNoteOutputResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiIntegratorCreditNoteDetailResource:
+      type: object
+      properties:
+        SiteName:
+          type: string
+        SiteAddress:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
+        Reference:
+          type: string
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        OutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        StartDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        EndDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        NetWeight:
+          type: number
+          format: double
+        Amount:
+          type: number
+          format: double
+        AmountIncVAT:
+          type: number
+          format: double
+        RelatedInvoiceDetailGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        Notes:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorCreditNoteResource:
       type: object
       properties:
@@ -413,160 +554,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCreditNoteDetailResource:
-      type: object
-      properties:
-        SiteName:
-          type: string
-        SiteAddress:
-          $ref: '#/components/schemas/ApiIntegratorCreditNoteAddressResource'
-        Reference:
-          type: string
-        ServiceListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        MaterialTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        OutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DepartmentListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        StartDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        EndDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-        NetWeight:
-          type: number
-          format: double
-        Amount:
-          type: number
-          format: double
-        AmountIncVAT:
-          type: number
-          format: double
-        RelatedInvoiceDetailGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        Notes:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection_ApiIntegratorCreditNoteResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCreditNoteOutputResource:
-      type: object
-      properties:
-        Hash:
-          type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges_ApiIntegratorCreditNoteResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCreditNoteAmountExchangeRateResource:
-      type: object
-      properties:
-        Rate:
-          type: number
-          format: double
-        ExchangeDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        BaseCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ExchangeCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiIntegratorCreditNoteInvoiceResource:
-      type: object
-      properties:
-        Amount:
-          type: number
-          format: double
-        DateInput:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        IsDeleted:
-          type: boolean
-        RelatedInvoiceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        AccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -575,23 +562,20 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityExtra:
+    ApiResourceErrors:
       type: object
       properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
+        errors:
+          type: string
+    ApiIntegratorCreditNoteVatBreakdownResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorCreditNoteAddressResource:
       type: object
       properties:
@@ -609,14 +593,30 @@ components:
           type: string
         Postcode:
           type: string
-    ApiIntegratorCreditNoteAmountResource:
+    ApiIntegratorCreditNoteAmountExchangeRateResource:
       type: object
       properties:
-        ExchangeRate:
-          $ref: '#/components/schemas/ApiIntegratorCreditNoteAmountExchangeRateResource'
-        Amount:
+        Rate:
           type: number
           format: double
-        BaseAmount:
-          type: number
-          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExchangeCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntity_ApiIntegratorCreditNoteResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCreditNoteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

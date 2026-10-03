@@ -171,111 +171,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorWeighingWeightsWeightResource:
-      type: object
-      properties:
-        BridgeName:
-          type: string
-        GrossWeight:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
-        TareWeight:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-    ApiIntegratorWeighingDestinationWeightResource:
-      type: object
-      properties:
-        GrossWeight:
-          type: number
-          format: double
-        TareWeight:
-          type: number
-          format: double
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorWeighingDocketPdfResource:
-      type: object
-      properties:
-        Hash:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorWeighingResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiIntegratorWeighingOutResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        TicketNo:
-          type: string
-        IsAutomatic:
-          type: boolean
-        GrossTallyNo:
-          type: string
-        RelatedTreatmentGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        RelatedWeighingInGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Weights:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
     ApiResourceId:
       type: object
       properties:
@@ -286,50 +181,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity_ApiIntegratorWeighingResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorWeighingResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceChanges_ApiIntegratorWeighingResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorWeighingWeightResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Weight:
-          type: number
-          format: double
-        Timestamp:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        WeightTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiIntegratorWeighingInResource:
       type: object
       properties:
@@ -357,6 +208,141 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiIntegratorWeighingInDetailResource'
+    ApiIntegratorWeighingPictureResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Hash:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity_ApiIntegratorWeighingResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorWeighingDestinationWeightResource:
+      type: object
+      properties:
+        GrossWeight:
+          type: number
+          format: double
+        TareWeight:
+          type: number
+          format: double
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorWeighingWeightResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weight:
+          type: number
+          format: double
+        Timestamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        WeightTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorWeighingInDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Barcode:
+          type: string
+        Weight:
+          type: number
+          format: double
+        RelatedJobOverrideBreakdownGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ReasonListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+    ApiResourceChanges_ApiIntegratorWeighingResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorWeighingWeightDetailResource:
       type: object
       properties:
@@ -377,6 +363,25 @@ components:
             TimeZone: Europe/London
         WeightTypeListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorWeighingDriverResource:
+      type: object
+      properties:
+        LicenceNumber:
+          type: string
+        Name:
+          type: string
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorWeighingDocketPdfResource:
+      type: object
+      properties:
+        Hash:
+          type: string
     ApiIntegratorWeighingResource:
       type: object
       properties:
@@ -545,6 +550,41 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorWeighingOutResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        IsAutomatic:
+          type: boolean
+        GrossTallyNo:
+          type: string
+        RelatedTreatmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
     ApiIntegratorWeighingWeightsResource:
       type: object
       properties:
@@ -563,71 +603,31 @@ components:
       properties:
         errors:
           type: string
-    ApiIntegratorWeighingDriverResource:
+    ApiIntegratorWeighingWeightsWeightResource:
       type: object
       properties:
-        LicenceNumber:
+        BridgeName:
           type: string
-        Name:
-          type: string
-    ApiIntegratorWeighingInDetailResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Barcode:
-          type: string
-        Weight:
+        GrossWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
+        TareWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightDetailResource'
+        Quantity:
           type: number
           format: double
-        RelatedJobOverrideBreakdownGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ReasonListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
-    ApiIntegratorListItemResource:
+        Volume:
+          type: number
+          format: double
+    ApiResourceResultCollection_ApiIntegratorWeighingResource:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiIntegratorWeighingPictureResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Hash:
-          type: string
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

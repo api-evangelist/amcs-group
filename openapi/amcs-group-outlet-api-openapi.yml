@@ -594,6 +594,23 @@ paths:
       description: AMCS VisionAI Developer Environment
 components:
   schemas:
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiIntegratorCompanyOutletResource:
       type: object
       properties:
@@ -633,19 +650,53 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorCompanyOutletResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCompanyOutletResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        count:
+          type: integer
+          format: int32
+    ApiResourceErrors:
+      type: object
+      properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCompanyOutletAnalysisCodesResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorCompanyOutletAcceptedMaterialResource:
+      type: object
+      properties:
+        WarnOnMinimumLoad:
+          type: boolean
+        MinimumLoadWeight:
+          type: number
+          format: double
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiIntegratorCompanyOutletResource:
       type: object
       properties:
@@ -659,12 +710,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorCompanyOutletAddressResource:
       type: object
       properties:
@@ -682,6 +727,27 @@ components:
           type: string
         Postcode:
           type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiIntegratorCompanyOutletResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCompanyOutletResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -699,72 +765,6 @@ components:
           type: array
           items:
             type: string
-    ApiIntegratorCompanyOutletAcceptedMaterialResource:
-      type: object
-      properties:
-        WarnOnMinimumLoad:
-          type: boolean
-        MinimumLoadWeight:
-          type: number
-          format: double
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorCompanyOutletAnalysisCodesResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiCompanyOutletAcceptedMaterialResource:
       type: object
       properties:
@@ -791,14 +791,31 @@ components:
           type: string
         Postcode:
           type: string
-    ApiIntegratorListItemResource_2:
+    ApiResourceResultEntity_ApiCompanyOutletResource:
       type: object
       properties:
-        Description:
+        resource:
+          $ref: '#/components/schemas/ApiCompanyOutletResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiOutletSupplierSiteResource:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/ApiOutletSupplierSiteAddressResource'
+        SupplierName:
           type: string
-        AbbreviatedDescription:
+        RelatedSupplierSiteGuid:
+          format: uuid
           type: string
-        Guid:
+          example: 00000000-0000-0000-0000-000000000000
+        GUID:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
@@ -896,19 +913,17 @@ components:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity_ApiCompanyOutletResource:
+    ApiIntegratorListItemResource_2:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiCompanyOutletResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        Description:
+          type: string
+        AbbreviatedDescription:
+          type: string
+        Guid:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiCompanyOutletResource:
       type: object
       properties:
@@ -941,21 +956,6 @@ components:
           type: string
         Postcode:
           type: string
-    ApiOutletSupplierSiteResource:
-      type: object
-      properties:
-        Address:
-          $ref: '#/components/schemas/ApiOutletSupplierSiteAddressResource'
-        SupplierName:
-          type: string
-        RelatedSupplierSiteGuid:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        GUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceId:
       type: object
       properties:
@@ -965,6 +965,14 @@ components:
           $ref: '#/components/schemas/ApiResourceStatus_2'
         resource:
           type: guid
+      additionalProperties: false
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.Outlet.ApiOutlet:
       type: object
@@ -995,15 +1003,62 @@ components:
         isSuccess:
           type: boolean
       additionalProperties: false
-    ApiResourceErrors_2:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
   responses:
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
     Forbidden:
       description: Forbidden - Access denied.
       content:
@@ -1036,61 +1091,6 @@ components:
               error:
                 type: string
                 example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
             additionalProperties: false
 x-refined-from:
 - amcs-group-erp-openapi-original.json

@@ -207,197 +207,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorGLJournalResource:
+    ApiResourceResultEntity_ApiIntegratorGLJournalResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+          $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorGLJournalLineAnalysisCodesResource:
-      type: object
-      properties:
-        Element1:
-          type: string
-        Element2:
-          type: string
-        Element3:
-          type: string
-        Element4:
-          type: string
-        Element5:
-          type: string
-        Element6:
-          type: string
-        Element7:
-          type: string
-        Element8:
-          type: string
-        Element9:
-          type: string
-        Element10:
-          type: string
-        Site:
-          type: string
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorGLJournalLineTaxResource:
-      type: object
-      properties:
-        Code:
-          type: string
-        Rate:
-          type: number
-          format: double
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorGLJournalLineExchangeRateResource:
-      type: object
-      properties:
-        RelatedExchangeRateGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Rate:
-          type: number
-          format: double
-        ExchangeDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        BaseCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        CurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiIntegratorGLJournalHeaderResource:
-      type: object
-      properties:
-        JournalHeaderGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        HeaderName:
-          type: string
-        CompanyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Source:
-          type: string
-        BaseCurrencyIntegrationCode:
-          type: string
-        CurrencyIntegrationCode:
-          type: string
-        TransactionDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        GLDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        JournalType:
-          type: string
-        JournalStatus:
-          type: string
-        TotalDr:
-          type: number
-          format: double
-        TotalCr:
-          type: number
-          format: double
-        RelatedTransactionGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        CreationDateTime:
-          type: string
-          format: offsetDateTime
-          example: '2000-01-01T00:00:00+01:00'
-        UpdatedDateTime:
-          type: string
-          format: offsetDateTime
-          example: '2000-01-01T00:00:00+01:00'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceChanges_ApiIntegratorGLJournalResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiIntegratorGLJournalLineResource:
       type: object
       properties:
@@ -452,6 +274,98 @@ components:
           $ref: '#/components/schemas/ApiIntegratorGLJournalLineReferenceResource'
         SummaryAccountCode:
           type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceResultCollection_ApiIntegratorGLJournalResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorGLJournalLineAnalysisCodesResource:
+      type: object
+      properties:
+        Element1:
+          type: string
+        Element2:
+          type: string
+        Element3:
+          type: string
+        Element4:
+          type: string
+        Element5:
+          type: string
+        Element6:
+          type: string
+        Element7:
+          type: string
+        Element8:
+          type: string
+        Element9:
+          type: string
+        Element10:
+          type: string
+        Site:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorGLJournalLineReferenceResource:
       type: object
       properties:
@@ -505,28 +419,114 @@ components:
           type: string
         OrderNo:
           type: string
-    ApiResourceResultEntity_ApiIntegratorGLJournalResource:
+    ApiIntegratorGLJournalLineTaxResource:
+      type: object
+      properties:
+        Code:
+          type: string
+        Rate:
+          type: number
+          format: double
+    ApiIntegratorGLJournalHeaderResource:
+      type: object
+      properties:
+        JournalHeaderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        HeaderName:
+          type: string
+        CompanyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Source:
+          type: string
+        BaseCurrencyIntegrationCode:
+          type: string
+        CurrencyIntegrationCode:
+          type: string
+        TransactionDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        GLDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        JournalType:
+          type: string
+        JournalStatus:
+          type: string
+        TotalDr:
+          type: number
+          format: double
+        TotalCr:
+          type: number
+          format: double
+        RelatedTransactionGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        CreationDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+        UpdatedDateTime:
+          type: string
+          format: offsetDateTime
+          example: '2000-01-01T00:00:00+01:00'
+    ApiResourceChanges_ApiIntegratorGLJournalResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiResourceResultUpdatesExtra:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        until:
+        self:
           type: string
-        cursor:
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorGLJournalLineExchangeRateResource:
+      type: object
+      properties:
+        RelatedExchangeRateGuid:
           type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
