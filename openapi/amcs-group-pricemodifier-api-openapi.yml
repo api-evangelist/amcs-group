@@ -93,19 +93,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorPriceModifierResource'
 components:
   schemas:
-    ApiResourceResultCollection_ApiIntegratorPriceModifierResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorPriceModifierResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -123,47 +110,11 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity_ApiIntegratorPriceModifierResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorPriceModifierResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiIntegratorPriceModifierResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -181,3 +132,52 @@ components:
           type: array
           items:
             type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorPriceModifierResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorPriceModifierResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorPriceModifierResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntity_ApiIntegratorPriceModifierResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorPriceModifierResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

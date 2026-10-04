@@ -375,19 +375,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceResultEntity_ApiIntegratorScheduleResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorScheduleResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -405,6 +392,148 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorScheduleVehicleCheckResource:
+      type: object
+      properties:
+        StartMileage:
+          type: number
+          format: double
+        EndMileage:
+          type: number
+          format: double
+        IsStartSafetyChecked:
+          type: boolean
+        StartNotes:
+          type: string
+        IsEndSafetyChecked:
+          type: boolean
+        EndNotes:
+          type: string
+        StartDefectTicketNo:
+          type: string
+        EndDefectTicketNo:
+          type: string
+        RelatedUserStartCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserEndCheckByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceChanges_ApiIntegratorScheduleResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorScheduleResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorScheduleResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorScheduleDriverResource:
+      type: object
+      properties:
+        RelatedUserDriverGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ClockOffDateTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        ClockOnDateTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
     ApiIntegratorScheduleResource:
       type: object
       properties:
@@ -479,16 +608,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -496,122 +615,3 @@ components:
           type: string
         cursor:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceChanges_ApiIntegratorScheduleResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorScheduleDriverResource:
-      type: object
-      properties:
-        RelatedUserDriverGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ClockOffDateTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        ClockOnDateTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollection_ApiIntegratorScheduleResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorScheduleResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorScheduleVehicleCheckResource:
-      type: object
-      properties:
-        StartMileage:
-          type: number
-          format: double
-        EndMileage:
-          type: number
-          format: double
-        IsStartSafetyChecked:
-          type: boolean
-        StartNotes:
-          type: string
-        IsEndSafetyChecked:
-          type: boolean
-        EndNotes:
-          type: string
-        StartDefectTicketNo:
-          type: string
-        EndDefectTicketNo:
-          type: string
-        RelatedUserStartCheckByGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedUserEndCheckByGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000

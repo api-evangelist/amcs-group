@@ -238,22 +238,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultCollection_ApiJobPostResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -277,6 +261,113 @@ components:
             items:
               type: object
               additionalProperties: {}
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResult_ApiJobPostResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResourceChanges_ApiJobPostResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollection_ApiJobPostResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
       additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiJobPost:
       type: object
@@ -336,25 +427,6 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -363,33 +435,6 @@ components:
           - string
           - 'null'
         cursor:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResult_ApiJobPostResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
           type:
           - string
           - 'null'
@@ -408,56 +453,11 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceChanges_ApiJobPostResource:
+    ApiResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobPost'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false

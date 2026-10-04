@@ -114,17 +114,36 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorSubscriptionResource:
+    ApiResourceErrors:
       type: object
       properties:
-        Description:
+        errors:
           type: string
-        IsDeleted:
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
           type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiIntegratorSubscriptionResource:
       type: object
       properties:
@@ -144,11 +163,17 @@ components:
         count:
           type: integer
           format: int32
-    ApiResourceErrors:
+    ApiIntegratorSubscriptionResource:
       type: object
       properties:
-        errors:
+        Description:
           type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiIntegratorSubscriptionResource:
       type: object
       properties:
@@ -162,28 +187,3 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

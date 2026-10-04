@@ -546,7 +546,7 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorLocationResource:
+    ApiResourceChanges_ApiIntegratorLocationResource:
       type: object
       properties:
         resource:
@@ -554,93 +554,11 @@ components:
           items:
             $ref: '#/components/schemas/ApiIntegratorLocationResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiIntegratorLocationResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Address:
-          $ref: '#/components/schemas/ApiIntegratorLocationAddressResource'
-        TimeZone:
-          type: string
-        LegalName:
-          type: string
-        Directions:
-          type: string
-        Geo:
-          $ref: '#/components/schemas/ApiIntegratorLocationGeoResource'
-        UniqueReference:
-          type: string
-        Acreage:
-          type: number
-          format: double
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorLocationGeoLocationResource:
-      type: object
-      properties:
-        Lat:
-          type: number
-          format: double
-        Long:
-          type: number
-          format: double
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorLocationGeoResource:
-      type: object
-      properties:
-        ZoneListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ParcelBoundaryListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Location:
-          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
-        Latitude:
-          type: number
-          format: double
-        Longitude:
-          type: number
-          format: double
     ApiResourceErrors:
       type: object
       properties:
@@ -659,6 +577,23 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -667,19 +602,22 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceChanges_ApiIntegratorLocationResource:
+    ApiIntegratorLocationGeoLocationResource:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorLocationResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiIntegratorLocationAddressContactMethodsResource:
+      type: object
+      properties:
+        TelNo:
+          type: string
+        FaxNo:
+          type: string
     ApiIntegratorLocationAddressResource:
       type: object
       properties:
@@ -711,27 +649,89 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         RegionCodeListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceResultEntityLinks:
+    ApiIntegratorLocationGeoResource:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorLocationAddressContactMethodsResource:
+        ZoneListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ParcelBoundaryListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Location:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoLocationResource'
+        Latitude:
+          type: number
+          format: double
+        Longitude:
+          type: number
+          format: double
+    ApiIntegratorLocationResource:
       type: object
       properties:
-        TelNo:
+        Description:
           type: string
-        FaxNo:
+        Address:
+          $ref: '#/components/schemas/ApiIntegratorLocationAddressResource'
+        TimeZone:
+          type: string
+        LegalName:
+          type: string
+        Directions:
+          type: string
+        Geo:
+          $ref: '#/components/schemas/ApiIntegratorLocationGeoResource'
+        UniqueReference:
+          type: string
+        Acreage:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorLocationResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorLocationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
           type: string

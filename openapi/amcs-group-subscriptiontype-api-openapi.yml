@@ -101,6 +101,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSubscriptionTypeResource'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorSubscriptionTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorSubscriptionTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -118,6 +131,28 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorSubscriptionTypeResource:
       type: object
       properties:
@@ -131,39 +166,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorSubscriptionTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorSubscriptionTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -185,20 +187,18 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

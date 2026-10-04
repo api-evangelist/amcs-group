@@ -93,19 +93,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRentalQuantityAttributeResource'
 components:
   schemas:
-    ApiResourceResultCollection_ApiIntegratorRentalQuantityAttributeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRentalQuantityAttributeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -123,6 +110,19 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceResultCollection_ApiIntegratorRentalQuantityAttributeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRentalQuantityAttributeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorRentalQuantityAttributeResource:
       type: object
       properties:
@@ -137,12 +137,23 @@ components:
       properties:
         errors:
           type: string
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultEntity_ApiIntegratorRentalQuantityAttributeResource:
       type: object
       properties:
@@ -164,20 +175,9 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        count:
+          type: integer
+          format: int32

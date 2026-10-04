@@ -299,49 +299,6 @@ components:
           - 'null'
           example: true
       additionalProperties: false
-    AMCSPayErrorContentResponse:
-      type:
-      - string
-      - 'null'
-    AMCSPayIvrResponse:
-      type: object
-      example: Success
-    AMCSPayErrorResponse:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The exception message.
-        type:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The type of exception thrown.
-        stackTrace:
-          type:
-          - string
-          - 'null'
-          example: error message
-          description: The stack trace of the error encountered.
-    AMCSPayAccountDetailIvrResponseCreditBalanceResponse:
-      type: object
-      properties:
-        customerid:
-          format: string
-          type: string
-          example: ACC1001
-        customerName:
-          type: string
-          example: Mark Smith
-        creditBalance:
-          type:
-          - integer
-          - 'null'
-          example: '200.00'
     AMCSPayMobillsIvrRequest:
       type: object
       required:
@@ -426,21 +383,10 @@ components:
           - string
           - 'null'
           example: 00000000-0000-0000-0000-000000000000
-    AMCSPayAccountDetailIvrResponse:
-      type: object
-      properties:
-        creditBalanceAsTrue:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceResponse'
-        creditBalanceAsFalse:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse'
+    AMCSPayErrorContentResponse:
+      type:
+      - string
+      - 'null'
     AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse:
       type: object
       properties:
@@ -557,6 +503,9 @@ components:
           format: uuid
           example: c4521490-c0dd-40e5-94c6-afe90073aa1b
       additionalProperties: false
+    AMCSPayIvrResponse:
+      type: object
+      example: Success
     AMCSPayInvoiceDetails:
       type: object
       properties:
@@ -587,6 +536,57 @@ components:
           type: string
           example: EUR
       additionalProperties: false
+    AMCSPayErrorResponse:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The exception message.
+        type:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The type of exception thrown.
+        stackTrace:
+          type:
+          - string
+          - 'null'
+          example: error message
+          description: The stack trace of the error encountered.
+    AMCSPayAccountDetailIvrResponse:
+      type: object
+      properties:
+        creditBalanceAsTrue:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceResponse'
+        creditBalanceAsFalse:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCSPayAccountDetailIvrResponseCreditBalanceAsFalse'
+    AMCSPayAccountDetailIvrResponseCreditBalanceResponse:
+      type: object
+      properties:
+        customerid:
+          format: string
+          type: string
+          example: ACC1001
+        customerName:
+          type: string
+          example: Mark Smith
+        creditBalance:
+          type:
+          - integer
+          - 'null'
+          example: '200.00'
   securitySchemes:
     cookieAuth:
       type: apiKey

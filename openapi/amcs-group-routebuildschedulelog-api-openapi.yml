@@ -146,29 +146,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorRouteBuildScheduleLogResource'
 components:
   schemas:
-    ApiIntegratorRouteBuildScheduleLogResource:
-      type: object
-      properties:
-        BuildStart:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        BuildEnd:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        IsSuccess:
-          type: boolean
-        RouteTemplateGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -199,6 +176,11 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceChanges_ApiIntegratorRouteBuildScheduleLogResource:
       type: object
       properties:
@@ -212,45 +194,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollection_ApiIntegratorRouteBuildScheduleLogResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteBuildScheduleLogResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -268,3 +211,60 @@ components:
           type: array
           items:
             type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorRouteBuildScheduleLogResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteBuildScheduleLogResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorRouteBuildScheduleLogResource:
+      type: object
+      properties:
+        BuildStart:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        BuildEnd:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsSuccess:
+          type: boolean
+        RouteTemplateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string

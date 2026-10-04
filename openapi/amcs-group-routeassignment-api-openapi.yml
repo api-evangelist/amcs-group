@@ -321,6 +321,63 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiIntegratorRouteAssignmentDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PlannedQuantity:
+          type: number
+          format: double
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceId:
       type: object
       properties:
@@ -331,53 +388,19 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultEntity_ApiIntegratorRouteAssignmentResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          type: string
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorRouteAssignmentAccessTimeResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        AccessContact:
-          type: string
-        AccessNotes:
-          type: string
-        FromExclusion:
-          type: boolean
-        AccessStartTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        AccessEndTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        DayOfWeekListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorRouteAssignmentResource:
       type: object
       properties:
@@ -444,18 +467,33 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorRouteAssignmentDetailResource:
+    ApiIntegratorRouteAssignmentAccessTimeResource:
       type: object
       properties:
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
+        AccessContact:
+          type: string
+        AccessNotes:
+          type: string
+        FromExclusion:
+          type: boolean
+        AccessStartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        AccessEndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        DayOfWeekListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PlannedQuantity:
-          type: number
-          format: double
     ApiResourceResultCollection_ApiIntegratorRouteAssignmentResource:
       type: object
       properties:
@@ -465,44 +503,6 @@ components:
             $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultEntity_ApiIntegratorRouteAssignmentResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorRouteAssignmentResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:

@@ -114,6 +114,36 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntity_ApiIntegratorDepartmentResource:
       type: object
       properties:
@@ -138,17 +168,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultCollection_ApiIntegratorDepartmentResource:
       type: object
       properties:
@@ -162,28 +181,9 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        id:
+        count:
           type: integer
           format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

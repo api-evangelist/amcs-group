@@ -229,30 +229,37 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity_ApiIntegratorWeighingTypeResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiIntegratorWeighingTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultCollection_ApiIntegratorWeighingTypeResource:
       type: object
       properties:
@@ -274,32 +281,25 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorWeighingTypeResource:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntity_ApiIntegratorWeighingTypeResource:
       type: object
       properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWeighingTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiWeighingTypeResource:
       type: object
       properties:
@@ -309,19 +309,6 @@ components:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiWeighingTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiWeighingTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntity_ApiWeighingTypeResource:
       type: object
       properties:
@@ -331,6 +318,19 @@ components:
           $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiWeighingTypeResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiWeighingTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:

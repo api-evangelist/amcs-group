@@ -472,16 +472,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceChanges_ApiIntegratorVehicleEventResource:
       type: object
       properties:
@@ -491,6 +481,19 @@ components:
             $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorVehicleEventResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -508,19 +511,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
@@ -594,45 +584,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorVehicleEventResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVehicleEventResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorLocationGeoLocationResource:
-      type: object
-      properties:
-        Lat:
-          type: number
-          format: double
-        Long:
-          type: number
-          format: double
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -650,3 +601,52 @@ components:
           type: array
           items:
             type: string
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorLocationGeoLocationResource:
+      type: object
+      properties:
+        Lat:
+          type: number
+          format: double
+        Long:
+          type: number
+          format: double
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string

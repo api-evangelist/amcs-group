@@ -64,28 +64,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalAccountStateResource'
 components:
   schemas:
-    ApiIntegratorMunicipalAccountStateResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultCollection_ApiIntegratorMunicipalAccountStateResource:
       type: object
       properties:
@@ -99,6 +77,22 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorMunicipalAccountStateResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -107,3 +101,9 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32

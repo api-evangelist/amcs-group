@@ -110,39 +110,28 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorRentTermResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRentTermResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorRentTermResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultEntity_ApiIntegratorRentTermResource:
       type: object
       properties:
@@ -164,20 +153,31 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollection_ApiIntegratorRentTermResource:
       type: object
       properties:
-        self:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRentTermResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorRentTermResource:
+      type: object
+      properties:
+        Description:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

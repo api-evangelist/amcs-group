@@ -262,7 +262,72 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
-    ApiResourceResultCollection_ApiGlossaryBrowserResource:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResourceChanges_ApiGlossaryBrowserResource:
       type: object
       properties:
         errors:
@@ -276,26 +341,7 @@ components:
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser:
       type: object
@@ -354,19 +400,7 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceChanges_ApiGlossaryBrowserResource:
+    ApiResourceResult_ApiGlossaryBrowserResource:
       type: object
       properties:
         errors:
@@ -374,13 +408,7 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
       additionalProperties: false
     ApiResourceResultEntity_ApiGlossaryBrowserResource:
       type: object
@@ -396,24 +424,19 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        count:
+        until:
           type:
-          - integer
+          - string
           - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
+        cursor:
           type:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceResult_ApiGlossaryBrowserResource:
+    ApiResourceResultCollection_ApiGlossaryBrowserResource:
       type: object
       properties:
         errors:
@@ -421,42 +444,19 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiGlossaryBrowser'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResource:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false

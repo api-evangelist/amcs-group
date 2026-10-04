@@ -101,19 +101,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorWriteOffReasonResource'
 components:
   schemas:
-    ApiResourceResultCollection_ApiIntegratorWriteOffReasonResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWriteOffReasonResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -131,30 +118,28 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorWriteOffReasonResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        AnalysisCode:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultEntity_ApiIntegratorWriteOffReasonResource:
       type: object
       properties:
@@ -176,20 +161,35 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorWriteOffReasonResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWriteOffReasonResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWriteOffReasonResource:
+      type: object
+      properties:
+        Description:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        IsDeleted:
+          type: boolean
+        AnalysisCode:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

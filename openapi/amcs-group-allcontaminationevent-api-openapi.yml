@@ -138,6 +138,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
+      additionalProperties: false
     ApiResourceChanges_ApiAllContaminationEventExternalResource:
       type: object
       properties:
@@ -153,30 +159,6 @@ components:
             $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal'
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-        since:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem:
       type: object
@@ -335,11 +317,13 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiAllContaminationEventExternal:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternalResourceItem'
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceStatus:
       type: object
@@ -351,4 +335,20 @@ components:
           format: int32
         isSuccess:
           type: boolean
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+        since:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

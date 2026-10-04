@@ -97,16 +97,22 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceId:
+    ApiIntegratorCustomerReportRelatedSiteResource:
       type: object
       properties:
-        resource:
+        Guid:
           type: string
           format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
     ApiIntegratorCustomerReportResource:
       type: object
       properties:
@@ -126,22 +132,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorCustomerReportRelatedSiteResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -150,3 +140,13 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

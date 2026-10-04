@@ -114,6 +114,28 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultCollection_ApiIntegratorSiteTypeResource:
       type: object
       properties:
@@ -127,30 +149,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity_ApiIntegratorSiteTypeResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorSiteTypeResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiIntegratorSiteTypeResource:
       type: object
       properties:
@@ -170,20 +168,22 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntity_ApiIntegratorSiteTypeResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorSiteTypeResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

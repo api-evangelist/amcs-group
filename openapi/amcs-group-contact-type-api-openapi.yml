@@ -93,6 +93,15 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorContactTypeResource'
 components:
   schemas:
+    ApiIntegratorContactTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -110,39 +119,28 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorContactTypeResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorContactTypeResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorContactTypeResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceResultEntity_ApiIntegratorContactTypeResource:
       type: object
       properties:
@@ -164,20 +162,22 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
-          type: string
-        associations:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorContactTypeResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ApiIntegratorContactTypeResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

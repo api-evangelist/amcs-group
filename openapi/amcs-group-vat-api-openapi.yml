@@ -118,43 +118,25 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultEntity_ApiIntegratorVatResource:
+    ApiIntegratorVatResource:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorVatResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        Rate:
+          type: number
+          format: double
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiResourceResultCollection_ApiIntegratorVatResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorVatResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -172,6 +154,19 @@ components:
           type: array
           items:
             type: string
+    ApiResourceResultEntity_ApiIntegratorVatResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorVatResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -180,17 +175,22 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiIntegratorVatResource:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        Rate:
-          type: number
-          format: double
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorVatResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorVatResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

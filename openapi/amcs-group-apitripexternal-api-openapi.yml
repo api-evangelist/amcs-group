@@ -143,52 +143,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiTripSummary:
-      type: object
-      properties:
-        TripId:
-          type: integer
-          format: int32
-          description: Trip identifier.
-        TotalTripMileage:
-          type: number
-          format: double
-          description: Total mileage covered during the trip. Unit of Measure - Liters
-        TotalPloughEnabledMileage:
-          type: number
-          format: double
-          description: Mileage covered while plough was enabled. Unit of Measure - Meters
-        TotalSpreaderEnabledMileage:
-          type: number
-          format: double
-          description: Mileage covered while spreader was enabled. Unit of Measure - Meters
-        SpreaderWidth:
-          type: number
-          format: double
-          description: Spreader width setting. Unit of Measure - Meters
-        TotalSolidMaterialDelivered:
-          type: number
-          format: double
-          description: Total solid material delivered during the trip. Unit of Measure - KG
-        TotalPrewetMaterialDelivered:
-          type: number
-          format: double
-          description: Total prewet material delivered during the trip. Unit of Measure - Liters
-        TotalTripDuration:
-          type: number
-          format: double
-          description: Total trip duration in minutes. Unit of Measure - Minutes
-    TripChangesResponse:
-      type: object
-      properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiTripExternalDto'
-        Extra:
-          type:
-          - object
-          - 'null'
     ApiTripExternalDto:
       type: object
       properties:
@@ -224,3 +178,49 @@ components:
         TripSummary:
           $ref: '#/components/schemas/ApiTripSummary'
           description: Calculated trip summary with metrics.
+    TripChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiTripExternalDto'
+        Extra:
+          type:
+          - object
+          - 'null'
+    ApiTripSummary:
+      type: object
+      properties:
+        TripId:
+          type: integer
+          format: int32
+          description: Trip identifier.
+        TotalTripMileage:
+          type: number
+          format: double
+          description: Total mileage covered during the trip. Unit of Measure - Liters
+        TotalPloughEnabledMileage:
+          type: number
+          format: double
+          description: Mileage covered while plough was enabled. Unit of Measure - Meters
+        TotalSpreaderEnabledMileage:
+          type: number
+          format: double
+          description: Mileage covered while spreader was enabled. Unit of Measure - Meters
+        SpreaderWidth:
+          type: number
+          format: double
+          description: Spreader width setting. Unit of Measure - Meters
+        TotalSolidMaterialDelivered:
+          type: number
+          format: double
+          description: Total solid material delivered during the trip. Unit of Measure - KG
+        TotalPrewetMaterialDelivered:
+          type: number
+          format: double
+          description: Total prewet material delivered during the trip. Unit of Measure - Liters
+        TotalTripDuration:
+          type: number
+          format: double
+          description: Total trip duration in minutes. Unit of Measure - Minutes

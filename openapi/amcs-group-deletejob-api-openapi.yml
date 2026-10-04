@@ -68,6 +68,21 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorDeleteJobResource:
       type: object
       properties:
@@ -83,11 +98,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -96,13 +106,3 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

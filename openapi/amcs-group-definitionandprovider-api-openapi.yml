@@ -262,7 +262,59 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
-    ApiResourceId:
+    AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        workflowProviderId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
@@ -270,16 +322,96 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
           type: integer
           format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        workflowDefinitions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
+        workflowProviders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser'
       additionalProperties: false
-    ApiResource:
+    ApiResourceChanges_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser:
       type: object
@@ -345,33 +477,16 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceChanges_ApiWorkflowDefinitionAndProviderResource:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
+        id:
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
@@ -382,15 +497,7 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResultEntity_ApiWorkflowDefinitionAndProviderResource:
+    ApiResourceId:
       type: object
       properties:
         errors:
@@ -398,108 +505,8 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
-    AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
           type: integer
           format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        workflowProviderId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResult_ApiWorkflowDefinitionAndProviderResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
-      additionalProperties: false
-    AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        workflowDefinitions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-        workflowProviders:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowProviderBrowser'
       additionalProperties: false
     ApiResourceResultCollection_ApiWorkflowDefinitionAndProviderResource:
       type: object
@@ -517,40 +524,33 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceResult_ApiWorkflowDefinitionAndProviderResource:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionAndProvider'
       additionalProperties: false
-    ApiResourceResultEntityLinks:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        self:
+        until:
           type:
           - string
           - 'null'
-        associations:
+        cursor:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false

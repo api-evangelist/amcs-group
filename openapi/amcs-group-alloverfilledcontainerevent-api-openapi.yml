@@ -132,6 +132,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem:
       type: object
       properties:
@@ -262,6 +270,17 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
     ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource:
       type: object
       properties:
@@ -278,6 +297,12 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
+    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
+      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -293,29 +318,4 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
       additionalProperties: false

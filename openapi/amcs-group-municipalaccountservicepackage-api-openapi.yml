@@ -55,6 +55,37 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalAccountServicePackageResource'
 components:
   schemas:
+    ApiIntegratorMunicipalAccountServicePackageResource:
+      type: object
+      properties:
+        AccountGuidFilter:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        FunctionalIdFilter:
+          type: string
+        ServicePackages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageDetailResource'
+    ApiResourceResultCollection_ApiIntegratorMunicipalAccountServicePackageResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiIntegratorMunicipalAccountServicePackageDetailServiceResource:
       type: object
       properties:
@@ -74,43 +105,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorMunicipalAccountServicePackageResource:
-      type: object
-      properties:
-        AccountGuidFilter:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        FunctionalIdFilter:
-          type: string
-        ServicePackages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageDetailResource'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorMunicipalAccountServicePackageResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -119,6 +113,12 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorMunicipalAccountServicePackageDetailResource:
       type: object
       properties:

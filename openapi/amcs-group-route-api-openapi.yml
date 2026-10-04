@@ -198,36 +198,11 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
           type: string
-        cursor:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorRouteResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorRouteResource:
       type: object
       properties:
@@ -381,33 +356,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntity_ApiIntegratorRouteResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorRouteResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorRouteDriverResource:
       type: object
       properties:
@@ -430,23 +378,23 @@ components:
         CrewNumber:
           type: integer
           format: int32
-    ApiIntegratorRouteAcceptedMaterialsResource:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        Guid:
+        self:
           type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        MaterialClassListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorRouteVehicleCheckCrewMembersResource:
       type: object
       properties:
@@ -460,6 +408,17 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorRouteAcceptedMaterialsResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        MaterialClassListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiResourceChanges_ApiIntegratorRouteResource:
       type: object
       properties:
@@ -481,23 +440,64 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntityLinks:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        self:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
           type: string
-        associations:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollection_ApiIntegratorRouteResource:
+      type: object
+      properties:
+        resource:
           type: array
           items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ApiIntegratorRouteResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiIntegratorRouteResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorRouteResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
     ApiIntegratorRouteVehicleCheckResource:
       type: object
       properties:

@@ -262,23 +262,13 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
-    ApiResourceResult_ApiScheduledJobResource:
+    ApiResourceErrors:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceChanges_ApiScheduledJobResource:
       type: object
@@ -296,59 +286,31 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        until:
+        self:
           type:
           - string
           - 'null'
-        cursor:
+        associations:
           type:
-          - string
+          - array
           - 'null'
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
+          items:
+            type: string
+        expand:
           type:
-          - integer
+          - array
           - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
+          items:
+            type: string
+        operations:
           type:
-          - string
+          - array
           - 'null'
-      additionalProperties: false
-    ApiResourceResultEntity_ApiScheduledJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          items:
+            type: string
       additionalProperties: false
     ApiResourceResultCollection_ApiScheduledJobResource:
       type: object
@@ -365,6 +327,51 @@ components:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiScheduledJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
       additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob:
       type: object
@@ -439,40 +446,33 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceResult_ApiScheduledJobResource:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiScheduledJob'
       additionalProperties: false
-    ApiResourceResultEntityLinks:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        self:
+        until:
           type:
           - string
           - 'null'
-        associations:
+        cursor:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false

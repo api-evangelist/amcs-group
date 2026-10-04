@@ -118,30 +118,11 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
-    ApiResourceResultEntity_ApiIntegratorContainerCategoryResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -159,15 +140,15 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection_ApiIntegratorContainerCategoryResource:
+    ApiResourceResultEntity_ApiIntegratorContainerCategoryResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
+          $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -193,3 +174,22 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultCollection_ApiIntegratorContainerCategoryResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorContainerCategoryResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

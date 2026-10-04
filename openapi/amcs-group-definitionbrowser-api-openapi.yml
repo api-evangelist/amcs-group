@@ -238,6 +238,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceResult_ApiWorkflowDefinitionBrowserResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
+      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -262,24 +272,39 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ApiResource:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser:
       type: object
@@ -345,6 +370,53 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    ApiResourceChanges_ApiWorkflowDefinitionBrowserResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -373,14 +445,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     ApiResourceResultEntity_ApiWorkflowDefinitionBrowserResource:
       type: object
       properties:
@@ -395,75 +459,11 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceChanges_ApiWorkflowDefinitionBrowserResource:
+    ApiResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResult_ApiWorkflowDefinitionBrowserResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowDefinitionBrowser'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false

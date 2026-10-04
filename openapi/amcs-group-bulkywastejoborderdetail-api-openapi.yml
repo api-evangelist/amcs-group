@@ -43,23 +43,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultEntity_ApiIntegratorBulkyWasteJobOrderDetailResource'
 components:
   schemas:
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
     ApiIntegratorBulkyWasteJobChargeAndCostResource:
       type: object
       properties:
@@ -84,11 +67,66 @@ components:
         Rate:
           type: number
           format: double
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiResourceErrors:
       type: object
       properties:
         errors:
           type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceResultEntity_ApiIntegratorBulkyWasteJobOrderDetailResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobOrderDetailResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorBulkyWasteProcessingPriceResource:
       type: object
       properties:
@@ -113,27 +151,6 @@ components:
         BreakdownQuantity:
           type: integer
           format: int32
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultEntity_ApiIntegratorBulkyWasteJobOrderDetailResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorBulkyWasteJobOrderDetailResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorBulkyWasteJobOrderDetailResource:
       type: object
       properties:
@@ -175,20 +192,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string

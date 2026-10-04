@@ -55,12 +55,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource'
 components:
   schemas:
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceErrors:
       type: object
       properties:
@@ -87,19 +94,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventDetailResource'
-    ApiResourceResultCollection_ApiIntegratorMunicipalCalendarEventResource:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalCalendarEventResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorMunicipalCalendarEventDetailResource:
       type: object
       properties:
@@ -109,11 +117,3 @@ components:
           type: string
           format: dateTime
           example: '2000-01-01 00:00:00.000'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
