@@ -140,6 +140,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMaterialClassResource'
 components:
   schemas:
+    ApiResourceResultEntity_ApiIntegratorMaterialClassResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -157,39 +170,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorMaterialClassResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        AnalysisCode:
-          type: string
-        MaterialClassGroupListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorMaterialClassResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -207,6 +187,19 @@ components:
           type: array
           items:
             type: string
+    ApiResourceResultCollection_ApiIntegratorMaterialClassResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -215,25 +208,33 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultEntity_ApiIntegratorMaterialClassResource:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorMaterialClassResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
+          type: string
+    ApiIntegratorMaterialClassResource:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        AnalysisCode:
+          type: string
+        MaterialClassGroupListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceChanges_ApiIntegratorMaterialClassResource:
       type: object
       properties:
@@ -247,6 +248,12 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -256,10 +263,3 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string

@@ -238,6 +238,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -261,14 +272,6 @@ components:
             items:
               type: object
               additionalProperties: {}
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
@@ -296,18 +299,7 @@ components:
           items:
             type: string
       additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultEntity_ApiWorkflowInstanceBrowserResource:
+    ApiResourceResult_ApiWorkflowInstanceBrowserResource:
       type: object
       properties:
         errors:
@@ -316,10 +308,14 @@ components:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowInstanceBrowser'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
     ApiResourceChanges_ApiWorkflowInstanceBrowserResource:
       type: object
@@ -337,35 +333,28 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type:
           - integer
           - 'null'
           format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
-    ApiResourceResult_ApiWorkflowInstanceBrowserResource:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowInstanceBrowser'
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceResultCollection_ApiWorkflowInstanceBrowserResource:
       type: object
@@ -383,25 +372,36 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResource:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceResultEntity_ApiWorkflowInstanceBrowserResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Workflow.ApiWorkflowInstanceBrowser'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
     AMCS.Core.Entity.Api.Workflow.ApiWorkflowInstanceBrowser:
       type: object

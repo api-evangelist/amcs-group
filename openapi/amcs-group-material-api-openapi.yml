@@ -138,11 +138,23 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceErrors:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        errors:
+        self:
           type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiIntegratorMaterialResource:
       type: object
       properties:
@@ -166,23 +178,14 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultEntityLinks:
+    ApiResourceStatus:
       type: object
       properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiResourceResultEntity_ApiIntegratorMaterialResource:
       type: object
       properties:
@@ -196,20 +199,11 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        errors:
+          type: string
     ApiIntegratorListItemResource:
       type: object
       properties:
@@ -219,6 +213,12 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultCollection_ApiIntegratorMaterialResource:
       type: object
       properties:

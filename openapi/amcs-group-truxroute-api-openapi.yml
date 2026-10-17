@@ -174,28 +174,6 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
     ServiceUnavailable:
       description: Service Unavailable - The server is currently unavailable.
       content:
@@ -206,6 +184,39 @@ components:
               error:
                 type: string
                 example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
             additionalProperties: false
     NotFound:
       description: Not Found - The requested resource was not found.
@@ -229,8 +240,8 @@ components:
                 type: string
                 example: You do not have permission to access this resource.
             additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
       content:
         application/json:
           schema:
@@ -238,38 +249,34 @@ components:
             properties:
               error:
                 type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
+                example: Invalid request. Please check your input parameters.
             additionalProperties: false
   schemas:
-    ApiResourceErrors:
+    ApiResourceId:
       type: object
       properties:
         errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: guid
+      additionalProperties: false
+    ApiauthTokens500Error:
+      type: object
+      properties:
+        message:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
+        type:
           type:
-          - integer
+          - string
           - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
+        stackTrace:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxRoute:
       type: object
@@ -366,28 +373,21 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceId:
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceErrors:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: guid
-      additionalProperties: false
-    ApiauthTokens500Error:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-        type:
-          type:
-          - string
-          - 'null'
-        stackTrace:
           type:
           - string
           - 'null'

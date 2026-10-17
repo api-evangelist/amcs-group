@@ -93,6 +93,15 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMarketResource'
 components:
   schemas:
+    ApiIntegratorMarketResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -110,20 +119,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorMarketResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -141,15 +136,15 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultCollection_ApiIntegratorMarketResource:
+    ApiResourceResultEntity_ApiIntegratorMarketResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMarketResource'
+          $ref: '#/components/schemas/ApiIntegratorMarketResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -162,21 +157,26 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceResultEntity_ApiIntegratorMarketResource:
+    ApiResourceResultCollection_ApiIntegratorMarketResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorMarketResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMarketResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:

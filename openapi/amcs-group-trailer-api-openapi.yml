@@ -139,20 +139,23 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiIntegratorTrailerResource:
+    ApiResourceResultEntityLinks:
       type: object
       properties:
-        Description:
+        self:
           type: string
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceChanges_ApiIntegratorTrailerResource:
       type: object
       properties:
@@ -179,23 +182,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -204,12 +190,27 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultCollectionExtra:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorTrailerResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultCollection_ApiIntegratorTrailerResource:
       type: object
       properties:
@@ -223,10 +224,9 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        until:
-          type: string
-        cursor:
-          type: string
+        count:
+          type: integer
+          format: int32

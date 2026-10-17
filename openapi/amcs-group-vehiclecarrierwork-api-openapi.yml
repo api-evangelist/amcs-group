@@ -154,11 +154,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiVehicleCarrierWorkResource'
 components:
   schemas:
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiVehicleCarrierWorkCurrentLinkedCustomersResource:
       type: object
       properties:
@@ -187,6 +182,34 @@ components:
         LastChangeReasonId:
           format: int32
           type: integer
+    ApiResourceResultCollection_ApiVehicleCarrierWorkResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiVehicleCarrierWorkCurrentLinkedMaterialsResource:
+      type: object
+      properties:
+        MaterialGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        Material:
+          type: string
+        MaterialShortCode:
+          type: string
+        MaterialAnalysisCode:
+          type: string
+        MaterialEWCCode:
+          type: string
     ApiVehicleCarrierWorkCurrentLinkedRoutesResource:
       type: object
       properties:
@@ -214,23 +237,6 @@ components:
         LastChangeReasonId:
           format: int32
           type: integer
-    ApiVehicleCarrierWorkCurrentLinkedJobsResource:
-      type: object
-      properties:
-        JobGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        TicketNo:
-          type: string
-        DefaultMaterial:
-          type: string
-        MaterialShortCode:
-          type: string
-        MaterialAnalysisCode:
-          type: string
-        MaterialEWCCode:
-          type: string
     ApiVehicleCarrierWorkStageWeighingResource:
       type: object
       properties:
@@ -252,21 +258,6 @@ components:
         TareWeight:
           format: double
           type: number
-    ApiVehicleCarrierWorkCurrentLinkedMaterialsResource:
-      type: object
-      properties:
-        MaterialGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        Material:
-          type: string
-        MaterialShortCode:
-          type: string
-        MaterialAnalysisCode:
-          type: string
-        MaterialEWCCode:
-          type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -275,36 +266,28 @@ components:
           type: integer
         isSuccess:
           type: boolean
-    ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource:
+    ApiResourceErrors:
       type: object
       properties:
-        OrderNo:
+        errors:
           type: string
-        OrderGUID:
+    ApiVehicleCarrierWorkCurrentLinkedJobsResource:
+      type: object
+      properties:
+        JobGUID:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
-        AreaOfOriginGUID:
-          format: uuid
+        TicketNo:
           type: string
-          example: 00000000-0000-0000-0000-000000000000
-        AreaOfOrigin:
+        DefaultMaterial:
           type: string
-        ShortCode:
+        MaterialShortCode:
           type: string
-        InboundOrder:
-          type: boolean
-        LinkedMaterials:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource'
-        GUID:
-          format: uuid
+        MaterialAnalysisCode:
           type: string
-          example: 00000000-0000-0000-0000-000000000000
-        LastChangeReasonId:
-          format: int32
-          type: integer
+        MaterialEWCCode:
+          type: string
     ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource:
       type: object
       properties:
@@ -333,19 +316,6 @@ components:
         count:
           format: int32
           type: integer
-    ApiResourceResultCollection_ApiVehicleCarrierWorkResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiVehicleCarrierWorkResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiVehicleCarrierWorkResource:
       type: object
       properties:
@@ -379,3 +349,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiVehicleCarrierWorkCurrentLinkedCustomersResource'
+    ApiVehicleCarrierWorkLinkedToCustomerLinkedOrdersResource:
+      type: object
+      properties:
+        OrderNo:
+          type: string
+        OrderGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOriginGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
+          type: string
+        ShortCode:
+          type: string
+        InboundOrder:
+          type: boolean
+        LinkedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVehicleCarrierWorkLinkedToCustomerLinkedOrderMaterialsResource'
+        GUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LastChangeReasonId:
+          format: int32
+          type: integer

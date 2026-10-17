@@ -116,24 +116,359 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorInvoiceResource'
 components:
   schemas:
-    ApiResourceResultEntity_ApiIntegratorInvoiceResource:
+    ApiResourceChanges_ApiIntegratorInvoiceResource:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorInvoiceOutputResource:
+    ApiIntegratorInvoiceDetailAmountResource:
       type: object
       properties:
-        Hash:
+        Rate:
+          type: number
+          format: double
+        IsRebilled:
+          type: boolean
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+        Weight:
+          type: number
+          format: double
+        Price:
+          type: number
+          format: double
+        PriceIncVat:
+          type: number
+          format: double
+        ChargeableHours:
+          type: number
+          format: double
+        MinimumCharge:
+          type: number
+          format: double
+        MaximumCharge:
+          type: number
+          format: double
+        Allowance:
+          type: number
+          format: double
+        RebillQuantity:
+          type: number
+          format: double
+        RebillVolume:
+          type: number
+          format: double
+        RebillWeight:
+          type: number
+          format: double
+        RebilledPrice:
+          type: number
+          format: double
+        RebilledPriceIncVat:
+          type: number
+          format: double
+        RebilledChargeableHours:
+          type: number
+          format: double
+        RebilledMinimumCharge:
+          type: number
+          format: double
+        RebilledMaximumCharge:
+          type: number
+          format: double
+        RebilledAllowance:
+          type: number
+          format: double
+    ApiIntegratorInvoiceAllocationResource:
+      type: object
+      properties:
+        Amount:
+          type: number
+          format: double
+        RelatedInvoiceAllocatedToGuid:
           type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        DateInput:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        IsExported:
+          type: boolean
+        IsDeleted:
+          type: boolean
+        AccountingPeriodListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DateExported:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorRemitAddressResource:
+      type: object
+      properties:
+        SiteName:
+          type: string
+        HouseNumber:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        Address5:
+          type: string
+        Postcode:
+          type: string
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorInvoiceAmountExchangeRateResource:
+      type: object
+      properties:
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ExchangeCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorInvoiceDetailRentResource:
+      type: object
+      properties:
+        RentTermListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        From:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        To:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorInvoiceDetailResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ItemDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        OrderNo:
+          type: string
+        CustomerOrderNo:
+          type: string
+        CustomerLoadReference:
+          type: string
+        PoNumber:
+          type: string
+        ReleaseNumber:
+          type: string
+        DepartmentListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceDescriptionOverride:
+          type: string
+        ActionDescriptionOverride:
+          type: string
+        UnitOfMeasurementListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        SiteAddress:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailSiteAddressResource'
+        Reason:
+          type: string
+        ServiceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ServiceFrequencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        DefaultActionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Rent:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailRentResource'
+        Amount:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailAmountResource'
+        NotDueAmount:
+          type: number
+          format: double
+        RelatedOrderGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedWeighingOutGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedSiteGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedRouteVisitJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedPONumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Reference:
+          type: string
+        Notes:
+          type: string
+        TaxTemplateCollection:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailTaxTemplateCollectionResource'
+        PriceFactor:
+          type: number
+          format: double
+    ApiIntegratorInvoiceBatchResource:
+      type: object
+      properties:
+        GeneratedTimestamp:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        AcceptedTimestamp:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        InvoiceDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        InvoiceUntil:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        IsAcceptanceInProgress:
+          type: boolean
+        IsGenerationInProgress:
+          type: boolean
+        IsExported:
+          type: boolean
+        RelatedUserGeneratedGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        RelatedUserAcceptedByGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        AnalysisCode:
+          type: string
+        Notes:
+          type: string
+        InvoiceBatchStatusListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        IsDeleted:
+          type: boolean
+        BatchGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorInvoiceDetailSiteAddressResource:
       type: object
       properties:
@@ -153,6 +488,20 @@ components:
           type: string
         ContactMethods:
           $ref: '#/components/schemas/ApiIntegratorInvoiceDetailSiteAddressContactMethodsResource'
+    ApiIntegratorInvoiceOutputResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorInvoiceResource:
       type: object
       properties:
@@ -305,12 +654,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorInvoiceDeallocationResource:
       type: object
       properties:
@@ -361,96 +704,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorInvoiceBatchResource:
-      type: object
-      properties:
-        GeneratedTimestamp:
-          type: string
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-        AcceptedTimestamp:
-          type: string
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-        InvoiceDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        InvoiceUntil:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        IsAcceptanceInProgress:
-          type: boolean
-        IsGenerationInProgress:
-          type: boolean
-        IsExported:
-          type: boolean
-        RelatedUserGeneratedGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedUserAcceptedByGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        AnalysisCode:
-          type: string
-        Notes:
-          type: string
-        InvoiceBatchStatusListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        IsDeleted:
-          type: boolean
-        BatchGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultCollection_ApiIntegratorInvoiceResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorInvoiceAmountExchangeRateResource:
-      type: object
-      properties:
-        Rate:
-          type: number
-          format: double
-        ExchangeDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        BaseCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ExchangeCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceChanges_ApiIntegratorInvoiceResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorPrintAddressResource:
       type: object
       properties:
@@ -468,153 +721,6 @@ components:
           type: string
         Postcode:
           type: string
-    ApiIntegratorInvoiceDetailSiteAddressContactMethodsResource:
-      type: object
-      properties:
-        TelNo:
-          type: string
-        FaxNo:
-          type: string
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiIntegratorInvoiceDetailResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ItemDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        OrderNo:
-          type: string
-        CustomerOrderNo:
-          type: string
-        CustomerLoadReference:
-          type: string
-        PoNumber:
-          type: string
-        ReleaseNumber:
-          type: string
-        DepartmentListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ServiceDescriptionOverride:
-          type: string
-        ActionDescriptionOverride:
-          type: string
-        UnitOfMeasurementListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        SiteAddress:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailSiteAddressResource'
-        Reason:
-          type: string
-        ServiceListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ServiceFrequencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DefaultActionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Rent:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailRentResource'
-        Amount:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailAmountResource'
-        NotDueAmount:
-          type: number
-          format: double
-        RelatedOrderGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedWeighingGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedWeighingInGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedWeighingOutGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedRouteVisitGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedSiteGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedRouteVisitJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        RelatedPONumberGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        VATListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Reference:
-          type: string
-        Notes:
-          type: string
-        TaxTemplateCollection:
-          $ref: '#/components/schemas/ApiIntegratorInvoiceDetailTaxTemplateCollectionResource'
-        PriceFactor:
-          type: number
-          format: double
     ApiIntegratorInvoiceAmountResource:
       type: object
       properties:
@@ -626,87 +732,26 @@ components:
           format: double
         ExchangeRate:
           $ref: '#/components/schemas/ApiIntegratorInvoiceAmountExchangeRateResource'
-    ApiIntegratorRemitAddressResource:
+    ApiIntegratorInvoiceDetailSiteAddressContactMethodsResource:
       type: object
       properties:
-        SiteName:
+        TelNo:
           type: string
-        HouseNumber:
+        FaxNo:
           type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        Address3:
-          type: string
-        Address4:
-          type: string
-        Address5:
-          type: string
-        Postcode:
-          type: string
-    ApiIntegratorInvoiceDetailAmountResource:
+    ApiResourceResultEntity_ApiIntegratorInvoiceResource:
       type: object
       properties:
-        Rate:
-          type: number
-          format: double
-        IsRebilled:
-          type: boolean
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-        Weight:
-          type: number
-          format: double
-        Price:
-          type: number
-          format: double
-        PriceIncVat:
-          type: number
-          format: double
-        ChargeableHours:
-          type: number
-          format: double
-        MinimumCharge:
-          type: number
-          format: double
-        MaximumCharge:
-          type: number
-          format: double
-        Allowance:
-          type: number
-          format: double
-        RebillQuantity:
-          type: number
-          format: double
-        RebillVolume:
-          type: number
-          format: double
-        RebillWeight:
-          type: number
-          format: double
-        RebilledPrice:
-          type: number
-          format: double
-        RebilledPriceIncVat:
-          type: number
-          format: double
-        RebilledChargeableHours:
-          type: number
-          format: double
-        RebilledMinimumCharge:
-          type: number
-          format: double
-        RebilledMaximumCharge:
-          type: number
-          format: double
-        RebilledAllowance:
-          type: number
-          format: double
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorInvoiceDetailTaxTemplateCollectionResource:
       type: object
       properties:
@@ -720,61 +765,16 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiResourceResultCollection_ApiIntegratorInvoiceResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorInvoiceDetailRentResource:
-      type: object
-      properties:
-        RentTermListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        From:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        To:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-    ApiIntegratorInvoiceAllocationResource:
-      type: object
-      properties:
-        Amount:
-          type: number
-          format: double
-        RelatedInvoiceAllocatedToGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        DateInput:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        IsExported:
-          type: boolean
-        IsDeleted:
-          type: boolean
-        AccountingPeriodListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        DateExported:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorInvoiceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

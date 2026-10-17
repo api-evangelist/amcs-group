@@ -238,6 +238,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -261,22 +272,6 @@ components:
             items:
               type: object
               additionalProperties: {}
-      additionalProperties: false
-    ApiResourceResultCollection_ApiLanguageResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
     AMCS.Core.Entity.Api.Glossary.ApiLanguage:
       type: object
@@ -322,24 +317,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResult_ApiLanguageResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
-      additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -366,7 +343,7 @@ components:
           items:
             type: string
       additionalProperties: false
-    ApiResourceChanges_ApiLanguageResource:
+    ApiResourceResultCollection_ApiLanguageResource:
       type: object
       properties:
         errors:
@@ -380,7 +357,15 @@ components:
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
     ApiResourceStatus:
       type: object
@@ -393,26 +378,6 @@ components:
         isSuccess:
           type: boolean
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
     ApiResourceResultUpdatesExtra:
       type: object
       properties:
@@ -424,6 +389,24 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResult_ApiLanguageResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
       additionalProperties: false
     ApiResourceResultEntity_ApiLanguageResource:
       type: object
@@ -439,11 +422,28 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResource:
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceChanges_ApiLanguageResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.Glossary.ApiLanguage'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false

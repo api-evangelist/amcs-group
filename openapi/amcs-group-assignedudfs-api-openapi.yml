@@ -174,6 +174,32 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceResult_ApiAssignedUdfsResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+      additionalProperties: false
+    ApiResourceChanges_ApiAssignedUdfsResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -214,28 +240,6 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResultEntity_ApiAssignedUdfsResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -261,6 +265,91 @@ components:
           - 'null'
           items:
             type: string
+      additionalProperties: false
+    AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        componentGuid:
+          type: string
+          format: uuid
+        businessObjectName:
+          type:
+          - string
+          - 'null'
+        plugins:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        title:
+          type:
+          - string
+          - 'null'
+        udFs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdf'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.Data.Entity.Api.Udf.ApiAssignedUdf:
       type: object
@@ -346,70 +435,19 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceResultEntity_ApiAssignedUdfsResource:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        componentGuid:
-          type: string
-          format: uuid
-        businessObjectName:
-          type:
-          - string
-          - 'null'
-        plugins:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        title:
-          type:
-          - string
-          - 'null'
-        udFs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdf'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
@@ -419,42 +457,4 @@ components:
           - integer
           - 'null'
           format: int32
-      additionalProperties: false
-    ApiResourceChanges_ApiAssignedUdfsResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceResult_ApiAssignedUdfsResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiAssignedUdfs'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
       additionalProperties: false

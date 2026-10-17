@@ -332,19 +332,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorCommunicationResource'
 components:
   schemas:
-    ApiIntegratorCommunicationJobResource:
+    ApiResourceResultCollection_ApiIntegratorCommunicationResource:
       type: object
       properties:
-        RelatedJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -362,41 +362,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorCommunicationResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorCommunicationFollowupResource:
-      type: object
-      properties:
-        ClosedDate:
-          type: string
-          format: localDate
-          example: '2000-01-01'
-        RelatedUserAssignedToGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -414,33 +379,19 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity_ApiIntegratorCommunicationResource:
+    ApiIntegratorCommunicationJobResource:
       type: object
       properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
           type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceChanges_ApiIntegratorCommunicationResource:
       type: object
       properties:
@@ -454,6 +405,19 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCommunicationRouteVisitResource:
+      type: object
+      properties:
+        RelatedRouteVisitGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorCommunicationResource:
       type: object
       properties:
@@ -531,19 +495,35 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
+    ApiResourceStatus:
       type: object
       properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCommunicationRouteVisitResource:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultEntity_ApiIntegratorCommunicationResource:
       type: object
       properties:
-        RelatedRouteVisitGuid:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorCommunicationResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorCommunicationFollowupResource:
+      type: object
+      properties:
+        ClosedDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        RelatedUserAssignedToGuid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
@@ -553,6 +533,18 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiIntegratorCommunicationDocumentBlobHashesResource:
       type: object
       properties:
@@ -568,10 +560,18 @@ components:
           type: string
         DocumentName:
           type: string
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        until:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
           type: string
-        cursor:
+        Guid:
           type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000

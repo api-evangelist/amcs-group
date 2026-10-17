@@ -169,24 +169,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -204,6 +186,19 @@ components:
           type: array
           items:
             type: string
+    ApiResourceResultCollection_ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -212,6 +207,24 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
@@ -227,24 +240,24 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorAreaOfOriginResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        CompanyOutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiIntegratorAreaOfOriginResource:
       type: object
       properties:
         resource:
           $ref: '#/components/schemas/ApiIntegratorAreaOfOriginResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiSubscriberAreaOfOriginResource'
         links:
           $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
@@ -275,19 +288,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubscriberAreaOfOriginResource'
-    ApiResourceResultEntity_ApiSubscriberAreaOfOriginResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiSubscriberAreaOfOriginResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
 x-refined-from:
 - amcs-group-erp-openapi-original.json
 - amcs-group-scale-openapi-original.json

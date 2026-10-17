@@ -88,40 +88,13 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorSharedContainerResource'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceStatus:
       type: object
       properties:
-        errors:
-          type: string
-    ApiIntegratorAccessClusterMunicipalAccountResource:
-      type: object
-      properties:
-        ClusterAccountId:
+        id:
           type: integer
           format: int32
-        CustomerId:
-          type: integer
-          format: int32
-        CustomerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        MunicipalAccountAccessPasses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorAccessClusterMunicipalAccessPassResource'
-    ApiIntegratorAccessClusterContainerResource:
-      type: object
-      properties:
-        ContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Tag:
-          type: string
-        SerialNo:
-          type: string
-        AccessPassRequired:
+        isSuccess:
           type: boolean
     ApiIntegratorSharedContainerResource:
       type: object
@@ -155,14 +128,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiIntegratorAccessClusterMunicipalAccessPassResource:
       type: object
       properties:
@@ -172,12 +137,6 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         AccessPassTagId:
           type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorAccessClusterMasterAccessPassResource:
       type: object
       properties:
@@ -187,6 +146,41 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         AccessPassTagId:
           type: string
+    ApiIntegratorAccessClusterContainerResource:
+      type: object
+      properties:
+        ContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Tag:
+          type: string
+        SerialNo:
+          type: string
+        AccessPassRequired:
+          type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorAccessClusterMunicipalAccountResource:
+      type: object
+      properties:
+        ClusterAccountId:
+          type: integer
+          format: int32
+        CustomerId:
+          type: integer
+          format: int32
+        CustomerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MunicipalAccountAccessPasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorAccessClusterMunicipalAccessPassResource'
     ApiResourceResultCollection_ApiIntegratorSharedContainerResource:
       type: object
       properties:
@@ -200,3 +194,9 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32

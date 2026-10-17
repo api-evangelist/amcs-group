@@ -84,38 +84,6 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiCheckBalanceResource'
 components:
   schemas:
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollection_ApiCheckBalanceResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiCheckBalanceResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          format: int32
-          type: integer
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          format: int32
-          type: integer
     ApiCheckBalanceResource:
       type: object
       properties:
@@ -129,3 +97,35 @@ components:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
+    ApiResourceResultCollection_ApiCheckBalanceResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiCheckBalanceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          format: int32
+          type: integer

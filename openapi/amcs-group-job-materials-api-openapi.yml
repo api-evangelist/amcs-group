@@ -90,11 +90,17 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceErrors:
+    ApiJobMaterialsResource:
       type: object
       properties:
-        errors:
+        JobGUID:
+          format: uuid
           type: string
+          example: 00000000-0000-0000-0000-000000000000
+        LinkedMaterials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiMaterialResource'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -112,19 +118,6 @@ components:
           type: array
           items:
             type: string
-    ApiResourceResultEntity_ApiJobMaterialsResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiJobMaterialsResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceStatus:
       type: object
       properties:
@@ -133,6 +126,11 @@ components:
           type: integer
         isSuccess:
           type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiMaterialResource:
       type: object
       properties:
@@ -148,14 +146,16 @@ components:
           type: string
         EWCCode:
           type: string
-    ApiJobMaterialsResource:
+    ApiResourceResultEntity_ApiJobMaterialsResource:
       type: object
       properties:
-        JobGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        LinkedMaterials:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiMaterialResource'
+        resource:
+          $ref: '#/components/schemas/ApiJobMaterialsResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

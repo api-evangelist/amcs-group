@@ -174,19 +174,46 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiResourceResultEntity_ApiUdfLocationDataSaveResource:
+    AMCS.Data.Entity.Api.Udf.ApiUdfSave:
       type: object
       properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        fieldName:
+          type:
+          - string
+          - 'null'
+        row:
+          type: integer
+          format: int32
+        column:
+          type: integer
+          format: int32
       additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
@@ -212,7 +239,7 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
-    ApiResourceChanges_ApiUdfLocationDataSaveResource:
+    ApiResourceResultEntity_ApiUdfLocationDataSaveResource:
       type: object
       properties:
         errors:
@@ -220,21 +247,11 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave'
+          $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
     ApiResourceResultEntityLinks:
       type: object
@@ -262,6 +279,43 @@ components:
           items:
             type: string
       additionalProperties: false
+    AMCS.Data.Entity.Api.Udf.ApiUdfLocationSave:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        udFs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfSave'
+      additionalProperties: false
     ApiResourceResultCollection_ApiUdfLocationDataSaveResource:
       type: object
       properties:
@@ -288,6 +342,42 @@ components:
           format: int32
         isSuccess:
           type: boolean
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceChanges_ApiUdfLocationDataSaveResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave:
       type: object
@@ -330,43 +420,6 @@ components:
           items:
             $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationSave'
       additionalProperties: false
-    AMCS.Data.Entity.Api.Udf.ApiUdfLocationSave:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        udFs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfSave'
-      additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
       properties:
@@ -374,47 +427,6 @@ components:
           type:
           - integer
           - 'null'
-          format: int32
-      additionalProperties: false
-    AMCS.Data.Entity.Api.Udf.ApiUdfSave:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        fieldName:
-          type:
-          - string
-          - 'null'
-        row:
-          type: integer
-          format: int32
-        column:
-          type: integer
           format: int32
       additionalProperties: false
     ApiResourceResult_ApiUdfLocationDataSaveResource:
@@ -426,16 +438,4 @@ components:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
           $ref: '#/components/schemas/AMCS.Data.Entity.Api.Udf.ApiUdfLocationDataSave'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
       additionalProperties: false

@@ -55,6 +55,34 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorMunicipalAccountServicePackageResource'
 components:
   schemas:
+    ApiIntegratorMunicipalAccountServicePackageDetailServiceResource:
+      type: object
+      properties:
+        ServiceType:
+          type: string
+        ServiceDescription:
+          type: string
+        ServiceLineDescription:
+          type: string
+        Material:
+          type: string
+        WorkOrderStatus:
+          type: string
+        OrderNumber:
+          type: string
+        OrderNumberGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorMunicipalAccountServicePackageDetailResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageDetailServiceResource'
     ApiIntegratorMunicipalAccountServicePackageResource:
       type: object
       properties:
@@ -81,30 +109,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorMunicipalAccountServicePackageDetailServiceResource:
-      type: object
-      properties:
-        ServiceType:
-          type: string
-        ServiceDescription:
-          type: string
-        ServiceLineDescription:
-          type: string
-        Material:
-          type: string
-        WorkOrderStatus:
-          type: string
-        OrderNumber:
-          type: string
-        OrderNumberGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceStatus:
       type: object
       properties:
@@ -113,18 +117,14 @@ components:
           format: int32
         isSuccess:
           type: boolean
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
     ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiIntegratorMunicipalAccountServicePackageDetailResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorMunicipalAccountServicePackageDetailServiceResource'

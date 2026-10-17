@@ -238,6 +238,78 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiResourceResultEntity_ApiJobHandlerResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+      additionalProperties: false
+    AMCS.Core.Entity.Api.JobSystem.ApiJobHandlerProperty:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        displayName:
+          type:
+          - string
+          - 'null'
+        isRequired:
+          type: boolean
+        isList:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -262,6 +334,32 @@ components:
               type: object
               additionalProperties: {}
       additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
     ApiResourceResult_ApiJobHandlerResource:
       type: object
       properties:
@@ -272,15 +370,15 @@ components:
         resource:
           $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResource:
       type: object
       properties:
         errors:
-          type:
-          - string
-          - 'null'
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
-    ApiResourceResultEntity_ApiJobHandlerResource:
+    ApiResourceChanges_ApiJobHandlerResource:
       type: object
       properties:
         errors:
@@ -288,11 +386,52 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiJobHandlerResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiJobHandlerParameter:
       type: object
@@ -334,6 +473,14 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandlerProperty'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiJobHandler:
       type: object
@@ -388,59 +535,6 @@ components:
           items:
             type: string
       additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceChanges_ApiJobHandlerResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
     ApiResourceResultCollectionExtra:
       type: object
       properties:
@@ -449,98 +543,4 @@ components:
           - integer
           - 'null'
           format: int32
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    AMCS.Core.Entity.Api.JobSystem.ApiJobHandlerProperty:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        displayName:
-          type:
-          - string
-          - 'null'
-        isRequired:
-          type: boolean
-        isList:
-          type: boolean
-        type:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResultCollection_ApiJobHandlerResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJobHandler'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false

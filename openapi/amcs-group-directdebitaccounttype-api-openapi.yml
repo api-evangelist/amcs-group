@@ -93,6 +93,17 @@ paths:
                 $ref: '#/components/schemas/ApiResourceResultCollection_ApiIntegratorDirectDebitAccountTypeResource'
 components:
   schemas:
+    ApiIntegratorDirectDebitAccountTypeResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -110,11 +121,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -132,14 +138,6 @@ components:
           type: array
           items:
             type: string
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
     ApiResourceResultCollection_ApiIntegratorDirectDebitAccountTypeResource:
       type: object
       properties:
@@ -153,12 +151,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiResourceResultEntity_ApiIntegratorDirectDebitAccountTypeResource:
       type: object
       properties:
@@ -172,14 +164,22 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorDirectDebitAccountTypeResource:
+    ApiResourceStatus:
       type: object
       properties:
-        Description:
-          type: string
-        IsDeleted:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
           type: boolean
-        GUID:
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
           type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32

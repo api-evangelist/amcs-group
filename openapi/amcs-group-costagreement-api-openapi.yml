@@ -599,6 +599,16 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -616,43 +626,6 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorCostAgreementResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorCostAgreementResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorCostAgreementAmountResource:
-      type: object
-      properties:
-        Cost:
-          type: number
-          format: double
-        MaximumCost:
-          type: number
-          format: double
-        MinimumCost:
-          type: number
-          format: double
-        Allowance:
-          type: number
-          format: double
-        VATListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        TaxTemplateCollectionListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -670,6 +643,39 @@ components:
           type: array
           items:
             type: string
+    ApiIntegratorCostAgreementCompanyOutletResource:
+      type: object
+      properties:
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiIntegratorCostAgreementServiceAgreementResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        RelatedServiceAgreementGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
     ApiIntegratorCostAgreementCostResource:
       type: object
       properties:
@@ -703,42 +709,6 @@ components:
           example: '2000-01-01'
         Amount:
           $ref: '#/components/schemas/ApiIntegratorCostAgreementAmountResource'
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorCostAgreementServiceAgreementResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        RelatedServiceAgreementGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorCostAgreementRelatedSupplierSiteResource:
       type: object
       properties:
@@ -746,6 +716,30 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorCostAgreementAmountResource:
+      type: object
+      properties:
+        Cost:
+          type: number
+          format: double
+        MaximumCost:
+          type: number
+          format: double
+        MinimumCost:
+          type: number
+          format: double
+        Allowance:
+          type: number
+          format: double
+        VATListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        TaxTemplateCollectionListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiResourceChanges_ApiIntegratorCostAgreementResource:
       type: object
       properties:
@@ -772,21 +766,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorCostAgreementCompanyOutletResource:
-      type: object
-      properties:
-        CompanyOutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiIntegratorCostAgreementResource:
       type: object
       properties:
@@ -862,10 +841,31 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        until:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
           type: string
-        cursor:
+        Guid:
           type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorCostAgreementResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorCostAgreementResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'

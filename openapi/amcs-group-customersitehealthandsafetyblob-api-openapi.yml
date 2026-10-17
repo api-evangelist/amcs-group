@@ -99,11 +99,24 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
-    ApiResourceErrors:
+    ApiResourceId:
       type: object
       properties:
-        errors:
+        resource:
           type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorHealthAndSafetyBlobHashesResource:
       type: object
       properties:
@@ -133,24 +146,11 @@ components:
           type: boolean
         IsSentToVehicle:
           type: boolean
-    ApiResourceStatus:
+    ApiResourceErrors:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiResourceId:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          type: string
     ApiIntegratorListItemResource:
       type: object
       properties:

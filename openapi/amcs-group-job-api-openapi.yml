@@ -539,90 +539,6 @@ paths:
     - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 components:
   schemas:
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - object
-            - 'null'
-            additionalProperties: {}
-        include:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - array
-            - 'null'
-            items:
-              type: object
-              additionalProperties: {}
-      additionalProperties: false
-    ApiResourceResult_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ApiResourceResultCollection_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
     AMCS.Core.Entity.Api.JobSystem.ApiJob:
       type: object
       properties:
@@ -725,16 +641,84 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceId:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type: integer
           format: int32
-        isSuccess:
-          type: boolean
+      additionalProperties: false
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceResult_ApiJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+      additionalProperties: false
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
       additionalProperties: false
     ApiResourceChanges_ApiJobResource:
       type: object
@@ -752,25 +736,36 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
-    ApiResourceResultCollectionExtra:
+    ApiResourceStatus:
       type: object
       properties:
-        count:
+        id:
           type:
           - integer
           - 'null'
           format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
-    ApiResourceId:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ApiResourceResultEntity_ApiJobResource:
       type: object
@@ -786,26 +781,111 @@ components:
         extra:
           $ref: '#/components/schemas/ApiResourceResultEntityExtra'
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
-        until:
+        count:
           type:
-          - string
+          - integer
           - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
+          format: int32
       additionalProperties: false
-    ApiResource:
+    ApiResourceResultCollection_ApiJobResource:
       type: object
       properties:
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
       additionalProperties: false
+    ApiIntegratorJobAccessTimeResource:
+      type: object
+      properties:
+        Contact:
+          type: string
+        StartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        EndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        Notes:
+          type: string
+        DayOfWeekId:
+          type: integer
+          format: int32
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultUpdatesExtra_2:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorJobVisitDetailsResource:
+      type: object
+      properties:
+        DriverNotes:
+          type: string
+        TimeInCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TimeOutCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        HoursChargeable:
+          type: number
+          format: double
+        HoursNotChargeable:
+          type: number
+          format: double
+    ApiIntegratorJobContainerDetailsResource:
+      type: object
+      properties:
+        Delivered:
+          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsDeliveredResource'
+        Removed:
+          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsRemovedResource'
+    ApiResourceResultCollectionExtra_2:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceId_2:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
     ApiIntegratorJobPictureResource:
       type: object
       properties:
@@ -817,17 +897,54 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         PictureSourceListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntityExtra_2:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollection_ApiIntegratorJobResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiResourceResultEntity_ApiIntegratorJobResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorJobResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks_2'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
     ApiIntegratorJobDocketPdfResource:
       type: object
       properties:
         Hash:
           type: string
-    ApiResourceResultCollectionExtra_2:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorJobWasteTransferNoteResource:
       type: object
       properties:
@@ -837,6 +954,44 @@ components:
           example: 00000000-0000-0000-0000-000000000000
         Hash:
           type: string
+    ApiResourceResultEntityLinks_2:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiResourceChanges_ApiIntegratorJobResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
     ApiIntegratorJobMaterialSaleSlotResource:
       type: object
       properties:
@@ -878,6 +1033,15 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorJobContainerDetailsRemovedResource:
       type: object
       properties:
@@ -893,6 +1057,41 @@ components:
           type: string
         Tag:
           type: string
+    ApiIntegratorJobContainerDetailsDeliveredResource:
+      type: object
+      properties:
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+    ApiIntegratorJobPriceResource:
+      type: object
+      properties:
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        OverrideRate:
+          type: number
+          format: double
+        IsSelected:
+          type: boolean
+        Breakdowns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPriceBreakdownResource'
     ApiIntegratorJobResource:
       type: object
       properties:
@@ -1084,140 +1283,19 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors_2:
+    ApiIntegratorLinkedJobResource:
       type: object
       properties:
-        errors:
-          type: string
-    ApiIntegratorJobVisitDetailsResource:
-      type: object
-      properties:
-        DriverNotes:
-          type: string
-        TimeInCustomerSite:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        TimeOutCustomerSite:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        HoursChargeable:
-          type: number
-          format: double
-        HoursNotChargeable:
-          type: number
-          format: double
-    ApiResourceChanges_ApiIntegratorJobResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiResourceId_2:
-      type: object
-      properties:
-        resource:
-          type: string
-          format: uuid
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiResourceResultUpdatesExtra_2:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceResultEntityExtra_2:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntity_ApiIntegratorJobResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorJobResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks_2'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra_2'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiIntegratorJobPriceResource:
-      type: object
-      properties:
-        RelatedPriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-        OverrideRate:
-          type: number
-          format: double
-        IsSelected:
+        IsDeleted:
           type: boolean
-        Breakdowns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobPriceBreakdownResource'
-    ApiResourceResultEntityLinks_2:
-      type: object
-      properties:
-        self:
+        RelatedJobGuid:
           type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultCollection_ApiIntegratorJobResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra_2'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorJobPriceBreakdownResource:
       type: object
       properties:
@@ -1239,84 +1317,6 @@ components:
           type: string
         JobPriceBreakdownTypeEnum:
           type: string
-    ApiIntegratorJobContainerDetailsDeliveredResource:
-      type: object
-      properties:
-        RelatedContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Notes:
-          type: string
-        SerialNo:
-          type: string
-        Tag:
-          type: string
-    ApiIntegratorLinkedJobResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        RelatedJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorJobAccessTimeResource:
-      type: object
-      properties:
-        Contact:
-          type: string
-        StartTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        EndTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        Notes:
-          type: string
-        DayOfWeekId:
-          type: integer
-          format: int32
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus_2:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
-    ApiIntegratorJobContainerDetailsResource:
-      type: object
-      properties:
-        Delivered:
-          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsDeliveredResource'
-        Removed:
-          $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsRemovedResource'
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
 x-refined-from:
 - amcs-group-core-openapi-original.json
 - amcs-group-erp-openapi-original.json
