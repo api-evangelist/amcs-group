@@ -1,28 +1,56 @@
 openapi: 3.2.0
 info:
-  description: '**Download Trux JSON**
-
-
-    ---
-
-
-    # Getting Started
-
-
-    ## Document Purpose and Scope
-
-
-    The VisionAI REST API endpoints are technically described in this document.'
-  title: External Contamination Event API
+  title: Amcs Group Contamination Event API
   version: external
+  description: 'Operations tagged ContaminationEvent across 2 of this provider''s published API definitions: amcs-group-openapi.json, amcs-group-visionai-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 - url: https://o1-dev-svc-core.amcsplatform.com/
   description: AMCS VisionAI Developer Environment
-security:
-- cookieAuth: []
 tags:
 - name: ContaminationEvent
 paths:
+  /integrator/contaminationEvents/changes:
+    get:
+      tags:
+      - ContaminationEvent
+      summary: Request list of Positive Contamination Event changes
+      description: '# Request list of Positive Contamination Event changes
+
+
+        Retrieve changes in the list of Positive Contamination Events for all tenants, that have been made since a specific point in the history'
+      parameters:
+      - name: since
+        in: query
+        description: Bookmark from extra.until
+        style: form
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Bookmark from extra.cursor
+        style: form
+        schema:
+          type: string
+      - name: outletName
+        in: query
+        description: Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiContaminationEventExternalResource'
+      operationId: getIntegratorContaminationEventsChanges
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
   /visionai/api/integrator/contaminationEvents/changes:
     get:
       tags:
@@ -137,7 +165,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges_ApiContaminationEventExternalResource'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiContaminationEventExternalResource_2'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -156,96 +184,12 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+      security:
+      - cookieAuth: []
+    servers:
+    - url: https://o1-dev-svc-core.amcsplatform.com/
+      description: AMCS VisionAI Developer Environment
 components:
-  responses:
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
   schemas:
     ApiResourceChanges_ApiContaminationEventExternalResource:
       type: object
@@ -259,9 +203,401 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal'
+            $ref: '#/components/schemas/ApiContaminationEventExternalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultChangesLinks'
         extra:
           $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+          description: Bookmark to put in as "since" later - appears when there are no more pages for now
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+          description: Error details describing why the request was rejected, or null when there were no errors.
+      additionalProperties: false
+      description: Validation and processing errors for the request. Populated only when the operation fails.
+    ApiResourceResultChangesLinks:
+      type: object
+      properties:
+        next:
+          type:
+          - string
+          - 'null'
+          description: Link to follow to get next page with changes
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the affected record, or null when it is not applicable.
+          format: int32
+        isSuccess:
+          type: boolean
+          description: True when the operation completed successfully; otherwise false.
+      additionalProperties: false
+      description: Outcome of the create or update operation.
+    ApiContaminationEventExternalResource:
+      type: object
+      properties:
+        GUID:
+          type:
+          - string
+          - 'null'
+          description: ID of the Contamination Event.
+          format: uuid
+        TenantId:
+          type: string
+          description: ID of the Tenant associated with the Contamination Event
+          format: uuid
+        CustomerName:
+          type:
+          - string
+          - 'null'
+          description: Name of the customer of the Contamination Event
+        CompanyOutletId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Company Outlet associated with the Contamination Event
+          format: uuid
+        OutletName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Company Outlet associated with the Contamination Event
+        CustomerSiteId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Customer Site associated with the Contamination Event
+          format: uuid
+        SiteName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Site associated with the Contamination Event
+        CustomerType:
+          type:
+          - string
+          - 'null'
+          description: Type of customer associated with the Contamination Event
+        CustomerAddress:
+          type:
+          - string
+          - 'null'
+          description: Address of customer associated with the Contamination Event
+        VehicleId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Vehicle associated with the Contamination Event
+          format: uuid
+        VehicleReg:
+          type:
+          - string
+          - 'null'
+          description: Registration (display name) of the vehicle.
+        Latitude:
+          type:
+          - number
+          - 'null'
+          description: Location of the Contamination Event
+          format: double
+        Longitude:
+          type:
+          - number
+          - 'null'
+          description: Location of the Contamination Event
+          format: double
+        Timestamp:
+          type: string
+          description: Timestamp of the Contamination Event
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        ContaminationScore:
+          type:
+          - integer
+          - 'null'
+          description: Degree of Contamination found
+          format: int32
+        GrossWeight:
+          type:
+          - number
+          - 'null'
+          description: Gross weight of the Contamination Event
+          format: double
+        TareWeight:
+          type:
+          - number
+          - 'null'
+          description: Tare weight of the Contamination Event
+          format: double
+        NetWeight:
+          type:
+          - number
+          - 'null'
+          description: Net weight of the Contamination Event
+          format: double
+        Seq:
+          type:
+          - integer
+          - 'null'
+          description: Sequence of the Contamination Event
+          format: int32
+        RFID:
+          type:
+          - string
+          - 'null'
+          description: RFID tag read for the container, when weighing data is available.
+        WeighErrorCode:
+          type:
+          - integer
+          - 'null'
+          description: Error code reported by the weighing system, when weighing data is available.
+          format: int32
+        Lifter:
+          type:
+          - integer
+          - 'null'
+          description: Lifter of the Contamination Event
+          format: int32
+        ContainerId:
+          type:
+          - string
+          - 'null'
+          description: Conntainer Id of the Contamination Event
+        WasteType:
+          type:
+          - string
+          - 'null'
+          description: Waste type of the Contamination Event
+        QRCodeRawText:
+          type:
+          - string
+          - 'null'
+          description: Raw QR code value of the COntamination Event
+        TotalSurfaceAreaVolume:
+          type:
+          - number
+          - 'null'
+          description: The total surface area of the Contamination Event
+          format: double
+        Materials:
+          type:
+          - string
+          - 'null'
+          description: The materials detected of the Contamination Event
+        JobId:
+          type:
+          - string
+          - 'null'
+          description: The Job Id of the route associated with the Contamination Event
+        RouteNumber:
+          type:
+          - integer
+          - 'null'
+          description: The route number associated with the Contamination Event
+          format: int64
+        AssetExternalId:
+          type:
+          - integer
+          - 'null'
+          description: The external Id of the Vehicle/Asset associated with the Contamination Event
+          format: int32
+        RouteDate:
+          type:
+          - string
+          - 'null'
+          description: Date the route was run, sourced from Trux.
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        CompanyCode:
+          type:
+          - string
+          - 'null'
+          description: Trux company code (SY03_CODE) of the tenant.
+        CustomerNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux customer number (CM04_CUST).
+        SiteNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux site number (CM04_SITE).
+        ServiceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux service number (RM03_SERV).
+        Country:
+          type:
+          - string
+          - 'null'
+          description: Country of the customer address (derived as USA or CANADA based on the company setting).
+        City:
+          type:
+          - string
+          - 'null'
+          description: City of the customer address (CM04_CITY).
+        District:
+          type:
+          - string
+          - 'null'
+          description: District/state of the customer address (CM04_STAT).
+        StreetAddress:
+          type:
+          - string
+          - 'null'
+          description: Street address of the customer (CM04_ADD2).
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal code of the customer address (CM04_PZIP).
+        CustomerLatitude:
+          type:
+          - number
+          - 'null'
+          description: Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.
+          format: double
+        CustomerLongitude:
+          type:
+          - number
+          - 'null'
+          description: Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.
+          format: double
+        VIN:
+          type:
+          - string
+          - 'null'
+          description: Vehicle Identification Number of the asset.
+        Division:
+          type:
+          - string
+          - 'null'
+          description: Trux division (CM05_FLD9) of the customer.
+        VehicleDescription:
+          type:
+          - string
+          - 'null'
+          description: Vehicle description (TR01_DESC).
+        VehicleTypeDescription:
+          type:
+          - string
+          - 'null'
+          description: Vehicle type description (CD13_DESC).
+        ContainerSize:
+          type:
+          - number
+          - 'null'
+          description: Capacity of the container serviced at this stop (e.g. cubic yards).
+          format: double
+        UnitOfMeasure:
+          type:
+          - string
+          - 'null'
+          description: Unit of measure for ContainerSize (e.g. "Cubic Yards", "Litres").
+        RouteType:
+          type:
+          - string
+          - 'null'
+          description: Waste stream/material type being collected on the route (CD14_DESC).
+        RouteStartLocation:
+          type:
+          - string
+          - 'null'
+          description: Free-text description of where the route started (SL01_NAME).
+        ExternalEventId:
+          type:
+          - string
+          - 'null'
+          description: The external event Id of the Contamination Event
+        ImageSas:
+          type:
+          - string
+          - 'null'
+          description: The image SAS url of the Contamination Event expires within 24 hours
+        ReferenceFrameSas:
+          type:
+          - string
+          - 'null'
+          description: 'The reference frame image SAS url expires within 24 hours. Only populated when duplicate
+
+            detection is enabled for the tenant - the reference frame is the baseline image captured
+
+            before this collection, used to detect material already present in the container.'
+      additionalProperties: false
+    ApiResourceChanges_ApiContaminationEventExternalResource_2:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
+      additionalProperties: false
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra_2:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+        since:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.ContaminationEvent.ApiContaminationEventExternal:
       type: object
@@ -426,38 +762,95 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-        since:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
+  responses:
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+x-refined-from:
+- amcs-group-openapi.json
+- amcs-group-visionai-openapi-original.json

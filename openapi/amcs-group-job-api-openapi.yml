@@ -2,243 +2,12 @@ openapi: 3.2.0
 info:
   title: Amcs Group Job API
   version: '1.0'
-  description: 'Operations tagged Job across 2 of this provider''s published API definitions: amcs-group-core-openapi-original.json, amcs-group-erp-openapi-original.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Job across 2 of this provider''s published API definitions: amcs-group-erp-openapi-original.json, amcs-group-job-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 tags:
 - name: Job
 paths:
-  /jobsystem/jobs/changes:
-    get:
-      tags:
-      - Job
-      parameters:
-      - name: since
-        in: query
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        schema:
-          type: string
-      - name: links
-        in: query
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceChanges_ApiJobResource'
-      summary: Get jobsystem jobs changes
-      x-summary-source: derived
-      operationId: getJobsystemJobsChanges
-      x-operation-id-source: derived
-  /jobsystem/jobs/template:
-    get:
-      tags:
-      - Job
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceResult_ApiJobResource'
-      summary: Get jobsystem jobs template
-      x-summary-source: derived
-      operationId: getJobsystemJobsTemplate
-      x-operation-id-source: derived
-  /jobsystem/jobs/{id}:
-    get:
-      tags:
-      - Job
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: links
-        in: query
-        schema:
-          type: string
-      - name: include
-        in: query
-        schema:
-          type: string
-      - name: expand
-        in: query
-        schema:
-          type: string
-      - name: udf
-        in: query
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobResource'
-      summary: Get jobsystem jobs by id
-      x-summary-source: derived
-      operationId: getJobsystemJobsById
-      x-operation-id-source: derived
-    put:
-      tags:
-      - Job
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiResourceId'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceId'
-      summary: Replace jobsystem jobs by id
-      x-summary-source: derived
-      operationId: putJobsystemJobsById
-      x-operation-id-source: derived
-    delete:
-      tags:
-      - Job
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResource'
-      summary: Delete jobsystem jobs by id
-      x-summary-source: derived
-      operationId: deleteJobsystemJobsById
-      x-operation-id-source: derived
-  /jobsystem/jobs/{id}/blob/{blobMemberName}:
-    get:
-      tags:
-      - Job
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: blobMemberName
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: fileName
-        in: query
-        schema:
-          type: string
-      - name: contentType
-        in: query
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: string
-                format: binary
-      summary: Get jobsystem jobs by id blob by blob member name
-      x-summary-source: derived
-      operationId: getJobsystemJobsByIdBlobByBlobMemberName
-      x-operation-id-source: derived
-  /jobsystem/jobs:
-    get:
-      tags:
-      - Job
-      parameters:
-      - name: filter
-        in: query
-        schema:
-          type: string
-      - name: search
-        in: query
-        schema:
-          type: string
-      - name: order
-        in: query
-        schema:
-          type: string
-      - name: max
-        in: query
-        schema:
-          type: string
-      - name: page
-        in: query
-        schema:
-          type: string
-      - name: includeCount
-        in: query
-        schema:
-          type: string
-      - name: includeDeleted
-        in: query
-        schema:
-          type: string
-      - name: links
-        in: query
-        schema:
-          type: string
-      - name: udf
-        in: query
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceResultCollection_ApiJobResource'
-      summary: Get jobsystem jobs
-      x-summary-source: derived
-      operationId: getJobsystemJobs
-      x-operation-id-source: derived
-    post:
-      tags:
-      - Job
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiResourceId'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResourceId'
-      summary: Create jobsystem jobs
-      x-summary-source: derived
-      operationId: postJobsystemJobs
-      x-operation-id-source: derived
   /transport/jobs/changes:
     get:
       tags:
@@ -276,7 +45,35 @@ paths:
 
         | DeleteReasonGuid| The GUID of delete reason|
 
-        | RelatedPONumberGuid| The GUID of related PONumber associated to the job.'
+        | RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|
+
+        | RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|
+
+        | RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|
+
+        | RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|
+
+        | RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|
+
+        | RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|
+
+        | RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|
+
+        | ActionListItem| The GUID and description of the action associated to the job.|
+
+        | CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |
+
+        | CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |
+
+        | ContainerTypeListItem| The GUID and description of the container type associated to the job. |
+
+        | DepartmentListItem| The GUID and description of the department associated to the job. |
+
+        | MaterialListItem| The GUID and description of the material associated to the job. |
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the job. |
+
+        | RepairReasonListItem| The GUID and description of the repair reason associated to the job.'
       operationId: Job_GetChanges
       parameters:
       - name: since
@@ -333,7 +130,35 @@ paths:
 
         | DeleteReasonGuid| The GUID of delete reason|
 
-        | RelatedPONumberGuid| The GUID of related PONumber associated to the job.'
+        | RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|
+
+        | RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|
+
+        | RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|
+
+        | RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|
+
+        | RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|
+
+        | RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|
+
+        | RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|
+
+        | ActionListItem| The GUID and description of the action associated to the job.|
+
+        | CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |
+
+        | CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |
+
+        | ContainerTypeListItem| The GUID and description of the container type associated to the job. |
+
+        | DepartmentListItem| The GUID and description of the department associated to the job. |
+
+        | MaterialListItem| The GUID and description of the material associated to the job. |
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the job. |
+
+        | RepairReasonListItem| The GUID and description of the repair reason associated to the job.'
       operationId: Job_Get
       parameters:
       - name: guid
@@ -389,7 +214,57 @@ paths:
 
         | DeleteReasonGuid| The GUID of delete reason| No (Required only if IsDeleted=true) |
 
-        | RelatedPONumberGuid| The GUID of related PONumber associated to the job.'
+        | RelatedPONumberGuid| The GUID of related PONumber associated to the job. | No |
+
+        | RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. | No |
+
+        | RelatedScheduleGuid| The GUID of related schedule associated to the job. Set to null to un-assign the job. | No |
+
+        | RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. | Yes (Not required for Transfer out weighingType)|
+
+        | RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. | No (Required Only for Container Jobs(Except Start of cycle)) |
+
+        | RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. | No |
+
+        | RelatedExternalVehicleGuid | The GUID of related external vehicle associated to the job. | No |
+
+        | ActionListItem| The GUID and description of the action associated to the job.| Yes |
+
+        | CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. | No |
+
+        | CompanyOutletListItem| The GUID and description of the company outlet associated to the job. | Yes |
+
+        | ContainerTypeListItem| The GUID and description of the container type associated to the job. | Yes (Only for Container & Collection Jobs) |
+
+        | DepartmentListItem| The GUID and description of the department associated to the job. | No |
+
+        | MaterialListItem| The GUID and description of the material associated to the job. | Yes (Only for Container & Collection Jobs)|
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the job. | No |
+
+        | RepairReasonListItem| The GUID and description of the repair reason associated to the job. | No |
+
+        | Access[]| The array of job access time associated to the job.| No |
+
+        | Access[0].Contact| The contact associated to the job access time.| No |
+
+        | Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |
+
+        | Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |
+
+        | Access[0].Notes| The notes time associated to the job access time.| No |
+
+        | Access[0].DayOfWeekId | The day of the week associated to the job access time.| Yes |
+
+        | Access[0].GUID| The Guid associated to the job access time.| Yes |
+
+        | ContainerDetails| The container details object associated to the job.| No |
+
+        | ContainerDetails.Delivered| The container delivered to the job.| No |
+
+        | ContainerDetails.Delivered.RelatedContainerGuid | The GUID of the container delivered to the job.| No |
+
+        | ContainerDetails.Delivered.ContainerTypeListItem | The GUID and description of the container type delivered to the job.'
       operationId: Job_Update
       parameters:
       - name: guid
@@ -411,7 +286,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceId_2'
+                $ref: '#/components/schemas/ApiResourceId'
     servers:
     - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
   /transport/jobs:
@@ -451,7 +326,35 @@ paths:
 
         | DeleteReasonGuid| The GUID of delete reason|
 
-        | RelatedPONumberGuid| The GUID of related PONumber associated to the job.'
+        | RelatedPONumberGuid| The GUID of related PONumber associated to the job. Filterable.|
+
+        | RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. Filterable.|
+
+        | RelatedScheduleGuid| The GUID of related schedule associated to the job. Filterable.|
+
+        | RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. Filterable.|
+
+        | RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. Filterable.|
+
+        | RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. Filterable.|
+
+        | RelatedExternalVehicleGuid| The GUID of related external vehicle associated to the job. Filterable.|
+
+        | ActionListItem| The GUID and description of the action associated to the job.|
+
+        | CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. |
+
+        | CompanyOutletListItem| The GUID and description of the company outlet associated to the job. |
+
+        | ContainerTypeListItem| The GUID and description of the container type associated to the job. |
+
+        | DepartmentListItem| The GUID and description of the department associated to the job. |
+
+        | MaterialListItem| The GUID and description of the material associated to the job. |
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the job. |
+
+        | RepairReasonListItem| The GUID and description of the repair reason associated to the job.'
       operationId: Job_GetCollection
       parameters:
       - name: filter
@@ -519,7 +422,57 @@ paths:
 
         | DeleteReasonGuid| The GUID of delete reason| No (Required only if IsDeleted=true) |
 
-        | RelatedPONumberGuid| The GUID of related PONumber associated to the job.'
+        | RelatedPONumberGuid| The GUID of related PONumber associated to the job. | No |
+
+        | RelatedRouteVisitGuid| The GUID of related routeVisit associated to the job. | No |
+
+        | RelatedScheduleGuid| The GUID of related schedule associated to the job. Set to null to un-assign the job. | No |
+
+        | RelatedSiteOrderGuid| The GUID of related siteorder associated to the job. | Yes (Not required for Transfer out weighingType)|
+
+        | RelatedSiteOrderItemGuid| The GUID of related siteorder item associated to the job. | No (Required Only for Container Jobs(Except Start of cycle)) |
+
+        | RelatedSupplierSiteTransportGuid| The GUID of related supplier site transport associated to the job. | No |
+
+        | RelatedExternalVehicleGuid | The GUID of related external vehicle associated to the job. | No |
+
+        | ActionListItem| The GUID and description of the action associated to the job.| Yes |
+
+        | CancelledReasonListItem| The GUID and description of the cancellation reason associated to the job. | No |
+
+        | CompanyOutletListItem| The GUID and description of the company outlet associated to the job. | Yes |
+
+        | ContainerTypeListItem| The GUID and description of the container type associated to the job. | Yes (Only for Container & Collection Jobs) |
+
+        | DepartmentListItem| The GUID and description of the department associated to the job. | No |
+
+        | MaterialListItem| The GUID and description of the material associated to the job. | Yes (Only for Container & Collection Jobs)|
+
+        | PaymentTypeListItem| The GUID and description of the payment type associated to the job. | No |
+
+        | RepairReasonListItem| The GUID and description of the repair reason associated to the job. | No |
+
+        | Access[]| The array of job access time associated to the job.| No |
+
+        | Access[0].Contact| The contact associated to the job access time.| No |
+
+        | Access[0].StartTime| The start time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |
+
+        | Access[0].EndTime| The end time associated to the job access time in ISO format (YYYY-MM-DD HH:mm).| Yes |
+
+        | Access[0].Notes| The notes time associated to the job access time.| No |
+
+        | Access[0].DayOfWeekId | The day of the week associated to the job access time.| Yes |
+
+        | Access[0].GUID| The Guid associated to the job access time.| No |
+
+        | ContainerDetails| The container details object associated to the job.| No |
+
+        | ContainerDetails.Delivered| The container delivered to the job.| No |
+
+        | ContainerDetails.Delivered.RelatedContainerGuid | The GUID of the container delivered to the job.| No |
+
+        | ContainerDetails.Delivered.ContainerTypeListItem | The GUID and description of the container type delivered to the job.'
       operationId: Job_Create
       requestBody:
         content:
@@ -534,335 +487,274 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/ApiResourceId'
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /jobsystem/jobs/changes:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiJobResource'
+      summary: Get jobsystem jobs changes
+      x-summary-source: derived
+      operationId: getJobsystemJobsChanges
+      x-operation-id-source: derived
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /jobsystem/jobs/template:
+    get:
+      tags:
+      - Job
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResult_ApiJobResource'
+      summary: Get jobsystem jobs template
+      x-summary-source: derived
+      operationId: getJobsystemJobsTemplate
+      x-operation-id-source: derived
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /jobsystem/jobs/{id}:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: include
+        in: query
+        schema:
+          type: string
+      - name: expand
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultEntity_ApiJobResource'
+      summary: Get jobsystem jobs by id
+      x-summary-source: derived
+      operationId: getJobsystemJobsById
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId_2'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
                 $ref: '#/components/schemas/ApiResourceId_2'
+      summary: Replace jobsystem jobs by id
+      x-summary-source: derived
+      operationId: putJobsystemJobsById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResource'
+      summary: Delete jobsystem jobs by id
+      x-summary-source: derived
+      operationId: deleteJobsystemJobsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /jobsystem/jobs/{id}/blob/{blobMemberName}:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: blobMemberName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        schema:
+          type: string
+      - name: contentType
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+      summary: Get jobsystem jobs by id blob by blob member name
+      x-summary-source: derived
+      operationId: getJobsystemJobsByIdBlobByBlobMemberName
+      x-operation-id-source: derived
+    servers:
+    - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
+  /jobsystem/jobs:
+    get:
+      tags:
+      - Job
+      parameters:
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+      - name: max
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: includeCount
+        in: query
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        schema:
+          type: string
+      - name: links
+        in: query
+        schema:
+          type: string
+      - name: udf
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceResultCollection_ApiJobResource'
+      summary: Get jobsystem jobs
+      x-summary-source: derived
+      operationId: getJobsystemJobs
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResourceId_2'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId_2'
+      summary: Create jobsystem jobs
+      x-summary-source: derived
+      operationId: postJobsystemJobs
+      x-operation-id-source: derived
     servers:
     - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
 components:
   schemas:
-    AMCS.Core.Entity.Api.JobSystem.ApiJob:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        isValid:
-          type: boolean
-          readOnly: true
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          readOnly: true
-        id32:
-          type: integer
-          format: int32
-          readOnly: true
-        guid:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        lastChangeReasonId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        tempIdentifier:
-          type:
-          - string
-          - 'null'
-        jobId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        userId:
-          type:
-          - string
-          - 'null'
-        friendlyName:
-          type:
-          - string
-          - 'null'
-        handler:
-          type:
-          - string
-          - 'null'
-        queue:
-          type:
-          - string
-          - 'null'
-        parameters:
-          type:
-          - string
-          - 'null'
-        deadline:
-          type:
-          - string
-          - 'null'
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-        duplicateMode:
-          type: integer
-          format: int32
-        created:
+        Description:
           type: string
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-        updated:
-          type: string
-          format: dateTimeOffset
-          example: '2000-01-01T00:00:00.0000000+01:00'
-        status:
-          type: integer
-          format: int32
-        result:
-          type:
-          - string
-          - 'null'
-        error:
-          type:
-          - string
-          - 'null'
-        log:
-          type:
-          - string
-          - 'null'
-        checkpoint:
-          type:
-          - string
-          - 'null'
-        runtime:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        scheduledJobId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceId:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - object
-            - 'null'
-            additionalProperties: {}
-        include:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - array
-            - 'null'
-            items:
-              type: object
-              additionalProperties: {}
-      additionalProperties: false
-    ApiResourceResult_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-      additionalProperties: false
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        associations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        expand:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ApiResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-      additionalProperties: false
-    ApiResourceChanges_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-      additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type:
-          - string
-          - 'null'
-        cursor:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ApiResourceResultEntity_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-      additionalProperties: false
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    ApiResourceResultCollection_ApiJobResource:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-      additionalProperties: false
-    ApiIntegratorJobAccessTimeResource:
-      type: object
-      properties:
-        Contact:
-          type: string
-        StartTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        EndTime:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        Notes:
-          type: string
-        DayOfWeekId:
-          type: integer
-          format: int32
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceResultUpdatesExtra_2:
+    ApiResourceChanges_ApiIntegratorJobResource:
       type: object
       properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceErrors_2:
-      type: object
-      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
         errors:
-          type: string
-    ApiIntegratorJobVisitDetailsResource:
-      type: object
-      properties:
-        DriverNotes:
-          type: string
-        TimeInCustomerSite:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        TimeOutCustomerSite:
-          type: string
-          format: dateTime
-          example: '2000-01-01 00:00:00.000'
-        HoursChargeable:
-          type: number
-          format: double
-        HoursNotChargeable:
-          type: number
-          format: double
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorJobContainerDetailsResource:
       type: object
       properties:
@@ -870,34 +762,133 @@ components:
           $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsDeliveredResource'
         Removed:
           $ref: '#/components/schemas/ApiIntegratorJobContainerDetailsRemovedResource'
-    ApiResourceResultCollectionExtra_2:
+    ApiResourceResultCollection_ApiIntegratorJobResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiIntegratorJobDocketPdfResource:
+      type: object
+      properties:
+        Hash:
+          type: string
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
+    ApiIntegratorJobContainerDetailsDeliveredResource:
+      type: object
+      properties:
+        RelatedContainerGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
+          type: string
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorJobPriceResource:
+      type: object
+      properties:
+        RelatedPriceGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        OverrideRate:
+          type: number
+          format: double
+        IsSelected:
+          type: boolean
+        Breakdowns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorJobPriceBreakdownResource'
+    ApiResourceResultCollectionExtra:
       type: object
       properties:
         count:
           type: integer
           format: int32
-    ApiResourceId_2:
+    ApiResourceId:
       type: object
       properties:
         resource:
           type: string
           format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
+          $ref: '#/components/schemas/ApiResourceErrors'
         status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiIntegratorJobPictureResource:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorJobContainerDetailsRemovedResource:
       type: object
       properties:
-        Description:
+        RelatedContainerGuid:
           type: string
-        Hash:
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Notes:
           type: string
-        PictureTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        PictureSourceListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceResultEntityExtra_2:
+        SerialNo:
+          type: string
+        Tag:
+          type: string
+    ApiIntegratorLinkedJobResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        IsDeleted:
+          type: boolean
+        RelatedJobGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultEntityExtra:
       type: object
       properties:
         expand:
@@ -914,84 +905,30 @@ components:
               type: object
               additionalProperties:
                 type: object
-    ApiResourceResultCollection_ApiIntegratorJobResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra_2'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
     ApiResourceResultEntity_ApiIntegratorJobResource:
       type: object
       properties:
         resource:
           $ref: '#/components/schemas/ApiIntegratorJobResource'
         links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks_2'
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra_2'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
+          $ref: '#/components/schemas/ApiResourceErrors'
         status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiIntegratorJobDocketPdfResource:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorJobPictureResource:
       type: object
       properties:
+        Description:
+          type: string
         Hash:
           type: string
-    ApiIntegratorJobWasteTransferNoteResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Hash:
-          type: string
-    ApiResourceResultEntityLinks_2:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceChanges_ApiIntegratorJobResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors_2'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus_2'
-    ApiResourceStatus_2:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        PictureTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        PictureSourceListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
     ApiIntegratorJobMaterialSaleSlotResource:
       type: object
       properties:
@@ -1033,65 +970,32 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorListItemResource:
+    ApiIntegratorJobAccessTimeResource:
       type: object
       properties:
-        Description:
+        Contact:
           type: string
+        StartTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        EndTime:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        Notes:
+          type: string
+        DayOfWeekId:
+          type: integer
+          format: int32
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorJobContainerDetailsRemovedResource:
-      type: object
-      properties:
-        RelatedContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Notes:
-          type: string
-        SerialNo:
-          type: string
-        Tag:
-          type: string
-    ApiIntegratorJobContainerDetailsDeliveredResource:
-      type: object
-      properties:
-        RelatedContainerGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Notes:
-          type: string
-        SerialNo:
-          type: string
-        Tag:
-          type: string
-    ApiIntegratorJobPriceResource:
-      type: object
-      properties:
-        RelatedPriceGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        OverrideRate:
-          type: number
-          format: double
-        IsSelected:
-          type: boolean
-        Breakdowns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorJobPriceBreakdownResource'
     ApiIntegratorJobResource:
       type: object
       properties:
@@ -1283,19 +1187,6 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorLinkedJobResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        IsDeleted:
-          type: boolean
-        RelatedJobGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorJobPriceBreakdownResource:
       type: object
       properties:
@@ -1317,6 +1208,309 @@ components:
           type: string
         JobPriceBreakdownTypeEnum:
           type: string
+    ApiIntegratorJobVisitDetailsResource:
+      type: object
+      properties:
+        DriverNotes:
+          type: string
+        TimeInCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        TimeOutCustomerSite:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        HoursChargeable:
+          type: number
+          format: double
+        HoursNotChargeable:
+          type: number
+          format: double
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorJobWasteTransferNoteResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Hash:
+          type: string
+    AMCS.Core.Entity.Api.JobSystem.ApiJob:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          readOnly: true
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          readOnly: true
+        id32:
+          type: integer
+          format: int32
+          readOnly: true
+        guid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        lastChangeReasonId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tempIdentifier:
+          type:
+          - string
+          - 'null'
+        jobId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        userId:
+          type:
+          - string
+          - 'null'
+        friendlyName:
+          type:
+          - string
+          - 'null'
+        handler:
+          type:
+          - string
+          - 'null'
+        queue:
+          type:
+          - string
+          - 'null'
+        parameters:
+          type:
+          - string
+          - 'null'
+        deadline:
+          type:
+          - string
+          - 'null'
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        duplicateMode:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        updated:
+          type: string
+          format: dateTimeOffset
+          example: '2000-01-01T00:00:00.0000000+01:00'
+        status:
+          type: integer
+          format: int32
+        result:
+          type:
+          - string
+          - 'null'
+        error:
+          type:
+          - string
+          - 'null'
+        log:
+          type:
+          - string
+          - 'null'
+        checkpoint:
+          type:
+          - string
+          - 'null'
+        runtime:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        scheduledJobId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceId_2:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ApiResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+      additionalProperties: false
+    ApiResourceResultEntity_ApiJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks_2'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra_2'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra_2:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceResultEntityExtra_2:
+      type: object
+      properties:
+        expand:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties: {}
+        include:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: {}
+      additionalProperties: false
+    ApiResourceResultCollectionExtra_2:
+      type: object
+      properties:
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    ApiResourceChanges_ApiJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
+      additionalProperties: false
+    ApiResourceResult_ApiJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+      additionalProperties: false
+    ApiResourceResultCollection_ApiJobResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.Core.Entity.Api.JobSystem.ApiJob'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra_2'
+      additionalProperties: false
+    ApiResourceResultEntityLinks_2:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        associations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        expand:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
 x-refined-from:
-- amcs-group-core-openapi-original.json
 - amcs-group-erp-openapi-original.json
+- amcs-group-job-api-openapi.yml

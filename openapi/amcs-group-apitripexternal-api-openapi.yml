@@ -6,7 +6,40 @@ info:
     ## Document Purpose and Scope
 
 
-    The Transport Live View REST API endpoints are technically described in this document.'
+    The Transport Live View REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the Transport Live View External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /tlv/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
   title: API Trip External API
   version: external
 tags:
@@ -143,52 +176,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiTripExternalDto:
-      type: object
-      properties:
-        VehicleId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Unique identifier for the vehicle (Asset GUID).
-        VehicleName:
-          type:
-          - string
-          - 'null'
-          description: Name of the vehicle.
-        TripId:
-          type: integer
-          format: int32
-          description: Unique identifier for the trip.
-        StartTime:
-          type: string
-          format: date-time
-          description: Trip start timestamp.
-        EndTime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Trip end timestamp.
-        Status:
-          type: integer
-          format: int32
-          description: Trip status (0=Started, 1=Completed, 2=Invalid).
-        TripSummary:
-          $ref: '#/components/schemas/ApiTripSummary'
-          description: Calculated trip summary with metrics.
-    TripChangesResponse:
-      type: object
-      properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiTripExternalDto'
-        Extra:
-          type:
-          - object
-          - 'null'
     ApiTripSummary:
       type: object
       properties:
@@ -224,3 +211,49 @@ components:
           type: number
           format: double
           description: Total trip duration in minutes. Unit of Measure - Minutes
+    TripChangesResponse:
+      type: object
+      properties:
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiTripExternalDto'
+        Extra:
+          type:
+          - object
+          - 'null'
+    ApiTripExternalDto:
+      type: object
+      properties:
+        VehicleId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Unique identifier for the vehicle (Asset GUID).
+        VehicleName:
+          type:
+          - string
+          - 'null'
+          description: Name of the vehicle.
+        TripId:
+          type: integer
+          format: int32
+          description: Unique identifier for the trip.
+        StartTime:
+          type: string
+          format: date-time
+          description: Trip start timestamp.
+        EndTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Trip end timestamp.
+        Status:
+          type: integer
+          format: int32
+          description: Trip status (0=Started, 1=Completed, 2=Invalid).
+        TripSummary:
+          $ref: '#/components/schemas/ApiTripSummary'
+          description: Calculated trip summary with metrics.

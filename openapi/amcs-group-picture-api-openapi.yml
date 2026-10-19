@@ -6,7 +6,123 @@ info:
     ## Document Purpose and Scope
 
 
-    The Scale REST API endpoints are technically described in this document.'
+    The Scale REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the Scale REST API.
+
+
+    ## Security
+
+
+    The API uses HTTPS as transport layer for security and uses HTTP/1.1 – RFC 7230 for message syntax and routing.
+
+
+    There are 2 ways of authenticating in order to access the REST API.
+
+
+    · Requesting a bearer token from /authTokens using username and password
+
+
+    · Requesting a session log on from /authTokens using a PAT token
+
+
+    Authentication using username and password will be phased out after 8.6.
+
+
+    ## GET /authTokens with username and password direct to the App server
+
+
+    Before using this method a user must be set up with access right “Can POST, PUT, GET to the REST API”. This can be done from User Management in the Scale UI.
+
+
+    ### Request format
+
+
+    The following table specifies the format and parameters for this request.
+
+
+    | Method | Type | Name | Type |
+
+    | --------- | --------- | ------------------ | ------------------ |
+
+    | GET | Parameter | Username | URI encoded string |
+
+    | Parameter | password | URI encoded string | |
+
+
+    ### Response format
+
+
+    The following table specifies the format and parameters for the response.
+
+
+    | Successful response | Type | |
+
+    | ------------------- | --------- | ---- |
+
+    | Bearer token | text/html | |
+
+
+    The token returned is then uses as a Bearer token in the subsequent calls to the REST API
+
+
+    ### Example
+
+
+    The following shows an example of a request to the authentication endpoint:
+
+
+    https://{scale-url}/scale/api/authTokens?username=john&password=password
+
+
+    The username and password in this request may need to be URI encoded.
+
+
+    The token in the response should be supplied in all subsequent requests in an authorization HTTP header.
+
+
+    Authorization: Bearer tcpRoNbIKOJZj9Yn0CL2oiX7m04JJmlAllaskd810incqjslasadjzxzza29axb
+
+
+    Notes:
+
+
+    · No specific Accept or Content-Type header is required for the authentication endpoint as it will always return text/html as content.
+
+
+    ## POST /scale/api/authTokens with PAT token
+
+
+    Before using this method, a user must be set up with:
+
+
+    · Access right “Can POST, PUT, GET to the REST API”
+
+
+    · A PAT token
+
+
+    This can be done from User Management in the Scale UI.
+
+
+    ### Request format
+
+
+    The following table specifies the format and parameters for this request.
+
+
+    | Method | Body |
+
+    | ------ | ------------------------------ |
+
+    | POST | { “privatekey”:”{PAT token}” } |
+
+
+    ### Response format
+
+
+    The response passes a Platform.ERP.SessionToken as a cookie.
+
+
+    This cookie should be included in the subsequent calls to the REST API."'
   title: Scale REST Picture API
   version: '9.1'
 servers:
@@ -70,14 +186,6 @@ paths:
         required: true
 components:
   schemas:
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          format: int32
-          type: integer
-        isSuccess:
-          type: boolean
     ApiResourceId:
       type: object
       properties:
@@ -88,6 +196,14 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        isSuccess:
+          type: boolean
     ApiResourceErrors:
       type: object
       properties:

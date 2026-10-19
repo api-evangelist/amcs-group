@@ -1,28 +1,39 @@
 openapi: 3.2.0
 info:
-  description: '**Download Trux JSON**
-
-
-    ---
-
-
-    # Getting Started
-
-
-    ## Document Purpose and Scope
-
-
-    The VisionAI REST API endpoints are technically described in this document.'
-  title: External Camera Event API
+  title: Amcs Group Camera Event API
   version: external
+  description: 'Operations tagged CameraEvent across 2 of this provider''s published API definitions: amcs-group-openapi.json, amcs-group-visionai-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 - url: https://o1-dev-svc-core.amcsplatform.com/
   description: AMCS VisionAI Developer Environment
-security:
-- cookieAuth: []
 tags:
 - name: CameraEvent
 paths:
+  /integrator/cameraEvents:
+    post:
+      tags:
+      - CameraEvent
+      summary: Create a contamination/overfilled from camera
+      description: '# Create a contamination/overfilled from camera'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCameraEventResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceId'
+      operationId: postIntegratorCameraEvents
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
   /visionai/api/integrator/cameraEvents:
     post:
       tags:
@@ -102,7 +113,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceId'
+                $ref: '#/components/schemas/ApiResourceId_2'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -121,99 +132,61 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+      security:
+      - cookieAuth: []
       operationId: postVisionaiApiIntegratorCameraEvents
       x-operation-id-source: derived
+    servers:
+    - url: https://o1-dev-svc-core.amcsplatform.com/
+      description: AMCS VisionAI Developer Environment
 components:
-  responses:
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
   schemas:
+    ApiCameraEventResource:
+      type: object
+      properties:
+        TenantId:
+          type: string
+          description: Internal. Overwritten with the calling tenant; integrators do not need to send it.
+          format: uuid
+        Asset:
+          type:
+          - string
+          - 'null'
+          description: Vehicle Identified Registration or Asset Id
+        Timestamp:
+          type: string
+          description: Local time or UTC time of the event
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        Lon:
+          type: number
+          description: Longitude
+          format: double
+        Lat:
+          type: number
+          description: Latitude
+          format: double
+        EventType:
+          type:
+          - string
+          - 'null'
+          description: Contamination or Overfilled event
+        EventId:
+          type:
+          - string
+          - 'null'
+          description: Unique Id for each event
+        WasteType:
+          type:
+          - string
+          - 'null'
+          description: The waste stream the truck is collecting
+        MediaLink:
+          type:
+          - string
+          - 'null'
+          description: URL to access the media file associate with each event
+      additionalProperties: false
     ApiResourceId:
       type: object
       properties:
@@ -222,9 +195,46 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
+          type: integer
+          description: Identifier of the created or updated resource. For most endpoints this is the record's integer id; some endpoints return the record's GUID instead.
+          format: int32
+      additionalProperties: false
+      description: Identifier of the created or updated resource.
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the affected record, or null when it is not applicable.
+          format: int32
+        isSuccess:
+          type: boolean
+          description: True when the operation completed successfully; otherwise false.
+      additionalProperties: false
+      description: Outcome of the create or update operation.
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+          description: Error details describing why the request was rejected, or null when there were no errors.
+      additionalProperties: false
+      description: Validation and processing errors for the request. Populated only when the operation fails.
+    ApiResourceId_2:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
           type: guid
       additionalProperties: false
-    ApiResourceStatus:
+    ApiResourceStatus_2:
       type: object
       properties:
         id:
@@ -235,7 +245,7 @@ components:
         isSuccess:
           type: boolean
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceErrors_2:
       type: object
       properties:
         errors:
@@ -304,3 +314,95 @@ components:
           - string
           - 'null'
       additionalProperties: false
+  responses:
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+x-refined-from:
+- amcs-group-openapi.json
+- amcs-group-visionai-openapi-original.json

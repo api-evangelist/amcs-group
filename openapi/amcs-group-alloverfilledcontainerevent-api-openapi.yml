@@ -1,28 +1,56 @@
 openapi: 3.2.0
 info:
-  description: '**Download Trux JSON**
-
-
-    ---
-
-
-    # Getting Started
-
-
-    ## Document Purpose and Scope
-
-
-    The VisionAI REST API endpoints are technically described in this document.'
-  title: External All Overfilled Container Event API
+  title: Amcs Group All Overfilled Container Event API
   version: external
+  description: 'Operations tagged AllOverfilledContainerEvent across 2 of this provider''s published API definitions: amcs-group-openapi.json, amcs-group-visionai-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 - url: https://o1-dev-svc-core.amcsplatform.com/
   description: AMCS VisionAI Developer Environment
-security:
-- cookieAuth: []
 tags:
 - name: AllOverfilledContainerEvent
 paths:
+  /integrator/allOverfilledContainerEvents/changes:
+    get:
+      tags:
+      - AllOverfilledContainerEvent
+      summary: Request list of All Overfilled Container Event changes
+      description: '# Request list of All Overfilled Container Event changes
+
+
+        Retrieve changes in the list of All Overfilled Container Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false'
+      parameters:
+      - name: since
+        in: query
+        description: Bookmark from extra.until
+        style: form
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Bookmark from extra.cursor
+        style: form
+        schema:
+          type: string
+      - name: outletName
+        in: query
+        description: Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource'
+      operationId: getIntegratorAllOverfilledContainerEventsChanges
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
   /visionai/api/integrator/allOverfilledContainerEvents/changes:
     get:
       tags:
@@ -127,11 +155,330 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource'
+                $ref: '#/components/schemas/ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource_2'
+      security:
+      - cookieAuth: []
       operationId: getVisionaiApiIntegratorAllOverfilledContainerEventsChanges
       x-operation-id-source: derived
+    servers:
+    - url: https://o1-dev-svc-core.amcsplatform.com/
+      description: AMCS VisionAI Developer Environment
 components:
   schemas:
+    ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ApiAllOverfilledContainerEventExternalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultChangesLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiAllOverfilledContainerEventExternalResource:
+      type: object
+      properties:
+        GUID:
+          type:
+          - string
+          - 'null'
+          description: ID of the Overfilled Container Event.
+          format: uuid
+        TenantId:
+          type: string
+          description: ID of the Tenant associated with the Overfilled Container Event
+          format: uuid
+        CustomerName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Customer with Overfilled Container Event
+        CompanyOutletId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Company Outlet associated with the Overfilled Container Event
+          format: uuid
+        OutletName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Company Outlet associated with the Overfilled Container Event
+        CustomerSiteId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Customer Site associated with the Overfilled Container Event
+          format: uuid
+        SiteName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Site associated with the Overfilled Container Event
+        CustomerType:
+          type:
+          - string
+          - 'null'
+          description: Type of Customer associated withe Overfilled Container Event
+        CustomerAddress:
+          type:
+          - string
+          - 'null'
+          description: Address of the Customer associated withe Overfilled Container Event
+        VehicleId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Vehicle associated with the Overfilled Container Event
+          format: uuid
+        VehicleReg:
+          type:
+          - string
+          - 'null'
+          description: Vehicle Registration associated with the Overfilled Container Event
+        Latitude:
+          type:
+          - number
+          - 'null'
+          description: Geographic coordinate of the Overfilled Container Event
+          format: double
+        Longitude:
+          type:
+          - number
+          - 'null'
+          description: Geographic coordinate of the Overfilled Container Event
+          format: double
+        Timestamp:
+          type: string
+          description: Timestamp of the Overfilled Container Event
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        GrossWeight:
+          type:
+          - number
+          - 'null'
+          description: Gross weight of the Overfilled Container Event
+          format: double
+        TareWeight:
+          type:
+          - number
+          - 'null'
+          description: Tare weight  of the Overfilled Container Event
+          format: double
+        NetWeight:
+          type:
+          - number
+          - 'null'
+          description: Net weight of the Overfilled Container Event
+          format: double
+        Seq:
+          type:
+          - integer
+          - 'null'
+          description: Sequence of the Overfilled Container Event
+          format: int32
+        RFID:
+          type:
+          - string
+          - 'null'
+          description: RFID of the Overfilled Container Event
+        WeighErrorCode:
+          type:
+          - integer
+          - 'null'
+          description: Weight error code of the Overfilled Container Event
+          format: int32
+        ContainerId:
+          type:
+          - string
+          - 'null'
+          description: ContainerId of the Overfilled Container Event
+        WasteType:
+          type:
+          - string
+          - 'null'
+          description: Waste type of the Overfilled Container Event
+        QRCodeRawText:
+          type:
+          - string
+          - 'null'
+          description: QRCode raw text of the Overfilled Container Event
+        JobId:
+          type:
+          - string
+          - 'null'
+          description: The Job Id of the route associated with the Overfilled Container Event
+        RouteNumber:
+          type:
+          - integer
+          - 'null'
+          description: The route number associated with the Overfilled Container Event
+          format: int64
+        AssetExternalId:
+          type:
+          - integer
+          - 'null'
+          description: The external Id of the Vehicle/Asset associated with the Overfilled Container Event
+          format: int32
+        RouteDate:
+          type:
+          - string
+          - 'null'
+          description: Date the route was run, sourced from Trux.
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        CompanyCode:
+          type:
+          - string
+          - 'null'
+          description: Trux company code (SY03_CODE) of the tenant.
+        CustomerNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux customer number (CM04_CUST).
+        SiteNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux site number (CM04_SITE).
+        ServiceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trux service number (RM03_SERV).
+        Country:
+          type:
+          - string
+          - 'null'
+          description: Country of the customer address (derived as USA or CANADA based on the company setting).
+        City:
+          type:
+          - string
+          - 'null'
+          description: City of the customer address (CM04_CITY).
+        District:
+          type:
+          - string
+          - 'null'
+          description: District/state of the customer address (CM04_STAT).
+        StreetAddress:
+          type:
+          - string
+          - 'null'
+          description: Street address of the customer (CM04_ADD2).
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal code of the customer address (CM04_PZIP).
+        CustomerLatitude:
+          type:
+          - number
+          - 'null'
+          description: Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.
+          format: double
+        CustomerLongitude:
+          type:
+          - number
+          - 'null'
+          description: Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.
+          format: double
+        VIN:
+          type:
+          - string
+          - 'null'
+          description: Vehicle Identification Number of the asset.
+        Division:
+          type:
+          - string
+          - 'null'
+          description: Trux division (CM05_FLD9) of the customer.
+        VehicleDescription:
+          type:
+          - string
+          - 'null'
+          description: Vehicle description (TR01_DESC).
+        VehicleTypeDescription:
+          type:
+          - string
+          - 'null'
+          description: Vehicle type description (CD13_DESC).
+        ContainerSize:
+          type:
+          - number
+          - 'null'
+          description: Capacity of the container serviced at this stop (e.g. cubic yards).
+          format: double
+        UnitOfMeasure:
+          type:
+          - string
+          - 'null'
+          description: Unit of measure for ContainerSize (e.g. "Cubic Yards", "Litres").
+        RouteType:
+          type:
+          - string
+          - 'null'
+          description: Waste stream/material type being collected on the route (CD14_DESC).
+        RouteStartLocation:
+          type:
+          - string
+          - 'null'
+          description: Free-text description of where the route started (SL01_NAME).
+        ExternalEventId:
+          type:
+          - string
+          - 'null'
+          description: The external event Id of the Overfilled Container Event
+        ImageSas:
+          type:
+          - string
+          - 'null'
+          description: The image SAS url of the Contamination Event expires within 24 hours
+        IsOverfilled:
+          type: boolean
+          description: Whether the Overfilled Container Event was found to be overfilled
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+          description: Bookmark to put in as "since" later - appears when there are no more pages for now
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+          description: Error details describing why the request was rejected, or null when there were no errors.
+      additionalProperties: false
+      description: Validation and processing errors for the request. Populated only when the operation fails.
+    ApiResourceResultChangesLinks:
+      type: object
+      properties:
+        next:
+          type:
+          - string
+          - 'null'
+          description: Link to follow to get next page with changes
+      additionalProperties: false
     ApiResourceStatus:
       type: object
       properties:
@@ -139,11 +486,36 @@ components:
           type:
           - integer
           - 'null'
+          description: Internal numeric identifier of the affected record, or null when it is not applicable.
           format: int32
         isSuccess:
           type: boolean
+          description: True when the operation completed successfully; otherwise false.
       additionalProperties: false
-    ApiResourceResultUpdatesExtra:
+      description: Outcome of the create or update operation.
+    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
+      additionalProperties: false
+    ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource_2:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra_2'
+      additionalProperties: false
+    ApiResourceResultUpdatesExtra_2:
       type: object
       properties:
         until:
@@ -159,27 +531,13 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem'
-      additionalProperties: false
-    ApiResourceChanges_ApiAllOverfilledContainerEventExternalResource:
+    ApiResourceErrors_2:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-        resource:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiAllOverfilledContainerEventExternal'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.OverfilledContainerEvent.ApiOverfilledContainerEventExternalResourceItem:
       type: object
@@ -311,11 +669,17 @@ components:
           - 'null'
           format: byte
       additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceStatus_2:
       type: object
       properties:
-        errors:
+        id:
           type:
-          - string
+          - integer
           - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
+x-refined-from:
+- amcs-group-openapi.json
+- amcs-group-visionai-openapi-original.json

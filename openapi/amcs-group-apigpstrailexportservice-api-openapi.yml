@@ -6,7 +6,40 @@ info:
     ## Document Purpose and Scope
 
 
-    The Transport Live View REST API endpoints are technically described in this document.'
+    The Transport Live View REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the Transport Live View External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /tlv/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
   title: External API Gps Trail Export Service API
   version: external
 tags:
@@ -80,20 +113,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
-      type: object
-      properties:
-        assetName:
-          type:
-          - string
-          - 'null'
-        gpsTrail:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
-      additionalProperties: false
     AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint:
       type: object
       properties:
@@ -107,4 +126,18 @@ components:
         lon:
           type: number
           format: double
+      additionalProperties: false
+    AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailExportService.ApiGpsTrailExportResponse:
+      type: object
+      properties:
+        assetName:
+          type:
+          - string
+          - 'null'
+        gpsTrail:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.MapBasedAlerting.Server.Api.Integrator.ApiGpsTrailService.ApiGpsPoint'
       additionalProperties: false

@@ -152,6 +152,28 @@ paths:
     - url: http://{env}-svc-core.amcsplatform.com/scale/api/
 components:
   schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorAreaOfOriginResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        IsDeleted:
+          type: boolean
+        CompanyOutletListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        GUID:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntityExtra:
       type: object
       properties:
@@ -169,6 +191,17 @@ components:
               type: object
               additionalProperties:
                 type: object
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -207,39 +240,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiIntegratorAreaOfOriginResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        IsDeleted:
-          type: boolean
-        CompanyOutletListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        GUID:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
     ApiResourceResultEntity_ApiIntegratorAreaOfOriginResource:
       type: object
       properties:
@@ -266,17 +266,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    SubscriberAreaOfOriginResource:
-      type: object
-      properties:
-        AreaOfOriginGUID:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-        AreaOfOrigin:
-          type: string
-        AreaOfOriginShortCode:
-          type: string
     ApiSubscriberAreaOfOriginResource:
       type: object
       properties:
@@ -288,6 +277,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubscriberAreaOfOriginResource'
+    SubscriberAreaOfOriginResource:
+      type: object
+      properties:
+        AreaOfOriginGUID:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+        AreaOfOrigin:
+          type: string
+        AreaOfOriginShortCode:
+          type: string
 x-refined-from:
 - amcs-group-erp-openapi-original.json
 - amcs-group-scale-openapi-original.json

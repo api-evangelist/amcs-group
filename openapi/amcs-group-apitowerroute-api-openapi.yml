@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  title: External API Tower Route API
+  description: '**Download Trux JSON**
+
+
+    ---
+
+
+    # Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The VisionAI REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the VisionAI External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /visionai/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie called Platform.Tracker.SessionToken.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
+  version: external
+servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
+tags:
+- name: ApiTowerRoute
+paths:
+  /integrator/towerroutes:
+    post:
+      tags:
+      - ApiTowerRoute
+      summary: Create or update Tower routes or route visits
+      description: '# Create or Update Tower Routes or Route Visits
+
+
+        Creates or updates customer address records from Tower route visit data. The endpoint processes route details including customer site information, addresses, and GPS coordinates.
+
+
+        ## Prerequisites
+
+        - Tenant must be configured with Tower sync type enabled
+
+        - SyncEntity must be configured for Site entity type with Tower sync type
+
+
+        ## Business Logic
+
+
+        ### Customer Address Creation/Update
+
+        - **Lookup:** Searches for existing CustomerAddress by `ForeignId` (CustomerSiteId) and TenantId
+
+        - **Create:** If not found, creates new CustomerAddress record
+
+        - **Update:** If found, updates existing record with new data
+
+
+        ### OutletId Assignment (New Customers Only)
+
+        For **new customer addresses** (not existing records):
+
+        - If `VehicleId` is provided, looks up the corresponding Asset by GUID
+
+        - If Asset is found and has an `OutletId`, assigns it to the new CustomerAddress
+
+        - Existing customer addresses retain their original OutletId
+
+
+        ## Notes
+
+
+        1. **Tenant Configuration Required:** The tenant must have Tower sync type enabled for Site entity. If not configured, the endpoint returns 0 with a warning log.
+
+
+        2. **Batch Processing:** Multiple route details can be processed in a single request. Each detail is processed independently.
+
+
+        3. **Idempotent:** Calling the endpoint multiple times with the same `CustomerSiteId` will update the existing record rather than create duplicates.
+
+
+        4. **OutletId Inheritance:** Only **new** customer addresses inherit the OutletId from the vehicle/asset. Existing addresses keep their current OutletId to prevent accidental overwrites.
+
+
+        5. **VehicleId Optional:** The VehicleId field is optional. If not provided, OutletId assignment is skipped for new customers.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Method:
+                  enum:
+                  - GetRoutes
+                  - GetRouteVisits
+                  type: string
+                  description: Selects the shape of Payload.
+                Payload:
+                  oneOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteItem'
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteDetail'
+                  description: 'Array of items matching Method: route headers for GetRoutes, route visits for GetRouteVisits. Tower may send it JSON-encoded as a string; both forms are accepted.'
+        required: true
+      responses:
+        '200':
+          description: The payload was accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Always true when the payload was accepted.
+                  count:
+                    type: integer
+                    description: Number of items that were read from Payload. Items the service skips are still counted.
+                    format: int32
+        '400':
+          description: Body missing, Method is not GetRoutes or GetRouteVisits, or Payload is empty.
+        '500':
+          description: Unexpected error while processing the payload.
+      operationId: postIntegratorTowerroutes
+      x-operation-id-source: derived
+components:
+  schemas:
+    AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteDetail:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Identifier for the route job id
+          format: int32
+        address:
+          $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerAddress'
+        customerSiteName:
+          type:
+          - string
+          - 'null'
+          description: Name of the customer site
+        customerName:
+          type:
+          - string
+          - 'null'
+          description: Name of the customer, used in place of CustomerSiteName when that field is not sent (callout visits).
+        customerSiteId:
+          type:
+          - integer
+          - 'null'
+          description: Unique identifier for the customer site (used as ForeignId)
+          format: int32
+        routeId:
+          type:
+          - integer
+          - 'null'
+          description: Route identifier (stored as TowerRoute)
+          format: int32
+        vehicleId:
+          type:
+          - integer
+          - 'null'
+          description: GUID of the vehicle/asset performing the route
+          format: int32
+        latitude:
+          type:
+          - number
+          - 'null'
+          description: Latitude of the customer site in decimal degrees.
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          description: Longitude of the customer site in decimal degrees.
+          format: double
+      additionalProperties: false
+      description: One route visit in the GetRouteVisits payload of POST /integrator/towerroutes.
+    AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteItem:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Identifier of the route in Tower.
+          format: int32
+        routeDate:
+          type:
+          - string
+          - 'null'
+          description: Date of the route.
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+        vehicleId:
+          type:
+          - integer
+          - 'null'
+          description: Identifier of the vehicle in Tower.
+          format: int32
+        outletId:
+          type:
+          - integer
+          - 'null'
+          description: Outlet identifier from Tower. Not used - the outlet is always resolved from the matched vehicle instead, because this value is unreliable.
+          format: int32
+      additionalProperties: false
+      description: One route header in the GetRoutes payload of POST /integrator/towerroutes.
+    AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerAddress:
+      type: object
+      properties:
+        address1:
+          type:
+          - string
+          - 'null'
+          description: Primary address line
+        address2:
+          type:
+          - string
+          - 'null'
+          description: Secondary address line
+        address3:
+          type:
+          - string
+          - 'null'
+          description: City/Region (also mapped to City field)
+        address4:
+          type:
+          - string
+          - 'null'
+          description: Address line 4.
+        address5:
+          type:
+          - string
+          - 'null'
+          description: Address line 5.
+        houseNumber:
+          type:
+          - string
+          - 'null'
+          description: Building/house number
+        latitude:
+          type:
+          - number
+          - 'null'
+          description: GPS latitude coordinate
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          description: GPS longitude coordinate
+          format: double
+      additionalProperties: false
+      description: The address of a customer site inside a Tower route visit.

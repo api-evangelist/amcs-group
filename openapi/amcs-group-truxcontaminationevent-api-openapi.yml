@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: External Trux Contamination Event API
+  description: '**Download Trux JSON**
+
+
+    ---
+
+
+    # Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The VisionAI REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the VisionAI External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /visionai/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie called Platform.Tracker.SessionToken.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
+  version: external
+servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
+tags:
+- name: TruxContaminationEvent
+paths:
+  /integrator/trux/contaminationevents:
+    get:
+      tags:
+      - TruxContaminationEvent
+      summary: Get Contamination Events
+      description: '# Request list of Trux Contamination Events
+
+
+        Retrieve a paginated list of contamination events for a specific vehicle and company code within a date range.
+
+
+        ## Notes
+
+
+        - Results are ordered by timestamp descending (newest first)
+
+        - ImageSas URLs expire after a period of time
+
+        - The asset is identified by the combination of `vehicleId` (AssetExternalId) and `companyCode` (OutletId)
+
+        - Only events with contamination score > 0 are returned
+
+        - Review process must be completed if enabled for the tenant'
+      parameters:
+      - name: vehicleId
+        in: query
+        description: Asset external ID to filter events
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: companyCode
+        in: query
+        description: Company code/outlet name to filter events
+        style: form
+        schema:
+          type: string
+      - name: routeNumber
+        in: query
+        description: Route number to filter events
+        style: form
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: dateFrom
+        in: query
+        description: Filter start date (inclusive)
+        style: form
+        schema:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+      - name: dateTo
+        in: query
+        description: Filter end date (exclusive)
+        style: form
+        schema:
+          type: string
+          format: dateTime
+          example: '2000-01-01 00:00:00.000'
+      - name: skip
+        in: query
+        description: 'Number of records to skip (default: 0)'
+        style: form
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: take
+        in: query
+        description: 'Number of records to take (default: 1000, max: 1000)'
+        style: form
+        schema:
+          type: integer
+          format: int32
+          default: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse_AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse_AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse_AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent'
+      operationId: getIntegratorTruxContaminationevents
+      x-operation-id-source: derived
+components:
+  schemas:
+    ? AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse_AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent
+    : type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent'
+        totalCount:
+          type: integer
+          description: Total number of matching records
+          format: int32
+        skip:
+          type: integer
+          description: Number of records skipped
+          format: int32
+        take:
+          type: integer
+          description: Number of records requested
+          format: int32
+        hasMore:
+          type: boolean
+          description: Whether more records are available
+      additionalProperties: false
+      description: Paginated response wrapper with metadata
+    AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job identifier from route data
+        imageSas:
+          type:
+          - string
+          - 'null'
+          description: Shared access signature URL for the contamination image
+      additionalProperties: false
+      description: A contamination event on a Trux route, as returned by GET /integrator/trux/contaminationevents.

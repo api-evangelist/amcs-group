@@ -10,7 +10,105 @@ info:
     ## Who Should Read this Document
 
 
-    This document contains a technical description of the AMCS Platform REST API.'
+    This document contains a technical description of the AMCS Platform REST API. It is intended for:
+
+
+    · System integrators
+
+
+    · Customer IT team looking to integrate AMCS Platform with another system
+
+
+    · Third parties looking to integrate their system with AMCS Platform
+
+
+    ## Document Scope
+
+
+    This document introduces the technical aspects of the AMCS Platform REST API. The purpose of this document is to provide readers with detail on how to:
+
+
+    · Access the REST API
+
+
+    · Make calls to the API to retrieve, append and update resources
+
+
+    · Retrieve the incremental changes to a collection
+
+
+    · Find more detail on the end points that are available from an environment. ## Summary
+
+
+    AMCS Platform REST API is designed to support the integration of AMCS Platform with other systems. With care and additional infrastructure, the REST API can be used to build functionality on top of Platform but that is not it’s primary purpose. The ‘changes since’ process provides the main means of performing an initial synchronisation of the AMCS Platform and another system, and then keeping them synchronised. Methods are also provided to create and update resources. # Integration Patterns and Tools
+
+
+    The AMCS Platform provides a number of tools that can be used to connect systems. Care should be taken to match the right tooling to the intended pattern of integration. · When an extract-based approach is needed, use BI reporting. · When derived values are require, use the data mart. · When business processes on different systems need to be integrated by synchronising the data on each through an event style interface, use the REST API. An integration using the REST API will need to take full responsibility for all aspects of the integration including:
+
+
+    · Pulling change events from AMCS Platform
+
+
+    · Filtering the changed resources for the ones that are of interest
+
+
+    · Pulling additional resources from the REST API in order the retrieve all the properties needed by the destination
+
+
+    · Mashing resources to create the complete view required
+
+
+    · Translating that into the form required by the destination
+
+
+    · Validating this to ensure it meet the entry rules of the destination
+
+
+    · Pushing the result to the destination
+
+
+    In the early stages of designing the interface care should be taken to ensure that the need for caching/staging has been considered. The changes since functionality is effectively a means of pulling create/change events from platform. The only filters available enable retrieval of related resources to build a view external to AMCS Platform
+
+
+    # Basics
+
+
+    The AMCS REST API provides a RESTful interface that allows access to the primary business resources of the AMCS platform. The interface follows general HATEOAS compliance principles. ## Quick start
+
+
+    A quickstart walkthrough based on node.js and covering authentication and getting a page of customers can be found here. ## Interface definitions
+
+
+    Swagger documentation for the end points available on an environment can be found at:
+
+
+    Before 8.5: https://{environment domain name}/swagger/ui/index
+
+
+    From 8.5: https://{environment domain name}/erp/api/swagger/ui/index
+
+
+    ## HTTP Interface
+
+
+    The following HTTP RESTful methods are provided as part of this API:
+
+
+    · GET: Provides read access to retrieve details of one or more resources. · POST: Creates or updates a single resource or a set of resources. · PUT: Updates a single resource or a set of resources. Note:
+
+
+    · DELETE methods are currently not provided as part of the API. The REST API URIs begin with
+
+
+    https://{environment domain name}/erp/api/integrator/erp
+
+
+    For example:
+
+    https://prod.amcs-at-mycompany.com/erp/api/integrator/erp
+
+
+    This should be used as the base of the URI.'
   version: latest
 servers:
 - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
@@ -155,49 +253,15 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiResourceResultEntityLinks:
-      type: object
-      properties:
-        self:
-          type: string
-        associations:
-          type: array
-          items:
-            type: string
-        expand:
-          type: array
-          items:
-            type: string
-        operations:
-          type: array
-          items:
-            type: string
-    ApiResourceResultCollection_ApiIntegratorRouteVisitPriceResource:
+    ApiResourceResultEntity_ApiIntegratorRouteVisitPriceResource:
       type: object
       properties:
         resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
+          $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
         extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
         errors:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
@@ -220,6 +284,64 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiResourceResultCollection_ApiIntegratorRouteVisitPriceResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiResourceResultEntityLinks:
+      type: object
+      properties:
+        self:
+          type: string
+        associations:
+          type: array
+          items:
+            type: string
+        expand:
+          type: array
+          items:
+            type: string
+        operations:
+          type: array
+          items:
+            type: string
     ApiResourceStatus:
       type: object
       properties:
@@ -228,27 +350,3 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiResourceResultEntity_ApiIntegratorRouteVisitPriceResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorRouteVisitPriceResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'

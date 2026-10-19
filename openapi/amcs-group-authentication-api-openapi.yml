@@ -1,67 +1,141 @@
 openapi: 3.2.0
 info:
-  title: Core Authentication API
-  version: core
+  title: External Authentication API
+  description: '**Download Trux JSON**
+
+
+    ---
+
+
+    # Getting Started
+
+
+    ## Document Purpose and Scope
+
+
+    The VisionAI REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the VisionAI External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /visionai/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie called Platform.Tracker.SessionToken.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
+  version: external
+servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 tags:
 - name: Authentication
 paths:
-  /services/api/login:
+  /authTokens:
     post:
       tags:
       - Authentication
+      summary: Exchange Private Key for Session Cookie
+      description: Manually added endpoint. Submit your private key to receive an auth cookie.
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/AMCS.Core.Entity.Api.Login.LoginDetails'
+              $ref: '#/components/schemas/ApiAuthRequest'
+        required: true
       responses:
         '200':
-          description: Success
-      summary: Create services api login
-      x-summary-source: derived
-      operationId: postServicesApiLogin
-      x-operation-id-source: derived
-  /services/api/loginPageConfiguration:
-    get:
-      tags:
-      - Authentication
-      responses:
-        '200':
-          description: Success
-      summary: Get services api login page configuration
-      x-summary-source: derived
-      operationId: getServicesApiLoginPageConfiguration
-      x-operation-id-source: derived
-  /services/api/verifyToken:
-    get:
-      tags:
-      - Authentication
-      responses:
-        '200':
-          description: Success
-      summary: Get services api verify token
-      x-summary-source: derived
-      operationId: getServicesApiVerifyToken
+          description: Success. The response will contain a Set-Cookie header and the authentication result object.
+          headers:
+            Set-Cookie:
+              description: Subsequent calls to the REST API will use this cookie to authenticate and authorize requests.
+              schema:
+                type: string
+                example: Platform.VisionAI.SessionToken=abcde12345; Path=/; HttpOnly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAuthResponse'
+      operationId: postAuthTokens
       x-operation-id-source: derived
 components:
   schemas:
-    AMCS.Core.Entity.Api.Login.LoginDetails:
+    ApiAuthResponse:
       type: object
       properties:
+        authResult:
+          type: string
+          description: Outcome of the authentication attempt. "ok" indicates success; any other value (e.g. "invalidCredentials") indicates the login was rejected and no session cookie was issued.
+          example: ok
         username:
           type:
           - string
           - 'null'
-        password:
+          description: The username (login) of the authenticated user. Null when authentication failed.
+          example: amcs@amcsgroup.com
+        userIdentity:
           type:
           - string
           - 'null'
+          description: The display name / identity of the authenticated user. Null when authentication failed.
+        sysUserId:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the authenticated user. Null when authentication failed.
+          example: 39
+        userGuid:
+          type:
+          - string
+          - 'null'
+          description: Globally unique identifier (GUID) of the authenticated user. Use this to reference the user across API calls. Null when authentication failed.
+          format: uuid
+          example: 91b6d13e-19e1-4abc-baeb-b028009eb482
+        companyoutletid:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the company outlet the user is associated with. Null when authentication failed or no outlet is assigned.
+          example: 0
+        companyOutletGuid:
+          type:
+          - string
+          - 'null'
+          description: Globally unique identifier (GUID) of the company outlet the user is associated with. Null when authentication failed or no outlet is assigned.
+          format: uuid
         stayLoggedIn:
           type: boolean
-      additionalProperties: false
+          description: Indicates whether the issued session is persistent ("stay logged in") rather than expiring at the end of the browser session.
+          example: false
+    ApiAuthRequest:
+      required:
+      - PrivateKey
+      type: object
+      properties:
+        PrivateKey:
+          type: string
+          description: Your personal access token (private key). Exchange it here for a session cookie used to authenticate subsequent requests.
+          example: nHNwUB8...

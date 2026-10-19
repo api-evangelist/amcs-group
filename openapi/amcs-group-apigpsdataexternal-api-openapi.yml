@@ -6,7 +6,40 @@ info:
     ## Document Purpose and Scope
 
 
-    The Transport Live View REST API endpoints are technically described in this document.'
+    The Transport Live View REST API endpoints are technically described in this document. This document''s goal is to instruct readers on how to interface with the Transport Live View External REST API.
+
+
+    ## Security
+
+
+    We use PAT Tokens for authentication over HTTPS encrypted comms.
+
+
+    A PAT token will be provided for you to use in your integration.
+
+
+    You will use this PAT token to authenticate as follows.
+
+
+    ### Request Format:
+
+
+    POST: /tlv/api/authTokens
+
+
+    Body: {"privateKey":"PATtokenstring"}
+
+
+    ### Response Format:
+
+
+    The response passes a SessionToken as a cookie.
+
+
+    This cookie should be included in the subsequent calls to the REST API.
+
+
+    The API endpoints that are currently available are detailed below.'
   title: API Gps Data External API
   version: external
 tags:
@@ -20,7 +53,184 @@ paths:
       description: '# API GPS Data Changes
 
 
-        Provides a structured response for changes in GPS Data Points.'
+        Provides a structured response for changes in GPS Data Points. ## How to Use This API
+
+
+        This API retrieves GPS data point changes using either a timestamp (`Since`) or a pagination cursor (`Cursor`). ### **Usage Guidelines**
+
+        - If `Since` is provided, the API returns data changes from that timestamp onwards. - If `Cursor` is provided, the API retrieves the next set of results from the given position. - If both `Since` and `Cursor` are omitted, the result is the same as using `Cursor`, meaning it will retrieve the most recent set of changes. - `Links.Next` contains both a URL and a `Cursor`. This will have data only if the response contains a `Cursor` value. - **A maximum of 2000 items can be retrieved per request.** If more data is required, use pagination via the `Cursor` parameter. ## **Request Parameters**
+
+
+        | Parameter | Type | Required | Description |
+
+        |------------|------------|----------|-------------|
+
+        | **Since** | `DateTime?` | No | The timestamp from which to retrieve changes. |
+
+        | **Cursor** | `string` | No | A pagination cursor to fetch the next set of data. |
+
+
+        ---
+
+
+        ## **Response Structure**
+
+
+        ### **Main Response Object**
+
+        | Property | Type | Description |
+
+        |------------|---------------------------------------|---------------------------------------------------------------|
+
+        | **Resource** | `List` | List of GPS data point changes. |
+
+        | **Links** | `GpsDataPointChangesLink` | Links object containing navigation links. |
+
+        | **Links.Next** | `string` | Contains the next page URL and cursor if there are more results. Will be present only if `Cursor` is included in the response. |
+
+        | **Extra** | `GpsDataPointChangesExtra` | Extra information for pagination, including cursors and until. |
+
+
+        ---
+
+
+        ### **Links Object**
+
+        | Property | Type | Description |
+
+        |------------|--------|---------------------------------|
+
+        | **Next** | `string` | Link to the next page of data. Will only be present if `Cursor` is included in the response. |
+
+
+        ---
+
+
+        ### **Extra Object**
+
+        | Property | Type | Description |
+
+        |------------|--------|---------------------------------------------------------------------------|
+
+        | **Cursor** | `string` | Bookmark for navigating through pages. |
+
+        | **Until** | `string` | Timestamp indicating the end of the range. If the `Cursor` is lost or unavailable, this `Until` timestamp can be used as the `Since` value in a new request to continue retrieving data from the last known point. |
+
+
+        ---
+
+
+        ### **GpsDataPointChangeResourceDto Object**
+
+        | Property | Type | Description |
+
+        |--------------|----------------------------|----------------------------------------------|
+
+        | **Resource** | `GpsDataPointChangeDto` | The GPS data point change details. |
+
+
+        ---
+
+
+        ### **GpsDataPointChangeDto Object**
+
+        | Property | Type | Description |
+
+        |--------------|-----------|----------------------------------------------|
+
+        | **Id** | `string` | Unique identifier for the GPS data point. |
+
+        | **PlateNo** | `string` | Vehicle plate number associated with the data point. |
+
+        | **Timestamp** | `DateTime` | Date and time of the GPS data point. |
+
+        | **Latitude** | `double` | Latitude of the GPS data point. |
+
+        | **Longitude** | `double` | Longitude of the GPS data point. |
+
+        | **SpeedKmh** | `int` | Speed in kilometers per hour. |
+
+        | **TenantId** | `Guid` | Identifier for the associated tenant. |
+
+
+        ---
+
+
+        ### **Example Request**
+
+        ```json
+
+        {
+
+        "Since": "2024-02-21T12:00:00Z",
+
+        "Cursor": "abcdef"
+
+        }
+
+        ```
+
+
+        ---
+
+
+        ### **Example Response**
+
+        ```json
+
+        {
+
+        "Resource": [
+
+        {
+
+        "Resource": {
+
+        "Id": "12345",
+
+        "PlateNo": "ABC123",
+
+        "Timestamp": "2024-02-21T14:30:00Z",
+
+        "Latitude": 14.5995,
+
+        "Longitude": 120.9842,
+
+        "SpeedKmh": 60,
+
+        "TenantId": "550e8400-e29b-41d4-a716-446655440000"
+
+        }
+
+        }
+
+        ],
+
+        "Links": {
+
+        "Next": "/integrator/gpsdata/changes?cursor=abcdef"
+
+        },
+
+        "Extra": {
+
+        "Cursor": "abcdef",
+
+        "Until": "2024-02-21T15:00:00Z"
+
+        }
+
+        }
+
+        ```
+
+
+        ---
+
+
+        ### **Pagination Instructions**
+
+        - If the response includes a `Next` link, call the API again using the `Cursor` parameter from the `Extra` object to fetch the next batch of data.'
       parameters:
       - name: Since
         in: query
@@ -50,23 +260,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GpsDataPointChangesExtra:
+    GpsDataPointChangesResponse:
       type: object
       properties:
-        Cursor:
-          type: string
-        Until:
-          type: string
+        Resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
+        Extra:
+          $ref: '#/components/schemas/GpsDataPointChangesExtra'
+        Links:
+          $ref: '#/components/schemas/GpsDataPointChangesLink'
     GpsDataPointChangeResourceDto:
       type: object
       properties:
         Resource:
           $ref: '#/components/schemas/GpsDataPointChangeDto'
-    GpsDataPointChangesLink:
-      type: object
-      properties:
-        Next:
-          type: string
     GpsDataPointChangeDto:
       type: object
       properties:
@@ -89,14 +298,15 @@ components:
         TenantId:
           type: string
           format: uuid
-    GpsDataPointChangesResponse:
+    GpsDataPointChangesLink:
       type: object
       properties:
-        Resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpsDataPointChangeResourceDto'
-        Extra:
-          $ref: '#/components/schemas/GpsDataPointChangesExtra'
-        Links:
-          $ref: '#/components/schemas/GpsDataPointChangesLink'
+        Next:
+          type: string
+    GpsDataPointChangesExtra:
+      type: object
+      properties:
+        Cursor:
+          type: string
+        Until:
+          type: string

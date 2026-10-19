@@ -10,7 +10,105 @@ info:
     ## Who Should Read this Document
 
 
-    This document contains a technical description of the AMCS Platform REST API.'
+    This document contains a technical description of the AMCS Platform REST API. It is intended for:
+
+
+    · System integrators
+
+
+    · Customer IT team looking to integrate AMCS Platform with another system
+
+
+    · Third parties looking to integrate their system with AMCS Platform
+
+
+    ## Document Scope
+
+
+    This document introduces the technical aspects of the AMCS Platform REST API. The purpose of this document is to provide readers with detail on how to:
+
+
+    · Access the REST API
+
+
+    · Make calls to the API to retrieve, append and update resources
+
+
+    · Retrieve the incremental changes to a collection
+
+
+    · Find more detail on the end points that are available from an environment. ## Summary
+
+
+    AMCS Platform REST API is designed to support the integration of AMCS Platform with other systems. With care and additional infrastructure, the REST API can be used to build functionality on top of Platform but that is not it’s primary purpose. The ‘changes since’ process provides the main means of performing an initial synchronisation of the AMCS Platform and another system, and then keeping them synchronised. Methods are also provided to create and update resources. # Integration Patterns and Tools
+
+
+    The AMCS Platform provides a number of tools that can be used to connect systems. Care should be taken to match the right tooling to the intended pattern of integration. · When an extract-based approach is needed, use BI reporting. · When derived values are require, use the data mart. · When business processes on different systems need to be integrated by synchronising the data on each through an event style interface, use the REST API. An integration using the REST API will need to take full responsibility for all aspects of the integration including:
+
+
+    · Pulling change events from AMCS Platform
+
+
+    · Filtering the changed resources for the ones that are of interest
+
+
+    · Pulling additional resources from the REST API in order the retrieve all the properties needed by the destination
+
+
+    · Mashing resources to create the complete view required
+
+
+    · Translating that into the form required by the destination
+
+
+    · Validating this to ensure it meet the entry rules of the destination
+
+
+    · Pushing the result to the destination
+
+
+    In the early stages of designing the interface care should be taken to ensure that the need for caching/staging has been considered. The changes since functionality is effectively a means of pulling create/change events from platform. The only filters available enable retrieval of related resources to build a view external to AMCS Platform
+
+
+    # Basics
+
+
+    The AMCS REST API provides a RESTful interface that allows access to the primary business resources of the AMCS platform. The interface follows general HATEOAS compliance principles. ## Quick start
+
+
+    A quickstart walkthrough based on node.js and covering authentication and getting a page of customers can be found here. ## Interface definitions
+
+
+    Swagger documentation for the end points available on an environment can be found at:
+
+
+    Before 8.5: https://{environment domain name}/swagger/ui/index
+
+
+    From 8.5: https://{environment domain name}/erp/api/swagger/ui/index
+
+
+    ## HTTP Interface
+
+
+    The following HTTP RESTful methods are provided as part of this API:
+
+
+    · GET: Provides read access to retrieve details of one or more resources. · POST: Creates or updates a single resource or a set of resources. · PUT: Updates a single resource or a set of resources. Note:
+
+
+    · DELETE methods are currently not provided as part of the API. The REST API URIs begin with
+
+
+    https://{environment domain name}/erp/api/integrator/erp
+
+
+    For example:
+
+    https://prod.amcs-at-mycompany.com/erp/api/integrator/erp
+
+
+    This should be used as the base of the URI.'
   version: latest
 servers:
 - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
@@ -26,7 +124,101 @@ paths:
 
         | ------------------------------------- | ----------------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the weighing.'
+        | GUID | The GUID associated to the weighing. |
+
+        | RelatedScheduleGuid | The GUID associated to the schedule of the weighing. |
+
+        | RelatedRouteGuid | The GUID associated to the route of the weighing. |
+
+        | RelatedJobGuid | The GUID associated to the job of the weighing. |
+
+        | RelatedVehicleGuid | The GUID associated to the vehicle of the weighing. |
+
+        | RelatedExternalVehicleGuid | The GUID associated to the external vehicle of the weighing. |
+
+        | RelatedMaterialGuid | The GUID associated to the material of the weighing. |
+
+        | RelatedLocationGuid | Used to filter the related location guid associated to the location of the weighing. |
+
+        | RelatedLocationDestinationGuid | Used to filter the related destination location guid associated to the destination location of the weighing. |
+
+        | RelatedAreaOfOriginGuid | The GUID associated to the area of origin of the weighing. |
+
+        | RelatedSupplierThirdPartyCarrierGuid | The GUID associated to the third party carrier supplier site of the weighing. |
+
+        | RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing. |
+
+        | TicketNo | The ticket number associated to the weighing. |
+
+        | ExternalTicketNo | The external ticket number associated to the weighing. |
+
+        | DestinationTicketNo | The destination ticket number associated to the weighing. |
+
+        | CustomerLoadReference | The customer load reference associated to the weighing. |
+
+        | CustomerInvoiceReference | The customer invoice reference associated to the weighing. |
+
+        | Notes | The notes associated to the weighing. |
+
+        | WeighingTypeListItem | The GUID and description of the weighing type associated to the weighing. |
+
+        | HaulierName | The haulier name associated to the weighing. |
+
+        | Driver | The driver data associated to the weighing. |
+
+        | Driver.Name | The name associated to the driver. |
+
+        | Driver.LicenceNumber | The licence number associated to the driver. |
+
+        | IsComplete | Is this weighing complete? |
+
+        | IsDestinationConfirmed | Is this weighing confirmed on destination? |
+
+        | IsExternalVehicle | Is this weighing done with an external vehicle? |
+
+        | IsEstimatedWeight | Is the weight of this weighing estimated? |
+
+        | IsGradingConfirmed | Is the grading of this weighing confirmed? |
+
+        | IsIncContainer | Is this weighing including a container? |
+
+        | IsInspectionConfirmed | Is the inspection of this weighing confirmed? |
+
+        | IsOutboundWeighingComplete | Is the outbound weighing complete? |
+
+        | IsPassThrough | Is this a pass through weighing? |
+
+        | IsPrinted | Is this weighing printed? |
+
+        | StartedFromANPR | Is this weighing started by an Automatic Number Plate Recognition device? |
+
+        | CashCollected | Amount of cash collected for this weighing. |
+
+        | WeighingDate | The weighing date of this weighing. Filterable |
+
+        | Weights | The weight data assosicated to the weighing. |
+
+        | Weights.GrossWeight | The gross weight data associated to the weighing. |
+
+        | Weights.GrossWeight.Guid | The GUID associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Weight | The weight associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the gross weight. |
+
+        | Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|
+
+        | Weights.TareWeight | The tare weight data associated to the weighing. |
+
+        | Weights.TareWeight.Guid | The GUID associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Weight | The weight associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Timestamp | The timestamp associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.WeightTypeListItem | The GUID and description of the weight type associated to the tare weight.'
       operationId: Weighing_GetChanges
       parameters:
       - name: since
@@ -53,7 +245,101 @@ paths:
 
         | ------------------------------------- | ----------------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the weighing.'
+        | GUID | The GUID associated to the weighing. |
+
+        | RelatedScheduleGuid | The GUID associated to the schedule of the weighing. |
+
+        | RelatedRouteGuid | The GUID associated to the route of the weighing. |
+
+        | RelatedJobGuid | The GUID associated to the job of the weighing. |
+
+        | RelatedVehicleGuid | The GUID associated to the vehicle of the weighing. |
+
+        | RelatedExternalVehicleGuid | The GUID associated to the external vehicle of the weighing. |
+
+        | RelatedMaterialGuid | The GUID associated to the material of the weighing. |
+
+        | RelatedLocationGuid | Used to filter the related location guid associated to the location of the weighing. |
+
+        | RelatedLocationDestinationGuid | Used to filter the related destination location guid associated to the destination location of the weighing. |
+
+        | RelatedAreaOfOriginGuid | The GUID associated to the area of origin of the weighing. |
+
+        | RelatedSupplierThirdPartyCarrierGuid | The GUID associated to the third party carrier supplier site of the weighing. |
+
+        | RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing. |
+
+        | TicketNo | The ticket number associated to the weighing. |
+
+        | ExternalTicketNo | The external ticket number associated to the weighing. |
+
+        | DestinationTicketNo | The destination ticket number associated to the weighing. |
+
+        | CustomerLoadReference | The customer load reference associated to the weighing. |
+
+        | CustomerInvoiceReference | The customer invoice reference associated to the weighing. |
+
+        | Notes | The notes associated to the weighing. |
+
+        | WeighingTypeListItem | The GUID and description of the weighing type associated to the weighing. |
+
+        | HaulierName | The haulier name associated to the weighing. |
+
+        | Driver | The driver data associated to the weighing. |
+
+        | Driver.Name | The name associated to the driver. |
+
+        | Driver.LicenceNumber | The licence number associated to the driver. |
+
+        | IsComplete | Is this weighing complete? |
+
+        | IsDestinationConfirmed | Is this weighing confirmed on destination? |
+
+        | IsExternalVehicle | Is this weighing done with an external vehicle? |
+
+        | IsEstimatedWeight | Is the weight of this weighing estimated? |
+
+        | IsGradingConfirmed | Is the grading of this weighing confirmed? |
+
+        | IsIncContainer | Is this weighing including a container? |
+
+        | IsInspectionConfirmed | Is the inspection of this weighing confirmed? |
+
+        | IsOutboundWeighingComplete | Is the outbound weighing complete? |
+
+        | IsPassThrough | Is this a pass through weighing? |
+
+        | IsPrinted | Is this weighing printed? |
+
+        | StartedFromANPR | Is this weighing started by an Automatic Number Plate Recognition device? |
+
+        | CashCollected | Amount of cash collected for this weighing. |
+
+        | WeighingDate | The weighing date of this weighing. Filterable |
+
+        | Weights | The weight data assosicated to the weighing. |
+
+        | Weights.GrossWeight | The gross weight data associated to the weighing. |
+
+        | Weights.GrossWeight.Guid | The GUID associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Weight | The weight associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the gross weight. |
+
+        | Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|
+
+        | Weights.TareWeight | The tare weight data associated to the weighing. |
+
+        | Weights.TareWeight.Guid | The GUID associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Weight | The weight associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Timestamp | The timestamp associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.WeightTypeListItem | The GUID and description of the weight type associated to the tare weight.'
       operationId: Weighing_Get
       parameters:
       - name: guid
@@ -81,7 +367,95 @@ paths:
 
         | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
 
-        | GUID | The GUID associated to the weighing.'
+        | GUID | The GUID associated to the weighing. | No |
+
+        | RelatedScheduleGuid | The GUID associated to the schedule of the weighing. | No |
+
+        | RelatedRouteGuid | The GUID associated to the route of the weighing. | Route |
+
+        | RelatedJobGuid | The GUID associated to the job of the weighing. | Gate, ScheduledJob, MaterialSale, TransferOut |
+
+        | RelatedVehicleGuid | The GUID associated to the vehicle of the weighing. | No |
+
+        | RelatedExternalVehicleGuid | The GUID associated to the external vehicle of the weighing. | Yes |
+
+        | RelatedMaterialGuid | The GUID associated to the material of the weighing. | Yes |
+
+        | RelatedLocationGuid | The GUID associated to the location of the weighing. | No |
+
+        | RelatedLocationDestinationGuid | The GUID associated to the destination location of the weighing. | TransferOut |
+
+        | RelatedAreaOfOriginGuid | The GUID associated to the area of origin of the weighing. | Route |
+
+        | RelatedSupplierThirdPartyCarrierGuid | The GUID associated to the third party carrier supplier site of the weighing. | No |
+
+        | RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing. | No |
+
+        | TicketNo | The ticket number associated to the weighing. | No |
+
+        | ExternalTicketNo | The external ticket number associated to the weighing. | No |
+
+        | DestinationTicketNo | The destination ticket number associated to the weighing. | No |
+
+        | CustomerLoadReference | The customer load reference associated to the weighing. | No |
+
+        | CustomerInvoiceReference | The customer invoice reference associated to the weighing. | No |
+
+        | Notes | The notes associated to the weighing. | No |
+
+        | WeighingTypeListItem | The GUID and description of the weighing type associated to the weighing. | Yes |
+
+        | HaulierName | The haulier name associated to the weighing. | No |
+
+        | Driver | The driver data associated to the weighing. | No |
+
+        | Driver.Name | The name associated to the driver. | No |
+
+        | Driver.LicenceNumber | The licence number associated to the driver. | No |
+
+        | IsComplete | Is this weighing complete? | No |
+
+        | IsDestinationConfirmed | Is this weighing confirmed on destination? | No |
+
+        | IsExternalVehicle | Is this weighing done with an external vehicle? | No |
+
+        | IsEstimatedWeight | Is the weight of this weighing estimated? | No |
+
+        | IsGradingConfirmed | Is the grading of this weighing confirmed? | No |
+
+        | IsIncContainer | Is this weighing including a container? | No |
+
+        | IsInspectionConfirmed | Is the inspection of this weighing confirmed? | No |
+
+        | IsOutboundWeighingComplete | Is the outbound weighing complete? | No |
+
+        | IsPassThrough | Is this a pass through weighing? | No |
+
+        | IsPrinted | Is this weighing printed? | No |
+
+        | StartedFromANPR | Is this weighing started by an Automatic Number Plate Recognition device? | No |
+
+        | CashCollected | Amount of cash collected for this weighing. | No |
+
+        | WeighingDate | The weighing date of this weighing. | No |
+
+        | Weights | The weight data assosicated to the weighing. | No |
+
+        | Weights.GrossWeight | The gross weight data associated to the weighing. | No |
+
+        | Weights.GrossWeight.Guid | The GUID associated to the gross weight of the weighing. | No |
+
+        | Weights.GrossWeight.Weight | The weight associated to the gross weight of the weighing. | No |
+
+        | Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing. | Yes if Weight not null |
+
+        | Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the gross weight. | Yes if Weights.GrossWeight not null |
+
+        | Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.| No |
+
+        | Weights.TareWeight | The tare weight data associated to the weighing. | No |
+
+        | Weights.TareWeight.Guid | The GUID associated to the tare weight of the weighing.'
       operationId: Weighing_Update
       parameters:
       - name: guid
@@ -113,7 +487,101 @@ paths:
 
         | ------------------------------------- | ----------------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the weighing.'
+        | GUID | The GUID associated to the weighing. |
+
+        | RelatedScheduleGuid | The GUID associated to the schedule of the weighing. |
+
+        | RelatedRouteGuid | The GUID associated to the route of the weighing. |
+
+        | RelatedJobGuid | The GUID associated to the job of the weighing. |
+
+        | RelatedVehicleGuid | The GUID associated to the vehicle of the weighing. |
+
+        | RelatedExternalVehicleGuid | The GUID associated to the external vehicle of the weighing. |
+
+        | RelatedMaterialGuid | The GUID associated to the material of the weighing. |
+
+        | RelatedLocationGuid | Used to filter the related location guid associated to the location of the weighing. |
+
+        | RelatedLocationDestinationGuid | Used to filter the related destination location guid associated to the destination location of the weighing. |
+
+        | RelatedAreaOfOriginGuid | The GUID associated to the area of origin of the weighing. |
+
+        | RelatedSupplierThirdPartyCarrierGuid | The GUID associated to the third party carrier supplier site of the weighing. |
+
+        | RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing. |
+
+        | TicketNo | The ticket number associated to the weighing. |
+
+        | ExternalTicketNo | The external ticket number associated to the weighing. |
+
+        | DestinationTicketNo | The destination ticket number associated to the weighing. |
+
+        | CustomerLoadReference | The customer load reference associated to the weighing. |
+
+        | CustomerInvoiceReference | The customer invoice reference associated to the weighing. |
+
+        | Notes | The notes associated to the weighing. |
+
+        | WeighingTypeListItem | The GUID and description of the weighing type associated to the weighing. |
+
+        | HaulierName | The haulier name associated to the weighing. |
+
+        | Driver | The driver data associated to the weighing. |
+
+        | Driver.Name | The name associated to the driver. |
+
+        | Driver.LicenceNumber | The licence number associated to the driver. |
+
+        | IsComplete | Is this weighing complete? |
+
+        | IsDestinationConfirmed | Is this weighing confirmed on destination? |
+
+        | IsExternalVehicle | Is this weighing done with an external vehicle? |
+
+        | IsEstimatedWeight | Is the weight of this weighing estimated? |
+
+        | IsGradingConfirmed | Is the grading of this weighing confirmed? |
+
+        | IsIncContainer | Is this weighing including a container? |
+
+        | IsInspectionConfirmed | Is the inspection of this weighing confirmed? |
+
+        | IsOutboundWeighingComplete | Is the outbound weighing complete? |
+
+        | IsPassThrough | Is this a pass through weighing? |
+
+        | IsPrinted | Is this weighing printed? |
+
+        | StartedFromANPR | Is this weighing started by an Automatic Number Plate Recognition device? |
+
+        | CashCollected | Amount of cash collected for this weighing. |
+
+        | WeighingDate | The weighing date of this weighing. Filterable |
+
+        | Weights | The weight data assosicated to the weighing. |
+
+        | Weights.GrossWeight | The gross weight data associated to the weighing. |
+
+        | Weights.GrossWeight.Guid | The GUID associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Weight | The weight associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing. |
+
+        | Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the gross weight. |
+
+        | Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.|
+
+        | Weights.TareWeight | The tare weight data associated to the weighing. |
+
+        | Weights.TareWeight.Guid | The GUID associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Weight | The weight associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.Timestamp | The timestamp associated to the tare weight of the weighing. |
+
+        | Weights.TareWeight.WeightTypeListItem | The GUID and description of the weight type associated to the tare weight.'
       operationId: Weighing_GetCollection
       parameters:
       - name: filter
@@ -153,7 +621,95 @@ paths:
 
         | ------------------------------------- | ----------------------------------------------------------------------------- | -------- |
 
-        | GUID | The GUID associated to the weighing.'
+        | GUID | The GUID associated to the weighing. | No |
+
+        | RelatedScheduleGuid | The GUID associated to the schedule of the weighing. | No |
+
+        | RelatedRouteGuid | The GUID associated to the route of the weighing. | Route |
+
+        | RelatedJobGuid | The GUID associated to the job of the weighing. | Gate, ScheduledJob, MaterialSale, TransferOut |
+
+        | RelatedVehicleGuid | The GUID associated to the vehicle of the weighing. | No |
+
+        | RelatedExternalVehicleGuid | The GUID associated to the external vehicle of the weighing. | Yes |
+
+        | RelatedMaterialGuid | The GUID associated to the material of the weighing. | Yes |
+
+        | RelatedLocationGuid | The GUID associated to the location of the weighing. | No |
+
+        | RelatedLocationDestinationGuid | The GUID associated to the destination location of the weighing. | TransferOut |
+
+        | RelatedAreaOfOriginGuid | The GUID associated to the area of origin of the weighing. | Route |
+
+        | RelatedSupplierThirdPartyCarrierGuid | The GUID associated to the third party carrier supplier site of the weighing. | No |
+
+        | RelatedTransferDestinationWeighingGuid | The GUID associated to the transfer destination weighing of the weighing. | No |
+
+        | TicketNo | The ticket number associated to the weighing. | No |
+
+        | ExternalTicketNo | The external ticket number associated to the weighing. | No |
+
+        | DestinationTicketNo | The destination ticket number associated to the weighing. | No |
+
+        | CustomerLoadReference | The customer load reference associated to the weighing. | No |
+
+        | CustomerInvoiceReference | The customer invoice reference associated to the weighing. | No |
+
+        | Notes | The notes associated to the weighing. | No |
+
+        | WeighingTypeListItem | The GUID and description of the weighing type associated to the weighing. | Yes |
+
+        | HaulierName | The haulier name associated to the weighing. | No |
+
+        | Driver | The driver data associated to the weighing. | No |
+
+        | Driver.Name | The name associated to the driver. | No |
+
+        | Driver.LicenceNumber | The licence number associated to the driver. | No |
+
+        | IsComplete | Is this weighing complete? | No |
+
+        | IsDestinationConfirmed | Is this weighing confirmed on destination? | No |
+
+        | IsExternalVehicle | Is this weighing done with an external vehicle? | No |
+
+        | IsEstimatedWeight | Is the weight of this weighing estimated? | No |
+
+        | IsGradingConfirmed | Is the grading of this weighing confirmed? | No |
+
+        | IsIncContainer | Is this weighing including a container? | No |
+
+        | IsInspectionConfirmed | Is the inspection of this weighing confirmed? | No |
+
+        | IsOutboundWeighingComplete | Is the outbound weighing complete? | No |
+
+        | IsPassThrough | Is this a pass through weighing? | No |
+
+        | IsPrinted | Is this weighing printed? | No |
+
+        | StartedFromANPR | Is this weighing started by an Automatic Number Plate Recognition device? | No |
+
+        | CashCollected | Amount of cash collected for this weighing. | No |
+
+        | WeighingDate | The weighing date of this weighing. | No |
+
+        | Weights | The weight data assosicated to the weighing. | No |
+
+        | Weights.GrossWeight | The gross weight data associated to the weighing. | No |
+
+        | Weights.GrossWeight.Guid | The GUID associated to the gross weight of the weighing. | No |
+
+        | Weights.GrossWeight.Weight | The weight associated to the gross weight of the weighing. | No |
+
+        | Weights.GrossWeight.Timestamp | The timestamp associated to the gross weight of the weighing. | Yes if Weight not null |
+
+        | Weights.GrossWeight.WeightTypeListItem | The GUID and description of the weight type associated to the gross weight. | Yes if Weights.GrossWeight not null |
+
+        | Weights.GrossWeight.TallyNo| The tally number associated to the gross weight.| No |
+
+        | Weights.TareWeight | The tare weight data associated to the weighing. | No |
+
+        | Weights.TareWeight.Guid | The GUID associated to the tare weight of the weighing.'
       operationId: Weighing_Create
       requestBody:
         content:
@@ -171,85 +727,20 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiIntegratorListItemResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
     ApiIntegratorWeighingDocketPdfResource:
       type: object
       properties:
         Hash:
           type: string
-    ApiIntegratorWeighingDestinationWeightResource:
-      type: object
-      properties:
-        GrossWeight:
-          type: number
-          format: double
-        TareWeight:
-          type: number
-          format: double
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-    ApiIntegratorWeighingInResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        TicketNo:
-          type: string
-        IsAutomatic:
-          type: boolean
-        TareTallyNo:
-          type: string
-        RelatedTreatmentGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        Weights:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
-        Details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWeighingInDetailResource'
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiIntegratorWeighingPictureResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Hash:
-          type: string
-    ApiResourceResultEntity_ApiIntegratorWeighingResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorWeighingResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceResultCollection_ApiIntegratorWeighingResource:
       type: object
       properties:
@@ -263,12 +754,6 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
     ApiIntegratorWeighingWeightResource:
       type: object
       properties:
@@ -287,100 +772,11 @@ components:
             TimeZone: Europe/London
         WeightTypeListItem:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiResourceId:
+    ApiResourceErrors:
       type: object
       properties:
-        resource:
-          type: string
-          format: uuid
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorWeighingDriverResource:
-      type: object
-      properties:
-        LicenceNumber:
           type: string
-        Name:
-          type: string
-    ApiResourceResultEntityExtra:
-      type: object
-      properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
-    ApiIntegratorWeighingWeightDetailResource:
-      type: object
-      properties:
-        TallyNo:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Weight:
-          type: number
-          format: double
-        Timestamp:
-          type: string
-          format: zonedDateTime
-          example:
-            DateTime: '2000-01-01'
-            TimeZone: Europe/London
-        WeightTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-    ApiIntegratorWeighingWeightsResource:
-      type: object
-      properties:
-        GrossWeight:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
-        TareWeight:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
-        Quantity:
-          type: number
-          format: double
-        Volume:
-          type: number
-          format: double
-    ApiIntegratorWeighingOutResource:
-      type: object
-      properties:
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        TicketNo:
-          type: string
-        IsAutomatic:
-          type: boolean
-        GrossTallyNo:
-          type: string
-        RelatedTreatmentGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        MaterialListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        ContainerTypeListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        RelatedWeighingInGuid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-        Weights:
-          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -398,6 +794,19 @@ components:
           type: array
           items:
             type: string
+    ApiResourceResultEntity_ApiIntegratorWeighingResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiIntegratorWeighingResource:
       type: object
       properties:
@@ -566,14 +975,21 @@ components:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
-    ApiResourceStatus:
+    ApiIntegratorWeighingDestinationWeightResource:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        isSuccess:
-          type: boolean
+        GrossWeight:
+          type: number
+          format: double
+        TareWeight:
+          type: number
+          format: double
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
     ApiIntegratorWeighingWeightsWeightResource:
       type: object
       properties:
@@ -589,15 +1005,133 @@ components:
         Volume:
           type: number
           format: double
-    ApiIntegratorListItemResource:
+    ApiResourceResultUpdatesExtra:
       type: object
       properties:
-        Description:
+        until:
+          type: string
+        cursor:
+          type: string
+    ApiIntegratorWeighingInResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        IsAutomatic:
+          type: boolean
+        TareTallyNo:
+          type: string
+        RelatedTreatmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'
+        Details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingInDetailResource'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    ApiIntegratorWeighingDriverResource:
+      type: object
+      properties:
+        LicenceNumber:
+          type: string
+        Name:
+          type: string
+    ApiResourceId:
+      type: object
+      properties:
+        resource:
+          type: string
+          format: uuid
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingWeightDetailResource:
+      type: object
+      properties:
+        TallyNo:
           type: string
         Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+        Weight:
+          type: number
+          format: double
+        Timestamp:
+          type: string
+          format: zonedDateTime
+          example:
+            DateTime: '2000-01-01'
+            TimeZone: Europe/London
+        WeightTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
+    ApiIntegratorWeighingWeightsResource:
+      type: object
+      properties:
+        GrossWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
+        TareWeight:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightResource'
+        Quantity:
+          type: number
+          format: double
+        Volume:
+          type: number
+          format: double
+    ApiResourceChanges_ApiIntegratorWeighingResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiIntegratorWeighingPictureResource:
+      type: object
+      properties:
+        Description:
+          type: string
+        Hash:
+          type: string
     ApiIntegratorWeighingInDetailResource:
       type: object
       properties:
@@ -618,16 +1152,38 @@ components:
           $ref: '#/components/schemas/ApiIntegratorListItemResource'
         IsDeleted:
           type: boolean
-    ApiResourceChanges_ApiIntegratorWeighingResource:
+    ApiResourceStatus:
       type: object
       properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorWeighingResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+        id:
+          type: integer
+          format: int32
+        isSuccess:
+          type: boolean
+    ApiIntegratorWeighingOutResource:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        TicketNo:
+          type: string
+        IsAutomatic:
+          type: boolean
+        GrossTallyNo:
+          type: string
+        RelatedTreatmentGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        MaterialListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        ContainerTypeListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        RelatedWeighingInGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Weights:
+          $ref: '#/components/schemas/ApiIntegratorWeighingWeightsResource'

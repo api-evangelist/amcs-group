@@ -1,0 +1,2830 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "External API",
+    "description": "**[Download Trux JSON](./swaggervisionai/Trux.postman_collection.json)**\n\n---\n\n# Getting Started\n\n## Document Purpose and Scope\n\nThe VisionAI REST API endpoints are technically described in this document. This document's goal is to instruct readers on how to interface with the VisionAI External REST API.\n\n## Security\n\nWe use PAT Tokens for authentication over HTTPS encrypted comms.\n\nA PAT token will be provided for you to use in your integration.\n\nYou will use this PAT token to authenticate as follows.\n\n### Request Format:\n\nPOST: /visionai/api/authTokens\n\nBody: {\"privateKey\":\"PATtokenstring\"}\n\n### Response Format:\n\nThe response passes a SessionToken as a cookie called Platform.Tracker.SessionToken.\n\nThis cookie should be included in the subsequent calls to the REST API.\n\nThe API endpoints that are currently available are detailed below.",
+    "version": "external"
+  },
+  "servers": [
+    {
+      "url": "https://eu1-tracker-dev-app.azurewebsites.net",
+      "description": "Direct Access"
+    }
+  ],
+  "paths": {
+    "/integrator/allContaminationEvents/changes": {
+      "get": {
+        "tags": [
+          "AllContaminationEvent"
+        ],
+        "summary": "Request list of All Contamination Event changes",
+        "description": "# Request list of All Contamination Event changes\n\nRetrieve changes in the list of Contamination Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false\n",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Bookmark from extra.until",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Bookmark from extra.cursor",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outletName",
+            "in": "query",
+            "description": "Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceChanges[ApiAllContaminationEventExternalResource]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/allOverfilledContainerEvents/changes": {
+      "get": {
+        "tags": [
+          "AllOverfilledContainerEvent"
+        ],
+        "summary": "Request list of All Overfilled Container Event changes",
+        "description": "# Request list of All Overfilled Container Event changes\n\nRetrieve changes in the list of All Overfilled Container Events for all tenants, that have been made since a specific point in the history where ReviewProcessEnabled for tenant is false\n",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Bookmark from extra.until",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Bookmark from extra.cursor",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outletName",
+            "in": "query",
+            "description": "Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceChanges[ApiAllOverfilledContainerEventExternalResource]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/towerroutes": {
+      "post": {
+        "tags": [
+          "ApiTowerRoute"
+        ],
+        "summary": "Create or update Tower routes or route visits",
+        "description": "# Create or Update Tower Routes or Route Visits\n\nCreates or updates customer address records from Tower route visit data. The endpoint processes route details including customer site information, addresses, and GPS coordinates.\n\n## Prerequisites\n- Tenant must be configured with Tower sync type enabled\n- SyncEntity must be configured for Site entity type with Tower sync type\n\n## Business Logic\n\n### Customer Address Creation/Update\n- **Lookup:** Searches for existing CustomerAddress by `ForeignId` (CustomerSiteId) and TenantId\n- **Create:** If not found, creates new CustomerAddress record\n- **Update:** If found, updates existing record with new data\n\n### OutletId Assignment (New Customers Only)\nFor **new customer addresses** (not existing records):\n- If `VehicleId` is provided, looks up the corresponding Asset by GUID\n- If Asset is found and has an `OutletId`, assigns it to the new CustomerAddress\n- Existing customer addresses retain their original OutletId\n\n\n## Notes\n\n1. **Tenant Configuration Required:** The tenant must have Tower sync type enabled for Site entity. If not configured, the endpoint returns 0 with a warning log.\n\n2. **Batch Processing:** Multiple route details can be processed in a single request. Each detail is processed independently.\n\n3. **Idempotent:** Calling the endpoint multiple times with the same `CustomerSiteId` will update the existing record rather than create duplicates.\n\n4. **OutletId Inheritance:** Only **new** customer addresses inherit the OutletId from the vehicle/asset. Existing addresses keep their current OutletId to prevent accidental overwrites.\n\n5. **VehicleId Optional:** The VehicleId field is optional. If not provided, OutletId assignment is skipped for new customers.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Method": {
+                    "enum": [
+                      "GetRoutes",
+                      "GetRouteVisits"
+                    ],
+                    "type": "string",
+                    "description": "Selects the shape of Payload."
+                  },
+                  "Payload": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteItem"
+                        }
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteDetail"
+                        }
+                      }
+                    ],
+                    "description": "Array of items matching Method: route headers for GetRoutes, route visits for GetRouteVisits. Tower may send it JSON-encoded as a string; both forms are accepted."
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The payload was accepted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Always true when the payload was accepted."
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "Number of items that were read from Payload. Items the service skips are still counted.",
+                      "format": "int32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Body missing, Method is not GetRoutes or GetRouteVisits, or Payload is empty."
+          },
+          "500": {
+            "description": "Unexpected error while processing the payload."
+          }
+        }
+      }
+    },
+    "/integrator/assets/changes": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "summary": "Request list of Asset changes",
+        "description": "# Request list of Asset changes\n\nRetrieve the assets (vehicles) of the calling tenant that have been created, updated or deleted since a specific point in the history.\n\n## Notes\n\n- Call without `since` to get the full list. Follow `links.next` while it is present, then store `extra.until` and send it as `since` on the next poll.\n- Deleted assets are returned with `IsDeleted: true`.\n",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Bookmark from extra.until",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Bookmark from extra.cursor",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceChanges[ApiAssetResource]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/assets": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "summary": "Create or Update an Asset (Vehicle)",
+        "description": "# Create or Update an Asset (Vehicle)\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiAssetResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "$ref": "#/components/schemas/ApiResourceErrors"
+                    },
+                    "status": {
+                      "$ref": "#/components/schemas/ApiResourceStatus"
+                    },
+                    "resource": {
+                      "type": "string",
+                      "description": "GUID of the created or updated asset.",
+                      "format": "uuid"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Identifier of the created or updated resource."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/cameraEvents": {
+      "post": {
+        "tags": [
+          "CameraEvent"
+        ],
+        "summary": "Create a contamination/overfilled from camera",
+        "description": "# Create a contamination/overfilled from camera\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiCameraEventResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceId"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/contaminationEvents/changes": {
+      "get": {
+        "tags": [
+          "ContaminationEvent"
+        ],
+        "summary": "Request list of Positive Contamination Event changes",
+        "description": "# Request list of Positive Contamination Event changes\n\nRetrieve changes in the list of Positive Contamination Events for all tenants, that have been made since a specific point in the history\n",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Bookmark from extra.until",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Bookmark from extra.cursor",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outletName",
+            "in": "query",
+            "description": "Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceChanges[ApiContaminationEventExternalResource]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/customerSites": {
+      "post": {
+        "tags": [
+          "CustomerSite"
+        ],
+        "summary": "Create or Update a Customer Site",
+        "description": "# Create or Update a Customer Site\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiCustomerAddressResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "$ref": "#/components/schemas/ApiResourceErrors"
+                    },
+                    "status": {
+                      "$ref": "#/components/schemas/ApiResourceStatus"
+                    },
+                    "resource": {
+                      "type": "string",
+                      "description": "GUID of the created or updated customer site.",
+                      "format": "uuid"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Identifier of the created or updated resource."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/image/{eventGuid}": {
+      "get": {
+        "tags": [
+          "EventImage"
+        ],
+        "summary": "Retrieve the image for the requested Event Guid",
+        "description": "# Download Event Image\n\nDownload the inferenced jpeg image associated with an Event.\n",
+        "parameters": [
+          {
+            "name": "eventGuid",
+            "in": "path",
+            "description": "GUID associated to the Event.",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/integrator/outlets": {
+      "post": {
+        "tags": [
+          "Outlet"
+        ],
+        "summary": "Create or Update an Outlet",
+        "description": "# Create or Update an Outlet\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiOutletResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "$ref": "#/components/schemas/ApiResourceErrors"
+                    },
+                    "status": {
+                      "$ref": "#/components/schemas/ApiResourceStatus"
+                    },
+                    "resource": {
+                      "type": "string",
+                      "description": "GUID of the created or updated outlet.",
+                      "format": "uuid"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Identifier of the created or updated resource."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/overfilledContainerEvents/changes": {
+      "get": {
+        "tags": [
+          "OverfilledContainerEvent"
+        ],
+        "summary": "Request list of Overfilled Container Event changes",
+        "description": "# Request list of Overfilled Container Event changes\n\nRetrieve changes in the list of Positive Overfilled Container Events for all tenants, that have been made since a specific point in the history\n",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Bookmark from extra.until",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Bookmark from extra.cursor",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outletName",
+            "in": "query",
+            "description": "Optional. Filter events by outlet name. When supplied, only events for that outlet are returned. When omitted, all tenant-level events are returned (existing behaviour). Returns an empty result if the outlet name does not exist within the calling tenant.",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResourceChanges[ApiOverfilledContainerEventExternalResource]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/trux/contaminationevents": {
+      "get": {
+        "tags": [
+          "TruxContaminationEvent"
+        ],
+        "summary": "Get Contamination Events",
+        "description": "# Request list of Trux Contamination Events\n\nRetrieve a paginated list of contamination events for a specific vehicle and company code within a date range.\n\n## Notes\n\n- Results are ordered by timestamp descending (newest first)\n- ImageSas URLs expire after a period of time\n- The asset is identified by the combination of `vehicleId` (AssetExternalId) and `companyCode` (OutletId)\n- Only events with contamination score > 0 are returned\n- Review process must be completed if enabled for the tenant\n",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "query",
+            "description": "Asset external ID to filter events",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "companyCode",
+            "in": "query",
+            "description": "Company code/outlet name to filter events",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "routeNumber",
+            "in": "query",
+            "description": "Route number to filter events",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Filter start date (inclusive)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "dateTime",
+              "example": "2000-01-01 00:00:00.000"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Filter end date (exclusive)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "dateTime",
+              "example": "2000-01-01 00:00:00.000"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip (default: 0)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of records to take (default: 1000, max: 1000)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrator/trux/overfilledevents": {
+      "get": {
+        "tags": [
+          "TruxOverfilledEvent"
+        ],
+        "summary": "Get Overfilled Events",
+        "description": "# Request list of Trux Overfilled Container Events\n\nRetrieve a paginated list of overfilled container events for a specific vehicle and company code within a date range.\n\n## Notes\n\n- Results are ordered by timestamp descending (newest first)\n- ImageSas URLs expire after a period of time\n- The asset is identified by the combination of `vehicleId` (AssetExternalId) and `companyCode` (OutletId)\n- Only overfilled container events with positive detection are returned\n- EventType must be OverfilledContainer with `Overfilled: true` in custom attributes\n",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "query",
+            "description": "Asset external ID to filter events",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "companyCode",
+            "in": "query",
+            "description": "Company code/outlet name to filter events",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "routeNumber",
+            "in": "query",
+            "description": "Route number to filter events",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Filter start date (inclusive)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "dateTime",
+              "example": "2000-01-01 00:00:00.000"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Filter end date (exclusive)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "dateTime",
+              "example": "2000-01-01 00:00:00.000"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip (default: 0)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of records to take (default: 1000, max: 1000)",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/authTokens": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Exchange Private Key for Session Cookie",
+        "description": "Manually added endpoint. Submit your private key to receive an auth cookie.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiAuthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success. The response will contain a Set-Cookie header and the authentication result object.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Subsequent calls to the REST API will use this cookie to authenticate and authorize requests.",
+                "schema": {
+                  "type": "string",
+                  "example": "Platform.VisionAI.SessionToken=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiAuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerAddress": {
+        "type": "object",
+        "properties": {
+          "address1": {
+            "type": "string",
+            "description": "Primary address line",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "description": "Secondary address line",
+            "nullable": true
+          },
+          "address3": {
+            "type": "string",
+            "description": "City/Region (also mapped to City field)",
+            "nullable": true
+          },
+          "address4": {
+            "type": "string",
+            "description": "Address line 4.",
+            "nullable": true
+          },
+          "address5": {
+            "type": "string",
+            "description": "Address line 5.",
+            "nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "description": "Building/house number",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "GPS latitude coordinate",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "GPS longitude coordinate",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The address of a customer site inside a Tower route visit."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identifier for the route job id",
+            "format": "int32",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerAddress"
+          },
+          "customerSiteName": {
+            "type": "string",
+            "description": "Name of the customer site",
+            "nullable": true
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Name of the customer, used in place of CustomerSiteName when that field is not sent (callout visits).",
+            "nullable": true
+          },
+          "customerSiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the customer site (used as ForeignId)",
+            "format": "int32",
+            "nullable": true
+          },
+          "routeId": {
+            "type": "integer",
+            "description": "Route identifier (stored as TowerRoute)",
+            "format": "int32",
+            "nullable": true
+          },
+          "vehicleId": {
+            "type": "integer",
+            "description": "GUID of the vehicle/asset performing the route",
+            "format": "int32",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude of the customer site in decimal degrees.",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude of the customer site in decimal degrees.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "One route visit in the GetRouteVisits payload of POST /integrator/towerroutes."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.TowerRoute.TowerRouteItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identifier of the route in Tower.",
+            "format": "int32",
+            "nullable": true
+          },
+          "routeDate": {
+            "type": "string",
+            "description": "Date of the route.",
+            "format": "dateTime",
+            "nullable": true,
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "vehicleId": {
+            "type": "integer",
+            "description": "Identifier of the vehicle in Tower.",
+            "format": "int32",
+            "nullable": true
+          },
+          "outletId": {
+            "type": "integer",
+            "description": "Outlet identifier from Tower. Not used - the outlet is always resolved from the matched vehicle instead, because this value is unreliable.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "One route header in the GetRoutes payload of POST /integrator/towerroutes."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContainer": {
+        "type": "object",
+        "properties": {
+          "containerId": {
+            "type": "string",
+            "description": "Identifier for this specific container. Permanent and unique per container within a visit - re-sending the same JobId+ContainerId updates that same container row rather than duplicating it.",
+            "nullable": true
+          },
+          "containerSize": {
+            "type": "number",
+            "description": "Capacity of this container (e.g. cubic yards). Optional - stored against this container's row.",
+            "format": "double",
+            "nullable": true
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "description": "Unit code for ContainerSize (e.g. \"Cubic Yards\", \"Litres\"). Optional - stored against this container's row.",
+            "nullable": true
+          },
+          "containerQRCode": {
+            "type": "string",
+            "description": "QR code identifying this specific container. Optional - stored against this container's row.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "One container serviced at a Trux stop, sent inside the Containers array of an ApiTruxCustomer entry."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Job identifier from route data",
+            "nullable": true
+          },
+          "imageSas": {
+            "type": "string",
+            "description": "Shared access signature URL for the contamination image",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A contamination event on a Trux route, as returned by GET /integrator/trux/contaminationevents."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxCustomer": {
+        "type": "object",
+        "properties": {
+          "siteName": {
+            "type": "string",
+            "description": "Site display name. Used for typo/error correction only - not intended for reassigning a stop to a different physical customer.",
+            "nullable": true
+          },
+          "customerNumber": {
+            "type": "string",
+            "description": "Customer identification number (used as foreign ID)",
+            "nullable": true
+          },
+          "division": {
+            "type": "string",
+            "description": "Business division the customer belongs to. Optional - stored against the customer address record.",
+            "nullable": true
+          },
+          "siteNumber": {
+            "type": "string",
+            "description": "Site identification number",
+            "nullable": true
+          },
+          "serviceNumber": {
+            "type": "string",
+            "description": "Service type identification number",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of the customer address",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City of the customer address",
+            "nullable": true
+          },
+          "district": {
+            "type": "string",
+            "description": "District of the customer address",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "description": "Street address of the customer",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal/ZIP code of the customer address",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude coordinate of the customer address",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude coordinate of the customer address",
+            "format": "double",
+            "nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job identification for this specific customer/stop. Permanent and globally unique per visit - used to identify this stop for later removal via the removeStops endpoint.",
+            "nullable": true
+          },
+          "liftQty": {
+            "type": "number",
+            "description": "Number of lifts serviced at this stop. Optional. Visit-level value, stored on every container row for this stop.",
+            "format": "double",
+            "nullable": true
+          },
+          "serviceSize": {
+            "type": "number",
+            "description": "Size of the service/lift at this stop (e.g. cubic yards). Optional. Visit-level value, stored on every container row for this stop.",
+            "format": "double",
+            "nullable": true
+          },
+          "serviceUOM": {
+            "type": "string",
+            "description": "Unit of measure for ServiceSize (e.g. \"Cubic Yards\", \"Litres\"). Optional. Visit-level value, stored on every container row for this stop.",
+            "nullable": true
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContainer"
+            },
+            "description": "Containers serviced at this stop. Optional - a stop with no containers still gets a single row with no container-specific fields set. ContainerSize/UnitOfMeasure moved here from singular per-customer fields since they now vary per container. Not yet populated by Trux - will follow in a later payload version.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "One customer stop on a Trux route, sent inside the Customer array of POST /integrator/truxRoutes."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Job identifier from route data",
+            "nullable": true
+          },
+          "imageSas": {
+            "type": "string",
+            "description": "Shared access signature URL for the overfilled container image",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An overfilled container event on a Trux route, as returned by\r\nGET /integrator/trux/overfilledevents."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxRoute": {
+        "type": "object",
+        "properties": {
+          "routeNumber": {
+            "type": "integer",
+            "description": "Route identification number",
+            "format": "int64",
+            "nullable": true
+          },
+          "routeDate": {
+            "type": "string",
+            "description": "Date and time of the route",
+            "format": "dateTimeOffset",
+            "nullable": true,
+            "example": "2000-01-01T00:00:00.0000000+01:00"
+          },
+          "vehicleId": {
+            "type": "integer",
+            "description": "ID of the vehicle (Asset) performing the route",
+            "format": "int32"
+          },
+          "routeStartLocation": {
+            "type": "string",
+            "description": "Free-text description of where the route started. Optional - stored against every stop on the route.",
+            "nullable": true
+          },
+          "companyCode": {
+            "type": "string",
+            "description": "Company code associated with the route (used as outlet name)",
+            "nullable": true
+          },
+          "routeType": {
+            "type": "string",
+            "description": "Waste stream/material type being collected on this route (e.g. \"Front load recycle\"). Optional - stored against every stop on the route and used to resolve an internal waste stream classification.",
+            "nullable": true
+          },
+          "customer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxCustomer"
+            },
+            "description": "Array of customer information for this route",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Trux route and the customer stops serviced on it, as sent to POST /integrator/truxRoutes.\r\nThe same payload shape is accepted by POST /integrator/truxRoutes/removeRoute, where only\r\nRouteNumber and RouteDate are read."
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxContaminationEvent"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of matching records",
+            "format": "int32"
+          },
+          "skip": {
+            "type": "integer",
+            "description": "Number of records skipped",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "description": "Number of records requested",
+            "format": "int32"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether more records are available"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Paginated response wrapper with metadata"
+      },
+      "AMCS.IoT.Contamination.Api.Integrator.Trux.Models.PaginatedResponse[AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AMCS.IoT.Contamination.Api.Integrator.Trux.ApiTruxOverfilledEvent"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of matching records",
+            "format": "int32"
+          },
+          "skip": {
+            "type": "integer",
+            "description": "Number of records skipped",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "description": "Number of records requested",
+            "format": "int32"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether more records are available"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Paginated response wrapper with metadata"
+      },
+      "ApiAllContaminationEventExternalResource": {
+        "type": "object",
+        "properties": {
+          "GUID": {
+            "type": "string",
+            "description": "ID of the Contamination Event.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "string",
+            "description": "ID of the Tenant associated with the Contamination Event",
+            "format": "uuid"
+          },
+          "CustomerName": {
+            "type": "string",
+            "description": "Name of the customer of the Contamination Event",
+            "nullable": true
+          },
+          "CompanyOutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the Company Outlet associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerSiteId": {
+            "type": "string",
+            "description": "ID of the Customer Site associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "SiteName": {
+            "type": "string",
+            "description": "Name of the Site associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerType": {
+            "type": "string",
+            "description": "Type of customer associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerAddress": {
+            "type": "string",
+            "description": "Address of customer associated with the Contamination Event",
+            "nullable": true
+          },
+          "VehicleId": {
+            "type": "string",
+            "description": "ID of the Vehicle associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "VehicleReg": {
+            "type": "string",
+            "description": "Registration (display name) of the vehicle.",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "Location of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "Location of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "Timestamp of the Contamination Event",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "ContaminationScore": {
+            "type": "integer",
+            "description": "Degree of Contamination found",
+            "format": "int32",
+            "nullable": true
+          },
+          "GrossWeight": {
+            "type": "number",
+            "description": "Gross weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "TareWeight": {
+            "type": "number",
+            "description": "Tare weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "NetWeight": {
+            "type": "number",
+            "description": "Net weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Seq": {
+            "type": "integer",
+            "description": "Sequence of the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RFID": {
+            "type": "string",
+            "description": "RFID tag read for the container, when weighing data is available.",
+            "nullable": true
+          },
+          "WeighErrorCode": {
+            "type": "integer",
+            "description": "Error code reported by the weighing system, when weighing data is available.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Lifter": {
+            "type": "integer",
+            "description": "Lifter of the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContainerId": {
+            "type": "string",
+            "description": "Conntainer Id of the Contamination Event",
+            "nullable": true
+          },
+          "WasteType": {
+            "type": "string",
+            "description": "Waste type of the Contamination Event",
+            "nullable": true
+          },
+          "QRCodeRawText": {
+            "type": "string",
+            "description": "Raw QR code value of the COntamination Event",
+            "nullable": true
+          },
+          "TotalSurfaceAreaVolume": {
+            "type": "number",
+            "description": "The total surface area of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Materials": {
+            "type": "string",
+            "description": "The materials detected of the Contamination Event",
+            "nullable": true
+          },
+          "JobId": {
+            "type": "string",
+            "description": "The Job Id of the route associated with the Contamination Event",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "integer",
+            "description": "The route number associated with the Contamination Event",
+            "format": "int64",
+            "nullable": true
+          },
+          "AssetExternalId": {
+            "type": "integer",
+            "description": "The external Id of the Vehicle/Asset associated with the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RouteDate": {
+            "type": "string",
+            "description": "Date the route was run, sourced from Trux.",
+            "format": "dateTime",
+            "nullable": true,
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "CompanyCode": {
+            "type": "string",
+            "description": "Trux company code (SY03_CODE) of the tenant.",
+            "nullable": true
+          },
+          "CustomerNumber": {
+            "type": "string",
+            "description": "Trux customer number (CM04_CUST).",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "type": "string",
+            "description": "Trux site number (CM04_SITE).",
+            "nullable": true
+          },
+          "ServiceNumber": {
+            "type": "string",
+            "description": "Trux service number (RM03_SERV).",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country of the customer address (derived as USA or CANADA based on the company setting).",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City of the customer address (CM04_CITY).",
+            "nullable": true
+          },
+          "District": {
+            "type": "string",
+            "description": "District/state of the customer address (CM04_STAT).",
+            "nullable": true
+          },
+          "StreetAddress": {
+            "type": "string",
+            "description": "Street address of the customer (CM04_ADD2).",
+            "nullable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Postal code of the customer address (CM04_PZIP).",
+            "nullable": true
+          },
+          "CustomerLatitude": {
+            "type": "number",
+            "description": "Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "CustomerLongitude": {
+            "type": "number",
+            "description": "Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "VIN": {
+            "type": "string",
+            "description": "Vehicle Identification Number of the asset.",
+            "nullable": true
+          },
+          "Division": {
+            "type": "string",
+            "description": "Trux division (CM05_FLD9) of the customer.",
+            "nullable": true
+          },
+          "VehicleDescription": {
+            "type": "string",
+            "description": "Vehicle description (TR01_DESC).",
+            "nullable": true
+          },
+          "VehicleTypeDescription": {
+            "type": "string",
+            "description": "Vehicle type description (CD13_DESC).",
+            "nullable": true
+          },
+          "ContainerSize": {
+            "type": "number",
+            "description": "Capacity of the container serviced at this stop (e.g. cubic yards).",
+            "format": "double",
+            "nullable": true
+          },
+          "UnitOfMeasure": {
+            "type": "string",
+            "description": "Unit of measure for ContainerSize (e.g. \"Cubic Yards\", \"Litres\").",
+            "nullable": true
+          },
+          "RouteType": {
+            "type": "string",
+            "description": "Waste stream/material type being collected on the route (CD14_DESC).",
+            "nullable": true
+          },
+          "RouteStartLocation": {
+            "type": "string",
+            "description": "Free-text description of where the route started (SL01_NAME).",
+            "nullable": true
+          },
+          "ExternalEventId": {
+            "type": "string",
+            "description": "The external event Id of the Contamination Event",
+            "nullable": true
+          },
+          "ImageSas": {
+            "type": "string",
+            "description": "The image SAS url of the Contamination Event expires within 24 hours",
+            "nullable": true
+          },
+          "ReferenceFrameSas": {
+            "type": "string",
+            "description": "The reference frame image SAS url expires within 24 hours. Only populated when duplicate\r\ndetection is enabled for the tenant - the reference frame is the baseline image captured\r\nbefore this collection, used to detect material already present in the container.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiAllOverfilledContainerEventExternalResource": {
+        "type": "object",
+        "properties": {
+          "GUID": {
+            "type": "string",
+            "description": "ID of the Overfilled Container Event.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "string",
+            "description": "ID of the Tenant associated with the Overfilled Container Event",
+            "format": "uuid"
+          },
+          "CustomerName": {
+            "type": "string",
+            "description": "Name of the Customer with Overfilled Container Event",
+            "nullable": true
+          },
+          "CompanyOutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the Company Outlet associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerSiteId": {
+            "type": "string",
+            "description": "ID of the Customer Site associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "SiteName": {
+            "type": "string",
+            "description": "Name of the Site associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerType": {
+            "type": "string",
+            "description": "Type of Customer associated withe Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerAddress": {
+            "type": "string",
+            "description": "Address of the Customer associated withe Overfilled Container Event",
+            "nullable": true
+          },
+          "VehicleId": {
+            "type": "string",
+            "description": "ID of the Vehicle associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "VehicleReg": {
+            "type": "string",
+            "description": "Vehicle Registration associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "Geographic coordinate of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "Geographic coordinate of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "Timestamp of the Overfilled Container Event",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "GrossWeight": {
+            "type": "number",
+            "description": "Gross weight of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "TareWeight": {
+            "type": "number",
+            "description": "Tare weight  of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "NetWeight": {
+            "type": "number",
+            "description": "Net weight of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Seq": {
+            "type": "integer",
+            "description": "Sequence of the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RFID": {
+            "type": "string",
+            "description": "RFID of the Overfilled Container Event",
+            "nullable": true
+          },
+          "WeighErrorCode": {
+            "type": "integer",
+            "description": "Weight error code of the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContainerId": {
+            "type": "string",
+            "description": "ContainerId of the Overfilled Container Event",
+            "nullable": true
+          },
+          "WasteType": {
+            "type": "string",
+            "description": "Waste type of the Overfilled Container Event",
+            "nullable": true
+          },
+          "QRCodeRawText": {
+            "type": "string",
+            "description": "QRCode raw text of the Overfilled Container Event",
+            "nullable": true
+          },
+          "JobId": {
+            "type": "string",
+            "description": "The Job Id of the route associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "integer",
+            "description": "The route number associated with the Overfilled Container Event",
+            "format": "int64",
+            "nullable": true
+          },
+          "AssetExternalId": {
+            "type": "integer",
+            "description": "The external Id of the Vehicle/Asset associated with the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RouteDate": {
+            "type": "string",
+            "description": "Date the route was run, sourced from Trux.",
+            "format": "dateTime",
+            "nullable": true,
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "CompanyCode": {
+            "type": "string",
+            "description": "Trux company code (SY03_CODE) of the tenant.",
+            "nullable": true
+          },
+          "CustomerNumber": {
+            "type": "string",
+            "description": "Trux customer number (CM04_CUST).",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "type": "string",
+            "description": "Trux site number (CM04_SITE).",
+            "nullable": true
+          },
+          "ServiceNumber": {
+            "type": "string",
+            "description": "Trux service number (RM03_SERV).",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country of the customer address (derived as USA or CANADA based on the company setting).",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City of the customer address (CM04_CITY).",
+            "nullable": true
+          },
+          "District": {
+            "type": "string",
+            "description": "District/state of the customer address (CM04_STAT).",
+            "nullable": true
+          },
+          "StreetAddress": {
+            "type": "string",
+            "description": "Street address of the customer (CM04_ADD2).",
+            "nullable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Postal code of the customer address (CM04_PZIP).",
+            "nullable": true
+          },
+          "CustomerLatitude": {
+            "type": "number",
+            "description": "Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "CustomerLongitude": {
+            "type": "number",
+            "description": "Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "VIN": {
+            "type": "string",
+            "description": "Vehicle Identification Number of the asset.",
+            "nullable": true
+          },
+          "Division": {
+            "type": "string",
+            "description": "Trux division (CM05_FLD9) of the customer.",
+            "nullable": true
+          },
+          "VehicleDescription": {
+            "type": "string",
+            "description": "Vehicle description (TR01_DESC).",
+            "nullable": true
+          },
+          "VehicleTypeDescription": {
+            "type": "string",
+            "description": "Vehicle type description (CD13_DESC).",
+            "nullable": true
+          },
+          "ContainerSize": {
+            "type": "number",
+            "description": "Capacity of the container serviced at this stop (e.g. cubic yards).",
+            "format": "double",
+            "nullable": true
+          },
+          "UnitOfMeasure": {
+            "type": "string",
+            "description": "Unit of measure for ContainerSize (e.g. \"Cubic Yards\", \"Litres\").",
+            "nullable": true
+          },
+          "RouteType": {
+            "type": "string",
+            "description": "Waste stream/material type being collected on the route (CD14_DESC).",
+            "nullable": true
+          },
+          "RouteStartLocation": {
+            "type": "string",
+            "description": "Free-text description of where the route started (SL01_NAME).",
+            "nullable": true
+          },
+          "ExternalEventId": {
+            "type": "string",
+            "description": "The external event Id of the Overfilled Container Event",
+            "nullable": true
+          },
+          "ImageSas": {
+            "type": "string",
+            "description": "The image SAS url of the Contamination Event expires within 24 hours",
+            "nullable": true
+          },
+          "IsOverfilled": {
+            "type": "boolean",
+            "description": "Whether the Overfilled Container Event was found to be overfilled"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiAssetResource": {
+        "type": "object",
+        "properties": {
+          "GUID": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "AssetId": {
+            "type": "string",
+            "description": "ID of the Asset",
+            "format": "uuid",
+            "nullable": true
+          },
+          "AssetExternalId": {
+            "type": "integer",
+            "description": "External System Identifier for Asset (optional)",
+            "format": "int32",
+            "nullable": true
+          },
+          "AssetName": {
+            "type": "string",
+            "description": "Display name (vehicle registration plate)",
+            "nullable": true
+          },
+          "AssetType": {
+            "type": "string",
+            "description": "Front Loader, Side Loader, Rear End Loader",
+            "nullable": true
+          },
+          "OutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Asset",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the Outlet (optional)",
+            "nullable": true
+          },
+          "CompanyCode": {
+            "type": "string",
+            "description": "Company code associated with the Asset",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean",
+            "description": "Asset is no longer in use"
+          },
+          "RegistrationNo": {
+            "type": "string",
+            "description": "Vehicle registration number. Saved exactly as sent on every create or update call.",
+            "nullable": true
+          },
+          "VehicleCode": {
+            "type": "string",
+            "description": "Vehicle code used by the integrator's system. Saved exactly as sent on every create or update call.",
+            "nullable": true
+          },
+          "VIN": {
+            "type": "string",
+            "description": "Vehicle Identification Number of the asset. Optional.",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "integer",
+            "description": "Internal. Filled from the calling tenant when omitted; integrators do not need to send it.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiAuthRequest": {
+        "required": [
+          "PrivateKey"
+        ],
+        "type": "object",
+        "properties": {
+          "PrivateKey": {
+            "type": "string",
+            "description": "Your personal access token (private key). Exchange it here for a session cookie used to authenticate subsequent requests.",
+            "example": "nHNwUB8..."
+          }
+        }
+      },
+      "ApiAuthResponse": {
+        "type": "object",
+        "properties": {
+          "authResult": {
+            "type": "string",
+            "description": "Outcome of the authentication attempt. \"ok\" indicates success; any other value (e.g. \"invalidCredentials\") indicates the login was rejected and no session cookie was issued.",
+            "example": "ok"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username (login) of the authenticated user. Null when authentication failed.",
+            "nullable": true,
+            "example": "amcs@amcsgroup.com"
+          },
+          "userIdentity": {
+            "type": "string",
+            "description": "The display name / identity of the authenticated user. Null when authentication failed.",
+            "nullable": true
+          },
+          "sysUserId": {
+            "type": "integer",
+            "description": "Internal numeric identifier of the authenticated user. Null when authentication failed.",
+            "nullable": true,
+            "example": 39
+          },
+          "userGuid": {
+            "type": "string",
+            "description": "Globally unique identifier (GUID) of the authenticated user. Use this to reference the user across API calls. Null when authentication failed.",
+            "format": "uuid",
+            "nullable": true,
+            "example": "91b6d13e-19e1-4abc-baeb-b028009eb482"
+          },
+          "companyoutletid": {
+            "type": "integer",
+            "description": "Internal numeric identifier of the company outlet the user is associated with. Null when authentication failed or no outlet is assigned.",
+            "nullable": true,
+            "example": 0
+          },
+          "companyOutletGuid": {
+            "type": "string",
+            "description": "Globally unique identifier (GUID) of the company outlet the user is associated with. Null when authentication failed or no outlet is assigned.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "stayLoggedIn": {
+            "type": "boolean",
+            "description": "Indicates whether the issued session is persistent (\"stay logged in\") rather than expiring at the end of the browser session.",
+            "example": false
+          }
+        }
+      },
+      "ApiCameraEventResource": {
+        "type": "object",
+        "properties": {
+          "TenantId": {
+            "type": "string",
+            "description": "Internal. Overwritten with the calling tenant; integrators do not need to send it.",
+            "format": "uuid"
+          },
+          "Asset": {
+            "type": "string",
+            "description": "Vehicle Identified Registration or Asset Id",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "Local time or UTC time of the event",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "Lon": {
+            "type": "number",
+            "description": "Longitude",
+            "format": "double"
+          },
+          "Lat": {
+            "type": "number",
+            "description": "Latitude",
+            "format": "double"
+          },
+          "EventType": {
+            "type": "string",
+            "description": "Contamination or Overfilled event",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "string",
+            "description": "Unique Id for each event",
+            "nullable": true
+          },
+          "WasteType": {
+            "type": "string",
+            "description": "The waste stream the truck is collecting",
+            "nullable": true
+          },
+          "MediaLink": {
+            "type": "string",
+            "description": "URL to access the media file associate with each event",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiContaminationEventExternalResource": {
+        "type": "object",
+        "properties": {
+          "GUID": {
+            "type": "string",
+            "description": "ID of the Contamination Event.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "string",
+            "description": "ID of the Tenant associated with the Contamination Event",
+            "format": "uuid"
+          },
+          "CustomerName": {
+            "type": "string",
+            "description": "Name of the customer of the Contamination Event",
+            "nullable": true
+          },
+          "CompanyOutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the Company Outlet associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerSiteId": {
+            "type": "string",
+            "description": "ID of the Customer Site associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "SiteName": {
+            "type": "string",
+            "description": "Name of the Site associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerType": {
+            "type": "string",
+            "description": "Type of customer associated with the Contamination Event",
+            "nullable": true
+          },
+          "CustomerAddress": {
+            "type": "string",
+            "description": "Address of customer associated with the Contamination Event",
+            "nullable": true
+          },
+          "VehicleId": {
+            "type": "string",
+            "description": "ID of the Vehicle associated with the Contamination Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "VehicleReg": {
+            "type": "string",
+            "description": "Registration (display name) of the vehicle.",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "Location of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "Location of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "Timestamp of the Contamination Event",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "ContaminationScore": {
+            "type": "integer",
+            "description": "Degree of Contamination found",
+            "format": "int32",
+            "nullable": true
+          },
+          "GrossWeight": {
+            "type": "number",
+            "description": "Gross weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "TareWeight": {
+            "type": "number",
+            "description": "Tare weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "NetWeight": {
+            "type": "number",
+            "description": "Net weight of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Seq": {
+            "type": "integer",
+            "description": "Sequence of the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RFID": {
+            "type": "string",
+            "description": "RFID tag read for the container, when weighing data is available.",
+            "nullable": true
+          },
+          "WeighErrorCode": {
+            "type": "integer",
+            "description": "Error code reported by the weighing system, when weighing data is available.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Lifter": {
+            "type": "integer",
+            "description": "Lifter of the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContainerId": {
+            "type": "string",
+            "description": "Conntainer Id of the Contamination Event",
+            "nullable": true
+          },
+          "WasteType": {
+            "type": "string",
+            "description": "Waste type of the Contamination Event",
+            "nullable": true
+          },
+          "QRCodeRawText": {
+            "type": "string",
+            "description": "Raw QR code value of the COntamination Event",
+            "nullable": true
+          },
+          "TotalSurfaceAreaVolume": {
+            "type": "number",
+            "description": "The total surface area of the Contamination Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Materials": {
+            "type": "string",
+            "description": "The materials detected of the Contamination Event",
+            "nullable": true
+          },
+          "JobId": {
+            "type": "string",
+            "description": "The Job Id of the route associated with the Contamination Event",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "integer",
+            "description": "The route number associated with the Contamination Event",
+            "format": "int64",
+            "nullable": true
+          },
+          "AssetExternalId": {
+            "type": "integer",
+            "description": "The external Id of the Vehicle/Asset associated with the Contamination Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RouteDate": {
+            "type": "string",
+            "description": "Date the route was run, sourced from Trux.",
+            "format": "dateTime",
+            "nullable": true,
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "CompanyCode": {
+            "type": "string",
+            "description": "Trux company code (SY03_CODE) of the tenant.",
+            "nullable": true
+          },
+          "CustomerNumber": {
+            "type": "string",
+            "description": "Trux customer number (CM04_CUST).",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "type": "string",
+            "description": "Trux site number (CM04_SITE).",
+            "nullable": true
+          },
+          "ServiceNumber": {
+            "type": "string",
+            "description": "Trux service number (RM03_SERV).",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country of the customer address (derived as USA or CANADA based on the company setting).",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City of the customer address (CM04_CITY).",
+            "nullable": true
+          },
+          "District": {
+            "type": "string",
+            "description": "District/state of the customer address (CM04_STAT).",
+            "nullable": true
+          },
+          "StreetAddress": {
+            "type": "string",
+            "description": "Street address of the customer (CM04_ADD2).",
+            "nullable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Postal code of the customer address (CM04_PZIP).",
+            "nullable": true
+          },
+          "CustomerLatitude": {
+            "type": "number",
+            "description": "Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "CustomerLongitude": {
+            "type": "number",
+            "description": "Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "VIN": {
+            "type": "string",
+            "description": "Vehicle Identification Number of the asset.",
+            "nullable": true
+          },
+          "Division": {
+            "type": "string",
+            "description": "Trux division (CM05_FLD9) of the customer.",
+            "nullable": true
+          },
+          "VehicleDescription": {
+            "type": "string",
+            "description": "Vehicle description (TR01_DESC).",
+            "nullable": true
+          },
+          "VehicleTypeDescription": {
+            "type": "string",
+            "description": "Vehicle type description (CD13_DESC).",
+            "nullable": true
+          },
+          "ContainerSize": {
+            "type": "number",
+            "description": "Capacity of the container serviced at this stop (e.g. cubic yards).",
+            "format": "double",
+            "nullable": true
+          },
+          "UnitOfMeasure": {
+            "type": "string",
+            "description": "Unit of measure for ContainerSize (e.g. \"Cubic Yards\", \"Litres\").",
+            "nullable": true
+          },
+          "RouteType": {
+            "type": "string",
+            "description": "Waste stream/material type being collected on the route (CD14_DESC).",
+            "nullable": true
+          },
+          "RouteStartLocation": {
+            "type": "string",
+            "description": "Free-text description of where the route started (SL01_NAME).",
+            "nullable": true
+          },
+          "ExternalEventId": {
+            "type": "string",
+            "description": "The external event Id of the Contamination Event",
+            "nullable": true
+          },
+          "ImageSas": {
+            "type": "string",
+            "description": "The image SAS url of the Contamination Event expires within 24 hours",
+            "nullable": true
+          },
+          "ReferenceFrameSas": {
+            "type": "string",
+            "description": "The reference frame image SAS url expires within 24 hours. Only populated when duplicate\r\ndetection is enabled for the tenant - the reference frame is the baseline image captured\r\nbefore this collection, used to detect material already present in the container.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiCustomerAddressResource": {
+        "type": "object",
+        "properties": {
+          "CustomerSiteId": {
+            "type": "string",
+            "description": "ID of the Customer Site",
+            "format": "uuid"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Display name of the Customer Site (Customer Name)",
+            "nullable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Address part",
+            "nullable": true
+          },
+          "HouseNumber": {
+            "type": "string",
+            "description": "Address part",
+            "nullable": true
+          },
+          "Address1": {
+            "type": "string",
+            "description": "Address part",
+            "nullable": true
+          },
+          "Address2": {
+            "type": "string",
+            "description": "Address part",
+            "nullable": true
+          },
+          "Address3": {
+            "type": "string",
+            "description": "Address part",
+            "nullable": true
+          },
+          "Address4": {
+            "type": "string",
+            "description": "Additional address part",
+            "nullable": true
+          },
+          "Address5": {
+            "type": "string",
+            "description": "Additional address part",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "Geographic coordinate",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "Geographic coordinate",
+            "format": "double",
+            "nullable": true
+          },
+          "OutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Customer Site",
+            "format": "uuid"
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the outlet. Informational only; the outlet is resolved from OutletId.",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean",
+            "description": "Indicates if the Customer Site is no longer in use"
+          },
+          "IsRelocatedByUser": {
+            "type": "boolean",
+            "description": "true when the site's position was adjusted manually in Vision AI. Stored as sent."
+          },
+          "SiteType": {
+            "type": "string",
+            "description": "Type of the site",
+            "nullable": true
+          },
+          "CustomerType": {
+            "type": "string",
+            "description": "Type of the customer",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "integer",
+            "description": "Internal. Filled from the calling tenant when omitted; integrators do not need to send it.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiOutletResource": {
+        "type": "object",
+        "properties": {
+          "OutletId": {
+            "type": "string",
+            "description": "ID of the Outlet",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Display name",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean",
+            "description": "Outlet is no longer in use"
+          },
+          "TenantId": {
+            "type": "integer",
+            "description": "Internal. Filled from the calling tenant when omitted; integrators do not need to send it.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiOverfilledContainerEventExternalResource": {
+        "type": "object",
+        "properties": {
+          "GUID": {
+            "type": "string",
+            "description": "ID of the Overfilled Container Event.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "string",
+            "description": "ID of the Tenant associated with the Overfilled Container Event",
+            "format": "uuid"
+          },
+          "CustomerName": {
+            "type": "string",
+            "description": "Name of the Customer with Overfilled Container Event",
+            "nullable": true
+          },
+          "CompanyOutletId": {
+            "type": "string",
+            "description": "ID of the Company Outlet associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "OutletName": {
+            "type": "string",
+            "description": "Name of the Company Outlet associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerSiteId": {
+            "type": "string",
+            "description": "ID of the Customer Site associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "SiteName": {
+            "type": "string",
+            "description": "Name of the Site associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerType": {
+            "type": "string",
+            "description": "Type of Customer associated withe Overfilled Container Event",
+            "nullable": true
+          },
+          "CustomerAddress": {
+            "type": "string",
+            "description": "Address of the Customer associated withe Overfilled Container Event",
+            "nullable": true
+          },
+          "VehicleId": {
+            "type": "string",
+            "description": "ID of the Vehicle associated with the Overfilled Container Event",
+            "format": "uuid",
+            "nullable": true
+          },
+          "VehicleReg": {
+            "type": "string",
+            "description": "Vehicle Registration associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "Geographic coordinate of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "Geographic coordinate of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "Timestamp of the Overfilled Container Event",
+            "format": "dateTime",
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "GrossWeight": {
+            "type": "number",
+            "description": "Gross weight of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "TareWeight": {
+            "type": "number",
+            "description": "Tare weight  of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "NetWeight": {
+            "type": "number",
+            "description": "Net weight of the Overfilled Container Event",
+            "format": "double",
+            "nullable": true
+          },
+          "Seq": {
+            "type": "integer",
+            "description": "Sequence of the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RFID": {
+            "type": "string",
+            "description": "RFID of the Overfilled Container Event",
+            "nullable": true
+          },
+          "WeighErrorCode": {
+            "type": "integer",
+            "description": "Weight error code of the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContainerId": {
+            "type": "string",
+            "description": "ContainerId of the Overfilled Container Event",
+            "nullable": true
+          },
+          "WasteType": {
+            "type": "string",
+            "description": "Waste type of the Overfilled Container Event",
+            "nullable": true
+          },
+          "QRCodeRawText": {
+            "type": "string",
+            "description": "QRCode raw text of the Overfilled Container Event",
+            "nullable": true
+          },
+          "JobId": {
+            "type": "string",
+            "description": "The Job Id of the route associated with the Overfilled Container Event",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "integer",
+            "description": "The route number associated with the Overfilled Container Event",
+            "format": "int64",
+            "nullable": true
+          },
+          "AssetExternalId": {
+            "type": "integer",
+            "description": "The external Id of the Vehicle/Asset associated with the Overfilled Container Event",
+            "format": "int32",
+            "nullable": true
+          },
+          "RouteDate": {
+            "type": "string",
+            "description": "Date the route was run, sourced from Trux.",
+            "format": "dateTime",
+            "nullable": true,
+            "example": "2000-01-01 00:00:00.000"
+          },
+          "CompanyCode": {
+            "type": "string",
+            "description": "Trux company code (SY03_CODE) of the tenant.",
+            "nullable": true
+          },
+          "CustomerNumber": {
+            "type": "string",
+            "description": "Trux customer number (CM04_CUST).",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "type": "string",
+            "description": "Trux site number (CM04_SITE).",
+            "nullable": true
+          },
+          "ServiceNumber": {
+            "type": "string",
+            "description": "Trux service number (RM03_SERV).",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country of the customer address (derived as USA or CANADA based on the company setting).",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City of the customer address (CM04_CITY).",
+            "nullable": true
+          },
+          "District": {
+            "type": "string",
+            "description": "District/state of the customer address (CM04_STAT).",
+            "nullable": true
+          },
+          "StreetAddress": {
+            "type": "string",
+            "description": "Street address of the customer (CM04_ADD2).",
+            "nullable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Postal code of the customer address (CM04_PZIP).",
+            "nullable": true
+          },
+          "CustomerLatitude": {
+            "type": "number",
+            "description": "Latitude of the customer address (CM04_LATT). Not the event's own GPS location - see Latitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "CustomerLongitude": {
+            "type": "number",
+            "description": "Longitude of the customer address (CM04_LONG). Not the event's own GPS location - see Longitude.",
+            "format": "double",
+            "nullable": true
+          },
+          "VIN": {
+            "type": "string",
+            "description": "Vehicle Identification Number of the asset.",
+            "nullable": true
+          },
+          "Division": {
+            "type": "string",
+            "description": "Trux division (CM05_FLD9) of the customer.",
+            "nullable": true
+          },
+          "VehicleDescription": {
+            "type": "string",
+            "description": "Vehicle description (TR01_DESC).",
+            "nullable": true
+          },
+          "VehicleTypeDescription": {
+            "type": "string",
+            "description": "Vehicle type description (CD13_DESC).",
+            "nullable": true
+          },
+          "ContainerSize": {
+            "type": "number",
+            "description": "Capacity of the container serviced at this stop (e.g. cubic yards).",
+            "format": "double",
+            "nullable": true
+          },
+          "UnitOfMeasure": {
+            "type": "string",
+            "description": "Unit of measure for ContainerSize (e.g. \"Cubic Yards\", \"Litres\").",
+            "nullable": true
+          },
+          "RouteType": {
+            "type": "string",
+            "description": "Waste stream/material type being collected on the route (CD14_DESC).",
+            "nullable": true
+          },
+          "RouteStartLocation": {
+            "type": "string",
+            "description": "Free-text description of where the route started (SL01_NAME).",
+            "nullable": true
+          },
+          "ExternalEventId": {
+            "type": "string",
+            "description": "The external event Id of the Overfilled Container Event",
+            "nullable": true
+          },
+          "ImageSas": {
+            "type": "string",
+            "description": "The image SAS url of the Contamination Event expires within 24 hours",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceChanges[ApiAllContaminationEventExternalResource]": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiAllContaminationEventExternalResource"
+            },
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/ApiResourceResultChangesLinks"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/ApiResourceResultUpdatesExtra"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceChanges[ApiAllOverfilledContainerEventExternalResource]": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiAllOverfilledContainerEventExternalResource"
+            },
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/ApiResourceResultChangesLinks"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/ApiResourceResultUpdatesExtra"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceChanges[ApiAssetResource]": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiAssetResource"
+            },
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/ApiResourceResultChangesLinks"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/ApiResourceResultUpdatesExtra"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceChanges[ApiContaminationEventExternalResource]": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiContaminationEventExternalResource"
+            },
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/ApiResourceResultChangesLinks"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/ApiResourceResultUpdatesExtra"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceChanges[ApiOverfilledContainerEventExternalResource]": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiOverfilledContainerEventExternalResource"
+            },
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/ApiResourceResultChangesLinks"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/ApiResourceResultUpdatesExtra"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceErrors": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "string",
+            "description": "Error details describing why the request was rejected, or null when there were no errors.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Validation and processing errors for the request. Populated only when the operation fails."
+      },
+      "ApiResourceId": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/ApiResourceErrors"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiResourceStatus"
+          },
+          "resource": {
+            "type": "integer",
+            "description": "Identifier of the created or updated resource. For most endpoints this is the record's integer id; some endpoints return the record's GUID instead.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Identifier of the created or updated resource."
+      },
+      "ApiResourceResultChangesLinks": {
+        "type": "object",
+        "properties": {
+          "next": {
+            "type": "string",
+            "description": "Link to follow to get next page with changes",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceResultUpdatesExtra": {
+        "type": "object",
+        "properties": {
+          "until": {
+            "type": "string",
+            "description": "Bookmark to put in as \"since\" later - appears when there are no more pages for now",
+            "nullable": true
+          },
+          "cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiResourceStatus": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Internal numeric identifier of the affected record, or null when it is not applicable.",
+            "format": "int32",
+            "nullable": true
+          },
+          "isSuccess": {
+            "type": "boolean",
+            "description": "True when the operation completed successfully; otherwise false."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Outcome of the create or update operation."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication"
+    }
+  ]
+}

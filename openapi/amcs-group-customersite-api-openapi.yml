@@ -1,28 +1,50 @@
 openapi: 3.2.0
 info:
-  description: '**Download Trux JSON**
-
-
-    ---
-
-
-    # Getting Started
-
-
-    ## Document Purpose and Scope
-
-
-    The VisionAI REST API endpoints are technically described in this document.'
-  title: External Customer Site API
+  title: Amcs Group Customer Site API
   version: external
+  description: 'Operations tagged CustomerSite across 2 of this provider''s published API definitions: amcs-group-openapi.json, amcs-group-visionai-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 - url: https://o1-dev-svc-core.amcsplatform.com/
   description: AMCS VisionAI Developer Environment
-security:
-- cookieAuth: []
 tags:
 - name: CustomerSite
 paths:
+  /integrator/customerSites:
+    post:
+      tags:
+      - CustomerSite
+      summary: Create or Update a Customer Site
+      description: '# Create or Update a Customer Site'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCustomerAddressResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    $ref: '#/components/schemas/ApiResourceErrors'
+                  status:
+                    $ref: '#/components/schemas/ApiResourceStatus'
+                  resource:
+                    type: string
+                    description: GUID of the created or updated customer site.
+                    format: uuid
+                additionalProperties: false
+                description: Identifier of the created or updated resource.
+      operationId: postIntegratorCustomerSites
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
   /visionai/api/integrator/customerSites:
     post:
       tags:
@@ -148,108 +170,158 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+      security:
+      - cookieAuth: []
       operationId: postVisionaiApiIntegratorCustomerSites
       x-operation-id-source: derived
+    servers:
+    - url: https://o1-dev-svc-core.amcsplatform.com/
+      description: AMCS VisionAI Developer Environment
 components:
-  responses:
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    InternalServerError:
-      description: Supplied properties are not valid, please try again with proper request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Supplied properties are not valid, please try again with proper request.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
   schemas:
+    ApiCustomerAddressResource:
+      type: object
+      properties:
+        CustomerSiteId:
+          type: string
+          description: ID of the Customer Site
+          format: uuid
+        Name:
+          type:
+          - string
+          - 'null'
+          description: Display name of the Customer Site (Customer Name)
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Address part
+        HouseNumber:
+          type:
+          - string
+          - 'null'
+          description: Address part
+        Address1:
+          type:
+          - string
+          - 'null'
+          description: Address part
+        Address2:
+          type:
+          - string
+          - 'null'
+          description: Address part
+        Address3:
+          type:
+          - string
+          - 'null'
+          description: Address part
+        Address4:
+          type:
+          - string
+          - 'null'
+          description: Additional address part
+        Address5:
+          type:
+          - string
+          - 'null'
+          description: Additional address part
+        Latitude:
+          type:
+          - number
+          - 'null'
+          description: Geographic coordinate
+          format: double
+        Longitude:
+          type:
+          - number
+          - 'null'
+          description: Geographic coordinate
+          format: double
+        OutletId:
+          type: string
+          description: ID of the Company Outlet associated with the Customer Site
+          format: uuid
+        OutletName:
+          type:
+          - string
+          - 'null'
+          description: Name of the outlet. Informational only; the outlet is resolved from OutletId.
+        IsDeleted:
+          type: boolean
+          description: Indicates if the Customer Site is no longer in use
+        IsRelocatedByUser:
+          type: boolean
+          description: true when the site's position was adjusted manually in Vision AI. Stored as sent.
+        SiteType:
+          type:
+          - string
+          - 'null'
+          description: Type of the site
+        CustomerType:
+          type:
+          - string
+          - 'null'
+          description: Type of the customer
+        TenantId:
+          type:
+          - integer
+          - 'null'
+          description: Internal. Filled from the calling tenant when omitted; integrators do not need to send it.
+          format: int32
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the affected record, or null when it is not applicable.
+          format: int32
+        isSuccess:
+          type: boolean
+          description: True when the operation completed successfully; otherwise false.
+      additionalProperties: false
+      description: Outcome of the create or update operation.
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+          description: Error details describing why the request was rejected, or null when there were no errors.
+      additionalProperties: false
+      description: Validation and processing errors for the request. Populated only when the operation fails.
     ApiResourceId:
       type: object
       properties:
         errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
+          $ref: '#/components/schemas/ApiResourceErrors_2'
         status:
-          $ref: '#/components/schemas/ApiResourceStatus'
+          $ref: '#/components/schemas/ApiResourceStatus_2'
         resource:
           type: guid
+      additionalProperties: false
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
+      additionalProperties: false
+    ApiResourceErrors_2:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AMCS.IoT.Contamination.Api.Integrator.CustomerSite.ApiCustomerAddress:
       type: object
@@ -313,22 +385,95 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
+  responses:
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    InternalServerError:
+      description: Supplied properties are not valid, please try again with proper request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Supplied properties are not valid, please try again with proper request.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+x-refined-from:
+- amcs-group-openapi.json
+- amcs-group-visionai-openapi-original.json

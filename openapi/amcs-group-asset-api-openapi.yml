@@ -1,28 +1,92 @@
 openapi: 3.2.0
 info:
-  description: '**Download Trux JSON**
-
-
-    ---
-
-
-    # Getting Started
-
-
-    ## Document Purpose and Scope
-
-
-    The VisionAI REST API endpoints are technically described in this document.'
-  title: External Asset API
+  title: Amcs Group Asset API
   version: external
+  description: 'Operations tagged Asset across 2 of this provider''s published API definitions: amcs-group-openapi.json, amcs-group-visionai-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://eu1-tracker-dev-app.azurewebsites.net
+  description: Direct Access
 - url: https://o1-dev-svc-core.amcsplatform.com/
   description: AMCS VisionAI Developer Environment
-security:
-- cookieAuth: []
 tags:
 - name: Asset
 paths:
+  /integrator/assets/changes:
+    get:
+      tags:
+      - Asset
+      summary: Request list of Asset changes
+      description: '# Request list of Asset changes
+
+
+        Retrieve the assets (vehicles) of the calling tenant that have been created, updated or deleted since a specific point in the history.
+
+
+        ## Notes
+
+
+        - Call without `since` to get the full list. Follow `links.next` while it is present, then store `extra.until` and send it as `since` on the next poll.
+
+        - Deleted assets are returned with `IsDeleted: true`.'
+      parameters:
+      - name: since
+        in: query
+        description: Bookmark from extra.until
+        style: form
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Bookmark from extra.cursor
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResourceChanges_ApiAssetResource'
+      operationId: getIntegratorAssetsChanges
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
+  /integrator/assets:
+    post:
+      tags:
+      - Asset
+      summary: Create or Update an Asset (Vehicle)
+      description: '# Create or Update an Asset (Vehicle)'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAssetResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    $ref: '#/components/schemas/ApiResourceErrors'
+                  status:
+                    $ref: '#/components/schemas/ApiResourceStatus'
+                  resource:
+                    type: string
+                    description: GUID of the created or updated asset.
+                    format: uuid
+                additionalProperties: false
+                description: Identifier of the created or updated resource.
+      operationId: postIntegratorAssets
+      x-operation-id-source: derived
+    servers:
+    - url: https://eu1-tracker-dev-app.azurewebsites.net
+      description: Direct Access
   /visionai/api/integrator/assets:
     post:
       tags:
@@ -115,89 +179,39 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+      security:
+      - cookieAuth: []
       operationId: postVisionaiApiIntegratorAssets
       x-operation-id-source: derived
+    servers:
+    - url: https://o1-dev-svc-core.amcsplatform.com/
+      description: AMCS VisionAI Developer Environment
 components:
-  responses:
-    ServiceUnavailable:
-      description: Service Unavailable - The server is currently unavailable.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Service is currently unavailable. Please try again later.
-            additionalProperties: false
-    GatewayTimeout:
-      description: Gateway Timeout - The server took too long to respond.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The request timed out. Please try again later.
-            additionalProperties: false
-    BadGateway:
-      description: Bad Gateway - The upstream server returned an invalid response.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Temporary issue with the server. Please try again later.
-            additionalProperties: false
-    NotImplemented:
-      description: This feature is not implemented.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: This feature is not implemented.
-            additionalProperties: false
-    NotFound:
-      description: Not Found - The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: The requested resource was not found.
-            additionalProperties: false
-    Forbidden:
-      description: Forbidden - Access denied.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: You do not have permission to access this resource.
-            additionalProperties: false
-    BadRequest:
-      description: Bad Request - Invalid input parameters.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. Please check your input parameters.
-            additionalProperties: false
   schemas:
-    ApiResourceId:
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
+          type:
+          - string
+          - 'null'
+          description: Bookmark to put in as "since" later - appears when there are no more pages for now
+        cursor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type:
+          - string
+          - 'null'
+          description: Error details describing why the request was rejected, or null when there were no errors.
+      additionalProperties: false
+      description: Validation and processing errors for the request. Populated only when the operation fails.
+    ApiResourceChanges_ApiAssetResource:
       type: object
       properties:
         errors:
@@ -205,7 +219,130 @@ components:
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
         resource:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ApiAssetResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultChangesLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+      additionalProperties: false
+    ApiAssetResource:
+      type: object
+      properties:
+        GUID:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        AssetId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Asset
+          format: uuid
+        AssetExternalId:
+          type:
+          - integer
+          - 'null'
+          description: External System Identifier for Asset (optional)
+          format: int32
+        AssetName:
+          type:
+          - string
+          - 'null'
+          description: Display name (vehicle registration plate)
+        AssetType:
+          type:
+          - string
+          - 'null'
+          description: Front Loader, Side Loader, Rear End Loader
+        OutletId:
+          type:
+          - string
+          - 'null'
+          description: ID of the Company Outlet associated with the Asset
+          format: uuid
+        OutletName:
+          type:
+          - string
+          - 'null'
+          description: Name of the Outlet (optional)
+        CompanyCode:
+          type:
+          - string
+          - 'null'
+          description: Company code associated with the Asset
+        IsDeleted:
+          type: boolean
+          description: Asset is no longer in use
+        RegistrationNo:
+          type:
+          - string
+          - 'null'
+          description: Vehicle registration number. Saved exactly as sent on every create or update call.
+        VehicleCode:
+          type:
+          - string
+          - 'null'
+          description: Vehicle code used by the integrator's system. Saved exactly as sent on every create or update call.
+        VIN:
+          type:
+          - string
+          - 'null'
+          description: Vehicle Identification Number of the asset. Optional.
+        TenantId:
+          type:
+          - integer
+          - 'null'
+          description: Internal. Filled from the calling tenant when omitted; integrators do not need to send it.
+          format: int32
+      additionalProperties: false
+    ApiResourceResultChangesLinks:
+      type: object
+      properties:
+        next:
+          type:
+          - string
+          - 'null'
+          description: Link to follow to get next page with changes
+      additionalProperties: false
+    ApiResourceStatus:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Internal numeric identifier of the affected record, or null when it is not applicable.
+          format: int32
+        isSuccess:
+          type: boolean
+          description: True when the operation completed successfully; otherwise false.
+      additionalProperties: false
+      description: Outcome of the create or update operation.
+    ApiResourceId:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors_2'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus_2'
+        resource:
           type: guid
+      additionalProperties: false
+    ApiResourceStatus_2:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isSuccess:
+          type: boolean
       additionalProperties: false
     ApiauthTokens500Error:
       type: object
@@ -251,18 +388,7 @@ components:
         isDeleted:
           type: boolean
       additionalProperties: false
-    ApiResourceStatus:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isSuccess:
-          type: boolean
-      additionalProperties: false
-    ApiResourceErrors:
+    ApiResourceErrors_2:
       type: object
       properties:
         errors:
@@ -270,3 +396,84 @@ components:
           - string
           - 'null'
       additionalProperties: false
+  responses:
+    NotImplemented:
+      description: This feature is not implemented.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: This feature is not implemented.
+            additionalProperties: false
+    BadGateway:
+      description: Bad Gateway - The upstream server returned an invalid response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Temporary issue with the server. Please try again later.
+            additionalProperties: false
+    Forbidden:
+      description: Forbidden - Access denied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You do not have permission to access this resource.
+            additionalProperties: false
+    BadRequest:
+      description: Bad Request - Invalid input parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid request. Please check your input parameters.
+            additionalProperties: false
+    ServiceUnavailable:
+      description: Service Unavailable - The server is currently unavailable.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Service is currently unavailable. Please try again later.
+            additionalProperties: false
+    GatewayTimeout:
+      description: Gateway Timeout - The server took too long to respond.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The request timed out. Please try again later.
+            additionalProperties: false
+    NotFound:
+      description: Not Found - The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: The requested resource was not found.
+            additionalProperties: false
+x-refined-from:
+- amcs-group-openapi.json
+- amcs-group-visionai-openapi-original.json

@@ -10,7 +10,105 @@ info:
     ## Who Should Read this Document
 
 
-    This document contains a technical description of the AMCS Platform REST API.'
+    This document contains a technical description of the AMCS Platform REST API. It is intended for:
+
+
+    · System integrators
+
+
+    · Customer IT team looking to integrate AMCS Platform with another system
+
+
+    · Third parties looking to integrate their system with AMCS Platform
+
+
+    ## Document Scope
+
+
+    This document introduces the technical aspects of the AMCS Platform REST API. The purpose of this document is to provide readers with detail on how to:
+
+
+    · Access the REST API
+
+
+    · Make calls to the API to retrieve, append and update resources
+
+
+    · Retrieve the incremental changes to a collection
+
+
+    · Find more detail on the end points that are available from an environment. ## Summary
+
+
+    AMCS Platform REST API is designed to support the integration of AMCS Platform with other systems. With care and additional infrastructure, the REST API can be used to build functionality on top of Platform but that is not it’s primary purpose. The ‘changes since’ process provides the main means of performing an initial synchronisation of the AMCS Platform and another system, and then keeping them synchronised. Methods are also provided to create and update resources. # Integration Patterns and Tools
+
+
+    The AMCS Platform provides a number of tools that can be used to connect systems. Care should be taken to match the right tooling to the intended pattern of integration. · When an extract-based approach is needed, use BI reporting. · When derived values are require, use the data mart. · When business processes on different systems need to be integrated by synchronising the data on each through an event style interface, use the REST API. An integration using the REST API will need to take full responsibility for all aspects of the integration including:
+
+
+    · Pulling change events from AMCS Platform
+
+
+    · Filtering the changed resources for the ones that are of interest
+
+
+    · Pulling additional resources from the REST API in order the retrieve all the properties needed by the destination
+
+
+    · Mashing resources to create the complete view required
+
+
+    · Translating that into the form required by the destination
+
+
+    · Validating this to ensure it meet the entry rules of the destination
+
+
+    · Pushing the result to the destination
+
+
+    In the early stages of designing the interface care should be taken to ensure that the need for caching/staging has been considered. The changes since functionality is effectively a means of pulling create/change events from platform. The only filters available enable retrieval of related resources to build a view external to AMCS Platform
+
+
+    # Basics
+
+
+    The AMCS REST API provides a RESTful interface that allows access to the primary business resources of the AMCS platform. The interface follows general HATEOAS compliance principles. ## Quick start
+
+
+    A quickstart walkthrough based on node.js and covering authentication and getting a page of customers can be found here. ## Interface definitions
+
+
+    Swagger documentation for the end points available on an environment can be found at:
+
+
+    Before 8.5: https://{environment domain name}/swagger/ui/index
+
+
+    From 8.5: https://{environment domain name}/erp/api/swagger/ui/index
+
+
+    ## HTTP Interface
+
+
+    The following HTTP RESTful methods are provided as part of this API:
+
+
+    · GET: Provides read access to retrieve details of one or more resources. · POST: Creates or updates a single resource or a set of resources. · PUT: Updates a single resource or a set of resources. Note:
+
+
+    · DELETE methods are currently not provided as part of the API. The REST API URIs begin with
+
+
+    https://{environment domain name}/erp/api/integrator/erp
+
+
+    For example:
+
+    https://prod.amcs-at-mycompany.com/erp/api/integrator/erp
+
+
+    This should be used as the base of the URI.'
   version: latest
 servers:
 - url: https://ete-p5-tst-svc-core.amcsplatform.com/erp/api/integrator/erp
@@ -26,7 +124,99 @@ paths:
 
         | ------------------------------------------- | --------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the GLJournalBatch.'
+        | GUID | The GUID associated to the GLJournalBatch. |
+
+        | BatchType | The type of this GLJournalBatch. |
+
+        | BatchName | The name of this GLJournalBatch. |
+
+        | BatchStatus | The status of this GLJournalBatch. |
+
+        | BatchApprovalStatus | The approval status of this GLJournalBatch. |
+
+        | PostingDate | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | PostedDate | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | AccountingPeriodCode | The accounting period code of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodGuid | The accounting period guid of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodListItem | The GUID and description of the accounting period. |
+
+        | RelatedGLExportGuid | The GUID of GLExport associated to the GLJournalBatch. Filterable. |
+
+        | RelatedGeneralLedgerExportGuid | The GUID of General Ledger Export associated to the GLJournalBatch |
+
+        | RelatedUserCreatedByGuid | The GUID of the user who created the GLJournalBatch. Filterable |
+
+        | RelatedUserUpdatedByGuid | The GUID of the user who updated the GLJournalBatch. Filterable |
+
+        | CreationDateTime | The date of the GLJournalBatch creation. |
+
+        | UpdatedDateTime | The date of the GLJournalBatch last update. |
+
+        | RelatedTransactionGuidFilter | Used to filter the related transaction guid associated to the GLJournalHeader. |
+
+        | JournalHeaders.JournalHeaderGuid | The GUID associated to the GLJournalHeaders. |
+
+        | JournalHeaders.HeaderName | The GLJournalHeaders headername. |
+
+        | JournalHeaders.CompanyListItem | The GUID and name of the company this GLJournalHeaders is associated to. |
+
+        | JournalHeaders.Source | The source of this GLJournalHeaders. |
+
+        | JournalHeaders.BaseCurrencyIntegrationCode | The integration code of the base currency of this GLJournalHeaders. |
+
+        | JournalHeaders.CurrencyIntegrationCode | The integration code of the currency of this GLJournalHeaders. |
+
+        | JournalHeaders.TransactionDate | The transaction date in ISO format of this GLJournalHeaders. |
+
+        | JournalHeaders.GLDate | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |
+
+        | JournalHeaders.JournalType | The type of this GLJournalHeaders. |
+
+        | JournalHeaders.JournalStatus | The status of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalDr | The total debit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalCr | The total credit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.RelatedTransactionGuid | The Source GUID associated to the transaction of the GLJournalHeader. |
+
+        | JournalHeaders.CreationDateTime | The date of the GLJournalHeaders creation. |
+
+        | JournalHeaders.UpdatedDateTime | The date of the GLJournalHeaders last update. |
+
+        | JournalHeaders.AccountGuid | The GUID associated to the account. |
+
+        | JournalHeaders.AccountTypeListItem | The GUID and the description of the account type. |
+
+        | JournalLines.RelatedJournalHeaderGuid | The GUID of the journal header related to this GLJournalLines. |
+
+        | JournalLines.JournalLineNo | The journal line number of this GLJournalLines. |
+
+        | JournalLines.TransactionFromDate | The transaction from date in ISO format of this GLJournalLines. |
+
+        | JournalLines.TransactionToDate | The transaction to date in ISO format of this GLJournalLines. |
+
+        | JournalLines.LineType | The type of this GLJournalLines. |
+
+        | JournalLines.LineDescription | The description of this GLJournalLines. |
+
+        | JournalLines.JnlDr | The debit amount of this GLJournalLines. |
+
+        | JournalLines.JnlCr | The credit amount of this GLJournalLines. |
+
+        | JournalLines.BaseDr | The base debit amount of this GLJournalLines. |
+
+        | JournalLines.BaseCr | The base credit amount of this GLJournalLines. |
+
+        | JournalLines.Category | The category of this GLJournalLines. |
+
+        | JournalLines.CreationDateTime | The date of the GLJournalLines creation. |
+
+        | JournalLines.UpdatedDateTime | The date of the GLJournalLines last update.'
       operationId: GLJournal_GetChanges
       parameters:
       - name: since
@@ -53,7 +243,99 @@ paths:
 
         | ------------------------------------------- | --------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the GLJournalBatch.'
+        | GUID | The GUID associated to the GLJournalBatch. |
+
+        | BatchType | The type of this GLJournalBatch. |
+
+        | BatchName | The name of this GLJournalBatch. |
+
+        | BatchStatus | The status of this GLJournalBatch. |
+
+        | BatchApprovalStatus | The approval status of this GLJournalBatch. |
+
+        | PostingDate | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | PostedDate | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | AccountingPeriodCode | The accounting period code of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodGuid | The accounting period guid of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodListItem | The GUID and description of the accounting period. |
+
+        | RelatedGLExportGuid | The GUID of GLExport associated to the GLJournalBatch. Filterable. |
+
+        | RelatedGeneralLedgerExportGuid | The GUID of General Ledger Export associated to the GLJournalBatch |
+
+        | RelatedUserCreatedByGuid | The GUID of the user who created the GLJournalBatch. Filterable |
+
+        | RelatedUserUpdatedByGuid | The GUID of the user who updated the GLJournalBatch. Filterable |
+
+        | CreationDateTime | The date of the GLJournalBatch creation. |
+
+        | UpdatedDateTime | The date of the GLJournalBatch last update. |
+
+        | RelatedTransactionGuidFilter | Used to filter the related transaction guid associated to the GLJournalHeader. |
+
+        | JournalHeaders.JournalHeaderGuid | The GUID associated to the GLJournalHeaders. |
+
+        | JournalHeaders.HeaderName | The GLJournalHeaders headername. |
+
+        | JournalHeaders.CompanyListItem | The GUID and name of the company this GLJournalHeaders is associated to. |
+
+        | JournalHeaders.Source | The source of this GLJournalHeaders. |
+
+        | JournalHeaders.BaseCurrencyIntegrationCode | The integration code of the base currency of this GLJournalHeaders. |
+
+        | JournalHeaders.CurrencyIntegrationCode | The integration code of the currency of this GLJournalHeaders. |
+
+        | JournalHeaders.TransactionDate | The transaction date in ISO format of this GLJournalHeaders. |
+
+        | JournalHeaders.GLDate | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |
+
+        | JournalHeaders.JournalType | The type of this GLJournalHeaders. |
+
+        | JournalHeaders.JournalStatus | The status of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalDr | The total debit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalCr | The total credit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.RelatedTransactionGuid | The Source GUID associated to the transaction of the GLJournalHeader. |
+
+        | JournalHeaders.CreationDateTime | The date of the GLJournalHeaders creation. |
+
+        | JournalHeaders.UpdatedDateTime | The date of the GLJournalHeaders last update. |
+
+        | JournalHeaders.AccountGuid | The GUID associated to the account. |
+
+        | JournalHeaders.AccountTypeListItem | The GUID and the description of the account type. |
+
+        | JournalLines.RelatedJournalHeaderGuid | The GUID of the journal header related to this GLJournalLines. |
+
+        | JournalLines.JournalLineNo | The journal line number of this GLJournalLines. |
+
+        | JournalLines.TransactionFromDate | The transaction from date in ISO format of this GLJournalLines. |
+
+        | JournalLines.TransactionToDate | The transaction to date in ISO format of this GLJournalLines. |
+
+        | JournalLines.LineType | The type of this GLJournalLines. |
+
+        | JournalLines.LineDescription | The description of this GLJournalLines. |
+
+        | JournalLines.JnlDr | The debit amount of this GLJournalLines. |
+
+        | JournalLines.JnlCr | The credit amount of this GLJournalLines. |
+
+        | JournalLines.BaseDr | The base debit amount of this GLJournalLines. |
+
+        | JournalLines.BaseCr | The base credit amount of this GLJournalLines. |
+
+        | JournalLines.Category | The category of this GLJournalLines. |
+
+        | JournalLines.CreationDateTime | The date of the GLJournalLines creation. |
+
+        | JournalLines.UpdatedDateTime | The date of the GLJournalLines last update.'
       operationId: GLJournal_Get
       parameters:
       - name: guid
@@ -82,7 +364,99 @@ paths:
 
         | ------------------------------------------- | --------------------------------------------------------------------- |
 
-        | GUID | The GUID associated to the GLJournalBatch.'
+        | GUID | The GUID associated to the GLJournalBatch. |
+
+        | BatchType | The type of this GLJournalBatch. |
+
+        | BatchName | The name of this GLJournalBatch. |
+
+        | BatchStatus | The status of this GLJournalBatch. |
+
+        | BatchApprovalStatus | The approval status of this GLJournalBatch. |
+
+        | PostingDate | The posting date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | PostedDate | The posted date of this GLJournalBatch in ISO format (YYYY-MM-DD). |
+
+        | AccountingPeriodCode | The accounting period code of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodGuid | The accounting period guid of this GLJournalBatch. Filterable |
+
+        | AccountingPeriodListItem | The GUID and description of the accounting period. |
+
+        | RelatedGLExportGuid | The GUID of GLExport associated to the GLJournalBatch. Filterable. |
+
+        | RelatedGeneralLedgerExportGuid | The GUID of General Ledger Export associated to the GLJournalBatch |
+
+        | RelatedUserCreatedByGuid | The GUID of the user who created the GLJournalBatch. Filterable |
+
+        | RelatedUserUpdatedByGuid | The GUID of the user who updated the GLJournalBatch. Filterable |
+
+        | CreationDateTime | The date of the GLJournalBatch creation. |
+
+        | UpdatedDateTime | The date of the GLJournalBatch last update. |
+
+        | RelatedTransactionGuidFilter | Used to filter the related transaction guid associated to the GLJournalHeader. |
+
+        | JournalHeaders.JournalHeaderGuid | The GUID associated to the GLJournalHeaders. |
+
+        | JournalHeaders.HeaderName | The GLJournalHeaders headername. |
+
+        | JournalHeaders.CompanyListItem | The GUID and name of the company this GLJournalHeaders is associated to. |
+
+        | JournalHeaders.Source | The source of this GLJournalHeaders. |
+
+        | JournalHeaders.BaseCurrencyIntegrationCode | The integration code of the base currency of this GLJournalHeaders. |
+
+        | JournalHeaders.CurrencyIntegrationCode | The integration code of the currency of this GLJournalHeaders. |
+
+        | JournalHeaders.TransactionDate | The transaction date in ISO format of this GLJournalHeaders. |
+
+        | JournalHeaders.GLDate | The Gl date of this GLJournalHeaders in ISO format (YYYY-MM-DD). |
+
+        | JournalHeaders.JournalType | The type of this GLJournalHeaders. |
+
+        | JournalHeaders.JournalStatus | The status of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalDr | The total debit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.TotalCr | The total credit amount of this GLJournalHeaders. |
+
+        | JournalHeaders.RelatedTransactionGuid | The Source GUID associated to the transaction of the GLJournalHeader. |
+
+        | JournalHeaders.CreationDateTime | The date of the GLJournalHeaders creation. |
+
+        | JournalHeaders.UpdatedDateTime | The date of the GLJournalHeaders last update. |
+
+        | JournalHeaders.AccountGuid | The GUID associated to the account. |
+
+        | JournalHeaders.AccountTypeListItem | The GUID and the description of the account type. |
+
+        | JournalLines.RelatedJournalHeaderGuid | The GUID of the journal header related to this GLJournalLines. |
+
+        | JournalLines.JournalLineNo | The journal line number of this GLJournalLines. |
+
+        | JournalLines.TransactionFromDate | The transaction from date in ISO format of this GLJournalLines. |
+
+        | JournalLines.TransactionToDate | The transaction to date in ISO format of this GLJournalLines. |
+
+        | JournalLines.LineType | The type of this GLJournalLines. |
+
+        | JournalLines.LineDescription | The description of this GLJournalLines. |
+
+        | JournalLines.JnlDr | The debit amount of this GLJournalLines. |
+
+        | JournalLines.JnlCr | The credit amount of this GLJournalLines. |
+
+        | JournalLines.BaseDr | The base debit amount of this GLJournalLines. |
+
+        | JournalLines.BaseCr | The base credit amount of this GLJournalLines. |
+
+        | JournalLines.Category | The category of this GLJournalLines. |
+
+        | JournalLines.CreationDateTime | The date of the GLJournalLines creation. |
+
+        | JournalLines.UpdatedDateTime | The date of the GLJournalLines last update.'
       operationId: GLJournal_GetCollection
       parameters:
       - name: filter
@@ -122,7 +496,93 @@ paths:
 
         | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------- |
 
-        | GUID | The GUID associated to the GLJournalBatch.'
+        | GUID | The GUID associated to the GLJournalBatch. | No |
+
+        | BatchType | The type of this GLJournalBatch. | No |
+
+        | BatchName | The name of this GLJournalBatch. | Yes |
+
+        | BatchStatus | The status of this GLJournalBatch. | Yes |
+
+        | BatchApprovalStatus | The approval status of this GLJournalBatch. | Yes |
+
+        | PostingDate | The posting date of this GLJournalBatch. | No |
+
+        | PostedDate | The posted date of this GLJournalBatch. | No |
+
+        | AccountingPeriodCode | The accounting period code of this GLJournalBatch. | No |
+
+        | AccountingPeriodListItem.Guid | The GUID of the accounting period of this GLJournalBatch. | Yes |
+
+        | RelatedGLExportGuid | The GUID of GLExport associated to the GLJournalBacth. Filterable. | No |
+
+        | RelatedUserCreatedByGuid | The GUID of the user who created the GLJournalBatch. Filterable | No |
+
+        | RelatedUserUpdatedByGuid | The GUID of the user who updated the GLJournalBatch. Filterable | No |
+
+        | CreationDateTime | The date of the GLJournalBatch creation. | No |
+
+        | UpdatedDateTime | The date of the GLJournalBatch last update. | No |
+
+        | RelatedTransactionGuidFilter | Used to filter the related transaction guid associated to the GLJournalHeader. | No |
+
+        | JournalHeaders.JournalHeaderGuid | The GUID associated to the GLJournalHeaders. | Yes |
+
+        | JournalHeaders.HeaderName | The GLJournalHeaders headername. | Yes |
+
+        | JournalHeaders.CompanyListItem.Guid | The GUID of the company this GLJournalHeaders is associated to. | Yes |
+
+        | JournalHeaders.Source | The source of this GLJournalHeaders. | No |
+
+        | JournalHeaders.BaseCurrencyIntegrationCode | The integration code of the base currency of this GLJournalHeaders. | No |
+
+        | JournalHeaders.CurrencyIntegrationCode | The integration code of the currency of this GLJournalHeaders. | Yes |
+
+        | JournalHeaders.TransactionDate | The transaction date of this GLJournalHeaders. | No |
+
+        | JournalHeaders.GLDate | The Gl date of this GLJournalHeaders. | No |
+
+        | JournalHeaders.JournalType | The type of this GLJournalHeaders. | No |
+
+        | JournalHeaders.JournalStatus | The status of this GLJournalHeaders. | Yes |
+
+        | JournalHeaders.TotalDr | The total debit amount of this GLJournalHeaders. | Yes |
+
+        | JournalHeaders.TotalCr | The total credit amount of this GLJournalHeaders. | Yes |
+
+        | JournalHeaders.RelatedTransactionGuid | The Source GUID associated to the transaction of the GLJournalHeader. | No |
+
+        | JournalHeaders.CreationDateTime | The date of the GLJournalHeaders creation. | No |
+
+        | JournalHeaders.UpdatedDateTime | The date of the GLJournalHeaders last update. | No |
+
+        | JournalLines.RelatedJournalHeaderGuid | The GUID of the journal header related to this GLJournalLines. | Yes |
+
+        | JournalLines.JournalLineNo | The journal line number of this GLJournalLines. | No |
+
+        | JournalLines.TransactionFromDate | The transaction from date of this GLJournalLines. | No |
+
+        | JournalLines.TransactionToDate | The transaction to date of this GLJournalLines. | No |
+
+        | JournalLines.LineType | The type of this GLJournalLines. | No |
+
+        | JournalLines.LineDescription | The description of this GLJournalLines. | Yes |
+
+        | JournalLines.JnlDr | The debit amount of this GLJournalLines. | Yes |
+
+        | JournalLines.JnlCr | The credit amount of this GLJournalLines. | Yes |
+
+        | JournalLines.BaseDr | The base debit amount of this GLJournalLines. | Yes |
+
+        | JournalLines.BaseCr | The base credit amount of this GLJournalLines. | Yes |
+
+        | JournalLines.Category | The category of this GLJournalLines. | No |
+
+        | JournalLines.CreationDateTime | The date of the GLJournalLines creation. | No |
+
+        | JournalLines.UpdatedDateTime | The date of the GLJournalLines last update. | No |
+
+        | JournalLines.ExchangeRate.RelatedExchangeRateGuid | The Related Exchange Rate Guid of this GLJournalLines.'
       operationId: GLJournal_Create
       requestBody:
         content:
@@ -140,6 +600,19 @@ paths:
                 $ref: '#/components/schemas/ApiResourceId'
 components:
   schemas:
+    ApiResourceResultCollection_ApiIntegratorGLJournalResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
     ApiResourceId:
       type: object
       properties:
@@ -150,24 +623,65 @@ components:
           $ref: '#/components/schemas/ApiResourceErrors'
         status:
           $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorGLJournalLineExchangeRateResource:
+    ApiIntegratorListItemResource:
       type: object
       properties:
-        RelatedExchangeRateGuid:
+        Description:
+          type: string
+        Guid:
           type: string
           format: uuid
           example: 00000000-0000-0000-0000-000000000000
+    ApiIntegratorGLJournalLineTaxResource:
+      type: object
+      properties:
+        Code:
+          type: string
         Rate:
           type: number
           format: double
-        ExchangeDate:
+    ApiResourceChanges_ApiIntegratorGLJournalResource:
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultUpdatesExtra:
+      type: object
+      properties:
+        until:
           type: string
-          format: localDate
-          example: '2000-01-01'
-        BaseCurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
-        CurrencyListItem:
-          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        cursor:
+          type: string
+    ApiResourceErrors:
+      type: object
+      properties:
+        errors:
+          type: string
+    ApiResourceResultEntityExtra:
+      type: object
+      properties:
+        expand:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        include:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: object
     ApiIntegratorGLJournalLineReferenceResource:
       type: object
       properties:
@@ -221,23 +735,43 @@ components:
           type: string
         OrderNo:
           type: string
-    ApiResourceResultEntityExtra:
+    ApiIntegratorGLJournalLineExchangeRateResource:
       type: object
       properties:
-        expand:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-        include:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: object
+        RelatedExchangeRateGuid:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        Rate:
+          type: number
+          format: double
+        ExchangeDate:
+          type: string
+          format: localDate
+          example: '2000-01-01'
+        BaseCurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+        CurrencyListItem:
+          $ref: '#/components/schemas/ApiIntegratorListItemResource'
+    ApiResourceResultEntity_ApiIntegratorGLJournalResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
+        links:
+          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
+        extra:
+          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
+        errors:
+          $ref: '#/components/schemas/ApiResourceErrors'
+        status:
+          $ref: '#/components/schemas/ApiResourceStatus'
+    ApiResourceResultCollectionExtra:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
     ApiResourceResultEntityLinks:
       type: object
       properties:
@@ -302,27 +836,6 @@ components:
           type: string
           format: offsetDateTime
           example: '2000-01-01T00:00:00+01:00'
-    ApiResourceResultCollection_ApiIntegratorGLJournalResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultCollectionExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiIntegratorGLJournalLineTaxResource:
-      type: object
-      properties:
-        Code:
-          type: string
-        Rate:
-          type: number
-          format: double
     ApiIntegratorGLJournalResource:
       type: object
       properties:
@@ -398,84 +911,6 @@ components:
           format: int32
         isSuccess:
           type: boolean
-    ApiResourceResultUpdatesExtra:
-      type: object
-      properties:
-        until:
-          type: string
-        cursor:
-          type: string
-    ApiResourceErrors:
-      type: object
-      properties:
-        errors:
-          type: string
-    ApiResourceChanges_ApiIntegratorGLJournalResource:
-      type: object
-      properties:
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultUpdatesExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultEntity_ApiIntegratorGLJournalResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/ApiIntegratorGLJournalResource'
-        links:
-          $ref: '#/components/schemas/ApiResourceResultEntityLinks'
-        extra:
-          $ref: '#/components/schemas/ApiResourceResultEntityExtra'
-        errors:
-          $ref: '#/components/schemas/ApiResourceErrors'
-        status:
-          $ref: '#/components/schemas/ApiResourceStatus'
-    ApiResourceResultCollectionExtra:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    ApiIntegratorListItemResource:
-      type: object
-      properties:
-        Description:
-          type: string
-        Guid:
-          type: string
-          format: uuid
-          example: 00000000-0000-0000-0000-000000000000
-    ApiIntegratorGLJournalLineAnalysisCodesResource:
-      type: object
-      properties:
-        Element1:
-          type: string
-        Element2:
-          type: string
-        Element3:
-          type: string
-        Element4:
-          type: string
-        Element5:
-          type: string
-        Element6:
-          type: string
-        Element7:
-          type: string
-        Element8:
-          type: string
-        Element9:
-          type: string
-        Element10:
-          type: string
-        Site:
-          type: string
     ApiIntegratorGLJournalLineResource:
       type: object
       properties:
@@ -529,4 +964,29 @@ components:
         Reference:
           $ref: '#/components/schemas/ApiIntegratorGLJournalLineReferenceResource'
         SummaryAccountCode:
+          type: string
+    ApiIntegratorGLJournalLineAnalysisCodesResource:
+      type: object
+      properties:
+        Element1:
+          type: string
+        Element2:
+          type: string
+        Element3:
+          type: string
+        Element4:
+          type: string
+        Element5:
+          type: string
+        Element6:
+          type: string
+        Element7:
+          type: string
+        Element8:
+          type: string
+        Element9:
+          type: string
+        Element10:
+          type: string
+        Site:
           type: string
